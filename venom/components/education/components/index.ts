@@ -1,1 +1,4 @@
-export { default as Header } from "./header";
+export {
+    default as Header,
+    type HeaderInstanceType,
+} from "./header";

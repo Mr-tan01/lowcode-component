@@ -1,1 +1,1 @@
-{"root":["./src/main.ts","./src/vite-env.d.ts","./src/components/education/education.ts","./src/components/education/components/index.ts","./src/components/education/components/header/index.ts","./src/components/education/components/header2/index.ts","./src/app.vue","./src/components/education/components/header/hader.vue","./src/components/education/components/header2/hader.vue"],"version":"5.6.3"}
+{"root":["./src/main.ts","./src/vite-env.d.ts","./src/app.vue"],"version":"5.6.3"}

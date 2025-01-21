@@ -28,7 +28,7 @@ export default defineConfig({
     cssCodeSplit: true,
     lib: {
       entry: [
-        './src/components/education/education.ts',
+        './venom/components/education/index.ts',
       ],
       name: 'lowcodeComponent',
       formats: ['es'],
