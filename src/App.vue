@@ -2,6 +2,7 @@
     <div class="app">
         <LcBgCommon>
             <LcHeader></LcHeader>
+            <RouterView></RouterView>
         </LcBgCommon>
     </div>
 </template>

@@ -4,6 +4,9 @@ import vue from '@vitejs/plugin-vue';
 import merge from 'lodash-es/merge.js';
 import cloneDeep from 'lodash-es/cloneDeep.js';
 
+/**
+* @type {import('vite').InlineConfig}
+*/
 const baseConfig = {
     plugins: [vue()],
     define: {
@@ -25,19 +28,24 @@ const baseConfig = {
             }
         ],
     },
+    build: {
+        outDir: '../es',
+    }
 }
 export class EsmComBuilder {
     options = cloneDeep(baseConfig);
     /**
+     * @param {string} base 路径
+
      * @param {import('vite').InlineConfig} options 
      */
-    constructor(options) {
-        this.base = '../src/components/education/components';
+    constructor(base, options = {}) {
+        this.base = base;
         this.setOptions(options);
     }
-     /**
-     * @param {import('vite').InlineConfig} options 
-     */
+    /**
+    * @param {import('vite').InlineConfig} options 
+    */
     setOptions(options) {
         this.options = merge({}, this.options, options || {});
     }
@@ -48,7 +56,6 @@ export class EsmComBuilder {
         const config = {
             build: {
                 cssCodeSplit: true,
-                outDir: '../es',
                 emptyOutDir: false,
                 lib: {
                     entry: `${this.base}/${comAppName}/index.ts`,
