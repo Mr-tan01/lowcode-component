@@ -8,8 +8,8 @@
             <slot></slot>
         </div>
         <div class="help-container__code" v-if="highlightCode">
-            <pre>
-                <code :contenteditable="true">
+            <pre class="__code__">
+                <code>
                     <div v-html="highlightCode"></div>
                 </code>
             </pre>
@@ -49,6 +49,7 @@ const highlightCode = computed(() => {
     flex-direction: column;
     margin: 20px auto;
     width: fit-content;
+    min-width: 500px;
 
     h1 {
         color: white;
@@ -58,7 +59,7 @@ const highlightCode = computed(() => {
 
     &__code {
         margin-top: 5px;
-        background: #222;
+        background: rgb(24 24 28);
         padding: 10px;
         border-radius: 5px;
         overflow-x: auto;
