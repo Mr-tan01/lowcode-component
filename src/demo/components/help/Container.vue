@@ -45,9 +45,10 @@ const highlightCode = computed(() => {
 
 <style lang="scss" scoped>
 .help-container {
-    display: inline-flex;
+    display: flex;
     flex-direction: column;
-    margin: 20px;
+    margin: 20px auto;
+    width: fit-content;
 
     h1 {
         color: white;
