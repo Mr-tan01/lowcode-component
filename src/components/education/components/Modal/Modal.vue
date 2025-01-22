@@ -1,7 +1,11 @@
 <template>
     <n-modal v-bind="$attrs">
         <div class="lc-modal" :style="layoutStyle">
+            <div class="lc-modal__header">
+                <LcDecoratorTitle :title="title"></LcDecoratorTitle>
+            </div>
             <div class="lc-modal__wrapper">
+                
                 <div class="lc-modal__wrapper__closeable" :class="{
                     [sizeMode]: true,
                 }">
@@ -20,8 +24,7 @@
                         </button>
                     </slot>
                 </div>
-                <slot>
-                </slot>
+                <slot></slot>
             </div>
         </div>
     </n-modal>
@@ -31,11 +34,13 @@
 import { NModal } from 'naive-ui/es/modal';
 import { computed, PropType } from 'vue';
 import { options, type Options } from './config';
+import { LcDecoratorTitle } from '../DecoratorTitle'
 
 const {
     width = options.size.large.width,
     height = options.size.large.height,
     sizeMode = 'large',
+    title = '',
 } = defineProps({
     width: {
         type: Number,
@@ -45,7 +50,10 @@ const {
     },
     sizeMode: {
         type: String as PropType<Options['sizeMode']>,
-    }
+    },
+    title: {
+        type: String,
+    },
 });
 const emit = defineEmits<{
     (e: 'update:show', value: boolean): void;
@@ -76,6 +84,15 @@ function close() {
     background-size: 100% 101%;
     box-sizing: border-box;
     box-shadow: 0px 7px 21px 0px rgba(0, 40, 76, 1);
+    position: relative;
+
+    &__header {
+        width: 401px;
+        height: 35px;
+        position: absolute;
+        top: -5px;
+        z-index: 200;
+    }
 
     &__wrapper {
         padding: 10px;
@@ -83,6 +100,7 @@ function close() {
         position: relative;
         width: 100%;
         box-sizing: border-box;
+        z-index: 99;
 
         &__closeable {
             position: absolute;

@@ -2,7 +2,7 @@
     <div class="demo_dialog">
         <Container title="弹出窗" description="大尺寸弹窗" :code="code1">
             <button @click="show = true">弹窗</button>
-            <LcModal v-model:show="show">
+            <LcModal v-model:show="show" title="弹窗标题">
                 <template #header>
                     <div class="header">
                         弹窗标题
@@ -17,7 +17,7 @@
         </Container>
         <Container title="弹出窗" description="中等尺寸弹窗"  :code="code2">
             <button @click="show2 = true">弹窗</button>
-            <LcModal v-model:show="show2" size-mode="medium">
+            <LcModal v-model:show="show2" size-mode="medium" title="弹窗标题">
                 <template #header>
                     <div class="header">
                         弹窗标题
