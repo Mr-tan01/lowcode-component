@@ -27,7 +27,7 @@ const bgURL = computed(() => bgImage.url);
             position: absolute;
             bottom: 0;
             left: 0;
-            background: url('../../../../assets/images/layout/bottom-left-bg.png') no-repeat;
+            background: url('./images/bottom-left-bg.png') no-repeat;
             background-size: cover;
             width: 781px;
             height: 19px;
@@ -41,7 +41,7 @@ const bgURL = computed(() => bgImage.url);
             border-bottom: 0;
             bottom: 0;
             right: 0;
-            background: url('../../../../assets/images/layout/bottom-right-bg.png') no-repeat;
+            background: url('./images/bottom-right-bg.png') no-repeat;
             background-size: cover;
             z-index: 10;
         }

@@ -34,7 +34,7 @@
 import { NModal } from 'naive-ui/es/modal';
 import { computed, PropType } from 'vue';
 import { options, type Options } from './config';
-import { LcDecoratorTitle } from '../DecoratorTitle'
+import { LcDecoratorTitle } from '@/components/education/components/DecoratorTitle';
 
 const {
     width = options.size.large.width,

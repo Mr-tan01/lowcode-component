@@ -1,5 +1,5 @@
 
-import bgPng from '../../../../assets/images/layout/bg.png';
+import bgPng from './images/bg.png';
 
 export const bgImage = {
     url: `url(${bgPng})`

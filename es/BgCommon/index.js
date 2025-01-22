@@ -2,14 +2,14 @@ import { defineComponent as s, useCssVars as l, computed as m, openBlock as _, c
 import { b as u } from "./assets/bg.png-ByhNX8B7.js";
 const g = {
   url: `url(${u})`
-}, b = { class: "lcc-bg__common" }, p = /* @__PURE__ */ s({
+}, p = { class: "lcc-bg__common" }, b = /* @__PURE__ */ s({
   __name: "BgCommon",
-  setup(e) {
-    l((t) => ({
-      "2c2c3cab": n.value
+  setup(t) {
+    l((e) => ({
+      "1ee1a61c": n.value
     }));
     const n = m(() => g.url);
-    return (t, o) => (_(), a("div", b, [
+    return (e, o) => (_(), a("div", p, [
       o[0] || (o[0] = c(
         "div",
         { class: "lcc-bg__common__bl-decoartor-bg" },
@@ -24,15 +24,15 @@ const g = {
         -1
         /* HOISTED */
       )),
-      d(t.$slots, "default", {}, void 0, !0)
+      d(e.$slots, "default", {}, void 0, !0)
     ]));
   }
-}), i = (e, n) => {
-  const t = e.__vccOpts || e;
+}), f = (t, n) => {
+  const e = t.__vccOpts || t;
   for (const [o, r] of n)
-    t[o] = r;
-  return t;
-}, B = /* @__PURE__ */ i(p, [["__scopeId", "data-v-1919b506"]]);
+    e[o] = r;
+  return e;
+}, B = /* @__PURE__ */ f(b, [["__scopeId", "data-v-e901cddf"]]);
 export {
   B as LcBgCommon
 };

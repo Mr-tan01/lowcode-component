@@ -3,6 +3,8 @@ import { build } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import merge from 'lodash-es/merge.js';
 import cloneDeep from 'lodash-es/cloneDeep.js';
+import child_process from 'child_process';
+import { join } from 'path';
 
 /**
 * @type {import('vite').InlineConfig}
@@ -16,7 +18,7 @@ const baseConfig = {
         alias: [
             {
                 find: '@',
-                replacement: pathResolve('src')
+                replacement: pathResolve('src', join(process.cwd(), '../')),
             },
             {
                 find: 'vue',
@@ -42,6 +44,7 @@ export class EsmComBuilder {
     constructor(base, options = {}) {
         this.base = base;
         this.setOptions(options);
+        this.cwd = process.cwd();
     }
     /**
     * @param {import('vite').InlineConfig} options 
@@ -50,6 +53,7 @@ export class EsmComBuilder {
         this.options = merge({}, this.options, options || {});
     }
     executeBuild(comAppName) {
+        const runEntryPath = `${this.base}/${comAppName}/index.ts`;
         /**
          * @type {import('vite').InlineConfig}
          */
@@ -58,7 +62,7 @@ export class EsmComBuilder {
                 cssCodeSplit: true,
                 emptyOutDir: false,
                 lib: {
-                    entry: `${this.base}/${comAppName}/index.ts`,
+                    entry: runEntryPath,
                     name: comAppName,
                     fileName: `${comAppName}/[name]`,
                     formats: ['es'],
@@ -87,6 +91,14 @@ export class EsmComBuilder {
             clearScreen: false,
             logLevel: 'info',
         };
-        build(merge({}, this.options, config));
+        const inlineConfig = merge({}, this.options, config);
+        const declaraDirPath = `${inlineConfig.build.outDir}/${comAppName}`;
+        const dtsExecCode = `npx vue-tsc ${runEntryPath} --declaration --emitDeclarationOnly --outDir ${declaraDirPath}`;
+        console.log("exec => ", dtsExecCode);
+        try {
+           child_process.exec(dtsExecCode);
+        } catch {
+        }
+        build(inlineConfig);
     }
 }

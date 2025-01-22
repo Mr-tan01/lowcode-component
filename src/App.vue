@@ -4,13 +4,13 @@
             <LcHeader></LcHeader>
             <RouterView></RouterView>
         </LcBgCommon>
+      
     </div>
 </template>
 
 <script setup lang="ts">
 import { LcBgCommon } from "@/components/education/components/BgCommon";
 import { LcHeader } from "@/components/education/components/Header";
-
 </script>
 
 
