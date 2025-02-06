@@ -12,6 +12,10 @@ export default defineConfig({
         replacement: pathResolve('src')
       },
       {
+        find: '~',
+        replacement: pathResolve('.')
+      },
+      {
         find: 'vue',
         replacement: 'vue/dist/vue.runtime.esm-browser.js',
       },

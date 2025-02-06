@@ -17,6 +17,7 @@
     "declarationDir": "dist/types",
     "noEmit": true,
     "paths": {
+      "~/*": ["./*"],
       "@/*": ["src/*"],
       "/#/*": ["types/*"]
     },

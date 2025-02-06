@@ -4,22 +4,25 @@
         <div class="help-container__desc">
             {{ description }}
         </div>
+
         <div class="help-container__wrapper">
-            <slot></slot>
+            <vue-resizable class="pd-20px" :width="rswidth" :height="rsHeight">
+                <slot></slot>
+            </vue-resizable>
         </div>
-        <div class="help-container__code" v-if="highlightCode">
-            <pre class="__code__">
-                <code>
-                    <div v-html="highlightCode"></div>
-                </code>
-            </pre>
+
+        <div class="help-container__code" v-if="code">
+            <n-code language="javascript" :code="code" word-wrap :hljs="Highlight">
+            </n-code>
         </div>
     </div>
 </template>
 <script lang="ts" setup>
-import { computed, PropType } from 'vue';
+import { PropType } from 'vue';
 import Highlight from 'highlight.js';
+import VueResizable from 'vue-resizable'
 import 'highlight.js/styles/lightfair.min.css';
+import { NCode } from 'naive-ui';
 
 const {
     code = '',
@@ -33,14 +36,13 @@ const {
     code: {
         type: String as PropType<string>,
     },
+    rswidth: {
+        type: [String, Number],
+    },
+    rsHeight: {
+        type: [String, Number],
+    }
 });
-
-const highlightCode = computed(() => {
-    return Highlight.highlight(code, {
-        language: 'typescript',
-    }).value;
-});
-
 </script>
 
 <style lang="scss" scoped>
@@ -51,6 +53,10 @@ const highlightCode = computed(() => {
     width: fit-content;
     min-width: 500px;
 
+    .pd-20px {
+        padding: 20px;
+    }
+
     h1 {
         color: white;
         font-size: 20px;
@@ -59,7 +65,7 @@ const highlightCode = computed(() => {
 
     &__code {
         margin-top: 5px;
-        background: rgb(24 24 28);
+        background: rgb(10, 10, 15);
         padding: 10px;
         border-radius: 5px;
         overflow-x: auto;
@@ -68,19 +74,7 @@ const highlightCode = computed(() => {
         line-height: 1.5;
         border: 1px solid #a1a1a1;
         margin-bottom: 10px;
-
-        pre {
-            margin: 0;
-        }
-
-        code {
-            color: #fff;
-            font-size: 16px;
-            white-space: pre-wrap;
-            word-wrap: break-word;
-            margin: 0;
-            outline: none;
-        }
+        color: #fff;
     }
 
     &__desc {
@@ -91,7 +85,6 @@ const highlightCode = computed(() => {
     &__wrapper {
         display: flex;
         flex-direction: column;
-        padding: 20px;
         border: 1px dotted #fff;
         border-radius: 5px;
     }
