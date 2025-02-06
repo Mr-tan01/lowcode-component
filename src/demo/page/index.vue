@@ -15,7 +15,7 @@
 
 <script lang="ts" setup>
 import Container from '../components/help/Container.vue';
-import { LcPageTitle } from '../../components/education/components/PageTitle';
+import { LcPageTitle } from '../../components/education/components/pageTitle';
 import * as pageTitle from './pageTitle';
 </script>
 

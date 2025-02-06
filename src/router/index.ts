@@ -6,10 +6,12 @@ const routerRaws = import.meta.glob('../demo/**/index.vue', {
 });
 
 const routes = createRoutes(routerRaws);
-console.log(routes);
+
 const router = createRouter({
     history: createWebHashHistory(base),
-    routes,
+    routes: [
+        ...routes,
+    ],
 });
 export default router;
 
@@ -21,7 +23,7 @@ function createRoutes(globPage: Record<string, unknown>, packageName = 'demo'): 
         const name = matchs[1]?.replace(/\//ig, '-') || '';
         routes.push({
             component: () => import(`../${packageName}/${name}/index.vue`),
-            name: name,
+            name: `${packageName}-${name}`,
             path: `/${packageName}/` + name,
         });
     });

@@ -4,7 +4,11 @@ import fs from 'node:fs';
 
 const modeListBase = '../src/components/education/components';
 // https://vite.dev/config/
-const esmComBuilder = new EsmComBuilder(modeListBase);
+const esmComBuilder = new EsmComBuilder(modeListBase, {
+    build: {
+        outDir: '../es/education',
+    }
+});
 
 const modeList = fs.readdirSync(modeListBase);
 modeList.forEach(mode => {

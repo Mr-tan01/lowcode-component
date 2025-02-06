@@ -1,4 +1,4 @@
-import LcModal from './Modal.vue';
+import LcModal from './modal.vue';
 
 export type LcModalInstanceType = InstanceType<typeof LcModal>;
 

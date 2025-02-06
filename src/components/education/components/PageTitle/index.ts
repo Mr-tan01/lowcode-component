@@ -1,4 +1,4 @@
-import LcPageTitle from "./PageTitle.vue";
+import LcPageTitle from "./pageTitle.vue";
 
 export type PageTitleInstanceType = InstanceType<typeof LcPageTitle>;
 

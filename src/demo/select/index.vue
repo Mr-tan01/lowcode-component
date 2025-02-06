@@ -11,7 +11,7 @@
 
 <script lang="ts" setup>
 import Container from '../components/help/Container.vue';
-import { LcSelect } from '../../components/education/components/Select';
+import { LcSelect } from '../../components/education/components/select';
 import { ref } from 'vue';
 import {
     code1,

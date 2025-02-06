@@ -1,4 +1,4 @@
-import LcDecoratorTitle from './DecoratorTitle.vue';
+import LcDecoratorTitle from './decoratorTitle.vue';
 
 export type DecoratorTitleInstanceType = InstanceType<typeof LcDecoratorTitle>;
 

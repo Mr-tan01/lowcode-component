@@ -1,4 +1,4 @@
-import LcHeader from './Header.vue';
+import LcHeader from './header.vue';
 
 export type HeaderInstanceType = InstanceType<typeof LcHeader>;
 

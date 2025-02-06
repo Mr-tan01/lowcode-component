@@ -1,3 +1,3 @@
-export * from "./Header";
-export * from './BgCommon';
-export * from './Modal';
+export * from "./header";
+export * from './bgCommon';
+export * from './modal';

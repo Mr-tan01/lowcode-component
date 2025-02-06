@@ -1,4 +1,4 @@
-import LcBgCommon from './BgCommon.vue';
+import LcBgCommon from './bgCommon.vue';
 
 export type BgCommonInstanceType = InstanceType<typeof LcBgCommon>;
 

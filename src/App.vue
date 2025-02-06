@@ -1,16 +1,11 @@
 <template>
     <div class="app">
-        <LcBgCommon>
-            <LcHeader></LcHeader>
-            <RouterView></RouterView>
-        </LcBgCommon>
-      
+        <Docx></Docx>
     </div>
 </template>
 
 <script setup lang="ts">
-import { LcBgCommon } from '../es/BgCommon';
-import { LcHeader } from "@/components/education/components/Header";
+import Docx from './docx/index.vue';
 </script>
 
 
