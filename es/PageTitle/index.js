@@ -1,3 +1,7 @@
+// css 
+ import './css/index.css';
+ // # end css mapping css/index.css 
+
 import { openBlock as s, createElementBlock as r, createElementVNode as _, renderSlot as a } from "vue";
 const l = (e, t) => {
   const c = e.__vccOpts || e;

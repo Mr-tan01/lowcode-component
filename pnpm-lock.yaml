@@ -15,7 +15,7 @@ importers:
         specifier: ^4.17.21
         version: 4.17.21
       lowcode-share:
-        specifier: link:F:/work/goview/tosts/lowcode-share
+        specifier: link:F:/Work/lowcode/lowcode-share
         version: link:../lowcode-share
       naive-ui:
         specifier: ^2.41.0

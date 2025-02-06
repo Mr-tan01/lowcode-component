@@ -1,5 +1,9 @@
+// css 
+ import './css/index.css';
+ // # end css mapping css/index.css 
+
 import { defineComponent as s, useCssVars as l, computed as m, openBlock as _, createElementBlock as a, createElementVNode as c, renderSlot as d } from "vue";
-import { b as u } from "./assets/bg.png-ByhNX8B7.js";
+import { b as u } from "./assets/bg-ByhNX8B7.js";
 const g = {
   url: `url(${u})`
 }, p = { class: "lcc-bg__common" }, b = /* @__PURE__ */ s({

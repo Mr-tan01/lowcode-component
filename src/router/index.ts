@@ -6,6 +6,7 @@ const routerRaws = import.meta.glob('../demo/**/index.vue', {
 });
 
 const routes = createRoutes(routerRaws);
+console.log(routes);
 const router = createRouter({
     history: createWebHashHistory(base),
     routes,

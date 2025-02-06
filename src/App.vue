@@ -9,7 +9,7 @@
 </template>
 
 <script setup lang="ts">
-import { LcBgCommon } from "@/components/education/components/BgCommon";
+import { LcBgCommon } from '../es/BgCommon';
 import { LcHeader } from "@/components/education/components/Header";
 </script>
 
