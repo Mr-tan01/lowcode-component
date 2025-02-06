@@ -1,16 +1,25 @@
 <template>
     <div class="demo-select">
-        <Container title="Select" description="基础用法" :code="code1">
-            <div class="select-box">
-                <LcSelect v-model:value="value" :options>
-                </LcSelect>
-            </div>
+
+        <Container title="Select" description="基础用法/渐变" :code="code1">
+            <n-space>
+                <div class="select-box">
+                    <LcSelect v-model:value="value" :options>
+                    </LcSelect>
+                </div>
+                <div class="select-box">
+                    <LcSelect v-model:value="value" :options gradient>
+                    </LcSelect>
+                </div>
+            </n-space>
         </Container>
+
     </div>
 </template>
 
 <script lang="ts" setup>
 import Container from '../components/help/Container.vue';
+import { NSpace } from 'naive-ui';
 import { LcSelect } from '../../components/education/components/select';
 import { ref } from 'vue';
 import {
@@ -30,7 +39,11 @@ const options = [
 </script>
 
 <style lang="scss" scoped>
-.select-box {
-    width: 200px;
+.demo-select {
+    margin: 0 auto;
+
+    .select-box {
+        width: 200px;
+    }
 }
 </style>

@@ -6,8 +6,10 @@
         </div>
 
         <div class="help-container__wrapper">
-            <vue-resizable class="pd-20px" :width="rswidth" :height="rsHeight">
-                <slot></slot>
+            <vue-resizable :width="rswidth" :height="rsHeight">
+                <div class="pad-box">
+                    <slot></slot>
+                </div>
             </vue-resizable>
         </div>
 
@@ -26,6 +28,7 @@ import { NCode } from 'naive-ui';
 
 const {
     code = '',
+    rsHeight = 'auto',
 } = defineProps({
     title: {
         type: String as PropType<string>,
@@ -51,11 +54,8 @@ const {
     flex-direction: column;
     margin: 20px auto;
     width: fit-content;
-    min-width: 500px;
+    min-width: 200px;
 
-    .pd-20px {
-        padding: 20px;
-    }
 
     h1 {
         color: white;
@@ -87,6 +87,12 @@ const {
         flex-direction: column;
         border: 1px dotted #fff;
         border-radius: 5px;
+        .pad-box {
+            padding: 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
     }
 }
 </style>

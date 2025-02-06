@@ -1,5 +1,7 @@
 <template>
-    <div class="lc-select">
+    <div class="lc-select" :class="{
+        'lc-select--gradient': gradient,
+    }">
         <n-select placeholder="下拉选择" :options="options" clearable :to="false" v-bind="$attrs">
             <template #arrow>
                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -18,17 +20,34 @@ import { PropType } from 'vue';
 
 const {
     options = [],
+    gradient = false,
 } = defineProps({
     options: {
         type: Array as PropType<{
             label: string;
             value: string;
         }[]>,
+    },
+    gradient: {
+        type: Boolean,
     }
 });
 </script>
 <style lang="scss" scoped>
 .lc-select {
+
+    &--gradient {
+        --gradient: linear-gradient(to right, rgba(0, 96, 163, 0.1) 0%, #033547b3 40%, #007FCE 100%);
+
+        :deep(.n-select) {
+            .n-base-selection,
+            .n-base-select-menu {
+                mask: var(--gradient);
+                -webkit-mask: var(--gradient);
+            }
+        }
+    }
+
     :deep(.n-select) {
 
         .n-base-selection {
@@ -54,9 +73,10 @@ const {
 
                 &--pending {
                     color: #fff;
+
                     &::before {
                         background-color: rgba(9, 159, 170, 1);
-                     
+
                     }
                 }
             }

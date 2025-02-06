@@ -18,7 +18,7 @@
 </template>
 
 <script lang="ts" setup>
-import { LcBgCommon } from '../../es/education/bgCommon';
+import { LcBgCommon } from '@/components/education/components/bgCommon';
 import { RouterLink, useRouter } from 'vue-router';
 import { NSpace, NLayout, NLayoutSider, NMenu } from 'naive-ui';
 import type { MenuOption } from 'naive-ui'

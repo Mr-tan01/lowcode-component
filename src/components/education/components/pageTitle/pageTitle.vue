@@ -22,6 +22,9 @@
         line-height: 28px;
         color: #fff;
         margin-bottom: 10px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 }
 </style>

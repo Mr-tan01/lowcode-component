@@ -22,6 +22,7 @@ const bgURL = computed(() => bgImage.url);
         background: v-bind(bgURL);
         background-size: cover;
         position: relative;
+        overflow: auto;
 
         &__bl-decoartor-bg {
             position: absolute;
