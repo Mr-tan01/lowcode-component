@@ -12,3 +12,16 @@ export const robotBQMap = {
 }
 
 export type RobotBQMapKeys = keyof typeof robotBQMap;
+type ReadValue<T> = T[keyof T];
+
+export const imageShowTrigger = {
+    none: 'none',
+    focus: 'focus',
+}
+export type ImageShowTrigger = ReadValue<typeof imageShowTrigger>;
+
+export const imageHideDir = {
+    lt: 'lt',
+    rt: 'rt',
+}
+export type ImageHideDir = ReadValue<typeof imageHideDir>;

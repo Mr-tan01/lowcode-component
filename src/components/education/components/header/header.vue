@@ -9,7 +9,7 @@
                                 {{ item.title }}
                             </a>
                         </template>
-                        <div class="lcc-header__wrapper__navs__drop" v-if="item.list">
+                        <div class="lcc-header__wrapper__navs__drop" v-if="item.list?.length">
                             <div class="lcc-header__wrapper__navs__drop__group" v-for="(el, key) in item.list" :key>
                                 <div class="lcc-header__wrapper__navs__drop__group__label">
                                     {{ el.label }}
@@ -137,9 +137,15 @@ function jump(item: NavData) {
 .header-popover-class {
     --n-padding: 0 !important;
     --n-color: transparent !important;
+    .n-popover-arrow-wrapper {
+        overflow: visible;
+
+    }
     .header-arrow-class {
-        background-color: rgba(15, 49, 99, 1) !important;
-        border: 1px solid rgba(46, 155, 182, 1) !important;
+        background-color: #103265 !important;
+        border-left: 1px solid #207097;
+        border-top: 1px solid #207097;
+        margin-bottom: -1px;
     }
 }
 
@@ -188,11 +194,31 @@ function jump(item: NavData) {
                     justify-content: center;
                     box-sizing: border-box;
                     white-space: nowrap;
+                    position: relative;
+
+                    &::before {
+                        content: '';
+                        background: url('./images/focus-point-light.png') no-repeat;
+                        background-size: 100% 100%;
+                        width: 100%;
+                        height: 100%;
+                        position: absolute;
+                        bottom: -43%;
+                        user-select: none;
+                        pointer-events: none;
+                        z-index: 9;
+                        display: none;
+                    }
 
                     &:hover {
                         cursor: pointer;
                         opacity: 0.8;
+
+                        &::before {
+                            display: block;
+                        }
                     }
+                    
                 }
 
                 &:nth-last-of-type(3) {
@@ -210,11 +236,10 @@ function jump(item: NavData) {
                 width: 100%;
                 display: flex;
                 gap: 40px;
-                background: linear-gradient(174deg, #123479 0%, rgba(44, 106, 210, 0.24) 56%, #0692A1 100%);
+                background: linear-gradient(174deg, #123479 0%, #0B2952 66%, #10507D 100%);
                 box-shadow: 0px 20px 20px -10px rgba(0, 0, 0, 0.31);
                 border-radius: 8px;
-                border: 1px solid;
-                border-image: linear-gradient(356deg, rgba(110, 173, 255, 0.45), rgba(63, 255, 246, 1)) 1 1;
+                border: 1px solid #207097;
                 padding: 15px 30px;
                 box-sizing: border-box;
                 border-radius: 8px;
