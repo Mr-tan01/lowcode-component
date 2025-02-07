@@ -75,12 +75,14 @@ export class EsmComBuilder {
                         'vue',
                         'vue-router',
                         'lodash-es',
+                        'naive-ui',
                     ],
                     output: {
                         globals: {
                             vue: 'Vue', // 打包时，不打包vue
                             'vue-router': 'vue-router',
                             'lodash-es': 'lodash-es',
+                            'naive-ui': 'naive-ui',
                         },
                         assetFileNames() {
                             return `${comAppName}/[ext]/[name].[ext]`;

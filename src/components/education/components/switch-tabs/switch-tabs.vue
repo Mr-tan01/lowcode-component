@@ -2,13 +2,13 @@
     <div class="lc-switch-tabs">
         <div class="lc-switch-tabs__wrapper">
             <div class="lc-switch-tabs__wrapper__arrow arrow--left" @click="leftHandler">
-                <img class="lc-switch-tabs__wrapper__arrow--image" src="./images/lt-arrow.png" alt="">
+                <img class="lc-switch-tabs__wrapper__arrow--image" src="./images/lt-arrow.png" draggable="false" alt="">
             </div>
             <div class="lc-switch-tabs__wrapper__tabs" ref="tabButtonParentElRef">
-                <div class="lc-switch-tabs__wrapper__tabs--train"
+                <div class="lc-switch-tabs__wrapper__tabs--train" :class="{ 'is-transition': _isTransition }"
                     :style="{ '--carousel-offset': `translateX(${carouselOffset}px)` }" ref="carouselTrainElRef">
                     <button class="lc-switch-tabs__wrapper__tabs--train__button" v-for="(item, index) in renderList"
-                        :key="item.value" :class="{ 'active': modelValue === index, 'is-even': isEven, }"
+                        :key="rowKey(item)" :class="{ 'active': carouseIndex === index, 'is-even': isEven, }"
                         @click="handleClick(item, index)" ref="tabButtonRef">
                         <div class="lc-switch-tabs__wrapper__tabs--train__button--text" :title="item.label">
                             {{ item.label }}
@@ -17,24 +17,32 @@
                 </div>
             </div>
             <div class="lc-switch-tabs__wrapper__arrow arrow--right" @click="rightHandler">
-                <img class="lc-switch-tabs__wrapper__arrow--image" src="./images/rt-arrow.png" alt="">
+                <img class="lc-switch-tabs__wrapper__arrow--image" src="./images/rt-arrow.png" draggable="false" alt="">
             </div>
         </div>
     </div>
 </template>
 
 <script lang="ts" setup>
-import { computed, onMounted, PropType, ref } from 'vue';
+import { computed, onMounted, PropType, ref, watch, watchPostEffect, nextTick } from 'vue';
 import { type TabListRaw } from './types';
 import { defSwitchTabList } from './const';
 import throttle from 'lodash-es/throttle';
 import debounce from 'lodash-es/debounce';
-import cloneDeep from 'lodash-es/cloneDeep';
 
-const modelValue = defineModel<number>('value', { default: 0 });
+// 轮播索引
+const carouseIndex = ref(0);
+const _isTransition = ref(true);
+
+// modeIndex 和 modelValue 是两个双向绑定，二选一vmodel, 初始化值，以modelIndex为准
+const modelIndex = defineModel<number>('index', { default: -1 });
+const modelValue = defineModel<TabListRaw['value']>('value', { default: '' });
+
+
 const {
     list,
-    offsetAnimationTime = 300
+    offsetAnimationTime = 300,
+    rowKey = (item: TabListRaw) => item.value,
 } = defineProps({
     list: {
         type: Array as PropType<TabListRaw[]>,
@@ -42,25 +50,56 @@ const {
     },
     offsetAnimationTime: {
         type: Number,
+    },
+    rowKey: {
+        type: Function as PropType<(item: TabListRaw) => string>,
+        required: false,
     }
 });
 
-const $emit = defineEmits<{
-    (e: 'change', value: { index: number, label: TabListRaw['label'], value: TabListRaw['value'], data: TabListRaw }): void;
-}>();
-const renderList = computed(() => {
-    // clone 一份放在结尾
-    const listClone = list === void 0 ? defSwitchTabList : list;
-    // TODO: 循环滚动
-    return listClone.concat(cloneDeep(listClone));
+
+const listSource = computed(() => {
+    return list === void 0 ? defSwitchTabList : list;
 });
 
-const isEven = computed(() => modelValue.value! % 2 === 0);
+// 如果modelIndex为-1，则以modelValue为准
+if (modelIndex.value === -1) {
+    modelIndex.value = listSource.value?.findIndex(item => rowKey(item) === modelValue.value) ?? 0;
+}
+type ChangeEvent = { index: number, label: TabListRaw['label'], value: TabListRaw['value'], data: TabListRaw };
+// 轮播索引
+carouseIndex.value = modelIndex.value;
+const $emit = defineEmits<{
+    (e: 'change', value: ChangeEvent): void;
+    (e: 'click', value: ChangeEvent): void;
+}>();
+
+
+const beforeAfterTempData = ref<{
+    before: TabListRaw[],
+    after: TabListRaw[],
+    appendCount: number,
+}>({
+    before: [],
+    after: [],
+    appendCount: 0,
+});
+
+
+
+const renderList = computed(() => {
+    // clone 一份放在结尾
+    const listClone = listSource.value ?? [];
+    return [...beforeAfterTempData.value.before, ...listClone, ...beforeAfterTempData.value.after];
+
+});
+
+const isEven = computed(() => carouseIndex.value! % 2 === 0);
 
 
 function createStepHandler(dir: number) {
     return throttle(() => {
-        let currentIndex = modelValue.value + dir;
+        let currentIndex = carouseIndex.value + dir;
         if (currentIndex < 0) {
             currentIndex = renderList.value.length - 1;
         } else if (currentIndex >= renderList.value.length) {
@@ -79,10 +118,43 @@ const tabButtonParentElRef = ref<HTMLDivElement>();
 const carouselTrainElRef = ref<HTMLDivElement>();
 const forceCompile = ref(0);
 
+watch(() => list, () => {
+    updateCompile();
+    nextTick(appendBeforeAfterData);
+}, {
+    deep: 1
+});
+
+onMounted(appendBeforeAfterData); // 初始化
+
+// 追加前后临时数据
+function appendBeforeAfterData() {
+    if (!clientRect.value) return;
+    const { maxButtonCountCeil } = clientRect.value;
+    const appendCount = maxButtonCountCeil;
+    if (appendCount === 0 || listSource.value?.length < appendCount) return;
+    beforeAfterTempData.value.appendCount = appendCount;
+    carouseIndex.value += appendCount; // 轮播索引增加
+    const listClone = listSource.value ?? [];
+    beforeAfterTempData.value.before = listClone.slice(-appendCount).map(uuCloneKey); // 把结尾的{maxButtonCountCeil}个追加到前面
+    beforeAfterTempData.value.after = listClone.slice(0, appendCount).map(uuCloneKey); // 把开始的{maxButtonCountCeil}个追加到后面
+}
+
+function uuCloneKey(item: TabListRaw, index: number): TabListRaw {
+    return {
+        ...item,
+        value: rowKey(item) + '_clone_' + index,
+    }
+}
+
+function updateCompile() {
+    forceCompile.value++; // 强制更新
+}
+
 function onParentElResize() {
     if (!window.ResizeObserver || !tabButtonParentElRef.value) return;
     const observer = new ResizeObserver(debounce(() => {
-        forceCompile.value++; // 强制更新
+        updateCompile();
     }, offsetAnimationTime));
     observer.observe(tabButtonParentElRef.value);
 }
@@ -90,7 +162,7 @@ function onParentElResize() {
 onMounted(onParentElResize);
 
 // 让选中的在中心点，计算中心点
-const centerPoint = computed(() => {
+const clientRect = computed(() => {
     forceCompile.value++; // 强制更新
     if (!tabButtonParentElRef.value || !tabButtonRef.value || !carouselTrainElRef.value) return;
     // 获取到父元素的宽度
@@ -103,12 +175,13 @@ const centerPoint = computed(() => {
     for (let i = 0; i <= tabButtonRef.value.length; i++) {
         const buttonEl = tabButtonRef.value[i];
         // 获取到选中的按钮宽度
-        if (buttonEl.classList.contains('active')) {
+        if (buttonEl?.classList?.contains('active')) {
             buttonMapsWidth.active = buttonEl.offsetWidth;
         } else {
             // 获取到正常的按钮宽度
-            buttonMapsWidth.normal = buttonEl.offsetWidth;
+            buttonMapsWidth.normal = buttonEl?.offsetWidth;
         }
+
         // 如果获取到两个值，则退出
         if (buttonMapsWidth.active && buttonMapsWidth.normal) {
             break;
@@ -119,15 +192,17 @@ const centerPoint = computed(() => {
     // 获取到选中的按钮宽度
     const activeButtonWidth = buttonMapsWidth.active;
     // 计算最多能容纳几个按钮
-    const maxButtonCount = Math.floor(width / normalButtonWidth);
+    const maxCount = width / normalButtonWidth;
+    const maxButtonCount = Math.floor(maxCount);
+    const maxButtonCountCeil = Math.ceil(maxCount);
     // 获取到轮播轨道的宽度
     const carouselWidth = carouselTrainElRef.value.offsetWidth;
-
 
     return {
         normalButtonWidth,
         maxButtonCount,
         carouselWidth,
+        maxButtonCountCeil,
         offset: activeButtonWidth / 2 // 加上选中的按钮宽度一半, 让选中的按钮在中心点
     }
 });
@@ -136,10 +211,10 @@ const centerPoint = computed(() => {
 // 计算轮播偏移量
 
 const carouselOffset = computed(() => {
-    if (centerPoint.value) {
-        const { normalButtonWidth, maxButtonCount, offset, carouselWidth } = centerPoint.value;
+    if (clientRect.value) {
+        const { normalButtonWidth, maxButtonCount, offset, carouselWidth } = clientRect.value;
         const maxButtonCountHalf = maxButtonCount / 2;
-        let offsetValue = ((normalButtonWidth * (modelValue.value - maxButtonCountHalf)) + offset) * -1;
+        let offsetValue = ((normalButtonWidth * (carouseIndex.value - maxButtonCountHalf)) + offset) * -1;
 
         if (offsetValue >= 0) {
             // 如果偏移量大于0，则设置为0, 证明已经左边到头了
@@ -155,15 +230,48 @@ const carouselOffset = computed(() => {
 });
 
 
-const handleClick = throttle((item: TabListRaw, index: number) => {
-    modelValue.value = index;
+function transitionCallabck(callback: () => void, isNextTick: boolean = true) {
+    if (isNextTick) {
+        nextTick(setTimeout.bind(null, callback, offsetAnimationTime));
+    } else {
+        setTimeout(callback, offsetAnimationTime);
+    }
+}
 
-    $emit('change', {
-        index,
-        label: item?.label,
-        value: item?.value,
-        data: item,
-    });
+function transitionCallabckLoop(index: number) {
+    transitionCallabck(() => {
+        // 动画结束后，更新轮播索引，实现无限轮播
+        _isTransition.value = false;
+        carouseIndex.value = index;
+        transitionCallabck(() => {
+            _isTransition.value = true;
+        }, true);
+    }, false);
+}
+
+const handleClick = throttle((item: TabListRaw, index: number) => {
+    const appendCount = beforeAfterTempData.value.appendCount;
+    let _index = index - appendCount;
+
+    if (modelIndex.value == _index) return;
+    carouseIndex.value = index;
+    modelValue.value = item?.value;
+    if (_index < 0) {
+        transitionCallabckLoop(listSource.value.length + _index + appendCount);
+        _index = listSource.value.length - 1;
+    } else if (_index >= listSource.value.length) {
+        transitionCallabckLoop(appendCount);
+        _index = 0;
+    }
+    modelIndex.value = _index;
+    const _newItem = listSource.value[_index];
+    const _newChangeEventData = {
+        index: _index,
+        label: _newItem?.label,
+        value: _newItem?.value,
+        data: _newItem,
+    }
+    $emit('change', _newChangeEventData);
 }, offsetAnimationTime);
 </script>
 
@@ -191,8 +299,24 @@ const handleClick = throttle((item: TabListRaw, index: number) => {
                 width: fit-content;
                 display: flex;
                 will-change: transform;
-                transition: transform calc(var(--transition-time) * 1ms) linear;
+                transition: none;
                 transform: var(--carousel-offset);
+
+                &.is-transition {
+                    transition: transform calc(var(--transition-time) * 1ms) linear;
+
+                    .lc-switch-tabs {
+                        &__wrapper {
+                            &__tabs {
+                                &--train {
+                                    &__button {
+                                        transition: calc(var(--transition-time) * 1ms) linear;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
 
                 &__button {
                     width: 175px;
@@ -202,7 +326,7 @@ const handleClick = throttle((item: TabListRaw, index: number) => {
                     border: 0;
                     padding-bottom: 10px;
                     box-sizing: border-box;
-                    transition: 0.3s linear;
+                    transition: none;
                     background: url(./images/lt-first.png) no-repeat center center / 100% 100%;
 
                     &:nth-child(odd) {
