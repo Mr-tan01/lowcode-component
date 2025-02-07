@@ -1,6 +1,7 @@
 <template>
     <div class="demo-tabs">
         <Container title="选项" description="基础用法" rswidth="1200px">
+            {{ tabValue2 }}
             <LcSwitchTabs v-model:value="tabValue2">
 
             </LcSwitchTabs>

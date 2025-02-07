@@ -24,7 +24,7 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, onMounted, PropType, ref, watch, watchPostEffect, nextTick } from 'vue';
+import { computed, onMounted, PropType, ref, watch, nextTick } from 'vue';
 import { type TabListRaw } from './types';
 import { defSwitchTabList } from './const';
 import throttle from 'lodash-es/throttle';
@@ -41,7 +41,7 @@ const modelValue = defineModel<TabListRaw['value']>('value', { default: '' });
 
 const {
     list,
-    offsetAnimationTime = 300,
+    offsetAnimationTime = 250,
     rowKey = (item: TabListRaw) => item.value,
 } = defineProps({
     list: {
@@ -67,11 +67,9 @@ if (modelIndex.value === -1) {
     modelIndex.value = listSource.value?.findIndex(item => rowKey(item) === modelValue.value) ?? 0;
 }
 type ChangeEvent = { index: number, label: TabListRaw['label'], value: TabListRaw['value'], data: TabListRaw };
-// 轮播索引
-carouseIndex.value = modelIndex.value;
+
 const $emit = defineEmits<{
     (e: 'change', value: ChangeEvent): void;
-    (e: 'click', value: ChangeEvent): void;
 }>();
 
 
@@ -97,8 +95,13 @@ const renderList = computed(() => {
 const isEven = computed(() => carouseIndex.value! % 2 === 0);
 
 
+function initCarouseIndex() {
+    carouseIndex.value = modelIndex.value;
+}
+initCarouseIndex();
 function createStepHandler(dir: number) {
     return throttle(() => {
+
         let currentIndex = carouseIndex.value + dir;
         if (currentIndex < 0) {
             currentIndex = renderList.value.length - 1;
@@ -134,7 +137,8 @@ function appendBeforeAfterData() {
     const appendCount = maxButtonCountCeil;
     if (appendCount === 0 || listSource.value?.length < appendCount) return;
     beforeAfterTempData.value.appendCount = appendCount;
-    carouseIndex.value += appendCount; // 轮播索引增加
+    initCarouseIndex(); // 初始化轮播索引
+    carouseIndex.value += appendCount; // 轮播索引增加临时数据偏移值
     const listClone = listSource.value ?? [];
     beforeAfterTempData.value.before = listClone.slice(-appendCount).map(uuCloneKey); // 把结尾的{maxButtonCountCeil}个追加到前面
     beforeAfterTempData.value.after = listClone.slice(0, appendCount).map(uuCloneKey); // 把开始的{maxButtonCountCeil}个追加到后面
@@ -155,6 +159,7 @@ function onParentElResize() {
     if (!window.ResizeObserver || !tabButtonParentElRef.value) return;
     const observer = new ResizeObserver(debounce(() => {
         updateCompile();
+        appendBeforeAfterData();
     }, offsetAnimationTime));
     observer.observe(tabButtonParentElRef.value);
 }
@@ -229,33 +234,44 @@ const carouselOffset = computed(() => {
 
 });
 
+function requestAnimationFrame(callback: () => void) {
+    if (window.requestAnimationFrame) {
+        window.requestAnimationFrame(callback);
+    } else {
+        callback();
+    }
+}
 
 function transitionCallabck(callback: () => void, isNextTick: boolean = true) {
-    if (isNextTick) {
-        nextTick(setTimeout.bind(null, callback, offsetAnimationTime));
-    } else {
-        setTimeout(callback, offsetAnimationTime);
-    }
+    requestAnimationFrame(() => {
+        if (isNextTick) {
+            nextTick(setTimeout.bind(null, callback, offsetAnimationTime));
+        } else {
+            setTimeout(callback, offsetAnimationTime);
+        }
+    });
 }
 
 function transitionCallabckLoop(index: number) {
     transitionCallabck(() => {
-        // 动画结束后，更新轮播索引，实现无限轮播
+        // 关闭过度效果
         _isTransition.value = false;
+        // 更新轮播索引，实现无限轮播
         carouseIndex.value = index;
-        transitionCallabck(() => {
-            _isTransition.value = true;
-        }, true);
     }, false);
 }
 
-const handleClick = throttle((item: TabListRaw, index: number) => {
+const handleClick = throttle((_item: TabListRaw, index: number) => {
+    // 开启过度效果
+    if (!_isTransition.value) {
+        _isTransition.value = true;
+    }
     const appendCount = beforeAfterTempData.value.appendCount;
     let _index = index - appendCount;
 
+
     if (modelIndex.value == _index) return;
     carouseIndex.value = index;
-    modelValue.value = item?.value;
     if (_index < 0) {
         transitionCallabckLoop(listSource.value.length + _index + appendCount);
         _index = listSource.value.length - 1;
@@ -265,12 +281,14 @@ const handleClick = throttle((item: TabListRaw, index: number) => {
     }
     modelIndex.value = _index;
     const _newItem = listSource.value[_index];
+    modelValue.value = _newItem?.value;
     const _newChangeEventData = {
         index: _index,
         label: _newItem?.label,
         value: _newItem?.value,
         data: _newItem,
     }
+
     $emit('change', _newChangeEventData);
 }, offsetAnimationTime);
 </script>
