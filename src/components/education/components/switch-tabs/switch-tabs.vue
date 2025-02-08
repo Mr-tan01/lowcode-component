@@ -21,7 +21,7 @@
             </div>
         </div>
         <div class="lc-switch-tabs__track">
-            <img class="lc-switch-tabs__track__image--pointer" src="./images/top-arrow.png" alt="">
+            <img class="lc-switch-tabs__track__image--pointer" src="./images/top-arrow.png" draggable="false" alt="">
         </div>
     </div>
 </template>
@@ -299,11 +299,13 @@ const handleClick = throttle((_item: TabListRaw, index: number) => {
 <style lang="scss" scoped>
 .lc-switch-tabs {
     width: 100%;
+    user-select: none;
 
     &__track {
         position: relative;
         width: 100%;
         padding-top: 17px;
+        pointer-events: none;
 
         &__image {
             &--pointer {
