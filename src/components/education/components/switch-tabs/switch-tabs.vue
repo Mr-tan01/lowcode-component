@@ -150,7 +150,7 @@ function appendBeforeAfterData() {
 function uuCloneKey(item: TabListRaw, index: number): TabListRaw {
     return {
         ...item,
-        value: rowKey(item) + '_clone_' + index,
+        value: rowKey(item) + '_clone_' + index + "_" + Date.now(),
     }
 }
 
