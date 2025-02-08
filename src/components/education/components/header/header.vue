@@ -12,7 +12,13 @@
                         <div class="lcc-header__wrapper__navs__drop" v-if="item.list?.length">
                             <div class="lcc-header__wrapper__navs__drop__group" v-for="(el, key) in item.list" :key>
                                 <div class="lcc-header__wrapper__navs__drop__group__label">
-                                    {{ el.label }}
+                                    <div class="lcc-header__wrapper__navs__drop__group__label--icon">
+                                        <img class="lcc-header__wrapper__navs__drop__group__label--icon--image"
+                                            src="./images/right-arrow.png" alt="">
+                                    </div>
+                                    <div class="lcc-header__wrapper__navs__drop__group__label--text">
+                                        {{ el.label }}
+                                    </div>
                                 </div>
                                 <div class="lcc-header__wrapper__navs__drop__group__item__group">
                                     <div class="lcc-header__wrapper__navs__drop__group__item__group__nav"
@@ -137,10 +143,12 @@ function jump(item: NavData) {
 .header-popover-class {
     --n-padding: 0 !important;
     --n-color: transparent !important;
+
     .n-popover-arrow-wrapper {
         overflow: visible;
 
     }
+
     .header-arrow-class {
         background-color: #103265 !important;
         border-left: 1px solid #207097;
@@ -148,8 +156,6 @@ function jump(item: NavData) {
         margin-bottom: -1px;
     }
 }
-
-
 </style>
 <style lang="scss" scoped>
 .lcc-header {
@@ -218,7 +224,7 @@ function jump(item: NavData) {
                             display: block;
                         }
                     }
-                    
+
                 }
 
                 &:nth-last-of-type(3) {
@@ -258,17 +264,31 @@ function jump(item: NavData) {
                     flex: 1;
 
                     &__label {
-                        font-family: HarmonyOS_Sans_SC_Bold;
-                        font-size: 16px;
-                        color: #F2F3F4;
-                        line-height: 24px;
-                        text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.5);
-                        text-align: left;
-                        font-style: normal;
-                        text-transform: none;
+                        display: flex;
+                        align-items: center;
                         padding-bottom: 15px;
                         margin-bottom: 15px;
                         border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+
+                        &--icon {
+                            display: flex;
+                            align-items: center;
+                            &--image {
+                                margin-right: 8px;
+                                height: 19px;
+                            }
+                        }
+
+                        &--text {
+                            font-family: HarmonyOS_Sans_SC_Bold;
+                            font-size: 16px;
+                            color: #F2F3F4;
+                            line-height: 24px;
+                            text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.5);
+                            text-align: left;
+                            font-style: normal;
+                            text-transform: none;
+                        }
                     }
 
                     &__item__group {
