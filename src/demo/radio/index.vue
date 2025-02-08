@@ -13,6 +13,22 @@
                 </n-space>
             </div>
         </Container>
+        <Container title="单选" description="深圳教育项目-单选" rswidth="1210px" rs-height="auto">
+            value: {{ radioValue }}
+            <div class="size-box">
+                <LcRadioGroup v-model:value="radioValue">
+                    <n-space>
+                        <LcRadio value="1">
+                            Definitely Maybe
+                        </LcRadio>
+                        <LcRadio value="2">
+                            Definitely Maybe
+                        </LcRadio>
+                    </n-space>
+                </LcRadioGroup>
+
+            </div>
+        </Container>
     </div>
 </template>
 <script lang="ts" setup>
@@ -20,6 +36,8 @@ import { NSpace } from 'naive-ui';
 import Container from '../components/help/Container.vue';
 import { LcRadioButtonGroup } from '@/components/education/components/radio-button-group';
 import { LcRadioButton } from '@/components/education/components/radio-button';
+import { LcRadio, LcRadioGroup } from '@/components/education/components/radio';
 import { ref } from 'vue';
-const radioButtonValue1 = ref('1')
+const radioButtonValue1 = ref('1');
+const radioValue = ref('1');
 </script>

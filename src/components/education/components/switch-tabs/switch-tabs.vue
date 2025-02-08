@@ -20,6 +20,9 @@
                 <img class="lc-switch-tabs__wrapper__arrow--image" src="./images/rt-arrow.png" draggable="false" alt="">
             </div>
         </div>
+        <div class="lc-switch-tabs__track">
+            <img class="lc-switch-tabs__track__image--pointer" src="./images/top-arrow.png" alt="">
+        </div>
     </div>
 </template>
 
@@ -198,8 +201,8 @@ const clientRect = computed(() => {
     const activeButtonWidth = buttonMapsWidth.active;
     // 计算最多能容纳几个按钮
     const maxCount = width / normalButtonWidth;
-    const maxButtonCount = Math.floor(maxCount);
-    const maxButtonCountCeil = Math.ceil(maxCount);
+    const maxButtonCount = maxCount; // 保留小数，计算偏移精度的偏移量需要用到
+    const maxButtonCountCeil = Math.ceil(maxCount); // 用来确定最少需要追加多少个自定元素（处理loop用）
     // 获取到轮播轨道的宽度
     const carouselWidth = carouselTrainElRef.value.offsetWidth;
 
@@ -296,6 +299,21 @@ const handleClick = throttle((_item: TabListRaw, index: number) => {
 <style lang="scss" scoped>
 .lc-switch-tabs {
     width: 100%;
+
+    &__track {
+        position: relative;
+        width: 100%;
+        padding-top: 17px;
+
+        &__image {
+            &--pointer {
+                height: 14px;
+                position: absolute;
+                left: 50%;
+                transform: translate(-50%, 0);
+            }
+        }
+    }
 
     &__wrapper {
         width: 100%;
