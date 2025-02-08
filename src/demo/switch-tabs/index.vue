@@ -1,11 +1,13 @@
 <template>
     <div class="demo-tabs">
-        <Container title="选项" description="基础用法" rswidth="1200px">
+        <Container title="选项" description="基础用法" rswidth="700px">
             {{ tabValue }}
             <LcSwitchTabs v-model:value="tabValue">
-
-
-
+            </LcSwitchTabs>
+        </Container>
+        <Container title="选项" description="基础用法" rswidth="1000px">
+            {{ tabValue }}
+            <LcSwitchTabs v-model:value="tabValue">
             </LcSwitchTabs>
         </Container>
     </div>

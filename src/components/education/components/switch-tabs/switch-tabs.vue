@@ -27,7 +27,7 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, onMounted, PropType, ref, watch, nextTick } from 'vue';
+import { computed, onMounted, PropType, ref, watch, nextTick, shallowRef } from 'vue';
 import { type TabListRaw } from './types';
 import { defSwitchTabList } from './const';
 import throttle from 'lodash-es/throttle';
@@ -119,9 +119,9 @@ function createStepHandler(dir: number) {
 const leftHandler = createStepHandler(-1);
 const rightHandler = createStepHandler(1);
 
-const tabButtonRef = ref<HTMLButtonElement[]>([]);
-const tabButtonParentElRef = ref<HTMLDivElement>();
-const carouselTrainElRef = ref<HTMLDivElement>();
+const tabButtonRef = shallowRef<HTMLButtonElement[]>([]);
+const tabButtonParentElRef = shallowRef<HTMLDivElement>();
+const carouselTrainElRef = shallowRef<HTMLDivElement>();
 const forceCompile = ref(0);
 
 watch(() => list, () => {
