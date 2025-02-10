@@ -17,6 +17,7 @@ const {
     name = 'add',
     size = 16,
     ext = '.png',
+    selected = void 0,
 } = defineProps({
     domain: {
         type: String as PropType<Domains>,
@@ -29,13 +30,19 @@ const {
     },
     ext: {
         type: String as PropType<'.png'>,
+    },
+    selected: {
+        type: Boolean,
     }
 });
 const isHover = ref(false);
 const { src, selectedSrc } = useImage(domain as Domains, name as NameTypeFunc<Domains>, ext);
 
 const imageSrc = computed(() => {
-    return isHover.value && selectedSrc.value ? selectedSrc.value : src.value;
+    if (selected === void 0) {
+        return isHover.value && selectedSrc.value ? selectedSrc.value : src.value;
+    }
+    return selected ? selectedSrc.value : src.value;
 });
 </script>
 
@@ -44,12 +51,13 @@ const imageSrc = computed(() => {
     width: fit-content;
     display: inline-flex;
     align-items: center;
-    
+
     &__img {
         width: calc(v-bind(size) * 1px);
         height: calc(v-bind(size) * 1px);
         object-fit: contain;
     }
+
     &__span {
         font-size: 12px;
         color: #fff;

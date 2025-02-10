@@ -33,6 +33,8 @@ export const innerImageDomain = {
         remove: 'remove',
         search: 'search',
         time: 'time',
+        blueLArrow: 'blue-l-arrow',
+        blueRArrow: 'blue-r-arrow',
     },
     event: {
         domain: 'domain',
