@@ -16,6 +16,7 @@ export const code2 = `
     <NSpace>
         // 拖拽机器人
         <LcRobot width="auto" height="147px" value="s4" trigger="focus" showPopup draggable></LcRobot>
+        <LcRobot width="auto" height="147px" value="s4" trigger="focus" showPopup draggable position="absolute"></LcRobot>
         // 其它用法
         <LcRobot width="auto" height="147px" value="s4" trigger="focus" showPopup></LcRobot>
         <LcRobot width="auto" height="147px" value="s4" trigger="focus" hid-dir="rt" showPopup></LcRobot>

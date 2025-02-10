@@ -17,6 +17,7 @@
         <Container title="机器人图标" description="深圳教育项目-机器人图标" rswidth="1210px" rs-height="auto" :code="code2">
             <NSpace>
                 <LcRobot width="auto" height="147px" value="s4" trigger="focus" showPopup draggable></LcRobot>
+                <LcRobot width="auto" height="147px" value="s4" trigger="focus" showPopup draggable position="absolute"></LcRobot>
                 <LcRobot width="auto" height="147px" value="s4" trigger="focus" showPopup></LcRobot>
                 <LcRobot width="auto" height="147px" value="s4" trigger="focus" hid-dir="rt" showPopup></LcRobot>
                 <LcRobot width="auto" height="147px"

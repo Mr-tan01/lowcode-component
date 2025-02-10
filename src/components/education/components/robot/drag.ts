@@ -9,12 +9,12 @@ export function useDragRobotPosition() {
         if (historyData) {
             const _history = JSON.parse(historyData);
             robotOffset.x = _history.x;
-            robotOffset.y = _history.y;
+            robotOffset.y = parseInt(_history.y) > innerHeight ? '80%' : _history.y;
         }
     } catch {
 
     }
-    const xAdsorptionDir = computed(() => robotOffset.x === 0 ? 'lt' : 'rt')
+    const xAdsorptionDir = computed(() => robotOffset.x <= 0 ? 'lt' : 'rt')
 
     function startDrag(event: DragEvent) {
         isDraging.value = true;
@@ -32,7 +32,9 @@ export function useDragRobotPosition() {
         } else {
             robotOffset.x = 100;
         }
-        robotOffset.y = (event.clientY < 200 ? 200 : event.clientY) + 'px';
+        // @ts-ignore
+        const { height = 200 } = event.target?.getBoundingClientRect();
+        robotOffset.y = (event.clientY <= height ? height : event.clientY) + 'px';
         localStorage.setItem(dragHistoryKey, JSON.stringify(robotOffset));
     }
 
