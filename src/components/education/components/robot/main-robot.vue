@@ -4,9 +4,16 @@
             <img class="lc-main-robot__img" src="./images/main-robot.png" draggable="false" alt="">
             <div class="lc-main-robot__wrapper__inner-input">
                 <div class="lc-main-robot__wrapper__inner-input--content">
-                    <input type="text" :placeholder class="lc-main-robot__wrapper__inner-input--content__input">
+                    <div class="lc-main-robot__wrapper__inner-input--help" v-show="output.helpText">
+                        <img class="lc-main-robot__wrapper__inner-input--help--voice" src="./images/voice.png"
+                            draggable="false" alt="">
+                        {{ output.helpText }}
+                    </div>
+                    <input type="text" :placeholder v-model="modelContext"
+                        class="lc-main-robot__wrapper__inner-input--content__input">
                     <div class="lc-main-robot__wrapper__inner-input--content__suffix">
-                        <img class="lc-main-robot__wrapper__inner-input--content__suffix--img" src="./images/microphone.png" draggable="false" alt="" />
+                        <img class="lc-main-robot__wrapper__inner-input--content__suffix--img"
+                            src="./images/microphone.png" draggable="false" @mousedown="start" @mouseup="stop" alt="" />
                     </div>
                 </div>
             </div>
@@ -15,10 +22,19 @@
 </template>
 
 <script lang="ts" setup>
+import { useSpeech } from './speech';
+
 const {
     placeholder = 'AI 智能问数',
 } = defineProps({
     placeholder: String,
+});
+const { start, stop, output, on } = useSpeech();
+
+const modelContext = defineModel('value', { default: '' });
+
+on('result', () => {
+    modelContext.value = output.value?.textContent || '';
 });
 </script>
 
@@ -46,6 +62,15 @@ const {
             display: flex;
             width: 74%;
             height: 8%;
+
+            &--help {
+                color: #fff;
+                font-size: 14px;
+
+                &--voice {
+                    width: 14px;
+                }
+            }
 
             &--content {
                 flex: 1;
@@ -76,9 +101,11 @@ const {
                 &__suffix {
                     margin-left: 5%;
                     width: 5%;
+
                     &--img {
                         width: 100%;
                         object-fit: contain;
+
                         &:hover {
                             cursor: pointer;
                             opacity: 0.8;
