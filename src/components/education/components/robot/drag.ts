@@ -25,6 +25,7 @@ export function useDragRobotPosition() {
     }
 
     function stopDrag(event: DragEvent) {
+        event.preventDefault();
         isDraging.value = false;
         if (event.clientX < window.innerWidth / 2) {
             robotOffset.x = 0;

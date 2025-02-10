@@ -10,3 +10,18 @@ export const code1 = `
     </n-space>
 </template>
 `;
+
+export const code2 = `
+<template>
+    <NSpace>
+        // 拖拽机器人
+        <LcRobot width="auto" height="147px" value="s4" trigger="focus" showPopup draggable></LcRobot>
+        // 其它用法
+        <LcRobot width="auto" height="147px" value="s4" trigger="focus" showPopup></LcRobot>
+        <LcRobot width="auto" height="147px" value="s4" trigger="focus" hid-dir="rt" showPopup></LcRobot>
+        <LcRobot width="auto" height="147px"
+            src="https://b0.bdstatic.com/2d43e63ca240bdf793814be0dbc9c3a5.jpg@h_1280" trigger="focus"
+            hid-dir="rt" showPopup></LcRobot>
+    </NSpace>
+</template>
+`;

@@ -14,7 +14,7 @@
                 </n-space>
             </div>
         </Container>
-        <Container title="机器人图标" description="深圳教育项目-机器人图标" rswidth="1210px" rs-height="auto">
+        <Container title="机器人图标" description="深圳教育项目-机器人图标" rswidth="1210px" rs-height="auto" :code="code2">
             <NSpace>
                 <LcRobot width="auto" height="147px" value="s4" trigger="focus" showPopup draggable></LcRobot>
                 <LcRobot width="auto" height="147px" value="s4" trigger="focus" showPopup></LcRobot>
@@ -30,7 +30,7 @@
 import { NSpace } from 'naive-ui';
 import Container from '../components/help/Container.vue';
 import { LcRobot, LcMainRobot } from '@/components/education/components/robot';
-import { code1 } from './const';
+import { code1, code2 } from './const';
 </script>
 
 <style lang="scss" scoped>
