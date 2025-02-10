@@ -14,7 +14,7 @@
                 </div>
                 <div class="lc-skew-indicator__wrapper__info--result">
                     <div class="lc-skew-indicator__wrapper__info--result--value">
-                        {{ renderValue }}
+                        <NNumberAnimation show-separator :from="0" :to="renderValue" active :precision="decimal" />
                     </div>
                     <div class="lc-skew-indicator__wrapper__info--result--unit" v-if="renderUnit">
                         {{ renderUnit }}
@@ -33,6 +33,7 @@ import { computed } from 'vue';
 import { AlertCircleOutline } from '@vicons/ionicons5';
 import personIcon from './images/skew/icon/person.png';
 import { bigNumber } from '@/components/education/common/utils/formate';
+import { NNumberAnimation } from 'naive-ui/es/number-animation';
 
 const {
     label = '',

@@ -3,7 +3,7 @@
         <div class="lc-indicator-card__wrapper">
             <div class="lc-indicator-card__wrapper--result">
                 <span class="lc-indicator-card__wrapper--result--value">
-                    {{ renderValue }}
+                    <NNumberAnimation show-separator :from="0" :to="renderValue" active :precision="decimal" />
                 </span>
                 <span class="lc-indicator-card__wrapper--result--unit" v-if="fixed">
                     {{ unit }}
@@ -18,6 +18,7 @@
 
 <script lang="ts" setup>
 import { computed, PropType } from 'vue';
+import { NNumberAnimation } from 'naive-ui/es/number-animation'
 import { bigNumber } from '@/components/education/common/utils/formate';
 const SIZE = {
     small: 'small',
@@ -50,7 +51,7 @@ const {
 });
 
 const renderValue = computed(() => {
-    if(fixed) {
+    if (fixed) {
         return bigNumber(value, decimal).result;
     }
     return value;
@@ -64,7 +65,7 @@ const padValue = computed(() => {
     return innerPad[size];
 });
 const unit = computed(() => {
-    if(fixed) {
+    if (fixed) {
         return bigNumber(value, decimal).unit;
     }
 });
