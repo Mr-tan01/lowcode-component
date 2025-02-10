@@ -1,5 +1,8 @@
 <template>
-    <div class="lc-indicator-card">
+    <div class="lc-indicator-card" :class="{
+        'lc-indicator-card--noborder': type === 'noborder',
+
+    }">
         <div class="lc-indicator-card__wrapper">
             <div class="lc-indicator-card__wrapper--result">
                 <span class="lc-indicator-card__wrapper--result--value">
@@ -20,6 +23,7 @@
 import { computed, PropType } from 'vue';
 import { NNumberAnimation } from 'naive-ui/es/number-animation'
 import { bigNumber } from '@/components/education/common/utils/formate';
+
 const SIZE = {
     small: 'small',
     medium: 'medium',
@@ -47,6 +51,9 @@ const {
     },
     decimal: {
         type: Number,
+    },
+    type: {
+        type: String as PropType<'border' | 'noborder'>,
     }
 });
 
@@ -74,8 +81,33 @@ const unit = computed(() => {
 <style lang="scss" scoped>
 .lc-indicator-card {
     z-index: 0;
-
     position: relative;
+
+    &--noborder {
+        .lc-indicator-card {
+            &__wrapper {
+                background-image: url(./images/card/bg-noborder.png);
+
+                &:hover {
+                    background-image: url(./images/card/bg-noborder-selected.png);
+                }
+
+                &--result {
+                    &--value {
+                        font-size: 30px;
+                    }
+
+                    &--unit {
+                        font-size: 16px;
+                    }
+                }
+
+                &--text {
+                    font-size: 14px;
+                }
+            }
+        }
+    }
 
     &::after {
         content: '';
@@ -97,8 +129,6 @@ const unit = computed(() => {
         &:hover {
             background-image: url(./images/card/bg-border-selected.png);
         }
-
-
 
         &--result {
             font-family: HarmonyOS_Sans_SC_Medium;

@@ -1,5 +1,5 @@
 <template>
-    <div class="lc-skew-indicator">
+    <div class="lc-skew-indicator" :class="[`lc-skew-indicator--${type}`]">
         <div class="lc-skew-indicator__wrapper">
             <div class="lc-skew-indicator__wrapper__table--bg">
                 <div class="lc-skew-indicator__wrapper__table--bg--icon">
@@ -19,8 +19,8 @@
                     <div class="lc-skew-indicator__wrapper__info--result--unit" v-if="renderUnit">
                         {{ renderUnit }}
                     </div>
-                    <div class="lc-skew-indicator__wrapper__info--result--altericon">
-                        <AlertCircleOutline></AlertCircleOutline>
+                    <div class="lc-skew-indicator__wrapper__info--result--altericon" v-if="tip">
+                        <LcTooltip>{{ tip }}</LcTooltip>
                     </div>
                 </div>
             </div>
@@ -29,11 +29,11 @@
 </template>
 
 <script lang="ts" setup>
-import { computed } from 'vue';
-import { AlertCircleOutline } from '@vicons/ionicons5';
+import { computed, PropType } from 'vue';
 import personIcon from './images/skew/icon/person.png';
 import { bigNumber } from '@/components/education/common/utils/formate';
 import { NNumberAnimation } from 'naive-ui/es/number-animation';
+import { LcTooltip } from '@/components/education/components/tooltip';
 
 const {
     label = '',
@@ -42,6 +42,8 @@ const {
     fixed = true,
     decimal = 0,
     icon = personIcon,
+    tip = '',
+    type = 'skew'
 } = defineProps({
     label: {
         type: String,
@@ -60,6 +62,12 @@ const {
     },
     icon: {
         type: String,
+    },
+    tip: {
+        type: String,
+    },
+    type: {
+        type: String as PropType<'tile' | 'skew'>,
     }
 });
 
@@ -84,12 +92,38 @@ const renderUnit = computed(() => {
 .lc-skew-indicator {
     width: fit-content;
 
+    &--tile {
+        background: url(./images/skew/tile-bg.png);
+        background-size: cover;
+        background-repeat: no-repeat;
+        transition: background 0.3s ease-in-out;
+        &:hover {
+            background-image: url(./images/skew/tile-selected-bg.png);
+        }
+        .lc-skew-indicator {
+            &__wrapper {
+                min-height: 112px;
+                &__info {
+                    padding: 35px 30px;
+                }
+                &__table--bg {
+                    display: none;
+                }
+                &::before,
+                &::after {
+                    display: none;
+                }
+            }
+        }
+    }
+
     &__wrapper {
         min-width: 393px;
         min-height: 85px;
         position: relative;
 
         &__info {
+            padding: 20px 0;
             padding-left: 35%;
             flex: 1;
             display: flex;
@@ -135,7 +169,7 @@ const renderUnit = computed(() => {
                         color: #0FFBF8;
                         width: 14px;
                         height: 14px;
-                        margin-bottom: 6px;
+                        margin-bottom: -6px;
                     }
                 }
             }
@@ -211,6 +245,7 @@ const renderUnit = computed(() => {
                     &__table--bg {
                         background-image: url(./images/skew/skew-selected-bg.png);
                     }
+
                     &__info {
                         &--result {
                             &--altericon {
