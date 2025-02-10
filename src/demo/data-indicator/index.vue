@@ -1,6 +1,6 @@
 <template>
     <div class="demo-data-indicator">
-        <Container title="数据指标" description="图表区指标" rswidth="1000px">
+        <Container title="数据指标" description="图表区指标" rswidth="1000px" :code="code1">
             <NSpace>
                 <LcSkewIndicator label="总教职工人" :value="3336" unit="人" tip="测试tip"></LcSkewIndicator>
                 <LcSkewIndicator label="总教职工人" :value="3533336" unit="人"></LcSkewIndicator>
@@ -21,7 +21,7 @@
                 <LcIndicatorCard :value="3457" fixed hint="教职工人(人)" type="noborder"></LcIndicatorCard>
             </NSpace>
         </Container>
-        <Container title="指标卡" description="基本用法" rswidth="1000px">
+        <Container title="指标卡" description="基本用法" rswidth="1000px" :code="code2">
             <NSpace>
                 <LcIndicatorCard :value="3457" fixed hint="教职工人(人)"></LcIndicatorCard>
                 <LcIndicatorCard :value="3457" fixed hint="在编教职工(人)"></LcIndicatorCard>
@@ -40,7 +40,7 @@
                 <LcIndicatorCard :value="23" unit="万" hint="在编教职工(人)" size="large"></LcIndicatorCard>
             </NSpace>
         </Container>
-        <Container title="指标卡列表" description="基本用法" rswidth="1000px">
+        <Container title="指标卡列表" description="基本用法" rswidth="1000px" :code="code3">
             <NSpace>
                 <LcIndicatorList icon="https://b0.bdstatic.com/2d43e63ca240bdf793814be0dbc9c3a5.jpg@h_1280" name="哪吒"
                     :msg="[
@@ -66,6 +66,7 @@ import {
     LcRangeIndicator,
     LcIndicatorList,
 } from '@/components/education/components/dataIndicator';
+import { code1, code2, code3, } from './const';
 
 </script>
 <style lang="scss" scoped>
