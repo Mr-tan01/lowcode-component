@@ -17,11 +17,14 @@ type ReadValue<T> = T[keyof T];
 export const imageShowTrigger = {
     none: 'none',
     focus: 'focus',
-}
+} as const;
+
 export type ImageShowTrigger = ReadValue<typeof imageShowTrigger>;
 
 export const imageHideDir = {
     lt: 'lt',
     rt: 'rt',
-}
+    auto: 'auto',
+} as const;
+
 export type ImageHideDir = ReadValue<typeof imageHideDir>;
