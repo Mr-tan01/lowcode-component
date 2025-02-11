@@ -52,6 +52,7 @@ type InnerImageDomain = typeof innerImageDomain;
 type ReadValue<T> = T[keyof T];
 export type Domains = keyof InnerImageDomain;
 export type NameTypeFunc<D extends Domains> = ReadValue<InnerImageDomain[D]>;
+export type NameTypes = NameTypeFunc<'event'> | NameTypeFunc<'func'>
 export function useImage<D extends Domains>(domain: D, name: NameTypeFunc<D>, ext = '.png') {
     const src = ref<string>('');
     const selectedSrc = ref<string>('');

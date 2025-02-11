@@ -1,7 +1,11 @@
 <template>
-    <div class="lc-icon">
-        <img class="lc-icon__img" v-if="imageSrc" :src="imageSrc" @mouseenter="isHover = true"
-            @mouseleave="isHover = false" alt=" ">
+    <div class="lc-icon" :style="{
+        '--img-src': `url(${src})`,
+        '--img-selected-src': `url(${selectedSrc})`,
+    }" :class="{ 'lc-icon--selected': selected, }">
+        <div class="lc-icon__image">
+            <img class="lc-icon__img" :src="src" draggable="false" alt="">
+        </div>
         <span class="lc-icon__span">
             <slot></slot>
         </span>
@@ -10,7 +14,7 @@
 
 <script lang="ts" setup>
 import { computed, PropType, ref } from 'vue';
-import { NameTypeFunc, useImage, type Domains } from './icons';
+import { NameTypeFunc, useImage, type Domains, type NameTypes } from './icons';
 
 const {
     domain = 'func',
@@ -23,10 +27,10 @@ const {
         type: String as PropType<Domains>,
     },
     name: {
-        type: String as PropType<NameTypeFunc<'event'> | NameTypeFunc<'func'>>,
+        type: String as PropType<NameTypes>,
     },
     size: {
-        type: Number,
+        type: [Number, String] as PropType<number | string>,
     },
     ext: {
         type: String as PropType<'.png'>,
@@ -35,15 +39,8 @@ const {
         type: Boolean,
     }
 });
-const isHover = ref(false);
 const { src, selectedSrc } = useImage(domain as Domains, name as NameTypeFunc<Domains>, ext);
-
-const imageSrc = computed(() => {
-    if (selected === void 0) {
-        return isHover.value && selectedSrc.value ? selectedSrc.value : src.value;
-    }
-    return selected ? selectedSrc.value : src.value;
-});
+const iconWidth = computed(() => typeof size === 'number' ? `${size}px` : size);
 </script>
 
 <style lang="scss" scoped>
@@ -52,10 +49,29 @@ const imageSrc = computed(() => {
     display: inline-flex;
     align-items: center;
 
+    &--selected {
+        .lc-icon {
+            &__image {
+                background-image: var(--img-selected-src);
+            }
+        }
+    }
+
+    &__image {
+        background: var(--img-src);
+        background-size: 100% 100%;
+        background-position: center center;
+        transition: background 0.3s linear;
+        &:hover {
+            background-image: var(--img-selected-src);
+        }
+    }
+
     &__img {
-        width: calc(v-bind(size) * 1px);
-        height: calc(v-bind(size) * 1px);
+        width: v-bind(iconWidth);
+        height: v-bind(iconWidth);
         object-fit: contain;
+        opacity: 0;
     }
 
     &__span {
