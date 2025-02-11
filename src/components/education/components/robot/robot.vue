@@ -83,7 +83,7 @@ const {
         type: String as PropType<'relative' | 'absolute' | 'fixed'>
     }
 });
-const isFocus = ref(false);
+const isFocus = defineModel('isShow', { default: false });
 const robotSrc = computed(() => src || robotBQMap[value]);
 const { isDraging, startDrag, stopDrag, robotOffset, xAdsorptionDir } = useDragRobotPosition();
 
@@ -119,7 +119,7 @@ const {
         left: 100%;
         top: v-bind(robotPositionBottom);
         transition: 0.2s linear;
-      
+
 
         &.lc-robot {
             &--dir-lt {
@@ -140,7 +140,7 @@ const {
 
     &--draging {
         &:hover {
-            cursor: move;
+            opacity: 0.1;
         }
     }
 
