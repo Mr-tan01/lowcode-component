@@ -1,9 +1,11 @@
 <template>
     <div class="lc-indicator-card" :class="{
         'lc-indicator-card--noborder': type === 'noborder',
-
-    }">
+        }">
         <div class="lc-indicator-card__wrapper">
+            <div class="lc-indicator-card__wrapper--tooltip" v-if="tip">
+                <LcTooltip>{{ tip }}</LcTooltip>
+            </div>
             <div class="lc-indicator-card__wrapper--result">
                 <span class="lc-indicator-card__wrapper--result--value">
                     <NNumberAnimation show-separator :from="0" :to="renderValue" active :precision="decimal" />
@@ -23,6 +25,7 @@
 import { computed, PropType } from 'vue';
 import { NNumberAnimation } from 'naive-ui/es/number-animation'
 import { bigNumber } from '@/components/education/common/utils/formate';
+import { LcTooltip } from '@/components/education/components/tooltip';
 
 const SIZE = {
     small: 'small',
@@ -54,6 +57,9 @@ const {
     },
     type: {
         type: String as PropType<'border' | 'noborder'>,
+    },
+    tip: {
+        type: String,
     }
 });
 
@@ -125,6 +131,16 @@ const unit = computed(() => {
         background-size: 100% 100%;
         padding: 22px 32px 24px;
         padding: v-bind(padValue);
+        position: relative;
+
+        &--tooltip {
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            :deep(.lc-tooltip__trigger_icon) {
+                width: 16px;
+            }
+        }
 
         &:hover {
             background-image: url(./images/card/bg-border-selected.png);
