@@ -34,8 +34,8 @@
 </template>
 
 <script lang="ts" setup>
-import Container from '../components/help/Container.vue';
-import { LcModal } from '../../components/education/components/modal';
+import Container from '@/demo/components/help/Container.vue';
+import { LcModal } from '@/components/education/components/modal';
 import { ref } from 'vue';
 import { code1, code2 } from './const';
 const show = ref(false);

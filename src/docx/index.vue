@@ -5,7 +5,10 @@
             <n-layout has-sider position="absolute">
                 <n-layout-sider bordered collapse-mode="width" :collapsed-width="64" :width="240" show-trigger
                     :inverted="true">
-                    <n-menu :inverted="true" :collapsed-width="64" :collapsed-icon-size="22" :options="menuOptions" />
+                    <n-scrollbar>
+                        <n-menu :inverted="true" defaultExpandAll :collapsed-width="64" :collapsed-icon-size="22"
+                            :options="menuOptions" />
+                    </n-scrollbar>
                 </n-layout-sider>
                 <n-layout>
                     <LcBgCommon>
@@ -19,32 +22,33 @@
 
 <script lang="ts" setup>
 import { LcBgCommon } from '@/components/education/components/bgCommon';
-import { RouterLink, useRouter } from 'vue-router';
-import { NSpace, NLayout, NLayoutSider, NMenu } from 'naive-ui';
+import { RouterLink } from 'vue-router';
+import { NSpace, NLayout, NLayoutSider, NMenu, NScrollbar } from 'naive-ui';
 import type { MenuOption } from 'naive-ui'
+import { deomMenu } from '@/router';
 
-import { h } from 'vue'
-const $router = useRouter();
+import { h } from 'vue';
 
-const routes = $router.getRoutes();
-const menuOptions: MenuOption[] = routes.map(item => {
-    return {
-        label: () => h(
-            RouterLink,
-            {
-                to: {
-                    name: item.name,
-                }
-            },
-            { default: () => item.name }
-        ),
-        key: item.path
-    }
-});
-function clickButton(path: string) {
-    const _resove = $router.resolve(path);
-    window.open(_resove.href);
+function toMenuOption(data?: { name: string; path: string; children?: any[] }[]) {
+    if (!data?.length) return data;
+    return data.map(item => {
+        return {
+            label: () => h(
+                RouterLink,
+                {
+                    to: {
+                        path: item.path,
+                    }
+                },
+                { default: () => item.name }
+            ),
+            key: item.name,
+            children: toMenuOption(item?.children),
+        }
+    });
 }
+
+const menuOptions: MenuOption[] = toMenuOption(deomMenu);
 </script>
 <style lang="scss" scoped>
 .docx {

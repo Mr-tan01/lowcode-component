@@ -59,7 +59,7 @@
 
 <script lang="ts" setup>
 import { NSpace } from 'naive-ui';
-import Container from '../components/help/Container.vue';
+import Container from '@/demo/components/help/Container.vue';
 import {
     LcSkewIndicator,
     LcIndicatorCard,

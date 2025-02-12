@@ -20,7 +20,7 @@
 </template>
 <script lang="ts" setup>
 import { NSpace } from 'naive-ui';
-import Container from '../components/help/Container.vue';
+import Container from '@/demo/components/help/Container.vue';
 import { LcCheckbox, LcCheckboxGroup } from '@/components/education/components/checkbox';
 import { ref } from 'vue';
 const checkboxValue = ref(['1']);

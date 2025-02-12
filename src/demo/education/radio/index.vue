@@ -33,7 +33,7 @@
 </template>
 <script lang="ts" setup>
 import { NSpace } from 'naive-ui';
-import Container from '../components/help/Container.vue';
+import Container from '@/demo/components/help/Container.vue';
 import { LcRadioButtonGroup } from '@/components/education/components/radio-button-group';
 import { LcRadioButton } from '@/components/education/components/radio-button';
 import { LcRadio, LcRadioGroup } from '@/components/education/components/radio';

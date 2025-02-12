@@ -9,8 +9,8 @@
 </template>
 
 <script lang="ts" setup>
-import Container from '../components/help/Container.vue';
-import { LcTooltip } from '../../components/education/components/tooltip';
+import Container from '@/demo/components/help/Container.vue';
+import { LcTooltip } from '@/components/education/components/tooltip';
 import {
     code1,
 } from './const';

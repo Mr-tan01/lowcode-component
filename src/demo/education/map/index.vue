@@ -8,6 +8,6 @@
     </div>
 </template>
 <script lang="ts" setup>
-import Container from '../components/help/Container.vue';
-import { LcMap } from '../../components/education/components/map';
+import Container from '@/demo/components/help/Container.vue';
+import { LcMap } from '@/components/education/components/map';
 </script>
