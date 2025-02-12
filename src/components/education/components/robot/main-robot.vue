@@ -250,6 +250,16 @@ on('result', () => {
                         transition-delay: calc(var(--left-reverse-offset-number) * 0.1s);
                         opacity: 0;
                         will-change: transform, opacity;
+                        position: relative;
+
+                        &::after {
+                            content: '';
+                            z-index: -1;
+                            position: absolute;
+                            inset: 0;
+                            backdrop-filter: blur(0.5px);
+                            -webkit-backdrop-filter: blur(0.5px);
+                        }
 
                         &:nth-of-type(1) {
                             @include mateItemShow;
