@@ -24,9 +24,10 @@
                     <LcIcon :domain="item.domain" :name="item.name" :size="item.size"></LcIcon>
                     <div class="lc-main-robot__wrapper__star-wrap--star__meta">
                         <div class="lc-main-robot__wrapper__star-wrap--star__meta--item" v-for="(el, ckey) in item.meta"
-                            :key="ckey">
+                            :key="ckey"
+                            :style="{ '--left-offset-number': ckey, '--left-reverse-offset-number': reverseIndex(item.meta.length, ckey), }">
                             <div class="lc-main-robot__wrapper__star-wrap--star__meta--item--text">
-                                {{ el.label }}-{{ key }}
+                                {{ el.label }}
                             </div>
                         </div>
                     </div>
@@ -42,6 +43,7 @@ import { useSpeech } from './speech';
 import { LcIcon } from '@/components/education/components/icon';
 import { defStarData, StarType } from './const';
 import { useStarRotate } from './main-robot-hook';
+import memoize from 'lodash-es/memoize';
 
 const {
     placeholder = 'AI 智能问数',
@@ -50,6 +52,7 @@ const {
     animate = true,
     startAngle = 90,
     maxShowCount = 7,
+    fullAngle = 360,
 } = defineProps({
     placeholder: String,
     stars: Array as PropType<StarType[]>,
@@ -57,6 +60,7 @@ const {
     animate: Boolean,
     startAngle: Number,
     maxShowCount: Number,
+    fullAngle: Number,
 });
 
 const { start, stop, output, on } = useSpeech();
@@ -70,14 +74,20 @@ const {
     startAngle: circleStartAngle,
     starMaxShowCount,
     displayAlternately,
+    fullAngle: circleFullAngle
 } = useStarRotate();
 
+
+const reverseIndex = memoize((len, index) => {
+    return len - (index + 1);
+}, (len, index) => `${len}-${index}`);
 
 const renderStartData = computed(() => stars?.length ? stars : defStarData);
 watchEffect(() => {
     starLneght.value = renderStartData.value?.length || 0;
     circleStartAngle.value = startAngle;
     starMaxShowCount.value = maxShowCount;
+    circleFullAngle.value = fullAngle;
     const yc = renderStartData.value.length - maxShowCount;
     yc < 0 ? [] : defStarData.slice(yc * -1).forEach((_, index) => {
         const newIndex = (renderStartData.value.length - yc) + index;
@@ -116,8 +126,13 @@ if (isAnimate.value) {
     autoRotate();
 }
 
+const $emit = defineEmits<{
+    (e: 'click', item: StarType, index: number): void;
+}>();
+
 function starClick(item: StarType, index: number) {
     angleOffset.value = averageAngle.value * (index) * -1;
+    $emit('click', item, index);
 }
 
 function mouseenter() {
@@ -161,7 +176,6 @@ on('result', () => {
             position: absolute;
             inset: 0;
             width: 100%;
-            will-change: transform;
 
             &--star {
                 width: 10%;
@@ -170,10 +184,21 @@ on('result', () => {
                 top: 50%;
                 display: flex;
                 transform: translate(-50%, -50%);
-                transition: 0.2s linear;
+                transition: 0.3s linear;
+                transition-property: transform, opacity, visibility;
+                will-change: transform;
+                z-index: var(--z-index-number);
 
+
+                @mixin mateItemShow() {
+                    transform: translate(calc(var(--left-offset-number) * -7px), 0);
+                    opacity: 1;
+                    pointer-events: auto;
+                    z-index: 99;
+                }
 
                 &:hover {
+                    z-index: calc(var(--z-index-number) + 1);
                     :deep(.lc-icon) {
                         .lc-icon__image {
                             background-image: var(--img-selected-src);
@@ -183,8 +208,11 @@ on('result', () => {
                     .lc-main-robot {
                         &__wrapper {
                             &__star-wrap--star {
-                                &__meta--item {
-                                    background-image: url(./images/selected-meat-rect-bg.png);
+                                &__meta {
+                                    &--item {
+                                        @include mateItemShow;
+                                        transition-delay: calc(var(--left-offset-number) * 0.1s);
+                                    }
                                 }
                             }
                         }
@@ -198,9 +226,16 @@ on('result', () => {
                 &__meta {
                     position: absolute;
                     left: 30%;
-                    bottom: 50%;
-                    transform: translate(0%, 50%);
+                    bottom: 20%;
                     width: 202px;
+                    display: flex;
+                    flex-direction: column-reverse;
+                    gap: 2px;
+                    pointer-events: none;
+
+                    &:hover {
+                        pointer-events: auto;
+                    }
 
                     &--item {
                         width: 100%;
@@ -209,7 +244,22 @@ on('result', () => {
                         background: url(./images/meat-rect-bg.png);
                         background-repeat: no-repeat;
                         background-size: 100% 100%;
-                        transition: linear 0.1s;
+                        transition: linear 0.2s;
+                        transform: translate(calc(var(--left-offset-number) * -18px), 0);
+                        transition-property: opacity, transform;
+                        transition-delay: calc(var(--left-reverse-offset-number) * 0.1s);
+                        opacity: 0;
+                        will-change: transform, opacity;
+
+                        &:nth-of-type(1) {
+                            @include mateItemShow;
+                        }
+
+                        &:hover {
+                            background-image: url(./images/selected-meat-rect-bg.png);
+                            @include mateItemShow;
+                            cursor: pointer;
+                        }
 
                         &--text {
                             font-family: AlimamaFangYuanTiVF-SemiBold, AlimamaFangYuanTiVF-SemiBold;

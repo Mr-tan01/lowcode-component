@@ -43,11 +43,23 @@ export const defStarData: StarType[] = [
     {
         key: '001',
         domain: 'event',
-        name: 'domain',
+        name: 'person2',
         size: '88%',
         meta: [
             {
                 label: '教师职业发展',
+            },
+            {
+                label: '教师资源均衡发展分析',
+            },
+            {
+                label: '基础教育交流轮岗',
+            },
+            {
+                label: '基础教育校长队伍',
+            },
+            {
+                label: '基础教育教师队伍结构',
             },
         ],
     },
@@ -58,7 +70,19 @@ export const defStarData: StarType[] = [
         size: '88%',
         meta: [
             {
-                label: '教师队伍建设',
+                label: '教师职业发展',
+            },
+            {
+                label: '教师资源均衡发展分析',
+            },
+            {
+                label: '基础教育交流轮岗',
+            },
+            {
+                label: '基础教育校长队伍',
+            },
+            {
+                label: '基础教育教师队伍结构',
             },
         ],
     },
@@ -69,7 +93,19 @@ export const defStarData: StarType[] = [
         size: '88%',
         meta: [
             {
-                label: '教师队伍建设',
+                label: '教师职业发展',
+            },
+            {
+                label: '教师资源均衡发展分析',
+            },
+            {
+                label: '基础教育交流轮岗',
+            },
+            {
+                label: '基础教育校长队伍',
+            },
+            {
+                label: '基础教育教师队伍结构',
             },
         ],
     },
@@ -80,7 +116,19 @@ export const defStarData: StarType[] = [
         size: '88%',
         meta: [
             {
-                label: '教师队伍建设',
+                label: '教师职业发展',
+            },
+            {
+                label: '教师资源均衡发展分析',
+            },
+            {
+                label: '基础教育交流轮岗',
+            },
+            {
+                label: '基础教育校长队伍',
+            },
+            {
+                label: '基础教育教师队伍结构',
             },
         ],
     },
@@ -91,7 +139,19 @@ export const defStarData: StarType[] = [
         size: '88%',
         meta: [
             {
-                label: '教师队伍建设',
+                label: '教师职业发展',
+            },
+            {
+                label: '教师资源均衡发展分析',
+            },
+            {
+                label: '基础教育交流轮岗',
+            },
+            {
+                label: '基础教育校长队伍',
+            },
+            {
+                label: '基础教育教师队伍结构',
             },
         ],
     },
@@ -102,7 +162,16 @@ export const defStarData: StarType[] = [
         size: '88%',
         meta: [
             {
-                label: '教师队伍建设',
+                label: '教师职业发展',
+            },
+            {
+                label: '教师资源均衡发展分析',
+            },
+            {
+                label: '基础教育校长队伍',
+            },
+            {
+                label: '基础教育教师队伍结构',
             },
         ],
     },
@@ -113,7 +182,16 @@ export const defStarData: StarType[] = [
         size: '88%',
         meta: [
             {
-                label: '教师队伍建设',
+                label: '教师职业发展',
+            },
+            {
+                label: '教师资源均衡发展分析',
+            },
+            {
+                label: '基础教育交流轮岗',
+            },
+            {
+                label: '基础教育教师队伍结构',
             },
         ],
     },
@@ -124,7 +202,16 @@ export const defStarData: StarType[] = [
         size: '88%',
         meta: [
             {
-                label: '教师队伍建设',
+                label: '教师职业发展',
+            },
+            {
+                label: '教师资源均衡发展分析',
+            },
+            {
+                label: '基础教育交流轮岗',
+            },
+            {
+                label: '基础教育教师队伍结构',
             },
         ],
     },
@@ -135,7 +222,16 @@ export const defStarData: StarType[] = [
         size: '88%',
         meta: [
             {
-                label: '教师队伍建设',
+                label: '教师职业发展',
+            },
+            {
+                label: '教师资源均衡发展分析',
+            },
+            {
+                label: '基础教育校长队伍',
+            },
+            {
+                label: '基础教育教师队伍结构',
             },
         ],
     }

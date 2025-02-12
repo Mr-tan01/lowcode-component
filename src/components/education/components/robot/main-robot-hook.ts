@@ -1,12 +1,13 @@
 import { computed, onMounted, ref, shallowRef } from "vue";
 import debounce from 'lodash-es/debounce';
+import memoize from 'lodash-es/memoize';
 
 const offsetAnimationTime = 300;
 export function useStarRotate() {
     const starWrapperRef = shallowRef<HTMLElement>();
     const starElRefs = shallowRef<HTMLElement[]>();
     const startAngle = ref(90); // 起始角度
-    const fullAngle = 360; // 完整的角度
+    const fullAngle = ref(360); // 完整的角度
     const starMaxShowCount = ref(7); // 星星的最大显示数量
     const circleRadius = ref({
         x: 0,
@@ -42,12 +43,12 @@ export function useStarRotate() {
     // 平均角度
     const averageAngle = computed(() => {
         let len = starLneght.value >= starMaxShowCount.value ? starMaxShowCount.value : starLneght.value;
-        return fullAngle / len;
+        return fullAngle.value / len;
     });
 
-    function getAngleDeg(index: number) {
+    const getAngleDeg = memoize((index: number) => {
         return (averageAngle.value * index) + startAngle.value;
-    }
+    });
 
     const updateDisplayAlternately = debounce((index) => {
         displayAlternately.value.pop();
@@ -55,8 +56,8 @@ export function useStarRotate() {
     }, 300);
 
 
-    function offset(_angleDeg: number, radiusX: number, radiusY: number, appedYOffset: number) {
-        const angleRad = _angleDeg * ((Math.PI * 2) / fullAngle); // 转换为弧度
+    const offset = memoize((_angleDeg: number, radiusX: number, radiusY: number, appedYOffset: number) => {
+        const angleRad = _angleDeg * (Math.PI / 180); // 转换为弧度
 
         // 计算当前点的坐标
         const x = (radiusX + radiusX * Math.cos(angleRad));
@@ -65,12 +66,13 @@ export function useStarRotate() {
             x,
             y,
         }
-    }
+    }, (_angleDeg, radiusX, radiusY, appedYOffset) => `${_angleDeg}-${radiusX}-${radiusY}-${appedYOffset}`);
 
     function decay(dir: number, y: number, yOffset: number, radiusY: number) {
         // 获取上部分的距离，并计算衰减效果
         return y / (yOffset - radiusY) - dir;
     }
+
     function customRotateStyle(index: number) {
         // 计算当前点的角度（360 度均匀分布）
         let layoutIndex = index >= starMaxShowCount.value ? 0 : index;
@@ -92,21 +94,26 @@ export function useStarRotate() {
 
         // 判断是否在正面，
         const isBlockNode = y > 0 && y > circleRadius.value.y + radiusY / 2;
-        const opacity = isBlockNode ? 1 : decay(1, y, yOffset, radiusY);
-        const scale = isBlockNode ? 1 : decay(1, y, yOffset, radiusY);
-        
+        let opacity = isBlockNode ? 1 : decay(1, y, yOffset, radiusY);
+        let scale = isBlockNode ? 1 : decay(1, y, yOffset, radiusY);
+        let zIndex = isBlockNode ? 10 : 0;
+
         let isHideBlock = displayAlternately.value.includes(index);
         if (!isHideBlock && y <= endY && layoutIndex === 0) {
             updateDisplayAlternately(index);
             isHideBlock = displayAlternately.value.includes(index);
         }
 
+        if (isHideBlock) {
+            scale = 0;
+            opacity = 0;
+        }
         return {
             left: x + 'px',
             top: y + 'px',
             transform: `translate(-50%, -50%) scale(${scale})`,
             opacity,
-            display: !isHideBlock ? 'block' : 'none',
+            '--z-index-number': zIndex,
         };
     }
     return {
@@ -119,5 +126,6 @@ export function useStarRotate() {
         startAngle,
         starMaxShowCount,
         displayAlternately,
+        fullAngle,
     }
 }
