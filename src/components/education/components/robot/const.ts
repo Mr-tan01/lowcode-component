@@ -168,6 +168,9 @@ export const defStarData: StarType[] = [
                 label: '教师资源均衡发展分析',
             },
             {
+                label: '基础教育交流轮岗',
+            },
+            {
                 label: '基础教育校长队伍',
             },
             {
