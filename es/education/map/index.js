@@ -2,11 +2,11 @@
  import './css/index.css';
  // # end css mapping css/index.css 
 
-import { openBlock as r, createElementBlock as i, createElementVNode as C, defineComponent as a, createVNode as s } from "vue";
+import { openBlock as r, createElementBlock as i, createElementVNode as C, defineComponent as n, createVNode as s } from "vue";
 const o = (t, L) => {
   const e = t.__vccOpts || t;
-  for (const [l, n] of L)
-    e[l] = n;
+  for (const [l, a] of L)
+    e[l] = a;
   return e;
 }, f = {}, d = { class: "lc-szmap" };
 function p(t, L) {
@@ -14,8 +14,8 @@ function p(t, L) {
     C(
       "svg",
       {
-        width: "100%",
-        height: "100%",
+        width: "914px",
+        height: "519px",
         viewBox: "0 0 914 519",
         version: "1.1",
         xmlns: "http://www.w3.org/2000/svg",
@@ -492,7 +492,7 @@ function p(t, L) {
     )
   ]));
 }
-const u = /* @__PURE__ */ o(f, [["render", p], ["__scopeId", "data-v-51770b09"]]), h = { class: "lc-map" }, c = /* @__PURE__ */ a({
+const u = /* @__PURE__ */ o(f, [["render", p], ["__scopeId", "data-v-bef1fd1a"]]), h = { class: "lc-map" }, c = /* @__PURE__ */ n({
   __name: "map",
   setup(t) {
     return (L, e) => (r(), i("div", h, [

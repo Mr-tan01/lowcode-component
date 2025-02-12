@@ -2,33 +2,53 @@
  import './css/index.css';
  // # end css mapping css/index.css 
 
-import { defineComponent as _, openBlock as a, createElementBlock as n, createElementVNode as c, toDisplayString as i } from "vue";
-const l = { class: "lc-decorator-title" }, p = { class: "lc-decorator-title__wrapper" }, d = { class: "lc-decorator-title__wrapper__text" }, m = /* @__PURE__ */ _({
+import { defineComponent as a, mergeDefaults as l, computed as i, openBlock as s, createElementBlock as d, normalizeClass as _, createElementVNode as c, toDisplayString as m } from "vue";
+function p(t, r) {
+  let e = t ?? "-";
+  return e.length > r ? e.substring(0, r) + "..." : e;
+}
+const u = { class: "lc-decorator-title__wrapper" }, x = ["title"], f = /* @__PURE__ */ a({
   __name: "decoratorTitle",
-  props: {
-    title: {
+  props: /* @__PURE__ */ l({
+    text: {
+      type: String
+    },
+    maxLength: {
+      type: Number
+    },
+    dir: {
       type: String
     }
-  },
+  }, {
+    text: "",
+    maxLength: 12,
+    dir: "ltr"
+  }),
   setup(t) {
-    return (o, e) => (a(), n("div", l, [
-      c("div", p, [
-        c(
-          "div",
-          d,
-          i(t.title),
-          1
-          /* TEXT */
-        )
-      ])
-    ]));
+    const r = i(() => p(t.text, t.maxLength));
+    return (e, o) => (s(), d(
+      "div",
+      {
+        class: _(["lc-decorator-title", [`lc-decorator-title--${t.dir}`]])
+      },
+      [
+        c("div", u, [
+          c("div", {
+            class: "lc-decorator-title__wrapper__text",
+            title: t.text
+          }, m(r.value), 9, x)
+        ])
+      ],
+      2
+      /* CLASS */
+    ));
   }
-}), v = (t, o) => {
+}), g = (t, r) => {
   const e = t.__vccOpts || t;
-  for (const [r, s] of o)
-    e[r] = s;
+  for (const [o, n] of r)
+    e[o] = n;
   return e;
-}, h = /* @__PURE__ */ v(m, [["__scopeId", "data-v-511ce74c"]]);
+}, h = /* @__PURE__ */ g(f, [["__scopeId", "data-v-896403bd"]]);
 export {
   h as LcDecoratorTitle
 };
