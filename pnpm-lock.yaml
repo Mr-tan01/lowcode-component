@@ -8,9 +8,25 @@ importers:
 
   .:
     dependencies:
+      lowcode-share:
+        specifier: link:F:/Work/lowcode/lowcode-share
+        version: link:../../../lowcode/lowcode-share
+      mmj-code-lib:
+        specifier: link:F:/work/sts-packages/mmj-code-lib
+        version: link:../../../sts-packages/mmj-code-lib
+    devDependencies:
+      '@types/node':
+        specifier: ^22.10.7
+        version: 22.10.7
       '@vicons/ionicons5':
         specifier: ^0.13.0
         version: 0.13.0
+      '@vitejs/plugin-vue':
+        specifier: ^5.2.1
+        version: 5.2.1(vite@5.4.13(@types/node@22.10.7)(sass-embedded@1.83.4))(vue@3.5.13(typescript@5.6.3))
+      '@vue/tsconfig':
+        specifier: ^0.7.0
+        version: 0.7.0(typescript@5.6.3)(vue@3.5.13(typescript@5.6.3))
       '@vueuse/core':
         specifier: ^12.5.0
         version: 12.5.0(typescript@5.6.3)
@@ -23,34 +39,9 @@ importers:
       lodash-es:
         specifier: ^4.17.21
         version: 4.17.21
-      lowcode-share:
-        specifier: link:F:/Work/lowcode/lowcode-share
-        version: link:../lowcode-share
-      mmj-code-lib:
-        specifier: link:F:/work/sts-packages/mmj-code-lib
-        version: link:../../../sts-packages/mmj-code-lib
       naive-ui:
         specifier: ^2.41.0
         version: 2.41.0(vue@3.5.13(typescript@5.6.3))
-      vue:
-        specifier: ^3.5.13
-        version: 3.5.13(typescript@5.6.3)
-      vue-resizable:
-        specifier: ^2.1.7
-        version: 2.1.7
-      vue-router:
-        specifier: ^4.5.0
-        version: 4.5.0(vue@3.5.13(typescript@5.6.3))
-    devDependencies:
-      '@types/node':
-        specifier: ^22.10.7
-        version: 22.10.7
-      '@vitejs/plugin-vue':
-        specifier: ^5.2.1
-        version: 5.2.1(vite@5.4.13(@types/node@22.10.7)(sass-embedded@1.83.4))(vue@3.5.13(typescript@5.6.3))
-      '@vue/tsconfig':
-        specifier: ^0.7.0
-        version: 0.7.0(typescript@5.6.3)(vue@3.5.13(typescript@5.6.3))
       sass-embedded:
         specifier: ^1.83.4
         version: 1.83.4
@@ -60,6 +51,15 @@ importers:
       vite:
         specifier: ^5.4.13
         version: 5.4.13(@types/node@22.10.7)(sass-embedded@1.83.4)
+      vue:
+        specifier: ^3.5.13
+        version: 3.5.13(typescript@5.6.3)
+      vue-resizable:
+        specifier: ^2.1.7
+        version: 2.1.7
+      vue-router:
+        specifier: ^4.5.0
+        version: 4.5.0(vue@3.5.13(typescript@5.6.3))
       vue-tsc:
         specifier: ^2.2.0
         version: 2.2.0(typescript@5.6.3)

@@ -2,9 +2,9 @@
     <div class="lcc-bg__common">
         <div class="lcc-bg__common__bl-decoartor-bg"></div>
         <div class="lcc-bg__common__br-decoartor-bg"></div>
-        <slot>
-
-        </slot>
+        <div class="lcc-bg__common__wrapper">
+            <slot></slot>
+        </div>
     </div>
 </template>
 <script lang="ts" setup>
