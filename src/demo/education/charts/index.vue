@@ -34,10 +34,10 @@
                     <LcBarChart :options="chartsBarOpts(100)" stack type="bar" :fake3d="false"></LcBarChart>
                 </Container>
                 <Container title="其他形态柱状图" rswidth="390px" rs-height="365px">
-                    <LcBarChart :options="pictorialBarOpts(1, 100)" type="bar" :fake3d="false"></LcBarChart>
+                    <LcBarChart :options="pictorialBarOpts(2, 100)" type="bar" :fake3d="false"></LcBarChart>
                 </Container>
                 <Container title="象形" rswidth="390px" rs-height="365px">
-                    <LcBarChart :options="pictorialBarOpts(0, 1)" type="bar" :fake3d="false"></LcBarChart>
+                    <LcBarChart :options="pictorialBarOpts(0, 2)" type="bar" :fake3d="false"></LcBarChart>
                 </Container>
             </NSpace>
         </Container>
@@ -48,6 +48,8 @@ import { NSpace } from 'naive-ui';
 import Container from '@/demo/components/help/Container.vue';
 import { LcBarChart, LcBarChartOptions } from '@/components/education/components/charts';
 import { type EChartsOption } from 'echarts';
+import orgImage from './images/org.svg';
+import blueImage from './images/blue.svg';
 
 function chartsBarOpts(len: number): EChartsOption {
     return {
@@ -177,8 +179,16 @@ function pictorialBarOpts(start, len): EChartsOption | { series: {}[] } {
 
         },
         series: [
-            {
+        {
                 name: '类型名称',
+                barWidth: 'auto',
+                type: 'pictorialBar',
+                barGap: 0,
+                symbol: 'path://M0,10 L10,10 C5.5,10 5.5,5 5,0 C4.5,5 4.5,10 0,10 z',
+                data: [123, 60, 25, 18],
+            },
+            {
+                name: '类型名称1',
                 barWidth: 'auto',
                 type: 'pictorialBar',
                 barGap: 0,
@@ -190,7 +200,7 @@ function pictorialBarOpts(start, len): EChartsOption | { series: {}[] } {
                 barWidth: 'auto',
                 type: 'pictorialBar',
                 barGap: '-50%',
-                symbol: 'path://M0,10 L10,10 C5.5,10 5.5,5 5,0 C4.5,5 4.5,10 0,10 z',
+                symbol: `image://${blueImage}`,
                 itemStyle: {
                     opacity: 0.9
                 },
@@ -201,7 +211,7 @@ function pictorialBarOpts(start, len): EChartsOption | { series: {}[] } {
                 barWidth: 'auto',
                 type: 'pictorialBar',
                 barGap: '-50%',
-                symbol: 'path://M0,10 L10,10 C5.5,10 5.5,5 5,0 C4.5,5 4.5,10 0,10 z',
+                symbol: `image://${orgImage}`,
                 itemStyle: {
                     opacity: 0.9
                 },

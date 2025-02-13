@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="38px" height="64px" viewBox="0 0 38 64" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>蓝色</title>
+    <defs>
+        <linearGradient x1="100%" y1="100%" x2="100%" y2="13.5017904%" id="linearGradient-1">
+            <stop stop-color="#0FFBF8" stop-opacity="0.2" offset="0%"></stop>
+            <stop stop-color="#0FFBF8" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="页面-2" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="P9" transform="translate(-178, -2930)" fill="url(#linearGradient-1)">
+            <g id="编组-15" transform="translate(154, 2798)">
+                <g id="编组-27" transform="translate(24, 39)">
+                    <polygon id="蓝色" points="18.5156573 93.6185185 37.0313147 157 0 156.594359"></polygon>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

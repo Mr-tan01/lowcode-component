@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="38px" height="136px" viewBox="0 0 38 136" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>橘色</title>
+    <defs>
+        <linearGradient x1="50%" y1="36.9045646%" x2="50%" y2="100%" id="linearGradient-1">
+            <stop stop-color="#E1BC4B" offset="0%"></stop>
+            <stop stop-color="#E1BC4B" stop-opacity="0.2" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="页面-2" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="P9" transform="translate(-197, -2858)" fill="url(#linearGradient-1)">
+            <g id="编组-15" transform="translate(154, 2798)">
+                <g id="编组-27" transform="translate(24, 39)">
+                    <polygon id="橘色" points="37.5156573 21.9183323 56.0313147 156.999987 19 156.500185"></polygon>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
