@@ -1,8 +1,8 @@
 <template>
     <div class="demo-charts">
-        <Container title="图表" description="图表-柱状图分单类数据、多类数据、组合类数据、" rswidth="1260px" rs-height="auto">
+        <Container title="图表" description="图表-柱状图分单类数据、多类数据、组合类数据、" rswidth="1360px" rs-height="auto">
             <NSpace>
-                <Container title="单柱" rswidth="390px" rs-height="265px">
+                <Container title="单柱" rswidth="390px" rs-height="265px" :code="barChartCodes.code1">
                     <LcBarChart :options="chartsBarOpts(1)" type="bar"></LcBarChart>
                 </Container>
                 <Container title="多柱(≥2类数据)" rswidth="390px" rs-height="265px">
@@ -50,6 +50,7 @@ import { LcBarChart, LcBarChartOptions } from '@/components/education/components
 import { type EChartsOption } from 'echarts';
 import orgImage from './images/org.svg';
 import blueImage from './images/blue.svg';
+import { barChartCodes  } from './codes';
 
 function chartsBarOpts(len: number): EChartsOption {
     return {

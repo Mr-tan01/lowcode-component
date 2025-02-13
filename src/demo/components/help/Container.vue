@@ -12,11 +12,14 @@
                 </div>
             </vue-resizable>
         </div>
-
-        <div class="help-container__code" v-if="code">
-            <n-code language="javascript" :code="code" word-wrap :hljs="Highlight">
-            </n-code>
-        </div>
+        <n-collapse class="n-collapse"  v-if="code">
+            <n-collapse-item title="查看用法" name="code">
+                <div class="help-container__code" :style="{ maxWidth: rswidth, }">
+                    <n-code language="javascript" :code="code" word-wrap :hljs="Highlight">
+                    </n-code>
+                </div>
+            </n-collapse-item>
+        </n-collapse>
     </div>
 </template>
 <script lang="ts" setup>
@@ -24,7 +27,7 @@ import { PropType } from 'vue';
 import Highlight from 'highlight.js';
 import VueResizable from 'vue-resizable'
 import 'highlight.js/styles/lightfair.min.css';
-import { NCode } from 'naive-ui';
+import { NCode, NCollapse, NCollapseItem } from 'naive-ui';
 
 const {
     code = '',
@@ -55,6 +58,16 @@ const {
     margin: 20px auto;
     width: fit-content;
     min-width: 200px;
+
+    .n-collapse {
+        width: 100%;
+        --n-title-text-color: #fff !important;
+        :deep(.n-base-icon) {
+            svg {
+                color: white;
+            }
+        }
+    }
 
 
     h1 {
@@ -87,10 +100,12 @@ const {
         flex-direction: column;
         border: 1px dotted #30b4dc;
         border-radius: 5px;
+
         .vue-resize {
             padding: 20px;
             box-sizing: border-box;
         }
+
         .pad-box {
             display: flex;
             flex-direction: column;
