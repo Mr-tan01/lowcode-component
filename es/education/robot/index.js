@@ -2,7 +2,7 @@
  import './css/index.css';
  // # end css mapping css/index.css 
 
-import { onActivated as wr, onDeactivated as _r, inject as De, defineComponent as ae, getCurrentInstance as Cr, onMounted as Rt, onBeforeUnmount as yn, renderSlot as Sn, computed as D, shallowRef as vt, ref as H, watchEffect as Ze, onBeforeMount as wn, h as J, Fragment as Ge, Transition as kt, mergeProps as bt, mergeDefaults as et, openBlock as Z, createElementBlock as ne, normalizeClass as qe, createElementVNode as N, toDisplayString as Ke, createVNode as _n, unref as L, normalizeStyle as Je, withCtx as Rr, renderList as xt, reactive as Er, mergeModels as yt, useCssVars as Cn, useModel as Rn, toRefs as Tr, createBlock as Ft, createCommentVNode as Nt, withDirectives as Lt, createTextVNode as $r, vShow as Or, vModelText as Pr } from "vue";
+import { onActivated as wr, onDeactivated as _r, inject as De, defineComponent as ae, getCurrentInstance as Cr, onMounted as Rt, onBeforeUnmount as yn, renderSlot as Sn, computed as D, shallowRef as vt, ref as H, watchEffect as Ze, onBeforeMount as wn, h as J, Fragment as Ye, Transition as kt, mergeProps as bt, mergeDefaults as et, openBlock as Z, createElementBlock as ne, normalizeClass as qe, createElementVNode as N, toDisplayString as Ke, createVNode as _n, unref as L, normalizeStyle as Je, withCtx as Rr, renderList as xt, reactive as Er, mergeModels as yt, useCssVars as Cn, useModel as Rn, toRefs as Tr, createBlock as Ft, createCommentVNode as Nt, withDirectives as Lt, createTextVNode as Or, vShow as $r, vModelText as Pr } from "vue";
 import { s as zr } from "./assets/s1-DPIWGfHc.js";
 import { s as Br } from "./assets/s2-DBLzyVtL.js";
 import { s as Mr } from "./assets/s3-DpTjJiCN.js";
@@ -328,17 +328,17 @@ function Wr() {
       const { type: _, eventPhase: P, bubbles: A } = h, I = Xe(h);
       if (P === 2)
         return;
-      const $ = P === 1 ? "capture" : "bubble";
+      const O = P === 1 ? "capture" : "bubble";
       let E = I;
       const z = [];
       for (; E === null && (E = window), z.push(E), E !== window; )
         E = E.parentNode || null;
       const j = p.capture[_], V = p.bubble[_];
-      if (o(h, "stopPropagation", n), o(h, "stopImmediatePropagation", r), s(h, d), $ === "capture") {
+      if (o(h, "stopPropagation", n), o(h, "stopImmediatePropagation", r), s(h, d), O === "capture") {
         if (j === void 0)
           return;
-        for (let G = z.length - 1; G >= 0 && !e.has(h); --G) {
-          const re = z[G], le = j.get(re);
+        for (let Y = z.length - 1; Y >= 0 && !e.has(h); --Y) {
+          const re = z[Y], le = j.get(re);
           if (le !== void 0) {
             l.set(h, re);
             for (const oe of le) {
@@ -347,7 +347,7 @@ function Wr() {
               oe(h);
             }
           }
-          if (G === 0 && !A && V !== void 0) {
+          if (Y === 0 && !A && V !== void 0) {
             const oe = V.get(re);
             if (oe !== void 0)
               for (const Ae of oe) {
@@ -357,11 +357,11 @@ function Wr() {
               }
           }
         }
-      } else if ($ === "bubble") {
+      } else if (O === "bubble") {
         if (V === void 0)
           return;
-        for (let G = 0; G < z.length && !e.has(h); ++G) {
-          const re = z[G], le = V.get(re);
+        for (let Y = 0; Y < z.length && !e.has(h); ++Y) {
+          const re = z[Y], le = V.get(re);
           if (le !== void 0) {
             l.set(h, re);
             for (const oe of le) {
@@ -407,7 +407,7 @@ function Wr() {
     }
     return !1;
   }
-  function O(f, h) {
+  function $(f, h) {
     const _ = g[f];
     return !!(_ !== void 0 && _.has(h));
   }
@@ -417,7 +417,7 @@ function Wr() {
       w(f, h, A, P), _(j);
     } : A = _, Lr(f, h, A, P))
       return;
-    const $ = P === !0 || typeof P == "object" && P.capture === !0 ? "capture" : "bubble", E = S($, f), z = v(E, h);
+    const O = P === !0 || typeof P == "object" && P.capture === !0 ? "capture" : "bubble", E = S(O, f), z = v(E, h);
     if (z.has(A) || z.add(A), h === window) {
       const j = x(f);
       j.has(A) || j.add(A);
@@ -426,12 +426,12 @@ function Wr() {
   function w(f, h, _, P) {
     if (jr(f, h, _, P))
       return;
-    const I = P === !0 || typeof P == "object" && P.capture === !0, $ = I ? "capture" : "bubble", E = S($, f), z = v(E, h);
-    if (h === window && !B(h, I ? "bubble" : "capture", f, _) && O(f, _)) {
+    const I = P === !0 || typeof P == "object" && P.capture === !0, O = I ? "capture" : "bubble", E = S(O, f), z = v(E, h);
+    if (h === window && !B(h, I ? "bubble" : "capture", f, _) && $(f, _)) {
       const V = g[f];
       V.delete(_), V.size === 0 && (window.removeEventListener(f, T), g[f] = void 0);
     }
-    z.has(_) && z.delete(_), z.size === 0 && E.delete(h), E.size === 0 && (window.removeEventListener(f, c, $ === "capture"), p[$][f] = void 0);
+    z.has(_) && z.delete(_), z.size === 0 && E.delete(h), E.size === 0 && (window.removeEventListener(f, c, O === "capture"), p[O][f] = void 0);
   }
   return {
     on: M,
@@ -458,13 +458,13 @@ function Xr(e) {
     t.isDeactivated = !0, n || (n = !0);
   }), t;
 }
-function Yr(e) {
+function Gr(e) {
   return e.composedPath()[0] || null;
 }
 function Vt(e) {
   return typeof e == "string" ? e.endsWith("px") ? Number(e.slice(0, e.length - 2)) : Number(e) : e;
 }
-function $e(e, t) {
+function Oe(e, t) {
   const n = e.trim().split(/\s+/g), r = {
     top: n[0]
   };
@@ -504,7 +504,7 @@ const Ut = {
   teal: "#008080",
   aqua: "#0FF",
   transparent: "#0000"
-}, _e = "^\\s*", Ce = "\\s*$", de = "\\s*((\\.\\d+)|(\\d+(\\.\\d*)?))\\s*", he = "([0-9A-Fa-f])", pe = "([0-9A-Fa-f]{2})", Gr = new RegExp(`${_e}rgb\\s*\\(${de},${de},${de}\\)${Ce}`), qr = new RegExp(`${_e}rgba\\s*\\(${de},${de},${de},${de}\\)${Ce}`), Kr = new RegExp(`${_e}#${he}${he}${he}${Ce}`), Jr = new RegExp(`${_e}#${pe}${pe}${pe}${Ce}`), Qr = new RegExp(`${_e}#${he}${he}${he}${he}${Ce}`), Zr = new RegExp(`${_e}#${pe}${pe}${pe}${pe}${Ce}`);
+}, _e = "^\\s*", Ce = "\\s*$", de = "\\s*((\\.\\d+)|(\\d+(\\.\\d*)?))\\s*", he = "([0-9A-Fa-f])", pe = "([0-9A-Fa-f]{2})", Yr = new RegExp(`${_e}rgb\\s*\\(${de},${de},${de}\\)${Ce}`), qr = new RegExp(`${_e}rgba\\s*\\(${de},${de},${de},${de}\\)${Ce}`), Kr = new RegExp(`${_e}#${he}${he}${he}${Ce}`), Jr = new RegExp(`${_e}#${pe}${pe}${pe}${Ce}`), Qr = new RegExp(`${_e}#${he}${he}${he}${he}${Ce}`), Zr = new RegExp(`${_e}#${pe}${pe}${pe}${pe}${Ce}`);
 function K(e) {
   return parseInt(e, 16);
 }
@@ -513,14 +513,14 @@ function we(e) {
     let t;
     if (t = Jr.exec(e))
       return [K(t[1]), K(t[2]), K(t[3]), 1];
-    if (t = Gr.exec(e))
-      return [Y(t[1]), Y(t[5]), Y(t[9]), 1];
+    if (t = Yr.exec(e))
+      return [G(t[1]), G(t[5]), G(t[9]), 1];
     if (t = qr.exec(e))
       return [
-        Y(t[1]),
-        Y(t[5]),
-        Y(t[9]),
-        Oe(t[13])
+        G(t[1]),
+        G(t[5]),
+        G(t[9]),
+        $e(t[13])
       ];
     if (t = Kr.exec(e))
       return [
@@ -534,14 +534,14 @@ function we(e) {
         K(t[1]),
         K(t[2]),
         K(t[3]),
-        Oe(K(t[4]) / 255)
+        $e(K(t[4]) / 255)
       ];
     if (t = Qr.exec(e))
       return [
         K(t[1] + t[1]),
         K(t[2] + t[2]),
         K(t[3] + t[3]),
-        Oe(K(t[4] + t[4]) / 255)
+        $e(K(t[4] + t[4]) / 255)
       ];
     if (e in Ut)
       return we(Ut[e]);
@@ -554,31 +554,31 @@ function eo(e) {
   return e > 1 ? 1 : e < 0 ? 0 : e;
 }
 function to(e, t, n, r) {
-  return `rgba(${Y(e)}, ${Y(t)}, ${Y(n)}, ${eo(r)})`;
+  return `rgba(${G(e)}, ${G(t)}, ${G(n)}, ${eo(r)})`;
 }
 function ft(e, t, n, r, o) {
-  return Y((e * t * (1 - r) + n * r) / o);
+  return G((e * t * (1 - r) + n * r) / o);
 }
 function no(e, t) {
   Array.isArray(e) || (e = we(e)), Array.isArray(t) || (t = we(t));
-  const n = e[3], r = t[3], o = Oe(n + r - n * r);
+  const n = e[3], r = t[3], o = $e(n + r - n * r);
   return to(ft(e[0], n, t[0], r, o), ft(e[1], n, t[1], r, o), ft(e[2], n, t[2], r, o), o);
 }
 function ke(e, t) {
   const [n, r, o, i = 1] = Array.isArray(e) ? e : we(e), { lightness: l = 1, alpha: a = 1 } = t;
   return ro([n * l, r * l, o * l, i * a]);
 }
-function Oe(e) {
+function $e(e) {
   const t = Math.round(Number(e) * 100) / 100;
   return t > 1 ? 1 : t < 0 ? 0 : t;
 }
-function Y(e) {
+function G(e) {
   const t = Math.round(Number(e));
   return t > 255 ? 255 : t < 0 ? 0 : t;
 }
 function ro(e) {
   const [t, n, r] = e;
-  return 3 in e ? `rgba(${Y(t)}, ${Y(n)}, ${Y(r)}, ${Oe(e[3])})` : `rgba(${Y(t)}, ${Y(n)}, ${Y(r)}, 1)`;
+  return 3 in e ? `rgba(${G(t)}, ${G(n)}, ${G(r)}, ${$e(e[3])})` : `rgba(${G(t)}, ${G(n)}, ${G(r)}, 1)`;
 }
 const oo = "@css-render/vue3-ssr";
 function io(e, t) {
@@ -610,10 +610,10 @@ function so(e) {
     e[n] === "&" && ++t;
   return t;
 }
-const $n = /\s*,(?![^(]*\))\s*/g, co = /\s+/g;
+const On = /\s*,(?![^(]*\))\s*/g, co = /\s+/g;
 function uo(e, t) {
   const n = [];
-  return t.split($n).forEach((r) => {
+  return t.split(On).forEach((r) => {
     let o = so(r);
     if (o) {
       if (o === 1) {
@@ -647,7 +647,7 @@ function uo(e, t) {
 }
 function fo(e, t) {
   const n = [];
-  return t.split($n).forEach((r) => {
+  return t.split(On).forEach((r) => {
     e.forEach((o) => {
       n.push((o && o + " ") + r);
     });
@@ -660,7 +660,7 @@ function ho(e) {
     n && (n.includes("&") ? t = uo(t, n) : t = fo(t, n));
   }), t.join(", ").replace(co, " ");
 }
-function Yt(e) {
+function Gt(e) {
   if (!e)
     return;
   const t = e.parentElement;
@@ -677,12 +677,12 @@ function Fe(e) {
   return e ? /^\s*@(s|m)/.test(e) : !1;
 }
 const go = /[A-Z]/g;
-function On(e) {
+function $n(e) {
   return e.replace(go, (t) => "-" + t.toLowerCase());
 }
 function mo(e, t = "  ") {
   return typeof e == "object" && e !== null ? ` {
-` + Object.entries(e).map((n) => t + `  ${On(n[0])}: ${n[1]};`).join(`
+` + Object.entries(e).map((n) => t + `  ${$n(n[0])}: ${n[1]};`).join(`
 `) + `
 ` + t + "}" : `: ${e};`;
 }
@@ -692,7 +692,7 @@ function vo(e, t, n) {
     props: n
   }) : e;
 }
-function Gt(e, t, n, r) {
+function Yt(e, t, n, r) {
   if (!t)
     return "";
   const o = vo(t, n, r);
@@ -717,7 +717,7 @@ ${o}
 `);
       return;
     }
-    a = On(a), d != null && l.push(`  ${a}${mo(d)}`);
+    a = $n(a), d != null && l.push(`  ${a}${mo(d)}`);
   }), e && l.push("}"), l.join(`
 `);
 }
@@ -751,13 +751,13 @@ function Pn(e, t, n, r, o) {
     });
     Fe(s) ? l = s : t.push(s);
   }
-  const a = ho(t), d = Gt(a, e.props, r, o);
+  const a = ho(t), d = Yt(a, e.props, r, o);
   l ? n.push(`${l} {`) : d.length && n.push(d), e.children && St(e.children, {
     context: r.context,
     props: o
   }, (s) => {
     if (typeof s == "string") {
-      const p = Gt(a, { raw: s }, r, o);
+      const p = Yt(a, { raw: s }, r, o);
       n.push(p);
     } else
       Pn(s, t, n, r, o);
@@ -792,10 +792,10 @@ typeof window < "u" && (window.__cssrContext = {});
 function xo(e, t, n, r) {
   const { els: o } = t;
   if (n === void 0)
-    o.forEach(Yt), t.els = [];
+    o.forEach(Gt), t.els = [];
   else {
     const i = tt(n, r);
-    i && o.includes(i) && (Yt(i), t.els = o.filter((l) => l !== i));
+    i && o.includes(i) && (Gt(i), t.els = o.filter((l) => l !== i));
   }
 }
 function qt(e, t) {
@@ -869,11 +869,11 @@ var ge = [], To = function() {
   return ge.some(function(e) {
     return e.activeTargets.length > 0;
   });
-}, $o = function() {
+}, Oo = function() {
   return ge.some(function(e) {
     return e.skippedTargets.length > 0;
   });
-}, Kt = "ResizeObserver loop completed with undelivered notifications.", Oo = function() {
+}, Kt = "ResizeObserver loop completed with undelivered notifications.", $o = function() {
   var e;
   typeof ErrorEvent == "function" ? e = new ErrorEvent("error", {
     message: Kt
@@ -943,7 +943,7 @@ var me = function(e) {
     return Le.get(e);
   if (Bn(e))
     return Le.set(e, Zt), Zt;
-  var n = getComputedStyle(e), r = Tt(e) && e.ownerSVGElement && e.getBBox(), o = !Mo && n.boxSizing === "border-box", i = Bo.test(n.writingMode || ""), l = !r && Qt.test(n.overflowY || ""), a = !r && Qt.test(n.overflowX || ""), d = r ? 0 : te(n.paddingTop), s = r ? 0 : te(n.paddingRight), p = r ? 0 : te(n.paddingBottom), g = r ? 0 : te(n.paddingLeft), y = r ? 0 : te(n.borderTopWidth), C = r ? 0 : te(n.borderRightWidth), c = r ? 0 : te(n.borderBottomWidth), T = r ? 0 : te(n.borderLeftWidth), S = g + s, x = d + p, v = T + C, B = y + c, O = a ? e.offsetHeight - B - e.clientHeight : 0, M = l ? e.offsetWidth - v - e.clientWidth : 0, w = o ? S + v : 0, f = o ? x + B : 0, h = r ? r.width : te(n.width) - w - M, _ = r ? r.height : te(n.height) - f - O, P = h + S + M + v, A = _ + x + O + B, I = me({
+  var n = getComputedStyle(e), r = Tt(e) && e.ownerSVGElement && e.getBBox(), o = !Mo && n.boxSizing === "border-box", i = Bo.test(n.writingMode || ""), l = !r && Qt.test(n.overflowY || ""), a = !r && Qt.test(n.overflowX || ""), d = r ? 0 : te(n.paddingTop), s = r ? 0 : te(n.paddingRight), p = r ? 0 : te(n.paddingBottom), g = r ? 0 : te(n.paddingLeft), y = r ? 0 : te(n.borderTopWidth), C = r ? 0 : te(n.borderRightWidth), c = r ? 0 : te(n.borderBottomWidth), T = r ? 0 : te(n.borderLeftWidth), S = g + s, x = d + p, v = T + C, B = y + c, $ = a ? e.offsetHeight - B - e.clientHeight : 0, M = l ? e.offsetWidth - v - e.clientWidth : 0, w = o ? S + v : 0, f = o ? x + B : 0, h = r ? r.width : te(n.width) - w - M, _ = r ? r.height : te(n.height) - f - $, P = h + S + M + v, A = _ + x + $ + B, I = me({
     devicePixelContentBoxSize: Se(Math.round(h * devicePixelRatio), Math.round(_ * devicePixelRatio), i),
     borderBoxSize: Se(P, A, i),
     contentBoxSize: Se(h, _, i),
@@ -1000,7 +1000,7 @@ var me = function(e) {
   var e = 0;
   for (en(e); To(); )
     e = Do(), en(e);
-  return $o() && Oo(), e > 0;
+  return Oo() && $o(), e > 0;
 }, dt, An = [], Io = function() {
   return An.splice(0).forEach(function(e) {
     return e();
@@ -1019,8 +1019,8 @@ var me = function(e) {
   ko(function() {
     requestAnimationFrame(e);
   });
-}, Ye = 0, No = function() {
-  return !!Ye;
+}, Ge = 0, No = function() {
+  return !!Ge;
 }, Lo = 250, jo = { attributes: !0, characterData: !0, childList: !0, subtree: !0 }, tn = [
   "resize",
   "load",
@@ -1080,7 +1080,7 @@ var me = function(e) {
     }), this.stopped = !0);
   }, e;
 }(), _t = new Wo(), rn = function(e) {
-  !Ye && e > 0 && _t.start(), Ye += e, !Ye && _t.stop();
+  !Ge && e > 0 && _t.start(), Ge += e, !Ge && _t.stop();
 }, Vo = function(e) {
   return !Tt(e) && !zo(e) && getComputedStyle(e).display === "inline";
 }, Uo = function() {
@@ -1122,7 +1122,7 @@ var me = function(e) {
       return n.unobserve(t, o.target);
     }), r.activeTargets.splice(0, r.activeTargets.length);
   }, e;
-}(), Yo = function() {
+}(), Go = function() {
   function e(t) {
     if (arguments.length === 0)
       throw new TypeError("Failed to construct 'ResizeObserver': 1 argument required, but only 0 present.");
@@ -1148,9 +1148,9 @@ var me = function(e) {
     return "function ResizeObserver () { [polyfill code] }";
   }, e;
 }();
-class Go {
+class Yo {
   constructor() {
-    this.handleResize = this.handleResize.bind(this), this.observer = new (typeof window < "u" && window.ResizeObserver || Yo)(this.handleResize), this.elHandlersMap = /* @__PURE__ */ new Map();
+    this.handleResize = this.handleResize.bind(this), this.observer = new (typeof window < "u" && window.ResizeObserver || Go)(this.handleResize), this.elHandlersMap = /* @__PURE__ */ new Map();
   }
   handleResize(t) {
     for (const n of t) {
@@ -1165,7 +1165,7 @@ class Go {
     this.elHandlersMap.has(t) && (this.elHandlersMap.delete(t), this.observer.unobserve(t));
   }
 }
-const an = new Go(), ln = ae({
+const an = new Yo(), ln = ae({
   name: "ResizeObserver",
   props: {
     onResize: Function
@@ -1202,10 +1202,10 @@ function sn(e) {
     right: n,
     top: r,
     bottom: o
-  } = $e(e);
+  } = Oe(e);
   return `${r} ${t} ${o} ${n}`;
 }
-var cn = { ALLUSERSPROFILE: "C:\\ProgramData", APPDATA: "C:\\Users\\admin\\AppData\\Roaming", CHROME_CRASHPAD_PIPE_NAME: "\\\\.\\pipe\\crashpad_25056_QFZLEHXAPWMVKXIM", COLORTERM: "truecolor", CommonProgramFiles: "C:\\Program Files\\Common Files", "CommonProgramFiles(x86)": "C:\\Program Files (x86)\\Common Files", CommonProgramW6432: "C:\\Program Files\\Common Files", COMPUTERNAME: "DESKTOP-9LOQ0MO", ComSpec: "C:\\Windows\\system32\\cmd.exe", DM_HOME: "F:\\dm", DriverData: "C:\\Windows\\System32\\Drivers\\DriverData", EPS_INSTALL_ROOT: "c:\\program files\\sf\\edr\\agent\\", FPS_BROWSER_APP_PROFILE_STRING: "Internet Explorer", FPS_BROWSER_USER_PROFILE_STRING: "Default", GIT_ASKPASS: "f:\\Microsoft VS Code\\resources\\app\\extensions\\git\\dist\\askpass.sh", HOME: "C:\\Users\\admin", HOMEDRIVE: "C:", HOMEPATH: "\\Users\\admin", INIT_CWD: "F:\\work\\goview\\tosts\\lowcode-component", LANG: "en_US.UTF-8", LOCALAPPDATA: "C:\\Users\\admin\\AppData\\Local", LOGONSERVER: "\\\\DESKTOP-9LOQ0MO", NODE: "F:\\install\\nodejs\\node.exe", npm_command: "run-script", npm_config_frozen_lockfile: "", npm_config_node_gyp: "F:\\nvm\\v18.19.0\\node_modules\\pnpm\\dist\\node_modules\\node-gyp\\bin\\node-gyp.js", npm_config_recursive: "true", npm_config_registry: "https://registry.npmmirror.com", npm_config_strict_ssl: "", npm_config_user_agent: "pnpm/9.7.0 npm/? node/v18.19.0 win32 x64", npm_execpath: "F:\\nvm\\v18.19.0\\node_modules\\pnpm\\bin\\pnpm.cjs", npm_lifecycle_event: "build", npm_lifecycle_script: "node ./vite.lib.js", npm_node_execpath: "F:\\install\\nodejs\\node.exe", npm_package_author: "", npm_package_description: "", npm_package_license: "ISC", npm_package_main: "index.js", npm_package_name: "scripts", npm_package_scripts_build: "node ./vite.lib.js", npm_package_type: "module", npm_package_version: "1.0.0", NUMBER_OF_PROCESSORS: "12", NVM_HOME: "F:\\nvm", NVM_SYMLINK: "F:\\install\\nodejs", OneDrive: "C:\\Users\\admin\\OneDrive", ORIGINAL_XDG_CURRENT_DESKTOP: "undefined", OS: "Windows_NT", Path: "F:\\work\\goview\\tosts\\lowcode-component\\scripts\\node_modules\\.bin;F:\\nvm\\v18.19.0\\node_modules\\pnpm\\dist\\node-gyp-bin;F:\\work\\goview\\tosts\\lowcode-component\\node_modules\\.bin;F:\\nvm\\v18.19.0\\node_modules\\pnpm\\dist\\node-gyp-bin;F:\\install\\mysql-8.0.33-winx64\\bin;F:\\install\\Git\\cmd;C:\\Windows\\System32;C:\\Users\\admin\\AppData\\Local\\Microsoft\\WindowsApps;F:\\Microsoft VS Code\\bin;F:\\nvm;F:\\install\\nodejs;C:\\Users\\admin\\.dotnet\\tools;C:\\Windows\\System32;", PATHEXT: ".COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.CPL", PNPM_SCRIPT_SRC_DIR: "F:\\work\\goview\\tosts\\lowcode-component\\scripts", PROCESSOR_ARCHITECTURE: "AMD64", PROCESSOR_IDENTIFIER: "Intel64 Family 6 Model 165 Stepping 3, GenuineIntel", PROCESSOR_LEVEL: "6", PROCESSOR_REVISION: "a503", ProgramData: "C:\\ProgramData", ProgramFiles: "C:\\Program Files", "ProgramFiles(x86)": "C:\\Program Files (x86)", ProgramW6432: "C:\\Program Files", PROMPT: "$P$G", PSModulePath: "C:\\Users\\admin\\Documents\\WindowsPowerShell\\Modules;C:\\Program Files\\WindowsPowerShell\\Modules;C:\\Windows\\system32\\WindowsPowerShell\\v1.0\\Modules", PUBLIC: "C:\\Users\\Public", SESSIONNAME: "Console", SystemDrive: "C:", SystemRoot: "C:\\Windows", TEMP: "C:\\Users\\admin\\AppData\\Local\\Temp", TERM_PROGRAM: "vscode", TERM_PROGRAM_VERSION: "1.97.0", TMP: "C:\\Users\\admin\\AppData\\Local\\Temp", USERDOMAIN: "DESKTOP-9LOQ0MO", USERDOMAIN_ROAMINGPROFILE: "DESKTOP-9LOQ0MO", USERNAME: "admin", USERPROFILE: "C:\\Users\\admin", VBOX_MSI_INSTALL_PATH: "C:\\Program Files\\Oracle\\VirtualBox\\", VSCODE_GIT_ASKPASS_EXTRA_ARGS: "", VSCODE_GIT_ASKPASS_MAIN: "f:\\Microsoft VS Code\\resources\\app\\extensions\\git\\dist\\askpass-main.js", VSCODE_GIT_ASKPASS_NODE: "F:\\Microsoft VS Code\\Code.exe", VSCODE_GIT_IPC_HANDLE: "\\\\.\\pipe\\vscode-git-5a8078c568-sock", VSCODE_INJECTION: "1", windir: "C:\\Windows", ZES_ENABLE_SYSMAN: "1" };
+var cn = { ALLUSERSPROFILE: "C:\\ProgramData", APPDATA: "C:\\Users\\admin\\AppData\\Roaming", CHROME_CRASHPAD_PIPE_NAME: "\\\\.\\pipe\\crashpad_2740_IONSRGRWNIQFNZAB", COLORTERM: "truecolor", CommonProgramFiles: "C:\\Program Files\\Common Files", "CommonProgramFiles(x86)": "C:\\Program Files (x86)\\Common Files", CommonProgramW6432: "C:\\Program Files\\Common Files", COMPUTERNAME: "DESKTOP-9LOQ0MO", ComSpec: "C:\\Windows\\system32\\cmd.exe", DM_HOME: "F:\\dm", DriverData: "C:\\Windows\\System32\\Drivers\\DriverData", EPS_INSTALL_ROOT: "c:\\program files\\sf\\edr\\agent\\", FPS_BROWSER_APP_PROFILE_STRING: "Internet Explorer", FPS_BROWSER_USER_PROFILE_STRING: "Default", GIT_ASKPASS: "f:\\Microsoft VS Code\\resources\\app\\extensions\\git\\dist\\askpass.sh", HOME: "C:\\Users\\admin", HOMEDRIVE: "C:", HOMEPATH: "\\Users\\admin", INIT_CWD: "F:\\work\\goview\\tosts\\lowcode-component", LANG: "en_US.UTF-8", LOCALAPPDATA: "C:\\Users\\admin\\AppData\\Local", LOGONSERVER: "\\\\DESKTOP-9LOQ0MO", NODE: "F:\\install\\nodejs\\node.exe", npm_command: "run-script", npm_config_frozen_lockfile: "", npm_config_node_gyp: "F:\\nvm\\v18.19.0\\node_modules\\pnpm\\dist\\node_modules\\node-gyp\\bin\\node-gyp.js", npm_config_recursive: "true", npm_config_registry: "https://registry.npmmirror.com", npm_config_strict_ssl: "", npm_config_user_agent: "pnpm/9.7.0 npm/? node/v18.19.0 win32 x64", npm_execpath: "F:\\nvm\\v18.19.0\\node_modules\\pnpm\\bin\\pnpm.cjs", npm_lifecycle_event: "build", npm_lifecycle_script: "node ./vite.lib.js", npm_node_execpath: "F:\\install\\nodejs\\node.exe", npm_package_author: "", npm_package_description: "", npm_package_license: "ISC", npm_package_main: "index.js", npm_package_name: "scripts", npm_package_scripts_build: "node ./vite.lib.js", npm_package_type: "module", npm_package_version: "1.0.0", NUMBER_OF_PROCESSORS: "12", NVM_HOME: "F:\\nvm", NVM_SYMLINK: "F:\\install\\nodejs", OneDrive: "C:\\Users\\admin\\OneDrive", ORIGINAL_XDG_CURRENT_DESKTOP: "undefined", OS: "Windows_NT", Path: "F:\\work\\goview\\tosts\\lowcode-component\\scripts\\node_modules\\.bin;F:\\nvm\\v18.19.0\\node_modules\\pnpm\\dist\\node-gyp-bin;F:\\work\\goview\\tosts\\lowcode-component\\node_modules\\.bin;F:\\nvm\\v18.19.0\\node_modules\\pnpm\\dist\\node-gyp-bin;F:\\install\\mysql-8.0.33-winx64\\bin;F:\\install\\Git\\cmd;C:\\Windows\\System32;C:\\Users\\admin\\AppData\\Local\\Microsoft\\WindowsApps;F:\\Microsoft VS Code\\bin;F:\\nvm;F:\\install\\nodejs;C:\\Users\\admin\\.dotnet\\tools;C:\\Windows\\System32;", PATHEXT: ".COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.CPL", PNPM_SCRIPT_SRC_DIR: "F:\\work\\goview\\tosts\\lowcode-component\\scripts", PROCESSOR_ARCHITECTURE: "AMD64", PROCESSOR_IDENTIFIER: "Intel64 Family 6 Model 165 Stepping 3, GenuineIntel", PROCESSOR_LEVEL: "6", PROCESSOR_REVISION: "a503", ProgramData: "C:\\ProgramData", ProgramFiles: "C:\\Program Files", "ProgramFiles(x86)": "C:\\Program Files (x86)", ProgramW6432: "C:\\Program Files", PROMPT: "$P$G", PSModulePath: "C:\\Users\\admin\\Documents\\WindowsPowerShell\\Modules;C:\\Program Files\\WindowsPowerShell\\Modules;C:\\Windows\\system32\\WindowsPowerShell\\v1.0\\Modules", PUBLIC: "C:\\Users\\Public", SESSIONNAME: "Console", SystemDrive: "C:", SystemRoot: "C:\\Windows", TEMP: "C:\\Users\\admin\\AppData\\Local\\Temp", TERM_PROGRAM: "vscode", TERM_PROGRAM_VERSION: "1.97.1", TMP: "C:\\Users\\admin\\AppData\\Local\\Temp", USERDOMAIN: "DESKTOP-9LOQ0MO", USERDOMAIN_ROAMINGPROFILE: "DESKTOP-9LOQ0MO", USERNAME: "admin", USERPROFILE: "C:\\Users\\admin", VBOX_MSI_INSTALL_PATH: "C:\\Program Files\\Oracle\\VirtualBox\\", VSCODE_GIT_ASKPASS_EXTRA_ARGS: "", VSCODE_GIT_ASKPASS_MAIN: "f:\\Microsoft VS Code\\resources\\app\\extensions\\git\\dist\\askpass-main.js", VSCODE_GIT_ASKPASS_NODE: "F:\\Microsoft VS Code\\Code.exe", VSCODE_GIT_IPC_HANDLE: "\\\\.\\pipe\\vscode-git-5a8078c568-sock", VSCODE_INJECTION: "1", windir: "C:\\Windows", ZES_ENABLE_SYSMAN: "1" };
 function qo(e) {
   let t = ".", n = "__", r = "--", o;
   {
@@ -1251,9 +1251,9 @@ function qo(e) {
     return {
       $({ context: T, props: S }) {
         c = typeof c == "string" ? c : c({ context: T, props: S });
-        const x = c.split(",").map((O) => O.trim());
-        function v(O) {
-          return x.map((M) => `&${(S == null ? void 0 : S.bPrefix) || t}${T.bem.b}${O !== void 0 ? `${n}${O}` : ""}${r}${M}`).join(", ");
+        const x = c.split(",").map(($) => $.trim());
+        function v($) {
+          return x.map((M) => `&${(S == null ? void 0 : S.bPrefix) || t}${T.bem.b}${$ !== void 0 ? `${n}${$}` : ""}${r}${M}`).join(", ");
         }
         const B = T.bem.els;
         if (B !== null) {
@@ -1396,7 +1396,7 @@ function oi(e, t, n) {
   };
   return r ? l() : wn(l), o;
 }
-const $t = {
+const Ot = {
   fontFamily: 'v-sans, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
   fontFamilyMono: "v-mono, SFMono-Regular, Menlo, Consolas, Courier, monospace",
   fontWeight: "400",
@@ -1425,7 +1425,7 @@ const $t = {
   fontSize: ii,
   fontFamily: ai,
   lineHeight: li
-} = $t, si = X("body", `
+} = Ot, si = X("body", `
  margin: 0;
  font-size: ${ii};
  font-family: ${ai};
@@ -1478,7 +1478,7 @@ function rt(e, t, n, r, o, i) {
       [e]: {
         common: v = void 0,
         self: B = void 0,
-        peers: O = {}
+        peers: $ = {}
       } = {}
     } = (a == null ? void 0 : a.mergedThemeRef.value) || {}, {
       common: M = void 0,
@@ -1496,7 +1496,7 @@ function rt(e, t, n, r, o, i) {
     return {
       common: _,
       self: P,
-      peers: Ie({}, r.peers, O, y),
+      peers: Ie({}, r.peers, $, y),
       peerOverrides: Ie({}, c.peers, h, S)
     };
   });
@@ -1508,7 +1508,7 @@ rt.props = {
 };
 const {
   cubicBezierEaseInOut: fn
-} = $t;
+} = Ot;
 function ci({
   name: e = "fade-in",
   enterDuration: t = "0.2s",
@@ -1594,7 +1594,7 @@ function U(e) {
 }
 const di = Object.assign(Object.assign({
   name: "common"
-}, $t), {
+}, Ot), {
   baseColor: b.neutralBase,
   // primary color
   primaryColor: b.primaryDefault,
@@ -1838,8 +1838,8 @@ const gi = {
       inlineThemeDisabled: n,
       mergedRtlRef: r
     } = ni(e), o = oi("Scrollbar", r, t), i = H(null), l = H(null), a = H(null), d = H(null), s = H(null), p = H(null), g = H(null), y = H(null), C = H(null), c = H(null), T = H(null), S = H(0), x = H(0), v = H(!1), B = H(!1);
-    let O = !1, M = !1, w, f, h = 0, _ = 0, P = 0, A = 0;
-    const I = Ur(), $ = rt("Scrollbar", "-scrollbar", mi, gi, e, t), E = D(() => {
+    let $ = !1, M = !1, w, f, h = 0, _ = 0, P = 0, A = 0;
+    const I = Ur(), O = rt("Scrollbar", "-scrollbar", mi, gi, e, t), E = D(() => {
       const {
         value: u
       } = y, {
@@ -1847,7 +1847,7 @@ const gi = {
       } = p, {
         value: R
       } = c;
-      return u === null || m === null || R === null ? 0 : Math.min(u, R * u / m + Vt($.value.self.width) * 1.5);
+      return u === null || m === null || R === null ? 0 : Math.min(u, R * u / m + Vt(O.value.self.width) * 1.5);
     }), z = D(() => `${E.value}px`), j = D(() => {
       const {
         value: u
@@ -1856,8 +1856,8 @@ const gi = {
       } = g, {
         value: R
       } = T;
-      return u === null || m === null || R === null ? 0 : R * u / m + Vt($.value.self.height) * 1.5;
-    }), V = D(() => `${j.value}px`), G = D(() => {
+      return u === null || m === null || R === null ? 0 : R * u / m + Vt(O.value.self.height) * 1.5;
+    }), V = D(() => `${j.value}px`), Y = D(() => {
       const {
         value: u
       } = y, {
@@ -1873,7 +1873,7 @@ const gi = {
         const W = R - u;
         return W ? m / W * (k - E.value) : 0;
       }
-    }), re = D(() => `${G.value}px`), le = D(() => {
+    }), re = D(() => `${Y.value}px`), le = D(() => {
       const {
         value: u
       } = C, {
@@ -1896,7 +1896,7 @@ const gi = {
         value: m
       } = p;
       return u !== null && m !== null && m > u;
-    }), Ot = D(() => {
+    }), $t = D(() => {
       const {
         value: u
       } = C, {
@@ -1947,13 +1947,13 @@ const gi = {
       });
     }), Xn = () => {
       zt.isDeactivated || ce();
-    }, Yn = (u) => {
+    }, Gn = (u) => {
       if (zt.isDeactivated) return;
       const {
         onResize: m
       } = e;
       m && m(u), ce();
-    }, Gn = (u, m) => {
+    }, Yn = (u, m) => {
       if (!e.scrollable) return;
       const {
         value: R
@@ -2056,7 +2056,7 @@ const gi = {
     }
     function Ht(u) {
       var m;
-      return !(!((m = i.value) === null || m === void 0) && m.contains(Yr(u)));
+      return !(!((m = i.value) === null || m === void 0) && m.contains(Gr(u)));
     }
     function rr(u) {
       u.preventDefault(), u.stopPropagation(), M = !0, Te("mousemove", window, Dt, !0), Te("mouseup", window, At, !0), _ = x.value, P = o != null && o.value ? window.innerWidth - u.clientX : u.clientX;
@@ -2090,10 +2090,10 @@ const gi = {
       u.preventDefault(), u.stopPropagation(), fe("mousemove", window, Dt, !0), fe("mouseup", window, At, !0), M = !1, ce(), Ht(u) && st();
     }
     function or(u) {
-      u.preventDefault(), u.stopPropagation(), O = !0, Te("mousemove", window, ct, !0), Te("mouseup", window, ut, !0), h = S.value, A = u.clientY;
+      u.preventDefault(), u.stopPropagation(), $ = !0, Te("mousemove", window, ct, !0), Te("mouseup", window, ut, !0), h = S.value, A = u.clientY;
     }
     function ct(u) {
-      if (!O) return;
+      if (!$) return;
       w !== void 0 && window.clearTimeout(w), f !== void 0 && window.clearTimeout(f);
       const {
         value: m
@@ -2112,12 +2112,12 @@ const gi = {
       Q && (Q.scrollTop = F);
     }
     function ut(u) {
-      u.preventDefault(), u.stopPropagation(), fe("mousemove", window, ct, !0), fe("mouseup", window, ut, !0), O = !1, ce(), Ht(u) && st();
+      u.preventDefault(), u.stopPropagation(), fe("mousemove", window, ct, !0), fe("mouseup", window, ut, !0), $ = !1, ce(), Ht(u) && st();
     }
     Ze(() => {
       const {
         value: u
-      } = Ot, {
+      } = $t, {
         value: m
       } = Ae, {
         value: R
@@ -2149,27 +2149,27 @@ const gi = {
           railInsetVerticalLeft: ie,
           railColor: ir
         }
-      } = $.value, {
+      } = O.value, {
         top: ar,
         right: lr,
         bottom: sr,
         left: cr
-      } = $e(ee), {
+      } = Oe(ee), {
         top: ur,
         right: fr,
         bottom: dr,
         left: hr
-      } = $e(F), {
+      } = Oe(F), {
         top: pr,
         right: gr,
         bottom: mr,
         left: vr
-      } = $e(o != null && o.value ? sn(Q) : Q), {
+      } = Oe(o != null && o.value ? sn(Q) : Q), {
         top: br,
         right: xr,
         bottom: yr,
         left: Sr
-      } = $e(o != null && o.value ? sn(ie) : ie);
+      } = Oe(o != null && o.value ? sn(ie) : ie);
       return {
         "--n-scrollbar-bezier": u,
         "--n-scrollbar-color": m,
@@ -2198,7 +2198,7 @@ const gi = {
     }), ye = n ? ri("scrollbar", void 0, It, e) : void 0;
     return Object.assign(Object.assign({}, {
       scrollTo: Pt,
-      scrollBy: Gn,
+      scrollBy: Yn,
       sync: ce,
       syncUnifiedContainer: Mt,
       handleMouseEnterWrapper: qn,
@@ -2213,7 +2213,7 @@ const gi = {
       yRailRef: d,
       xRailRef: s,
       needYBar: Ae,
-      needXBar: Ot,
+      needXBar: $t,
       yBarSizePx: z,
       xBarSizePx: V,
       yBarTopPx: re,
@@ -2223,7 +2223,7 @@ const gi = {
       isIos: I,
       handleScroll: tr,
       handleContentResize: Xn,
-      handleContainerResize: Yn,
+      handleContainerResize: Gn,
       handleYScrollMouseDown: or,
       handleXScrollMouseDown: rr,
       cssVars: n ? void 0 : It,
@@ -2312,7 +2312,7 @@ const gi = {
     }, {
       default: g
     });
-    return i ? J(Ge, null, y, p(this.themeClass, this.cssVars)) : y;
+    return i ? J(Ye, null, y, p(this.themeClass, this.cssVars)) : y;
   }
 }), xi = Object.assign(Object.assign({}, rt.props), {
   trigger: String,
@@ -2405,7 +2405,7 @@ const gi = {
               }, {
                 default: Rr(() => [
                   (Z(!0), ne(
-                    Ge,
+                    Ye,
                     null,
                     xt(e.aiConfig.quick, (l, a) => (Z(), ne("div", {
                       class: "lc-robot-chat-popup__content--inner__quick__item",
@@ -2452,7 +2452,7 @@ const gi = {
     n[r] = o;
   return n;
 }, hn = /* @__PURE__ */ ot(Ti, [["__scopeId", "data-v-f617021b"]]), pn = "__localStorage:dragHistory__";
-function $i() {
+function Oi() {
   const e = H(!1), t = Er({ x: 100, y: "80%" });
   try {
     const d = localStorage.getItem(pn);
@@ -2492,7 +2492,7 @@ function $i() {
     dragover: a
   };
 }
-const Oi = ["draggable"], Pi = ["src"], zi = /* @__PURE__ */ ae({
+const $i = ["draggable"], Pi = ["src"], zi = /* @__PURE__ */ ae({
   __name: "robot",
   props: /* @__PURE__ */ yt(/* @__PURE__ */ et({
     src: {
@@ -2567,7 +2567,7 @@ const Oi = ["draggable"], Pi = ["src"], zi = /* @__PURE__ */ ae({
       "309fe340": e.width,
       "16fa7866": e.height
     }));
-    const t = Rn(e, "isShow"), n = D(() => e.src || Ir[e.value]), { isDraging: r, startDrag: o, stopDrag: i, robotOffset: l, xAdsorptionDir: a } = $i(), d = D(() => e.draggable ? a.value : e.hidDir), s = D(() => ({
+    const t = Rn(e, "isShow"), n = D(() => e.src || Ir[e.value]), { isDraging: r, startDrag: o, stopDrag: i, robotOffset: l, xAdsorptionDir: a } = Oi(), d = D(() => e.draggable ? a.value : e.hidDir), s = D(() => ({
       [`lc-robot__wrapper__image--status-${d.value}`]: e.trigger !== kr.none
     }));
     function p(y) {
@@ -2620,9 +2620,9 @@ const Oi = ["draggable"], Pi = ["src"], zi = /* @__PURE__ */ ae({
         32
         /* NEED_HYDRATION */
       )
-    ], 42, Oi));
+    ], 42, $i));
   }
-}), $l = /* @__PURE__ */ ot(zi, [["__scopeId", "data-v-1eb72328"]]), Bi = 2e3;
+}), Ol = /* @__PURE__ */ ot(zi, [["__scopeId", "data-v-1eb72328"]]), Bi = 2e3;
 function Mi() {
   let e = !1;
   const t = window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -2803,12 +2803,12 @@ function Ui(e) {
   return t;
 }
 var Xi = /^\s+/;
-function Yi(e) {
+function Gi(e) {
   return e && e.slice(0, Ui(e) + 1).replace(Xi, "");
 }
-var Qe = it.Symbol, Nn = Object.prototype, Gi = Nn.hasOwnProperty, qi = Nn.toString, Ee = Qe ? Qe.toStringTag : void 0;
+var Qe = it.Symbol, Nn = Object.prototype, Yi = Nn.hasOwnProperty, qi = Nn.toString, Ee = Qe ? Qe.toStringTag : void 0;
 function Ki(e) {
-  var t = Gi.call(e, Ee), n = e[Ee];
+  var t = Yi.call(e, Ee), n = e[Ee];
   try {
     e[Ee] = void 0;
     var r = !0;
@@ -2844,7 +2844,7 @@ function bn(e) {
   }
   if (typeof e != "string")
     return e === 0 ? e : +e;
-  e = Yi(e);
+  e = Gi(e);
   var n = aa.test(e);
   return n || la.test(e) ? sa(e.slice(2), n ? 2 : 8) : ia.test(e) ? vn : +e;
 }
@@ -2881,7 +2881,7 @@ function gt(e, t, n) {
   function B() {
     a !== void 0 && clearTimeout(a), s = 0, r = d = o = a = void 0;
   }
-  function O() {
+  function $() {
     return a === void 0 ? l : v(pt());
   }
   function M() {
@@ -2894,7 +2894,7 @@ function gt(e, t, n) {
     }
     return a === void 0 && (a = setTimeout(x, t)), l;
   }
-  return M.cancel = B, M.flush = O, M;
+  return M.cancel = B, M.flush = $, M;
 }
 var da = "[object AsyncFunction]", ha = "[object Function]", pa = "[object GeneratorFunction]", ga = "[object Proxy]";
 function ma(e) {
@@ -2927,18 +2927,18 @@ function ya(e) {
 var Sa = /[\\^$.*+?()[\]{}|]/g, wa = /^\[object .+?Constructor\]$/, _a = Function.prototype, Ca = Object.prototype, Ra = _a.toString, Ea = Ca.hasOwnProperty, Ta = RegExp(
   "^" + Ra.call(Ea).replace(Sa, "\\$&").replace(/hasOwnProperty|(function).*?(?=\\\()| for .+?(?=\\\])/g, "$1.*?") + "$"
 );
-function $a(e) {
+function Oa(e) {
   if (!Be(e) || va(e))
     return !1;
   var t = ma(e) ? Ta : wa;
   return t.test(ya(e));
 }
-function Oa(e, t) {
+function $a(e, t) {
   return e == null ? void 0 : e[t];
 }
 function jn(e, t) {
-  var n = Oa(e, t);
-  return $a(n) ? n : void 0;
+  var n = $a(e, t);
+  return Oa(n) ? n : void 0;
 }
 var Me = jn(Object, "create");
 function Pa() {
@@ -3003,10 +3003,10 @@ function Xa(e) {
   var t = this.__data__, n = at(t, e);
   return n < 0 ? void 0 : t[n][1];
 }
-function Ya(e) {
+function Ga(e) {
   return at(this.__data__, e) > -1;
 }
-function Ga(e, t) {
+function Ya(e, t) {
   var n = this.__data__, r = at(n, e);
   return r < 0 ? (++this.size, n.push([e, t])) : n[r][1] = t, this;
 }
@@ -3020,8 +3020,8 @@ function Re(e) {
 Re.prototype.clear = La;
 Re.prototype.delete = Ua;
 Re.prototype.get = Xa;
-Re.prototype.has = Ya;
-Re.prototype.set = Ga;
+Re.prototype.has = Ga;
+Re.prototype.set = Ya;
 var qa = jn(it, "Map");
 function Ka() {
   this.size = 0, this.__data__ = {
@@ -3086,8 +3086,8 @@ function ol() {
   }), l = H(0), a = H({ x: 0 }), d = H(0), s = H([]), p = gt(() => {
     const v = e.value;
     if (!v || !t.value) return;
-    const { width: B, height: O } = v.getBoundingClientRect();
-    i.value.x = B / 2, i.value.y = O / 2;
+    const { width: B, height: $ } = v.getBoundingClientRect();
+    i.value.x = B / 2, i.value.y = $ / 2;
     const { width: M } = t.value[0].getBoundingClientRect();
     a.value.x = M / 2;
   });
@@ -3105,27 +3105,27 @@ function ol() {
     return r.value / v;
   }), C = He((v) => y.value * v + n.value), c = gt((v) => {
     s.value.pop(), s.value.unshift(v);
-  }, 300), T = He((v, B, O, M) => {
-    const w = v * (Math.PI / 180), f = B + B * Math.cos(w), h = O + O * Math.sin(w) + M;
+  }, 300), T = He((v, B, $, M) => {
+    const w = v * (Math.PI / 180), f = B + B * Math.cos(w), h = $ + $ * Math.sin(w) + M;
     return {
       x: f,
       y: h
     };
-  }, (v, B, O, M) => `${v}-${B}-${O}-${M}`);
-  function S(v, B, O, M) {
-    return B / (O - M) - v;
+  }, (v, B, $, M) => `${v}-${B}-${$}-${M}`);
+  function S(v, B, $, M) {
+    return B / ($ - M) - v;
   }
   function x(v) {
     let B = v >= o.value ? 0 : v;
-    const O = C(B) + d.value, M = i.value.y, w = i.value.x, f = i.value.y / 3.2, h = +M / 1.1, _ = C(y.value + 1), { y: P } = T(_, w, f, h), { x: A, y: I } = T(O, w, f, h);
+    const $ = C(B) + d.value, M = i.value.y, w = i.value.x, f = i.value.y / 3.2, h = +M / 1.1, _ = C(y.value + 1), { y: P } = T(_, w, f, h), { x: A, y: I } = T($, w, f, h);
     if (!A || !I || !i.value.y) return {
       left: "50%",
       top: "50%",
       opacity: 0,
       zIndex: 0
     };
-    const $ = I > 0 && I > i.value.y + f / 2;
-    let E = $ ? 1 : S(1, I, M, f), z = $ ? 1 : S(1, I, M, f), j = $ ? 10 : 0, V = s.value.includes(v);
+    const O = I > 0 && I > i.value.y + f / 2;
+    let E = O ? 1 : S(1, I, M, f), z = O ? 1 : S(1, I, M, f), j = O ? 10 : 0, V = s.value.includes(v);
     return !V && I <= P && B === 0 && (c(v), V = s.value.includes(v)), V && (z = 0, E = 0), {
       left: A + "px",
       top: I + "px",
@@ -3183,49 +3183,49 @@ const il = { class: "lc-main-robot" }, al = { class: "lc-main-robot__wrapper" },
       starMaxShowCount: C,
       displayAlternately: c,
       fullAngle: T
-    } = ol(), S = He(($, E) => $ - (E + 1), ($, E) => `${$}-${E}`), x = D(() => {
-      var $;
-      return ($ = e.stars) != null && $.length ? e.stars : Wt;
+    } = ol(), S = He((O, E) => O - (E + 1), (O, E) => `${O}-${E}`), x = D(() => {
+      var O;
+      return (O = e.stars) != null && O.length ? e.stars : Wt;
     });
     Ze(() => {
       var E;
       d.value = ((E = x.value) == null ? void 0 : E.length) || 0, y.value = e.startAngle, C.value = e.maxShowCount, T.value = e.fullAngle;
-      const $ = x.value.length - e.maxShowCount;
-      $ < 0 || Wt.slice($ * -1).forEach((z, j) => {
-        const V = x.value.length - $ + j;
+      const O = x.value.length - e.maxShowCount;
+      O < 0 || Wt.slice(O * -1).forEach((z, j) => {
+        const V = x.value.length - O + j;
         c.value.push(V);
       });
     });
-    const v = D(() => 360 / e.duration), B = D(() => 1e3 / e.duration), O = H(e.animate);
+    const v = D(() => 360 / e.duration), B = D(() => 1e3 / e.duration), $ = H(e.animate);
     let M;
-    function w($) {
-      window.requestAnimationFrame ? window.requestAnimationFrame.call(this, $) : $();
+    function w(O) {
+      window.requestAnimationFrame ? window.requestAnimationFrame.call(this, O) : O();
     }
     function f() {
-      O.value && setTimeout(() => {
-        O.value && w(() => {
+      $.value && setTimeout(() => {
+        $.value && w(() => {
           p.value += v.value, p.value >= 360 && (p.value = 0), f();
         });
       }, B.value);
     }
-    O.value && f();
+    $.value && f();
     const h = t;
-    function _($, E) {
-      p.value = g.value * E * -1, h("click", $, E);
+    function _(O, E) {
+      p.value = g.value * E * -1, h("click", O, E);
     }
     function P() {
-      clearTimeout(M), O.value = !1;
+      clearTimeout(M), $.value = !1;
     }
     function A() {
       M = setTimeout(() => {
-        O.value || (O.value = e.animate, f());
+        $.value || ($.value = e.animate, f());
       }, 2e3);
     }
     const I = Rn(e, "value");
     return i("result", () => {
-      var $;
-      I.value = (($ = o.value) == null ? void 0 : $.textContent) || "";
-    }), ($, E) => (Z(), ne("div", il, [
+      var O;
+      I.value = ((O = o.value) == null ? void 0 : O.textContent) || "";
+    }), (O, E) => (Z(), ne("div", il, [
       N("div", al, [
         E[4] || (E[4] = N(
           "img",
@@ -3257,7 +3257,7 @@ const il = { class: "lc-main-robot" }, al = { class: "lc-main-robot__wrapper" },
                   -1
                   /* HOISTED */
                 )),
-                $r(
+                Or(
                   " " + Ke(L(o).helpText),
                   1
                   /* TEXT */
@@ -3266,7 +3266,7 @@ const il = { class: "lc-main-robot" }, al = { class: "lc-main-robot__wrapper" },
               512
               /* NEED_PATCH */
             ), [
-              [Or, L(o).helpText]
+              [$r, L(o).helpText]
             ]),
             Lt(N("input", {
               type: "text",
@@ -3305,7 +3305,7 @@ const il = { class: "lc-main-robot" }, al = { class: "lc-main-robot__wrapper" },
           },
           [
             (Z(!0), ne(
-              Ge,
+              Ye,
               null,
               xt(x.value, (z, j) => (Z(), ne("div", {
                 class: "lc-main-robot__wrapper__star-wrap--star",
@@ -3325,14 +3325,14 @@ const il = { class: "lc-main-robot" }, al = { class: "lc-main-robot__wrapper" },
                 }, null, 8, ["domain", "name", "size"]),
                 N("div", hl, [
                   (Z(!0), ne(
-                    Ge,
+                    Ye,
                     null,
-                    xt(z.meta, (V, G) => (Z(), ne(
+                    xt(z.meta, (V, Y) => (Z(), ne(
                       "div",
                       {
                         class: "lc-main-robot__wrapper__star-wrap--star__meta--item",
-                        key: G,
-                        style: Je({ "--left-offset-number": G, "--left-reverse-offset-number": L(S)(z.meta.length, G) })
+                        key: Y,
+                        style: Je({ "--left-offset-number": Y, "--left-reverse-offset-number": L(S)(z.meta.length, Y) })
                       },
                       [
                         N(
@@ -3361,10 +3361,10 @@ const il = { class: "lc-main-robot" }, al = { class: "lc-main-robot__wrapper" },
       ])
     ]));
   }
-}), Ol = /* @__PURE__ */ ot(gl, [["__scopeId", "data-v-3f1247db"]]);
+}), $l = /* @__PURE__ */ ot(gl, [["__scopeId", "data-v-3f1247db"]]);
 export {
-  Ol as LcMainRobot,
-  $l as LcRobot,
+  $l as LcMainRobot,
+  Ol as LcRobot,
   Wt as defStarData,
   jt as imageHideDir,
   kr as imageShowTrigger,

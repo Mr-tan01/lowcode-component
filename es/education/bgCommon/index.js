@@ -2,41 +2,46 @@
  import './css/index.css';
  // # end css mapping css/index.css 
 
-import { defineComponent as s, useCssVars as l, computed as m, openBlock as _, createElementBlock as a, createElementVNode as c, renderSlot as d } from "vue";
-import { b as u } from "./assets/bg-ByhNX8B7.js";
-const b = {
-  url: `url(${u})`
-}, g = { class: "lcc-bg__common" }, p = /* @__PURE__ */ s({
+import { defineComponent as s, mergeDefaults as l, useCssVars as m, computed as _, openBlock as g, createElementBlock as a, createElementVNode as r, renderSlot as b } from "vue";
+import { b as d } from "./assets/bg-ByhNX8B7.js";
+const u = {
+  url: `url(${d})`
+}, p = { class: "lcc-bg__common" }, i = /* @__PURE__ */ s({
   __name: "bgCommon",
-  setup(e) {
-    l((t) => ({
-      "10c5baf0": n.value
+  props: /* @__PURE__ */ l({
+    bgSrc: String
+  }, {
+    bgSrc: ""
+  }),
+  setup(t) {
+    m((e) => ({
+      "88c16c0c": c.value
     }));
-    const n = m(() => b.url);
-    return (t, o) => (_(), a("div", g, [
-      o[0] || (o[0] = c(
+    const c = _(() => t.bgSrc || u.url);
+    return (e, o) => (g(), a("div", p, [
+      o[0] || (o[0] = r(
         "div",
         { class: "lcc-bg__common__bl-decoartor-bg" },
         null,
         -1
         /* HOISTED */
       )),
-      o[1] || (o[1] = c(
+      o[1] || (o[1] = r(
         "div",
         { class: "lcc-bg__common__br-decoartor-bg" },
         null,
         -1
         /* HOISTED */
       )),
-      d(t.$slots, "default", {}, void 0, !0)
+      b(e.$slots, "default", {}, void 0, !0)
     ]));
   }
-}), f = (e, n) => {
-  const t = e.__vccOpts || e;
-  for (const [o, r] of n)
-    t[o] = r;
-  return t;
-}, C = /* @__PURE__ */ f(p, [["__scopeId", "data-v-d257c117"]]);
+}), f = (t, c) => {
+  const e = t.__vccOpts || t;
+  for (const [o, n] of c)
+    e[o] = n;
+  return e;
+}, S = /* @__PURE__ */ f(i, [["__scopeId", "data-v-c76d481e"]]);
 export {
-  C as LcBgCommon
+  S as LcBgCommon
 };

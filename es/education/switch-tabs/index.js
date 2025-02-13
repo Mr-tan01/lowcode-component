@@ -197,7 +197,7 @@ const Xe = { class: "lc-switch-tabs" }, Ge = { class: "lc-switch-tabs__wrapper" 
   setup(e, { emit: a }) {
     var U;
     de((r) => ({
-      "3e09da57": e.offsetAnimationTime
+      "6c1aa647": e.offsetAnimationTime
     }));
     const n = M(0), s = M(!0), u = J(e, "index"), h = J(e, "value"), f = R(() => e.list === void 0 ? ye : e.list);
     u.value === -1 && (u.value = ((U = f.value) == null ? void 0 : U.findIndex((r) => e.rowKey(r) === h.value)) ?? 0);
@@ -412,7 +412,7 @@ const Xe = { class: "lc-switch-tabs" }, Ge = { class: "lc-switch-tabs__wrapper" 
   for (const [s, u] of a)
     n[s] = u;
   return n;
-}, rt = /* @__PURE__ */ Ze(Ye, [["__scopeId", "data-v-3b952cd9"]]);
+}, rt = /* @__PURE__ */ Ze(Ye, [["__scopeId", "data-v-bc383042"]]);
 export {
   rt as LcSwitchTabs
 };

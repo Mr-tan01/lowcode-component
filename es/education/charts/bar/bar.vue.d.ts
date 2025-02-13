@@ -1,4 +1,19 @@
-declare const _default: import("vue").DefineComponent<{}, {}, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").PublicProps, Readonly<{}> & Readonly<{}>, {}, {}, {}, {}, string, import("vue").ComponentProvideOptions, true, {}, any>;
+import { PropType } from 'vue';
+import { type EChartsOption } from 'echarts';
+import { type LinearGradient } from 'echarts/types/src/util/graphic.js';
+declare const _default: import("vue").DefineComponent<import("vue").ExtractPropTypes<{
+    options: PropType<EChartsOption>;
+    linearGradientColor: PropType<LinearGradient[]>;
+    isHorizontal: PropType<Boolean>;
+    stack: BooleanConstructor;
+}>, {}, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").PublicProps, Readonly<import("vue").ExtractPropTypes<{
+    options: PropType<EChartsOption>;
+    linearGradientColor: PropType<LinearGradient[]>;
+    isHorizontal: PropType<Boolean>;
+    stack: BooleanConstructor;
+}>> & Readonly<{}>, {
+    stack: boolean;
+}, {}, {}, {}, string, import("vue").ComponentProvideOptions, true, {}, any>;
 export default _default;
 declare module 'vue' {
     interface GlobalComponents {
