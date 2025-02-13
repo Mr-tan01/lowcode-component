@@ -23,5 +23,8 @@ export default defineConfig({
         api: 'modern-compiler'
       }
     }
+  },
+  build: {
+    outDir: 'dist/lowcode-docx'
   }
 })
