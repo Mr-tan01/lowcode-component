@@ -6,7 +6,7 @@
         </div>
 
         <div class="help-container__wrapper">
-            <vue-resizable :width="rswidth" :height="rsHeight">
+            <vue-resizable class="vue-resize" :width="rswidth" :height="rsHeight">
                 <div class="pad-box">
                     <slot></slot>
                 </div>
@@ -85,13 +85,19 @@ const {
     &__wrapper {
         display: flex;
         flex-direction: column;
-        border: 1px dotted #fff;
+        border: 1px dotted #30b4dc;
         border-radius: 5px;
-        .pad-box {
+        .vue-resize {
             padding: 20px;
-            flex: 1;
+            box-sizing: border-box;
+        }
+        .pad-box {
             display: flex;
             flex-direction: column;
+            box-sizing: border-box;
+            width: 100%;
+            height: 100%;
+            border: 1px dashed #ffffff35;
         }
     }
 }

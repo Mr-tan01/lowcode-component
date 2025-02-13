@@ -8,9 +8,14 @@
     </div>
 </template>
 <script lang="ts" setup>
-import { computed } from 'vue';
+import { computed, PropType } from 'vue';
 import { bgImage } from './const';
-const bgURL = computed(() => bgImage.url);
+const {
+    bgSrc = '',
+} = defineProps({
+    bgSrc: String as PropType<string>,
+});
+const bgURL = computed(() => bgSrc || bgImage.url);
 </script>
 <style lang="scss" scoped>
 .lcc-bg {

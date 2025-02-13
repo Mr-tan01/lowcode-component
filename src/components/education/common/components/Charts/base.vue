@@ -4,8 +4,8 @@
 
 <script lang="ts" setup>
 import { useResizeObserver } from '@vueuse/core';
-import { init, type EChartsType, type EChartsInitOpts } from 'echarts';
-import { onMounted, PropType, shallowRef, useTemplateRef } from 'vue';
+import { init, type EChartsType, type EChartsOption } from 'echarts';
+import { onMounted, PropType, shallowRef, useTemplateRef, watchEffect } from 'vue';
 import debounce from 'lodash-es/debounce';
 
 const commonChartRef = useTemplateRef("commonChart");
@@ -14,12 +14,19 @@ const chartInstance = shallowRef<EChartsType>();
 const {
     debounceTime = 300,
     options = {},
+    notMerge = true,
 } = defineProps({
     debounceTime: Number,
-    options: Object as PropType<EChartsInitOpts>,
+    options: Object as PropType<EChartsOption>,
+    notMerge: Boolean,
 })
-useResizeObserver(commonChartRef, debounce((entries) => {
-    chartInstance.value?.resize();
+useResizeObserver(commonChartRef, debounce(() => {
+    chartInstance.value?.resize({
+        animation: {
+            duration: 500,
+            easing: 'cubicOut'
+        }
+    });
 }, debounceTime));
 function initChartInstance() {
     chartInstance.value = init(commonChartRef.value!, options);
@@ -27,8 +34,17 @@ function initChartInstance() {
 onMounted(() => {
     initChartInstance();
 });
+
+function setOptions(options: EChartsOption, deep: boolean) {
+    chartInstance.value?.setOption(options, deep);
+}
+watchEffect(() => {
+    options; // tack on the options
+    setOptions(options, notMerge);
+});
 defineExpose({
     chartInstance,
+    setOptions,
 });
 </script>
 

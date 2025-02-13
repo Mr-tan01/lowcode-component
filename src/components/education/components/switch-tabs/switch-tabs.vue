@@ -304,7 +304,7 @@ const handleClick = throttle((_item: TabListRaw, index: number) => {
     &__track {
         position: relative;
         width: 100%;
-        padding-top: 17px;
+        padding-top: 30px;
         pointer-events: none;
 
         &__image {
@@ -312,6 +312,7 @@ const handleClick = throttle((_item: TabListRaw, index: number) => {
                 height: 14px;
                 position: absolute;
                 left: 50%;
+                bottom: 0;
                 transform: translate(-50%, 0);
             }
         }
