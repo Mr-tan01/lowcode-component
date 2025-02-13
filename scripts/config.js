@@ -11,7 +11,9 @@ export default {
                 'lodash-es',
                 'naive-ui',
                 '@vueuse/core',
-                'echarts'
+                'echarts',
+                'lowcode-share',
+                'mmj-code-lib',
             ],
             output: {
                 globals: {
