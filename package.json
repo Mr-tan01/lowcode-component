@@ -1,7 +1,7 @@
 {
   "name": "lowcode-component",
   "private": true,
-  "version": "0.1.0",
+  "version": "0.1.0-alpha.0.0.2",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -14,7 +14,7 @@
     "dist"
   ],
   "dependencies": {
-    "lowcode-share": "link:F:/Work/lowcode/lowcode-share",
+    "lowcode-share": "link:F:/work/goview/tosts/lowcode-share",
     "mmj-code-lib": "link:F:/work/sts-packages/mmj-code-lib"
   },
   "devDependencies": {

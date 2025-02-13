@@ -6,15 +6,15 @@
         </div>
 
         <div class="help-container__wrapper">
-            <vue-resizable class="vue-resize" :width="rswidth" :height="rsHeight">
+            <vue-resizable class="vue-resize" :width="rswidth" :height="rsHeight" @resize:move="resizeMove">
                 <div class="pad-box">
                     <slot></slot>
                 </div>
             </vue-resizable>
         </div>
-        <n-collapse class="n-collapse"  v-if="code">
+        <n-collapse class="n-collapse" v-if="code" :style="{ wdith: codeWraperWidth }">
             <n-collapse-item title="查看用法" name="code">
-                <div class="help-container__code" :style="{ maxWidth: rswidth, }">
+                <div class="help-container__code" :style="{ maxWidth: codeWraperWidth, }">
                     <n-code language="javascript" :code="code" word-wrap :hljs="Highlight">
                     </n-code>
                 </div>
@@ -23,7 +23,7 @@
     </div>
 </template>
 <script lang="ts" setup>
-import { PropType } from 'vue';
+import { PropType, ref } from 'vue';
 import Highlight from 'highlight.js';
 import VueResizable from 'vue-resizable'
 import 'highlight.js/styles/lightfair.min.css';
@@ -31,6 +31,7 @@ import { NCode, NCollapse, NCollapseItem } from 'naive-ui';
 
 const {
     code = '',
+    rswidth,
     rsHeight = 'auto',
 } = defineProps({
     title: {
@@ -49,6 +50,10 @@ const {
         type: [String, Number],
     }
 });
+const codeWraperWidth = ref(rswidth);
+function resizeMove({ width }) {
+    codeWraperWidth.value = width + 'px';
+}
 </script>
 
 <style lang="scss" scoped>
@@ -62,6 +67,7 @@ const {
     .n-collapse {
         width: 100%;
         --n-title-text-color: #fff !important;
+
         :deep(.n-base-icon) {
             svg {
                 color: white;

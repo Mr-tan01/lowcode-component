@@ -26,8 +26,17 @@ const bgURL = computed(() => `url(${bgSrc || bgImage.url})`);
         flex-direction: column;
         background: v-bind(bgURL);
         background-size: cover;
-        position: relative;
-        overflow: auto;
+
+        &__wrapper {
+            width: inherit;
+            height: inherit;
+            display: inherit;
+            flex-direction: inherit;
+            position: inherit;
+            z-index: inherit;
+            overflow: auto;
+            position: relative;
+        }
 
         &__bl-decoartor-bg {
             position: absolute;

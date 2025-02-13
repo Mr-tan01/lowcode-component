@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       lowcode-share:
-        specifier: link:F:/Work/lowcode/lowcode-share
-        version: link:../../../lowcode/lowcode-share
+        specifier: link:F:/work/goview/tosts/lowcode-share
+        version: link:../lowcode-share
       mmj-code-lib:
         specifier: link:F:/work/sts-packages/mmj-code-lib
         version: link:../../../sts-packages/mmj-code-lib
