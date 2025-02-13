@@ -25,6 +25,13 @@ export default defineConfig({
     }
   },
   build: {
-    outDir: 'dist/lowcode-docx'
+    outDir: 'dist/lowcode-docx',
+    rollupOptions: {
+      output: {
+        assetFileNames() {
+          return `[ext]/[name].[ext]`;
+        },
+      }
+    },
   }
 })
