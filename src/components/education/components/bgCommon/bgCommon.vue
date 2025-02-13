@@ -15,7 +15,7 @@ const {
 } = defineProps({
     bgSrc: String as PropType<string>,
 });
-const bgURL = computed(() => bgSrc || bgImage.url);
+const bgURL = computed(() => `url(${bgSrc || bgImage.url})`);
 </script>
 <style lang="scss" scoped>
 .lcc-bg {

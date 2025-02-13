@@ -1,3 +1,3 @@
 export declare const bgImage: {
-    url: string;
+    url: any;
 };
