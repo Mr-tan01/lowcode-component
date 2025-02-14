@@ -1,6 +1,6 @@
 <template>
     <div class="demo-map">
-        <Container title="深圳地图" description="深圳教育项目-深圳地图" rswidth="910px">
+        <Container title="深圳地图" description="深圳教育项目-深圳地图" rswidth="962px">
             <div class="size-box">
                 <LcMap></LcMap>
             </div>
