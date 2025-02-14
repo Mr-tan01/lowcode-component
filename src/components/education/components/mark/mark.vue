@@ -1,6 +1,6 @@
 <template>
     <div class="lc-mark" :class="[`lc-mark--${model}`, `lc-mark--${size}`, `lc-mark--icon-${iconName}`]" :tabindex="-1"
-        :style="customProperts">
+        :style="customProperts" v-if="show">
         <div class="lc-mark__wrapper" @click="clickMark">
             <div class="lc-mark__wrapper__image">
                 <img class="lc-mark__wrapper__image__img" :src="imageIconSrc" alt=" " draggable="false">
@@ -22,6 +22,7 @@
 
 <script lang="ts" setup>
 import { computed } from 'vue';
+import { EducationMarkProps } from './props';
 
 const {
     value = 0,
@@ -32,16 +33,8 @@ const {
     iconName = 'mark',
     iconSrc = '',
     label = '',
-} = defineProps<{
-    value: number | string;
-    unit?: string;
-    model?: 'hover' | 'focus' | 'default';
-    meta?: Record<string, any>;
-    size?: 'small' | 'medium';
-    iconName?: string;
-    iconSrc?: string;
-    label?: string;
-}>();
+    show = true,
+} = defineProps<EducationMarkProps>();
 const icons = import.meta.glob<string>('./images/**.png', { import: 'default', eager: true });
 
 const $emit = defineEmits<{ (e: 'mark:click', v: { value: number | string; meta: any }): void }>();
@@ -198,7 +191,7 @@ function clickMark() {
             pointer-events: none;
             position: absolute;
             z-index: 0;
-            bottom: 25%;
+            bottom: 30%;
             padding: 0 30px;
             left: 50%;
             background: var(--mark-icon-rect) no-repeat;
@@ -208,9 +201,9 @@ function clickMark() {
             display: flex;
             justify-content: center;
             align-items: flex-end;
+            backdrop-filter: blur(2px);
 
             &--value {
-                width: 100%;
                 font-family: HarmonyOS_Sans_SC_Medium;
                 font-size: 27px;
                 color: #FFFFFF;
@@ -218,6 +211,7 @@ function clickMark() {
                 text-align: center;
                 font-style: normal;
                 text-transform: none;
+               
             }
 
             &--unit {

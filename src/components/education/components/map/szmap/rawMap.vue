@@ -19,6 +19,10 @@
                 </g>
             </g>
         </svg>
+        <div class="lc-szmap-raw__mark-group" v-if="showLabel">
+            <LcMark v-for="(_, key) in blockList" :key :class="[`lc-szmap-raw__mark-group--item`, `mark-${key}`]"
+                v-bind="getMarkProp(key)" size="small"></LcMark>
+        </div>
     </div>
 </template>
 <script lang="ts" setup>
@@ -35,9 +39,10 @@ import Nanshan from './comp/nanshan.vue';
 import Longhua from './comp/longhua.vue';
 import Defines from './comp/defines.vue';
 import Labels from './comp/labels.vue';
+import { LcMark } from '@/components/education/components/mark';
 import { type Component, computed } from 'vue';
 import { type Levels, propsRaw } from './props';
-import { defFloatLevelConfig, type BlockName } from './const';
+import { defFloatLevelConfig, type BlockName, szBlockNames } from './const';
 import merge from 'lodash-es/merge';
 
 const {
@@ -49,17 +54,21 @@ const {
 } = defineProps(propsRaw);
 
 const blockList: Record<BlockName, Component> = {
-    光明: Guangming,
-    宝安: Baoan,
-    龙华: Longhua,
-    南山: Nanshan,
-    福田: Futian,
-    罗湖: Luohu,
-    盐田: Yantian,
-    坪山: Pingshan,
-    龙岗: Longgang,
-    大鹏新区: Dapeng,
-    深汕合作区: Sshzq,
+    [szBlockNames['光明']]: Guangming,
+    [szBlockNames['宝安']]: Baoan,
+    [szBlockNames['龙华']]: Longhua,
+    [szBlockNames['南山']]: Nanshan,
+    [szBlockNames['福田']]: Futian,
+    [szBlockNames['罗湖']]: Luohu,
+    [szBlockNames['盐田']]: Yantian,
+    [szBlockNames['坪山']]: Pingshan,
+    [szBlockNames['龙岗']]: Longgang,
+    [szBlockNames['大鹏新区']]: Dapeng,
+    [szBlockNames['深汕合作区']]: Sshzq,
+}
+
+function getMarkProp(key: BlockName) {
+    return (values[key]! ?? { value: 0, })
 }
 
 const blockClass = computed(() => {
@@ -97,6 +106,77 @@ function getBlockProperties(key: BlockName) {
 <style lang="scss" scoped>
 .lc-szmap-raw {
     width: 100%;
+    position: relative;
+
+    &__mark-group {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+
+        &--item {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            will-change: transform;
+            pointer-events: auto;
+
+            &.mark-guangming {
+                left: 20%;
+                top: 22%;
+            }
+
+            &.mark-baoan {
+                left: 13%;
+                top: 48%;
+            }
+
+            &.mark-longhua {
+                left: 32%;
+                top: 39%;
+            }
+
+            &.mark-nanshan {
+                left: 24%;
+                top: 62%;
+            }
+
+            &.mark-futian {
+                left: 34%;
+                top: 70%;
+            }
+
+            &.mark-luohu {
+                left: 47%;
+                top: 61%;
+            }
+
+            &.mark-yantian {
+                left: 59%;
+                top: 56%;
+            }
+
+            &.mark-pingshan {
+                left: 70%;
+                top: 41%;
+            }
+
+            &.mark-longgang {
+                left: 59%;
+                top: 32%;
+            }
+
+            &.mark-dapeng {
+                left: 81%;
+                top: 53%;
+            }
+
+            &.mark-shenshan {
+                left: 90%;
+                top: 10%;
+            }
+        }
+    }
 
     &__block {
         transition: 0.3s linear;

@@ -1,5 +1,6 @@
 import { PropType } from "vue";
 import { type BlockLableMapType, type BlockName } from "./const";
+import { type EducationMarkProps } from "@/components/education/components/mark/props";
 
 
 export type Levels = Partial<Record<string, {
@@ -11,9 +12,7 @@ export type Levels = Partial<Record<string, {
     } & {})[] | string;
 }>>;
 
-export type SZDataValue = Partial<Record<BlockName, {
-    value: number;
-}>>;
+export type SZMapMarkProps = Partial<Record<BlockName, EducationMarkProps>>;
 
 export const propsRaw = {
     showLabel: {
@@ -29,6 +28,6 @@ export const propsRaw = {
         type: Object as PropType<BlockLableMapType>,
     },
     values: {
-        type: Object as PropType<SZDataValue>,
+        type: Object as PropType<SZMapMarkProps>,
     }
 } as const;

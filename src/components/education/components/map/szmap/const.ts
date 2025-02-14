@@ -1,20 +1,20 @@
 import { Levels } from "./props";
 
 export const szBlockNames = {
-    '光明': '光明',
-    '宝安': '宝安',
-    '龙华': '龙华',
-    '南山': '南山',
-    '福田': '福田',
-    '罗湖': '罗湖',
-    '盐田': '盐田',
-    '坪山': '坪山',
-    '龙岗': '龙岗',
-    '大鹏新区': '大鹏新区',
-    '深汕合作区': '深汕合作区',
+    '光明': 'guangming',
+    '宝安': 'baoan',
+    '龙华': 'longhua',
+    '南山': 'nanshan',
+    '福田': 'futian',
+    '罗湖': 'luohu',
+    '盐田': 'yantian',
+    '坪山': 'pingshan',
+    '龙岗': 'longgang',
+    '大鹏新区': 'dapeng',
+    '深汕合作区': 'shenshan',
 } as const;
-
-export type BlockName = keyof typeof szBlockNames;
+export type SzBlockNames = typeof szBlockNames
+export type BlockName = SzBlockNames[keyof SzBlockNames];
 
 export const defBlockLableMap = {
     [szBlockNames['光明']]: '光明区',

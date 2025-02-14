@@ -9,14 +9,16 @@
 </template>
 <script lang="ts" setup>
 import Container from '@/demo/components/help/Container.vue';
-import { Szmap } from '@/components/education/components/map';
+import { Szmap, type SZMapMarkProps } from '@/components/education/components/map';
 
-const values = {
-    光明: {
+const values: SZMapMarkProps = {
+    guangming: {
         value: 1,
+        unit: '人'
     },
-    龙岗: {
+    longgang: {
         value: 10000,
+        unit: '人'
     },
 }
 
