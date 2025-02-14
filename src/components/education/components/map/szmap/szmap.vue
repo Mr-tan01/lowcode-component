@@ -1,13 +1,16 @@
 <template>
     <div class="lc-szmap">
-        <RawMap class="back-block-map level-map" :show-label="false" />
-        <RawMap class="float-block-map level-map" fill-model="hover" :show-label="true" />
+        <RawMap class="back-block-map level-map" :show-label="false" :levels :values />
+        <RawMap class="float-block-map level-map" fill-model="hover" :show-label="true" :levels :values />
     </div>
 </template>
 
 <script lang="ts" setup>
+import { propsRaw } from './props';
 import RawMap from './rawMap.vue';
-
+const {
+    levels,
+} = defineProps(propsRaw);
 </script>
 
 <style lang="scss" scoped>

@@ -1,6 +1,6 @@
 <template>
     <div class="lc-map">
-        <Szmap></Szmap>
+        <Szmap v-bind="$attrs"></Szmap>
     </div>
 </template>
 
