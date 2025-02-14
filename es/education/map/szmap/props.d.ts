@@ -1,0 +1,29 @@
+import { PropType } from "vue";
+import { type BlockLableMapType, type BlockName } from "./const";
+import { type EducationMarkProps } from "@/components/education/components/mark/props";
+export type Levels = Partial<Record<string, {
+    range: number[];
+    stop: ({
+        'stop-color': string;
+        'stop-opacity': number;
+        offset: string;
+    } & {})[] | string;
+}>>;
+export type SZMapMarkProps = Partial<Record<BlockName, EducationMarkProps>>;
+export declare const propsRaw: {
+    readonly showLabel: {
+        readonly type: BooleanConstructor;
+    };
+    readonly fillModel: {
+        readonly type: PropType<"hover" | "default">;
+    };
+    readonly levels: {
+        readonly type: PropType<Levels>;
+    };
+    readonly labels: {
+        readonly type: PropType<BlockLableMapType>;
+    };
+    readonly values: {
+        readonly type: PropType<SZMapMarkProps>;
+    };
+};

@@ -6,7 +6,7 @@ import cloneDeep from 'lodash-es/cloneDeep.js';
 import child_process from 'child_process';
 import { join, basename, extname } from 'path';
 import { readFileSync, writeFileSync } from 'fs';
-import commonViteConfig from './config.js';
+
 const assetFileNames = ['.png', '.jpg', '.jpeg', '.svg', '.gif', '.mp4', '.mp3', '.webp'];
 
 /**
@@ -88,7 +88,7 @@ export class EsmComBuilder {
             clearScreen: false,
             logLevel: 'info',
         };
-        const inlineConfig = merge({}, this.options, config, commonViteConfig);
+        const inlineConfig = merge({}, config, this.options);
         const declaraDirPath = `${inlineConfig.build.outDir}/${comAppName}`;
         const dtsExecCode = `npx vue-tsc ${runEntryPath} --declaration --emitDeclarationOnly --outDir ${declaraDirPath}`;
         console.log("exec => ", dtsExecCode);
