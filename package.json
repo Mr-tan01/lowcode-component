@@ -15,7 +15,7 @@
   ],
   "dependencies": {
     "lowcode-share": "link:F:/work/goview/tosts/lowcode-share",
-    "mmj-code-lib": "link:F:/work/sts-packages/mmj-code-lib"
+    "mmj-code-lib": "git+http://code.siteshun.com:800/front-component/STS/mmj-code-lib.git#lowcode-0.1.0"
   },
   "devDependencies": {
     "@types/node": "^22.10.7",

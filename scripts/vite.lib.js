@@ -1,5 +1,5 @@
 
-import { EsmComBuilder } from './build.cli.js';
+import { EsmComBuilder } from 'mmj-code-lib/scripts/build.vite.mjs';
 import fs from 'node:fs';
 import commonViteConfig from './config.js';
 import merge from 'lodash-es/merge.js';

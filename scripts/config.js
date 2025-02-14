@@ -1,8 +1,18 @@
+import { pathResolve } from 'lowcode-share';
+import { join } from 'path';
 
 /**
  * @type {import('vite').InlineConfig}
  */
 export default {
+    resolve: {
+        alias: [
+            {
+                find: '@',
+                replacement: pathResolve('src', join(process.cwd(), '../')),
+            },
+        ],
+    },
     build: {
         rollupOptions: {
             external: [
