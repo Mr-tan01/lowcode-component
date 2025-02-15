@@ -2,6 +2,32 @@
     <div class="demo-charts">
         <Container title="图表" description="图表-柱状图分单类数据、多类数据、组合类数据、" rswidth="1360px" rs-height="auto">
             <NSpace>
+                <Container title="单条折线图" rswidth="390px" rs-height="265px">
+                    <lcLineChart :options="combinationOpts(1)"></lcLineChart>
+                </Container>
+                <Container title="多条折线图(≥2类数据)" rswidth="390px" rs-height="265px">
+                    <lcLineChart :options="combinationOpts(2)"></lcLineChart>
+                </Container>
+                <Container title="组合折线数据图" rswidth="390px" rs-height="265px">
+                    <lcLineChart :options="combinationOpts(2)"></lcLineChart>
+                </Container>
+                <Container title="组合折线数据图3D" rswidth="390px" rs-height="265px">
+                    <LcBarChart :options="combinationOpts(4, 2)" fake3d></LcBarChart>
+                </Container>
+                <Container title="单条曲线图" rswidth="390px" rs-height="265px">
+                    <lcLineChart :options="combinationOpts(4, 3)" fake3d></lcLineChart>
+                </Container>
+                <Container title="多条曲线图(≥2类数据)" rswidth="390px" rs-height="265px">
+                    <lcLineChart :options="combinationOpts(6, 4)" fake3d></lcLineChart>
+                </Container>
+                <Container title="面积曲线图" rswidth="390px" rs-height="265px">
+                    <lcLineChart :options="combinationOpts(7, 6)" fake3d></lcLineChart>
+                </Container>
+                <Container title="多条曲线图(≥2类数据)" rswidth="390px" rs-height="265px">
+                    <lcLineChart :options="combinationOpts(8, 6)" fake3d></lcLineChart>
+                </Container>
+            </NSpace>
+            <NSpace>
                 <Container title="单柱" rswidth="390px" rs-height="265px" :code="barChartCodes.code1">
                     <LcBarChart :options="chartsBarOpts(1)" type="bar"></LcBarChart>
                 </Container>
@@ -46,11 +72,17 @@
 <script lang="ts" setup>
 import { NSpace } from 'naive-ui';
 import Container from '@/demo/components/help/Container.vue';
-import { LcBarChart, LcBarChartOptions } from '@/components/education/components/charts';
+import {
+    LcBarChart,
+    LcBarChartOptions,
+    lcLineChart,
+} from '@/components/education/components/charts';
 import { type EChartsOption } from 'echarts';
 import orgImage from './images/org.svg';
 import blueImage from './images/blue.svg';
-import { barChartCodes  } from './codes';
+import { barChartCodes } from './codes';
+import { combinationOpts } from './options/line-options';
+import { YAXisOption } from 'echarts/types/src/coord/cartesian/AxisModel';
 
 function chartsBarOpts(len: number): EChartsOption {
     return {
@@ -154,8 +186,8 @@ function evenYaixsChartsBarOpts(len: number): EChartsOption {
             data: Array.from(Array(4)).map((_, i) => `类目${i + 1}`),
         },
         yAxis: [
-            LcBarChartOptions.yAxisOptions,
-            LcBarChartOptions.yAxisOptions
+            LcBarChartOptions.commonBarOptions.yAxis as YAXisOption ,
+            LcBarChartOptions.commonBarOptions.yAxis as YAXisOption ,
         ],
         series: [
             {
@@ -180,7 +212,7 @@ function pictorialBarOpts(start, len): EChartsOption | { series: {}[] } {
 
         },
         series: [
-        {
+            {
                 name: '类型名称',
                 barWidth: 'auto',
                 type: 'pictorialBar',

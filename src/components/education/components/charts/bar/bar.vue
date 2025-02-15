@@ -1,13 +1,13 @@
 <template>
     <div class="lc-bar-chart">
-        <SChartsBar :opts="renderOptions" :linearGradientColor :stack v-bind="$attrs"></SChartsBar>
+        <SChartsBar :opts="renderOptions" :linearGradientColor :stack :fake3d v-bind="$attrs"></SChartsBar>
     </div>
 </template>
 
 <script lang="ts" setup>
 import { SChartsBar } from '~/@mmj-code-lib/lowcode/es/components';
-import { computed, PropType } from 'vue';
-import { type EChartsOption } from 'echarts';
+import { computed } from 'vue';
+import { type EChartsOption, type EChartsCoreOption } from 'echarts';
 import { commonBarOptions, useCommonBarOptions, useCommonBarSeries } from './options';
 import merge from 'lodash-es/merge';
 import { type LinearGradient } from 'echarts/types/src/util/graphic.js';
@@ -18,12 +18,14 @@ const {
     linearGradientColor = barBuiltInStyle.color,
     isHorizontal = false,
     stack = false,
-} = defineProps({
-    options: Object as PropType<EChartsOption>,
-    linearGradientColor: Array as PropType<LinearGradient[]>,
-    isHorizontal: Boolean as PropType<Boolean>,
-    stack: Boolean,
-});
+    fake3d = true,
+} = defineProps<{
+    options?: EChartsCoreOption | EChartsOption,
+    linearGradientColor?: LinearGradient[],
+    isHorizontal?: boolean,
+    stack?: boolean,
+    fake3d?: boolean
+}>();
 
 const renderOptions = computed(() => {
     const newOptions = useCommonBarOptions(options, { isHorizontal });

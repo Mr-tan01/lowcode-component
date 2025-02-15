@@ -1,82 +1,15 @@
-import { type EChartsOption, type BarSeriesOption } from "echarts";
-import { YAXisOption } from "echarts/types/src/coord/cartesian/AxisModel";
+import { type EChartsOption, type BarSeriesOption, type SeriesOption, type EChartsCoreOption } from "echarts";
 import merge from 'lodash-es/merge';
+import { mergeLineRecord } from "@/components/education/components/charts/line/options";
+import { barColors, gridOptions, legendOptions, tooltipOptions, xAxisOptions, yAxisOptions } from "./const";
+import { deepMergeArrayOptions } from "~/@mmj-code-lib/lowcode/es/components";
 
-export const barColors = ['rgba(54, 115, 245, 1)', 'rgba(1, 158, 43, 1)', 'rgba(222, 56, 4, 1)'];
-export const yAxisOptions: YAXisOption = {
-    nameLocation: 'end',
-    nameTextStyle: {
-        padding: [0, 20, 0, 0],
-        color: '#fff',
-        fontSize: 14,
-        lineHeight: 20,
-    },
-    splitLine: {
-        lineStyle: {
-            color: 'rgba(255, 255, 255, 0.2)',
-         
-        }
-    },
-    axisLabel: {
-        color: '#fff',
-        fontSize: 14,
-        lineHeight: 20,
-        margin: 13,
-    },
-}
+
 export const commonBarOptions: EChartsOption = {
-    tooltip: {
-        backgroundColor: 'rgba(0, 32, 61, 1)',
-        borderColor: 'rgba(15, 251, 248, 1)',
-        textStyle: {
-            color: '#fff',
-            fontSize: 14,
-            lineHeight: 20,
-        }
-    },
-    legend: {
-        show: true,
-        top: 'bottom',
-        left: 'center',
-        icon: 'rect',
-        textStyle: {
-            fontSize: 14,
-            color: '#fff',
-            lineHeight: 24,
-        },
-        itemGap: 20,
-        type: 'scroll',
-        pageIconColor: 'rgba(15, 251, 248, 1)',
-        pageIconInactiveColor: '#e5e5e5',
-        pageTextStyle: {
-            fontSize: 12,
-            color: '#fff',
-        }
-    },
-    grid: {
-        top: 50,
-        bottom: 40
-    },
-    xAxis: {
-        type: 'category',
-        boundaryGap: true,
-        splitLine: {
-            show: false,
-        },
-        axisTick: {
-            show: false,
-        },
-        axisLine: {
-            lineStyle: {
-                color: 'rgba(255, 255, 255, 0.2)',
-            }
-        },
-        axisLabel: {
-            color: '#fff',
-            fontSize: 14,
-            lineHeight: 20,
-        }
-    },
+    tooltip: tooltipOptions,
+    legend: legendOptions,
+    grid: gridOptions,
+    xAxis: xAxisOptions,
     yAxis: yAxisOptions,
     color: barColors,
 };
@@ -123,7 +56,7 @@ const defHorizontalBarOptions: EChartsOption = {
     }
 }
 
-export const horizontalBarOptions: EChartsOption = merge<EChartsOption>({}, commonBarOptions, defHorizontalBarOptions);
+export const horizontalBarOptions: EChartsOption = merge({}, commonBarOptions, defHorizontalBarOptions);
 
 export const commonBarSeries: BarSeriesOption = {
     barWidth: 20,
@@ -140,35 +73,46 @@ export const commonBarSeries: BarSeriesOption = {
     },
 }
 
-export const smallBarSeries = merge({}, commonBarSeries, {
+export const smallBarSeries: BarSeriesOption = merge({}, commonBarSeries, {
     barWidth: 12,
     backgroundStyle: {
         borderWidth: 12,
+        opacity: 1,
     },
     markPoint: {
         symbolSize: [12, 6],
     },
 });
 
-export function useCommonBarOptions(opt: EChartsOption, props: { isHorizontal: Boolean }) {
+export function useCommonBarOptions(opts: EChartsOption | EChartsCoreOption, props: { isHorizontal: Boolean }) {
     const dynaicOptions = props.isHorizontal ? horizontalBarOptions : commonBarOptions;
-    return merge({}, dynaicOptions, opt);
+    deepMergeArrayOptions(opts, Object.keys(dynaicOptions), Object.values(dynaicOptions));
+    return merge({}, dynaicOptions, opts);
 }
 
-export function useCommonBarSeries(series: EChartsOption['series'], props: { stack: Boolean }) {
+function mergeSeriesRecord(series1: SeriesOption, series2: SeriesOption, index: number) {
+    if (series2.type === 'bar' || !series2.type) {
+        return merge({}, series1, series2);
+    } else if (series2.type === 'line') {
+        return mergeLineRecord(index, series2);
+    }
+    return series2;
+}
+
+export function useCommonBarSeries(series: EChartsOption['series'], props: { stack: Boolean }): EChartsOption['series'] {
 
     if (Array.isArray(series)) {
         if (series.length > 1) {
             // 两条以上数据时，使用小尺寸的柱状图
-            if(props.stack) {
+            if (props.stack) {
                 // 堆叠柱状图，背景透明度为1/n，防止堆叠时背景颜色太重影响视觉效果
-                smallBarSeries.backgroundStyle.opacity = 1 / series.length;
+                smallBarSeries.backgroundStyle!.opacity = 1 / series.length;
             } else {
-                smallBarSeries.backgroundStyle.opacity = 1;
+                smallBarSeries.backgroundStyle!.opacity = 1;
             }
-            return series.map((item) => merge({}, smallBarSeries, item));
+            return series.map((item, index) => mergeSeriesRecord(smallBarSeries, item, index));
         }
-        return series.map((item) => merge({}, commonBarSeries, item));
+        return series.map((item, index) => mergeSeriesRecord(commonBarSeries, item, index));
     }
     return merge({}, commonBarSeries, series);
 }
