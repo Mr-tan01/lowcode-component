@@ -1,3 +1,4 @@
+import '@mmj-code-lib/lowcode/es/components/css/index.css';
 import { PropType } from 'vue';
 import { type EChartsOption } from 'echarts';
 import { type LinearGradient } from 'echarts/types/src/util/graphic.js';

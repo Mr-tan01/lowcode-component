@@ -8,9 +8,6 @@ importers:
 
   .:
     dependencies:
-      '@mmj-code-lib/lowcode':
-        specifier: link:F:/work/sts-packages/mmj-code-lib
-        version: link:../../../sts-packages/mmj-code-lib
       lowcode-share:
         specifier: git+http://code.siteshun.com:800/front-component/lowcode-sview/lowcode-share.git#develop
         version: git+http://code.siteshun.com:800/front-component/lowcode-sview/lowcode-share.git#c87b8278195deefb7a7917091087f49a907614da(typescript@5.6.3)

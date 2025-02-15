@@ -1,0 +1,4 @@
+[submodule "@mmj-code-lib/lowcode"]
+	path = @mmj-code-lib/lowcode
+	url = http://code.siteshun.com:800/front-component/STS/mmj-code-lib.git
+	branch = lowcode-0.1.0

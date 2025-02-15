@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts" setup>
-import { SChartsBar } from '@mmj-code-lib/lowcode/src/packages/components/s-charts/components/s-charts-bar';
+import { SChartsBar } from '~/@mmj-code-lib/lowcode/es/components';
 import { computed, PropType } from 'vue';
 import { type EChartsOption } from 'echarts';
 import { commonBarOptions, useCommonBarOptions, useCommonBarSeries } from './options';
