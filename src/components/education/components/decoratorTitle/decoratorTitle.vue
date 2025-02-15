@@ -10,8 +10,7 @@
 
 <script lang="ts" setup>
 import { computed, PropType } from 'vue';
-import { overflowStr } from '../../common/utils/formate';
-
+import { overflowStr } from 'lowcode-share/es/share';
 const {
     text = '',
     maxLength = 12,

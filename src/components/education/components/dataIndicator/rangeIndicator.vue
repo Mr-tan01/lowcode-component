@@ -26,7 +26,7 @@
 
 <script lang="ts" setup>
 import { PropType } from 'vue';
-import { bigNumber } from '@/components/education/common/utils/formate';
+import { bigNumber } from 'lowcode-share/es/share';
 import { NNumberAnimation } from 'naive-ui/es/number-animation';
 import memoize from 'lodash-es/memoize';
 type Data = {

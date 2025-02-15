@@ -35,6 +35,7 @@ export type BlockLableMapType = Record<BlockName, string>;
 export const defFloatLevelConfig: Levels = {
     warning: {
         range: [0, 100],
+        scale: 1.1,
         stop: [
             {
                 'stop-color': 'rgb(225, 188, 75)',
@@ -50,6 +51,7 @@ export const defFloatLevelConfig: Levels = {
     },
     series: {
         range: [101, Infinity],
+        scale: 1.2,
         stop: [
             {
                 'stop-color': 'rgb(238, 111, 124)',

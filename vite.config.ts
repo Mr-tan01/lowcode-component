@@ -1,6 +1,6 @@
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
-import { pathResolve } from 'lowcode-share'
+import { pathResolve } from 'lowcode-share/es/cli'
 
 // https://vite.dev/config/
 export default defineConfig({
@@ -20,9 +20,10 @@ export default defineConfig({
   css: {
     preprocessorOptions: {
       scss: {
+        implementation: 'sass',
         api: 'modern-compiler'
-      }
-    }
+      },
+    },
   },
   build: {
     outDir: 'dist/lowcode-docx',

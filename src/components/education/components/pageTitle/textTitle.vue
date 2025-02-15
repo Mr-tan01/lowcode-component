@@ -8,7 +8,7 @@
 </template>
 <script lang="ts" setup>
 import { computed } from 'vue';
-import { overflowStr } from '../../common/utils/formate';
+import { overflowStr } from 'lowcode-share/es/share';
 
 const {
     text = '',

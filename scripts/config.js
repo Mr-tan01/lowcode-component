@@ -1,4 +1,4 @@
-import { pathResolve } from 'lowcode-share';
+import { pathResolve } from 'lowcode-share/es/cli/index.js';
 import { join } from 'path';
 
 /**

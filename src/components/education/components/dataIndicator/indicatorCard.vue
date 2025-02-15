@@ -24,7 +24,7 @@
 <script lang="ts" setup>
 import { computed, PropType } from 'vue';
 import { NNumberAnimation } from 'naive-ui/es/number-animation'
-import { bigNumber } from '@/components/education/common/utils/formate';
+import { bigNumber } from 'lowcode-share/es/share';
 import { LcTooltip } from '@/components/education/components/tooltip';
 
 const SIZE = {

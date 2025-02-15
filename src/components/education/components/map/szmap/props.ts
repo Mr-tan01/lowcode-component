@@ -5,6 +5,7 @@ import { type EducationMarkProps } from "@/components/education/components/mark/
 
 export type Levels = Partial<Record<string, {
     range: number[];
+    scale?: number;
     stop: ({
         'stop-color': string;
         'stop-opacity': number,

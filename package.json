@@ -14,10 +14,12 @@
     "dist"
   ],
   "dependencies": {
-    "lowcode-share": "link:F:/work/goview/tosts/lowcode-share",
-    "mmj-code-lib": "git+http://code.siteshun.com:800/front-component/STS/mmj-code-lib.git#lowcode-0.1.0"
+    "lowcode-share": "git+http://code.siteshun.com:800/front-component/lowcode-sview/lowcode-share.git#develop",
+    "mmj-code-lib": "link:F:/work/sts-packages/mmj-code-lib"
   },
   "devDependencies": {
+    "@mmj-code-lib/scripts": "git+http://code.siteshun.com:800/front-component/STS/mmj-code-lib.git#scripts",
+    "@types/lodash-es": "^4.17.12",
     "@types/node": "^22.10.7",
     "@vicons/ionicons5": "^0.13.0",
     "@vitejs/plugin-vue": "^5.2.1",

@@ -68,7 +68,15 @@ const blockList: Record<BlockName, Component> = {
 }
 
 function getMarkProp(key: BlockName) {
-    return (values[key]! ?? { value: 0, })
+    const markMate = (values[key]! ?? { value: 0, });
+    const currentLevelIndex = levelsList.value.findIndex(([_, item]) => markMate.value >= item?.range?.[0]! && markMate.value <= item?.range?.[1]!);
+    const [_type, currentLevelConf] = levelsList.value[currentLevelIndex] ?? [];
+    return {
+        ...markMate,
+        style: {
+            '--level-scale': currentLevelConf?.scale ?? 1,
+        }
+    }
 }
 
 const blockClass = computed(() => {
@@ -117,9 +125,10 @@ function getBlockProperties(key: BlockName) {
             position: absolute;
             top: 50%;
             left: 50%;
-            transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%) scale(var(--level-scale, 1));
             will-change: transform;
             pointer-events: auto;
+            transition: transform 0.2s;
 
             &.mark-guangming {
                 left: 20%;
