@@ -1,7 +1,7 @@
 {
   "name": "lowcode-component",
   "private": true,
-  "version": "0.1.0-alpha.0.0.2",
+  "version": "0.1.0-alpha.0.0.3",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -14,8 +14,9 @@
     "dist"
   ],
   "dependencies": {
+    "@mmj-code-lib/lowcode": "link:F:/work/sts-packages/mmj-code-lib",
     "lowcode-share": "git+http://code.siteshun.com:800/front-component/lowcode-sview/lowcode-share.git#develop",
-    "mmj-code-lib": "link:F:/work/sts-packages/mmj-code-lib"
+    "resize-observer-polyfill": "^1.5.1"
   },
   "devDependencies": {
     "@mmj-code-lib/scripts": "git+http://code.siteshun.com:800/front-component/STS/mmj-code-lib.git#scripts",

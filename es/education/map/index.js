@@ -2,7 +2,7 @@
  import './css/index.css';
  // # end css mapping css/index.css 
 
-import { openBlock as u, createElementBlock as f, createElementVNode as t, Fragment as $, defineComponent as B, createVNode as m, computed as G, toDisplayString as y, unref as g, normalizeClass as T1, normalizeStyle as D1, renderSlot as P1, createCommentVNode as q, mergeDefaults as z1, renderList as D, mergeProps as R, resolveDynamicComponent as U1, createBlock as E1, normalizeProps as N1, guardReactiveProps as Z1 } from "vue";
+import { openBlock as u, createElementBlock as f, createElementVNode as t, Fragment as A, defineComponent as I, createVNode as O, computed as j, toDisplayString as g, unref as _, normalizeClass as T1, normalizeStyle as D1, renderSlot as P1, createCommentVNode as q, mergeDefaults as z1, renderList as D, mergeProps as R, resolveDynamicComponent as U1, createBlock as E1, normalizeProps as N1, guardReactiveProps as Z1 } from "vue";
 import { _ as R1 } from "./assets/mark-rect-CXWu9vet.js";
 import { _ as H1 } from "./assets/mark-D-ktqeQX.js";
 import { _ as V1 } from "./assets/mark2-rect-CB64moIF.js";
@@ -190,9 +190,9 @@ function o3(C, e) {
     )
   ]));
 }
-const i3 = /* @__PURE__ */ c(r3, [["render", o3]]), a3 = {}, L3 = { id: "福田" };
-function l3(C, e) {
-  return u(), f("g", L3, e[0] || (e[0] = [
+const i3 = /* @__PURE__ */ c(r3, [["render", o3]]), a3 = {}, l3 = { id: "福田" };
+function L3(C, e) {
+  return u(), f("g", l3, e[0] || (e[0] = [
     t(
       "use",
       {
@@ -241,7 +241,7 @@ function l3(C, e) {
     )
   ]));
 }
-const s3 = /* @__PURE__ */ c(a3, [["render", l3]]), u3 = {}, f3 = { id: "光明" };
+const s3 = /* @__PURE__ */ c(a3, [["render", L3]]), u3 = {}, f3 = { id: "光明" };
 function d3(C, e) {
   return u(), f("g", f3, e[0] || (e[0] = [
     t(
@@ -601,7 +601,7 @@ function D3(C, e) {
 const P3 = /* @__PURE__ */ c(M3, [["render", D3]]), z3 = {};
 function U3(C, e) {
   return u(), f(
-    $,
+    A,
     null,
     [
       e[0] || (e[0] = t(
@@ -681,11 +681,11 @@ function U3(C, e) {
     /* STABLE_FRAGMENT */
   );
 }
-const E3 = /* @__PURE__ */ c(z3, [["render", U3]]), N3 = /* @__PURE__ */ B({
+const E3 = /* @__PURE__ */ c(z3, [["render", U3]]), N3 = /* @__PURE__ */ I({
   __name: "defines",
   setup(C) {
     return (e, r) => (u(), f("defs", null, [
-      m(E3),
+      O(E3),
       r[0] || (r[0] = t(
         "linearGradient",
         {
@@ -2091,37 +2091,37 @@ function W3(C) {
 function Q3(C) {
   return this.__data__.has(C);
 }
-var g1 = typeof global == "object" && global && global.Object === Object && global, C2 = typeof self == "object" && self && self.Object === Object && self, I = g1 || C2 || Function("return this")(), P = I.Symbol, w1 = Object.prototype, t2 = w1.hasOwnProperty, e2 = w1.toString, F = P ? P.toStringTag : void 0;
+var g1 = typeof global == "object" && global && global.Object === Object && global, C2 = typeof self == "object" && self && self.Object === Object && self, k = g1 || C2 || Function("return this")(), P = k.Symbol, w1 = Object.prototype, t2 = w1.hasOwnProperty, e2 = w1.toString, $ = P ? P.toStringTag : void 0;
 function r2(C) {
-  var e = t2.call(C, F), r = C[F];
+  var e = t2.call(C, $), r = C[$];
   try {
-    C[F] = void 0;
+    C[$] = void 0;
     var n = !0;
   } catch {
   }
   var i = e2.call(C);
-  return n && (e ? C[F] = r : delete C[F]), i;
+  return n && (e ? C[$] = r : delete C[$]), i;
 }
 var n2 = Object.prototype, o2 = n2.toString;
 function i2(C) {
   return o2.call(C);
 }
-var a2 = "[object Null]", L2 = "[object Undefined]", n1 = P ? P.toStringTag : void 0;
+var a2 = "[object Null]", l2 = "[object Undefined]", n1 = P ? P.toStringTag : void 0;
 function N(C) {
-  return C == null ? C === void 0 ? L2 : a2 : n1 && n1 in Object(C) ? r2(C) : i2(C);
+  return C == null ? C === void 0 ? l2 : a2 : n1 && n1 in Object(C) ? r2(C) : i2(C);
 }
-function b(C) {
+function B(C) {
   var e = typeof C;
   return C != null && (e == "object" || e == "function");
 }
-var l2 = "[object AsyncFunction]", s2 = "[object Function]", u2 = "[object GeneratorFunction]", f2 = "[object Proxy]";
+var L2 = "[object AsyncFunction]", s2 = "[object Function]", u2 = "[object GeneratorFunction]", f2 = "[object Proxy]";
 function W(C) {
-  if (!b(C))
+  if (!B(C))
     return !1;
   var e = N(C);
-  return e == s2 || e == u2 || e == l2 || e == f2;
+  return e == s2 || e == u2 || e == L2 || e == f2;
 }
-var H = I["__core-js_shared__"], o1 = function() {
+var H = k["__core-js_shared__"], o1 = function() {
   var C = /[^.]+$/.exec(H && H.keys && H.keys.IE_PROTO || "");
   return C ? "Symbol(src)_1." + C : "";
 }();
@@ -2146,7 +2146,7 @@ var y2 = /[\\^$.*+?()[\]{}|]/g, g2 = /^\[object .+?Constructor\]$/, w2 = Functio
   "^" + x2.call(v2).replace(y2, "\\$&").replace(/hasOwnProperty|(function).*?(?=\\\()| for .+?(?=\\\])/g, "$1.*?") + "$"
 );
 function O2(C) {
-  if (!b(C) || d2(C))
+  if (!B(C) || d2(C))
     return !1;
   var e = W(C) ? m2 : g2;
   return e.test(c2(C));
@@ -2158,9 +2158,9 @@ function Q(C, e) {
   var r = b2(C, e);
   return O2(r) ? r : void 0;
 }
-var _1 = Q(I, "Map"), j = Q(Object, "create");
+var _1 = Q(k, "Map"), M = Q(Object, "create");
 function B2() {
-  this.__data__ = j ? j(null) : {}, this.size = 0;
+  this.__data__ = M ? M(null) : {}, this.size = 0;
 }
 function I2(C) {
   var e = this.has(C) && delete this.__data__[C];
@@ -2169,7 +2169,7 @@ function I2(C) {
 var k2 = "__lodash_hash_undefined__", S2 = Object.prototype, F2 = S2.hasOwnProperty;
 function $2(C) {
   var e = this.__data__;
-  if (j) {
+  if (M) {
     var r = e[C];
     return r === k2 ? void 0 : r;
   }
@@ -2178,30 +2178,30 @@ function $2(C) {
 var A2 = Object.prototype, G2 = A2.hasOwnProperty;
 function j2(C) {
   var e = this.__data__;
-  return j ? e[C] !== void 0 : G2.call(e, C);
+  return M ? e[C] !== void 0 : G2.call(e, C);
 }
 var M2 = "__lodash_hash_undefined__";
 function T2(C, e) {
   var r = this.__data__;
-  return this.size += this.has(C) ? 0 : 1, r[C] = j && e === void 0 ? M2 : e, this;
+  return this.size += this.has(C) ? 0 : 1, r[C] = M && e === void 0 ? M2 : e, this;
 }
-function O(C) {
+function b(C) {
   var e = -1, r = C == null ? 0 : C.length;
   for (this.clear(); ++e < r; ) {
     var n = C[e];
     this.set(n[0], n[1]);
   }
 }
-O.prototype.clear = B2;
-O.prototype.delete = I2;
-O.prototype.get = $2;
-O.prototype.has = j2;
-O.prototype.set = T2;
+b.prototype.clear = B2;
+b.prototype.delete = I2;
+b.prototype.get = $2;
+b.prototype.has = j2;
+b.prototype.set = T2;
 function D2() {
   this.size = 0, this.__data__ = {
-    hash: new O(),
+    hash: new b(),
     map: new (_1 || v)(),
-    string: new O()
+    string: new b()
   };
 }
 function P2(C) {
@@ -2226,18 +2226,18 @@ function N2(C, e) {
   var r = Z(this, C), n = r.size;
   return r.set(C, e), this.size += r.size == n ? 0 : 1, this;
 }
-function k(C) {
+function S(C) {
   var e = -1, r = C == null ? 0 : C.length;
   for (this.clear(); ++e < r; ) {
     var n = C[e];
     this.set(n[0], n[1]);
   }
 }
-k.prototype.clear = D2;
-k.prototype.delete = z2;
-k.prototype.get = U2;
-k.prototype.has = E2;
-k.prototype.set = N2;
+S.prototype.clear = D2;
+S.prototype.delete = z2;
+S.prototype.get = U2;
+S.prototype.has = E2;
+S.prototype.set = N2;
 var Z2 = 200;
 function R2(C, e) {
   var r = this.__data__;
@@ -2245,19 +2245,19 @@ function R2(C, e) {
     var n = r.__data__;
     if (!_1 || n.length < Z2 - 1)
       return n.push([C, e]), this.size = ++r.size, this;
-    r = this.__data__ = new k(n);
+    r = this.__data__ = new S(n);
   }
   return r.set(C, e), this.size = r.size, this;
 }
-function S(C) {
+function F(C) {
   var e = this.__data__ = new v(C);
   this.size = e.size;
 }
-S.prototype.clear = Y3;
-S.prototype.delete = J3;
-S.prototype.get = W3;
-S.prototype.has = Q3;
-S.prototype.set = R2;
+F.prototype.clear = Y3;
+F.prototype.delete = J3;
+F.prototype.get = W3;
+F.prototype.has = Q3;
+F.prototype.set = R2;
 var z = function() {
   try {
     var C = Q(Object, "defineProperty");
@@ -2286,15 +2286,15 @@ function H2(C) {
     return e;
   };
 }
-var V2 = H2(), x1 = typeof exports == "object" && exports && !exports.nodeType && exports, i1 = x1 && typeof module == "object" && module && !module.nodeType && module, q2 = i1 && i1.exports === x1, a1 = q2 ? I.Buffer : void 0;
+var V2 = H2(), x1 = typeof exports == "object" && exports && !exports.nodeType && exports, i1 = x1 && typeof module == "object" && module && !module.nodeType && module, q2 = i1 && i1.exports === x1, a1 = q2 ? k.Buffer : void 0;
 a1 && a1.allocUnsafe;
 function K2(C, e) {
   return C.slice();
 }
-var L1 = I.Uint8Array;
+var l1 = k.Uint8Array;
 function X2(C) {
   var e = new C.constructor(C.byteLength);
-  return new L1(e).set(new L1(C)), e;
+  return new l1(e).set(new l1(C)), e;
 }
 function Y2(C, e) {
   var r = X2(C.buffer);
@@ -2306,14 +2306,14 @@ function J2(C, e) {
     e[r] = C[r];
   return e;
 }
-var l1 = Object.create, W2 = /* @__PURE__ */ function() {
+var L1 = Object.create, W2 = /* @__PURE__ */ function() {
   function C() {
   }
   return function(e) {
-    if (!b(e))
+    if (!B(e))
       return {};
-    if (l1)
-      return l1(e);
+    if (L1)
+      return L1(e);
     C.prototype = e;
     var r = new C();
     return C.prototype = void 0, r;
@@ -2332,17 +2332,17 @@ function m1(C) {
 function t4(C) {
   return typeof C.constructor == "function" && !m1(C) ? W2(v1(C)) : {};
 }
-function M(C) {
+function T(C) {
   return C != null && typeof C == "object";
 }
 var e4 = "[object Arguments]";
 function s1(C) {
-  return M(C) && N(C) == e4;
+  return T(C) && N(C) == e4;
 }
 var O1 = Object.prototype, r4 = O1.hasOwnProperty, n4 = O1.propertyIsEnumerable, X = s1(/* @__PURE__ */ function() {
   return arguments;
 }()) ? s1 : function(C) {
-  return M(C) && r4.call(C, "callee") && !n4.call(C, "callee");
+  return T(C) && r4.call(C, "callee") && !n4.call(C, "callee");
 }, Y = Array.isArray, o4 = 9007199254740991;
 function b1(C) {
   return typeof C == "number" && C > -1 && C % 1 == 0 && C <= o4;
@@ -2351,14 +2351,14 @@ function t1(C) {
   return C != null && b1(C.length) && !W(C);
 }
 function i4(C) {
-  return M(C) && t1(C);
+  return T(C) && t1(C);
 }
 function a4() {
   return !1;
 }
-var B1 = typeof exports == "object" && exports && !exports.nodeType && exports, u1 = B1 && typeof module == "object" && module && !module.nodeType && module, L4 = u1 && u1.exports === B1, f1 = L4 ? I.Buffer : void 0, l4 = f1 ? f1.isBuffer : void 0, I1 = l4 || a4, s4 = "[object Object]", u4 = Function.prototype, f4 = Object.prototype, k1 = u4.toString, d4 = f4.hasOwnProperty, p4 = k1.call(Object);
+var B1 = typeof exports == "object" && exports && !exports.nodeType && exports, u1 = B1 && typeof module == "object" && module && !module.nodeType && module, l4 = u1 && u1.exports === B1, f1 = l4 ? k.Buffer : void 0, L4 = f1 ? f1.isBuffer : void 0, I1 = L4 || a4, s4 = "[object Object]", u4 = Function.prototype, f4 = Object.prototype, k1 = u4.toString, d4 = f4.hasOwnProperty, p4 = k1.call(Object);
 function h4(C) {
-  if (!M(C) || N(C) != s4)
+  if (!T(C) || N(C) != s4)
     return !1;
   var e = v1(C);
   if (e === null)
@@ -2366,20 +2366,20 @@ function h4(C) {
   var r = d4.call(e, "constructor") && e.constructor;
   return typeof r == "function" && r instanceof r && k1.call(r) == p4;
 }
-var c4 = "[object Arguments]", y4 = "[object Array]", g4 = "[object Boolean]", w4 = "[object Date]", _4 = "[object Error]", x4 = "[object Function]", v4 = "[object Map]", m4 = "[object Number]", O4 = "[object Object]", b4 = "[object RegExp]", B4 = "[object Set]", I4 = "[object String]", k4 = "[object WeakMap]", S4 = "[object ArrayBuffer]", F4 = "[object DataView]", $4 = "[object Float32Array]", A4 = "[object Float64Array]", G4 = "[object Int8Array]", j4 = "[object Int16Array]", M4 = "[object Int32Array]", T4 = "[object Uint8Array]", D4 = "[object Uint8ClampedArray]", P4 = "[object Uint16Array]", z4 = "[object Uint32Array]", d = {};
-d[$4] = d[A4] = d[G4] = d[j4] = d[M4] = d[T4] = d[D4] = d[P4] = d[z4] = !0;
-d[c4] = d[y4] = d[S4] = d[g4] = d[F4] = d[w4] = d[_4] = d[x4] = d[v4] = d[m4] = d[O4] = d[b4] = d[B4] = d[I4] = d[k4] = !1;
+var c4 = "[object Arguments]", y4 = "[object Array]", g4 = "[object Boolean]", w4 = "[object Date]", _4 = "[object Error]", x4 = "[object Function]", v4 = "[object Map]", m4 = "[object Number]", O4 = "[object Object]", b4 = "[object RegExp]", B4 = "[object Set]", I4 = "[object String]", k4 = "[object WeakMap]", S4 = "[object ArrayBuffer]", F4 = "[object DataView]", $4 = "[object Float32Array]", A4 = "[object Float64Array]", G4 = "[object Int8Array]", j4 = "[object Int16Array]", M4 = "[object Int32Array]", T4 = "[object Uint8Array]", D4 = "[object Uint8ClampedArray]", P4 = "[object Uint16Array]", z4 = "[object Uint32Array]", h = {};
+h[$4] = h[A4] = h[G4] = h[j4] = h[M4] = h[T4] = h[D4] = h[P4] = h[z4] = !0;
+h[c4] = h[y4] = h[S4] = h[g4] = h[F4] = h[w4] = h[_4] = h[x4] = h[v4] = h[m4] = h[O4] = h[b4] = h[B4] = h[I4] = h[k4] = !1;
 function U4(C) {
-  return M(C) && b1(C.length) && !!d[N(C)];
+  return T(C) && b1(C.length) && !!h[N(C)];
 }
 function E4(C) {
   return function(e) {
     return C(e);
   };
 }
-var S1 = typeof exports == "object" && exports && !exports.nodeType && exports, A = S1 && typeof module == "object" && module && !module.nodeType && module, N4 = A && A.exports === S1, V = N4 && g1.process, d1 = function() {
+var S1 = typeof exports == "object" && exports && !exports.nodeType && exports, G = S1 && typeof module == "object" && module && !module.nodeType && module, N4 = G && G.exports === S1, V = N4 && g1.process, d1 = function() {
   try {
-    var C = A && A.require && A.require("util").types;
+    var C = G && G.require && G.require("util").types;
     return C || V && V.binding && V.binding("util");
   } catch {
   }
@@ -2414,12 +2414,12 @@ function $1(C, e) {
 }
 function Y4(C, e) {
   var r = Y(C), n = !r && X(C), i = !r && !n && I1(C), s = !r && !n && !i && F1(C), a = r || n || i || s, o = a ? q4(C.length, String) : [], l = o.length;
-  for (var p in C)
+  for (var d in C)
     a && // Safari 9 has enumerable `arguments.length` in strict mode.
-    (p == "length" || // Node.js 0.10 has enumerable non-index properties on buffers.
-    i && (p == "offset" || p == "parent") || // PhantomJS 2 has enumerable non-index properties on typed arrays.
-    s && (p == "buffer" || p == "byteLength" || p == "byteOffset") || // Skip index properties.
-    $1(p, l)) || o.push(p);
+    (d == "length" || // Node.js 0.10 has enumerable non-index properties on buffers.
+    i && (d == "offset" || d == "parent") || // PhantomJS 2 has enumerable non-index properties on typed arrays.
+    s && (d == "buffer" || d == "byteLength" || d == "byteOffset") || // Skip index properties.
+    $1(d, l)) || o.push(d);
   return o;
 }
 function J4(C) {
@@ -2431,7 +2431,7 @@ function J4(C) {
 }
 var W4 = Object.prototype, Q4 = W4.hasOwnProperty;
 function C5(C) {
-  if (!b(C))
+  if (!B(C))
     return J4(C);
   var e = m1(C), r = [];
   for (var n in C)
@@ -2445,21 +2445,21 @@ function t5(C) {
   return V4(C, A1(C));
 }
 function e5(C, e, r, n, i, s, a) {
-  var o = J(C, r), l = J(e, r), p = a.get(l);
-  if (p) {
-    K(C, r, p);
+  var o = J(C, r), l = J(e, r), d = a.get(l);
+  if (d) {
+    K(C, r, d);
     return;
   }
-  var h = s ? s(o, l, r + "", C, e, a) : void 0, w = h === void 0;
+  var p = s ? s(o, l, r + "", C, e, a) : void 0, w = p === void 0;
   if (w) {
-    var _ = Y(l), T = !_ && I1(l), x = !_ && !T && F1(l);
-    h = l, _ || T || x ? Y(o) ? h = o : i4(o) ? h = J2(o) : T ? (w = !1, h = K2(l)) : x ? (w = !1, h = Y2(l)) : h = [] : h4(l) || X(l) ? (h = o, X(o) ? h = t5(o) : (!b(o) || W(o)) && (h = t4(l))) : w = !1;
+    var y = Y(l), m = !y && I1(l), x = !y && !m && F1(l);
+    p = l, y || m || x ? Y(o) ? p = o : i4(o) ? p = J2(o) : m ? (w = !1, p = K2(l)) : x ? (w = !1, p = Y2(l)) : p = [] : h4(l) || X(l) ? (p = o, X(o) ? p = t5(o) : (!B(o) || W(o)) && (p = t4(l))) : w = !1;
   }
-  w && (a.set(l, h), i(h, l, n, s, a), a.delete(l)), K(C, r, h);
+  w && (a.set(l, p), i(p, l, n, s, a), a.delete(l)), K(C, r, p);
 }
 function G1(C, e, r, n, i) {
   C !== e && V2(e, function(s, a) {
-    if (i || (i = new S()), b(s))
+    if (i || (i = new F()), B(s))
       e5(C, e, a, r, G1, n, i);
     else {
       var o = n ? n(J(C, a), s, a + "", C, e, i) : void 0;
@@ -2506,11 +2506,11 @@ var i5 = z ? function(C, e) {
     value: o5(e),
     writable: !0
   });
-} : j1, a5 = 800, L5 = 16, l5 = Date.now;
+} : j1, a5 = 800, l5 = 16, L5 = Date.now;
 function s5(C) {
   var e = 0, r = 0;
   return function() {
-    var n = l5(), i = L5 - (n - r);
+    var n = L5(), i = l5 - (n - r);
     if (r = n, i > 0) {
       if (++e >= a5)
         return arguments[0];
@@ -2524,7 +2524,7 @@ function f5(C, e) {
   return u5(n5(C, e, j1), C + "");
 }
 function d5(C, e, r) {
-  if (!b(r))
+  if (!B(r))
     return !1;
   var n = typeof e;
   return (n == "number" ? t1(r) && $1(e, r.length) : n == "string" && e in r) ? U(r[e], C) : !1;
@@ -2569,6 +2569,7 @@ const L = {
 }, c5 = {
   warning: {
     range: [0, 100],
+    scale: 1.1,
     stop: [
       {
         "stop-color": "rgb(225, 188, 75)",
@@ -2584,6 +2585,7 @@ const L = {
   },
   series: {
     range: [101, 1 / 0],
+    scale: 1.2,
     stop: [
       {
         "stop-color": "rgb(238, 111, 124)",
@@ -2682,20 +2684,20 @@ const L = {
 }, z5 = {
   x: "690",
   y: "-48"
-}, U5 = /* @__PURE__ */ B({
+}, U5 = /* @__PURE__ */ I({
   __name: "labels",
   props: {
     labels: { default: () => ({}) },
     values: { default: () => ({}) }
   },
   setup(C) {
-    const e = G(() => M1({}, h5, C.labels));
+    const e = j(() => M1({}, h5, C.labels));
     return (r, n) => (u(), f("g", y5, [
       t("text", g5, [
         t(
           "tspan",
           w5,
-          y(e.value[g(L).南山]),
+          g(e.value[_(L).南山]),
           1
           /* TEXT */
         )
@@ -2704,7 +2706,7 @@ const L = {
         t(
           "tspan",
           x5,
-          y(e.value[g(L).福田]),
+          g(e.value[_(L).福田]),
           1
           /* TEXT */
         )
@@ -2713,7 +2715,7 @@ const L = {
         t(
           "tspan",
           m5,
-          y(e.value[g(L).罗湖]),
+          g(e.value[_(L).罗湖]),
           1
           /* TEXT */
         )
@@ -2722,7 +2724,7 @@ const L = {
         t(
           "tspan",
           b5,
-          y(e.value[g(L).盐田]),
+          g(e.value[_(L).盐田]),
           1
           /* TEXT */
         )
@@ -2731,7 +2733,7 @@ const L = {
         t(
           "tspan",
           I5,
-          y(e.value[g(L).宝安]),
+          g(e.value[_(L).宝安]),
           1
           /* TEXT */
         )
@@ -2740,7 +2742,7 @@ const L = {
         t(
           "tspan",
           S5,
-          y(e.value[g(L).光明]),
+          g(e.value[_(L).光明]),
           1
           /* TEXT */
         )
@@ -2749,7 +2751,7 @@ const L = {
         t(
           "tspan",
           $5,
-          y(e.value[g(L).龙岗]),
+          g(e.value[_(L).龙岗]),
           1
           /* TEXT */
         )
@@ -2758,7 +2760,7 @@ const L = {
         t(
           "tspan",
           G5,
-          y(e.value[g(L).坪山]),
+          g(e.value[_(L).坪山]),
           1
           /* TEXT */
         )
@@ -2767,7 +2769,7 @@ const L = {
         t(
           "tspan",
           M5,
-          y(e.value[g(L).大鹏新区]),
+          g(e.value[_(L).大鹏新区]),
           1
           /* TEXT */
         )
@@ -2776,7 +2778,7 @@ const L = {
         t(
           "tspan",
           D5,
-          y(e.value[g(L).龙华]),
+          g(e.value[_(L).龙华]),
           1
           /* TEXT */
         )
@@ -2785,14 +2787,14 @@ const L = {
         t(
           "tspan",
           z5,
-          y(e.value[g(L).深汕合作区]),
+          g(e.value[_(L).深汕合作区]),
           1
           /* TEXT */
         )
       ])
     ]));
   }
-}), E5 = /* @__PURE__ */ c(U5, [["__scopeId", "data-v-14651451"]]), N5 = { class: "lc-mark__wrapper__image" }, Z5 = ["src"], R5 = { class: "lc-mark__wrapper__image__label" }, H5 = { class: "lc-mark__wrapper__rect" }, V5 = { class: "lc-mark__wrapper__rect--value" }, q5 = { class: "lc-mark__wrapper__rect--unit" }, K5 = /* @__PURE__ */ B({
+}), E5 = /* @__PURE__ */ c(U5, [["__scopeId", "data-v-14651451"]]), N5 = { class: "lc-mark__wrapper__image" }, Z5 = ["src"], R5 = { class: "lc-mark__wrapper__image__label" }, H5 = { class: "lc-mark__wrapper__rect" }, V5 = { class: "lc-mark__wrapper__rect--value" }, q5 = { class: "lc-mark__wrapper__rect--unit" }, K5 = /* @__PURE__ */ I({
   __name: "mark",
   props: {
     value: { default: 0 },
@@ -2807,7 +2809,7 @@ const L = {
   },
   emits: ["mark:click"],
   setup(C, { emit: e }) {
-    const r = /* @__PURE__ */ Object.assign({ "./images/mark-rect.png": R1, "./images/mark.png": H1, "./images/mark2-rect.png": V1, "./images/mark2.png": q1, "./images/normal.png": K1 }), n = e, i = G(() => C.iconSrc || r[`./images/${C.iconName}.png`]), s = G(() => ({
+    const r = /* @__PURE__ */ Object.assign({ "./images/mark-rect.png": R1, "./images/mark.png": H1, "./images/mark2-rect.png": V1, "./images/mark2.png": q1, "./images/normal.png": K1 }), n = e, i = j(() => C.iconSrc || r[`./images/${C.iconName}.png`]), s = j(() => ({
       "--mark-icon": `url(${r[`./images/${C.iconName}.png`]})`,
       "--mark-icon-rect": `url(${r[`./images/${C.iconName === "normal" ? "mark2" : C.iconName}-rect.png`]})`
     }));
@@ -2840,7 +2842,7 @@ const L = {
             t(
               "span",
               R5,
-              y(o.label),
+              g(o.label),
               1
               /* TEXT */
             )
@@ -2850,14 +2852,14 @@ const L = {
               t(
                 "span",
                 V5,
-                y(o.value),
+                g(o.value),
                 1
                 /* TEXT */
               ),
               t(
                 "span",
                 q5,
-                y(o.unit),
+                g(o.unit),
                 1
                 /* TEXT */
               )
@@ -2888,7 +2890,7 @@ const L = {
 }, e6 = {
   key: 0,
   class: "lc-szmap-raw__mark-group"
-}, r6 = /* @__PURE__ */ B({
+}, r6 = /* @__PURE__ */ I({
   __name: "rawMap",
   props: /* @__PURE__ */ z1(y1, {
     showLabel: !0,
@@ -2911,39 +2913,48 @@ const L = {
       [L.深汕合作区]: W1
     };
     function r(a) {
-      return C.values[a] ?? { value: 0 };
+      const o = C.values[a] ?? { value: 0 }, l = i.value.findIndex(([w, y]) => {
+        var m, x;
+        return o.value >= ((m = y == null ? void 0 : y.range) == null ? void 0 : m[0]) && o.value <= ((x = y == null ? void 0 : y.range) == null ? void 0 : x[1]);
+      }), [d, p] = i.value[l] ?? [];
+      return {
+        ...o,
+        style: {
+          "--level-scale": (p == null ? void 0 : p.scale) ?? 1
+        }
+      };
     }
-    const n = G(() => ["lc-szmap-raw__block", `visible--${C.fillModel}`]), i = G(() => Object.entries(M1({}, C.levels, c5)));
+    const n = j(() => ["lc-szmap-raw__block", `visible--${C.fillModel}`]), i = j(() => Object.entries(M1({}, C.levels, c5)));
     function s(a) {
       const o = C.values[a];
       if (!o) return {};
-      const l = i.value.findIndex(([T, x]) => {
+      const l = i.value.findIndex(([m, x]) => {
         var e1, r1;
         return o.value >= ((e1 = x == null ? void 0 : x.range) == null ? void 0 : e1[0]) && o.value <= ((r1 = x == null ? void 0 : x.range) == null ? void 0 : r1[1]);
-      }), [p, h] = i.value[l] ?? [];
-      let w = [], _ = {};
-      return h && p && (w.push("float-active"), typeof h.stop == "string" ? _["--linear-gradient-fill"] = h.stop : _["--linear-gradient-fill"] = `url(#linearGradient-float-${p})`), {
+      }), [d, p] = i.value[l] ?? [];
+      let w = [], y = {};
+      return p && d && (w.push("float-active"), typeof p.stop == "string" ? y["--linear-gradient-fill"] = p.stop : y["--linear-gradient-fill"] = `url(#linearGradient-float-${d})`), {
         class: w,
-        style: _
+        style: y
       };
     }
     return (a, o) => (u(), f("div", Y5, [
       (u(), f("svg", J5, [
-        m(N3),
+        O(N3),
         t("defs", null, [
           (u(!0), f(
-            $,
+            A,
             null,
-            D(i.value, ([l, p], h) => (u(), f("linearGradient", {
-              key: h,
+            D(i.value, ([l, d], p) => (u(), f("linearGradient", {
+              key: p,
               id: `linearGradient-float-${l}`
             }, [
               (u(!0), f(
-                $,
+                A,
                 null,
-                D(p == null ? void 0 : p.stop, (w, _) => (u(), f(
+                D(d == null ? void 0 : d.stop, (w, y) => (u(), f(
                   "stop",
-                  R({ ref_for: !0 }, typeof w == "object" && !Array.isArray(w) ? w : {}, { key: _ }),
+                  R({ ref_for: !0 }, typeof w == "object" && !Array.isArray(w) ? w : {}, { key: y }),
                   null,
                   16
                   /* FULL_PROPS */
@@ -2960,13 +2971,13 @@ const L = {
           t("g", C6, [
             t("g", t6, [
               (u(), f(
-                $,
+                A,
                 null,
-                D(e, (l, p, h) => m(U1(l), R({
+                D(e, (l, d, p) => O(U1(l), R({
                   class: n.value,
-                  key: h,
+                  key: p,
                   ref_for: !0
-                }, s(p)), null, 16, ["class"])),
+                }, s(d)), null, 16, ["class"])),
                 64
                 /* STABLE_FRAGMENT */
               )),
@@ -2981,31 +2992,31 @@ const L = {
       ])),
       a.showLabel ? (u(), f("div", e6, [
         (u(), f(
-          $,
+          A,
           null,
-          D(e, (l, p) => m(g(X5), R({
-            key: p,
-            class: ["lc-szmap-raw__mark-group--item", `mark-${p}`],
+          D(e, (l, d) => O(_(X5), R({
+            key: d,
+            class: ["lc-szmap-raw__mark-group--item", `mark-${d}`],
             ref_for: !0
-          }, r(p), { size: "small" }), null, 16, ["class"])),
+          }, r(d), { size: "small" }), null, 16, ["class"])),
           64
           /* STABLE_FRAGMENT */
         ))
       ])) : q("v-if", !0)
     ]));
   }
-}), c1 = /* @__PURE__ */ c(r6, [["__scopeId", "data-v-b199540d"]]), n6 = { class: "lc-szmap" }, o6 = /* @__PURE__ */ B({
+}), c1 = /* @__PURE__ */ c(r6, [["__scopeId", "data-v-03d438d0"]]), n6 = { class: "lc-szmap" }, o6 = /* @__PURE__ */ I({
   __name: "szmap",
   props: y1,
   setup(C) {
     return (e, r) => (u(), f("div", n6, [
-      m(c1, {
+      O(c1, {
         class: "back-block-map level-map",
         "show-label": !1,
         levels: e.levels,
         values: e.values
       }, null, 8, ["levels", "values"]),
-      m(c1, {
+      O(c1, {
         class: "float-block-map level-map",
         "fill-model": "hover",
         "show-label": !0,
@@ -3014,12 +3025,12 @@ const L = {
       }, null, 8, ["levels", "values"])
     ]));
   }
-}), i6 = /* @__PURE__ */ c(o6, [["__scopeId", "data-v-46647964"]]), a6 = { class: "lc-map" }, L6 = /* @__PURE__ */ B({
+}), i6 = /* @__PURE__ */ c(o6, [["__scopeId", "data-v-46647964"]]), a6 = { class: "lc-map" }, l6 = /* @__PURE__ */ I({
   __name: "map",
   setup(C) {
     return (e, r) => (u(), f("div", a6, [
-      m(
-        g(i6),
+      O(
+        _(i6),
         N1(Z1(e.$attrs)),
         null,
         16
@@ -3027,7 +3038,7 @@ const L = {
       )
     ]));
   }
-}), h6 = /* @__PURE__ */ c(L6, [["__scopeId", "data-v-060491e4"]]);
+}), h6 = /* @__PURE__ */ c(l6, [["__scopeId", "data-v-060491e4"]]);
 export {
   h6 as LcMap,
   c1 as SzRawMap,

@@ -8,12 +8,15 @@ importers:
 
   .:
     dependencies:
+      '@mmj-code-lib/lowcode':
+        specifier: link:F:/work/sts-packages/mmj-code-lib
+        version: link:../../../sts-packages/mmj-code-lib
       lowcode-share:
         specifier: git+http://code.siteshun.com:800/front-component/lowcode-sview/lowcode-share.git#develop
         version: git+http://code.siteshun.com:800/front-component/lowcode-sview/lowcode-share.git#c87b8278195deefb7a7917091087f49a907614da(typescript@5.6.3)
-      mmj-code-lib:
-        specifier: link:F:/work/sts-packages/mmj-code-lib
-        version: link:../../../sts-packages/mmj-code-lib
+      resize-observer-polyfill:
+        specifier: ^1.5.1
+        version: 1.5.1
     devDependencies:
       '@mmj-code-lib/scripts':
         specifier: git+http://code.siteshun.com:800/front-component/STS/mmj-code-lib.git#scripts
@@ -573,6 +576,9 @@ packages:
   postcss@8.5.1:
     resolution: {integrity: sha512-6oz2beyjc5VMn/KV1pPw8fliQkhBXrVn1Z3TVyqZxU8kZpzEKhBdmCFqI6ZbmGtamQvQGuU1sgPTk8ZrXDD7jQ==}
     engines: {node: ^10 || ^12 || >=14}
+
+  resize-observer-polyfill@1.5.1:
+    resolution: {integrity: sha512-LwZrotdHOo12nQuZlHEmtuXdqGoOD0OhaxopaNFxWzInpEgaLWoVuAMbTzixuosCx2nEG58ngzW3vxdWoxIgdg==}
 
   rollup@4.31.0:
     resolution: {integrity: sha512-9cCE8P4rZLx9+PjoyqHLs31V9a9Vpvfo4qNcs6JCiGWYhw2gijSetFbH6SSy1whnkgcefnUwr8sad7tgqsGvnw==}
@@ -1243,6 +1249,8 @@ snapshots:
       nanoid: 3.3.8
       picocolors: 1.1.1
       source-map-js: 1.2.1
+
+  resize-observer-polyfill@1.5.1: {}
 
   rollup@4.31.0:
     dependencies:

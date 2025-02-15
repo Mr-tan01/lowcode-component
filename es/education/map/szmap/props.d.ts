@@ -3,6 +3,7 @@ import { type BlockLableMapType, type BlockName } from "./const";
 import { type EducationMarkProps } from "@/components/education/components/mark/props";
 export type Levels = Partial<Record<string, {
     range: number[];
+    scale?: number;
     stop: ({
         'stop-color': string;
         'stop-opacity': number;

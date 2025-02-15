@@ -15,6 +15,7 @@ export default defineConfig({
         find: '~',
         replacement: pathResolve('.')
       },
+      
     ],
   },
   css: {

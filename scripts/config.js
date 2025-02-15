@@ -23,7 +23,6 @@ export default {
                 '@vueuse/core',
                 'echarts',
                 'lowcode-share',
-                'mmj-code-lib',
             ],
             output: {
                 globals: {

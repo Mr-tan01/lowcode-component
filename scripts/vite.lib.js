@@ -10,13 +10,13 @@ const modeListBase = '../src/components/education/components';
 // https://vite.dev/config/
 const options = merge({}, commonViteConfig, {
     build: {
-        outDir: '../es',
+        outDir: '../es/education',
     }
 });
 const esmComBuilder = new EsmComBuilder(modeListBase, options);
 const modeList = fs.readdirSync(modeListBase);
 
-modeList.forEach(mode => {
+['charts'].forEach(mode => {
     mode !== 'index.ts' ? esmComBuilder.executeBuild(mode).then(closeCallback) : null;
 });
 
