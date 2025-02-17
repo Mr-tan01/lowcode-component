@@ -26,11 +26,11 @@
         border-radius: 10px;
     }
     &::-webkit-scrollbar-thumb {
-        background: rgba(0, 127, 206, 0.50);
+        background: rgba(0, 127, 206, 0.1);
         border-radius: 10px;
     }
     &::-webkit-scrollbar-thumb:hover {
-        background: #555;
+        background: rgba(0, 127, 206, 0.5);;
     }
 
 

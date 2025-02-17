@@ -8,6 +8,7 @@
 <script lang="ts" setup>
 import { propsRaw } from './props';
 import RawMap from './rawMap.vue';
+
 const {
     levels,
     rotateX,
