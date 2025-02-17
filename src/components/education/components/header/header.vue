@@ -2,141 +2,90 @@
     <div class="lcc-header">
         <div class="lcc-header__wrapper">
             <div class="lcc-header__wrapper__navs">
-                <div class="lcc-header__wrapper__navs__item" v-for="(item, index) in renderNavData" :key="index">
-                    <n-popover trigger="hover" arrow-class="header-arrow-class" class="header-popover-class">
-                        <template #trigger>
-                            <a class="lcc-header__wrapper__navs__item__link" @click="jump(item)">
-                                {{ item.title }}
-                            </a>
-                        </template>
-                        <div class="lcc-header__wrapper__navs__drop" v-if="item.list?.length">
-                            <div class="lcc-header__wrapper__navs__drop__group" v-for="(el, key) in item.list" :key>
-                                <div class="lcc-header__wrapper__navs__drop__group__label">
-                                    <div class="lcc-header__wrapper__navs__drop__group__label--icon">
-                                        <img class="lcc-header__wrapper__navs__drop__group__label--icon--image"
-                                            src="./images/right-arrow.png" alt="">
-                                    </div>
-                                    <div class="lcc-header__wrapper__navs__drop__group__label--text">
-                                        {{ el.label }}
+                <LcCarouseBox :disabled="hideArrow" :list="listSource" :show-track="false" v-model:index="modelIndex" @change="carouseChange">
+                    <template #default="{ index, record, isActive }">
+                        <div class="lcc-header__wrapper__navs__item" :class="{
+                            'active': isActive,
+                        }">
+                            <n-popover trigger="hover" arrow-class="header-arrow-class" class="header-popover-class">
+                                <template #trigger>
+                                    <a class="lcc-header__wrapper__navs__item__link"
+                                        @click="jump(null, record as NavData, index)">
+                                        {{ record.label }}
+                                    </a>
+                                </template>
+                                <div class="lcc-header__wrapper__navs__drop" v-if="record.list?.length">
+                                    <div class="lcc-header__wrapper__navs__drop__group" v-for="(el, key) in record.list"
+                                        :key>
+                                        <div class="lcc-header__wrapper__navs__drop__group__label">
+                                            <div class="lcc-header__wrapper__navs__drop__group__label--icon">
+                                                <img class="lcc-header__wrapper__navs__drop__group__label--icon--image"
+                                                    src="./images/right-arrow.png" alt="">
+                                            </div>
+                                            <div class="lcc-header__wrapper__navs__drop__group__label--text">
+                                                {{ el.label }}
+                                            </div>
+                                        </div>
+                                        <div class="lcc-header__wrapper__navs__drop__group__item__group">
+                                            <div class="lcc-header__wrapper__navs__drop__group__item__group__nav"
+                                                v-for="(child, ckey) in el.children" :key="ckey"
+                                                @click="jump(el, child, ckey)">
+                                                {{ child.label }}
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="lcc-header__wrapper__navs__drop__group__item__group">
-                                    <div class="lcc-header__wrapper__navs__drop__group__item__group__nav"
-                                        v-for="(child, ckey) in el.children" :key="ckey">
-                                        {{ child.title }}
-                                    </div>
-                                </div>
-                            </div>
+                            </n-popover>
                         </div>
-                    </n-popover>
-                </div>
+                    </template>
+                </LcCarouseBox>
             </div>
         </div>
     </div>
 </template>
 
 <script lang="ts" setup>
-import { PropType, computed } from 'vue';
+import { computed } from 'vue';
 import { NPopover } from 'naive-ui/es/popover';
+import { defNavData } from './const';
+import { LcCarouseBox, type LcCarouseBoxChangeEvent, } from '@/components/education/components/carouseBox';
 
-type NavData = {
-    title: string;
-    path: string;
-    list?: {
-        label: string;
-        children: NavData[];
-    }[];
-
-};
-const defNavData = [{
-    title: '高质量发展中心',
-    path: '/home',
-},
-{
-    title: '学生发展中心',
-    path: '/join',
-},
-{
-    title: '教师发展中心',
-    path: '/join',
-    list: [
-        {
-            label: '数据概览',
-            children: [
-                {
-                    title: '数据概览',
-                    path: '',
-                },
-            ]
-        },
-        {
-            label: '教师队伍建设',
-            children: [
-                {
-                    title: '基础教育教师队伍结构',
-                    path: '',
-                },
-                {
-                    title: '基础教育校长队伍',
-                    path: '',
-                },
-                {
-                    title: '基础教育交流轮岗',
-                    path: '',
-                },
-                {
-                    title: '基础教育交流轮岗',
-                    path: '',
-                },
-                {
-                    title: '教师资源均衡发展分析',
-                    path: '',
-                },
-            ]
-        },
-        {
-            label: '教师职业发展',
-            children: [
-                {
-                    title: '教师成长',
-                    path: '',
-                },
-                {
-                    title: '教师专业技术水平分析',
-                    path: '',
-                },
-                {
-                    title: '教师风采',
-                    path: '',
-                },
-            ]
-        },
-    ]
-},
-{
-    title: '治理决策中心',
-    path: '/join',
-},
-{
-    title: '发展规划中心',
-    path: '/join',
+type ListRaw = {
+    label: string;
+    children: NavData[];
 }
-];
+export type NavData = {
+    label: string;
+    path: string;
+    list?: ListRaw[];
+};
+
 const {
     navDatas,
-} = defineProps({
-    navDatas: {
-        type: Array as PropType<NavData[]>,
-    }
+    hideArrow,
+} = defineProps<{
+    navDatas?: NavData[];
+    hideArrow?: boolean;
+}>();
+
+const modelIndex = defineModel<number>('index', { default: 0, });
+const listSource = computed(() => {
+    return navDatas === void 0 ? defNavData : navDatas;
 });
 
-const renderNavData = computed(() => navDatas ?? defNavData);
 const $emit = defineEmits<{
-    (e: 'jump', item: NavData): void;
+    (e: 'jump', parent: ListRaw | null, item: NavData, i: number): void;
+    (e: 'scroll', data: LcCarouseBoxChangeEvent): void;
 }>();
-function jump(item: NavData) {
-    $emit('jump', item);
+
+function jump(parent: ListRaw | null, item: NavData, i: number) {
+    $emit('jump', parent, item, i);
 }
+
+function carouseChange(value: LcCarouseBoxChangeEvent) {
+    $emit('scroll', value);
+}
+
 </script>
 
 <style lang="scss">
@@ -162,45 +111,52 @@ function jump(item: NavData) {
     width: 100%;
     height: 106px;
     background: url(./images/header-nav-bg.png) no-repeat;
-    background-size: 100% 100%;
+    background-size: 1920px 100%;
+    background-position: center top;
+    --min-width: 1100px;
+    min-width: var(--min-width);
 
     &__wrapper {
-        width: 100%;
+        width: var(--min-width);
         height: 100%;
         display: flex;
         justify-content: center;
         align-items: center;
+        margin: 0 auto;
+        position: relative;
 
         &__navs {
-            width: 50%;
+            width: 100%;
+            box-sizing: border-box;
+            padding: 0 20px;
             display: flex;
-            gap: 10px;
             align-items: center;
+            justify-content: center;
             position: relative;
             z-index: 301;
-            perspective: 3000px;
-            transform-style: preserve-3d;
-
 
             &__item {
                 color: #fff;
                 font-size: 18px;
                 line-height: 28px;
-                flex: 3;
+                width: 170px;
+                min-width: 170px;
                 text-align: center;
                 display: flex;
                 flex-direction: column;
                 height: 100%;
+                overflow: hidden;
 
                 &__link {
                     display: block;
                     height: 70px;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
+                    line-height: 70px;
                     box-sizing: border-box;
-                    white-space: nowrap;
                     position: relative;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                    transition: transform linear 0.3s;
 
                     &::before {
                         content: '';
@@ -227,12 +183,13 @@ function jump(item: NavData) {
 
                 }
 
-                &:nth-last-of-type(3) {
-                    flex: 4;
+                &.active {
+                    width: 245px;
+                    min-width: 245px;
                     font-size: 30px;
 
                     .lcc-header__wrapper__navs__item__link {
-                        padding-bottom: 15px;
+                        transform: translateY(-10%);
                     }
                 }
             }
@@ -273,6 +230,7 @@ function jump(item: NavData) {
                         &--icon {
                             display: flex;
                             align-items: center;
+
                             &--image {
                                 margin-right: 8px;
                                 height: 19px;
