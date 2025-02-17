@@ -1,7 +1,7 @@
 <template>
     <div class="lc-ranking">
-        <div class="lc-ranking__wrapper">
-            <LcElasticScrollbar>
+        <LcElasticScrollbar>
+            <div class="lc-ranking__wrapper">
                 <div class="lc-ranking__wrapper__item" :class="[`lc-ranking__wrapper__item--${type}`]"
                     v-for="(item, key) in renderList" :key :style="{
                         '--proportion': getCurrentProportion(item.value),
@@ -27,8 +27,8 @@
                         <div class="lc-ranking__wrapper__item__inner__ball" v-if="showBall"></div>
                     </div>
                 </div>
-            </LcElasticScrollbar>
-        </div>
+            </div>
+        </LcElasticScrollbar>
     </div>
 </template>
 
@@ -69,14 +69,14 @@ function getPreProportion(i: number) {
 }
 
 function fromValue(item: RankingRecord) {
-    if(typeof item.formatter === 'function') {
+    if (typeof item.formatter === 'function') {
         return item.formatter(item);
     }
-    switch(item.formatter) {
+    switch (item.formatter) {
         case '{b}':
             return (item.value / total.value * 100).toFixed(2);
         case '{a}':
-        return item.value * total.value;
+            return item.value * total.value;
         default:
             return item.value;
     }
@@ -108,6 +108,7 @@ onMounted(() => {
         display: flex;
         flex-direction: column;
         flex: 1;
+        padding: 20px;
 
         &__item {
             width: 100%;
