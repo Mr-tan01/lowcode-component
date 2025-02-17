@@ -82,7 +82,7 @@ import orgImage from './images/org.svg';
 import blueImage from './images/blue.svg';
 import { barChartCodes } from './codes';
 import { combinationOpts } from './options/line-options';
-import { YAXisOption } from 'echarts/types/src/coord/cartesian/AxisModel';
+import { type YAXisOption } from 'echarts/types/src/coord/cartesian/AxisModel';
 
 function chartsBarOpts(len: number): EChartsOption {
     return {

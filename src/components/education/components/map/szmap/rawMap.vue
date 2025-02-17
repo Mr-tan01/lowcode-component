@@ -1,6 +1,6 @@
 <template>
     <div class="lc-szmap-raw">
-        <svg viewBox="0 0 922 527" version="1.1">
+        <svg class="lc-szmap-raw__svg" viewBox="0 0 922 527" version="1.1">
             <Defines></Defines>
             <defs>
                 <linearGradient v-for="([type, item], key) in levelsList" :key :id="`linearGradient-float-${type}`">
@@ -51,6 +51,7 @@ const {
     levels = {},
     values = {},
     fillModel = 'default',
+    rotateX = 0,
 } = defineProps(propsRaw);
 
 const blockList: Record<BlockName, Component> = {
@@ -84,7 +85,7 @@ const blockClass = computed(() => {
 });
 
 const levelsList = computed<Array<[string, Levels]>>(() => {
-    return Object.entries(merge({}, levels, defFloatLevelConfig));
+    return Object.entries(merge({}, levels, defFloatLevelConfig)) as unknown as [string, Levels][];
 });
 
 function getBlockProperties(key: BlockName) {
@@ -109,23 +110,31 @@ function getBlockProperties(key: BlockName) {
         style: styles,
     }
 }
+const mapRotateX = computed(() => `rotateX(${rotateX}deg)`);
+const labelWrapInsetY = computed(() => Math.abs(rotateX));
 </script>
 
 <style lang="scss" scoped>
 .lc-szmap-raw {
     width: 100%;
     position: relative;
+    perspective: 3000px;
+
+    &__svg {
+        transform: v-bind(mapRotateX);
+        width: 100%;
+    }
 
     &__mark-group {
         position: absolute;
-        inset: 0;
+        inset: calc(v-bind(labelWrapInsetY) * 1px) 0;
         pointer-events: none;
 
         &--item {
             position: absolute;
             top: 50%;
             left: 50%;
-            transform: translate(-50%, -50%) scale(var(--level-scale, 1));
+            transform: translate(-50%, calc(-50% * var(--level-scale, 1))) scale(var(--level-scale, 1));
             will-change: transform;
             pointer-events: auto;
             transition: transform 0.2s;
@@ -231,8 +240,5 @@ function getBlockProperties(key: BlockName) {
         }
     }
 
-    &>svg {
-        width: 100%;
-    }
 }
 </style>

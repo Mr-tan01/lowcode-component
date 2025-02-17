@@ -30,5 +30,8 @@ export const propsRaw = {
     },
     values: {
         type: Object as PropType<SZMapMarkProps>,
+    },
+    rotateX: {
+        type: Number as PropType<number>,
     }
 } as const;

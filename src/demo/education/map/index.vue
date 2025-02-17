@@ -5,6 +5,11 @@
                 <Szmap :values></Szmap>
             </div>
         </Container>
+        <Container title="深圳地图" description="深圳教育项目-深圳地图" rswidth="962px">
+            <div class="size-box">
+                <Szmap :values :rotate-x="-30"></Szmap>
+            </div>
+        </Container>
     </div>
 </template>
 <script lang="ts" setup>

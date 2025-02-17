@@ -1,7 +1,7 @@
 <template>
     <div class="lc-szmap">
-        <RawMap class="back-block-map level-map" :show-label="false" :levels :values />
-        <RawMap class="float-block-map level-map" fill-model="hover" :show-label="true" :levels :values />
+        <RawMap class="back-block-map level-map" :show-label="false" :rotateX :levels :values />
+        <RawMap class="float-block-map level-map" fill-model="hover" :rotateX :show-label="true" :levels :values />
     </div>
 </template>
 
@@ -10,6 +10,7 @@ import { propsRaw } from './props';
 import RawMap from './rawMap.vue';
 const {
     levels,
+    rotateX,
 } = defineProps(propsRaw);
 </script>
 
