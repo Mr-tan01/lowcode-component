@@ -35,11 +35,10 @@ onMounted(() => {
     initChartInstance();
 });
 
-function setOptions(options: EChartsOption, deep: boolean) {
-    chartInstance.value?.setOption(options, deep);
+function setOptions(options: EChartsOption, deep: boolean, lazyUpdate?: boolean) {
+    chartInstance.value?.setOption(options, deep, lazyUpdate);
 }
 watchEffect(() => {
-    options; // tack on the options
     setOptions(options, notMerge);
 });
 defineExpose({

@@ -2,6 +2,11 @@
     <div class="demo-charts">
         <Container title="图表" description="图表-柱状图分单类数据、多类数据、组合类数据、" rswidth="1360px" rs-height="auto">
             <NSpace>
+                <Container title="雷达图" rswidth="447px" rs-height="306px">
+                    <lcRadar v-bind="(usePieOptions())"></lcRadar>
+                </Container>
+            </NSpace>
+            <NSpace>
                 <Container title="饼图" rswidth="447px" rs-height="306px">
                     <LcPieChart v-bind="(usePieOptions())"></LcPieChart>
                 </Container>
@@ -85,6 +90,7 @@ import {
     LcBarChartOptions,
     lcLineChart,
     LcPieChart,
+    lcRadar,
 } from '@/components/education/components/charts';
 import { type EChartsOption } from 'echarts';
 import orgImage from './images/org.svg';

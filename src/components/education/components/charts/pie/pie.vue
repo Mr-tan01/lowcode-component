@@ -148,10 +148,10 @@ function setOptions(option: EChartsCoreOption, notMerge?: boolean, lazyUpdate?: 
     chartInstance.value?.setOption(option, notMerge, lazyUpdate)
 }
 const cssBlockSize = ref('100%')
-function resizeChart(resizeObserverEntrys) {
-    const [record] = resizeObserverEntrys;
-    const { blockSize, inlineSize, } = record.borderBoxSize[0] ?? {};
-    cssBlockSize.value = Math.min(blockSize, inlineSize) + 'px';
+function resizeChart(entries) {
+    const entry = entries[0]
+  const { width, height } = entry.contentRect
+    cssBlockSize.value = Math.min(width, height) + 'px';
     chartInstance.value?.resize();
 }
 const { stop } = useResizeObserver(chartDom, debounce(resizeChart, debounceTime));
