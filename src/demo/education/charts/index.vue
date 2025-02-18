@@ -19,7 +19,7 @@
                     <lcLineChart :options="combinationOpts(1)"></lcLineChart>
                 </Container>
                 <Container title="多条折线图(≥2类数据)" rswidth="390px" rs-height="265px">
-                    <lcLineChart :options="combinationOpts(2)"></lcLineChart>
+                    <lcLineChart :options="combinationOpts(4, 2)"></lcLineChart>
                 </Container>
                 <Container title="组合折线数据图" rswidth="390px" rs-height="265px">
                     <lcLineChart :options="combinationOpts(2)"></lcLineChart>
@@ -202,8 +202,8 @@ function evenYaixsChartsBarOpts(len: number): EChartsOption {
             data: Array.from(Array(4)).map((_, i) => `类目${i + 1}`),
         },
         yAxis: [
-            LcBarChartOptions.commonBarOptions.yAxis as YAXisOption ,
-            LcBarChartOptions.commonBarOptions.yAxis as YAXisOption ,
+            LcBarChartOptions.commonBarOptions.yAxis as YAXisOption,
+            LcBarChartOptions.commonBarOptions.yAxis as YAXisOption,
         ],
         series: [
             {
