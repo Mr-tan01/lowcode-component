@@ -47,7 +47,6 @@
 <script lang="ts" setup>
 import { computed } from 'vue';
 import { NPopover } from 'naive-ui/es/popover';
-import { defNavData } from './const';
 import { LcCarouseBox, type LcCarouseBoxChangeEvent, } from '@/components/education/components/carouseBox';
 
 type ListRaw = {
@@ -70,7 +69,7 @@ const {
 
 const modelIndex = defineModel<number>('index', { default: 0, });
 const listSource = computed(() => {
-    return navDatas === void 0 ? defNavData : navDatas;
+    return navDatas === void 0 ? [] : navDatas;
 });
 
 const $emit = defineEmits<{

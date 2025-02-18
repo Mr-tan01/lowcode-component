@@ -2,6 +2,11 @@
     <div class="demo-charts">
         <Container title="图表" description="图表-柱状图分单类数据、多类数据、组合类数据、" rswidth="1360px" rs-height="auto">
             <NSpace>
+                <Container title="饼图" rswidth="447px" rs-height="306px">
+                    <LcPieChart v-bind="(usePieOptions())"></LcPieChart>
+                </Container>
+            </NSpace>
+            <NSpace>
                 <Container title="单条折线图" rswidth="390px" rs-height="265px">
                     <lcLineChart :options="combinationOpts(1)"></lcLineChart>
                 </Container>
@@ -76,12 +81,14 @@ import {
     LcBarChart,
     LcBarChartOptions,
     lcLineChart,
+    LcPieChart,
 } from '@/components/education/components/charts';
 import { type EChartsOption } from 'echarts';
 import orgImage from './images/org.svg';
 import blueImage from './images/blue.svg';
 import { barChartCodes } from './codes';
 import { combinationOpts } from './options/line-options';
+import { usePieOptions } from './options/pie-options';
 import { type YAXisOption } from 'echarts/types/src/coord/cartesian/AxisModel';
 
 function chartsBarOpts(len: number): EChartsOption {
