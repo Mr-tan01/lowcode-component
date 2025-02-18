@@ -1,5 +1,6 @@
 import { type EChartsOption, graphic } from "echarts"
 import { type LinearGradient } from "echarts/types/src/util/graphic";
+import merge from "lodash-es/merge";
 
 export const pieColors = ['#0FFBF8', '#E1BC4B', '#2276FC', '#A6CFFF', '#7749FF', '#64D677', '#EE6F7C'];
 export const pieTitleOptions: EChartsOption['title'] = {
@@ -86,3 +87,37 @@ export const pieSeriesRecord: EChartsOption['series'] = {
         }
     }
 }
+
+const innerLableOption: EChartsOption['series'] = {
+    radius: ['42%', '62%'],
+    label: {
+        show: true,
+        alignTo: 'edge',
+        formatter: '{prop|{d}}{unit|%}\n{name|{b}}',
+        minMargin: 5,
+        edgeDistance: 10,
+        rich: {
+            prop: {
+                fontSize: 20,
+                lineHeight: 0,
+                padding: [-20, 0, 0, 0],
+            },
+            unit: {
+                fontSize: 14,
+                lineHeight: 0,
+                padding: [-17, 0, 0, 0],
+            },
+            name: {
+                fontSize: 14,
+                lineHeight: 20,
+                color: '#ffffff'
+            }
+        }
+    },
+    labelLine: {
+        length: 15,
+        length2: 0,
+        maxSurfaceAngle: 0
+    },
+}
+export const innerLabelSeries1: EChartsOption['series'] = merge({}, pieSeriesRecord, innerLableOption);

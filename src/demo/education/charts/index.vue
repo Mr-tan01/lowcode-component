@@ -5,6 +5,9 @@
                 <Container title="饼图" rswidth="447px" rs-height="306px">
                     <LcPieChart v-bind="(usePieOptions())"></LcPieChart>
                 </Container>
+                <Container title="饼图" rswidth="547px" rs-height="406px">
+                    <LcPieChart v-bind="(useLabelPieOptions())"></LcPieChart>
+                </Container>
             </NSpace>
             <NSpace>
                 <Container title="单条折线图" rswidth="390px" rs-height="265px">
@@ -88,7 +91,7 @@ import orgImage from './images/org.svg';
 import blueImage from './images/blue.svg';
 import { barChartCodes } from './codes';
 import { combinationOpts } from './options/line-options';
-import { usePieOptions } from './options/pie-options';
+import { usePieOptions, useLabelPieOptions } from './options/pie-options';
 import { type YAXisOption } from 'echarts/types/src/coord/cartesian/AxisModel';
 
 function chartsBarOpts(len: number): EChartsOption {

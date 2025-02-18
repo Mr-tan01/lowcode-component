@@ -30,7 +30,7 @@
         border-radius: 10px;
     }
     &::-webkit-scrollbar-thumb:hover {
-        background: rgba(0, 127, 206, 0.5);;
+        background: rgba(0, 127, 206, 0.5);
     }
 
 
