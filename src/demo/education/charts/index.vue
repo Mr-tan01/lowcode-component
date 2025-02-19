@@ -2,8 +2,8 @@
     <div class="demo-charts">
         <Container title="图表" description="图表-柱状图分单类数据、多类数据、组合类数据、" rswidth="1360px" rs-height="auto">
             <NSpace>
-                <Container title="饼图" rswidth="420px" rs-height="420px">
-                    <LcGaugeChart v-bind="(usePieOptions())"></LcGaugeChart>
+                <Container title="得分图" rswidth="520px" rs-height="420px">
+                    <LcGaugeChart v-bind="useCommonGaugeOptions()"></LcGaugeChart>
                 </Container>
             </NSpace>
             <NSpace>
@@ -122,7 +122,7 @@ import { barChartCodes } from './codes';
 import { combinationOpts } from './options/line-options';
 import { useRadarOptions } from './options/radar-options';
 import { usePieOptions, useLabelPieOptions, useProperctionPieOptions, } from './options/pie-options';
-
+import { useCommonGaugeOptions } from './options/gauge-options';
 import {
     chartsBarOpts,
     chartsHorizontalBarOpts,

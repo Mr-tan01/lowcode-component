@@ -42,7 +42,9 @@ watchEffect(() => {
     flush: 'post',
 });
 defineExpose({
-    chartInstance,
+    get chartInstance() {
+        return chartInstance.value;
+    },
     setOptions,
 });
 </script>
