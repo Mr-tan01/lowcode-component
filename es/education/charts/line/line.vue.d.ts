@@ -1,2 +1,8 @@
-declare const _default: import("vue").DefineComponent<{}, {}, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").PublicProps, Readonly<{}> & Readonly<{}>, {}, {}, {}, {}, string, import("vue").ComponentProvideOptions, true, {}, any>;
+import { PropType } from 'vue';
+import { type EChartsCoreOption, type EChartsOption } from 'echarts';
+declare const _default: import("vue").DefineComponent<import("vue").ExtractPropTypes<{
+    options: PropType<EChartsCoreOption | EChartsOption>;
+}>, {}, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").PublicProps, Readonly<import("vue").ExtractPropTypes<{
+    options: PropType<EChartsCoreOption | EChartsOption>;
+}>> & Readonly<{}>, {}, {}, {}, {}, string, import("vue").ComponentProvideOptions, true, {}, any>;
 export default _default;

@@ -1,21 +1,23 @@
-import '@mmj-code-lib/lowcode/es/components/css/index.css';
-import { PropType } from 'vue';
-import { type EChartsOption } from 'echarts';
+import { type EChartsOption, type EChartsCoreOption } from 'echarts';
 import { type LinearGradient } from 'echarts/types/src/util/graphic.js';
-declare const _default: import("vue").DefineComponent<import("vue").ExtractPropTypes<{
-    options: PropType<EChartsOption>;
-    linearGradientColor: PropType<LinearGradient[]>;
-    isHorizontal: PropType<Boolean>;
-    stack: BooleanConstructor;
-}>, {}, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").PublicProps, Readonly<import("vue").ExtractPropTypes<{
-    options: PropType<EChartsOption>;
-    linearGradientColor: PropType<LinearGradient[]>;
-    isHorizontal: PropType<Boolean>;
-    stack: BooleanConstructor;
-}>> & Readonly<{}>, {
-    stack: boolean;
-}, {}, {}, {}, string, import("vue").ComponentProvideOptions, true, {}, any>;
+type __VLS_Props = {
+    options?: EChartsCoreOption | EChartsOption;
+    linearGradientColor?: LinearGradient[];
+    isHorizontal?: boolean;
+    stack?: boolean;
+    fake3d?: boolean;
+};
+declare const _default: import("vue").DefineComponent<import("vue").ExtractPropTypes<__VLS_TypePropsToOption<__VLS_Props>>, {}, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").PublicProps, Readonly<import("vue").ExtractPropTypes<__VLS_TypePropsToOption<__VLS_Props>>> & Readonly<{}>, {}, {}, {}, {}, string, import("vue").ComponentProvideOptions, true, {}, any>;
 export default _default;
+type __VLS_NonUndefinedable<T> = T extends undefined ? never : T;
+type __VLS_TypePropsToOption<T> = {
+    [K in keyof T]-?: {} extends Pick<T, K> ? {
+        type: import('vue').PropType<__VLS_NonUndefinedable<T[K]>>;
+    } : {
+        type: import('vue').PropType<T[K]>;
+        required: true;
+    };
+};
 declare module 'vue' {
     interface GlobalComponents {
     }

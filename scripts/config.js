@@ -11,6 +11,10 @@ export default {
                 find: '@',
                 replacement: pathResolve('src', join(process.cwd(), '../')),
             },
+            {
+                find: '~',
+                replacement: pathResolve('.', join(process.cwd(), '../'))
+            },
         ],
     },
     build: {
