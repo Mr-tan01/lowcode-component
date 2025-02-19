@@ -1,4 +1,5 @@
-import { type EChartsOption } from "echarts";
+import { graphic, type EChartsOption } from "echarts";
+import { type LinearGradient } from "echarts/types/src/util/graphic";
 
 export const gaugeColors: EChartsOption['color'] = [
     'rgba(15, 251, 248, 1)',
@@ -7,6 +8,30 @@ export const gaugeColors: EChartsOption['color'] = [
     'rgba(166, 207, 255, 1)',
     'rgba(119, 73, 255, 1)',
     'rgba(100, 214, 119, 1)',
+];
+
+// 为每个扇形设置不同的渐变颜色
+export const gaugeInnerGraphicColors: LinearGradient[] = [
+    new graphic.LinearGradient(0, 0, 0, 1, [
+        { offset: 0, color: 'rgba(15, 251, 248, 0.20)' }, // 渐变色起始颜色
+        { offset: 1, color: '#0FFBF8' }  // 渐变色结束颜色
+    ]),
+    new graphic.LinearGradient(0, 0, 0, 1, [
+        { offset: 0, color: 'rgba(225, 188, 75, 0.20)' },
+        { offset: 1, color: 'rgba(225, 188, 75, 1)' }
+    ]),
+    new graphic.LinearGradient(0, 0, 0, 1, [
+        { offset: 0, color: 'rgba(0, 148, 255, 0.20)' },
+        { offset: 1, color: 'rgba(0, 148, 255, 1)' }
+    ]),
+    new graphic.LinearGradient(0, 0, 0, 1, [
+        { offset: 0, color: 'rgba(166, 207, 255, 0.20)' },
+        { offset: 1, color: 'rgba(166, 207, 255, 1)' }
+    ]),
+    new graphic.LinearGradient(0, 0, 0, 1, [
+        { offset: 0, color: 'rgba(119, 73, 255, 0.20)' },
+        { offset: 1, color: 'rgba(119, 73, 255, 1)' }
+    ]),
 ];
 
 export const gaugeTitleOptions: EChartsOption['title'] = {
@@ -55,7 +80,6 @@ export const gaugeSeriesRecordOptions: EChartsOption['series'] = {
         lineStyle: {
             width: 15,
             color: [[1, 'rgba(3, 29, 61, 1)']],
-            
         },
     },
     splitLine: {

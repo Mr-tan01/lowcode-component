@@ -1,11 +1,7 @@
 <template>
     <div class="demo-charts">
         <Container title="图表" description="图表-柱状图分单类数据、多类数据、组合类数据、" rswidth="1360px" rs-height="auto">
-            <NSpace>
-                <Container title="得分图" rswidth="520px" rs-height="420px">
-                    <LcGaugeChart v-bind="useCommonGaugeOptions()"></LcGaugeChart>
-                </Container>
-            </NSpace>
+
             <NSpace>
                 <Container title="圆形雷达图" rswidth="420px" rs-height="406px">
                     <lcRadarChart v-bind="useRadarOptions('circle', 0, 1, 0, 6)"></lcRadarChart>
@@ -38,6 +34,12 @@
                 </Container>
                 <Container title="圆环图" rswidth="447px" rs-height="306px">
                     <LcPieChart v-bind="(useProperctionPieOptions())"></LcPieChart>
+                </Container>
+                <Container title="得分图" rswidth="520px" rs-height="420px">
+                    <LcGaugeChart v-bind="useCommonGaugeOptions()"></LcGaugeChart>
+                </Container>
+                <Container title="仪表盘" rswidth="520px" rs-height="420px">
+                    <LcGaugeChart v-bind="useGaugeOptions()"></LcGaugeChart>
                 </Container>
             </NSpace>
             <NSpace>
@@ -122,7 +124,7 @@ import { barChartCodes } from './codes';
 import { combinationOpts } from './options/line-options';
 import { useRadarOptions } from './options/radar-options';
 import { usePieOptions, useLabelPieOptions, useProperctionPieOptions, } from './options/pie-options';
-import { useCommonGaugeOptions } from './options/gauge-options';
+import { useCommonGaugeOptions, useGaugeOptions } from './options/gauge-options';
 import {
     chartsBarOpts,
     chartsHorizontalBarOpts,

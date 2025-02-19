@@ -1,4 +1,6 @@
-import { type EChartsOption } from "echarts"
+import { graphic, type EChartsOption } from "echarts"
+import merge from "lodash-es/merge";
+import { gaugeThemeOptions } from '@/components/education/components/charts';
 
 export function useCommonGaugeOptions(): {
     options: EChartsOption
@@ -45,5 +47,35 @@ export function useCommonGaugeOptions(): {
                 }
             ]
         }
+    }
+}
+
+export function useGaugeOptions(): {
+    options: EChartsOption;
+    showCustomLegend: boolean;
+} {
+    return {
+        showCustomLegend: false,
+        options: {
+            title: {
+                show: false,
+            },
+            series: merge({}, gaugeThemeOptions.progressSeries, {
+                min: 0,
+                max: 150,
+                splitNumber: 7,
+                data: [
+                    {
+                        value: 100,
+                        itemStyle: {
+                            color: new graphic.LinearGradient(0, 1, 0, 0, [
+                                { offset: 0, color: 'rgba(15, 251, 248, 0.20)' }, // 渐变色起始颜色
+                                { offset: 1, color: '#0FFBF8' }  // 渐变色结束颜色
+                            ]),
+                        }
+                    }
+                ]
+            }),
+        },
     }
 }

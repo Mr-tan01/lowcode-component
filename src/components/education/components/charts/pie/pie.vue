@@ -3,7 +3,7 @@
         '--legendWidth': legendWidth,
     }">
         <div class="lc-pie__wrapper">
-            <div class="lc-pie__wrapper__legend" v-if="isNoNavtiveLegend && showCustomLegend">
+            <div class="lc-pie__wrapper__legend" v-if="showCustomLegend">
                 <CommonLegend :legend-label :options="renderOptions" @legend:click="legendClick"
                     @legend:toggle-select="legendToggleSelect"></CommonLegend>
             </div>
@@ -93,12 +93,6 @@ function legendToggleSelect(record: LegendSelectParams) {
     dispatchAction(record.type, record.name);
     $emit('legend:toggleSelect', record);
 }
-
-const isNoNavtiveLegend = computed(() => {
-    const legend = renderOptions.value.legend;
-    if (Array.isArray(legend)) return false;
-    return !legend?.show;
-});
 
 onMounted(initChart);
 watchPostEffect(() => {

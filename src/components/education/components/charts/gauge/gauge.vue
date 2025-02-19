@@ -2,7 +2,7 @@
     <div class="lc-gauge">
         <div class="lc-gauge__wrapper">
             <BaseChart :options="renderOptions" ref="baseChart"></BaseChart>
-            <CommonLegend disabled :legendLabel :options="renderOptions"></CommonLegend>
+            <CommonLegend disabled :legendLabel :options="renderOptions" v-if="showCustomLegend"></CommonLegend>
         </div>
     </div>
 </template>
@@ -12,32 +12,27 @@ import { BaseChart, useCommonChartExpose } from '@/components/education/common/c
 import { computed, PropType } from 'vue';
 import { type EChartsCoreOption, type EChartsOption } from 'echarts';
 import merge from 'lodash-es/merge';
-import { useCommonGaugeOptions, } from './options';
+import { useCommonGaugeOptions, useGaugeSeriesOptions, } from './options';
 import {
     CommonLegend,
-    type LegendDataRecord,
-    type LegendSelectParams
 } from '@/components/education/common/components/Charts/legend';
 const {
     options = {},
+    showCustomLegend = true,
 } = defineProps<{
     legendLabel?: ((name: string, value: number) => string);
     options: EChartsCoreOption | EChartsOption,
+    showCustomLegend?: boolean;
 }>();
 const {
     exposes,
-    baseChartRef,
 } = useCommonChartExpose("baseChart");
 const renderOptions = computed(() => {
 
     const newOptions = useCommonGaugeOptions(options);
+    newOptions.series = useGaugeSeriesOptions(newOptions.series);
     return merge({}, newOptions);
 });
-const $emit = defineEmits<{
-    (e: 'legend:click', d: LegendDataRecord): void;
-    (e: 'legend:toggleSelect', value: LegendSelectParams): void;
-}>();
-
 defineExpose(exposes);
 </script>
 
