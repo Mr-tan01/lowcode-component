@@ -25,11 +25,11 @@ import { LcBgCommon } from '@/components/education/components/bgCommon';
 import { RouterLink } from 'vue-router';
 import { NSpace, NLayout, NLayoutSider, NMenu, NScrollbar } from 'naive-ui';
 import type { MenuOption } from 'naive-ui'
-import { deomMenu } from '@/router';
+import { deomMenu, type MenuRecordRawType } from '@/router';
 
 import { h } from 'vue';
 
-function toMenuOption(data?: { name: string; path: string; children?: any[] }[]) {
+function toMenuOption(data?: MenuRecordRawType[]) {
     if (!data?.length) return data;
     return data.map(item => {
         return {
@@ -40,7 +40,7 @@ function toMenuOption(data?: { name: string; path: string; children?: any[] }[])
                         path: item.path,
                     }
                 },
-                { default: () => item.name }
+                { default: () => item?.meta?.title }
             ),
             key: item.name,
             children: toMenuOption(item?.children),
