@@ -2,16 +2,42 @@
     <div class="demo-charts">
         <Container title="图表" description="图表-柱状图分单类数据、多类数据、组合类数据、" rswidth="1360px" rs-height="auto">
             <NSpace>
-                <Container title="雷达图" rswidth="447px" rs-height="306px">
-                    <lcRadar v-bind="(usePieOptions())"></lcRadar>
+                <Container title="饼图" rswidth="420px" rs-height="420px">
+                    <LcGaugeChart v-bind="(usePieOptions())"></LcGaugeChart>
                 </Container>
             </NSpace>
             <NSpace>
-                <Container title="饼图" rswidth="447px" rs-height="306px">
+                <Container title="圆形雷达图" rswidth="420px" rs-height="406px">
+                    <lcRadarChart v-bind="useRadarOptions('circle', 0, 1, 0, 6)"></lcRadarChart>
+                </Container>
+                <Container title="六边雷达图" rswidth="420px" rs-height="406px">
+                    <lcRadarChart v-bind="useRadarOptions('polygon', 0, 1, 0, 6)"></lcRadarChart>
+                </Container>
+                <Container title="五边雷达图" rswidth="420px" rs-height="406px">
+                    <lcRadarChart v-bind="useRadarOptions('polygon', 0, 1, 0, 5)"></lcRadarChart>
+                </Container>
+                <Container title="三角雷达图" rswidth="420px" rs-height="406px">
+                    <lcRadarChart v-bind="useRadarOptions('polygon', 0, 1, 0, 3, true)"></lcRadarChart>
+                </Container>
+                <Container title="六边雷达图" rswidth="420px" rs-height="406px">
+                    <lcRadarChart v-bind="useRadarOptions('circle', 0, 3, 0, 6, true)"></lcRadarChart>
+                </Container>
+                <Container title="五边雷达图" rswidth="420px" rs-height="406px">
+                    <lcRadarChart v-bind="useRadarOptions('polygon', 0, 3, 0, 5, true)"></lcRadarChart>
+                </Container>
+                <Container title="三角雷达图" rswidth="420px" rs-height="406px">
+                    <lcRadarChart v-bind="useRadarOptions('polygon', 0, 3, 0, 3, true)"></lcRadarChart>
+                </Container>
+            </NSpace>
+            <NSpace>
+                <Container title="饼图" rswidth="547px" rs-height="406px">
                     <LcPieChart v-bind="(usePieOptions())"></LcPieChart>
                 </Container>
                 <Container title="饼图" rswidth="547px" rs-height="406px">
                     <LcPieChart v-bind="(useLabelPieOptions())"></LcPieChart>
+                </Container>
+                <Container title="圆环图" rswidth="447px" rs-height="306px">
+                    <LcPieChart v-bind="(useProperctionPieOptions())"></LcPieChart>
                 </Container>
             </NSpace>
             <NSpace>
@@ -87,188 +113,23 @@ import { NSpace } from 'naive-ui';
 import Container from '@/demo/components/help/Container.vue';
 import {
     LcBarChart,
-    LcBarChartOptions,
     lcLineChart,
     LcPieChart,
-    lcRadar,
+    lcRadarChart,
+    LcGaugeChart,
 } from '@/components/education/components/charts';
-import { type EChartsOption } from 'echarts';
-import orgImage from './images/org.svg';
-import blueImage from './images/blue.svg';
 import { barChartCodes } from './codes';
 import { combinationOpts } from './options/line-options';
-import { usePieOptions, useLabelPieOptions } from './options/pie-options';
-import { type YAXisOption } from 'echarts/types/src/coord/cartesian/AxisModel';
+import { useRadarOptions } from './options/radar-options';
+import { usePieOptions, useLabelPieOptions, useProperctionPieOptions, } from './options/pie-options';
 
-function chartsBarOpts(len: number): EChartsOption {
-    return {
-        yAxis: {
-            name: '单位/人',
-        },
-        xAxis: {
-            data: Array.from(Array(5)).map((_, i) => `${i + 1}月`),
-        },
-        series: [
-            {
-                name: '待审核',
-                data: Array.from(Array(5)).map((_, i) => Math.round(Math.random() * 100 + i)),
-                backgroundStyle: {
-
-                },
-            },
-            {
-                name: '已通过',
-                data: Array.from(Array(5)).map((_, i) => Math.round(Math.random() * 100 + i)),
-                backgroundStyle: {
-
-                },
-            },
-            {
-                name: '已通过2',
-                data: Array.from(Array(5)).map((_, i) => Math.round(Math.random() * 100 + i)),
-                backgroundStyle: {
-
-                },
-            },
-            {
-                name: '已通过3',
-                data: Array.from(Array(5)).map((_, i) => Math.round(Math.random() * 100 + i)),
-                backgroundStyle: {
-
-                },
-            },
-            {
-                name: '已通过4',
-                data: Array.from(Array(5)).map((_, i) => Math.round(Math.random() * 100 + i)),
-                backgroundStyle: {
-
-                },
-            },
-            {
-                name: '已通过5',
-                data: Array.from(Array(5)).map((_, i) => Math.round(Math.random() * 100 + i)),
-                backgroundStyle: {
-
-                },
-            },
-        ].slice(0, len),
-    }
-};
-function chartsHorizontalBarOpts(len: number): EChartsOption {
-    return {
-        yAxis: {
-            data: Array.from(Array(4)).map((_, i) => `类目${i + 1}`),
-        },
-        xAxis: {
-            name: '',
-        },
-        series: [
-            {
-                name: '待审核',
-                data: Array.from(Array(4)).map((_, i) => Math.round(Math.random() * 100 + i)),
-            },
-            {
-                name: '已通过',
-                data: Array.from(Array(4)).map((_, i) => Math.round(Math.random() * 100 + i)),
-            },
-        ].slice(0, len),
-    }
-};
-
-function chartNegativeBarOptions(): EChartsOption {
-    return {
-        grid: {
-            right: 20,
-        },
-        yAxis: {
-            data: Array.from(Array(4)).map((_, i) => `类目${i + 1}`),
-        },
-        series: [
-            {
-                name: '待审核',
-                data: Array.from(Array(4)).map((_, i) => Math.round(Math.random() * -100 + i)),
-            },
-            {
-                name: '已通过',
-                data: Array.from(Array(4)).map((_, i) => Math.round(Math.random() * 100 + i)),
-            },
-        ],
-    }
-}
-
-function evenYaixsChartsBarOpts(len: number): EChartsOption {
-    return {
-        xAxis: {
-            data: Array.from(Array(4)).map((_, i) => `类目${i + 1}`),
-        },
-        yAxis: [
-            LcBarChartOptions.commonBarOptions.yAxis as YAXisOption,
-            LcBarChartOptions.commonBarOptions.yAxis as YAXisOption,
-        ],
-        series: [
-            {
-                name: '待审核',
-                data: Array.from(Array(4)).map((_, i) => Math.round(Math.random() * 100 + i)),
-            },
-            {
-                name: '已通过',
-                yAxisIndex: 1,
-                data: Array.from(Array(4)).map((_, i) => Math.round(Math.random() * 100 + i)),
-            },
-        ].slice(0, len),
-    }
-}
-
-function pictorialBarOpts(start, len): EChartsOption | { series: {}[] } {
-    return {
-        xAxis: {
-            data: Array.from(Array(4)).map((_, i) => `类目${i + 1}`),
-        },
-        yAxis: {
-
-        },
-        series: [
-            {
-                name: '类型名称',
-                barWidth: 'auto',
-                type: 'pictorialBar',
-                barGap: 0,
-                symbol: 'path://M0,10 L10,10 C5.5,10 5.5,5 5,0 C4.5,5 4.5,10 0,10 z',
-                data: [123, 60, 25, 18],
-            },
-            {
-                name: '类型名称1',
-                barWidth: 'auto',
-                type: 'pictorialBar',
-                barGap: 0,
-                symbol: 'path://M0,10 L10,10 C5.5,10 5.5,5 5,0 C4.5,5 4.5,10 0,10 z',
-                data: [123, 60, 25, 18],
-            },
-            {
-                name: '类型名称2',
-                barWidth: 'auto',
-                type: 'pictorialBar',
-                barGap: '-50%',
-                symbol: `image://${blueImage}`,
-                itemStyle: {
-                    opacity: 0.9
-                },
-                data: [23, 60, 125, 118],
-            },
-            {
-                name: '类型名称3',
-                barWidth: 'auto',
-                type: 'pictorialBar',
-                barGap: '-50%',
-                symbol: `image://${orgImage}`,
-                itemStyle: {
-                    opacity: 0.9
-                },
-                data: [23, 160, 45, 108],
-            },
-        ].slice(start, len),
-    }
-} 
+import {
+    chartsBarOpts,
+    chartsHorizontalBarOpts,
+    chartNegativeBarOptions,
+    evenYaixsChartsBarOpts,
+    pictorialBarOpts,
+} from './options/bar-options';
 </script>
 <style lang="scss" scoped>
 .demo-charts {

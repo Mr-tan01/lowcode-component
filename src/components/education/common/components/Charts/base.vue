@@ -1,5 +1,7 @@
 <template>
-    <div class="common-chart" ref="commonChart"></div>
+    <div class="lc-common-chart">
+        <div class="lc-common-chart__wrapper"  ref="commonChart"></div>
+    </div>
 </template>
 
 <script lang="ts" setup>
@@ -21,18 +23,14 @@ const {
     notMerge: Boolean,
 })
 useResizeObserver(commonChartRef, debounce(() => {
-    chartInstance.value?.resize({
-        animation: {
-            duration: 500,
-            easing: 'cubicOut'
-        }
-    });
+    chartInstance.value?.resize();
 }, debounceTime));
 function initChartInstance() {
     chartInstance.value = init(commonChartRef.value!, options);
 }
 onMounted(() => {
     initChartInstance();
+    setOptions(options, notMerge);
 });
 
 function setOptions(options: EChartsOption, deep: boolean, lazyUpdate?: boolean) {
@@ -40,6 +38,8 @@ function setOptions(options: EChartsOption, deep: boolean, lazyUpdate?: boolean)
 }
 watchEffect(() => {
     setOptions(options, notMerge);
+}, {
+    flush: 'post',
 });
 defineExpose({
     chartInstance,
@@ -48,8 +48,14 @@ defineExpose({
 </script>
 
 <style lang="scss" scoped>
-.common-chart {
+.lc-common-chart {
     width: 100%;
     height: 100%;
+    display: flex;
+    flex-direction: column;
+
+    &__wrapper {
+        flex: 1;
+    }
 }
 </style>

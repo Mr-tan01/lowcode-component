@@ -38,3 +38,29 @@ export function useLabelPieOptions(): {
         options: merge({}, baeOptions)
     };
 }
+
+export function useProperctionPieOptions() {
+    return {
+        showCustomLegend: false,
+        options: {
+            title: {
+                text: '59.4%',
+                subtext: '占比',
+            },
+            series: [
+                {
+                    name: '类别',
+                    data: [
+                        { value: 55, name: '已完成' },
+                        {
+                            value: 45, name: '未完成',
+                            itemStyle: {
+                                color: 'rgba(15, 251, 248, 0.05)',
+                            },
+                        },
+                    ],
+                }
+            ]
+        }
+    };
+}

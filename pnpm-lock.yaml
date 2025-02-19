@@ -18,6 +18,9 @@ importers:
       '@mmj-code-lib/scripts':
         specifier: git+http://code.siteshun.com:800/front-component/STS/mmj-code-lib.git#scripts
         version: git+http://code.siteshun.com:800/front-component/STS/mmj-code-lib.git#7909e84f319297d9122741e6e850c463ddd9082a
+      '@types/echarts':
+        specifier: ^5.0.0
+        version: 5.0.0
       '@types/lodash-es':
         specifier: ^4.17.12
         version: 4.17.12
@@ -405,6 +408,10 @@ packages:
 
   '@transloadit/prettier-bytes@0.0.7':
     resolution: {integrity: sha512-VeJbUb0wEKbcwaSlj5n+LscBl9IPgLPkHVGBkh00cztv6X4L/TJXK58LzFuBKX7/GAfiGhIwH67YTLTlzvIzBA==}
+
+  '@types/echarts@5.0.0':
+    resolution: {integrity: sha512-5uc/16BlYpzH8kU/u8aeRRgY2FV6yRY7RjPnYfUFPowl0F3kvNgfaz09PmeVdLkqdAtMft3XkCfqiJPJjG2DNQ==}
+    deprecated: This is a stub types definition. echarts provides its own type definitions, so you do not need this installed.
 
   '@types/estree@1.0.6':
     resolution: {integrity: sha512-AYnb1nQyY49te+VRAVgmzfcgjYS91mY5P0TKUDCLEM+gNnA+3T6rWITXRLYCpahpqSQbN5cE+gHpnPyXjHWxcw==}
@@ -1390,6 +1397,10 @@ snapshots:
     optional: true
 
   '@transloadit/prettier-bytes@0.0.7': {}
+
+  '@types/echarts@5.0.0':
+    dependencies:
+      echarts: 5.6.0
 
   '@types/estree@1.0.6': {}
 

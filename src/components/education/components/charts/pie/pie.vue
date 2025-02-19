@@ -3,7 +3,7 @@
         '--legendWidth': legendWidth,
     }">
         <div class="lc-pie__wrapper">
-            <div class="lc-pie__wrapper__legend" v-if="isNavtiveLegend && showCustomLegend">
+            <div class="lc-pie__wrapper__legend" v-if="isNoNavtiveLegend && showCustomLegend">
                 <div class="lc-pie__wrapper__legend__item" v-for="(item, key) in customLegendData" :key
                     :style="getLegendStyle(key, item)" :title="legendLabel(item.name, item.value)"
                     @click="legendClick(item)" @mouseenter="dispatchAction('highlight', item.name)"
@@ -25,7 +25,7 @@
 
 <script lang="ts" setup>
 import { type EChartsCoreOption, type EChartsOption, init, type ECharts } from 'echarts';
-import { computed, onBeforeUnmount, onMounted, ref, shallowRef, watchPostEffect, watch } from 'vue';
+import { computed, onBeforeUnmount, onMounted, ref, shallowRef, watchPostEffect, watch, useTemplateRef } from 'vue';
 import { useCommonPieOptions, usePieCommonSeries } from './options';
 import merge from 'lodash-es/merge';
 import { useResizeObserver } from '@vueuse/core';
@@ -61,7 +61,7 @@ const {
 }>();
 type DataRecord = { name: string | number, value: number | number[] };
 const legendSelectedMaps = ref(new Map<string | number, DataRecord & { selected: boolean; }>());
-const chartDom = shallowRef<HTMLElement>();
+const chartDomRef = useTemplateRef("chartDom");
 const chartInstance = shallowRef<ECharts>();
 const renderOptions = computed(() => {
     const newOptions = useCommonPieOptions(options);
@@ -120,7 +120,7 @@ function legendClick(record: DataRecord) {
     togggleLegendSelected(record.name);
     $emit('legend:click', record);
 }
-const isNavtiveLegend = computed(() => {
+const isNoNavtiveLegend = computed(() => {
     const legend = renderOptions.value.legend;
     if (Array.isArray(legend)) return false;
     return !legend?.show;
@@ -141,7 +141,7 @@ watchPostEffect(() => {
 })
 
 function initChart() {
-    chartInstance.value = init(chartDom.value, renderOptions.value);
+    chartInstance.value = init(chartDomRef.value, renderOptions.value);
 }
 
 function setOptions(option: EChartsCoreOption, notMerge?: boolean, lazyUpdate?: boolean) {
@@ -150,11 +150,11 @@ function setOptions(option: EChartsCoreOption, notMerge?: boolean, lazyUpdate?: 
 const cssBlockSize = ref('100%')
 function resizeChart(entries) {
     const entry = entries[0]
-  const { width, height } = entry.contentRect
+  const { width, height } = entry.contentRect;
     cssBlockSize.value = Math.min(width, height) + 'px';
     chartInstance.value?.resize();
 }
-const { stop } = useResizeObserver(chartDom, debounce(resizeChart, debounceTime));
+const { stop } = useResizeObserver(chartDomRef, debounce(resizeChart, debounceTime));
 
 const wrapperPading = computed(() => legendPosition === 'absolute' ? `0 ${legendWidth}` : '0');
 
@@ -187,6 +187,8 @@ defineExpose({
 
         &__legend {
             max-width: var(--legendWidth);
+            min-width: var(--legendWidth);
+            flex: 1;
             width: 100%;
             display: flex;
             flex-direction: column;
@@ -267,13 +269,12 @@ defineExpose({
         &__chart {
             display: flex;
             flex-direction: column;
-            justify-content: center;
-            align-items: center;
             flex: 1;
 
             &__inner {
                 width: 100%;
                 height: 100%;
+                aspect-ratio: 1/1;
 
                 @mixin innerCircleDecorator() {
                     content: '';

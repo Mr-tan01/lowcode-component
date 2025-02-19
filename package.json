@@ -19,6 +19,7 @@
   },
   "devDependencies": {
     "@mmj-code-lib/scripts": "git+http://code.siteshun.com:800/front-component/STS/mmj-code-lib.git#scripts",
+    "@types/echarts": "^5.0.0",
     "@types/lodash-es": "^4.17.12",
     "@types/node": "^22.10.7",
     "@vicons/ionicons5": "^0.13.0",
