@@ -1,6 +1,8 @@
 <template>
     <div class="help-container">
-        <h1>{{ title }}</h1>
+        <slot name="title">
+            <h1>{{ title }}</h1>
+        </slot>
         <div class="help-container__desc">
             {{ description }}
         </div>

@@ -79,3 +79,9 @@ export function useGaugeOptions(): {
         },
     }
 }
+
+export function useGaugeSvgOptions() {
+    return {
+        value: 100,
+    }
+}

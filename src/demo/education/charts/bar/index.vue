@@ -35,12 +35,21 @@
                     <LcBarChart :options="chartsBarOpts(100)" stack type="bar" :fake3d="false"></LcBarChart>
                 </Container>
                 <Container title="其他形态柱状图" rswidth="390px" rs-height="365px">
+                    <template #title>
+                        <span>其他形态柱状图</span>
+                        <NSpace>
+                            <a href="../images/blue.svg" download="blue-bg-iocn">蓝色图标</a>
+                            <a href="../images/org.svg" download="orange-bg-iocn">橙色图标</a>
+                        </NSpace>
+                    </template>
                     <LcBarChart :options="pictorialBarOpts(2, 100)" type="bar" :fake3d="false"></LcBarChart>
                 </Container>
                 <Container title="象形" rswidth="390px" rs-height="365px">
                     <LcBarChart :options="pictorialBarOpts(0, 2)" type="bar" :fake3d="false"></LcBarChart>
                 </Container>
+
             </NSpace>
+
         </Container>
     </div>
 </template>
@@ -62,5 +71,10 @@ import {
 <style lang="scss" scoped>
 .demo-charts {
     overflow: auto;
+
+    a,
+    span {
+        color: #fff;
+    }
 }
 </style>
