@@ -3,8 +3,8 @@
         <svg viewBox="0 0 308 313" version="1.1" xmlns="http://www.w3.org/2000/svg"
             xmlns:xlink="http://www.w3.org/1999/xlink">
             <defs>
-                <linearGradient id="processGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="0%" stop-color="rgba(15, 251, 248, 0.20)" /> <!-- 起始颜色 -->
+                <linearGradient :id="processGradientId" x1="0%" y1="0%" :x2="value + '%'" y2="0%" gradientUnits="userSpaceOnUse">
+                    <stop offset="0%" :stop-color="`rgba(15, 251, 248, 0.2)`" /> <!-- 起始颜色 -->
                     <stop offset="100%" stop-color="rgba(15, 251, 248, 1)" /> <!-- 结束颜色 -->
                 </linearGradient>
                 <path
@@ -124,7 +124,7 @@
 </template>
 <script lang="ts" setup>
 import { NNumberAnimation } from 'naive-ui/es/number-animation';
-import { computed } from 'vue';
+import { computed, useId } from 'vue';
 const {
     value = 0,
     unit = "%",
@@ -151,6 +151,8 @@ const precisionCompute = computed(() => {
     if (!isDecimal(value)) return 0;
     return precision;
 });
+const processGradientId = `processGradient${useId()}`;
+const strokeUrlId = computed(() => `url(#${processGradientId})`);
 const dashOffset = computed(() => startDashOffset + (offset * (value / 100)) + 'px');
 </script>
 <style lang="scss" scoped>
@@ -167,9 +169,8 @@ const dashOffset = computed(() => startDashOffset + (offset * (value / 100)) + '
         #process {
             transform: scale(0.875);
             transform-origin: 42.3% 42.3%;
-            transition: stroke-dashoffset 1s linear;
             fill: none;
-            stroke: url(#processGradient);
+            stroke: v-bind(strokeUrlId);
             stroke-width: 14.5px;
             stroke-dasharray: 800px, 800px;
             stroke-dashoffset: v-bind(dashOffset);

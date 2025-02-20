@@ -5,6 +5,12 @@
                 <Container title="仪表盘" rswidth="420px" rs-height="auto">
                     <LcGaugeSvgChart v-bind="useGaugeSvgOptions()"></LcGaugeSvgChart>
                 </Container>
+                <Container title="仪表盘" rswidth="420px" rs-height="auto">
+                    <LcGaugeSvgChart :value="90"></LcGaugeSvgChart>
+                </Container>
+                <Container title="仪表盘" rswidth="420px" rs-height="auto">
+                    <LcGaugeSvgChart :value="60"></LcGaugeSvgChart>
+                </Container>
                 <Container title="得分图" rswidth="520px" rs-height="420px">
                     <LcGaugeChart v-bind="useCommonGaugeOptions()"></LcGaugeChart>
                 </Container>
