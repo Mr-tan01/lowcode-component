@@ -14,7 +14,7 @@
     "dist"
   ],
   "dependencies": {
-    "lowcode-share": "git+http://code.siteshun.com:800/front-component/lowcode-sview/lowcode-share.git#develop",
+    "lowcode-share": "link:F:/work/goview/tosts/lowcode-share",
     "resize-observer-polyfill": "^1.5.1"
   },
   "devDependencies": {

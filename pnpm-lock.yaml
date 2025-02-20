@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       lowcode-share:
-        specifier: git+http://code.siteshun.com:800/front-component/lowcode-sview/lowcode-share.git#develop
-        version: git+http://code.siteshun.com:800/front-component/lowcode-sview/lowcode-share.git#c87b8278195deefb7a7917091087f49a907614da(typescript@5.6.3)
+        specifier: link:F:/work/goview/tosts/lowcode-share
+        version: link:../lowcode-share
       resize-observer-polyfill:
         specifier: ^1.5.1
         version: 1.5.1
@@ -773,10 +773,6 @@ packages:
 
   lodash@4.17.21:
     resolution: {integrity: sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==}
-
-  lowcode-share@git+http://code.siteshun.com:800/front-component/lowcode-sview/lowcode-share.git#c87b8278195deefb7a7917091087f49a907614da:
-    resolution: {commit: c87b8278195deefb7a7917091087f49a907614da, repo: http://code.siteshun.com:800/front-component/lowcode-sview/lowcode-share.git, type: git}
-    version: 0.0.0
 
   magic-string@0.30.17:
     resolution: {integrity: sha512-sNPKHvyjVf7gyjwS4xGTaW/mCnF8wnjtifKBEhxfZ7E/S8tQ0rssrwGNn6q8JH/ohItJfSQp9mBtQYuTlH5QnA==}
@@ -1838,12 +1834,6 @@ snapshots:
   lodash.toarray@4.4.0: {}
 
   lodash@4.17.21: {}
-
-  lowcode-share@git+http://code.siteshun.com:800/front-component/lowcode-sview/lowcode-share.git#c87b8278195deefb7a7917091087f49a907614da(typescript@5.6.3):
-    dependencies:
-      vue: 3.5.13(typescript@5.6.3)
-    transitivePeerDependencies:
-      - typescript
 
   magic-string@0.30.17:
     dependencies:

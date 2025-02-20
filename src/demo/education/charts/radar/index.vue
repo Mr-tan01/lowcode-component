@@ -4,25 +4,25 @@
 
             <NSpace>
                 <Container title="圆形雷达图" rswidth="420px" rs-height="406px">
-                    <lcRadarChart v-bind="useRadarOptions('circle', 0, 1, 0, 6)"></lcRadarChart>
+                    <LcRadarChart v-bind="useRadarOptions('circle', 0, 1, 0, 6)"></LcRadarChart>
                 </Container>
                 <Container title="六边雷达图" rswidth="420px" rs-height="406px">
-                    <lcRadarChart v-bind="useRadarOptions('polygon', 0, 1, 0, 6)"></lcRadarChart>
+                    <LcRadarChart v-bind="useRadarOptions('polygon', 0, 1, 0, 6)"></LcRadarChart>
                 </Container>
                 <Container title="五边雷达图" rswidth="420px" rs-height="406px">
-                    <lcRadarChart v-bind="useRadarOptions('polygon', 0, 1, 0, 5)"></lcRadarChart>
+                    <LcRadarChart v-bind="useRadarOptions('polygon', 0, 1, 0, 5)"></LcRadarChart>
                 </Container>
                 <Container title="三角雷达图" rswidth="420px" rs-height="406px">
-                    <lcRadarChart v-bind="useRadarOptions('polygon', 0, 1, 0, 3, true)"></lcRadarChart>
+                    <LcRadarChart v-bind="useRadarOptions('polygon', 0, 1, 0, 3, true)"></LcRadarChart>
                 </Container>
                 <Container title="六边雷达图" rswidth="420px" rs-height="406px">
-                    <lcRadarChart v-bind="useRadarOptions('circle', 0, 3, 0, 6, true)"></lcRadarChart>
+                    <LcRadarChart v-bind="useRadarOptions('circle', 0, 3, 0, 6, true)"></LcRadarChart>
                 </Container>
                 <Container title="五边雷达图" rswidth="420px" rs-height="406px">
-                    <lcRadarChart v-bind="useRadarOptions('polygon', 0, 3, 0, 5, true)"></lcRadarChart>
+                    <LcRadarChart v-bind="useRadarOptions('polygon', 0, 3, 0, 5, true)"></LcRadarChart>
                 </Container>
                 <Container title="三角雷达图" rswidth="420px" rs-height="406px">
-                    <lcRadarChart v-bind="useRadarOptions('polygon', 0, 3, 0, 3, true)"></lcRadarChart>
+                    <LcRadarChart v-bind="useRadarOptions('polygon', 0, 3, 0, 3, true)"></LcRadarChart>
                 </Container>
             </NSpace>
         </Container>
@@ -32,7 +32,7 @@
 import { NSpace } from 'naive-ui';
 import Container from '@/demo/components/help/Container.vue';
 import {
-    lcRadarChart,
+    LcRadarChart,
 } from '@/components/education/components/charts';
 import { useRadarOptions } from '../options/radar-options';
 </script>

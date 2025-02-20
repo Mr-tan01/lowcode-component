@@ -22,7 +22,7 @@ const renderOptions = computed(() => {
 });
 const {
     exposes,
-} = useCommonChartExpose();
+} = useCommonChartExpose("baseChart");
 defineExpose(exposes);
 </script>
 
