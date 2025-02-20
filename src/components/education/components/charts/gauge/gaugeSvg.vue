@@ -3,7 +3,8 @@
         <svg viewBox="0 0 308 313" version="1.1" xmlns="http://www.w3.org/2000/svg"
             xmlns:xlink="http://www.w3.org/1999/xlink">
             <defs>
-                <linearGradient :id="processGradientId" x1="0%" y1="0%" :x2="value + '%'" y2="0%" gradientUnits="userSpaceOnUse">
+                <linearGradient :id="processGradientId" x1="0%" y1="0%" :x2="value + '%'" y2="0%"
+                    gradientUnits="userSpaceOnUse">
                     <stop offset="0%" :stop-color="`rgba(15, 251, 248, 0.2)`" /> <!-- 起始颜色 -->
                     <stop offset="100%" stop-color="rgba(15, 251, 248, 1)" /> <!-- 结束颜色 -->
                 </linearGradient>
@@ -55,7 +56,7 @@
                 <g id="P9" transform="translate(-1437, -9183)">
                     <g id="组合-37" transform="translate(1437, 9183)">
                         <g id="编组-8" transform="translate(21.7492, 23.5567)">
-                            <g id="编组-2" transform="translate(49.4693, 49.1938)" stroke-dasharray="0,0">
+                            <g id="group-2" transform="translate(49.4693, 49.1938)" stroke-dasharray="0,0">
                                 <g id="路径">
                                     <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1">
                                     </use>
@@ -73,7 +74,7 @@
                                     <animate attributeName="stroke-dashoffset" :from="startDashOffset" :to="dashOffset"
                                         :dur="duration" />
                                 </path>
-                                <g id="编组-10">
+                                <g id="group-10">
                                     <path
                                         d="M182.49766,239.362241 C220.761924,220.190939 247.090116,180.122656 247.090116,133.798789 C247.090116,68.8489106 195.333561,16.1968843 131.48881,16.1968843 C67.6440591,16.1968843 15.8875039,68.8489106 15.8875039,133.798789 C15.8875039,180.830365 43.0262979,221.413703 82.2419595,240.226108"
                                         id="路径" stroke="#0FFBF8" stroke-width="0.644569492" stroke-dasharray="0,0">
@@ -194,13 +195,29 @@ const dashOffset = computed(() => startDashOffset + (offset * (value / 100)) + '
             }
         }
 
-        #编组-2 {
+        #group-2 {
             animation: breath-light 2s linear infinite;
             transform-origin: 30% 30%;
 
             &:hover {
                 opacity: 0.7;
             }
+        }
+
+        // 呼吸灯动画效果
+        @keyframes breath-light2 {
+            0% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.2;
+
+            }
+        }
+
+        #group-10 {
+            animation: breath-light2 linear infinite 1s;
         }
     }
 }
