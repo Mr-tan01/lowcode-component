@@ -1,4 +1,6 @@
 import { EChartsOption } from "echarts";
+import { TierOptions } from "~/src/components/education/components/charts";
+import { TierSeriesDataOptions } from "~/src/components/education/components/charts/funnel/themeConfig";
 
 export function useOptions(): {
     options: EChartsOption
@@ -18,4 +20,26 @@ export function useOptions(): {
             ],
         }
     };
+}
+
+const tierData = [
+    { value: 117, name: '类目名称' },
+    { value: 163, name: 'Inquiry' },
+    { value: 103, name: 'Order' },
+    { value: 230, name: 'Click' },
+    { value: 343, name: 'Show' }
+].sort((a, b) => a.value - b.value);
+export function useTierOptions(): {
+    options: TierOptions
+} {
+    return {
+        options: {
+            series: [
+                {
+                    max: 350,
+                    data: tierData,
+                }
+            ],
+        }
+    }
 }

@@ -1,12 +1,11 @@
 <template>
     <div class="demo-charts">
-        <Container title="气泡图" description="散点图主要包括单系列散点图、多系列散点图、" rswidth="1360px" rs-height="auto">
-
+        <Container title="漏斗图" description="散点图主要包括单系列散点图、多系列散点图、" rswidth="1360px" rs-height="auto">
             <NSpace>
-                <Container title="单气泡图" rswidth="520px" rs-height="306px">
-                    <LcFunnelChart v-bind="useOptions()"></LcFunnelChart>
+                <Container title="漏斗图(HTMLElement)" rswidth="520px" rs-height="306px">
+                    <LcFunnelTierChart v-bind="useTierOptions()"></LcFunnelTierChart>
                 </Container>
-                <Container title="多气泡图(≥2类数据)" rswidth="520px" rs-height="306px">
+                <Container title="漏斗图（echarts)" rswidth="520px" rs-height="306px">
                     <LcFunnelChart v-bind="useOptions()"></LcFunnelChart>
                 </Container>
             </NSpace>
@@ -18,8 +17,9 @@ import { NSpace } from 'naive-ui';
 import Container from '@/demo/components/help/Container.vue';
 import {
     LcFunnelChart,
+    LcFunnelTierChart,
 } from '@/components/education/components/charts';
-import { useOptions } from '../options/funnel-options';
+import { useOptions, useTierOptions } from '../options/funnel-options';
 </script>
 <style lang="scss" scoped>
 .demo-charts {
