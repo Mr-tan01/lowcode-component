@@ -72,7 +72,7 @@ export const legendOptions: EChartsOption['legend'] = [
     },
     {
        
-        left: '70%',
+        left: '67%',
         top: 'center',
         orient:'vertical',
         icon: 'none',
@@ -80,7 +80,6 @@ export const legendOptions: EChartsOption['legend'] = [
         formatter(name) {
             return name;
         },
-        align: 'right',
         padding: [0, 0, 0, 10],
         textStyle: {
             fontSize: 14,

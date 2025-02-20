@@ -2,8 +2,12 @@
     <div class="lc-icon" :style="{
         '--img-src': `url(${src})`,
         '--img-selected-src': `url(${selectedSrc})`,
-    }" :class="{ 'lc-icon--selected': selected, }">
-        <div class="lc-icon__image">
+    }" :class="{ 
+        'lc-icon--selected': selected,
+         }">
+        <div class="lc-icon__image" :class="{
+            'lc-icon__image--enhover': !!selectedSrc,
+        }">
             <img class="lc-icon__img" :src="src" draggable="false" alt="">
         </div>
         <span class="lc-icon__span">
@@ -13,7 +17,7 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, PropType, ref } from 'vue';
+import { computed, PropType } from 'vue';
 import { NameTypeFunc, useImage, type Domains, type NameTypes } from './icons';
 
 const {
@@ -58,12 +62,15 @@ const iconWidth = computed(() => typeof size === 'number' ? `${size}px` : size);
     }
 
     &__image {
-        background: var(--img-src);
-        background-size: 100% 100%;
+        background: var(--img-src) no-repeat;
+        background-size: 100%;
         background-position: center center;
         transition: background 0.3s linear;
-        &:hover {
-            background-image: var(--img-selected-src);
+
+        &--enhover {
+            &:hover {
+                background-image: var(--img-selected-src);
+            }
         }
     }
 
