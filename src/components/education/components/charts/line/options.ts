@@ -2,8 +2,8 @@ import { type EChartsCoreOption, type SeriesOption, type EChartsOption, type Lin
 import merge from 'lodash-es/merge';
 import { deepMergeArrayOptions } from "~/@mmj-code-lib/lowcode/es/components";
 import { defLinearGradients, gridOptions, legendOptions, lineColors, tooltipOptions, xAxisOptions, yAxisOptions } from "./const";
-import lineSymbol from '../images/symobl.png';
-import lineSymbol2 from '../images/symobl2.png';
+import lineSymbol from './images/symobl.png';
+import lineSymbol2 from './images/symobl2.png';
 import { useCommonBarSeries } from "@/components/education/components/charts/bar/options";
 const symbolList = [lineSymbol, lineSymbol2];
 
