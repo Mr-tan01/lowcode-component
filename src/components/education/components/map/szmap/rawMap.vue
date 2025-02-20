@@ -40,7 +40,7 @@ import Longhua from './comp/longhua.vue';
 import Defines from './comp/defines.vue';
 import Labels from './comp/labels.vue';
 import { LcMark } from '@/components/education/components/mark';
-import { type Component, computed } from 'vue';
+import { type Component, computed, onMounted, ref } from 'vue';
 import { type Levels, propsRaw } from './props';
 import { defFloatLevelConfig, type BlockName, szBlockNames } from './const';
 import merge from 'lodash-es/merge';
@@ -68,6 +68,8 @@ const blockList: Record<BlockName, Component> = {
     [szBlockNames['深汕合作区']]: Sshzq,
 }
 
+const labelAnimateNum = ref(0);
+
 function getMarkProp(key: BlockName) {
     const markMate = (values[key]! ?? { value: 0, });
     const currentLevelIndex = levelsList.value.findIndex(([_, item]) => markMate.value >= item?.range?.[0]! && markMate.value <= item?.range?.[1]!);
@@ -75,10 +77,16 @@ function getMarkProp(key: BlockName) {
     return {
         ...markMate,
         style: {
-            '--level-scale': currentLevelConf?.scale ?? 1,
+            '--level-scale': labelAnimateNum.value ? currentLevelConf?.scale ?? 1 : labelAnimateNum.value,
         }
     }
 }
+onMounted(() => {
+    // 显示动画
+    setTimeout(() => {
+        labelAnimateNum.value = 1;
+    }, 300)
+});
 
 const blockClass = computed(() => {
     return ['lc-szmap-raw__block', `visible--${fillModel}`];

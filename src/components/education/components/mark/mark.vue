@@ -9,7 +9,8 @@
             <div class="lc-mark__wrapper__rect">
                 <slot>
                     <span class="lc-mark__wrapper__rect--value">
-                        {{ value }}
+                        <NNumberAnimation :from="0" :to="value" :precision="precision">
+                        </NNumberAnimation>
                     </span>
                     <span class="lc-mark__wrapper__rect--unit">
                         {{ unit }}
@@ -21,6 +22,7 @@
 </template>
 
 <script lang="ts" setup>
+import { NNumberAnimation } from 'naive-ui/es/number-animation';
 import { computed } from 'vue';
 import { EducationMarkProps } from './props';
 
@@ -34,6 +36,7 @@ const {
     iconSrc = '',
     label = '',
     show = true,
+    precision = 0,
 } = defineProps<EducationMarkProps>();
 const icons = import.meta.glob<string>('./images/**.png', { import: 'default', eager: true });
 
