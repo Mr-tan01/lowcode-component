@@ -185,7 +185,7 @@ on('result', () => {
                 display: flex;
                 transform: translate(-50%, -50%);
                 transition: 0.3s linear;
-                transition-property: transform, opacity, visibility;
+                transition-property: transform, opacity, visibility, left, top;
                 will-change: transform;
                 z-index: var(--z-index-number);
 
