@@ -31,7 +31,7 @@ export function useCommonScatterOptions(
     return merge({}, commonScatterOptions, {
         legend: [{}, {
             formatter(name) {
-                return name + ' ' + legendValues[name];
+                return name + '：' + legendValues[name] + '%';
             },
         }],
     }, opts);
