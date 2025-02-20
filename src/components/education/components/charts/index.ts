@@ -9,4 +9,6 @@ export * from './radar';
  /** @vite-chunck */
 export * from './gauge';
  /** @vite-chunck */
-export * from './scatter';
+ export * from './scatter';
+ /** @vite-chunck */
+ export * from './funnel';
