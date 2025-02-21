@@ -1,6 +1,6 @@
 <template>
     <div class="lc-word-cloud">
-
+        word cloud
     </div>
 </template>
 

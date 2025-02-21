@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="392px" height="323px" viewBox="0 0 392 323" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>编组 76</title>
+    <g id="页面-2" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" opacity="0.499" stroke-dasharray="0,0">
+        <g id="P9" transform="translate(-758, -10762)" stroke-width="1.5">
+            <g id="编组-76" transform="translate(759, 10763.0016)">
+                <g id="编组-63">
+                    <path d="M208.555001,200.319862 C176.031987,147.267216 117.509736,111.875 50.7210093,111.875 C-19.4662084,111.875 -80.5246648,150.961143 -111.874999,208.555" id="路径" stroke-opacity="0.5" stroke="#FFFFFF" transform="translate(48.34, 160.215) rotate(-90) translate(-48.34, -160.215)"></path>
+                    <path d="M120.66,172.635888 C90.6684528,151.672843 54.1715828,139.375466 14.8026367,139.375466 C-22.9804672,139.375466 -58.1180729,150.702069 -87.4,170.145015" id="路径" stroke="#0FFBF8" transform="translate(16.63, 156.0055) rotate(-90) translate(-16.63, -156.0055)"></path>
+                </g>
+                <g id="编组-64" transform="translate(292.875, 0.1234)">
+                    <path d="M-111.875,200.319862 C-79.3509254,147.267216 -20.8286743,111.875 45.9600525,111.875 C116.14727,111.875 177.205727,150.961143 208.555,208.555" id="路径" stroke-opacity="0.5" stroke="#FFFFFF" transform="translate(48.34, 160.215) rotate(90) translate(-48.34, -160.215)"></path>
+                    <path d="M-23.875,172.135422 C6.11787224,151.172377 42.6147423,138.875 81.9836884,138.875 C119.766792,138.875 154.904398,150.201603 184.185,169.644548" id="路径" stroke="#0FFBF8" transform="translate(80.155, 155.505) rotate(90) translate(-80.155, -155.505)"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
