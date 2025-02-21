@@ -1,26 +1,38 @@
-import { PropType } from 'vue';
-type NavData = {
-    title: string;
-    path: string;
-    list?: {
-        label: string;
-        children: NavData[];
-    }[];
+type ListRaw = {
+    label: string;
+    children: NavData[];
 };
-declare const _default: import("vue").DefineComponent<import("vue").ExtractPropTypes<{
-    navDatas: {
-        type: PropType<NavData[]>;
-    };
-}>, {}, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {
-    jump: (item: NavData) => void;
-}, string, import("vue").PublicProps, Readonly<import("vue").ExtractPropTypes<{
-    navDatas: {
-        type: PropType<NavData[]>;
-    };
-}>> & Readonly<{
-    onJump?: (item: NavData) => any;
+export type NavData = {
+    label: string;
+    path: string;
+    list?: ListRaw[];
+};
+type __VLS_Props = {
+    navDatas?: NavData[];
+    hideArrow?: boolean;
+};
+type __VLS_PublicProps = {
+    'index'?: number;
+} & __VLS_Props;
+declare const _default: import("vue").DefineComponent<import("vue").ExtractPropTypes<__VLS_TypePropsToOption<__VLS_PublicProps>>, {}, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {
+    jump: (parent: ListRaw, item: NavData, i: number) => void;
+    scroll: (data: LcCarouseBoxChangeEvent) => void;
+    "update:index": (value: number) => void;
+}, string, import("vue").PublicProps, Readonly<import("vue").ExtractPropTypes<__VLS_TypePropsToOption<__VLS_PublicProps>>> & Readonly<{
+    onScroll?: (data: LcCarouseBoxChangeEvent) => any;
+    onJump?: (parent: ListRaw, item: NavData, i: number) => any;
+    "onUpdate:index"?: (value: number) => any;
 }>, {}, {}, {}, {}, string, import("vue").ComponentProvideOptions, true, {}, any>;
 export default _default;
+type __VLS_NonUndefinedable<T> = T extends undefined ? never : T;
+type __VLS_TypePropsToOption<T> = {
+    [K in keyof T]-?: {} extends Pick<T, K> ? {
+        type: import('vue').PropType<__VLS_NonUndefinedable<T[K]>>;
+    } : {
+        type: import('vue').PropType<T[K]>;
+        required: true;
+    };
+};
 declare module 'vue' {
     interface GlobalComponents {
     }

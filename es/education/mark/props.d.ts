@@ -1,5 +1,5 @@
 export type EducationMarkProps = {
-    value: number | string;
+    value: number;
     unit?: string;
     model?: 'hover' | 'focus' | 'default';
     meta?: Record<string, any>;
@@ -8,4 +8,5 @@ export type EducationMarkProps = {
     iconSrc?: string;
     label?: string;
     show?: boolean;
+    precision?: number;
 };

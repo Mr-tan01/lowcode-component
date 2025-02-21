@@ -16,7 +16,7 @@ const options = merge({}, commonViteConfig, {
 const esmComBuilder = new EsmComBuilder(modeListBase, options);
 const modeList = fs.readdirSync(modeListBase);
 
-['charts'].forEach(mode => {
+modeList.forEach(mode => {
     mode !== 'index.ts' ? esmComBuilder.executeBuild(mode).then(closeCallback) : null;
 });
 

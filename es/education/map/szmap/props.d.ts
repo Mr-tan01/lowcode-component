@@ -27,4 +27,7 @@ export declare const propsRaw: {
     readonly values: {
         readonly type: PropType<SZMapMarkProps>;
     };
+    readonly rotateX: {
+        readonly type: PropType<number>;
+    };
 };

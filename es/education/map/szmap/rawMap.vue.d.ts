@@ -15,6 +15,9 @@ declare const _default: import("vue").DefineComponent<import("vue").ExtractPropT
     readonly values: {
         readonly type: import("vue").PropType<import("./props").SZMapMarkProps>;
     };
+    readonly rotateX: {
+        readonly type: import("vue").PropType<number>;
+    };
 }>, {}, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").PublicProps, Readonly<import("vue").ExtractPropTypes<{
     readonly showLabel: {
         readonly type: BooleanConstructor;
@@ -30,6 +33,9 @@ declare const _default: import("vue").DefineComponent<import("vue").ExtractPropT
     };
     readonly values: {
         readonly type: import("vue").PropType<import("./props").SZMapMarkProps>;
+    };
+    readonly rotateX: {
+        readonly type: import("vue").PropType<number>;
     };
 }>> & Readonly<{}>, {
     readonly showLabel: boolean;

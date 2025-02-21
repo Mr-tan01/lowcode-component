@@ -1,3 +1,3 @@
-import lcRadarChart from './radar.vue';
-export type lcRadarChartInstanceType = InstanceType<typeof lcRadarChart>;
-export { lcRadarChart, };
+import LcRadarChart from './radar.vue';
+export type LcRadarChartInstanceType = InstanceType<typeof LcRadarChart>;
+export { LcRadarChart, };

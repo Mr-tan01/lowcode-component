@@ -1,0 +1,4 @@
+import { type EChartsCoreOption, type EChartsOption } from "echarts";
+export declare const commonScatterOptions: EChartsOption;
+export declare function useCommonScatterOptions(opts: EChartsCoreOption | EChartsOption): EChartsOption | (EChartsOption & EChartsCoreOption);
+export declare function useCommonScatterSeries(series: EChartsOption['series']): EChartsOption['series'];

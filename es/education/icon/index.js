@@ -2,7 +2,7 @@
  import './css/index.css';
  // # end css mapping css/index.css 
 
-import { ref as h, defineComponent as b, mergeDefaults as w, useCssVars as y, computed as $, openBlock as _, createElementBlock as S, normalizeClass as z, normalizeStyle as I, unref as m, createElementVNode as p, renderSlot as D } from "vue";
+import { ref as h, defineComponent as w, mergeDefaults as y, useCssVars as $, computed as _, openBlock as S, createElementBlock as z, normalizeClass as v, normalizeStyle as I, unref as r, createElementVNode as g, renderSlot as D } from "vue";
 const x = /* @__PURE__ */ Object.assign({
   "./images/func/add.png": () => import("./assets/add-ChlFVGqP.js").then((e) => e.default),
   "./images/func/blue-l-arrow.png": () => import("./assets/blue-l-arrow-BdO8_23_.js").then((e) => e.default),
@@ -39,10 +39,10 @@ const x = /* @__PURE__ */ Object.assign({
   "./images/event/reward/selected-icon.png": () => import("./assets/selected-icon-MFwRU2PB.js").then((e) => e.f).then((e) => e.default),
   "./images/event/style/icon.png": () => import("./assets/icon-CpqipgJB.js").then((e) => e.g).then((e) => e.default),
   "./images/event/style/selected-icon.png": () => import("./assets/selected-icon-MFwRU2PB.js").then((e) => e.g).then((e) => e.default)
-}), v = {
+}), b = {
   func: x,
   event: C
-}, L = {
+}, E = {
   func: {
     add: "add",
     caretDown: "caret-down",
@@ -75,17 +75,17 @@ const x = /* @__PURE__ */ Object.assign({
   }
 };
 function k(e, t, n = ".png") {
-  var o, g, d, c, u, f;
+  var o, p, u, c, d, f;
   const a = h(""), i = h("");
-  let r = `${e}/${t}${n}`, s = "";
-  return e === "event" && (r = `${e}/${t}/icon${n}`, s = `${e}/${t}/selected-icon${n}`), (d = (g = (o = v[e]) == null ? void 0 : o[`./images/${r}`]) == null ? void 0 : g.call(o)) == null || d.then((l) => a.value = l), s && ((f = (u = (c = v[e]) == null ? void 0 : c[`./images/${s}`]) == null ? void 0 : u.call(c)) == null || f.then((l) => i.value = l)), {
+  let s = `${e}/${t}${n}`, l = "";
+  return e === "event" && (s = `${e}/${t}/icon${n}`, l = `${e}/${t}/selected-icon${n}`), (u = (p = (o = b[e]) == null ? void 0 : o[`./images/${s}`]) == null ? void 0 : p.call(o)) == null || u.then((m) => a.value = m), l && ((f = (d = (c = b[e]) == null ? void 0 : c[`./images/${l}`]) == null ? void 0 : d.call(c)) == null || f.then((m) => i.value = m)), {
     src: a,
     selectedSrc: i
   };
 }
-const B = { class: "lc-icon__image" }, O = ["src"], P = { class: "lc-icon__span" }, j = /* @__PURE__ */ b({
+const B = ["src"], O = { class: "lc-icon__span" }, P = /* @__PURE__ */ w({
   __name: "icon",
-  props: /* @__PURE__ */ w({
+  props: /* @__PURE__ */ y({
     domain: {
       type: String
     },
@@ -110,29 +110,41 @@ const B = { class: "lc-icon__image" }, O = ["src"], P = { class: "lc-icon__span"
     }
   }),
   setup(e) {
-    y((i) => ({
-      "74ae46c6": a.value
+    $((i) => ({
+      b8ee5aa4: a.value
     }));
-    const { src: t, selectedSrc: n } = k(e.domain, e.name, e.ext), a = $(() => typeof e.size == "number" ? `${e.size}px` : e.size);
-    return (i, r) => (_(), S(
+    const { src: t, selectedSrc: n } = k(e.domain, e.name, e.ext), a = _(() => typeof e.size == "number" ? `${e.size}px` : e.size);
+    return (i, s) => (S(), z(
       "div",
       {
-        class: z(["lc-icon", { "lc-icon--selected": e.selected }]),
+        class: v(["lc-icon", {
+          "lc-icon--selected": e.selected
+        }]),
         style: I({
-          "--img-src": `url(${m(t)})`,
-          "--img-selected-src": `url(${m(n)})`
+          "--img-src": `url(${r(t)})`,
+          "--img-selected-src": `url(${r(n)})`
         })
       },
       [
-        p("div", B, [
-          p("img", {
-            class: "lc-icon__img",
-            src: m(t),
-            draggable: "false",
-            alt: ""
-          }, null, 8, O)
-        ]),
-        p("span", P, [
+        g(
+          "div",
+          {
+            class: v(["lc-icon__image", {
+              "lc-icon__image--enhover": !!r(n)
+            }])
+          },
+          [
+            g("img", {
+              class: "lc-icon__img",
+              src: r(t),
+              draggable: "false",
+              alt: ""
+            }, null, 8, B)
+          ],
+          2
+          /* CLASS */
+        ),
+        g("span", O, [
           D(i.$slots, "default", {}, void 0, !0)
         ])
       ],
@@ -140,16 +152,16 @@ const B = { class: "lc-icon__image" }, O = ["src"], P = { class: "lc-icon__span"
       /* CLASS, STYLE */
     ));
   }
-}), A = (e, t) => {
+}), j = (e, t) => {
   const n = e.__vccOpts || e;
   for (const [a, i] of t)
     n[a] = i;
   return n;
-}, N = /* @__PURE__ */ A(j, [["__scopeId", "data-v-5ad7eb20"]]);
+}, L = /* @__PURE__ */ j(P, [["__scopeId", "data-v-f29b791c"]]);
 export {
-  N as LcIcon,
+  L as LcIcon,
   C as eventDomainIcons,
   x as funcDomainIcons,
-  L as innerImageDomain,
+  E as innerImageDomain,
   k as useImage
 };

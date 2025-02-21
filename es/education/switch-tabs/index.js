@@ -2,11 +2,397 @@
  import './css/index.css';
  // # end css mapping css/index.css 
 
-import { defineComponent as ce, mergeModels as G, mergeDefaults as fe, useCssVars as de, ref as M, useModel as J, computed as R, shallowRef as D, watch as ve, nextTick as Q, onMounted as Y, openBlock as K, createElementBlock as q, createElementVNode as g, unref as A, normalizeClass as Z, normalizeStyle as me, Fragment as be, renderList as ge, toDisplayString as pe } from "vue";
-import { _ as he } from "./assets/lt-arrow-DiWswSiL.js";
-import { _ as _e } from "./assets/rt-arrow-CQwSTGHi.js";
-import { _ as Te } from "./assets/top-arrow-bBxwU0FN.js";
-const ye = [
+import { defineComponent as oe, mergeModels as Q, mergeDefaults as _e, useCssVars as ye, ref as K, useModel as Y, computed as k, shallowRef as q, watch as Te, nextTick as Z, onMounted as ee, openBlock as S, createElementBlock as A, createElementVNode as T, unref as E, createCommentVNode as V, normalizeClass as H, normalizeStyle as he, Fragment as we, renderList as xe, renderSlot as te, mergeProps as le, toDisplayString as se, createVNode as Ce, withCtx as ke } from "vue";
+import { _ as Se } from "./assets/lt-arrow-DiWswSiL.js";
+import { _ as Ae } from "./assets/rt-arrow-CQwSTGHi.js";
+import { _ as Oe } from "./assets/top-arrow-bBxwU0FN.js";
+function F(e) {
+  var r = typeof e;
+  return e != null && (r == "object" || r == "function");
+}
+var je = typeof global == "object" && global && global.Object === Object && global, Be = typeof self == "object" && self && self.Object === Object && self, ue = je || Be || Function("return this")(), z = function() {
+  return ue.Date.now();
+}, Re = /\s/;
+function Ee(e) {
+  for (var r = e.length; r-- && Re.test(e.charAt(r)); )
+    ;
+  return r;
+}
+var $e = /^\s+/;
+function We(e) {
+  return e && e.slice(0, Ee(e) + 1).replace($e, "");
+}
+var P = ue.Symbol, ce = Object.prototype, Ie = ce.hasOwnProperty, Le = ce.toString, W = P ? P.toStringTag : void 0;
+function Me(e) {
+  var r = Ie.call(e, W), n = e[W];
+  try {
+    e[W] = void 0;
+    var o = !0;
+  } catch {
+  }
+  var l = Le.call(e);
+  return o && (r ? e[W] = n : delete e[W]), l;
+}
+var Ne = Object.prototype, Ke = Ne.toString;
+function Fe(e) {
+  return Ke.call(e);
+}
+var Pe = "[object Null]", De = "[object Undefined]", ne = P ? P.toStringTag : void 0;
+function qe(e) {
+  return e == null ? e === void 0 ? De : Pe : ne && ne in Object(e) ? Me(e) : Fe(e);
+}
+function Ve(e) {
+  return e != null && typeof e == "object";
+}
+var ze = "[object Symbol]";
+function He(e) {
+  return typeof e == "symbol" || Ve(e) && qe(e) == ze;
+}
+var ae = NaN, Ue = /^[-+]0x[0-9a-f]+$/i, Xe = /^0b[01]+$/i, Ge = /^0o[0-7]+$/i, Je = parseInt;
+function re(e) {
+  if (typeof e == "number")
+    return e;
+  if (He(e))
+    return ae;
+  if (F(e)) {
+    var r = typeof e.valueOf == "function" ? e.valueOf() : e;
+    e = F(r) ? r + "" : r;
+  }
+  if (typeof e != "string")
+    return e === 0 ? e : +e;
+  e = We(e);
+  var n = Xe.test(e);
+  return n || Ge.test(e) ? Je(e.slice(2), n ? 2 : 8) : Ue.test(e) ? ae : +e;
+}
+var Qe = "Expected a function", Ye = Math.max, Ze = Math.min;
+function fe(e, r, n) {
+  var o, l, m, c, d, _, v = 0, w = !1, h = !1, O = !0;
+  if (typeof e != "function")
+    throw new TypeError(Qe);
+  r = re(r) || 0, F(n) && (w = !!n.leading, h = "maxWait" in n, m = h ? Ye(re(n.maxWait) || 0, r) : m, O = "trailing" in n ? !!n.trailing : O);
+  function j(i) {
+    var g = o, p = l;
+    return o = l = void 0, v = i, c = e.apply(p, g), c;
+  }
+  function I(i) {
+    return v = i, d = setTimeout(b, r), w ? j(i) : c;
+  }
+  function L(i) {
+    var g = i - _, p = i - v, N = r - g;
+    return h ? Ze(N, m - p) : N;
+  }
+  function x(i) {
+    var g = i - _, p = i - v;
+    return _ === void 0 || g >= r || g < 0 || h && p >= m;
+  }
+  function b() {
+    var i = z();
+    if (x(i))
+      return B(i);
+    d = setTimeout(b, L(i));
+  }
+  function B(i) {
+    return d = void 0, O && o ? j(i) : (o = l = void 0, c);
+  }
+  function M() {
+    d !== void 0 && clearTimeout(d), v = 0, o = _ = l = d = void 0;
+  }
+  function $() {
+    return d === void 0 ? c : B(z());
+  }
+  function R() {
+    var i = z(), g = x(i);
+    if (o = arguments, l = this, _ = i, g) {
+      if (d === void 0)
+        return I(_);
+      if (h)
+        return clearTimeout(d), d = setTimeout(b, r), j(_);
+    }
+    return d === void 0 && (d = setTimeout(b, r)), c;
+  }
+  return R.cancel = M, R.flush = $, R;
+}
+var et = "Expected a function";
+function ie(e, r, n) {
+  var o = !0, l = !0;
+  if (typeof e != "function")
+    throw new TypeError(et);
+  return F(n) && (o = "leading" in n ? !!n.leading : o, l = "trailing" in n ? !!n.trailing : l), fe(e, r, {
+    leading: o,
+    maxWait: r,
+    trailing: l
+  });
+}
+const de = {
+  list: {
+    type: Array,
+    required: !1
+  },
+  offsetAnimationTime: {
+    type: Number
+  },
+  gap: {
+    type: Number
+  },
+  rowKey: {
+    type: Function,
+    required: !1
+  },
+  showTrack: {
+    type: Boolean,
+    required: !1
+  },
+  disabled: {
+    type: Boolean
+  }
+}, tt = { class: "lc-carouse-box" }, nt = { class: "lc-carouse-box__wrapper" }, at = ["onClick"], rt = ["title"], it = {
+  key: 0,
+  class: "lc-carouse-box__track"
+}, ot = /* @__PURE__ */ oe({
+  __name: "carouseBox",
+  props: /* @__PURE__ */ Q(/* @__PURE__ */ _e(de, {
+    offsetAnimationTime: 250,
+    rowKey: (e) => e.value ?? Math.random(),
+    __skip_rowKey: !0,
+    showTrack: !0,
+    gap: 10,
+    disabled: !1
+  }), {
+    index: { default: -1 },
+    indexModifiers: {},
+    value: { default: "" },
+    valueModifiers: {}
+  }),
+  emits: /* @__PURE__ */ Q(["change"], ["update:index", "update:value"]),
+  setup(e, { emit: r }) {
+    var G;
+    ye((a) => ({
+      "24ca7a73": a.gap,
+      "67b6a43b": a.offsetAnimationTime
+    }));
+    const n = K(0), o = K(!0), l = Y(e, "index"), m = Y(e, "value"), c = k(() => e.list ?? []), d = k(() => !e.disabled);
+    l.value === -1 && (l.value = ((G = c.value) == null ? void 0 : G.findIndex((a) => e.rowKey(a) === m.value)) ?? 0);
+    const _ = r, v = K({
+      before: [],
+      after: [],
+      appendCount: 0
+    }), w = k(() => {
+      const a = c.value ?? [];
+      return [...v.value.before, ...a, ...v.value.after];
+    }), h = k(() => n.value % 2 === 0);
+    function O() {
+      n.value = l.value;
+    }
+    O();
+    function j(a) {
+      return ie(() => {
+        let t = n.value + a;
+        t < 0 ? t = w.value.length - 1 : t >= w.value.length && (t = 0), X(w.value[t], t);
+      }, e.offsetAnimationTime);
+    }
+    const I = j(-1), L = j(1), x = q([]), b = q(), B = q(), M = K(0);
+    Te(() => e.list, () => {
+      i(), Z($);
+    }, {
+      deep: 1
+    }), ee($);
+    function $() {
+      if (!p.value) return;
+      const { maxAppendCount: a } = p.value, t = a;
+      if (t === 0) return;
+      if (v.value.appendCount = t, O(), n.value += t, e.disabled) {
+        v.value.before = [], v.value.after = [];
+        return;
+      }
+      const s = c.value ?? [];
+      v.value.before = s.slice(-t).map(R), v.value.after = s.slice(0, t).map(R);
+    }
+    function R(a, t) {
+      return {
+        ...a,
+        value: e.rowKey(a) + "_clone_" + t + "_" + Date.now()
+      };
+    }
+    function i() {
+      M.value++;
+    }
+    function g() {
+      if (!window.ResizeObserver || !b.value) return;
+      new ResizeObserver(fe(() => {
+        i(), $();
+      }, e.offsetAnimationTime)).observe(b.value);
+    }
+    ee(g);
+    const p = k(() => {
+      var J;
+      if (M.value++, !b.value || !x.value || !B.value) return;
+      const { width: a } = b.value.getBoundingClientRect(), t = {
+        normal: 0,
+        active: 0
+      };
+      for (let D = 0; D <= x.value.length; D++) {
+        const C = x.value[D];
+        if ((J = C == null ? void 0 : C.classList) != null && J.contains("active") ? t.active = C.offsetWidth : t.normal = C == null ? void 0 : C.offsetWidth, t.active && t.normal)
+          break;
+      }
+      const s = t.normal, u = t.active, f = a / s, y = f, ge = e.disabled ? 0 : Math.ceil(f), pe = B.value.offsetWidth;
+      return {
+        normalButtonWidth: s,
+        maxButtonCount: y,
+        carouselWidth: pe,
+        maxAppendCount: ge,
+        offset: u / 2
+        // 加上选中的按钮宽度一半, 让选中的按钮在中心点
+      };
+    }), N = k(() => {
+      if (p.value) {
+        const { normalButtonWidth: a, maxButtonCount: t, offset: s, carouselWidth: u } = p.value, f = t / 2;
+        let y = (a * (n.value - f) + s) * -1;
+        return y >= 0 ? y = 0 : y <= -u + a * t && (y = -u + a * t), y;
+      }
+      return 0;
+    });
+    function me(a) {
+      window.requestAnimationFrame ? window.requestAnimationFrame(a) : a();
+    }
+    function be(a, t = !0) {
+      me(() => {
+        t ? Z(setTimeout.bind(null, a, e.offsetAnimationTime)) : setTimeout(a, e.offsetAnimationTime);
+      });
+    }
+    function U(a) {
+      be(() => {
+        o.value = !1, n.value = a;
+      }, !1);
+    }
+    const X = ie((a, t) => {
+      if (e.disabled) return;
+      o.value || (o.value = !0);
+      const s = v.value.appendCount;
+      let u = t - s;
+      if (l.value == u) return;
+      n.value = t, u < 0 ? (U(c.value.length + u + s), u = c.value.length - 1) : u >= c.value.length && (U(s), u = 0), l.value = u;
+      const f = c.value[u];
+      m.value = f == null ? void 0 : f.value;
+      const y = {
+        index: u,
+        label: f == null ? void 0 : f.label,
+        value: f == null ? void 0 : f.value,
+        data: f
+      };
+      _("change", y);
+    }, e.offsetAnimationTime);
+    return (a, t) => (S(), A("div", tt, [
+      T("div", nt, [
+        d.value ? (S(), A("div", {
+          key: 0,
+          class: "lc-carouse-box__wrapper__arrow arrow--left",
+          onClick: t[0] || (t[0] = //@ts-ignore
+          (...s) => E(I) && E(I)(...s))
+        }, t[2] || (t[2] = [
+          T(
+            "img",
+            {
+              class: "lc-carouse-box__wrapper__arrow--image",
+              src: Se,
+              draggable: "false",
+              alt: ""
+            },
+            null,
+            -1
+            /* HOISTED */
+          )
+        ]))) : V("v-if", !0),
+        T(
+          "div",
+          {
+            class: "lc-carouse-box__wrapper__tabs",
+            ref_key: "tabButtonParentElRef",
+            ref: b
+          },
+          [
+            T(
+              "div",
+              {
+                class: H(["lc-carouse-box__wrapper__tabs--train", { "is-transition": o.value }]),
+                style: he({ "--carousel-offset": `translateX(${N.value}px)` }),
+                ref_key: "carouselTrainElRef",
+                ref: B
+              },
+              [
+                (S(!0), A(
+                  we,
+                  null,
+                  xe(w.value, (s, u) => (S(), A("button", {
+                    class: H(["lc-carouse-box__wrapper__tabs--train__button", { active: n.value === u, "is-even": h.value }]),
+                    key: a.rowKey(s),
+                    onClick: (f) => E(X)(s, u),
+                    ref_for: !0,
+                    ref_key: "tabButtonRef",
+                    ref: x
+                  }, [
+                    te(a.$slots, "default", le({ ref_for: !0 }, { record: s, isActive: n.value === u, isEven: h.value, isTransition: o.value, index: u }), () => [
+                      T("div", {
+                        class: "lc-carouse-box__wrapper__tabs--train__button--text",
+                        title: s.label
+                      }, se(s.label), 9, rt)
+                    ], !0)
+                  ], 10, at))),
+                  128
+                  /* KEYED_FRAGMENT */
+                ))
+              ],
+              6
+              /* CLASS, STYLE */
+            )
+          ],
+          512
+          /* NEED_PATCH */
+        ),
+        d.value ? (S(), A("div", {
+          key: 1,
+          class: "lc-carouse-box__wrapper__arrow arrow--right",
+          onClick: t[1] || (t[1] = //@ts-ignore
+          (...s) => E(L) && E(L)(...s))
+        }, t[3] || (t[3] = [
+          T(
+            "img",
+            {
+              class: "lc-carouse-box__wrapper__arrow--image",
+              src: Ae,
+              draggable: "false",
+              alt: ""
+            },
+            null,
+            -1
+            /* HOISTED */
+          )
+        ]))) : V("v-if", !0)
+      ]),
+      a.showTrack ? (S(), A("div", it, [
+        te(a.$slots, "track", {}, () => [
+          t[4] || (t[4] = T(
+            "img",
+            {
+              class: "lc-carouse-box__track__image--pointer",
+              src: Oe,
+              draggable: "false",
+              alt: ""
+            },
+            null,
+            -1
+            /* HOISTED */
+          ))
+        ], !0)
+      ])) : V("v-if", !0)
+    ]));
+  }
+}), ve = (e, r) => {
+  const n = e.__vccOpts || e;
+  for (const [o, l] of r)
+    n[o] = l;
+  return n;
+}, lt = /* @__PURE__ */ ve(ot, [["__scopeId", "data-v-3bf1662e"]]), st = [
   {
     label: "龙华区",
     value: "龙华区"
@@ -51,368 +437,39 @@ const ye = [
     label: "深汕特别合作区",
     value: "深汕特别合作区"
   }
-];
-function F(e) {
-  var a = typeof e;
-  return e != null && (a == "object" || a == "function");
-}
-var we = typeof global == "object" && global && global.Object === Object && global, xe = typeof self == "object" && self && self.Object === Object && self, re = we || xe || Function("return this")(), z = function() {
-  return re.Date.now();
-}, Ce = /\s/;
-function Se(e) {
-  for (var a = e.length; a-- && Ce.test(e.charAt(a)); )
-    ;
-  return a;
-}
-var ke = /^\s+/;
-function Oe(e) {
-  return e && e.slice(0, Se(e) + 1).replace(ke, "");
-}
-var N = re.Symbol, ie = Object.prototype, je = ie.hasOwnProperty, Be = ie.toString, E = N ? N.toStringTag : void 0;
-function Re(e) {
-  var a = je.call(e, E), n = e[E];
-  try {
-    e[E] = void 0;
-    var s = !0;
-  } catch {
-  }
-  var u = Be.call(e);
-  return s && (a ? e[E] = n : delete e[E]), u;
-}
-var Ae = Object.prototype, Ee = Ae.toString;
-function We(e) {
-  return Ee.call(e);
-}
-var Ie = "[object Null]", $e = "[object Undefined]", ee = N ? N.toStringTag : void 0;
-function Le(e) {
-  return e == null ? e === void 0 ? $e : Ie : ee && ee in Object(e) ? Re(e) : We(e);
-}
-function Me(e) {
-  return e != null && typeof e == "object";
-}
-var Fe = "[object Symbol]";
-function Ne(e) {
-  return typeof e == "symbol" || Me(e) && Le(e) == Fe;
-}
-var te = NaN, Pe = /^[-+]0x[0-9a-f]+$/i, De = /^0b[01]+$/i, Ke = /^0o[0-7]+$/i, qe = parseInt;
-function ne(e) {
-  if (typeof e == "number")
-    return e;
-  if (Ne(e))
-    return te;
-  if (F(e)) {
-    var a = typeof e.valueOf == "function" ? e.valueOf() : e;
-    e = F(a) ? a + "" : a;
-  }
-  if (typeof e != "string")
-    return e === 0 ? e : +e;
-  e = Oe(e);
-  var n = De.test(e);
-  return n || Ke.test(e) ? qe(e.slice(2), n ? 2 : 8) : Pe.test(e) ? te : +e;
-}
-var ze = "Expected a function", He = Math.max, Ve = Math.min;
-function le(e, a, n) {
-  var s, u, h, f, d, v, b = 0, W = !1, _ = !1, C = !0;
-  if (typeof e != "function")
-    throw new TypeError(ze);
-  a = ne(a) || 0, F(n) && (W = !!n.leading, _ = "maxWait" in n, h = _ ? He(ne(n.maxWait) || 0, a) : h, C = "trailing" in n ? !!n.trailing : C);
-  function S(i) {
-    var m = s, w = u;
-    return s = u = void 0, b = i, f = e.apply(w, m), f;
-  }
-  function I(i) {
-    return b = i, d = setTimeout(y, a), W ? S(i) : f;
-  }
-  function k(i) {
-    var m = i - v, w = i - b, L = a - m;
-    return _ ? Ve(L, h - w) : L;
-  }
-  function T(i) {
-    var m = i - v, w = i - b;
-    return v === void 0 || m >= a || m < 0 || _ && w >= h;
-  }
-  function y() {
-    var i = z();
-    if (T(i))
-      return j(i);
-    d = setTimeout(y, k(i));
-  }
-  function j(i) {
-    return d = void 0, C && s ? S(i) : (s = u = void 0, f);
-  }
-  function B() {
-    d !== void 0 && clearTimeout(d), b = 0, s = v = u = d = void 0;
-  }
-  function $() {
-    return d === void 0 ? f : j(z());
-  }
-  function O() {
-    var i = z(), m = T(i);
-    if (s = arguments, u = this, v = i, m) {
-      if (d === void 0)
-        return I(v);
-      if (_)
-        return clearTimeout(d), d = setTimeout(y, a), S(v);
-    }
-    return d === void 0 && (d = setTimeout(y, a)), f;
-  }
-  return O.cancel = B, O.flush = $, O;
-}
-var Ue = "Expected a function";
-function ae(e, a, n) {
-  var s = !0, u = !0;
-  if (typeof e != "function")
-    throw new TypeError(Ue);
-  return F(n) && (s = "leading" in n ? !!n.leading : s, u = "trailing" in n ? !!n.trailing : u), le(e, a, {
-    leading: s,
-    maxWait: a,
-    trailing: u
-  });
-}
-const Xe = { class: "lc-switch-tabs" }, Ge = { class: "lc-switch-tabs__wrapper" }, Je = ["onClick"], Qe = ["title"], Ye = /* @__PURE__ */ ce({
+], ut = { class: "lc-switch-tabs" }, ct = ["title"], ft = /* @__PURE__ */ oe({
   __name: "switch-tabs",
-  props: /* @__PURE__ */ G(/* @__PURE__ */ fe({
-    list: {
-      type: Array,
-      required: !1
-    },
-    offsetAnimationTime: {
-      type: Number
-    },
-    rowKey: {
-      type: Function,
-      required: !1
-    }
-  }, {
-    offsetAnimationTime: 250,
-    rowKey: (e) => e.value,
-    __skip_rowKey: !0
-  }), {
-    index: { default: -1 },
-    indexModifiers: {},
-    value: { default: "" },
-    valueModifiers: {}
-  }),
-  emits: /* @__PURE__ */ G(["change"], ["update:index", "update:value"]),
-  setup(e, { emit: a }) {
-    var U;
-    de((r) => ({
-      "6c1aa647": e.offsetAnimationTime
-    }));
-    const n = M(0), s = M(!0), u = J(e, "index"), h = J(e, "value"), f = R(() => e.list === void 0 ? ye : e.list);
-    u.value === -1 && (u.value = ((U = f.value) == null ? void 0 : U.findIndex((r) => e.rowKey(r) === h.value)) ?? 0);
-    const d = a, v = M({
-      before: [],
-      after: [],
-      appendCount: 0
-    }), b = R(() => {
-      const r = f.value ?? [];
-      return [...v.value.before, ...r, ...v.value.after];
-    }), W = R(() => n.value % 2 === 0);
-    function _() {
-      n.value = u.value;
-    }
-    _();
-    function C(r) {
-      return ae(() => {
-        let t = n.value + r;
-        t < 0 ? t = b.value.length - 1 : t >= b.value.length && (t = 0), V(b.value[t], t);
-      }, e.offsetAnimationTime);
-    }
-    const S = C(-1), I = C(1), k = D([]), T = D(), y = D(), j = M(0);
-    ve(() => e.list, () => {
-      O(), Q(B);
-    }, {
-      deep: 1
-    }), Y(B);
-    function B() {
-      var o;
-      if (!m.value) return;
-      const { maxButtonCountCeil: r } = m.value, t = r;
-      if (t === 0 || ((o = f.value) == null ? void 0 : o.length) < t) return;
-      v.value.appendCount = t, _(), n.value += t;
-      const l = f.value ?? [];
-      v.value.before = l.slice(-t).map($), v.value.after = l.slice(0, t).map($);
-    }
-    function $(r, t) {
-      return {
-        ...r,
-        value: e.rowKey(r) + "_clone_" + t + "_" + Date.now()
-      };
-    }
-    function O() {
-      j.value++;
-    }
-    function i() {
-      if (!window.ResizeObserver || !T.value) return;
-      new ResizeObserver(le(() => {
-        O(), B();
-      }, e.offsetAnimationTime)).observe(T.value);
-    }
-    Y(i);
-    const m = R(() => {
-      var X;
-      if (j.value++, !T.value || !k.value || !y.value) return;
-      const { width: r } = T.value.getBoundingClientRect(), t = {
-        normal: 0,
-        active: 0
-      };
-      for (let P = 0; P <= k.value.length; P++) {
-        const x = k.value[P];
-        if ((X = x == null ? void 0 : x.classList) != null && X.contains("active") ? t.active = x.offsetWidth : t.normal = x == null ? void 0 : x.offsetWidth, t.active && t.normal)
-          break;
-      }
-      const l = t.normal, o = t.active, c = r / l, p = c, se = Math.ceil(c), ue = y.value.offsetWidth;
-      return {
-        normalButtonWidth: l,
-        maxButtonCount: p,
-        carouselWidth: ue,
-        maxButtonCountCeil: se,
-        offset: o / 2
-        // 加上选中的按钮宽度一半, 让选中的按钮在中心点
-      };
-    }), w = R(() => {
-      if (m.value) {
-        const { normalButtonWidth: r, maxButtonCount: t, offset: l, carouselWidth: o } = m.value, c = t / 2;
-        let p = (r * (n.value - c) + l) * -1;
-        return p >= 0 ? p = 0 : p <= -o + r * t && (p = -o + r * t), p;
-      }
-      return 0;
-    });
-    function L(r) {
-      window.requestAnimationFrame ? window.requestAnimationFrame(r) : r();
-    }
-    function oe(r, t = !0) {
-      L(() => {
-        t ? Q(setTimeout.bind(null, r, e.offsetAnimationTime)) : setTimeout(r, e.offsetAnimationTime);
-      });
-    }
-    function H(r) {
-      oe(() => {
-        s.value = !1, n.value = r;
-      }, !1);
-    }
-    const V = ae((r, t) => {
-      s.value || (s.value = !0);
-      const l = v.value.appendCount;
-      let o = t - l;
-      if (u.value == o) return;
-      n.value = t, o < 0 ? (H(f.value.length + o + l), o = f.value.length - 1) : o >= f.value.length && (H(l), o = 0), u.value = o;
-      const c = f.value[o];
-      h.value = c == null ? void 0 : c.value;
-      const p = {
-        index: o,
-        label: c == null ? void 0 : c.label,
-        value: c == null ? void 0 : c.value,
-        data: c
-      };
-      d("change", p);
-    }, e.offsetAnimationTime);
-    return (r, t) => (K(), q("div", Xe, [
-      g("div", Ge, [
-        g("div", {
-          class: "lc-switch-tabs__wrapper__arrow arrow--left",
-          onClick: t[0] || (t[0] = //@ts-ignore
-          (...l) => A(S) && A(S)(...l))
-        }, t[2] || (t[2] = [
-          g(
-            "img",
+  props: de,
+  setup(e) {
+    const r = k(() => e.list ?? st);
+    return (n, o) => (S(), A("div", ut, [
+      Ce(E(lt), le({
+        list: r.value,
+        offsetAnimationTime: n.offsetAnimationTime,
+        rowKey: n.rowKey
+      }, n.$attrs), {
+        default: ke(({ isActive: l, isEven: m, record: { label: c } }) => [
+          T(
+            "button",
             {
-              class: "lc-switch-tabs__wrapper__arrow--image",
-              src: he,
-              draggable: "false",
-              alt: ""
+              class: H(["lc-switch-tabs__wrapper__tabs--train__button", { active: l, "is-even": m }])
             },
-            null,
-            -1
-            /* HOISTED */
+            [
+              T("div", {
+                class: "lc-switch-tabs__wrapper__tabs--train__button--text",
+                title: c
+              }, se(c), 9, ct)
+            ],
+            2
+            /* CLASS */
           )
-        ])),
-        g(
-          "div",
-          {
-            class: "lc-switch-tabs__wrapper__tabs",
-            ref_key: "tabButtonParentElRef",
-            ref: T
-          },
-          [
-            g(
-              "div",
-              {
-                class: Z(["lc-switch-tabs__wrapper__tabs--train", { "is-transition": s.value }]),
-                style: me({ "--carousel-offset": `translateX(${w.value}px)` }),
-                ref_key: "carouselTrainElRef",
-                ref: y
-              },
-              [
-                (K(!0), q(
-                  be,
-                  null,
-                  ge(b.value, (l, o) => (K(), q("button", {
-                    class: Z(["lc-switch-tabs__wrapper__tabs--train__button", { active: n.value === o, "is-even": W.value }]),
-                    key: e.rowKey(l),
-                    onClick: (c) => A(V)(l, o),
-                    ref_for: !0,
-                    ref_key: "tabButtonRef",
-                    ref: k
-                  }, [
-                    g("div", {
-                      class: "lc-switch-tabs__wrapper__tabs--train__button--text",
-                      title: l.label
-                    }, pe(l.label), 9, Qe)
-                  ], 10, Je))),
-                  128
-                  /* KEYED_FRAGMENT */
-                ))
-              ],
-              6
-              /* CLASS, STYLE */
-            )
-          ],
-          512
-          /* NEED_PATCH */
-        ),
-        g("div", {
-          class: "lc-switch-tabs__wrapper__arrow arrow--right",
-          onClick: t[1] || (t[1] = //@ts-ignore
-          (...l) => A(I) && A(I)(...l))
-        }, t[3] || (t[3] = [
-          g(
-            "img",
-            {
-              class: "lc-switch-tabs__wrapper__arrow--image",
-              src: _e,
-              draggable: "false",
-              alt: ""
-            },
-            null,
-            -1
-            /* HOISTED */
-          )
-        ]))
-      ]),
-      t[4] || (t[4] = g(
-        "div",
-        { class: "lc-switch-tabs__track" },
-        [
-          g("img", {
-            class: "lc-switch-tabs__track__image--pointer",
-            src: Te,
-            draggable: "false",
-            alt: ""
-          })
-        ],
-        -1
-        /* HOISTED */
-      ))
+        ]),
+        _: 1
+        /* STABLE */
+      }, 16, ["list", "offsetAnimationTime", "rowKey"])
     ]));
   }
-}), Ze = (e, a) => {
-  const n = e.__vccOpts || e;
-  for (const [s, u] of a)
-    n[s] = u;
-  return n;
-}, rt = /* @__PURE__ */ Ze(Ye, [["__scopeId", "data-v-bc383042"]]);
+}), gt = /* @__PURE__ */ ve(ft, [["__scopeId", "data-v-f146b1eb"]]);
 export {
-  rt as LcSwitchTabs
+  gt as LcSwitchTabs
 };
