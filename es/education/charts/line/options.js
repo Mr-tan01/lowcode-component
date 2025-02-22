@@ -1,5 +1,5 @@
 import r from "lodash-es/merge";
-import { deepMergeArrayOptions as p } from "~/@mmj-code-lib/lowcode/es/components";
+import { deepMergeArrayOptions as p } from "@mmj-code-lib/lowcode/es/components";
 import { tooltipOptions as y, legendOptions as a, gridOptions as c, xAxisOptions as f, yAxisOptions as u, lineColors as n, defLinearGradients as i } from "./const.js";
 import S from "./images/symobl.png.js";
 import b from "./images/symobl2.png.js";

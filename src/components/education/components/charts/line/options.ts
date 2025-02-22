@@ -1,6 +1,6 @@
 import { type EChartsCoreOption, type SeriesOption, type EChartsOption, type LineSeriesOption } from "echarts";
 import merge from 'lodash-es/merge';
-import { deepMergeArrayOptions } from "~/@mmj-code-lib/lowcode/es/components";
+import { deepMergeArrayOptions } from "@mmj-code-lib/lowcode/es/components";
 import { defLinearGradients, gridOptions, legendOptions, lineColors, tooltipOptions, xAxisOptions, yAxisOptions } from "./const";
 import lineSymbol from './images/symobl.png';
 import lineSymbol2 from './images/symobl2.png';

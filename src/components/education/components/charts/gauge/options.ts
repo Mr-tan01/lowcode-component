@@ -1,6 +1,6 @@
 import { type SeriesOption, type EChartsCoreOption, type EChartsOption } from "echarts";
 import merge from "lodash-es/merge";
-import { deepMergeArrayOptions } from "~/@mmj-code-lib/lowcode/es/components";
+import { deepMergeArrayOptions } from "@mmj-code-lib/lowcode/es/components";
 import { gaugeColors, gaugeInnerGraphicColors, gaugeSeriesRecordOptions, gaugeTitleOptions } from "./const";
 import { commonTooltipOptions } from "@/components/education/common/components/Charts/options";
 

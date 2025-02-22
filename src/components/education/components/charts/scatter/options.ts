@@ -1,6 +1,6 @@
 import { type SeriesOption, type EChartsCoreOption, type EChartsOption, } from "echarts";
 import merge from 'lodash-es/merge';
-import { deepMergeArrayOptions } from "~/@mmj-code-lib/lowcode/es/components";
+import { deepMergeArrayOptions } from "@mmj-code-lib/lowcode/es/components";
 import { commonScatterSeries, gridOptions, legendOptions, scatterColors, tooltipOptions, xAxisOptions, yAxisOptions } from "./const";
 import { setRgbaAlpha } from 'lowcode-share/es/share';
 

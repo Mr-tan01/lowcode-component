@@ -2,7 +2,7 @@ import { type EChartsOption, type BarSeriesOption, type SeriesOption, type EChar
 import merge from 'lodash-es/merge';
 import { mergeLineRecord } from "@/components/education/components/charts/line/options";
 import { barColors, gridOptions, legendOptions, tooltipOptions, xAxisOptions, yAxisOptions } from "./const";
-import { deepMergeArrayOptions } from "~/@mmj-code-lib/lowcode/es/components";
+import { deepMergeArrayOptions } from "@mmj-code-lib/lowcode/es/components";
 
 
 export const commonBarOptions: EChartsOption = {

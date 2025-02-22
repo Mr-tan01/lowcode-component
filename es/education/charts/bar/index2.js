@@ -1,5 +1,5 @@
 import { defineComponent as t, computed as a, openBlock as n, createElementBlock as s, createVNode as i, unref as l, mergeProps as m } from "vue";
-import { SChartsBar as c } from "~/@mmj-code-lib/lowcode/es/components";
+import { SChartsBar as c } from "@mmj-code-lib/lowcode/es/components";
 import { useCommonBarOptions as d, useCommonBarSeries as f, commonBarOptions as p } from "./options.js";
 import u from "lodash-es/merge";
 import { barBuiltInStyle as k } from "./const.js";

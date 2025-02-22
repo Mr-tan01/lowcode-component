@@ -1,5 +1,5 @@
 import s from "lodash-es/merge";
-import { deepMergeArrayOptions as c } from "~/@mmj-code-lib/lowcode/es/components";
+import { deepMergeArrayOptions as c } from "@mmj-code-lib/lowcode/es/components";
 import { tooltipOptions as a, legendOptions as u, gridOptions as l, xAxisOptions as d, yAxisOptions as f, funnelColors as p, commonScatterSeries as m } from "./const.js";
 const t = {
   tooltip: a,

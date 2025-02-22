@@ -1,5 +1,5 @@
 import s from "lodash-es/merge";
-import { deepMergeArrayOptions as c } from "~/@mmj-code-lib/lowcode/es/components";
+import { deepMergeArrayOptions as c } from "@mmj-code-lib/lowcode/es/components";
 import { tooltipOptions as p, legendOptions as l, gridOptions as a, xAxisOptions as u, yAxisOptions as O, scatterColors as i, commonScatterSeries as m } from "./const.js";
 import { setRgbaAlpha as g } from "lowcode-share/es/share";
 const e = {

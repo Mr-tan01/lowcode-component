@@ -1,7 +1,7 @@
 import { type RadarComponentOption, type EChartsCoreOption, type EChartsOption } from "echarts";
 import merge from "lodash-es/merge";
 import { radarColors, radarGridOptions, radarItemOptions, radarLegendOptions, radarSeriesOptions, radarTitleOptions, radarTooltipOptions } from "./const";
-import { deepMergeArrayOptions } from "~/@mmj-code-lib/lowcode/es/components";
+import { deepMergeArrayOptions } from "@mmj-code-lib/lowcode/es/components";
 
 const commonRadarOptions: EChartsOption = {
     grid: radarGridOptions,

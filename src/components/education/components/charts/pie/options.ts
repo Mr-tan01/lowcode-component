@@ -1,4 +1,4 @@
-import { deepMergeArrayOptions } from "~/@mmj-code-lib/lowcode/es/components";
+import { deepMergeArrayOptions } from "@mmj-code-lib/lowcode/es/components";
 import { innerLabelSeries1, pieColors, pieLegend, pieSeriesRecord, pieTitleOptions, pieTooltipOptions } from "./const";
 import { type EChartsCoreOption, type EChartsOption } from "echarts";
 import merge from "lodash-es/merge";

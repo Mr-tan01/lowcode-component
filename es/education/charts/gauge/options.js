@@ -1,5 +1,5 @@
 import t from "lodash-es/merge";
-import { deepMergeArrayOptions as s } from "~/@mmj-code-lib/lowcode/es/components";
+import { deepMergeArrayOptions as s } from "@mmj-code-lib/lowcode/es/components";
 import { gaugeTitleOptions as g, gaugeSeriesRecordOptions as p, gaugeColors as c, gaugeInnerGraphicColors as i } from "./const.js";
 import { commonTooltipOptions as l } from "../common/components/Charts/options/index.js";
 const e = {

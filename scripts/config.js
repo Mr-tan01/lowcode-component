@@ -28,7 +28,7 @@ export default {
                 /echarts*/,
                 /lowcode-share*/,
                 'resize-observer-polyfill',
-                /~\/@mmj-code-lib\/lowcode*/,
+                /@mmj-code-lib\/lowcode*/,
             ],
             output: {
                 globals: {

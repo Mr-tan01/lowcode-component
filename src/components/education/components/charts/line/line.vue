@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts" setup>
-import { SChartsLine } from '~/@mmj-code-lib/lowcode/es/components';
+import { SChartsLine } from '@mmj-code-lib/lowcode/es/components';
 import { computed, PropType } from 'vue';
 import { type EChartsCoreOption, type EChartsOption } from 'echarts';
 import {

@@ -1,6 +1,6 @@
 import d from "lodash-es/merge";
 import { radarGridOptions as m, radarTooltipOptions as c, radarTitleOptions as p, radarLegendOptions as u, radarItemOptions as f, radarSeriesOptions as O, radarColors as R } from "./const.js";
-import { deepMergeArrayOptions as v } from "~/@mmj-code-lib/lowcode/es/components";
+import { deepMergeArrayOptions as v } from "@mmj-code-lib/lowcode/es/components";
 const o = {
   grid: m,
   tooltip: c,
