@@ -5,6 +5,7 @@
 </template>
 
 <script lang="ts" setup>
+// TODO: 去除依赖 @mmj-code-lib/lowcode
 import { SChartsBar } from '~/@mmj-code-lib/lowcode/es/components';
 import { computed } from 'vue';
 import { type EChartsOption, type EChartsCoreOption } from 'echarts';

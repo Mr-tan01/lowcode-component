@@ -1,5 +1,5 @@
-import { pathResolve } from 'lowcode-share/es/cli/index.js';
-import { join } from 'path';
+
+import { resolve } from 'path';
 
 /**
  * @type {import('vite').InlineConfig}
@@ -9,11 +9,11 @@ export default {
         alias: [
             {
                 find: '@',
-                replacement: pathResolve('src', join(process.cwd(), '../')),
+                replacement: resolve('../src'),
             },
             {
                 find: '~',
-                replacement: pathResolve('.', join(process.cwd(), '../'))
+                replacement: resolve('../'),
             },
         ],
     },
@@ -22,11 +22,13 @@ export default {
             external: [
                 'vue',
                 'vue-router',
-                'lodash-es',
-                'naive-ui',
-                '@vueuse/core',
-                'echarts',
-                'lowcode-share',
+                /lodash-es*/,
+                /naive-ui*/,
+                /@vueuse\/core*/,
+                /echarts*/,
+                /lowcode-share*/,
+                'resize-observer-polyfill',
+                /~\/@mmj-code-lib\/lowcode*/,
             ],
             output: {
                 globals: {
