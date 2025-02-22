@@ -1,9 +1,9 @@
 import { defineComponent as p, computed as m, openBlock as t, createElementBlock as i, createElementVNode as l, createVNode as u, unref as n, createBlock as c, createCommentVNode as d } from "vue";
-import g from "../src/components/education/common/components/Charts/baseChart/base.js";
-import { useCommonChartExpose as f } from "../src/components/education/common/components/Charts/utils/index.js";
+import g from "../common/components/Charts/baseChart/base.js";
+import { useCommonChartExpose as f } from "../common/components/Charts/utils/index.js";
 import C from "lodash-es/merge";
 import { useCommonGaugeOptions as _, useGaugeSeriesOptions as h } from "./options.js";
-import b from "../src/components/education/common/components/Charts/legend/index.js";
+import b from "../common/components/Charts/legend/index.js";
 const L = { class: "lc-gauge" }, v = { class: "lc-gauge__wrapper" }, N = /* @__PURE__ */ p({
   __name: "gauge",
   props: {

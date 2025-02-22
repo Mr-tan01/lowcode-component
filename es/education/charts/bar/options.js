@@ -1,10 +1,10 @@
 import e from "lodash-es/merge";
 import { mergeLineRecord as c } from "../line/options.js";
-import { tooltipOptions as s, legendOptions as d, gridOptions as y, xAxisOptions as m, yAxisOptions as u, barColors as g } from "./const.js";
-import { deepMergeArrayOptions as b } from "../@mmj-code-lib/lowcode/es/components/index.js";
+import { tooltipOptions as d, legendOptions as s, gridOptions as y, xAxisOptions as m, yAxisOptions as u, barColors as g } from "./const.js";
+import { deepMergeArrayOptions as b } from "~/@mmj-code-lib/lowcode/es/components";
 const p = {
-  tooltip: s,
-  legend: d,
+  tooltip: d,
+  legend: s,
   grid: y,
   xAxis: m,
   yAxis: u,

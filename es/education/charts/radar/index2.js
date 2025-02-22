@@ -1,6 +1,6 @@
 import { defineComponent as n, mergeDefaults as a, computed as m, openBlock as p, createElementBlock as i, createVNode as c, unref as u } from "vue";
-import d from "../src/components/education/common/components/Charts/baseChart/base.js";
-import { useCommonChartExpose as f } from "../src/components/education/common/components/Charts/utils/index.js";
+import d from "../common/components/Charts/baseChart/base.js";
+import { useCommonChartExpose as f } from "../common/components/Charts/utils/index.js";
 import l from "lodash-es/merge";
 import { useCommonRadarOptions as C, useCommonRadarSeries as _ } from "./options.js";
 const h = { class: "lc-radar" }, v = /* @__PURE__ */ n({

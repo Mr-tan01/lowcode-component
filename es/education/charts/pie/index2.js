@@ -5,7 +5,7 @@ import G from "lodash-es/merge";
 import { useResizeObserver as I } from "@vueuse/core";
 import { debounce as U } from "lodash-es";
 import { innerGraphicColors as j } from "./const.js";
-import q from "../src/components/education/common/components/Charts/legend/index.js";
+import q from "../common/components/Charts/legend/index.js";
 const x = { class: "lc-pie__wrapper" }, H = {
   key: 0,
   class: "lc-pie__wrapper__legend"

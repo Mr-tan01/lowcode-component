@@ -1,14 +1,14 @@
-import { deepMergeArrayOptions as l } from "../@mmj-code-lib/lowcode/es/components/index.js";
-import { pieTitleOptions as d, pieTooltipOptions as f, pieLegend as s, pieColors as y, innerLabelSeries1 as O, pieSeriesRecord as S } from "./const.js";
+import { deepMergeArrayOptions as l } from "~/@mmj-code-lib/lowcode/es/components";
+import { pieTitleOptions as d, pieTooltipOptions as f, pieLegend as y, pieColors as O, innerLabelSeries1 as S, pieSeriesRecord as g } from "./const.js";
 import o from "lodash-es/merge";
 const a = {
   title: d,
   tooltip: f,
-  legend: s,
-  color: y
+  legend: y,
+  color: O
 };
 function C(e, t, n, r) {
-  const p = r === "innerLabel" ? O : S, m = Array.isArray(n) ? n : n ? [n] : [];
+  const p = r === "innerLabel" ? S : g, m = Array.isArray(n) ? n : n ? [n] : [];
   return Array.isArray(e) ? e.map((i) => (i.data = c(i.data, m), o(u(t), p, i))) : (e.data = c(e.data, m), o(u(t), p, e));
 }
 function u(e) {

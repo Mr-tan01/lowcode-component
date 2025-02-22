@@ -1,8 +1,8 @@
 import s from "lodash-es/merge";
-import { deepMergeArrayOptions as a } from "../@mmj-code-lib/lowcode/es/components/index.js";
-import { tooltipOptions as c, legendOptions as u, gridOptions as l, xAxisOptions as d, yAxisOptions as f, funnelColors as p, commonScatterSeries as m } from "./const.js";
+import { deepMergeArrayOptions as c } from "~/@mmj-code-lib/lowcode/es/components";
+import { tooltipOptions as a, legendOptions as u, gridOptions as l, xAxisOptions as d, yAxisOptions as f, funnelColors as p, commonScatterSeries as m } from "./const.js";
 const t = {
-  tooltip: c,
+  tooltip: a,
   legend: u,
   grid: l,
   xAxis: d,
@@ -12,7 +12,7 @@ const t = {
 };
 function A(e) {
   var o;
-  a(e, Object.keys(t), Object.values(t));
+  c(e, Object.keys(t), Object.values(t));
   const r = {};
   return (((o = e == null ? void 0 : e.series[0]) == null ? void 0 : o.data) ?? []).forEach((n) => {
     r[n.name] = n.value;

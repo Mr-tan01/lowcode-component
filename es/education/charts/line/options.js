@@ -1,12 +1,12 @@
 import r from "lodash-es/merge";
-import { deepMergeArrayOptions as a } from "../@mmj-code-lib/lowcode/es/components/index.js";
-import { tooltipOptions as p, legendOptions as y, gridOptions as c, xAxisOptions as f, yAxisOptions as u, lineColors as n, defLinearGradients as i } from "./const.js";
+import { deepMergeArrayOptions as p } from "~/@mmj-code-lib/lowcode/es/components";
+import { tooltipOptions as y, legendOptions as a, gridOptions as c, xAxisOptions as f, yAxisOptions as u, lineColors as n, defLinearGradients as i } from "./const.js";
 import S from "./images/symobl.png.js";
 import b from "./images/symobl2.png.js";
 import { useCommonBarSeries as g } from "../bar/options.js";
 const l = [S, b], t = {
-  tooltip: p,
-  legend: y,
+  tooltip: y,
+  legend: a,
   grid: c,
   xAxis: f,
   yAxis: u,
@@ -29,7 +29,7 @@ const l = [S, b], t = {
   }
 };
 function C(o) {
-  return a(o, Object.keys(t), Object.values(t)), r({}, t, o);
+  return p(o, Object.keys(t), Object.values(t)), r({}, t, o);
 }
 function O(o, e) {
   return r({}, r({}, m, {
