@@ -6,3 +6,5 @@ export * as lcScatterOptions from './options';
 export {
     LcScatterChart,
 };
+
+export default LcScatterChart;

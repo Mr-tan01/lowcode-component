@@ -11,3 +11,5 @@ export {
     LcFunnelTierChart,
     type TierOptions,
 };
+
+export default LcFunnelChart;

@@ -6,3 +6,5 @@ export * as LcBarChartOptions from './options';
 export {
     LcBarChart,
 };
+
+export default LcBarChart;

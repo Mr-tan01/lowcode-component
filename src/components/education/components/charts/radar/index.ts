@@ -5,3 +5,5 @@ export type LcRadarChartInstanceType = InstanceType<typeof LcRadarChart>;
 export {
     LcRadarChart,
 }
+
+export default LcRadarChart;

@@ -11,3 +11,5 @@ export {
     LcGaugeChart,
     LcGaugeSvgChart,
 };
+
+export default LcGaugeChart;

@@ -6,3 +6,5 @@ export * as LcLineOptions from './options';
 export {
     lcLineChart,
 };
+
+export default lcLineChart;

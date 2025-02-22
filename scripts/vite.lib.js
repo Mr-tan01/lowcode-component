@@ -23,6 +23,7 @@ const options = merge({}, commonViteConfig, {
     },
     build: {
         outDir: '../es/education',
+        emptyOutDir: false,
     }
 });
 const esmComBuilder = new EsmComBuilder(modeListBase, options);
