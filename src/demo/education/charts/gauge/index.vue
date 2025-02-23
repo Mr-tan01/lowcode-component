@@ -27,7 +27,7 @@ import Container from '@/demo/components/help/Container.vue';
 import {
     LcGaugeChart,
     LcGaugeSvgChart
-} from '@/components/education/components/charts';
+} from '~/es/education/charts';
 import { useCommonGaugeOptions, useGaugeOptions, useGaugeSvgOptions } from '../options/gauge-options';
 </script>
 <style lang="scss" scoped>

@@ -3,7 +3,7 @@ import blueImage from '../images/blue.svg';
 import { type YAXisOption } from 'echarts/types/src/coord/cartesian/AxisModel';
 import {
     LcBarChartOptions,
-} from '@/components/education/components/charts';
+} from '~/es/education/charts';
 import { type EChartsOption } from 'echarts';
 export function chartsBarOpts(len: number): EChartsOption {
     return {

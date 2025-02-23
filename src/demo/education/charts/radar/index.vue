@@ -33,7 +33,7 @@ import { NSpace } from 'naive-ui';
 import Container from '@/demo/components/help/Container.vue';
 import {
     LcRadarChart,
-} from '@/components/education/components/charts';
+} from '~/es/education/charts';
 import { useRadarOptions } from '../options/radar-options';
 </script>
 <style lang="scss" scoped>

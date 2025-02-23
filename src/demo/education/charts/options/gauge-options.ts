@@ -1,6 +1,6 @@
 import { graphic, type EChartsOption } from "echarts"
 import merge from "lodash-es/merge";
-import { gaugeThemeOptions } from '@/components/education/components/charts';
+import { gaugeThemeOptions } from '~/es/education/charts';
 
 export function useCommonGaugeOptions(): {
     options: EChartsOption

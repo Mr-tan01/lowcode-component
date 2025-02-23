@@ -14,7 +14,7 @@
 </template>
 <script lang="ts" setup>
 import Container from '@/demo/components/help/Container.vue';
-import { Szmap, type SZMapMarkProps } from '@/components/education/components/map';
+import { Szmap, type SZMapMarkProps } from '~/es/education/map';
 
 const values: SZMapMarkProps = {
     guangming: {

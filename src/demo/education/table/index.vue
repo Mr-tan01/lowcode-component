@@ -11,7 +11,7 @@
 
 <script lang="ts" setup>
 import Container from '@/demo/components/help/Container.vue';
-import { LcDescTable, type LcDescTableColumns } from '@/components/education/components/table';
+import { LcDescTable, type LcDescTableColumns } from '~/es/education/table';
 
 const columns: LcDescTableColumns[] = [
     {

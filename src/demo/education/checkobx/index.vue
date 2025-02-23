@@ -21,7 +21,7 @@
 <script lang="ts" setup>
 import { NSpace } from 'naive-ui';
 import Container from '@/demo/components/help/Container.vue';
-import { LcCheckbox, LcCheckboxGroup } from '@/components/education/components/checkbox';
+import { LcCheckbox, LcCheckboxGroup } from '~/es/education/checkbox';
 import { ref } from 'vue';
 const checkboxValue = ref(['1']);
 </script>

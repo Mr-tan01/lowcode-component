@@ -20,7 +20,7 @@ importers:
     devDependencies:
       '@mmj-code-lib/scripts':
         specifier: git+http://code.siteshun.com:800/front-component/STS/mmj-code-lib.git#scripts
-        version: git+http://code.siteshun.com:800/front-component/STS/mmj-code-lib.git#b26103587a28eb4f013bf005798fcea18e421a72
+        version: git+http://code.siteshun.com:800/front-component/STS/mmj-code-lib.git#eb00c7df72170652f760c59191b1b1812b159fa4
       '@types/echarts':
         specifier: ^5.0.0
         version: 5.0.0
@@ -340,9 +340,9 @@ packages:
     resolution: {commit: 28e17724f3eb0f7c6975933489b9e91aee392141, repo: http://liangweizhu%40siteshun@code.siteshun.com:800/front-component/STS/mmj-code-lib.git, type: git}
     version: 0.1.1-alpha-0.1.4
 
-  '@mmj-code-lib/scripts@git+http://code.siteshun.com:800/front-component/STS/mmj-code-lib.git#b26103587a28eb4f013bf005798fcea18e421a72':
-    resolution: {commit: b26103587a28eb4f013bf005798fcea18e421a72, repo: http://code.siteshun.com:800/front-component/STS/mmj-code-lib.git, type: git}
-    version: 0.2.5
+  '@mmj-code-lib/scripts@git+http://code.siteshun.com:800/front-component/STS/mmj-code-lib.git#eb00c7df72170652f760c59191b1b1812b159fa4':
+    resolution: {commit: eb00c7df72170652f760c59191b1b1812b159fa4, repo: http://code.siteshun.com:800/front-component/STS/mmj-code-lib.git, type: git}
+    version: 0.3.5
 
   '@rollup/pluginutils@5.1.4':
     resolution: {integrity: sha512-USm05zrsFxYLPdWWq+K3STlWiT/3ELn3RcV5hJMghpeAIhxfsUIg6mt12CBJBInWMV4VneoV7SfGv8xIwo2qNQ==}
@@ -1311,7 +1311,7 @@ snapshots:
 
   '@mmj-code-lib/lowcode@git+http://liangweizhu%40siteshun@code.siteshun.com:800/front-component/STS/mmj-code-lib.git#28e17724f3eb0f7c6975933489b9e91aee392141': {}
 
-  '@mmj-code-lib/scripts@git+http://code.siteshun.com:800/front-component/STS/mmj-code-lib.git#b26103587a28eb4f013bf005798fcea18e421a72': {}
+  '@mmj-code-lib/scripts@git+http://code.siteshun.com:800/front-component/STS/mmj-code-lib.git#eb00c7df72170652f760c59191b1b1812b159fa4': {}
 
   '@rollup/pluginutils@5.1.4(rollup@4.31.0)':
     dependencies:

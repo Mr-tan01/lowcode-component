@@ -33,8 +33,8 @@
 <script lang="ts" setup>
 import Container from '@/demo/components/help/Container.vue';
 import { NSpace } from 'naive-ui';
-import { LcPageTitle, LcTextTitle } from '@/components/education/components/pageTitle';
-import { LcDecoratorTitle } from '@/components/education/components/decoratorTitle';
+import { LcPageTitle, LcTextTitle } from '~/es/education/pageTitle';
+import { LcDecoratorTitle } from '~/es/education/decoratorTitle';
 import * as pageTitle from './pageTitle';
 import VueResizable from 'vue-resizable'
 </script>

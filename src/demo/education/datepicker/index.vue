@@ -15,7 +15,7 @@
 
 <script lang="ts" setup>
 import Container from '@/demo/components/help/Container.vue';
-import { LcDatePicker } from '@/components/education/components/datePicker';
+import { LcDatePicker } from '~/es/education/datePicker';
 import { code1, code2 } from './const';
 </script>
 

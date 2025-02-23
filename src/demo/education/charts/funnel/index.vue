@@ -18,7 +18,7 @@ import Container from '@/demo/components/help/Container.vue';
 import {
     LcFunnelChart,
     LcFunnelTierChart,
-} from '@/components/education/components/charts';
+} from '~/es/education/charts';
 import { useOptions, useTierOptions } from '../options/funnel-options';
 </script>
 <style lang="scss" scoped>

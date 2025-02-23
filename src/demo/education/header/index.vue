@@ -3,7 +3,7 @@
      <LcHeader v-model:index="headerIndex" :nav-datas="defNavData"></LcHeader>
 </template>
 <script lang="ts" setup>
-import { LcHeader } from "@/components/education/components/header";
+import { LcHeader } from "~/es/education/header";
 import { ref } from "vue";
 const headerIndex = ref(2);
 const defNavData = [{
