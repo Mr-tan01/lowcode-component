@@ -108,10 +108,26 @@ function resizeMove({ width }) {
         flex-direction: column;
         border: 1px dotted #30b4dc;
         border-radius: 5px;
+        position: relative;
 
         .vue-resize {
             padding: 20px;
             box-sizing: border-box;
+            position: unset;
+            :deep(.resizable-t),
+            :deep(.resizable-r),
+            :deep(.resizable-b),
+            :deep(.resizable-l),
+            :deep(.resizable-lt),
+            :deep(.resizable-rt),
+            :deep(.resizable-rb),
+            :deep(.resizable-lb) {
+                &:hover {
+                    background: #0845fc6f;
+                    filter: blur(10px);
+                    border-radius: 10px;
+                }
+            }
         }
 
         .pad-box {
