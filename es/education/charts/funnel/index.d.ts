@@ -1,8 +1,8 @@
 import { default as LcFunnelChart } from './funnel';
 import { default as LcFunnelTierChart } from './funnelTier';
-import { TierOptions } from './themeConfig';
-export type LcFunnelChartInstanceType = InstanceType<typeof LcFunnelChart>;
+export * as funnelThemeConfig from './themeConfig';
 export * as LcFunnelChartOptions from './options';
+export type LcFunnelChartInstanceType = InstanceType<typeof LcFunnelChart>;
 export type LcFunnelTierChartInstanceType = InstanceType<typeof LcFunnelTierChart>;
-export { LcFunnelChart, LcFunnelTierChart, type TierOptions, };
+export { LcFunnelChart, LcFunnelTierChart, };
 export default LcFunnelChart;

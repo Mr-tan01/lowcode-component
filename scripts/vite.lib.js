@@ -34,4 +34,4 @@ tasking(modeList, (taskId) => {
     return new Promise((resolve) => {
         taskId !== 'index.ts' ? esmComBuilder.executeBuild(taskId).then(resolve) : null;
     });
-}, 2);
+}, 1);
