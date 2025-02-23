@@ -1,5 +1,5 @@
-import { type EChartsOption } from "echarts";
-import { LinearGradient } from "echarts/types/src/util/graphic";
+import { EChartsOption } from 'echarts';
+import { LinearGradient } from 'echarts/types/src/util/graphic';
 export declare const lineColors: string[];
 export declare const yAxisOptions: EChartsOption['yAxis'];
 export declare const tooltipOptions: EChartsOption['tooltip'];

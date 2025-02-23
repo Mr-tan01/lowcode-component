@@ -1,6 +1,6 @@
-import { PropType } from "vue";
-import { type BlockLableMapType, type BlockName } from "./const";
-import { type EducationMarkProps } from "@/components/education/components/mark/props";
+import { PropType } from 'vue';
+import { BlockLableMapType, BlockName } from './const';
+import { EducationMarkProps } from '../../mark/props';
 export type Levels = Partial<Record<string, {
     range: number[];
     scale?: number;

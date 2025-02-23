@@ -1,5 +1,5 @@
-import Szmap from './szmap.vue';
-import SzRawMap from './rawMap.vue';
+import { default as Szmap } from './szmap';
+import { default as SzRawMap } from './rawMap';
 export type SzmapInstanceType = InstanceType<typeof Szmap>;
 export type SzRawMapInstanceType = InstanceType<typeof SzRawMap>;
 export * from './const';

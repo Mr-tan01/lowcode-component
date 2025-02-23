@@ -1,4 +1,4 @@
-import { type EChartsCoreOption, type EChartsOption } from "echarts";
+import { EChartsCoreOption, EChartsOption } from 'echarts';
 export declare const commonScatterOptions: EChartsOption;
 export declare function useCommonScatterOptions(opts: EChartsCoreOption | EChartsOption): EChartsOption & ({
     legend: ({
@@ -6,5 +6,5 @@ export declare function useCommonScatterOptions(opts: EChartsCoreOption | EChart
     } | {
         formatter(name: any): string;
     })[];
-} & (EChartsCoreOption | EChartsOption));
+} & (EChartsOption | EChartsCoreOption));
 export declare function useCommonScatterSeries(series: EChartsOption['series']): EChartsOption['series'];

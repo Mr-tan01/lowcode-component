@@ -1,4 +1,4 @@
-import { Levels } from "./props";
+import { Levels } from './props';
 export declare const szBlockNames: {
     readonly 光明: "guangming";
     readonly 宝安: "baoan";

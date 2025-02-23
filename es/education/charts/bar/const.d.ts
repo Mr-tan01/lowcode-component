@@ -1,4 +1,4 @@
-import { graphic, type EChartsOption } from "echarts";
+import { graphic, EChartsOption } from 'echarts';
 export declare const barBuiltInStyle: {
     color: graphic.LinearGradient[];
     symbols: [];

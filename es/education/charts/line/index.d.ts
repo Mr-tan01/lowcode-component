@@ -1,4 +1,4 @@
-import lcLineChart from './line.vue';
+import { default as lcLineChart } from './line';
 export type lcLineChartInstanceType = InstanceType<typeof lcLineChart>;
 export * as LcLineOptions from './options';
 export { lcLineChart, };

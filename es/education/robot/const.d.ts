@@ -1,9 +1,9 @@
-import { type Domains, type NameTypes } from '@/components/education/components/icon';
+import { Domains, NameTypes } from '../icon';
 export declare const robotBQMap: {
-    s1: any;
-    s2: any;
-    s3: any;
-    s4: any;
+    s1: string;
+    s2: string;
+    s3: string;
+    s4: string;
 };
 export type RobotBQMapKeys = keyof typeof robotBQMap;
 type ReadValue<T> = T[keyof T];

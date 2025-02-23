@@ -1,5 +1,5 @@
-import { type SeriesOption, type EChartsOption } from "echarts";
-import { type ZRColor } from "echarts/types/src/util/types";
+import { SeriesOption, EChartsOption } from 'echarts';
+import { ZRColor } from 'echarts/types/src/util/types';
 export declare const radarTitleOptions: EChartsOption['title'];
 export declare const radarColors: ZRColor[];
 export declare const radarTooltipOptions: EChartsOption['tooltip'];

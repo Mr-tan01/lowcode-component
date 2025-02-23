@@ -1,4 +1,4 @@
-import { type EChartsCoreOption, type SeriesOption, type EChartsOption, type LineSeriesOption } from "echarts";
+import { EChartsCoreOption, SeriesOption, EChartsOption, LineSeriesOption } from 'echarts';
 export declare const commonLineOptions: EChartsOption;
 export declare const commonLineSeries: LineSeriesOption;
 export declare function useCommonLineOptions(opts: EChartsCoreOption | EChartsOption): EChartsOption | (EChartsOption & EChartsCoreOption);

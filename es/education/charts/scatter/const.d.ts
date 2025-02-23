@@ -1,4 +1,4 @@
-import { type ScatterSeriesOption, type EChartsOption } from "echarts";
+import { ScatterSeriesOption, EChartsOption } from 'echarts';
 export declare const scatterColors: string[];
 export declare const yAxisOptions: EChartsOption['yAxis'];
 export declare const tooltipOptions: EChartsOption['tooltip'];

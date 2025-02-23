@@ -1,5 +1,5 @@
-export declare const funcDomainIcons: any;
-export declare const eventDomainIcons: any;
+export declare const funcDomainIcons: Record<string, () => Promise<string>>;
+export declare const eventDomainIcons: Record<string, () => Promise<string>>;
 export declare const innerImageDomain: {
     readonly func: {
         readonly add: "add";
@@ -38,7 +38,7 @@ export type Domains = keyof InnerImageDomain;
 export type NameTypeFunc<D extends Domains> = ReadValue<InnerImageDomain[D]>;
 export type NameTypes = NameTypeFunc<'event'> | NameTypeFunc<'func'>;
 export declare function useImage<D extends Domains>(domain: D, name: NameTypeFunc<D>, ext?: string): {
-    src: import("vue").Ref<string, string>;
-    selectedSrc: import("vue").Ref<string, string>;
+    src: import('vue').Ref<string, string>;
+    selectedSrc: import('vue').Ref<string, string>;
 };
 export {};

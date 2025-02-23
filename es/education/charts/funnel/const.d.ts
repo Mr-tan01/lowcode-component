@@ -1,4 +1,4 @@
-import { type FunnelSeriesOption, type EChartsOption } from "echarts";
+import { FunnelSeriesOption, EChartsOption } from 'echarts';
 export declare const funnelColors: string[];
 export declare const yAxisOptions: EChartsOption['yAxis'];
 export declare const tooltipOptions: EChartsOption['tooltip'];

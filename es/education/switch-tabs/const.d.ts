@@ -1,4 +1,4 @@
-import { type TabListRaw } from "./types";
+import { TabListRaw } from './types';
 /**
  * 深圳各区
  */

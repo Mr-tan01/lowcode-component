@@ -1,5 +1,5 @@
-import LcRobot from './robot.vue';
-import LcMainRobot from './main-robot.vue';
+import { default as LcRobot } from './robot';
+import { default as LcMainRobot } from './main-robot';
 export * from './const';
 export type LcRobotInstanceType = InstanceType<typeof LcRobot>;
 export type LcMainRobotInstanceType = InstanceType<typeof LcMainRobot>;

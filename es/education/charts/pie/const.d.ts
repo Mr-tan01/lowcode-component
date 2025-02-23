@@ -1,5 +1,5 @@
-import { type EChartsOption } from "echarts";
-import { type LinearGradient } from "echarts/types/src/util/graphic";
+import { EChartsOption } from 'echarts';
+import { LinearGradient } from 'echarts/types/src/util/graphic';
 export declare const pieColors: string[];
 export declare const pieTitleOptions: EChartsOption['title'];
 export declare const pieTooltipOptions: EChartsOption['tooltip'];

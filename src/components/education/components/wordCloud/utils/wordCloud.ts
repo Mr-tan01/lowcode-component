@@ -29,6 +29,7 @@ Initialization.prototype.init = function() {
         this.dataArr[i].style.color = color;
         var newtag = new Tag(this.dataArr[i], x, y, z, this.options);
         newtag.move();
+        // @ts-ignore
         newTags.push(newtag);
         this.animate();
     }

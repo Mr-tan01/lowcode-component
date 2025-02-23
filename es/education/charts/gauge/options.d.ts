@@ -1,7 +1,7 @@
-import { type SeriesOption, type EChartsCoreOption, type EChartsOption } from "echarts";
+import { SeriesOption, EChartsCoreOption, EChartsOption } from 'echarts';
 export declare function useGaugeSeriesOptions(series: EChartsOption['series']): ({
     data: never[];
-} & SeriesOption) | ({
+} & (SeriesOption | undefined)) | ({
     data: never[];
-} & SeriesOption)[];
+} & (SeriesOption | undefined))[];
 export declare function useCommonGaugeOptions(opts: EChartsOption | EChartsCoreOption): EChartsOption;

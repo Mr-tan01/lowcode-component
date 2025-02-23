@@ -1,4 +1,4 @@
-import { type EChartsOption, type BarSeriesOption, type EChartsCoreOption } from "echarts";
+import { EChartsOption, BarSeriesOption, EChartsCoreOption } from 'echarts';
 export declare const commonBarOptions: EChartsOption;
 export declare const horizontalBarOptions: EChartsOption;
 export declare const commonBarSeries: BarSeriesOption;

@@ -1,2 +1,2 @@
-import { type EChartsOption } from "echarts";
+import { EChartsOption } from 'echarts';
 export declare const progressSeries: EChartsOption['series'];

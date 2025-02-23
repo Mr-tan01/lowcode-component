@@ -1,5 +1,5 @@
 export declare function useDragRobotPosition(): {
-    isDraging: import("vue").Ref<boolean, boolean>;
+    isDraging: import('vue').Ref<boolean, boolean>;
     startDrag: (event: DragEvent) => void;
     stopDrag: (event: DragEvent) => void;
     draging: (event: DragEvent) => void;
@@ -8,6 +8,6 @@ export declare function useDragRobotPosition(): {
         x: number;
         y: string;
     };
-    xAdsorptionDir: import("vue").ComputedRef<"lt" | "rt">;
+    xAdsorptionDir: import('vue').ComputedRef<"lt" | "rt">;
     dragover: (event: DragEvent) => void;
 };

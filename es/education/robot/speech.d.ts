@@ -3,7 +3,7 @@ export declare function useSpeech(): {
     recognition: any;
     start: () => void;
     stop: () => void;
-    output: import("vue").Ref<{
+    output: import('vue').Ref<{
         textContent: string;
         helpText: string;
         starting: boolean;

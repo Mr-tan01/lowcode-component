@@ -1,7 +1,7 @@
-import LcRangeIndicator from './rangeIndicator.vue';
-import LcSkewIndicator from './skewIndicator.vue';
-import LcIndicatorCard from './indicatorCard.vue';
-import LcIndicatorList from './indicatorList.vue';
+import { default as LcRangeIndicator } from './rangeIndicator';
+import { default as LcSkewIndicator } from './skewIndicator';
+import { default as LcIndicatorCard } from './indicatorCard';
+import { default as LcIndicatorList } from './indicatorList';
 export type LcRangeIndicatorInstanceType = InstanceType<typeof LcRangeIndicator>;
 export type LcSkewIndicatorInstanceType = InstanceType<typeof LcSkewIndicator>;
 export type LcIndicatorCardInstanceType = InstanceType<typeof LcIndicatorCard>;
