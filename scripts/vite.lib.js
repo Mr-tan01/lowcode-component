@@ -8,19 +8,6 @@ import { resolve } from 'node:path';
 const modeListBase = '../src/components/education/components';
 // https://vite.dev/config/
 const options = merge({}, commonViteConfig, {
-    resolve: {
-        alias: [
-            {
-                find: '@',
-                replacement: resolve('../src')
-            },
-            {
-                find: '~',
-                replacement: resolve('../')
-            },
-
-        ],
-    },
     build: {
         outDir: '../es/education',
         emptyOutDir: false,
