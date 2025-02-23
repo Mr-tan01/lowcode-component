@@ -1,10 +1,10 @@
 {
   "name": "lowcode-component",
   "private": true,
-  "version": "0.1.0-alpha.0.2.4",
+  "version": "0.1.0-alpha.0.3.1",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "vue-tsc --noEmit && vite",
     "docx": "vue-tsc -b && vite build",
     "lib": "pnpm --filter scripts build",
     "preview": "vite preview"

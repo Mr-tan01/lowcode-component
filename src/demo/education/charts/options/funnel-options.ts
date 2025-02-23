@@ -1,6 +1,5 @@
 import { EChartsOption } from "echarts";
-import { TierOptions } from "~/src/components/education/components/charts";
-import { TierSeriesDataOptions } from "~/src/components/education/components/charts/funnel/themeConfig";
+import { funnelThemeConfig } from "~/src/components/education/components/charts";
 
 export function useOptions(): {
     options: EChartsOption
@@ -30,7 +29,7 @@ const tierData = [
     { value: 343, name: 'Show' }
 ].sort((a, b) => a.value - b.value);
 export function useTierOptions(): {
-    options: TierOptions
+    options: funnelThemeConfig.TierOptions
 } {
     return {
         options: {
