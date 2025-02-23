@@ -15,8 +15,13 @@ const options = merge({}, commonViteConfig, {
 const esmComBuilder = new EsmComBuilder(modeListBase, options);
 const modeList = fs.readdirSync(modeListBase);
 console.log("编译模块：", modeList);
-tasking(modeList, (taskId) => {
-    return new Promise((resolve) => {
-        taskId !== 'index.ts' ? esmComBuilder.executeBuild(taskId).then(resolve) : resolve();
-    });
-}, 1);
+async function startBuild() {
+    console.time("built");
+    await tasking(modeList, (taskId) => {
+        return new Promise((resolve) => {
+            taskId !== 'index.ts' ? esmComBuilder.executeBuild(taskId).then(resolve) : resolve();
+        });
+    }, 1);
+    console.timeEnd("built");
+}
+startBuild();
