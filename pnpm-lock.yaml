@@ -12,8 +12,8 @@ importers:
         specifier: git+http://liangweizhu@siteshun@code.siteshun.com:800/front-component/STS/mmj-code-lib.git#lowcode-0.1.0
         version: git+http://liangweizhu%40siteshun@code.siteshun.com:800/front-component/STS/mmj-code-lib.git#28e17724f3eb0f7c6975933489b9e91aee392141
       lowcode-share:
-        specifier: link:F:/work/goview/tosts/lowcode-share
-        version: link:../lowcode-share
+        specifier: git+http://code.siteshun.com:800/front-component/lowcode-sview/lowcode-share.git#develop
+        version: git+http://code.siteshun.com:800/front-component/lowcode-sview/lowcode-share.git#a487ba4447e9ff8c7f77bc744dc6c510b2d7c4c3(typescript@5.6.3)
       resize-observer-polyfill:
         specifier: ^1.5.1
         version: 1.5.1
@@ -760,6 +760,10 @@ packages:
 
   lodash@4.17.21:
     resolution: {integrity: sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==}
+
+  lowcode-share@git+http://code.siteshun.com:800/front-component/lowcode-sview/lowcode-share.git#a487ba4447e9ff8c7f77bc744dc6c510b2d7c4c3:
+    resolution: {commit: a487ba4447e9ff8c7f77bc744dc6c510b2d7c4c3, repo: http://code.siteshun.com:800/front-component/lowcode-sview/lowcode-share.git, type: git}
+    version: 0.2.0
 
   lru-cache@6.0.0:
     resolution: {integrity: sha512-Jo6dJ04CmSjuznwJSS3pUeWmd/H0ffTlkXXgwZi+eq1UCmqQwCh+eLsYOYCwY991i2Fah4h1BEMCx4qThGbsiA==}
@@ -1713,6 +1717,12 @@ snapshots:
   lodash-es@4.17.21: {}
 
   lodash@4.17.21: {}
+
+  lowcode-share@git+http://code.siteshun.com:800/front-component/lowcode-sview/lowcode-share.git#a487ba4447e9ff8c7f77bc744dc6c510b2d7c4c3(typescript@5.6.3):
+    dependencies:
+      vue: 3.5.13(typescript@5.6.3)
+    transitivePeerDependencies:
+      - typescript
 
   lru-cache@6.0.0:
     dependencies:
