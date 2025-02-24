@@ -37,7 +37,7 @@ import Container from '@/demo/components/help/Container.vue';
 import {
     LcBarChart,
     lcLineChart,
-} from '~/es/education/charts';
+} from '@/components/education/components/charts';
 import { combinationOpts } from '../options/line-options';
 </script>
 <style lang="scss" scoped>

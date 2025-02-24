@@ -65,7 +65,7 @@ import {
     LcIndicatorCard,
     LcRangeIndicator,
     LcIndicatorList,
-} from '~/es/education/dataIndicator';
+} from '@/components/education/components/dataIndicator';
 import { code1, code2, code3, } from './const';
 
 </script>

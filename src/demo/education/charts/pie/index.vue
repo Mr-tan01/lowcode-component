@@ -20,7 +20,7 @@ import { NSpace } from 'naive-ui';
 import Container from '@/demo/components/help/Container.vue';
 import {
     LcPieChart,
-} from '~/es/education/charts';
+} from '@/components/education/components/charts';
 import { usePieOptions, useLabelPieOptions, useProperctionPieOptions, } from '../options/pie-options';
 </script>
 <style lang="scss" scoped>

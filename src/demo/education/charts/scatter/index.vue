@@ -18,7 +18,7 @@ import { NSpace } from 'naive-ui';
 import Container from '@/demo/components/help/Container.vue';
 import {
     LcScatterChart,
-} from '~/es/education/charts';
+} from '@/components/education/components/charts';
 import { useScatterOptions } from '../options/scatter-options';
 </script>
 <style lang="scss" scoped>

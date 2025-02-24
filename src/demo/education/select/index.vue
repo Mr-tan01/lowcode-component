@@ -20,7 +20,7 @@
 <script lang="ts" setup>
 import Container from '@/demo/components/help/Container.vue';
 import { NSpace } from 'naive-ui';
-import { LcSelect } from '~/es/education/select';
+import { LcSelect } from '@/components/education/components/select';
 import { ref } from 'vue';
 import {
     code1,

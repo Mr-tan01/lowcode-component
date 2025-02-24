@@ -12,7 +12,7 @@ importers:
         specifier: git+http://liangweizhu@siteshun@code.siteshun.com:800/front-component/STS/mmj-code-lib.git#lowcode-0.1.0
         version: git+http://liangweizhu%40siteshun@code.siteshun.com:800/front-component/STS/mmj-code-lib.git#28e17724f3eb0f7c6975933489b9e91aee392141
       lowcode-share:
-        specifier: link:F:/Work/lowcode/lowcode-share
+        specifier: link:F:/work/goview/tosts/lowcode-share
         version: link:../lowcode-share
       resize-observer-polyfill:
         specifier: ^1.5.1

@@ -19,5 +19,5 @@
 <script lang="ts" setup>
 import Container from '@/demo/components/help/Container.vue';
 import { NSpace } from 'naive-ui';
-import { LcMark } from '~/es/education/mark';
+import { LcMark } from '@/components/education/components/mark';
 </script>

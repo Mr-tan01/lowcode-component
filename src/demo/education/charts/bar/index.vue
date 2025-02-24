@@ -58,7 +58,7 @@ import { NSpace } from 'naive-ui';
 import Container from '@/demo/components/help/Container.vue';
 import {
     LcBarChart,
-} from '~/es/education/charts';
+} from '@/components/education/components/charts';
 import { barChartCodes } from './codes';
 import {
     chartsBarOpts,

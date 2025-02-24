@@ -34,7 +34,7 @@
 <script lang="ts" setup>
 import { NSpace } from 'naive-ui';
 import Container from '@/demo/components/help/Container.vue';
-import { LcButton } from '~/es/education/button';
+import { LcButton } from '@/components/education/components/button';
 </script>
 
 <style lang="scss" scoped></style>

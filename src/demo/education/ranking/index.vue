@@ -11,7 +11,7 @@
 <script lang="ts" setup>
 import { NSpace } from 'naive-ui';
 import Container from '@/demo/components/help/Container.vue';
-import { LcRanking, type RankingRecord } from '~/es/education/ranking';
+import { LcRanking, type RankingRecord } from '@/components/education/components/ranking';
 
 const rankingList: RankingRecord[] = [
     {

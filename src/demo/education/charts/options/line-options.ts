@@ -1,5 +1,5 @@
 import { EChartsCoreOption, EChartsOption, graphic } from "echarts";
-import { LcLineOptions } from '~/es/education/charts';
+import { LcLineOptions } from '@/components/education/components/charts';
 
 export function combinationOpts(len = 2, start = 0): EChartsCoreOption | EChartsOption {
     return {

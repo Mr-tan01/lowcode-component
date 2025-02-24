@@ -29,7 +29,7 @@
 
 <script lang="ts" setup>
 import Container from '@/demo/components/help/Container.vue';
-import { LcBubbleWordColud } from '~/es/education/wordCloud';
+import { LcBubbleWordColud } from '@/components/education/components/wordCloud';
 import { NSpace } from 'naive-ui';
 
 const wordCloudData = [

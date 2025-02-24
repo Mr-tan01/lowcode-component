@@ -34,9 +34,9 @@
 <script lang="ts" setup>
 import { NSpace } from 'naive-ui';
 import Container from '@/demo/components/help/Container.vue';
-import { LcRadioButtonGroup } from '~/es/education/radio-button-group';
-import { LcRadioButton } from '~/es/education/radio-button';
-import { LcRadio, LcRadioGroup } from '~/es/education/radio';
+import { LcRadioButtonGroup } from '@/components/education/components/radio-button-group';
+import { LcRadioButton } from '@/components/education/components/radio-button';
+import { LcRadio, LcRadioGroup } from '@/components/education/components/radio';
 import { ref } from 'vue';
 const radioButtonValue1 = ref('1');
 const radioValue = ref('1');
