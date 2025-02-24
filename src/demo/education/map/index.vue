@@ -1,19 +1,19 @@
 <template>
     <div class="demo-map">
-        <Container title="深圳地图" description="深圳教育项目-深圳地图" rswidth="962px">
+        <DemoBox title="深圳地图" description="深圳教育项目-深圳地图" rswidth="962px">
             <div class="size-box">
                 <Szmap :values></Szmap>
             </div>
-        </Container>
-        <Container title="深圳地图" description="深圳教育项目-深圳地图" rswidth="962px">
+        </DemoBox>
+        <DemoBox title="深圳地图" description="深圳教育项目-深圳地图" rswidth="962px">
             <div class="size-box">
                 <Szmap :values :rotate-x="-30"></Szmap>
             </div>
-        </Container>
+        </DemoBox>
     </div>
 </template>
 <script lang="ts" setup>
-import Container from '@/demo/components/help/Container.vue';
+import { DemoBox } from 'lowcode-share/es/demo';
 import { Szmap, type SZMapMarkProps } from '@/components/education/components/map';
 
 const values: SZMapMarkProps = {

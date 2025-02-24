@@ -1,6 +1,6 @@
 <template>
     <div class="demo-map">
-        <Container title="选项按钮" description="深圳教育项目-选项" rswidth="1210px" rs-height="auto">
+        <DemoBox title="选项按钮" description="深圳教育项目-选项" rswidth="1210px" rs-height="auto">
             <div class="size-box">
                 <n-space>
                     <LcRadioButtonGroup v-model="radioButtonValue1">
@@ -12,8 +12,8 @@
                     </LcRadioButtonGroup>
                 </n-space>
             </div>
-        </Container>
-        <Container title="单选" description="深圳教育项目-单选" rswidth="1210px" rs-height="auto">
+        </DemoBox>
+        <DemoBox title="单选" description="深圳教育项目-单选" rswidth="1210px" rs-height="auto">
             value: {{ radioValue }}
             <div class="size-box">
                 <LcRadioGroup v-model:value="radioValue">
@@ -28,12 +28,12 @@
                 </LcRadioGroup>
 
             </div>
-        </Container>
+        </DemoBox>
     </div>
 </template>
 <script lang="ts" setup>
 import { NSpace } from 'naive-ui';
-import Container from '@/demo/components/help/Container.vue';
+import { DemoBox } from 'lowcode-share/es/demo';
 import { LcRadioButtonGroup } from '@/components/education/components/radio-button-group';
 import { LcRadioButton } from '@/components/education/components/radio-button';
 import { LcRadio, LcRadioGroup } from '@/components/education/components/radio';

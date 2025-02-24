@@ -1,16 +1,16 @@
 <template>
     <div class="demo-table">
-        <Container title="Table" description="基础用法" rswidth="1300px">
-            <Container title="描述列表" description="描述列表-配合LcElasticScrollbar组件适配高度" rswidth="500px" rs-height="500px">
+        <DemoBox title="Table" description="基础用法" rswidth="1300px">
+            <DemoBox title="描述列表" description="描述列表-配合LcElasticScrollbar组件适配高度" rswidth="500px" rs-height="500px">
                 <LcDescTable :columns :data>
                 </LcDescTable>
-            </Container>
-        </Container>
+            </DemoBox>
+        </DemoBox>
     </div>
 </template>
 
 <script lang="ts" setup>
-import Container from '@/demo/components/help/Container.vue';
+import { DemoBox } from 'lowcode-share/es/demo';
 import { LcDescTable, type LcDescTableColumns } from '@/components/education/components/table';
 
 const columns: LcDescTableColumns[] = [

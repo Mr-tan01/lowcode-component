@@ -1,34 +1,34 @@
 <template>
     <div class="demo-tooltip">
-        <Container title="词云" description="基础用法" rswidth="100%">
+        <DemoBox title="词云" description="基础用法" rswidth="100%">
             <NSpace>
-                <Container title="款词云-圆球" rswidth="450px" rs-height="450px">
+                <DemoBox title="款词云-圆球" rswidth="450px" rs-height="450px">
                     <LcBubbleWordColud :data="wordCloudData">
                     </LcBubbleWordColud>
-                </Container>
-                <Container title="款词云-发光球" rswidth="450px" rs-height="450px">
+                </DemoBox>
+                <DemoBox title="款词云-发光球" rswidth="450px" rs-height="450px">
                     <LcBubbleWordColud type="shadow" :enable-animate="true" :data="wordCloudData">
                     </LcBubbleWordColud>
-                </Container>
-                <Container title="款词云-文本" rswidth="450px" rs-height="450px">
+                </DemoBox>
+                <DemoBox title="款词云-文本" rswidth="450px" rs-height="450px">
                     <LcBubbleWordColud type="text" :maxWord="30" :data="wordCloudData">
                     </LcBubbleWordColud>
-                </Container>
-                <Container title="款词云-混合" rswidth="450px" rs-height="450px">
+                </DemoBox>
+                <DemoBox title="款词云-混合" rswidth="450px" rs-height="450px">
                     <LcBubbleWordColud type="text-circle" :maxWord="30" :data="wordCloudData">
                     </LcBubbleWordColud>
-                </Container>
-                <Container title="款词云-禁止自动动画" rswidth="450px" rs-height="450px">
+                </DemoBox>
+                <DemoBox title="款词云-禁止自动动画" rswidth="450px" rs-height="450px">
                     <LcBubbleWordColud type="shadow" :enable-animate="false" :data="wordCloudData">
                     </LcBubbleWordColud>
-                </Container>
+                </DemoBox>
             </NSpace>
-        </Container>
+        </DemoBox>
     </div>
 </template>
 
 <script lang="ts" setup>
-import Container from '@/demo/components/help/Container.vue';
+import { DemoBox } from 'lowcode-share/es/demo';
 import { LcBubbleWordColud } from '@/components/education/components/wordCloud';
 import { NSpace } from 'naive-ui';
 

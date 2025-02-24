@@ -1,6 +1,6 @@
 <template>
     <div class="demo_dialog">
-        <Container title="弹出窗" description="大尺寸弹窗" :code="code1">
+        <DemoBox title="弹出窗" description="大尺寸弹窗" :code="code1">
             <button @click="show = true">弹窗</button>
             <LcModal v-model:show="show" title="弹窗标题">
                 <template #header>
@@ -14,8 +14,8 @@
                     </div>
                 </template>
             </LcModal>
-        </Container>
-        <Container title="弹出窗" description="中等尺寸弹窗"  :code="code2">
+        </DemoBox>
+        <DemoBox title="弹出窗" description="中等尺寸弹窗"  :code="code2">
             <button @click="show2 = true">弹窗</button>
             <LcModal v-model:show="show2" size-mode="medium" title="弹窗标题">
                 <template #header>
@@ -29,12 +29,12 @@
                     </div>
                 </template>
             </LcModal>
-        </Container>
+        </DemoBox>
     </div>
 </template>
 
 <script lang="ts" setup>
-import Container from '@/demo/components/help/Container.vue';
+import { DemoBox } from 'lowcode-share/es/demo';
 import { LcModal } from '@/components/education/components/modal';
 import { ref } from 'vue';
 import { code1, code2 } from './const';

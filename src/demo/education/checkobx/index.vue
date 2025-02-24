@@ -1,6 +1,6 @@
 <template>
     <div class="demo-map">
-        <Container title="复选框" description="深圳教育项目-复选框" rswidth="1210px" rs-height="auto">
+        <DemoBox title="复选框" description="深圳教育项目-复选框" rswidth="1210px" rs-height="auto">
             value: {{ checkboxValue }}
             <div class="size-box">
                 <LcCheckboxGroup v-model:value="checkboxValue">
@@ -15,12 +15,12 @@
                 </LcCheckboxGroup>
 
             </div>
-        </Container>
+        </DemoBox>
     </div>
 </template>
 <script lang="ts" setup>
 import { NSpace } from 'naive-ui';
-import Container from '@/demo/components/help/Container.vue';
+import { DemoBox } from 'lowcode-share/es/demo';
 import { LcCheckbox, LcCheckboxGroup } from '@/components/education/components/checkbox';
 import { ref } from 'vue';
 const checkboxValue = ref(['1']);

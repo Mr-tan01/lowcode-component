@@ -1,16 +1,16 @@
 <template>
     <div class="demo-ranking">
-        <Container title="排行条形图" description="深圳教育项目-排行条形图" rswidth="806px" rs-height="300px">
+        <DemoBox title="排行条形图" description="深圳教育项目-排行条形图" rswidth="806px" rs-height="300px">
             <LcRanking :list="rankingList"></LcRanking>
-        </Container>
-        <Container title="排行占比图" description="深圳教育项目-排行占比图" rswidth="806px" rs-height="300px">
+        </DemoBox>
+        <DemoBox title="排行占比图" description="深圳教育项目-排行占比图" rswidth="806px" rs-height="300px">
             <LcRanking :list="rankingList" type="proprotion" :showBall="false"></LcRanking>
-        </Container>
+        </DemoBox>
     </div>
 </template>
 <script lang="ts" setup>
 import { NSpace } from 'naive-ui';
-import Container from '@/demo/components/help/Container.vue';
+import { DemoBox } from 'lowcode-share/es/demo';
 import { LcRanking, type RankingRecord } from '@/components/education/components/ranking';
 
 const rankingList: RankingRecord[] = [
