@@ -21,7 +21,7 @@ import { useCommonPieOptions, usePieCommonSeries } from './options';
 import merge from 'lodash-es/merge';
 import { useResizeObserver } from '@vueuse/core';
 import { debounce } from 'lodash-es';
-import { type LinearGradient } from 'echarts/types/src/util/graphic';
+import { type LinearGradient } from 'echarts/types/src/util/graphic.d';
 import { innerGraphicColors } from './const';
 import { type LayoutType, } from './types';
 import {

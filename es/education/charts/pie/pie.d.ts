@@ -1,5 +1,5 @@
 import { EChartsCoreOption, EChartsOption, ECharts } from 'echarts';
-import { LinearGradient } from 'echarts/types/src/util/graphic';
+import { LinearGradient } from 'echarts/types/src/util/graphic.d';
 import { LayoutType } from './types';
 import { LegendActiveType, LegendDataRecord, LegendSelectParams } from '../../../common/components/Charts/legend';
 type __VLS_Props = {

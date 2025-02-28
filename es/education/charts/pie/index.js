@@ -1,7 +1,7 @@
 import o from "./index2.js";
 import '../assets/pie/pie.css';/* empty css       */
 import t from "../_virtual/_plugin-vue_export-helper.js";
-const m = /* @__PURE__ */ t(o, [["__scopeId", "data-v-4983f64b"]]);
+const p = /* @__PURE__ */ t(o, [["__scopeId", "data-v-99769b84"]]);
 export {
-  m as default
+  p as default
 };

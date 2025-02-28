@@ -30,12 +30,12 @@ const x = { class: "lc-pie__wrapper" }, H = {
   emits: ["legend:click", "legend:toggleSelect"],
   setup(t, { expose: C, emit: _ }) {
     S((e) => ({
-      f1a872dc: e.flexDirection,
-      "4e6fe7ee": k.value,
-      "964e626c": e.legendPosition,
-      "7c6ece28": e.legendLeft,
-      df3269d8: e.legendTop,
-      "720b1a42": m.value
+      a2053d68: e.flexDirection,
+      "764182a8": k.value,
+      f18ae960: e.legendPosition,
+      "277fbdae": e.legendLeft,
+      "4356d2ce": e.legendTop,
+      "1ce4ce36": m.value
     }));
     const r = z("chartDom"), l = O(), s = g(() => {
       const e = M(t.options);
@@ -72,14 +72,14 @@ const x = { class: "lc-pie__wrapper" }, H = {
     }
     const m = D("100%");
     function L(e) {
-      var p;
+      var f;
       const o = e[0], { width: n, height: i } = o.contentRect;
-      m.value = Math.min(n, i) + "px", (p = l.value) == null || p.resize();
+      m.value = Math.min(n, i) + "px", (f = l.value) == null || f.resize();
     }
-    const { stop: f } = I(r, U(L, t.debounceTime)), k = g(() => t.legendPosition === "absolute" ? `0 ${t.legendWidth}` : "0");
-    return R(f), C({
+    const { stop: p } = I(r, U(L, t.debounceTime)), k = g(() => t.legendPosition === "absolute" ? `0 ${t.legendWidth}` : "0");
+    return R(p), C({
       chartInstance: l,
-      stop: f,
+      stop: p,
       setOptions: u,
       dispatchAction: c
     }), (e, o) => (h(), v(

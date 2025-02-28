@@ -1,5 +1,5 @@
 import { EChartsOption, EChartsCoreOption } from 'echarts';
-import { LinearGradient } from 'echarts/types/src/util/graphic.js';
+import { LinearGradient } from 'echarts/types/src/util/graphic.d';
 type __VLS_Props = {
     options?: EChartsCoreOption | EChartsOption;
     linearGradientColor?: LinearGradient[];
