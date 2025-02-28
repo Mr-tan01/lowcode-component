@@ -10,7 +10,7 @@ importers:
     dependencies:
       '@mmj-code-lib/lowcode':
         specifier: git+http://liangweizhu@siteshun@code.siteshun.com:800/front-component/STS/mmj-code-lib.git#lowcode-0.1.0
-        version: git+http://liangweizhu%40siteshun@code.siteshun.com:800/front-component/STS/mmj-code-lib.git#0ebbdaf3164854c1bd8c0683e9050c67ff3cb90e
+        version: git+http://liangweizhu%40siteshun@code.siteshun.com:800/front-component/STS/mmj-code-lib.git#6718b6af92a4e0f8142d9045ed583da219cd4b44
       lowcode-share:
         specifier: git+http://code.siteshun.com:800/front-component/lowcode-sview/lowcode-share.git#develop
         version: git+http://code.siteshun.com:800/front-component/lowcode-sview/lowcode-share.git#7581a4e933f2ce469a6c2f03d91eee3e07fa7204(typescript@5.6.3)
@@ -336,9 +336,9 @@ packages:
   '@microsoft/tsdoc@0.15.1':
     resolution: {integrity: sha512-4aErSrCR/On/e5G2hDP0wjooqDdauzEbIq8hIkIe5pXV0rtWJZvdCEKL0ykZxex+IxIwBp0eGeV48hQN07dXtw==}
 
-  '@mmj-code-lib/lowcode@git+http://liangweizhu%40siteshun@code.siteshun.com:800/front-component/STS/mmj-code-lib.git#0ebbdaf3164854c1bd8c0683e9050c67ff3cb90e':
-    resolution: {commit: 0ebbdaf3164854c1bd8c0683e9050c67ff3cb90e, repo: http://liangweizhu%40siteshun@code.siteshun.com:800/front-component/STS/mmj-code-lib.git, type: git}
-    version: 0.1.1-alpha-0.2.3
+  '@mmj-code-lib/lowcode@git+http://liangweizhu%40siteshun@code.siteshun.com:800/front-component/STS/mmj-code-lib.git#6718b6af92a4e0f8142d9045ed583da219cd4b44':
+    resolution: {commit: 6718b6af92a4e0f8142d9045ed583da219cd4b44, repo: http://liangweizhu%40siteshun@code.siteshun.com:800/front-component/STS/mmj-code-lib.git, type: git}
+    version: 0.1.1-alpha-0.2.4
 
   '@mmj-code-lib/scripts@git+http://code.siteshun.com:800/front-component/STS/mmj-code-lib.git#9d03fa1cd2f98910b6a4f9d4017ae5642199fed4':
     resolution: {commit: 9d03fa1cd2f98910b6a4f9d4017ae5642199fed4, repo: http://code.siteshun.com:800/front-component/STS/mmj-code-lib.git, type: git}
@@ -1322,7 +1322,7 @@ snapshots:
 
   '@microsoft/tsdoc@0.15.1': {}
 
-  '@mmj-code-lib/lowcode@git+http://liangweizhu%40siteshun@code.siteshun.com:800/front-component/STS/mmj-code-lib.git#0ebbdaf3164854c1bd8c0683e9050c67ff3cb90e': {}
+  '@mmj-code-lib/lowcode@git+http://liangweizhu%40siteshun@code.siteshun.com:800/front-component/STS/mmj-code-lib.git#6718b6af92a4e0f8142d9045ed583da219cd4b44': {}
 
   '@mmj-code-lib/scripts@git+http://code.siteshun.com:800/front-component/STS/mmj-code-lib.git#9d03fa1cd2f98910b6a4f9d4017ae5642199fed4': {}
 
