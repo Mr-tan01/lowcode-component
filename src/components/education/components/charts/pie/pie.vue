@@ -21,7 +21,7 @@ import { useCommonPieOptions, usePieCommonSeries } from './options';
 import merge from 'lodash-es/merge';
 import { useResizeObserver } from '@vueuse/core';
 import { debounce } from 'lodash-es';
-import { type LinearGradient } from 'echarts/types/src/util/graphic.d';
+import { graphic } from 'echarts';
 import { innerGraphicColors } from './const';
 import { type LayoutType, } from './types';
 import {
@@ -47,7 +47,7 @@ const {
     options: EChartsOption | EChartsCoreOption;
     debounceTime?: number;
     legendLabel?: ((name: string, value: number) => string);
-    graphicColors?: LinearGradient[];
+    graphicColors?: graphic.LinearGradient[];
     flexDirection?: 'row' | 'column' | 'row-reverse' | 'column-reverse',
     showCustomLegend?: boolean;
     layout?: LayoutType;

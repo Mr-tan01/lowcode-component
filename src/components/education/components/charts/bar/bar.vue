@@ -10,7 +10,7 @@ import { computed } from 'vue';
 import { type EChartsOption, type EChartsCoreOption } from 'echarts';
 import { commonBarOptions, useCommonBarOptions, useCommonBarSeries } from './options';
 import merge from 'lodash-es/merge';
-import { type LinearGradient } from 'echarts/types/src/util/graphic.d';
+import { graphic } from 'echarts';
 import { barBuiltInStyle } from './const';
 
 const {
@@ -21,7 +21,7 @@ const {
     fake3d = true,
 } = defineProps<{
     options?: EChartsCoreOption | EChartsOption,
-    linearGradientColor?: LinearGradient[],
+    linearGradientColor?: graphic.LinearGradient[],
     isHorizontal?: boolean,
     stack?: boolean,
     fake3d?: boolean
