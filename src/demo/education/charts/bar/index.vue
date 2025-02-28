@@ -6,7 +6,7 @@
                 <DemoBox title="单柱" rswidth="390px" rs-height="265px" :code="barChartCodes.code1">
                     <LcBarChart :options="chartsBarOpts(1)" type="bar"></LcBarChart>
                 </DemoBox>
-                <DemoBox title="多柱(≥2类数据)" rswidth="390px" rs-height="265px">
+                <DemoBox title="多柱(≥2类数据)" rswidth="390px" rs-height="265px" :code="barChartCodes.code2">
                     <LcBarChart :options="chartsBarOpts(2)" type="bar"></LcBarChart>
                 </DemoBox>
                 <DemoBox title="堆叠柱" rswidth="390px" rs-height="265px">

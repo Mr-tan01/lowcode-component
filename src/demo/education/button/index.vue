@@ -1,6 +1,6 @@
 <template>
     <div class="demo-按钮">
-        <DemoBox title="按钮" description="基本用法" rswidth="auto">
+        <DemoBox title="按钮" description="基本用法" rswidth="1000px" :code="code1">
             <NSpace>
                 <LcButton type="primary">
                     重要按钮
@@ -35,6 +35,7 @@
 import { NSpace } from 'naive-ui';
 import { DemoBox } from 'lowcode-share/es/demo';
 import { LcButton } from '@/components/education/components/button';
+import { code1 } from './const';
 </script>
 
 <style lang="scss" scoped></style>
