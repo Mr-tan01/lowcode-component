@@ -1,8 +1,7 @@
-import { EChartsOption, EChartsCoreOption } from 'echarts';
-import { LinearGradient } from 'echarts/types/src/util/graphic.d';
+import { EChartsOption, EChartsCoreOption, graphic } from 'echarts';
 type __VLS_Props = {
     options?: EChartsCoreOption | EChartsOption;
-    linearGradientColor?: LinearGradient[];
+    linearGradientColor?: graphic.LinearGradient[];
     isHorizontal?: boolean;
     stack?: boolean;
     fake3d?: boolean;

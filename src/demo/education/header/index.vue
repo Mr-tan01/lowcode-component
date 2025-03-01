@@ -1,6 +1,8 @@
 <template>
-     <LcHeader v-model:index="headerIndex" hideArrow :nav-datas="defNavData"></LcHeader>
-     <LcHeader v-model:index="headerIndex" :nav-datas="defNavData"></LcHeader>
+     <div class="deom-headers">
+          <LcHeader v-model:index="headerIndex" hideArrow :nav-datas="defNavData"></LcHeader>
+          <LcHeader v-model:index="headerIndex" :nav-datas="defNavData"></LcHeader>
+     </div>
 </template>
 <script lang="ts" setup>
 import { LcHeader } from "@/components/education/components/header";

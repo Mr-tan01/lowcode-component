@@ -1,12 +1,11 @@
-import { EChartsCoreOption, EChartsOption, ECharts } from 'echarts';
-import { LinearGradient } from 'echarts/types/src/util/graphic.d';
+import { EChartsCoreOption, EChartsOption, ECharts, graphic } from 'echarts';
 import { LayoutType } from './types';
 import { LegendActiveType, LegendDataRecord, LegendSelectParams } from '../../../common/components/Charts/legend';
 type __VLS_Props = {
     options: EChartsOption | EChartsCoreOption;
     debounceTime?: number;
     legendLabel?: ((name: string, value: number) => string);
-    graphicColors?: LinearGradient[];
+    graphicColors?: graphic.LinearGradient[];
     flexDirection?: 'row' | 'column' | 'row-reverse' | 'column-reverse';
     showCustomLegend?: boolean;
     layout?: LayoutType;

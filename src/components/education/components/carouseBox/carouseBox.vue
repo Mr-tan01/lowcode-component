@@ -177,7 +177,7 @@ const clientRect = computed(() => {
     forceCompile.value++; // 强制更新
     if (!tabButtonParentElRef.value || !tabButtonRef.value || !carouselTrainElRef.value) return;
     // 获取到父元素的宽度
-    const { width } = tabButtonParentElRef.value.getBoundingClientRect();
+    const  width  = tabButtonParentElRef.value.offsetWidth;
     // 获取到按钮的宽度
     const buttonMapsWidth = {
         normal: 0,

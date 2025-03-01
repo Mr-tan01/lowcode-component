@@ -30,12 +30,12 @@ const x = { class: "lc-pie__wrapper" }, H = {
   emits: ["legend:click", "legend:toggleSelect"],
   setup(t, { expose: C, emit: _ }) {
     S((e) => ({
-      a2053d68: e.flexDirection,
-      "764182a8": k.value,
-      f18ae960: e.legendPosition,
-      "277fbdae": e.legendLeft,
-      "4356d2ce": e.legendTop,
-      "1ce4ce36": m.value
+      "2fd3c071": e.flexDirection,
+      "11d03c66": k.value,
+      "213010cb": e.legendPosition,
+      "1cf138a9": e.legendLeft,
+      "92c6e71a": e.legendTop,
+      "508c4120": m.value
     }));
     const r = z("chartDom"), l = O(), s = g(() => {
       const e = M(t.options);
