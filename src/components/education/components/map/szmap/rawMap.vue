@@ -93,7 +93,7 @@ const blockClass = computed(() => {
 });
 
 const levelsList = computed<Array<[string, Levels]>>(() => {
-    return Object.entries(merge({}, levels, defFloatLevelConfig)) as unknown as [string, Levels][];
+    return Object.entries(merge({}, defFloatLevelConfig, levels)) as unknown as [string, Levels][];
 });
 
 function getBlockProperties(key: BlockName) {
