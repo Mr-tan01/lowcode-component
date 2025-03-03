@@ -1,7 +1,7 @@
-import o from "./rawMap2.js";
+import o from "./rawMap3.js";
 import '../assets/szmap/rawMap.css';/* empty css        */
-import a from "../_virtual/_plugin-vue_export-helper.js";
-const c = /* @__PURE__ */ a(o, [["__scopeId", "data-v-9c884c3a"]]);
+import t from "../_virtual/_plugin-vue_export-helper.js";
+const m = /* @__PURE__ */ t(o, [["__scopeId", "data-v-470d109b"]]);
 export {
-  c as default
+  m as default
 };

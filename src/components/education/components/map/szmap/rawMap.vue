@@ -21,7 +21,7 @@
         </svg>
         <div class="lc-szmap-raw__mark-group" v-if="showLabel">
             <LcMark v-for="(_, key) in blockList" :key :class="[`lc-szmap-raw__mark-group--item`, `mark-${key}`]"
-                v-bind="getMarkProp(key)" size="small"></LcMark>
+                v-bind="getMarkProp(key)" size="small" @click="markClick(key)"></LcMark>
         </div>
     </div>
 </template>
@@ -44,6 +44,7 @@ import { type Component, computed, onMounted, ref } from 'vue';
 import { type Levels, propsRaw } from './props';
 import { defFloatLevelConfig, type BlockName, szBlockNames } from './const';
 import merge from 'lodash-es/merge';
+import { EducationMarkProps } from '../../mark/props';
 
 const {
     labels,
@@ -69,6 +70,9 @@ const blockList: Record<BlockName, Component> = {
 }
 
 const labelAnimateNum = ref(0);
+const $emits = defineEmits<{
+    (e: 'markClick', value: EducationMarkProps): void;
+}>();
 
 function getMarkProp(key: BlockName) {
     const markMate = (values[key]! ?? { value: 0, });
@@ -80,6 +84,10 @@ function getMarkProp(key: BlockName) {
             '--level-scale': labelAnimateNum.value ? currentLevelConf?.scale ?? 1 : labelAnimateNum.value,
         }
     }
+}
+function markClick(key: BlockName) {
+    // 点击事件处理
+    $emits('markClick', getMarkProp(key));
 }
 onMounted(() => {
     // 显示动画
@@ -146,6 +154,10 @@ const labelWrapInsetY = computed(() => Math.abs(rotateX));
             will-change: transform;
             pointer-events: auto;
             transition: transform 0.2s;
+
+            &:hover {
+                cursor: pointer;
+            }
 
             &.mark-guangming {
                 left: 20%;

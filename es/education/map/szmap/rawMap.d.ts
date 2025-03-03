@@ -1,4 +1,5 @@
 import { Levels } from './props';
+import { EducationMarkProps } from '../../mark/props';
 declare const _default: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
     readonly showLabel: {
         readonly type: BooleanConstructor;
@@ -18,7 +19,9 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
     readonly rotateX: {
         readonly type: import('vue').PropType<number>;
     };
-}>, {}, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
+}>, {}, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {} & {
+    markClick: (value: EducationMarkProps) => any;
+}, string, import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
     readonly showLabel: {
         readonly type: BooleanConstructor;
     };
@@ -37,7 +40,9 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
     readonly rotateX: {
         readonly type: import('vue').PropType<number>;
     };
-}>> & Readonly<{}>, {
+}>> & Readonly<{
+    onMarkClick?: ((value: EducationMarkProps) => any) | undefined;
+}>, {
     readonly showLabel: boolean;
 }, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, HTMLDivElement>;
 export default _default;
