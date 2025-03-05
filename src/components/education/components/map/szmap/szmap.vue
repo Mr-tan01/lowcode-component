@@ -19,15 +19,10 @@ const {
 .lc-szmap {
     position: relative;
 
-    .back-block-map {
-        z-index: 1;
-    }
-
     .float-block-map {
         position: absolute;
         left: 50%;
         top: 50%;
-        z-index: 2;
         transform: translate(-50%, -51%) scale(0.98);
     }
 }
