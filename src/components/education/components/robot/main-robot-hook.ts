@@ -99,7 +99,7 @@ export function useStarRotate() {
         let zIndex = isBlockNode ? 10 : 0;
 
         let isHideBlock = displayAlternately.value.includes(index);
-        if (!isHideBlock && y <= endY && layoutIndex === 0) {
+        if (starLneght.value > starMaxShowCount.value && !isHideBlock && y <= endY && layoutIndex === 0) {
             updateDisplayAlternately(index);
             isHideBlock = displayAlternately.value.includes(index);
         }
