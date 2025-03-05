@@ -1,7 +1,8 @@
-import { defineComponent as s, mergeDefaults as r, computed as i, resolveComponent as p, openBlock as m, createElementBlock as c, createVNode as a, mergeProps as l } from "vue";
-import { useCommonLineOptions as u, useCommonLineSeries as _ } from "./options.js";
+import { defineComponent as n, mergeDefaults as r, computed as s, openBlock as i, createElementBlock as m, createVNode as p, unref as c, mergeProps as a } from "vue";
+import { SChartsLine as l } from "@mmj-code-lib/lowcode/es/components";
+import { useCommonLineOptions as u, useCommonLineSeries as f } from "./options.js";
 import d from "lodash-es/merge";
-const f = { class: "lc-line-chart" }, g = /* @__PURE__ */ s({
+const _ = { class: "lc-line-chart" }, k = /* @__PURE__ */ n({
   __name: "line",
   props: /* @__PURE__ */ r({
     options: Object
@@ -9,18 +10,15 @@ const f = { class: "lc-line-chart" }, g = /* @__PURE__ */ s({
     options: () => ({})
   }),
   setup(o) {
-    const t = i(() => {
+    const t = s(() => {
       const e = u(o.options);
-      return e.series = _(e.series), d({}, e);
+      return e.series = f(e.series), d({}, e);
     });
-    return (e, C) => {
-      const n = p("SChartsLine");
-      return m(), c("div", f, [
-        a(n, l({ opts: t.value }, e.$attrs), null, 16, ["opts"])
-      ]);
-    };
+    return (e, h) => (i(), m("div", _, [
+      p(c(l), a({ opts: t.value }, e.$attrs), null, 16, ["opts"])
+    ]));
   }
 });
 export {
-  g as default
+  k as default
 };
