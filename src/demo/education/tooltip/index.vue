@@ -13,7 +13,7 @@ import { DemoBox } from 'lowcode-share/es/demo';
 import { LcTooltip } from '@/components/education/components/tooltip';
 import {
     code1,
-} from './const';
+} from './demo-codes';
 </script>
 
 <style lang="scss" scoped>

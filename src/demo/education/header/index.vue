@@ -1,12 +1,18 @@
 <template>
      <div class="deom-headers">
-          <LcHeader v-model:index="headerIndex" hideArrow :nav-datas="defNavData"></LcHeader>
-          <LcHeader v-model:index="headerIndex" :nav-datas="defNavData"></LcHeader>
+          <DemoBox rswidth="100%" :code="demoCodes.code1">
+               <LcHeader v-model:index="headerIndex" hideArrow :nav-datas="defNavData"></LcHeader>
+          </DemoBox>
+          <DemoBox rswidth="100%" :code="demoCodes.code2">
+               <LcHeader v-model:index="headerIndex" :nav-datas="defNavData"></LcHeader>
+          </DemoBox>
      </div>
 </template>
 <script lang="ts" setup>
 import { LcHeader } from "@/components/education/components/header";
+import { demoCodes } from './demo-codes';
 import { ref } from "vue";
+import { DemoBox } from "lowcode-share/es/demo";
 const headerIndex = ref(2);
 const defNavData = [{
      label: '高质量发展中心',
@@ -81,13 +87,5 @@ const defNavData = [{
      label: '发展规划中心',
      path: '/join',
 },
-     // {
-     //     label: '发展规划中心2',
-     //     path: '/join',
-     // },
-     // {
-     //     label: '发展规划中心3',
-     //     path: '/join',
-     // }
 ];
 </script>

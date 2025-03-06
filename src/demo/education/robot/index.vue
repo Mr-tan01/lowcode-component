@@ -1,6 +1,6 @@
 <template>
     <div class="demo-robot">
-        <DemoBox title="主入口机器人" description="深圳教育项目-主入口机器人" rswidth="806px" rs-height="966px">
+        <DemoBox title="主入口机器人" description="深圳教育项目-主入口机器人" rswidth="806px" rs-height="966px" :code="codeStr0">
             <LcMainRobot :animate="true"></LcMainRobot>
         </DemoBox>
         <DemoBox title="机器人图标" description="深圳教育项目-机器人图标" rswidth="1210px" rs-height="auto" :code="code1">
@@ -31,7 +31,7 @@
 import { NSpace } from 'naive-ui';
 import { DemoBox } from 'lowcode-share/es/demo';
 import { LcRobot, LcMainRobot } from '@/components/education/components/robot';
-import { code1, code2 } from './const';
+import { code1, code2, codeStr0 } from './demo-codes';
 </script>
 
 <style lang="scss" scoped>

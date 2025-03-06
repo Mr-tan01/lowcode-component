@@ -1,11 +1,11 @@
 <template>
     <div class="demo-map">
-        <DemoBox title="深圳地图" description="深圳教育项目-深圳地图" rswidth="962px">
+        <DemoBox title="深圳地图" description="深圳教育项目-深圳地图" rswidth="962px" :code="demoCodes.code1">
             <div class="size-box">
                 <Szmap :values></Szmap>
             </div>
         </DemoBox>
-        <DemoBox title="深圳地图" description="深圳教育项目-深圳地图" rswidth="962px">
+        <DemoBox title="深圳地图" description="深圳教育项目-深圳地图" rswidth="962px" :code="demoCodes.code2">
             <div class="size-box">
                 <Szmap :values :rotate-x="-30"></Szmap>
             </div>
@@ -15,6 +15,7 @@
 <script lang="ts" setup>
 import { DemoBox } from 'lowcode-share/es/demo';
 import { Szmap, type SZMapMarkProps } from '@/components/education/components/map';
+import { demoCodes } from './demo-codes';
 
 const values: SZMapMarkProps = {
     guangming: {

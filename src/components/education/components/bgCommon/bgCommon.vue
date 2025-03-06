@@ -39,6 +39,7 @@ const bgURL = computed(() => `url(${bgSrc || bgImage.url})`);
         }
 
         &__bl-decoartor-bg {
+            pointer-events: none;
             position: absolute;
             bottom: 0;
             left: 0;
@@ -50,6 +51,7 @@ const bgURL = computed(() => `url(${bgSrc || bgImage.url})`);
         }
 
         &__br-decoartor-bg {
+            pointer-events: none;
             width: 608px;
             height: 23px;
             position: absolute;

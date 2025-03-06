@@ -4,7 +4,7 @@ export const code1 = `
     <LcSelect v-model:value="value" :options></LcSelect>
      <LcSelect v-model:value="value" :options gradient></LcSelect>
 </template>
-<script setup>
+<script lang="ts" setup>
     const value = ref('song1')
     const options = [
         {

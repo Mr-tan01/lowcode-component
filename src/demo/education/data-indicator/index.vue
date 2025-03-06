@@ -66,7 +66,7 @@ import {
     LcRangeIndicator,
     LcIndicatorList,
 } from '@/components/education/components/dataIndicator';
-import { code1, code2, code3, } from './const';
+import { code1, code2, code3, } from './demo-codes';
 
 </script>
 <style lang="scss" scoped>

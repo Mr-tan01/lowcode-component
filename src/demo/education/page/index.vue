@@ -35,7 +35,7 @@ import { DemoBox } from 'lowcode-share/es/demo';
 import { NSpace } from 'naive-ui';
 import { LcPageTitle, LcTextTitle } from '@/components/education/components/pageTitle';
 import { LcDecoratorTitle } from '@/components/education/components/decoratorTitle';
-import * as pageTitle from './pageTitle';
+import * as pageTitle from './demo-codes';
 import VueResizable from 'vue-resizable'
 </script>
 

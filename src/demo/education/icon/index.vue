@@ -21,7 +21,6 @@ import { code1 } from './const';
 </script>
 
 <style lang="scss" scoped>
-.text-box {}
 .demo-page {
     overflow: auto;
 }

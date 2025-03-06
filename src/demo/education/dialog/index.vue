@@ -1,7 +1,7 @@
 <template>
     <div class="demo_dialog">
         <DemoBox title="弹出窗" description="大尺寸弹窗" :code="code1">
-            <button @click="show = true">弹窗</button>
+            <NButton @click="show = true">点击弹窗</NButton>
             <LcModal v-model:show="show" title="弹窗标题">
                 <template #header>
                     <div class="header">
@@ -16,7 +16,7 @@
             </LcModal>
         </DemoBox>
         <DemoBox title="弹出窗" description="中等尺寸弹窗"  :code="code2">
-            <button @click="show2 = true">弹窗</button>
+            <NButton @click="show2 = true">点击弹窗</NButton>
             <LcModal v-model:show="show2" size-mode="medium" title="弹窗标题">
                 <template #header>
                     <div class="header">
@@ -37,7 +37,8 @@
 import { DemoBox } from 'lowcode-share/es/demo';
 import { LcModal } from '@/components/education/components/modal';
 import { ref } from 'vue';
-import { code1, code2 } from './const';
+import { code1, code2 } from './demo-codes';
+import { NButton } from 'naive-ui';
 const show = ref(false);
 const show2 = ref(false);
 

@@ -24,7 +24,7 @@ import { LcSelect } from '@/components/education/components/select';
 import { ref } from 'vue';
 import {
     code1,
-} from './const';
+} from './demo-codes';
 const value = ref('song1')
 const options = [
     {

@@ -35,7 +35,7 @@
 import { NSpace } from 'naive-ui';
 import { DemoBox } from 'lowcode-share/es/demo';
 import { LcButton } from '@/components/education/components/button';
-import { code1 } from './const';
+import { code1 } from './demo-codes';
 </script>
 
 <style lang="scss" scoped></style>

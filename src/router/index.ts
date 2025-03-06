@@ -10,6 +10,13 @@ const routes = createMetaGlobRoutes(routerRaws, ['demo', 'education']);
 const router: Router = createRouter({
     history: createWebHashHistory(base),
     routes: [
+        {
+            path: '/',
+            redirect: routes[0].path,
+            meta: {
+                title: '首页',
+            },
+        },
         ...routes,
     ],
 });

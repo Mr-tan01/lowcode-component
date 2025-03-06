@@ -1,6 +1,6 @@
 <template>
     <div class="demo-map">
-        <DemoBox title="mark" description="深圳教育项目-深圳地图-mark" rswidth="962px">
+        <DemoBox title="mark" description="深圳教育项目-深圳地图-mark" rswidth="962px" :code="demoCodes.code1">
             <NSpace :size="150">
                 <LcMark :value="11000" unit="人" size="small"></LcMark>
                 <LcMark :value="11000" unit="人"></LcMark>
@@ -20,4 +20,5 @@
 import { DemoBox } from 'lowcode-share/es/demo';
 import { NSpace } from 'naive-ui';
 import { LcMark } from '@/components/education/components/mark';
+import { demoCodes } from './demo-codes';
 </script>

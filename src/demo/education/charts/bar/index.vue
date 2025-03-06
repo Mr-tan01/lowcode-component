@@ -9,32 +9,32 @@
                 <DemoBox title="多柱(≥2类数据)" rswidth="390px" rs-height="265px" :code="barChartCodes.code2">
                     <LcBarChart :options="chartsBarOpts(2)" type="bar"></LcBarChart>
                 </DemoBox>
-                <DemoBox title="堆叠柱" rswidth="390px" rs-height="265px">
+                <DemoBox title="堆叠柱" rswidth="390px" rs-height="265px" :code="barChartCodes.code3">
                     <LcBarChart :options="chartsBarOpts(2)" stack type="bar"></LcBarChart>
                 </DemoBox>
-                <DemoBox title="单条横柱" rswidth="390px" rs-height="385px">
+                <DemoBox title="单条横柱" rswidth="390px" rs-height="385px" :code="barChartCodes.code4">
                     <LcBarChart :options="chartsHorizontalBarOpts(1)" is-horizontal :fake3d="false" type="bar">
                     </LcBarChart>
                 </DemoBox>
-                <DemoBox title="多条横柱" rswidth="390px" rs-height="385px">
+                <DemoBox title="多条横柱" rswidth="390px" rs-height="385px" :code="barChartCodes.code5">
                     <LcBarChart :options="chartsHorizontalBarOpts(2)" is-horizontal :fake3d="false" type="bar">
                     </LcBarChart>
                 </DemoBox>
-                <DemoBox title="多条横柱" rswidth="390px" rs-height="385px">
+                <DemoBox title="多条横柱" rswidth="390px" rs-height="385px" :code="barChartCodes.code6">
                     <LcBarChart :options="chartNegativeBarOptions()" is-horizontal stack :fake3d="false" type="bar">
                     </LcBarChart>
                 </DemoBox>
-                <DemoBox title="单柱多维(2类数据)" rswidth="390px" rs-height="365px">
+                <DemoBox title="单柱多维(2类数据)" rswidth="390px" rs-height="365px" :code="barChartCodes.code7">
                     <LcBarChart :options="evenYaixsChartsBarOpts(2)" type="bar"></LcBarChart>
                 </DemoBox>
-                <DemoBox title="横向堆叠柱" rswidth="390px" rs-height="365px">
+                <DemoBox title="横向堆叠柱" rswidth="390px" rs-height="365px" :code="barChartCodes.code8">
                     <LcBarChart :options="chartsBarOpts(100)" is-horizontal stack :fake3d="false" type="bar">
                     </LcBarChart>
                 </DemoBox>
-                <DemoBox title="纵向堆叠柱" rswidth="390px" rs-height="365px">
+                <DemoBox title="纵向堆叠柱" rswidth="390px" rs-height="365px" :code="barChartCodes.code9">
                     <LcBarChart :options="chartsBarOpts(100)" stack type="bar" :fake3d="false"></LcBarChart>
                 </DemoBox>
-                <DemoBox title="其他形态柱状图" rswidth="390px" rs-height="365px">
+                <DemoBox title="其他形态柱状图" rswidth="390px" rs-height="365px" :code="barChartCodes.code10">
                     <template #title>
                         <span>其他形态柱状图</span>
                         <NSpace>
@@ -44,7 +44,7 @@
                     </template>
                     <LcBarChart :options="pictorialBarOpts(2, 100)" type="bar" :fake3d="false"></LcBarChart>
                 </DemoBox>
-                <DemoBox title="象形" rswidth="390px" rs-height="365px">
+                <DemoBox title="象形" rswidth="390px" rs-height="365px" :code="barChartCodes.code11">
                     <LcBarChart :options="pictorialBarOpts(0, 2)" type="bar" :fake3d="false"></LcBarChart>
                 </DemoBox>
 
@@ -59,7 +59,7 @@ import { DemoBox } from 'lowcode-share/es/demo';
 import {
     LcBarChart,
 } from '@/components/education/components/charts';
-import { barChartCodes } from './codes';
+import { barChartCodes } from './demo-codes';
 import {
     chartsBarOpts,
     chartsHorizontalBarOpts,
@@ -71,9 +71,11 @@ import {
 <style lang="scss" scoped>
 .demo-charts {
     overflow: auto;
+
     span {
         color: #fff;
     }
+
     a {
         color: #23cec3;
     }

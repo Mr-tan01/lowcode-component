@@ -2,10 +2,10 @@
     <div class="demo-charts">
         <DemoBox title="漏斗图" description="散点图主要包括单系列散点图、多系列散点图、" rswidth="1360px" rs-height="auto">
             <NSpace>
-                <DemoBox title="漏斗图(HTMLElement)" rswidth="520px" rs-height="306px">
+                <DemoBox title="漏斗图(HTMLElement)" rswidth="520px" rs-height="306px" :code="deomCodes.code1">
                     <LcFunnelTierChart v-bind="useTierOptions()"></LcFunnelTierChart>
                 </DemoBox>
-                <DemoBox title="漏斗图（echarts)" rswidth="520px" rs-height="306px">
+                <DemoBox title="漏斗图（echarts)" rswidth="520px" rs-height="306px" :code="deomCodes.code2">
                     <LcFunnelChart v-bind="useOptions()"></LcFunnelChart>
                 </DemoBox>
             </NSpace>
@@ -20,6 +20,7 @@ import {
     LcFunnelTierChart,
 } from '@/components/education/components/charts';
 import { useOptions, useTierOptions } from '../options/funnel-options';
+import { deomCodes } from './deom-codes';
 </script>
 <style lang="scss" scoped>
 .demo-charts {
