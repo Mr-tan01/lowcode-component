@@ -69,7 +69,8 @@ const tdCellTypeMap = {
         return typeof val === 'number' ? val : val || '-';
     })
 }
-const getThCellNode = memoize((_record, _index) => {
+
+const getThCellNode: (_record: Columns, _index: number) => string = memoize((_record: Columns, _index: number) => {
     return _record.title;
 });
 
@@ -77,9 +78,9 @@ function createTdCellNode(_tdRecord, _thRecord: Columns, _tdIndex: number, _thIn
     const renderHandler = _thRecord.type ? tdCellTypeMap[_thRecord.type] : tdCellTypeMap.default;
     return renderHandler(_tdRecord, _thRecord, _tdIndex, _thIndex);
 }
-const getTdCellNode = memoize(createTdCellNode, createTdCellNode);
+const getTdCellNode: typeof createTdCellNode = memoize(createTdCellNode, createTdCellNode);
 
-const customRecordStyle = memoize((thRecord) => {
+const customRecordStyle: (_record: Columns) => Record<string, any> = memoize((thRecord) => {
     return {
         '--text-align': thRecord.align ?? 'left',
         '--cell-flex': thRecord.flex ?? 1,
