@@ -1,16 +1,16 @@
 <template>
     <div class="demo-table">
-        <DemoBox title="Table" description="基础用法" rswidth="1300px">
-            <DemoBox title="描述列表" description="描述列表-配合LcElasticScrollbar组件适配高度" rswidth="500px" rs-height="500px" :code="demoCodes.code1">
+        <DemoHelpBox title="Table" description="基础用法" rswidth="1300px">
+            <DemoHelpBox title="描述列表" description="描述列表-配合LcElasticScrollbar组件适配高度" rswidth="500px" rs-height="500px" :code="demoCodes.code1">
                 <LcDescTable :columns :data>
                 </LcDescTable>
-            </DemoBox>
-        </DemoBox>
+            </DemoHelpBox>
+        </DemoHelpBox>
     </div>
 </template>
 
 <script lang="ts" setup>
-import { DemoBox } from 'lowcode-share/es/demo';
+import { DemoHelpBox } from '@/components/common/DemoHelpBox';
 import { LcDescTable, type LcDescTableColumns } from '@/components/education/components/table';
 import { demoCodes } from './demo-codes';
 

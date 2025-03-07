@@ -1,6 +1,6 @@
 <template>
     <div class="demo-按钮">
-        <DemoBox title="按钮" description="基本用法" rswidth="1000px" :code="code1">
+        <DemoHelpBox title="按钮" description="基本用法" rswidth="1000px" :code="code1">
             <NSpace>
                 <LcButton type="primary">
                     重要按钮
@@ -27,13 +27,13 @@
                     图标按钮
                 </LcButton>
             </NSpace>
-        </DemoBox>
+        </DemoHelpBox>
     </div>
 </template>
 
 <script lang="ts" setup>
 import { NSpace } from 'naive-ui';
-import { DemoBox } from 'lowcode-share/es/demo';
+import { DemoHelpBox } from '@/components/common/DemoHelpBox';
 import { LcButton } from '@/components/education/components/button';
 import { code1 } from './demo-codes';
 </script>

@@ -1,6 +1,6 @@
 <template>
     <div class="demo-page">
-        <DemoBox title="页面标题" description="基础用法" :code="pageTitle.code1" rswidth="1000px">
+        <DemoHelpBox title="页面标题" description="基础用法" :code="pageTitle.code1" rswidth="1000px">
             <div class="text-box">
                 <n-space>
                     <LcPageTitle>
@@ -13,8 +13,8 @@
                     <LcTextTitle text="超长二级小标题，最多十五个字符最多十五个字符最多十五个字符"></LcTextTitle>
                 </n-space>
             </div>
-        </DemoBox>
-        <DemoBox title="标题头部" description="左右排序" rswidth="1000px" :code="pageTitle.decoratorCode">
+        </DemoHelpBox>
+        <DemoHelpBox title="标题头部" description="左右排序" rswidth="1000px" :code="pageTitle.decoratorCode">
             <n-space>
                 <VueResizable width="390px" height="35px">
                     <LcDecoratorTitle text="标题文字最多十二个字符"></LcDecoratorTitle>
@@ -26,12 +26,12 @@
                     <LcDecoratorTitle text="标题文字最多十二个字符标题文字最多十二个字符标题文字最多十二个字符" ></LcDecoratorTitle>
                 </VueResizable>
             </n-space>
-        </DemoBox>
+        </DemoHelpBox>
     </div>
 </template>
 
 <script lang="ts" setup>
-import { DemoBox } from 'lowcode-share/es/demo';
+import { DemoHelpBox } from '@/components/common/DemoHelpBox';
 import { NSpace } from 'naive-ui';
 import { LcPageTitle, LcTextTitle } from '@/components/education/components/pageTitle';
 import { LcDecoratorTitle } from '@/components/education/components/decoratorTitle';

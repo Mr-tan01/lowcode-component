@@ -1,7 +1,7 @@
 <template>
     <div class="demo-select">
 
-        <DemoBox title="Select" description="基础用法/渐变" :code="code1">
+        <DemoHelpBox title="Select" description="基础用法/渐变" :code="code1">
             <n-space>
                 <div class="select-box">
                     <LcSelect v-model:value="value" :options>
@@ -12,13 +12,13 @@
                     </LcSelect>
                 </div>
             </n-space>
-        </DemoBox>
+        </DemoHelpBox>
 
     </div>
 </template>
 
 <script lang="ts" setup>
-import { DemoBox } from 'lowcode-share/es/demo';
+import { DemoHelpBox } from '@/components/common/DemoHelpBox';
 import { NSpace } from 'naive-ui';
 import { LcSelect } from '@/components/education/components/select';
 import { ref } from 'vue';

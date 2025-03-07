@@ -7,6 +7,8 @@ const routerRaws = import.meta.glob<RouteRecordRaw['component']>('../demo/**/ind
 });
 
 const routes = createMetaGlobRoutes(routerRaws, ['demo', 'education']);
+const routes2 = createMetaGlobRoutes(routerRaws, ['demo', 'edit']);
+
 const router: Router = createRouter({
     history: createWebHashHistory(base),
     routes: [
@@ -18,6 +20,7 @@ const router: Router = createRouter({
             },
         },
         ...routes,
+        ...routes2,
     ],
 });
 

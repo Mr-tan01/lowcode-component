@@ -1,20 +1,20 @@
 <template>
     <div class="demo-tabs">
-        <DemoBox title="选项" description="基础用法" rswidth="700px" rs-height="auto" :code="demoCodes.code1">
+        <DemoHelpBox title="选项" description="基础用法" rswidth="700px" rs-height="auto" :code="demoCodes.code1">
             {{ tabValue2 }}
             <LcSwitchTabs v-model:index="tabValue2">
             </LcSwitchTabs>
-        </DemoBox>
-        <DemoBox title="选项" description="基础用法" rswidth="1000px" rs-height="auto" :code="demoCodes.code2">
+        </DemoHelpBox>
+        <DemoHelpBox title="选项" description="基础用法" rswidth="1000px" rs-height="auto" :code="demoCodes.code2">
             {{ tabValue }}
             <LcSwitchTabs v-model:value="tabValue">
             </LcSwitchTabs>
-        </DemoBox>
+        </DemoHelpBox>
     </div>
 </template>
 
 <script lang="ts" setup>
-import { DemoBox } from 'lowcode-share/es/demo';
+import { DemoHelpBox } from '@/components/common/DemoHelpBox';
 import { LcSwitchTabs } from '@/components/education/components/switch-tabs';
 import { ref } from 'vue';
 import { demoCodes } from './demo-codes';

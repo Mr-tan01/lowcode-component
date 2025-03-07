@@ -1,34 +1,34 @@
 <template>
     <div class="demo-wordcloud">
-        <DemoBox title="词云" description="基础用法" rswidth="100%">
+        <DemoHelpBox title="词云" description="基础用法" rswidth="100%">
             <NSpace>
-                <DemoBox title="款词云-圆球" rswidth="450px" rs-height="450px" :code="demoCodes.code1">
+                <DemoHelpBox title="款词云-圆球" rswidth="450px" rs-height="450px" :code="demoCodes.code1">
                     <LcBubbleWordColud :data="wordCloudData">
                     </LcBubbleWordColud>
-                </DemoBox>
-                <DemoBox title="款词云-发光球" rswidth="450px" rs-height="450px" :code="demoCodes.code2">
+                </DemoHelpBox>
+                <DemoHelpBox title="款词云-发光球" rswidth="450px" rs-height="450px" :code="demoCodes.code2">
                     <LcBubbleWordColud type="shadow" :enable-animate="true" :data="wordCloudData">
                     </LcBubbleWordColud>
-                </DemoBox>
-                <DemoBox title="款词云-文本" rswidth="450px" rs-height="450px" :code="demoCodes.code3">
+                </DemoHelpBox>
+                <DemoHelpBox title="款词云-文本" rswidth="450px" rs-height="450px" :code="demoCodes.code3">
                     <LcBubbleWordColud type="text" :maxWord="30" :data="wordCloudData">
                     </LcBubbleWordColud>
-                </DemoBox>
-                <DemoBox title="款词云-混合" rswidth="450px" rs-height="450px" :code="demoCodes.code4">
+                </DemoHelpBox>
+                <DemoHelpBox title="款词云-混合" rswidth="450px" rs-height="450px" :code="demoCodes.code4">
                     <LcBubbleWordColud type="text-circle" :maxWord="30" :data="wordCloudData">
                     </LcBubbleWordColud>
-                </DemoBox>
-                <DemoBox title="款词云-禁止自动动画" rswidth="450px" rs-height="450px" :code="demoCodes.code5">
+                </DemoHelpBox>
+                <DemoHelpBox title="款词云-禁止自动动画" rswidth="450px" rs-height="450px" :code="demoCodes.code5">
                     <LcBubbleWordColud type="shadow" :enable-animate="false" :data="wordCloudData">
                     </LcBubbleWordColud>
-                </DemoBox>
+                </DemoHelpBox>
             </NSpace>
-        </DemoBox>
+        </DemoHelpBox>
     </div>
 </template>
 
 <script lang="ts" setup>
-import { DemoBox } from 'lowcode-share/es/demo';
+import { DemoHelpBox } from '@/components/common/DemoHelpBox';
 import { LcBubbleWordColud } from '@/components/education/components/wordCloud';
 import { NSpace } from 'naive-ui';
 import { demoCodes } from './demo-codes';

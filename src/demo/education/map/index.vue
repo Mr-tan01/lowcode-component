@@ -1,19 +1,19 @@
 <template>
     <div class="demo-map">
-        <DemoBox title="深圳地图" description="深圳教育项目-深圳地图" rswidth="962px" :code="demoCodes.code1">
+        <DemoHelpBox title="深圳地图" description="深圳教育项目-深圳地图" rswidth="962px" :code="demoCodes.code1">
             <div class="size-box">
                 <Szmap :values></Szmap>
             </div>
-        </DemoBox>
-        <DemoBox title="深圳地图" description="深圳教育项目-深圳地图" rswidth="962px" :code="demoCodes.code2">
+        </DemoHelpBox>
+        <DemoHelpBox title="深圳地图" description="深圳教育项目-深圳地图" rswidth="962px" :code="demoCodes.code2">
             <div class="size-box">
                 <Szmap :values :rotate-x="-30"></Szmap>
             </div>
-        </DemoBox>
+        </DemoHelpBox>
     </div>
 </template>
 <script lang="ts" setup>
-import { DemoBox } from 'lowcode-share/es/demo';
+import { DemoHelpBox } from '@/components/common/DemoHelpBox';
 import { Szmap, type SZMapMarkProps } from '@/components/education/components/map';
 import { demoCodes } from './demo-codes';
 

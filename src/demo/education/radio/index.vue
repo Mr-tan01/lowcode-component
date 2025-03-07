@@ -1,6 +1,6 @@
 <template>
     <div class="demo-map">
-        <DemoBox title="选项按钮" description="深圳教育项目-选项" rswidth="1210px" rs-height="auto" :code="demoCodes.code1">
+        <DemoHelpBox title="选项按钮" description="深圳教育项目-选项" rswidth="1210px" rs-height="auto" :code="demoCodes.code1">
             <div class="size-box">
                 <n-space>
                     <LcRadioButtonGroup v-model="radioButtonValue1">
@@ -12,8 +12,8 @@
                     </LcRadioButtonGroup>
                 </n-space>
             </div>
-        </DemoBox>
-        <DemoBox title="单选" description="深圳教育项目-单选" rswidth="1210px" rs-height="auto" :code="demoCodes.code2">
+        </DemoHelpBox>
+        <DemoHelpBox title="单选" description="深圳教育项目-单选" rswidth="1210px" rs-height="auto" :code="demoCodes.code2">
             value: {{ radioValue }}
             <div class="size-box">
                 <LcRadioGroup v-model:value="radioValue">
@@ -28,12 +28,12 @@
                 </LcRadioGroup>
 
             </div>
-        </DemoBox>
+        </DemoHelpBox>
     </div>
 </template>
 <script lang="ts" setup>
 import { NSpace } from 'naive-ui';
-import { DemoBox } from 'lowcode-share/es/demo';
+import { DemoHelpBox } from '@/components/common/DemoHelpBox';
 import { LcRadioButtonGroup } from '@/components/education/components/radio-button-group';
 import { LcRadioButton } from '@/components/education/components/radio-button';
 import { LcRadio, LcRadioGroup } from '@/components/education/components/radio';

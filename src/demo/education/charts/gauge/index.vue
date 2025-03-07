@@ -1,29 +1,29 @@
 <template>
     <div class="demo-charts">
-        <DemoBox title="图表" description="图表-图分单类数据、多类数据、组合类数据、" rswidth="1360px" rs-height="auto">
+        <DemoHelpBox title="图表" description="图表-图分单类数据、多类数据、组合类数据、" rswidth="1360px" rs-height="auto">
             <NSpace>
-                <DemoBox title="仪表盘" rswidth="420px" rs-height="auto" :code="deomCodes.code1(100)">
+                <DemoHelpBox title="仪表盘" rswidth="420px" rs-height="auto" :code="deomCodes.code1(100)">
                     <LcGaugeSvgChart v-bind="useGaugeSvgOptions()"></LcGaugeSvgChart>
-                </DemoBox>
-                <DemoBox title="仪表盘" rswidth="420px" rs-height="auto" :code="deomCodes.code1(90)">
+                </DemoHelpBox>
+                <DemoHelpBox title="仪表盘" rswidth="420px" rs-height="auto" :code="deomCodes.code1(90)">
                     <LcGaugeSvgChart :value="90"></LcGaugeSvgChart>
-                </DemoBox>
-                <DemoBox title="仪表盘" rswidth="420px" rs-height="auto" :code="deomCodes.code1(60)">
+                </DemoHelpBox>
+                <DemoHelpBox title="仪表盘" rswidth="420px" rs-height="auto" :code="deomCodes.code1(60)">
                     <LcGaugeSvgChart :value="60"></LcGaugeSvgChart>
-                </DemoBox>
-                <DemoBox title="得分图" rswidth="520px" rs-height="420px"  :code="deomCodes.code2">
+                </DemoHelpBox>
+                <DemoHelpBox title="得分图" rswidth="520px" rs-height="420px"  :code="deomCodes.code2">
                     <LcGaugeChart v-bind="useCommonGaugeOptions()"></LcGaugeChart>
-                </DemoBox>
-                <DemoBox title="仪表盘" rswidth="420px" rs-height="420px"  :code="deomCodes.code3">
+                </DemoHelpBox>
+                <DemoHelpBox title="仪表盘" rswidth="420px" rs-height="420px"  :code="deomCodes.code3">
                     <LcGaugeChart v-bind="useGaugeOptions()"></LcGaugeChart>
-                </DemoBox>
+                </DemoHelpBox>
             </NSpace>
-        </DemoBox>
+        </DemoHelpBox>
     </div>
 </template>
 <script lang="ts" setup>
 import { NSpace } from 'naive-ui';
-import { DemoBox } from 'lowcode-share/es/demo';
+import { DemoHelpBox } from '@/components/common/DemoHelpBox';
 import {
     LcGaugeChart,
     LcGaugeSvgChart

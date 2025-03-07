@@ -11,9 +11,12 @@ importers:
       '@mmj-code-lib/lowcode':
         specifier: git+http://liangweizhu@siteshun@code.siteshun.com:800/front-component/STS/mmj-code-lib.git#lowcode-0.1.0
         version: git+http://liangweizhu%40siteshun@code.siteshun.com:800/front-component/STS/mmj-code-lib.git#6718b6af92a4e0f8142d9045ed583da219cd4b44
+      '@vue/repl':
+        specifier: ^4.5.1
+        version: 4.5.1
       lowcode-share:
-        specifier: git+http://code.siteshun.com:800/front-component/lowcode-sview/lowcode-share.git#develop
-        version: git+http://code.siteshun.com:800/front-component/lowcode-sview/lowcode-share.git#b00df84126877ae19605644cb97468939e7c4ab7(typescript@5.6.3)
+        specifier: link:F:/work/goview/tosts/lowcode-share
+        version: link:../lowcode-share
       resize-observer-polyfill:
         specifier: ^1.5.1
         version: 1.5.1
@@ -556,6 +559,9 @@ packages:
   '@vue/reactivity@3.5.13':
     resolution: {integrity: sha512-NaCwtw8o48B9I6L1zl2p41OHo/2Z4wqYGGIK1Khu5T7yxrn+ATOixn/Udn2m+6kZKB/J7cuT9DbWWhRxqixACg==}
 
+  '@vue/repl@4.5.1':
+    resolution: {integrity: sha512-YYXvFue2GOrZ6EWnoA8yQVKzdCIn45+tpwJHzMof1uwrgyYAVY9ynxCsDYeAuWcpaAeylg/nybhFuqiFy2uvYA==}
+
   '@vue/runtime-core@3.5.13':
     resolution: {integrity: sha512-Fj4YRQ3Az0WTZw1sFe+QDb0aXCerigEpw418pw1HBUKFtnQHWzwojaukAs2X/c9DQz4MQ4bsXTGlcpGxU/RCIw==}
 
@@ -584,20 +590,11 @@ packages:
   '@vueuse/core@12.5.0':
     resolution: {integrity: sha512-GVyH1iYqNANwcahAx8JBm6awaNgvR/SwZ1fjr10b8l1HIgDp82ngNbfzJUgOgWEoxjL+URAggnlilAEXwCOZtg==}
 
-  '@vueuse/core@12.7.0':
-    resolution: {integrity: sha512-jtK5B7YjZXmkGNHjviyGO4s3ZtEhbzSgrbX+s5o+Lr8i2nYqNyHuPVOeTdM1/hZ5Tkxg/KktAuAVDDiHMraMVA==}
-
   '@vueuse/metadata@12.5.0':
     resolution: {integrity: sha512-Ui7Lo2a7AxrMAXRF+fAp9QsXuwTeeZ8fIB9wsLHqzq9MQk+2gMYE2IGJW48VMJ8ecvCB3z3GsGLKLbSasQ5Qlg==}
 
-  '@vueuse/metadata@12.7.0':
-    resolution: {integrity: sha512-4VvTH9mrjXqFN5LYa5YfqHVRI6j7R00Vy4995Rw7PQxyCL3z0Lli86iN4UemWqixxEvYfRjG+hF9wL8oLOn+3g==}
-
   '@vueuse/shared@12.5.0':
     resolution: {integrity: sha512-vMpcL1lStUU6O+kdj6YdHDixh0odjPAUM15uJ9f7MY781jcYkIwFA4iv2EfoIPO6vBmvutI1HxxAwmf0cx5ISQ==}
-
-  '@vueuse/shared@12.7.0':
-    resolution: {integrity: sha512-coLlUw2HHKsm7rPN6WqHJQr18WymN4wkA/3ThFaJ4v4gWGWAQQGK+MJxLuJTBs4mojQiazlVWAKNJNpUWGRkNw==}
 
   acorn@8.14.0:
     resolution: {integrity: sha512-cl669nCJTZBsL97OF4kUQm5g5hC2uihk0NxY3WENAC0TYdILVkAyHymAntgxGkl7K+t0cXIrH5siy5S4XkFycA==}
@@ -776,10 +773,6 @@ packages:
 
   lodash@4.17.21:
     resolution: {integrity: sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==}
-
-  lowcode-share@git+http://code.siteshun.com:800/front-component/lowcode-sview/lowcode-share.git#b00df84126877ae19605644cb97468939e7c4ab7:
-    resolution: {commit: b00df84126877ae19605644cb97468939e7c4ab7, repo: http://code.siteshun.com:800/front-component/lowcode-sview/lowcode-share.git, type: git}
-    version: 0.2.0-apha.0.6.0
 
   lru-cache@6.0.0:
     resolution: {integrity: sha512-Jo6dJ04CmSjuznwJSS3pUeWmd/H0ffTlkXXgwZi+eq1UCmqQwCh+eLsYOYCwY991i2Fah4h1BEMCx4qThGbsiA==}
@@ -1527,6 +1520,8 @@ snapshots:
     dependencies:
       '@vue/shared': 3.5.13
 
+  '@vue/repl@4.5.1': {}
+
   '@vue/runtime-core@3.5.13':
     dependencies:
       '@vue/reactivity': 3.5.13
@@ -1561,26 +1556,9 @@ snapshots:
     transitivePeerDependencies:
       - typescript
 
-  '@vueuse/core@12.7.0(typescript@5.6.3)':
-    dependencies:
-      '@types/web-bluetooth': 0.0.20
-      '@vueuse/metadata': 12.7.0
-      '@vueuse/shared': 12.7.0(typescript@5.6.3)
-      vue: 3.5.13(typescript@5.6.3)
-    transitivePeerDependencies:
-      - typescript
-
   '@vueuse/metadata@12.5.0': {}
 
-  '@vueuse/metadata@12.7.0': {}
-
   '@vueuse/shared@12.5.0(typescript@5.6.3)':
-    dependencies:
-      vue: 3.5.13(typescript@5.6.3)
-    transitivePeerDependencies:
-      - typescript
-
-  '@vueuse/shared@12.7.0(typescript@5.6.3)':
     dependencies:
       vue: 3.5.13(typescript@5.6.3)
     transitivePeerDependencies:
@@ -1752,13 +1730,6 @@ snapshots:
   lodash-es@4.17.21: {}
 
   lodash@4.17.21: {}
-
-  lowcode-share@git+http://code.siteshun.com:800/front-component/lowcode-sview/lowcode-share.git#b00df84126877ae19605644cb97468939e7c4ab7(typescript@5.6.3):
-    dependencies:
-      '@vueuse/core': 12.7.0(typescript@5.6.3)
-      highlight.js: 11.11.1
-    transitivePeerDependencies:
-      - typescript
 
   lru-cache@6.0.0:
     dependencies:

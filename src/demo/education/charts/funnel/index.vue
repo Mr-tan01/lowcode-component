@@ -1,20 +1,20 @@
 <template>
     <div class="demo-charts">
-        <DemoBox title="漏斗图" description="散点图主要包括单系列散点图、多系列散点图、" rswidth="1360px" rs-height="auto">
+        <DemoHelpBox title="漏斗图" description="散点图主要包括单系列散点图、多系列散点图、" rswidth="1360px" rs-height="auto">
             <NSpace>
-                <DemoBox title="漏斗图(HTMLElement)" rswidth="520px" rs-height="306px" :code="deomCodes.code1">
+                <DemoHelpBox title="漏斗图(HTMLElement)" rswidth="520px" rs-height="306px" :code="deomCodes.code1">
                     <LcFunnelTierChart v-bind="useTierOptions()"></LcFunnelTierChart>
-                </DemoBox>
-                <DemoBox title="漏斗图（echarts)" rswidth="520px" rs-height="306px" :code="deomCodes.code2">
+                </DemoHelpBox>
+                <DemoHelpBox title="漏斗图（echarts)" rswidth="520px" rs-height="306px" :code="deomCodes.code2">
                     <LcFunnelChart v-bind="useOptions()"></LcFunnelChart>
-                </DemoBox>
+                </DemoHelpBox>
             </NSpace>
-        </DemoBox>
+        </DemoHelpBox>
     </div>
 </template>
 <script lang="ts" setup>
 import { NSpace } from 'naive-ui';
-import { DemoBox } from 'lowcode-share/es/demo';
+import { DemoHelpBox } from '@/components/common/DemoHelpBox';
 import {
     LcFunnelChart,
     LcFunnelTierChart,

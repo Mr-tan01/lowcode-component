@@ -4,6 +4,7 @@ import { pathResolve } from 'lowcode-share/es/cli'
 
 // https://vite.dev/config/
 export default defineConfig({
+  base: './',
   plugins: [vue()],
   resolve: {
     alias: [
@@ -29,6 +30,9 @@ export default defineConfig({
   server: {
     host: '0.0.0.0',
     open: true,
+  },
+  optimizeDeps: {
+    exclude: ['@vue/repl'],
   },
   build: {
     outDir: 'dist/lowcode-docx',

@@ -1,6 +1,6 @@
 <template>
     <div class="demo-data-indicator">
-        <DemoBox title="数据指标" description="图表区指标" rswidth="1000px" :code="code1">
+        <DemoHelpBox title="数据指标" description="图表区指标" rswidth="1000px" :code="code1">
             <NSpace>
                 <LcSkewIndicator label="总教职工人" :value="3336" unit="人" tip="测试tip"></LcSkewIndicator>
                 <LcSkewIndicator label="总教职工人" :value="3533336" unit="人"></LcSkewIndicator>
@@ -20,8 +20,8 @@
                 <LcIndicatorCard :value="3457" fixed hint="教职工人(人)" type="noborder"></LcIndicatorCard>
                 <LcIndicatorCard :value="3457" fixed hint="教职工人(人)" type="noborder"></LcIndicatorCard>
             </NSpace>
-        </DemoBox>
-        <DemoBox title="指标卡" description="基本用法" rswidth="1000px" :code="code2">
+        </DemoHelpBox>
+        <DemoHelpBox title="指标卡" description="基本用法" rswidth="1000px" :code="code2">
             <NSpace>
                 <LcIndicatorCard :value="3457" fixed hint="教职工人(人)"></LcIndicatorCard>
                 <LcIndicatorCard :value="3457" fixed hint="在编教职工(人)"></LcIndicatorCard>
@@ -39,8 +39,8 @@
                 <LcIndicatorCard :value="30" unit="万" hint="教职工人(人)" size="large"></LcIndicatorCard>
                 <LcIndicatorCard :value="23" unit="万" hint="在编教职工(人)" size="large"></LcIndicatorCard>
             </NSpace>
-        </DemoBox>
-        <DemoBox title="指标卡列表" description="基本用法" rswidth="1000px" :code="code3">
+        </DemoHelpBox>
+        <DemoHelpBox title="指标卡列表" description="基本用法" rswidth="1000px" :code="code3">
             <NSpace>
                 <LcIndicatorList icon="https://b0.bdstatic.com/2d43e63ca240bdf793814be0dbc9c3a5.jpg@h_1280" name="哪吒"
                     :msg="[
@@ -53,13 +53,13 @@
                         { label: '时间：', value: '2025年2月10日' }
                     ]"></LcIndicatorList>
             </NSpace>
-        </DemoBox>
+        </DemoHelpBox>
     </div>
 </template>
 
 <script lang="ts" setup>
 import { NSpace } from 'naive-ui';
-import { DemoBox } from 'lowcode-share/es/demo';
+import { DemoHelpBox } from '@/components/common/DemoHelpBox';
 import {
     LcSkewIndicator,
     LcIndicatorCard,

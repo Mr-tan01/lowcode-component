@@ -1,18 +1,18 @@
 <template>
      <div class="deom-headers">
-          <DemoBox rswidth="100%" :code="demoCodes.code1">
+          <DemoHelpBox rswidth="100%" :code="demoCodes.code1">
                <LcHeader v-model:index="headerIndex" hideArrow :nav-datas="defNavData"></LcHeader>
-          </DemoBox>
-          <DemoBox rswidth="100%" :code="demoCodes.code2">
+          </DemoHelpBox>
+          <DemoHelpBox rswidth="100%" :code="demoCodes.code2">
                <LcHeader v-model:index="headerIndex" :nav-datas="defNavData"></LcHeader>
-          </DemoBox>
+          </DemoHelpBox>
      </div>
 </template>
 <script lang="ts" setup>
 import { LcHeader } from "@/components/education/components/header";
 import { demoCodes } from './demo-codes';
 import { ref } from "vue";
-import { DemoBox } from "lowcode-share/es/demo";
+import { DemoHelpBox } from "@/components/common/DemoHelpBox";
 const headerIndex = ref(2);
 const defNavData = [{
      label: '高质量发展中心',
