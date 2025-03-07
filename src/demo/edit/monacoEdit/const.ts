@@ -12,3 +12,17 @@ const msg = ref('Hello World!')
 </template>
 
 `;
+
+export const headHTML = `
+<link rel="stylesheet" href="./cdn/lowcode-component/assets/index.css">
+`;
+
+export const preveiwOptions = {
+  headHTML,
+  bodyHTML: ``,
+  placeholderHTML: `loading...`,
+  customCode: {
+    importCode: ``,
+    useCode: ``,
+  }
+}

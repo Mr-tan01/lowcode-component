@@ -2,7 +2,7 @@
 import { ref, computed } from 'vue'
 import { Repl, useStore, useVueImportMap } from '@vue/repl';
 import Monaco from '@vue/repl/monaco-editor';
-import { testCodeStr } from './const';
+import { preveiwOptions, testCodeStr } from './const';
 import { useRoute } from 'vue-router';
 
 const $route = useRoute();
@@ -25,36 +25,28 @@ const store = useStore(
                 ...builtinImportMap.value,
                 imports: {
                     ...builtinImportMap.value.imports,
+                    'lowcode-component': './cdn/lowcode-component/index.js',
                 }
             };
+        }),
+        template: ref({
+            welcomeSFC: demoCodeStr,
         }),
         showOutput: ref(true),
         outputMode: ref('preview'),
     },
-    location.search
+    location.search,
 );
 
-store.setFiles({
-    'App.vue': demoCodeStr,
-});
-
 productionMode.value = true;
-const previewOptions = ref({
-    headHTML: ``,
-    bodyHTML: ``,
-    placeholderHTML: `loading...`,
-    customCode: {
-        importCode: ``,
-        useCode: ``,
-    }
-});
+const previewOptions = ref(preveiwOptions);
 </script>
 
 <template>
     <div class="repl">
         <Repl :store="store" :show-import-map="true" :preview-options="previewOptions" :editor="Monaco"
-            :auto-resize="true" :ssr="false" :clearConsole="false" :showCompileOutput="true" theme="dark"
-            preview-theme />
+            :auto-resize="true" :ssr="false" :showTsConfig="true" :clearConsole="false" :showCompileOutput="true"
+            theme="dark" preview-theme />
     </div>
 </template>
 

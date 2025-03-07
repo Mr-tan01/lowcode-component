@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite && vue-tsc --noEmit",
     "docx": "vue-tsc -b && vite build",
+    "build:lib": "vue-tsc -b && vite build --config vite.config.lib.ts",
     "lib": "pnpm --filter scripts build",
     "preview": "vite preview"
   },

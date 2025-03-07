@@ -1,3 +1,2 @@
-export * from "./header";
-export * from './bgCommon';
-export * from './modal';
+
+export * from './button';
