@@ -38,8 +38,8 @@
                     <template #title>
                         <span>其他形态柱状图</span>
                         <NSpace>
-                            <a href="../images/blue.svg" download="blue-bg-iocn">下载蓝色图标</a>
-                            <a href="../images/org.svg" download="orange-bg-iocn">下载橙色图标</a>
+                            <a :href="blueImage" download="blue-bg-iocn">下载蓝色图标</a>
+                            <a :href="orgImage" download="orange-bg-iocn">下载橙色图标</a>
                         </NSpace>
                     </template>
                     <LcBarChart :options="pictorialBarOpts(2, 100)" type="bar" :fake3d="false"></LcBarChart>
@@ -66,6 +66,8 @@ import {
     chartNegativeBarOptions,
     evenYaixsChartsBarOpts,
     pictorialBarOpts,
+    orgImage,
+    blueImage,
 } from '../options/bar-options';
 </script>
 <style lang="scss" scoped>

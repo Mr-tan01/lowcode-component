@@ -5,6 +5,10 @@ import {
     LcBarChartOptions,
 } from '@/components/education/components/charts';
 import { type EChartsOption } from 'echarts';
+export {
+    orgImage,
+    blueImage,
+}
 export function chartsBarOpts(len: number): EChartsOption {
     return {
         yAxis: {

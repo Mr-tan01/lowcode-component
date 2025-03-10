@@ -4,7 +4,7 @@ import { pathResolve } from 'lowcode-share/es/cli'
 
 // https://vite.dev/config/
 export default defineConfig({
-  base: './',
+  base: '/lc-component',
   plugins: [vue()],
   resolve: {
     alias: [

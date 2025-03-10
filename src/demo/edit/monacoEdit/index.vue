@@ -25,8 +25,8 @@ const store = useStore(
                 ...builtinImportMap.value,
                 imports: {
                     ...builtinImportMap.value.imports,
-                    'lowcode-component': './cdn/lowcode-component/v0.1.0/index.prod.mjs',
-                    'naive-ui': './cdn/naive-ui/v2.4.1/index.prod.mjs',
+                    'lowcode-component': `${import.meta.env.BASE_URL}/cdn/lowcode-component/v0.1.0/index.prod.mjs`,
+                    'naive-ui': `${import.meta.env.BASE_URL}/cdn/naive-ui/v2.4.1/index.prod.mjs`,
                 }
             };
         }),
