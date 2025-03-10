@@ -2,12 +2,30 @@ import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import { pathResolve } from 'lowcode-share/es/cli'
 import { resolve } from 'path';
+import { libInjectCss } from 'vite-plugin-lib-inject-css';
+import dtsPlugin from 'vite-plugin-dts';
 
 const dtsRoot = resolve('./src/components/education/components');
 // https://vite.dev/config/
 export default defineConfig({
   base: './',
-  plugins: [vue()],
+  plugins: [vue(), libInjectCss(), dtsPlugin({
+    root: dtsRoot,
+    entryRoot: dtsRoot,
+    outDir: resolve('dist', 'types'),
+    declarationOnly: false,
+    cleanVueFileName: true,
+    compilerOptions: {
+      incremental: true,
+      declaration: true,
+      emitDeclarationOnly: true,
+    },
+    include: [
+      `${dtsRoot}/**/*.ts`,
+      `${dtsRoot}/**/*d.ts`,
+      `${dtsRoot}/**/*.vue`,
+    ]
+  })],
   resolve: {
     alias: [
       {
@@ -39,12 +57,12 @@ export default defineConfig({
   build: {
     copyPublicDir: false,
     cssCodeSplit: true,
-    outDir: 'public/cdn/lowcode-component',
+    outDir: 'dist',
     lib: {
       entry: dtsRoot,
       name: 'LowcodeComponent',
       formats: ['es'],
-      fileName: `[name]`,
+      fileName: () => `index.prod.mjs`,
     },
     rollupOptions: {
       output: {

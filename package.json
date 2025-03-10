@@ -3,6 +3,8 @@
   "private": true,
   "version": "0.1.0-alpha.0.4.4",
   "type": "module",
+  "main": "dist/index.prod.mjs",
+  "types": "dist/types/index.d.ts",
   "scripts": {
     "dev": "vite && vue-tsc --noEmit",
     "docx": "vue-tsc -b && vite build",

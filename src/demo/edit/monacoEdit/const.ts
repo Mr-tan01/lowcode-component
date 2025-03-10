@@ -14,7 +14,7 @@ const msg = ref('Hello World!')
 `;
 
 export const headHTML = `
-<link rel="stylesheet" href="./cdn/lowcode-component/assets/index.css">
+<link rel="stylesheet" href="./cdn/lowcode-component/v0.1.0/assets/index.css">
 `;
 
 export const preveiwOptions = {

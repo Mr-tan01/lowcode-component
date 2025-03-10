@@ -30,6 +30,7 @@ export const code1 = `
 </template>
 
 <script lang="ts" setup>
-import { LcButton } from 'lowcode-component/es/education/button';
+import { NSpace } from 'naive-ui'
+import { LcButton } from 'lowcode-component';
 </script>
 `;

@@ -1,4 +1,7 @@
 import { defineComponent as p, openBlock as n, createElementBlock as r, normalizeClass as u, createElementVNode as s, renderSlot as c, createCommentVNode as _ } from "vue";
+
+/* eslint-disable @typescript-eslint/restrict-template-expressions */
+/* eslint-disable @typescript-eslint/strict-boolean-expressions */
 const d = { class: "lc-button__wrapper" }, i = {
   key: 0,
   class: "lc-button__wrapper--icon"
