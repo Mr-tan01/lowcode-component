@@ -35,7 +35,7 @@ export default defineConfig({
     exclude: ['@vue/repl'],
   },
   build: {
-    outDir: 'dist/lowcode-docx',
+    outDir: 'lowcode-docx',
     rollupOptions: {
       output: {
         assetFileNames() {

@@ -11,12 +11,9 @@ importers:
       '@mmj-code-lib/lowcode':
         specifier: git+http://liangweizhu@siteshun@code.siteshun.com:800/front-component/STS/mmj-code-lib.git#lowcode-0.1.0
         version: git+http://liangweizhu%40siteshun@code.siteshun.com:800/front-component/STS/mmj-code-lib.git#6718b6af92a4e0f8142d9045ed583da219cd4b44
-      '@vue/repl':
-        specifier: ^4.5.1
-        version: 4.5.1
       lowcode-share:
-        specifier: link:F:/work/goview/tosts/lowcode-share
-        version: link:../lowcode-share
+        specifier: git+http://code.siteshun.com:800/front-component/lowcode-sview/lowcode-share.git#develop
+        version: git+http://code.siteshun.com:800/front-component/lowcode-sview/lowcode-share.git#1e87b109baa7a8bd1e0df5390c118993d1a73792(typescript@5.6.3)
       resize-observer-polyfill:
         specifier: ^1.5.1
         version: 1.5.1
@@ -39,6 +36,9 @@ importers:
       '@vitejs/plugin-vue':
         specifier: ^5.2.1
         version: 5.2.1(vite@5.4.13(@types/node@22.10.7)(sass-embedded@1.83.4))(vue@3.5.13(typescript@5.6.3))
+      '@vue/repl':
+        specifier: ^4.5.1
+        version: 4.5.1
       '@vue/tsconfig':
         specifier: ^0.7.0
         version: 0.7.0(typescript@5.6.3)(vue@3.5.13(typescript@5.6.3))
@@ -511,6 +511,9 @@ packages:
   '@types/web-bluetooth@0.0.20':
     resolution: {integrity: sha512-g9gZnnXVq7gM7v3tJCWV/qw7w+KeOlSHAhgF9RytFyifW6AF61hdT2ucrYhPq9hLs5JIryeupHV3qGk95dH9ow==}
 
+  '@types/web-bluetooth@0.0.21':
+    resolution: {integrity: sha512-oIQLCGWtcFZy2JW77j9k8nHzAOpqMHLQejDA48XXMWH6tjCQHz5RCFz1bzsmROyL6PUm+LLnUiI4BCn221inxA==}
+
   '@vicons/ionicons5@0.13.0':
     resolution: {integrity: sha512-zvZKBPjEXKN7AXNo2Na2uy+nvuv6SP4KAMQxpKL2vfHMj0fSvuw7JZcOPCjQC3e7ayssKnaoFVAhbYcW6v41qQ==}
 
@@ -590,11 +593,20 @@ packages:
   '@vueuse/core@12.5.0':
     resolution: {integrity: sha512-GVyH1iYqNANwcahAx8JBm6awaNgvR/SwZ1fjr10b8l1HIgDp82ngNbfzJUgOgWEoxjL+URAggnlilAEXwCOZtg==}
 
+  '@vueuse/core@12.8.2':
+    resolution: {integrity: sha512-HbvCmZdzAu3VGi/pWYm5Ut+Kd9mn1ZHnn4L5G8kOQTPs/IwIAmJoBrmYk2ckLArgMXZj0AW3n5CAejLUO+PhdQ==}
+
   '@vueuse/metadata@12.5.0':
     resolution: {integrity: sha512-Ui7Lo2a7AxrMAXRF+fAp9QsXuwTeeZ8fIB9wsLHqzq9MQk+2gMYE2IGJW48VMJ8ecvCB3z3GsGLKLbSasQ5Qlg==}
 
+  '@vueuse/metadata@12.8.2':
+    resolution: {integrity: sha512-rAyLGEuoBJ/Il5AmFHiziCPdQzRt88VxR+Y/A/QhJ1EWtWqPBBAxTAFaSkviwEuOEZNtW8pvkPgoCZQ+HxqW1A==}
+
   '@vueuse/shared@12.5.0':
     resolution: {integrity: sha512-vMpcL1lStUU6O+kdj6YdHDixh0odjPAUM15uJ9f7MY781jcYkIwFA4iv2EfoIPO6vBmvutI1HxxAwmf0cx5ISQ==}
+
+  '@vueuse/shared@12.8.2':
+    resolution: {integrity: sha512-dznP38YzxZoNloI0qpEfpkms8knDtaoQ6Y/sfS0L7Yki4zh40LFHEhur0odJC6xTHG5dxWVPiUWBXn+wCG2s5w==}
 
   acorn@8.14.0:
     resolution: {integrity: sha512-cl669nCJTZBsL97OF4kUQm5g5hC2uihk0NxY3WENAC0TYdILVkAyHymAntgxGkl7K+t0cXIrH5siy5S4XkFycA==}
@@ -773,6 +785,10 @@ packages:
 
   lodash@4.17.21:
     resolution: {integrity: sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==}
+
+  lowcode-share@git+http://code.siteshun.com:800/front-component/lowcode-sview/lowcode-share.git#1e87b109baa7a8bd1e0df5390c118993d1a73792:
+    resolution: {commit: 1e87b109baa7a8bd1e0df5390c118993d1a73792, repo: http://code.siteshun.com:800/front-component/lowcode-sview/lowcode-share.git, type: git}
+    version: 0.2.0-apha.0.6.1
 
   lru-cache@6.0.0:
     resolution: {integrity: sha512-Jo6dJ04CmSjuznwJSS3pUeWmd/H0ffTlkXXgwZi+eq1UCmqQwCh+eLsYOYCwY991i2Fah4h1BEMCx4qThGbsiA==}
@@ -1447,6 +1463,8 @@ snapshots:
 
   '@types/web-bluetooth@0.0.20': {}
 
+  '@types/web-bluetooth@0.0.21': {}
+
   '@vicons/ionicons5@0.13.0': {}
 
   '@vitejs/plugin-vue@5.2.1(vite@5.4.13(@types/node@22.10.7)(sass-embedded@1.83.4))(vue@3.5.13(typescript@5.6.3))':
@@ -1556,9 +1574,26 @@ snapshots:
     transitivePeerDependencies:
       - typescript
 
+  '@vueuse/core@12.8.2(typescript@5.6.3)':
+    dependencies:
+      '@types/web-bluetooth': 0.0.21
+      '@vueuse/metadata': 12.8.2
+      '@vueuse/shared': 12.8.2(typescript@5.6.3)
+      vue: 3.5.13(typescript@5.6.3)
+    transitivePeerDependencies:
+      - typescript
+
   '@vueuse/metadata@12.5.0': {}
 
+  '@vueuse/metadata@12.8.2': {}
+
   '@vueuse/shared@12.5.0(typescript@5.6.3)':
+    dependencies:
+      vue: 3.5.13(typescript@5.6.3)
+    transitivePeerDependencies:
+      - typescript
+
+  '@vueuse/shared@12.8.2(typescript@5.6.3)':
     dependencies:
       vue: 3.5.13(typescript@5.6.3)
     transitivePeerDependencies:
@@ -1730,6 +1765,13 @@ snapshots:
   lodash-es@4.17.21: {}
 
   lodash@4.17.21: {}
+
+  lowcode-share@git+http://code.siteshun.com:800/front-component/lowcode-sview/lowcode-share.git#1e87b109baa7a8bd1e0df5390c118993d1a73792(typescript@5.6.3):
+    dependencies:
+      '@vueuse/core': 12.8.2(typescript@5.6.3)
+      highlight.js: 11.11.1
+    transitivePeerDependencies:
+      - typescript
 
   lru-cache@6.0.0:
     dependencies:

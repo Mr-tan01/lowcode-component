@@ -22,7 +22,7 @@ export const preveiwOptions = {
   bodyHTML: ``,
   placeholderHTML: `loading...`,
   customCode: {
-    importCode: ``,
-    useCode: ``,
+    importCode: `import { LcButton } from 'lowcode-component';`,
+    useCode: `app.use(LcButton);`,
   }
 }
