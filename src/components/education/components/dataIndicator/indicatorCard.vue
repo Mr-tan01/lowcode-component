@@ -39,6 +39,8 @@ const {
     size = 'small',
     fixed = false,
     decimal = 0,
+    valueColor = '#ffffff',
+    hintColor = '#F2F3F4',
 } = defineProps({
     value: {
         type: Number,
@@ -60,7 +62,13 @@ const {
     },
     tip: {
         type: String,
-    }
+    },
+    valueColor: {
+        type: String,
+    },
+    hintColor: {
+        type: String,
+    },
 });
 
 const renderValue = computed(() => {
@@ -148,7 +156,7 @@ const unit = computed(() => {
 
         &--result {
             font-family: HarmonyOS_Sans_SC_Medium;
-            color: #FFFFFF;
+            color: v-bind(valueColor);
             text-align: center;
             font-style: normal;
 
@@ -167,7 +175,7 @@ const unit = computed(() => {
             font-family: AlimamaFangYuanTiVF-SemiBold, AlimamaFangYuanTiVF-SemiBold;
             font-weight: normal;
             font-size: 18px;
-            color: #F2F3F4;
+            color: v-bind(hintColor);
             line-height: 20px;
             text-align: center;
             font-style: normal;
