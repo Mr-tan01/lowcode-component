@@ -1,8 +1,8 @@
 export const code1 = `
 <template>
-    <LcTime :url="url"></LcTime>
+    <LcTime :icon="icon"></LcTime>
 </template>
 <script setup>
-    const url = ref('')
+    const icon = ref('')
 </script>
 `;

@@ -16,10 +16,10 @@ import { NTime } from 'naive-ui/es';
 import defaultImage from './images/time.png';
 
 const {
-    url='',
+    icon='',
 } = defineProps<EducationTimeProps>();
 
-const imageIconSrc = computed<string>(() => url || defaultImage);
+const imageIconSrc = computed<string>(() => icon || defaultImage);
 
 
 

@@ -1,5 +1,5 @@
 
 
 export type EducationTimeProps = {
-    url?: string,
+    icon?: string,
 }
