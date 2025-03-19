@@ -25,3 +25,22 @@ export const decoratorCode = `
 import { LcDecoratorTitle } from 'lowcode-component/es/education/decoratorTitle';
 </script>
 `;
+
+export const chartTitleCode = `
+<template>
+    <LcChartTitle text="优质均衡园区"></LcChartTitle>
+    <LcChartTitle text="优质均衡园区" dir="rtl"></LcChartTitle>
+    <LcChartTitle text="文字最多6个字符标题文字最多十二个字符标题文字最多十二个字符" ></LcChartTitle>
+</template>
+`;
+
+export const HeadlineCode = `
+<template>
+    <LcHeadline>
+        监测试点样本园所优质均衡分析四象限图
+    </LcHeadline>
+    <LcHeadline>
+        基础教师队伍结构
+    </LcHeadline>
+</template>
+`;
