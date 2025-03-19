@@ -3,6 +3,7 @@ import blueImage from '../images/blue.svg';
 import { type YAXisOption } from 'echarts/types/src/coord/cartesian/AxisModel';
 import {
     LcBarChartOptions,
+    useDifferenceSeries,
 } from '@/components/education/components/charts';
 import { type EChartsOption } from 'echarts';
 export {
@@ -177,4 +178,42 @@ export function pictorialBarOpts(start, len): EChartsOption | { series: {}[] } {
             },
         ].slice(start, len),
     }
-} 
+}
+
+export function differenceChartsBarOpts(): EChartsOption {
+    return {
+        legend: {
+            data: [
+                '类型名称',
+                {
+                    name: '标准差',
+                    icon: 'roundRect',
+                    itemStyle: {
+                        opacity: 1,
+                    },
+
+                }
+            ],
+        },
+        xAxis: {
+            data: Array.from(Array(4)).map((_, i) => `类目${i + 1}`),
+        },
+        series: [
+            {
+                name: '类型名称',
+                barGap: 0,
+                data: [13, 60, 25, 18],
+                stack: 'stack',
+            },
+            useDifferenceSeries([
+                [20, 50],
+                [70, 10],
+                [50, 80],
+                [30, 60],
+            ], {
+                name: '标准差',
+                stack: 'stack',
+            }),
+        ],
+    }
+}

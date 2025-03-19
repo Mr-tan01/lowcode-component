@@ -31,6 +31,7 @@ const w = { class: "lc-fourscatter" }, P = /* @__PURE__ */ p({
       i.isPushAxis && e.series.push({
         type: "custom",
         coordinateSystem: "cartesian2d",
+        silent: !0,
         renderItem: function(t, r) {
           if (t.isRenderer) return;
           t.isRenderer = !0;
@@ -54,6 +55,7 @@ const w = { class: "lc-fourscatter" }, P = /* @__PURE__ */ p({
         data: [1]
       }, {
         type: "custom",
+        silent: !0,
         renderItem: function(t, r) {
           if (t.isRenderer) return;
           t.isRenderer = !0;

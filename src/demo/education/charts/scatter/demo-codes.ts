@@ -48,16 +48,18 @@ import {
     LcFourScatter,
 } from 'lowcode-component/es/education/charts';
 const options = {
-        xAxis: {
-            data: Array.from(Array(7)).map((_, i) => \`\${i + 1}月\`),
-        },
+       xAxis: [
+            {
+                data: Array.from(Array(7)).map((_, i) => \`\${i + 1}月\`),
+            }
+        ],
         series: [
             {
                 name: '福田',
                 data: Array.from(Array(6)).map((_, i) => {
                     return {
                         name: \`深圳市中学深圳市中学\${i}\`,
-                        value: (Math.random() * 100 + 40),
+                        value: (Math.random() * 70 + 40),
                     }
                 }),
             },
@@ -67,7 +69,7 @@ const options = {
                 data: Array.from(Array(6)).map((_, i) => {
                     return {
                         name: \`深圳市中学\${i}\`,
-                        value: (Math.random() * 100 + 40),
+                        value: (Math.random() * 70 + 40),
                     }
                 }),
                 itemStyle: {

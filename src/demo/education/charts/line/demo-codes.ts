@@ -2,12 +2,12 @@
 export const demoCodes = {
     code1: `
 <template>
-     <lcLineChart :options></lcLineChart>
+     <LcLineChart :options></LcLineChart>
 </template>
 
 <script lang="ts" setup>
 import {
-    lcLineChart,
+    LcLineChart,
 } from 'lowcode-component/es/education/charts';
 import { LcLineOptions } from 'lowcode-component/es/education/charts';
 
@@ -37,12 +37,12 @@ const options = {
 `,
 code2: `
 <template>
-     <lcLineChart :options></lcLineChart>
+     <LcLineChart :options></LcLineChart>
 </template>
 
 <script lang="ts" setup>
 import {
-    lcLineChart,
+    LcLineChart,
 } from 'lowcode-component/es/education/charts';
 import { LcLineOptions } from 'lowcode-component/es/education/charts';
 
@@ -79,12 +79,12 @@ const options = {
 `,
 code3: `
 <template>
-     <lcLineChart :options></lcLineChart>
+     <LcLineChart :options></LcLineChart>
 </template>
 
 <script lang="ts" setup>
 import {
-    lcLineChart,
+    LcLineChart,
 } from 'lowcode-component/es/education/charts';
 import { LcLineOptions } from 'lowcode-component/es/education/charts';
 
@@ -162,12 +162,12 @@ const options = {
 `,
 code5: `
 <template>
-     <lcLineChart :options></lcLineChart>
+     <LcLineChart :options></LcLineChart>
 </template>
 
 <script lang="ts" setup>
 import {
-    lcLineChart,
+    LcLineChart,
 } from 'lowcode-component/es/education/charts';
 import { LcLineOptions } from 'lowcode-component/es/education/charts';
 
@@ -197,12 +197,12 @@ const options = {
 `,
 code6: `
 <template>
-     <lcLineChart :options></lcLineChart>
+     <LcLineChart :options></LcLineChart>
 </template>
 
 <script lang="ts" setup>
 import {
-    lcLineChart,
+    LcLineChart,
 } from 'lowcode-component/es/education/charts';
 import { LcLineOptions } from 'lowcode-component/es/education/charts';
 
@@ -244,12 +244,12 @@ const options = {
 `,
 code7: `
 <template>
-     <lcLineChart :options></lcLineChart>
+     <LcLineChart :options></LcLineChart>
 </template>
 
 <script lang="ts" setup>
 import {
-    lcLineChart,
+    LcLineChart,
 } from 'lowcode-component/es/education/charts';
 import { LcLineOptions } from 'lowcode-component/es/education/charts';
 
@@ -278,12 +278,12 @@ const options = {
 `,
 code8: `
 <template>
-     <lcLineChart :options></lcLineChart>
+     <LcLineChart :options></LcLineChart>
 </template>
 
 <script lang="ts" setup>
 import {
-    lcLineChart,
+    LcLineChart,
 } from 'lowcode-component/es/education/charts';
 import { LcLineOptions } from 'lowcode-component/es/education/charts';
 

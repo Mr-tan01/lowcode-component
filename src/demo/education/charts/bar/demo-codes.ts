@@ -1,5 +1,39 @@
 
 export const barChartCodes = {
+    code0: `
+<template>
+    <LcBarChart :options="data" type="bar-line"></LcBarChart>
+</template>
+<script setup>
+import {
+    LcBarChart,
+} from 'lowcode-component/es/education/charts';
+const data =  {
+    yAxis: {
+        name: '单位/人',
+    },
+    xAxis: {
+        data: Array.from(Array(5)).map((_, i) => i + 1 + '月'),
+    },
+    series: [
+        {
+            name: '待审核',
+            data: Array.from(Array(5)).map((_, i) => Math.round(Math.random() * 100 + i)),
+            backgroundStyle: {
+
+            },
+        },
+         {
+            name: '已通过',
+            data: Array.from(Array(5)).map((_, i) => Math.round(Math.random() * 100 + i)),
+            backgroundStyle: {
+
+            },
+        },
+    ],
+}
+</script>
+`,
     code1: `
 <template>
     <LcBarChart :options="data" type="bar"></LcBarChart>
@@ -165,6 +199,9 @@ code7: `
    <LcBarChart :options="data" type="bar"></LcBarChart>
 </template>
 <script setup>
+import {
+    LcBarChartOptions,
+} from 'lowcode-component/es/education/charts';
 const data =  {
         xAxis: {
             data: Array.from(Array(4)).map((_, i) => \`类目\${i + 1}\`),
@@ -381,4 +418,50 @@ const data =  {
     }
 </script>
 `,
+difference: `
+<template>
+    <LcBarChart :options="data" type="bar"></LcBarChart>
+</template>
+<script setup>
+import { LcBarChart } from 'lowcode-component/es/education/charts';
+import {
+    useDifferenceSeries,
+} from 'lowcode-component/es/education/charts';
+const data = {
+        legend: {
+            data: [
+                '类型名称',
+                {
+                    name: '标准差',
+                    icon: 'roundRect',
+                    itemStyle: {
+                        opacity: 1,
+                    },
+
+                }
+            ],
+        },
+        xAxis: {
+            data: Array.from(Array(4)).map((_, i) => \`类目\${i + 1}\`),
+        },
+        series: [
+            {
+                name: '类型名称',
+                barGap: 0,
+                data: [13, 60, 25, 18],
+                stack: 'stack',
+            },
+            useDifferenceSeries([
+                [20, 50],
+                [70, 10],
+                [50, 80],
+                [30, 60],
+            ], {
+                name: '标准差',
+                stack: 'stack',
+            }),
+        ],
+    }
+</script>
+`
 }
