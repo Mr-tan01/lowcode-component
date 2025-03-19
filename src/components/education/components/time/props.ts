@@ -1,5 +1,3 @@
-
-
 export type EducationTimeProps = {
-    icon?: string,
+  icon?: string,
 }
