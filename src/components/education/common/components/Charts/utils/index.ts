@@ -2,7 +2,6 @@ import { useTemplateRef, watchEffect } from "vue";
 import {
     type BaseChartInstanceType
 } from '@/components/education/common/components/Charts';
-import { map } from "lodash-es";
 
 export function useCommonChartExpose<T extends string>(key: T) {
     const baseChartRef = useTemplateRef<BaseChartInstanceType>(key);

@@ -8,7 +8,7 @@ export const demoCodes = {
 <script lang="ts" setup>
 import {
     LcScatterChart,
-} from '@/components/education/components/charts';
+} from 'lowcode-component/es/education/charts';
 
 const options = {
     yAxis: {
@@ -37,4 +37,46 @@ const options = {
 }
 </script>
     `,
+
+    fourScatter: `
+<template>
+  <LcFourScatter :options></LcFourScatter>
+</template>
+
+<script lang="ts" setup>
+import {
+    LcFourScatter,
+} from 'lowcode-component/es/education/charts';
+const options = {
+        xAxis: {
+            data: Array.from(Array(7)).map((_, i) => \`\${i + 1}月\`),
+        },
+        series: [
+            {
+                name: '福田',
+                data: Array.from(Array(6)).map((_, i) => {
+                    return {
+                        name: \`深圳市中学深圳市中学\${i}\`,
+                        value: (Math.random() * 100 + 40),
+                    }
+                }),
+            },
+            
+            {
+                name: '南山',
+                data: Array.from(Array(6)).map((_, i) => {
+                    return {
+                        name: \`深圳市中学\${i}\`,
+                        value: (Math.random() * 100 + 40),
+                    }
+                }),
+                itemStyle: {
+                    color: 'rgba(255, 175, 103, 0.59)',
+                },
+            }, 
+        ],
+    }
+</script>
+    
+    `
 }

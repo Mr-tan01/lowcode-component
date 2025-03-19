@@ -1,13 +1,14 @@
 <template>
     <div class="lc-scatter-chart">
-        <BaseChart :options="renderOptions" v-bind="$attrs"></BaseChart>
+        <BaseChart :options="renderOptions" v-bind="$attrs" ref="baseChart"></BaseChart>
     </div>
 </template>
 
 <script lang="ts" setup>
 import { BaseChart, useCommonChartExpose } from '@/components/education/common/components/Charts';
-import { computed, PropType } from 'vue';
+import { computed, PropType, useTemplateRef } from 'vue';
 import { type EChartsCoreOption, type EChartsOption } from 'echarts';
+const baseChartRef = useTemplateRef<InstanceType<typeof BaseChart>>("baseChart");
 import {
     useCommonScatterOptions,
     useCommonScatterSeries,
@@ -24,10 +25,9 @@ const renderOptions = computed(() => {
     const newOptions = useCommonScatterOptions(options);
     return merge({}, newOptions);
 });
-const {
-    exposes,
-} = useCommonChartExpose("baseChart");
-defineExpose(exposes);
+defineExpose({
+    instance: computed(() => baseChartRef.value),
+});
 </script>
 
 <style lang="scss" scoped>
