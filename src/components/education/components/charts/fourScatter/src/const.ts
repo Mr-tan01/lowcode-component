@@ -36,7 +36,7 @@ export const tooltipOptions: EChartsOption['tooltip'] = [
             </div>`;
         },
         axisPointer: {
-            type: 'cross',
+            type: 'none',
             label: {
                 backgroundColor: '#6a7985',
                 formatter(params) {
@@ -165,11 +165,27 @@ export const commonScatterSeries: EffectScatterSeriesOption = {
             show: true,
             trigger: 'item'
         },
-        'label': {
+        label: {
             show: false,
+            silent: true,
             formatter(params) {
-                return params.name;
+                // @ts-ignore
+                return params.data?.coord?.[1].toFixed(2);
             },
+            color: '#ffffff',
+            fontSize: 14,
+            fontWeight: 'bold',
+            position: 'inside',
+            align: 'center',
+            verticalAlign: 'middle',
+            textBorderColor: '#000000',
+            textBorderType: 'solid',
+            textBorderWidth: 2,
+        },
+        emphasis: {
+            label: {
+                show: true,
+            }  
         },
         data: []
     },

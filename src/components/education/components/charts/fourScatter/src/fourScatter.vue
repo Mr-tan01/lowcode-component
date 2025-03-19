@@ -47,6 +47,7 @@ function appendSplitAxis(newOptions: EChartsCoreOption) {
         (newOptions.series as any[]).push({
             type: 'custom',
             coordinateSystem: 'cartesian2d',
+            silent: true,
             renderItem: function (params, api) {
                 if (params.isRenderer) return;
                 params.isRenderer = true;
@@ -72,6 +73,7 @@ function appendSplitAxis(newOptions: EChartsCoreOption) {
             data: [1]
         }, {
             type: 'custom',
+            silent: true,
             renderItem: function (params, api) {
                 if (params.isRenderer) return;
                 params.isRenderer = true;
