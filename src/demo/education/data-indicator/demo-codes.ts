@@ -41,6 +41,8 @@ export const code2 = `
     <NSpace>
         <LcIndicatorCard :value="30" unit="万" hint="教职工人(人)" size="large"></LcIndicatorCard>
         <LcIndicatorCard :value="23" unit="万" hint="在编教职工(人)" size="large"></LcIndicatorCard>
+        <LcIndicatorCard :value="23" unit="万" hint="在编教职工(人)"  size="large" value-color="rgba(15, 251, 248, 1)" hint-color="rgba(15, 251, 248, 1)"> </LcIndicatorCard>
+        <LcIndicatorCard :value="23" unit="万" hint="在编教职工(人)" size="large" value-color="rgba(15, 251, 248, 1)" hint-color="rgba(15, 251, 248, 1)"></LcIndicatorCard>
     </NSpace>
 </template>
 `;

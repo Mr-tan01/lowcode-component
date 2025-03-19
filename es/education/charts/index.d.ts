@@ -5,3 +5,4 @@ export * from './radar';
 export * from './gauge';
 export * from './scatter';
 export * from './funnel';
+export * from './fourScatter';

@@ -23,3 +23,5 @@ export * from './switch-tabs';
 export * from './table';
 export * from './tooltip';
 export * from './wordCloud';
+export * from './toolbarSlot';
+

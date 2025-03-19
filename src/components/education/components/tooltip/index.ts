@@ -5,3 +5,6 @@ export type LcTooltipInstanceType = InstanceType<typeof LcTooltip>;
 export {
     LcTooltip,
 }
+
+
+

@@ -1,28 +1,27 @@
-import { defineComponent as n, mergeDefaults as m, computed as i, openBlock as p, createElementBlock as a, createVNode as c, unref as u, mergeProps as f } from "vue";
-import l from "../common/components/Charts/baseChart/base.js";
-import { useCommonChartExpose as d } from "../common/components/Charts/utils/index.js";
-import { useCommonScatterSeries as C, useCommonScatterOptions as h } from "./options.js";
-import x from "lodash-es/merge";
-const O = { class: "lc-scatter-chart" }, v = /* @__PURE__ */ n({
+import { defineComponent as a, mergeDefaults as c, useTemplateRef as i, computed as o, openBlock as m, createElementBlock as p, createVNode as u, unref as f, mergeProps as l } from "vue";
+import d from "../common/components/Charts/baseChart/base.js";
+import { useCommonScatterSeries as h, useCommonScatterOptions as C } from "./options.js";
+import b from "lodash-es/merge";
+const O = { class: "lc-scatter-chart" }, k = /* @__PURE__ */ a({
   __name: "scatter",
-  props: /* @__PURE__ */ m({
+  props: /* @__PURE__ */ c({
     options: Object
   }, {
     options: () => ({})
   }),
-  setup(e, { expose: t }) {
-    const s = i(() => {
-      e.options.series = C(e.options.series || []);
-      const o = h(e.options);
-      return x({}, o);
-    }), {
-      exposes: r
-    } = d("baseChart");
-    return t(r), (o, g) => (p(), a("div", O, [
-      c(u(l), f({ options: s.value }, o.$attrs), null, 16, ["options"])
+  setup(e, { expose: s }) {
+    const r = i("baseChart"), n = o(() => {
+      e.options.series = h(e.options.series || []);
+      const t = C(e.options);
+      return b({}, t);
+    });
+    return s({
+      instance: o(() => r.value)
+    }), (t, g) => (m(), p("div", O, [
+      u(f(d), l({ options: n.value }, t.$attrs, { ref: "baseChart" }), null, 16, ["options"])
     ]));
   }
 });
 export {
-  v as default
+  k as default
 };

@@ -26,7 +26,7 @@ const options = merge({}, commonViteConfig, {
     }
 });
 const esmComBuilder = new EsmComBuilder(modeListBase, options);
-const modeList = programActions.target ? programActions.target?.split(',') : fs.readdirSync(modeListBase);
+const modeList = programActions.target ? programActions.target?.split(' ') : fs.readdirSync(modeListBase);
 console.log("编译模块：", modeList);
 async function startBuild() {
     console.time("built");
