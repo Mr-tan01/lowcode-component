@@ -7,3 +7,4 @@ export * from './scatter';
 export * from './funnel';
 export * from './fourScatter';
 
+export * from './common/common.options';

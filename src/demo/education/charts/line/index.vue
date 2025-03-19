@@ -4,28 +4,28 @@
 
             <NSpace>
                 <DemoHelpBox title="单条折线图" rswidth="390px" rs-height="265px" :code="demoCodes.code1">
-                    <lcLineChart :options="combinationOpts(1)"></lcLineChart>
+                    <LcLineChart :options="combinationOpts(1)"></LcLineChart>
                 </DemoHelpBox>
                 <DemoHelpBox title="多条折线图(≥2类数据)" rswidth="390px" rs-height="265px" :code="demoCodes.code2">
-                    <lcLineChart :options="combinationOpts(4, 2)"></lcLineChart>
+                    <LcLineChart :options="combinationOpts(4, 2)"></LcLineChart>
                 </DemoHelpBox>
                 <DemoHelpBox title="组合折线数据图" rswidth="390px" rs-height="265px" :code="demoCodes.code3">
-                    <lcLineChart :options="combinationOpts(2)"></lcLineChart>
+                    <LcLineChart :options="combinationOpts(2)"></LcLineChart>
                 </DemoHelpBox>
                 <DemoHelpBox title="组合折线数据图3D" rswidth="390px" rs-height="265px" :code="demoCodes.code4">
                     <LcBarChart :options="combinationOpts(4, 2)" fake3d></LcBarChart>
                 </DemoHelpBox>
                 <DemoHelpBox title="单条曲线图" rswidth="390px" rs-height="265px" :code="demoCodes.code5">
-                    <lcLineChart :options="combinationOpts(4, 3)" fake3d></lcLineChart>
+                    <LcLineChart :options="combinationOpts(4, 3)" fake3d></LcLineChart>
                 </DemoHelpBox>
                 <DemoHelpBox title="多条曲线图(≥2类数据)" rswidth="390px" rs-height="265px" :code="demoCodes.code6">
-                    <lcLineChart :options="combinationOpts(6, 4)" fake3d></lcLineChart>
+                    <LcLineChart :options="combinationOpts(6, 4)" fake3d></LcLineChart>
                 </DemoHelpBox>
                 <DemoHelpBox title="面积曲线图" rswidth="390px" rs-height="265px" :code="demoCodes.code7">
-                    <lcLineChart :options="combinationOpts(7, 6)" fake3d></lcLineChart>
+                    <LcLineChart :options="combinationOpts(7, 6)" fake3d></LcLineChart>
                 </DemoHelpBox>
                 <DemoHelpBox title="多条曲线图(≥2类数据)" rswidth="390px" rs-height="265px" :code="demoCodes.code8">
-                    <lcLineChart :options="combinationOpts(8, 6)" fake3d></lcLineChart>
+                    <LcLineChart :options="combinationOpts(8, 6)" fake3d></LcLineChart>
                 </DemoHelpBox>
             </NSpace>
         </DemoHelpBox>
@@ -36,7 +36,7 @@ import { NSpace } from 'naive-ui';
 import { DemoHelpBox } from '@/components/common/DemoHelpBox';
 import {
     LcBarChart,
-    lcLineChart,
+    LcLineChart,
 } from '@/components/education/components/charts';
 import { combinationOpts } from '../options/line-options';
 import { demoCodes } from './demo-codes';

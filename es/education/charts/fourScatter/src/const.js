@@ -14,7 +14,7 @@ padding: 7px 14p;
 z-index: 100;
 backdrop-filter: blur(5px);
 transform: translate(-6px, 0px);
-`, c = [
+`, p = [
   {
     trigger: "item",
     backgroundColor: "transparent",
@@ -31,7 +31,7 @@ transform: translate(-6px, 0px);
             </div>`;
     },
     axisPointer: {
-      type: "cross",
+      type: "none",
       label: {
         backgroundColor: "#6a7985",
         formatter(t) {
@@ -42,7 +42,7 @@ transform: translate(-6px, 0px);
       }
     }
   }
-], f = {
+], c = {
   show: !0,
   icon: "roundRect",
   top: "65%",
@@ -60,12 +60,12 @@ transform: translate(-6px, 0px);
     fontSize: 14,
     padding: [0, 0, 0, 0]
   }
-}, m = {
+}, g = {
   bottom: 70,
   left: 100,
   right: 100,
   top: 30
-}, g = [
+}, m = [
   {
     type: "value",
     axisLabel: {
@@ -160,8 +160,24 @@ transform: translate(-6px, 0px);
     },
     label: {
       show: !1,
+      silent: !0,
       formatter(t) {
-        return t.name;
+        var e, o;
+        return (o = (e = t.data) == null ? void 0 : e.coord) == null ? void 0 : o[1].toFixed(2);
+      },
+      color: "#ffffff",
+      fontSize: 14,
+      fontWeight: "bold",
+      position: "inside",
+      align: "center",
+      verticalAlign: "middle",
+      textBorderColor: "#000000",
+      textBorderType: "solid",
+      textBorderWidth: 2
+    },
+    emphasis: {
+      label: {
+        show: !0
       }
     },
     data: []
@@ -169,10 +185,10 @@ transform: translate(-6px, 0px);
 };
 export {
   x as commonScatterSeries,
-  m as gridOptions,
-  f as legendOptions,
+  g as gridOptions,
+  c as legendOptions,
   a as scatterColors,
-  c as tooltipOptions,
+  p as tooltipOptions,
   b as xAxisOptions,
-  g as yAxisOptions
+  m as yAxisOptions
 };
