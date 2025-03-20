@@ -39,62 +39,52 @@ const formatedText = computed(() => {
     width: fit-content;
     background-repeat: no-repeat;
     box-sizing: border-box;
-    padding: 5px 5px;
-
+    min-width: 148px;
+    height: 32px;
     background-size: 100% 100%;
+    display: flex;
+    align-items: center;
+    padding: 0 6px;
 
     &--ltr {
-        width: fit-content;
+        justify-content: flex-end;
         background-image: url(./images/ltr-bg.png);
-        .lc-chart-title {
-            &__wrapper {
-                position: relative;
-                &__text  {
-                    text-align: right;
-                    padding-right: unset;
-                    font-size: 18px;
-                    margin-right: 40px;
-                }
-                &__icon {
-                    position: absolute;
-                    right: 10px; 
-                    top: 60%;
-                    right: 3%;
-                    transform: translateY(-50%);
-                    img {
-                        width: 30px; 
-                        height: 30px; 
-                    }
-                } 
-            }
-        }
     }
 
     &--rtl {
-        width: fit-content;
+        justify-content: flex-start;
         background-image: url(./images/rtl-bg.png);
+
         .lc-chart-title {
             &__wrapper {
-                position: relative;
-                &__text  {
-                    text-align: right;
-                    padding-right: unset;
-                    font-size: 18px;
-                    margin-left: 40px;
-                } 
-                &__icon {
-                    position: absolute;
-                    right: 10px; 
-                    top: 60%;
-                    left: 3%;
-                    transform: translateY(-50%);
-                    img {
-                        width: 30px; 
-                        height: 30px; 
-                    }
-                } 
+                flex-direction: row-reverse;
             }
         }
     }
+
+    &__wrapper {
+        position: relative;
+        display: flex;
+        align-items: center;
+        gap: 9px;
+
+        &__text {
+            font-family: HarmonyOS_Sans_SC;
+            font-size: 16px;
+            color: #FFFFFF;
+            line-height: 18px;
+        }
+
+        &__icon {
+            display: flex;
+
+            img {
+                width: 21px;
+                height: 21px;
+                object-fit: contain;
+            }
+        }
+    }
+
 }
 </style>
