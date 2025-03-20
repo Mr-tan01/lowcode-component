@@ -1,8 +1,14 @@
 <template>
     <div class="lcc-header">
+        <div class="lcc-header__prefix-slot">
+            <slot name="prefix">
+            </slot>
+        </div>
         <div class="lcc-header__wrapper">
+
             <div class="lcc-header__wrapper__navs">
-                <LcCarouseBox :disabled="hideArrow" :list="listSource" :show-track="false" v-model:index="modelIndex" @change="carouseChange">
+                <LcCarouseBox :disabled="hideArrow" :list="listSource" :show-track="false" v-model:index="modelIndex"
+                    @change="carouseChange">
                     <template #default="{ index, record, isActive }">
                         <div class="lcc-header__wrapper__navs__item" :class="{
                             'active': isActive,
@@ -40,6 +46,11 @@
                     </template>
                 </LcCarouseBox>
             </div>
+
+        </div>
+        <div class="lcc-header__suffix-slot">
+            <slot name="suffix">
+            </slot>
         </div>
     </div>
 </template>
@@ -113,7 +124,28 @@ function carouseChange(value: LcCarouseBoxChangeEvent) {
     background-size: 1920px 100%;
     background-position: center top;
     --min-width: 1100px;
+    position: relative;
     min-width: var(--min-width);
+
+    &__prefix-slot {
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        padding-left: 0px;
+    }
+
+    &__suffix-slot {
+        position: absolute;
+        right: 0;
+        top: 0;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        padding-right: 30px;
+    }
 
     &__wrapper {
         width: var(--min-width);

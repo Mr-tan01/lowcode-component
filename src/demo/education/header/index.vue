@@ -1,6 +1,6 @@
 <template>
      <div class="deom-headers">
-          <DemoHelpBox rswidth="100%" :code="demoCodes.code1">
+          <DemoHelpBox rswidth="1620px" :code="demoCodes.code1">
                <LcHeader v-model:index="headerIndex" hideArrow :nav-datas="defNavData"></LcHeader>
           </DemoHelpBox>
           <DemoHelpBox rswidth="100%" :code="demoCodes.code2">
@@ -89,3 +89,9 @@ const defNavData = [{
 },
 ];
 </script>
+
+<style lang="scss" scoped>
+.deom-headers {
+     width: 100%;
+}
+</style>
