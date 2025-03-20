@@ -27,6 +27,12 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
     tip: {
         type: StringConstructor;
     };
+    valueColor: {
+        type: StringConstructor;
+    };
+    hintColor: {
+        type: StringConstructor;
+    };
 }>, {}, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
     value: {
         type: NumberConstructor;
@@ -47,6 +53,12 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
         type: PropType<"border" | "noborder">;
     };
     tip: {
+        type: StringConstructor;
+    };
+    valueColor: {
+        type: StringConstructor;
+    };
+    hintColor: {
         type: StringConstructor;
     };
 }>> & Readonly<{}>, {

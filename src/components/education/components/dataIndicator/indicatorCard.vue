@@ -163,6 +163,7 @@ const unit = computed(() => {
             &--value {
                 font-size: 40px;
                 line-height: 42px;
+                margin-bottom: 5px;
             }
 
             &--unit {

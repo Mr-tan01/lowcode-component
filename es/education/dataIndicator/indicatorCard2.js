@@ -1,14 +1,14 @@
-import { defineComponent as v, mergeDefaults as h, useCssVars as y, computed as a, openBlock as r, createElementBlock as c, normalizeClass as g, createElementVNode as t, createVNode as n, unref as d, withCtx as N, createTextVNode as b, toDisplayString as l, createCommentVNode as o } from "vue";
-import { NNumberAnimation as w } from "naive-ui/es/number-animation";
+import { defineComponent as x, mergeDefaults as h, useCssVars as y, computed as a, openBlock as r, createElementBlock as l, normalizeClass as g, createElementVNode as t, createVNode as c, unref as o, withCtx as C, createTextVNode as b, toDisplayString as n, createCommentVNode as d } from "vue";
+import { NNumberAnimation as N } from "naive-ui/es/number-animation";
 import { bigNumber as s } from "lowcode-share/es/share";
-import V from "./tooltip/index.js";
-const C = { class: "lc-indicator-card__wrapper" }, S = {
+import w from "./tooltip/index.js";
+const S = { class: "lc-indicator-card__wrapper" }, V = {
   key: 0,
   class: "lc-indicator-card__wrapper--tooltip"
-}, _ = { class: "lc-indicator-card__wrapper--result" }, k = { class: "lc-indicator-card__wrapper--result--value" }, z = {
+}, k = { class: "lc-indicator-card__wrapper--result" }, z = { class: "lc-indicator-card__wrapper--result--value" }, B = {
   key: 0,
   class: "lc-indicator-card__wrapper--result--unit"
-}, B = { class: "lc-indicator-card__wrapper--text" }, L = /* @__PURE__ */ v({
+}, E = { class: "lc-indicator-card__wrapper--text" }, I = /* @__PURE__ */ x({
   __name: "indicatorCard",
   props: /* @__PURE__ */ h({
     value: {
@@ -31,17 +31,27 @@ const C = { class: "lc-indicator-card__wrapper" }, S = {
     },
     tip: {
       type: String
+    },
+    valueColor: {
+      type: String
+    },
+    hintColor: {
+      type: String
     }
   }, {
     value: 0,
     hint: "",
     size: "small",
     fixed: !1,
-    decimal: 0
+    decimal: 0,
+    valueColor: "#ffffff",
+    hintColor: "#F2F3F4"
   }),
   setup(e) {
-    y((x) => ({
-      "0644f8ba": p.value
+    y((v) => ({
+      59384864: f.value,
+      "517a06b8": e.valueColor,
+      a57e3bd4: e.hintColor
     }));
     const i = {
       small: "small",
@@ -51,11 +61,11 @@ const C = { class: "lc-indicator-card__wrapper" }, S = {
       [i.small]: "22px 32px 24px",
       [i.medium]: "22px 54px 24px",
       [i.large]: "22px 116px 24px"
-    }, p = a(() => m[e.size]), f = a(() => {
+    }, f = a(() => m[e.size]), p = a(() => {
       if (e.fixed)
         return s(e.value, e.decimal).unit;
     });
-    return (x, E) => (r(), c(
+    return (v, F) => (r(), l(
       "div",
       {
         class: g(["lc-indicator-card", {
@@ -63,12 +73,12 @@ const C = { class: "lc-indicator-card__wrapper" }, S = {
         }])
       },
       [
-        t("div", C, [
-          e.tip ? (r(), c("div", S, [
-            n(d(V), null, {
-              default: N(() => [
+        t("div", S, [
+          e.tip ? (r(), l("div", V, [
+            c(o(w), null, {
+              default: C(() => [
                 b(
-                  l(e.tip),
+                  n(e.tip),
                   1
                   /* TEXT */
                 )
@@ -76,10 +86,10 @@ const C = { class: "lc-indicator-card__wrapper" }, S = {
               _: 1
               /* STABLE */
             })
-          ])) : o("v-if", !0),
-          t("div", _, [
-            t("span", k, [
-              n(d(w), {
+          ])) : d("v-if", !0),
+          t("div", k, [
+            t("span", z, [
+              c(o(N), {
                 "show-separator": "",
                 from: 0,
                 to: u.value,
@@ -87,18 +97,18 @@ const C = { class: "lc-indicator-card__wrapper" }, S = {
                 precision: e.decimal
               }, null, 8, ["to", "precision"])
             ]),
-            e.fixed ? (r(), c(
+            e.fixed ? (r(), l(
               "span",
-              z,
-              l(f.value),
+              B,
+              n(p.value),
               1
               /* TEXT */
-            )) : o("v-if", !0)
+            )) : d("v-if", !0)
           ]),
           t(
             "div",
-            B,
-            l(e.hint),
+            E,
+            n(e.hint),
             1
             /* TEXT */
           )
@@ -110,5 +120,5 @@ const C = { class: "lc-indicator-card__wrapper" }, S = {
   }
 });
 export {
-  L as default
+  I as default
 };
