@@ -159,16 +159,20 @@ const unit = computed(() => {
             color: v-bind(valueColor);
             text-align: center;
             font-style: normal;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            margin-bottom: 5px;
 
             &--value {
                 font-size: 40px;
                 line-height: 42px;
-                margin-bottom: 5px;
+           
             }
 
             &--unit {
                 font-size: 16px;
-                line-height: 42px;
+                line-height: 26px;
             }
         }
 
