@@ -1,4 +1,4 @@
-import { defineComponent as x, mergeDefaults as h, useCssVars as y, computed as a, openBlock as r, createElementBlock as l, normalizeClass as g, createElementVNode as t, createVNode as c, unref as o, withCtx as C, createTextVNode as b, toDisplayString as n, createCommentVNode as d } from "vue";
+import { defineComponent as x, mergeDefaults as h, useCssVars as y, computed as a, openBlock as r, createElementBlock as l, normalizeClass as g, createElementVNode as t, createVNode as n, unref as o, withCtx as C, createTextVNode as b, toDisplayString as c, createCommentVNode as d } from "vue";
 import { NNumberAnimation as N } from "naive-ui/es/number-animation";
 import { bigNumber as s } from "lowcode-share/es/share";
 import w from "./tooltip/index.js";
@@ -49,9 +49,9 @@ const S = { class: "lc-indicator-card__wrapper" }, V = {
   }),
   setup(e) {
     y((v) => ({
-      59384864: f.value,
-      "517a06b8": e.valueColor,
-      a57e3bd4: e.hintColor
+      "1e863b00": f.value,
+      "09d47b58": e.valueColor,
+      dc9d7a0c: e.hintColor
     }));
     const i = {
       small: "small",
@@ -75,10 +75,10 @@ const S = { class: "lc-indicator-card__wrapper" }, V = {
       [
         t("div", S, [
           e.tip ? (r(), l("div", V, [
-            c(o(w), null, {
+            n(o(w), null, {
               default: C(() => [
                 b(
-                  n(e.tip),
+                  c(e.tip),
                   1
                   /* TEXT */
                 )
@@ -89,7 +89,7 @@ const S = { class: "lc-indicator-card__wrapper" }, V = {
           ])) : d("v-if", !0),
           t("div", k, [
             t("span", z, [
-              c(o(N), {
+              n(o(N), {
                 "show-separator": "",
                 from: 0,
                 to: u.value,
@@ -100,7 +100,7 @@ const S = { class: "lc-indicator-card__wrapper" }, V = {
             e.fixed ? (r(), l(
               "span",
               B,
-              n(p.value),
+              c(p.value),
               1
               /* TEXT */
             )) : d("v-if", !0)
@@ -108,7 +108,7 @@ const S = { class: "lc-indicator-card__wrapper" }, V = {
           t(
             "div",
             E,
-            n(e.hint),
+            c(e.hint),
             1
             /* TEXT */
           )
