@@ -1,50 +1,53 @@
-import { defineComponent as j, mergeModels as g, useModel as y, computed as M, openBlock as r, createElementBlock as a, createElementVNode as e, createVNode as w, unref as f, withCtx as i, normalizeClass as V, toDisplayString as c, Fragment as x, renderList as C, createCommentVNode as $ } from "vue";
+import { defineComponent as j, mergeModels as f, useModel as y, computed as M, openBlock as s, createElementBlock as a, createElementVNode as e, renderSlot as g, createVNode as w, unref as x, withCtx as i, normalizeClass as S, toDisplayString as c, Fragment as C, renderList as b, createCommentVNode as V } from "vue";
 import A from "./images/right-arrow.png.js";
 import { NPopover as E } from "naive-ui/es/popover";
 import L from "./carouseBox/index.js";
-const S = { class: "lcc-header" }, z = { class: "lcc-header__wrapper" }, F = { class: "lcc-header__wrapper__navs" }, I = ["onClick"], P = {
+const z = { class: "lcc-header" }, F = { class: "lcc-header__prefix-slot" }, I = { class: "lcc-header__wrapper" }, P = { class: "lcc-header__wrapper__navs" }, U = ["onClick"], q = {
   key: 0,
   class: "lcc-header__wrapper__navs__drop"
-}, U = { class: "lcc-header__wrapper__navs__drop__group__label" }, q = { class: "lcc-header__wrapper__navs__drop__group__label--text" }, G = { class: "lcc-header__wrapper__navs__drop__group__item__group" }, H = ["onClick"], T = /* @__PURE__ */ j({
+}, G = { class: "lcc-header__wrapper__navs__drop__group__label" }, H = { class: "lcc-header__wrapper__navs__drop__group__label--text" }, J = { class: "lcc-header__wrapper__navs__drop__group__item__group" }, K = ["onClick"], O = { class: "lcc-header__suffix-slot" }, Y = /* @__PURE__ */ j({
   __name: "header",
-  props: /* @__PURE__ */ g({
+  props: /* @__PURE__ */ f({
     navDatas: {},
     hideArrow: { type: Boolean }
   }, {
     index: { default: 0 },
     indexModifiers: {}
   }),
-  emits: /* @__PURE__ */ g(["jump", "scroll"], ["update:index"]),
-  setup(l, { emit: b }) {
-    const p = y(l, "index"), k = M(() => l.navDatas === void 0 ? [] : l.navDatas), u = b;
-    function v(s, _, o) {
-      u("jump", s, _, o);
+  emits: /* @__PURE__ */ f(["jump", "scroll"], ["update:index"]),
+  setup(l, { emit: k }) {
+    const p = y(l, "index"), $ = M(() => l.navDatas === void 0 ? [] : l.navDatas), u = k;
+    function v(_, r, o) {
+      u("jump", _, r, o);
     }
-    function B(s) {
-      u("scroll", s);
+    function B(_) {
+      u("scroll", _);
     }
-    return (s, _) => (r(), a("div", S, [
-      e("div", z, [
-        e("div", F, [
-          w(f(L), {
-            disabled: s.hideArrow,
-            list: k.value,
+    return (_, r) => (s(), a("div", z, [
+      e("div", F, [
+        g(_.$slots, "prefix", {}, void 0, !0)
+      ]),
+      e("div", I, [
+        e("div", P, [
+          w(x(L), {
+            disabled: _.hideArrow,
+            list: $.value,
             "show-track": !1,
             index: p.value,
-            "onUpdate:index": _[0] || (_[0] = (o) => p.value = o),
+            "onUpdate:index": r[0] || (r[0] = (o) => p.value = o),
             onChange: B
           }, {
             default: i(({ index: o, record: t, isActive: D }) => [
               e(
                 "div",
                 {
-                  class: V(["lcc-header__wrapper__navs__item", {
+                  class: S(["lcc-header__wrapper__navs__item", {
                     active: D
                   }])
                 },
                 [
                   w(
-                    f(E),
+                    x(E),
                     {
                       trigger: "hover",
                       "arrow-class": "header-arrow-class",
@@ -55,21 +58,21 @@ const S = { class: "lcc-header" }, z = { class: "lcc-header__wrapper" }, F = { c
                         e("a", {
                           class: "lcc-header__wrapper__navs__item__link",
                           onClick: (n) => v(null, t, o)
-                        }, c(t.label), 9, I)
+                        }, c(t.label), 9, U)
                       ]),
                       default: i(() => {
                         var n;
                         return [
-                          (n = t.list) != null && n.length ? (r(), a("div", P, [
-                            (r(!0), a(
-                              x,
+                          (n = t.list) != null && n.length ? (s(), a("div", q, [
+                            (s(!0), a(
+                              C,
                               null,
-                              C(t.list, (d, N) => (r(), a("div", {
+                              b(t.list, (d, N) => (s(), a("div", {
                                 class: "lcc-header__wrapper__navs__drop__group",
                                 key: N
                               }, [
-                                e("div", U, [
-                                  _[1] || (_[1] = e(
+                                e("div", G, [
+                                  r[1] || (r[1] = e(
                                     "div",
                                     { class: "lcc-header__wrapper__navs__drop__group__label--icon" },
                                     [
@@ -84,21 +87,21 @@ const S = { class: "lcc-header" }, z = { class: "lcc-header__wrapper" }, F = { c
                                   )),
                                   e(
                                     "div",
-                                    q,
+                                    H,
                                     c(d.label),
                                     1
                                     /* TEXT */
                                   )
                                 ]),
-                                e("div", G, [
-                                  (r(!0), a(
-                                    x,
+                                e("div", J, [
+                                  (s(!0), a(
+                                    C,
                                     null,
-                                    C(d.children, (m, h) => (r(), a("div", {
+                                    b(d.children, (h, m) => (s(), a("div", {
                                       class: "lcc-header__wrapper__navs__drop__group__item__group__nav",
-                                      key: h,
-                                      onClick: (J) => v(d, m, h)
-                                    }, c(m.label), 9, H))),
+                                      key: m,
+                                      onClick: (Q) => v(d, h, m)
+                                    }, c(h.label), 9, K))),
                                     128
                                     /* KEYED_FRAGMENT */
                                   ))
@@ -107,7 +110,7 @@ const S = { class: "lcc-header" }, z = { class: "lcc-header__wrapper" }, F = { c
                               128
                               /* KEYED_FRAGMENT */
                             ))
-                          ])) : $("v-if", !0)
+                          ])) : V("v-if", !0)
                         ];
                       }),
                       _: 2
@@ -125,10 +128,13 @@ const S = { class: "lcc-header" }, z = { class: "lcc-header__wrapper" }, F = { c
             /* STABLE */
           }, 8, ["disabled", "list", "index"])
         ])
+      ]),
+      e("div", O, [
+        g(_.$slots, "suffix", {}, void 0, !0)
       ])
     ]));
   }
 });
 export {
-  T as default
+  Y as default
 };

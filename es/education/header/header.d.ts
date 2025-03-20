@@ -15,7 +15,17 @@ type __VLS_Props = {
 type __VLS_PublicProps = {
     'index'?: number;
 } & __VLS_Props;
-declare const _default: import('vue').DefineComponent<__VLS_PublicProps, {}, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {
+declare function __VLS_template(): {
+    attrs: Partial<{}>;
+    slots: {
+        prefix?(_: {}): any;
+        suffix?(_: {}): any;
+    };
+    refs: {};
+    rootEl: HTMLDivElement;
+};
+type __VLS_TemplateResult = ReturnType<typeof __VLS_template>;
+declare const __VLS_component: import('vue').DefineComponent<__VLS_PublicProps, {}, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {
     "update:index": (value: number) => any;
 } & {
     scroll: (data: LcCarouseBoxChangeEvent) => any;
@@ -25,4 +35,10 @@ declare const _default: import('vue').DefineComponent<__VLS_PublicProps, {}, {},
     onScroll?: ((data: LcCarouseBoxChangeEvent) => any) | undefined;
     onJump?: ((parent: ListRaw | null, item: NavData, i: number) => any) | undefined;
 }>, {}, {}, {}, {}, string, import('vue').ComponentProvideOptions, false, {}, HTMLDivElement>;
+declare const _default: __VLS_WithTemplateSlots<typeof __VLS_component, __VLS_TemplateResult["slots"]>;
 export default _default;
+type __VLS_WithTemplateSlots<T, S> = T & {
+    new (): {
+        $slots: S;
+    };
+};
