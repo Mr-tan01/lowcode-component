@@ -24,4 +24,6 @@ export * from './table';
 export * from './tooltip';
 export * from './wordCloud';
 export * from './toolbarSlot';
+export * from './time';
+export * from './chartTitle';
 
