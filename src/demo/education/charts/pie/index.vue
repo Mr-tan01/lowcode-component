@@ -2,7 +2,10 @@
     <div class="demo-charts">
         <DemoHelpBox title="图表" description="图表-饼图分单类数据、多类数据、组合类数据、" rswidth="1360px" rs-height="auto">
             <NSpace>
-                <DemoHelpBox title="饼图" rswidth="547px" rs-height="406px" :code="demoCodes.code1">
+                <DemoHelpBox title="饼图-自定义label" rswidth="547px" rs-height="306px" :code="demoCodes.customLabel">
+                    <LcPieChart v-bind="(usePieOptions())" :legend-label="legendLabel" legend-width="fit-content"></LcPieChart>
+                </DemoHelpBox>
+                <DemoHelpBox title="饼图" rswidth="547px" rs-height="306px" :code="demoCodes.code1">
                     <LcPieChart v-bind="(usePieOptions())"></LcPieChart>
                 </DemoHelpBox>
                 <DemoHelpBox title="饼图" rswidth="547px" rs-height="406px" :code="demoCodes.code2">
@@ -23,6 +26,7 @@ import {
 } from '@/components/education/components/charts';
 import { usePieOptions, useLabelPieOptions, useProperctionPieOptions, } from '../options/pie-options';
 import { demoCodes } from './demo-codes';
+const legendLabel = (name, value) => `${name} <span style="margin-left: 20px;color: yellow;">${value}</span>`
 </script>
 <style lang="scss" scoped>
 .demo-charts {

@@ -2,7 +2,7 @@ import { type EChartsOption } from "echarts";
 import { merge } from "lodash-es";
 
 const data = [
-    { value: 1048, name: '类目一' },
+    { value: 1048, name: '类目' },
     { value: 735, name: '类目二' },
     { value: 580, name: '类目三' },
     { value: 484, name: '类目四' },

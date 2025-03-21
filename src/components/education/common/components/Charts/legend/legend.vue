@@ -2,14 +2,21 @@
     <div class="lc-common-legend">
         <div class="lc-common-legend__wrapper__legend">
             <div class="lc-common-legend__wrapper__legend__item" v-for="(item, key) in customLegendData" :key
-                :style="getLegendStyle(key, item)" :title="legendLabel(item.name, item.value)"
-                @click="legendClick(item)" @mouseenter="dispatchAction('highlight', item.name)"
+                :style="getLegendStyle(key, item)" @click="legendClick(item)"
+                @mouseenter="dispatchAction('highlight', item.name)"
                 @mouseleave="dispatchAction('downplay', item.name)">
-                <slot name="legend">
-                    <div class="lc-common-legend__wrapper__legend__item__icon"></div>
-                    <div class="lc-common-legend__wrapper__legend__item__label">
-                        {{ legendLabel(item.name, item.value) }}
-                    </div>
+                <slot name="legend" :record="item">
+                    <n-tooltip :delay="800">
+                        <template #trigger>
+                            <div class="lc-common-legend__trigger">
+                                <div class="lc-common-legend__wrapper__legend__item__icon"></div>
+                                <div class="lc-common-legend__wrapper__legend__item__label"
+                                    v-html="legendLabel(item.name, item.value)">
+                                </div>
+                            </div>
+                        </template>
+                        <span v-html="legendLabel(item.name, item.value)"></span>
+                    </n-tooltip>
                 </slot>
             </div>
         </div>
@@ -19,6 +26,7 @@
 import { type EChartsCoreOption, type EChartsOption, } from 'echarts';
 import { computed, ref, watch } from 'vue';
 import { type LegendDataRecord, type LegendDataSelectRecord, type LegendActiveType, type LegendSelectParams } from './types';
+import { NTooltip } from 'naive-ui/es/tooltip';
 
 const {
     options = {},
@@ -93,6 +101,11 @@ const customLegendData = computed(() => {
 
 <style lang="scss" scoped>
 .lc-common-legend {
+    &__trigger {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
     &__wrapper {
         &__legend {
             max-width: var(--legendWidth, 128px);
