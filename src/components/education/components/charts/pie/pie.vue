@@ -166,6 +166,7 @@ defineExpose({
             display: flex;
             flex-direction: column;
             flex: 1;
+            position: relative;
 
             &__inner {
                 width: 100%;

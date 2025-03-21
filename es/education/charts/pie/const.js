@@ -24,6 +24,7 @@ const l = ["#0FFBF8", "#E1BC4B", "#2276FC", "#A6CFFF", "#7749FF", "#64D677", "#E
     overflow: "truncate"
   }
 }, f = {
+  appendTo: "body",
   trigger: "item",
   backgroundColor: "rgba(0, 32, 61, 1)",
   borderColor: "rgba(15, 251, 248, 1)",
