@@ -188,6 +188,7 @@ function carouseChange(value: LcCarouseBoxChangeEvent) {
                     text-overflow: ellipsis;
                     white-space: nowrap;
                     transition: transform linear 0.3s;
+                    color: #fff;
 
                     &::before {
                         content: '';

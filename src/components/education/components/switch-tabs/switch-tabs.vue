@@ -74,6 +74,15 @@ const listSource = computed(() => {
                     &.active {
                         width: 197px;
                         background-image: url(./images/active-bg.png) !important;
+
+                        .lc-switch-tabs__wrapper__tabs--train__button--text {
+                            font-weight: normal;
+                            font-size: 24px;
+                            color: #EDF6FF;
+                            line-height: 29px;
+                            text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.12);
+                            margin-bottom: 2px;
+                        }
                     }
 
 
