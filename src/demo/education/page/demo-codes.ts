@@ -19,10 +19,16 @@ export const decoratorCode = `
     <LcDecoratorTitle text="标题文字最多十二个字符"></LcDecoratorTitle>
     <LcDecoratorTitle text="标题文字最多十二个字符" dir="rtl"></LcDecoratorTitle>
     <LcDecoratorTitle text="标题文字最多十二个字符标题文字最多十二个字符标题文字最多十二个字符" ></LcDecoratorTitle>
+    <LcDecoratorTitle text="插槽插槽插槽 helper" dir="rtl">
+        <template #helper>
+            <LcIcon name="pause" :size="21"></LcIcon>
+        </template>
+    </LcDecoratorTitle>
 </template>
 
 <script lang="ts" setup>
 import { LcDecoratorTitle } from 'lowcode-component/es/education/decoratorTitle';
+import { LcIcon } from 'lowcode-component/es/education/icon';
 </script>
 `;
 

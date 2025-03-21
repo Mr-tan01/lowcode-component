@@ -25,6 +25,13 @@
                 <VueResizable width="390px" height="35px">
                     <LcDecoratorTitle text="标题文字最多十二个字符标题文字最多十二个字符标题文字最多十二个字符" ></LcDecoratorTitle>
                 </VueResizable>
+                <VueResizable width="390px" height="35px">
+                    <LcDecoratorTitle text="插槽插槽插槽 helper" dir="rtl">
+                        <template #helper>
+                            <LcIcon name="pause" :size="21"></LcIcon>
+                        </template>
+                    </LcDecoratorTitle>
+                </VueResizable>
             </n-space>
         </DemoHelpBox>
         <DemoHelpBox title="图表标题" description="左右排序" rswidth="1000px" :code="pageTitle.chartTitleCode">
@@ -58,6 +65,7 @@ import * as pageTitle from './demo-codes';
 import VueResizable from 'vue-resizable'
 import { LcChartTitle } from '@/components/education/components/chartTitle';
 import { LcHeadline } from '@/components/education/components/headline';
+import { LcIcon } from '@/components/education/components/icon';
 
 
 </script>

@@ -4,6 +4,9 @@
             <div class="lc-decorator-title__wrapper__text" :title="text">
                 {{ formatedText }}
             </div>
+            <div class="lc-decortator-title__slot" v-if="$slots.helper">
+                <slot name="helper"></slot>
+            </div>
         </div>
     </div>
 </template>
@@ -47,12 +50,15 @@ const formatedText = computed(() => {
         background-image: url(./images/rtl-bg.png);
         .lc-decorator-title {
             &__wrapper {
+                padding-right: unset;
                 margin-right: 27px;
                 margin-left: unset;
+                padding-left: 30%;
+                flex-direction: row-reverse;
                 &__text  {
                     text-align: right;
                     padding-right: unset;
-                    padding-left: 35%;
+                   
                 } 
             }
         }
@@ -60,6 +66,10 @@ const formatedText = computed(() => {
 
     &__wrapper {
         margin-left: 27px;
+        padding-right: 28%;
+        display: flex;
+        gap: 7px;
+        align-items: center;
 
         &__text {
             font-family: AlimamaFangYuanTiVF-SemiBold, AlimamaFangYuanTiVF-SemiBold;
@@ -71,7 +81,7 @@ const formatedText = computed(() => {
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
-            padding-right: 35%;
+           
         }
     }
 }

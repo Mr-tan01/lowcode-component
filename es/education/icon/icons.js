@@ -14,6 +14,7 @@ const h = /* @__PURE__ */ Object.assign({
   "./images/func/laptop.png": () => import("./images/func/laptop.png.js").then((e) => e.default),
   "./images/func/layers.png": () => import("./images/func/layers.png.js").then((e) => e.default),
   "./images/func/location.png": () => import("./images/func/location.png.js").then((e) => e.default),
+  "./images/func/pause.png": () => import("./images/func/pause.png.js").then((e) => e.default),
   "./images/func/refresh.png": () => import("./images/func/refresh.png.js").then((e) => e.default),
   "./images/func/remove.png": () => import("./images/func/remove.png.js").then((e) => e.default),
   "./images/func/search.png": () => import("./images/func/search.png.js").then((e) => e.default),
@@ -57,7 +58,8 @@ const h = /* @__PURE__ */ Object.assign({
     search: "search",
     time: "time",
     blueLArrow: "blue-l-arrow",
-    blueRArrow: "blue-r-arrow"
+    blueRArrow: "blue-r-arrow",
+    pause: "pause"
   },
   event: {
     domain: "domain",
@@ -71,12 +73,12 @@ const h = /* @__PURE__ */ Object.assign({
   }
 };
 function $(e, i, r = ".png") {
-  var t, s, g, n, l, u;
-  const c = f(""), p = f("");
-  let m = `${e}/${i}${r}`, o = "";
-  return e === "event" && (m = `${e}/${i}/icon${r}`, o = `${e}/${i}/selected-icon${r}`), (g = (s = (t = d[e]) == null ? void 0 : t[`./images/${m}`]) == null ? void 0 : s.call(t)) == null || g.then((a) => c.value = a), o && ((u = (l = (n = d[e]) == null ? void 0 : n[`./images/${o}`]) == null ? void 0 : l.call(n)) == null || u.then((a) => p.value = a)), {
-    src: c,
-    selectedSrc: p
+  var t, m, g, n, l, u;
+  const p = f(""), c = f("");
+  let s = `${e}/${i}${r}`, a = "";
+  return e === "event" && (s = `${e}/${i}/icon${r}`, a = `${e}/${i}/selected-icon${r}`), (g = (m = (t = d[e]) == null ? void 0 : t[`./images/${s}`]) == null ? void 0 : m.call(t)) == null || g.then((o) => p.value = o), a && ((u = (l = (n = d[e]) == null ? void 0 : n[`./images/${a}`]) == null ? void 0 : l.call(n)) == null || u.then((o) => c.value = o)), {
+    src: p,
+    selectedSrc: c
   };
 }
 export {

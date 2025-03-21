@@ -35,6 +35,7 @@ export const innerImageDomain = {
         time: 'time',
         blueLArrow: 'blue-l-arrow',
         blueRArrow: 'blue-r-arrow',
+        pause: 'pause',
     },
     event: {
         domain: 'domain',
