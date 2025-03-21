@@ -20,6 +20,7 @@ export declare const innerImageDomain: {
         readonly time: "time";
         readonly blueLArrow: "blue-l-arrow";
         readonly blueRArrow: "blue-r-arrow";
+        readonly pause: "pause";
     };
     readonly event: {
         readonly domain: "domain";
