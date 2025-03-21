@@ -28,14 +28,14 @@ const x = { class: "lc-pie__wrapper" }, H = {
     legendWidth: { default: "128px" }
   },
   emits: ["legend:click", "legend:toggleSelect"],
-  setup(t, { expose: C, emit: _ }) {
+  setup(t, { expose: C, emit: b }) {
     S((e) => ({
-      "2fd3c071": e.flexDirection,
-      "11d03c66": k.value,
-      "213010cb": e.legendPosition,
-      "1cf138a9": e.legendLeft,
-      "92c6e71a": e.legendTop,
-      "508c4120": m.value
+      "7e03f28a": e.flexDirection,
+      ef7bafd2: k.value,
+      "9562d87e": e.legendPosition,
+      "86f8b2c2": e.legendLeft,
+      "58a987bd": e.legendTop,
+      "553b0996": f.value
     }));
     const r = z("chartDom"), l = O(), s = g(() => {
       const e = M(t.options);
@@ -53,33 +53,33 @@ const x = { class: "lc-pie__wrapper" }, H = {
         name: o
       });
     }
-    const d = _;
-    function w(e) {
+    const d = b;
+    function _(e) {
       d("legend:click", e);
     }
-    function y(e) {
+    function w(e) {
       c(e.type, e.name), d("legend:toggleSelect", e);
     }
-    T(b), B(() => {
+    T(y), B(() => {
       u(s.value, !0);
     });
-    function b() {
+    function y() {
       l.value = $(r.value, s.value);
     }
     function u(e, o, n) {
       var i;
       (i = l.value) == null || i.setOption(e, o, n);
     }
-    const m = D("100%");
+    const f = D("100%");
     function L(e) {
-      var f;
+      var p;
       const o = e[0], { width: n, height: i } = o.contentRect;
-      m.value = Math.min(n, i) + "px", (f = l.value) == null || f.resize();
+      f.value = Math.min(n, i) + "px", (p = l.value) == null || p.resize();
     }
-    const { stop: p } = I(r, U(L, t.debounceTime)), k = g(() => t.legendPosition === "absolute" ? `0 ${t.legendWidth}` : "0");
-    return R(p), C({
+    const { stop: m } = I(r, U(L, t.debounceTime)), k = g(() => t.legendPosition === "absolute" ? `0 ${t.legendWidth}` : "0");
+    return R(m), C({
       chartInstance: l,
-      stop: p,
+      stop: m,
       setOptions: u,
       dispatchAction: c
     }), (e, o) => (h(), v(
@@ -96,8 +96,8 @@ const x = { class: "lc-pie__wrapper" }, H = {
             W(E(q), {
               "legend-label": e.legendLabel,
               options: s.value,
-              "onLegend:click": w,
-              "onLegend:toggleSelect": y
+              "onLegend:click": _,
+              "onLegend:toggleSelect": w
             }, null, 8, ["legend-label", "options"])
           ])) : N("v-if", !0),
           a("div", J, [

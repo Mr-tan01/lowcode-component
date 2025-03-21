@@ -30,6 +30,7 @@ export const pieTitleOptions: EChartsOption['title'] = {
 }
 
 export const pieTooltipOptions: EChartsOption['tooltip'] = {
+    appendTo: 'body',
     trigger: 'item',
     backgroundColor: 'rgba(0, 32, 61, 1)',
     borderColor: 'rgba(15, 251, 248, 1)',
