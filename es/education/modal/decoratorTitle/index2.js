@@ -1,8 +1,11 @@
-import { defineComponent as o, mergeDefaults as a, computed as l, openBlock as c, createElementBlock as i, normalizeClass as n, createElementVNode as e, toDisplayString as d } from "vue";
-import { overflowStr as m } from "lowcode-share/es/share";
-const s = { class: "lc-decorator-title__wrapper" }, p = ["title"], g = /* @__PURE__ */ o({
+import { defineComponent as i, mergeDefaults as c, computed as n, openBlock as r, createElementBlock as o, normalizeClass as s, createElementVNode as l, toDisplayString as d, renderSlot as m, createCommentVNode as p } from "vue";
+import { overflowStr as u } from "lowcode-share/es/share";
+const _ = { class: "lc-decorator-title__wrapper" }, f = ["title"], h = {
+  key: 0,
+  class: "lc-decortator-title__slot"
+}, y = /* @__PURE__ */ i({
   __name: "decoratorTitle",
-  props: /* @__PURE__ */ a({
+  props: /* @__PURE__ */ c({
     text: {
       type: String
     },
@@ -17,19 +20,22 @@ const s = { class: "lc-decorator-title__wrapper" }, p = ["title"], g = /* @__PUR
     maxLength: 12,
     dir: "ltr"
   }),
-  setup(t) {
-    const r = l(() => m(t.text, t.maxLength));
-    return (x, _) => (c(), i(
+  setup(e) {
+    const a = n(() => u(e.text, e.maxLength));
+    return (t, x) => (r(), o(
       "div",
       {
-        class: n(["lc-decorator-title", [`lc-decorator-title--${t.dir}`]])
+        class: s(["lc-decorator-title", [`lc-decorator-title--${e.dir}`]])
       },
       [
-        e("div", s, [
-          e("div", {
+        l("div", _, [
+          l("div", {
             class: "lc-decorator-title__wrapper__text",
-            title: t.text
-          }, d(r.value), 9, p)
+            title: e.text
+          }, d(a.value), 9, f),
+          t.$slots.helper ? (r(), o("div", h, [
+            m(t.$slots, "helper", {}, void 0, !0)
+          ])) : p("v-if", !0)
         ])
       ],
       2
@@ -38,5 +44,5 @@ const s = { class: "lc-decorator-title__wrapper" }, p = ["title"], g = /* @__PUR
   }
 });
 export {
-  g as default
+  y as default
 };

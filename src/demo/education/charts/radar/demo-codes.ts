@@ -8,7 +8,7 @@ export const demoCodes = {
 <script lang="ts" setup>
 import {
     LcRadarChart,
-} from 'locode-component/es/education/charts';
+} from 'lowcode-component/es/education/charts';
 const options =  {
     radar: {
         shape: 'circle',
@@ -49,7 +49,7 @@ const options =  {
 <script lang="ts" setup>
 import {
     LcRadarChart,
-} from 'locode-component/es/education/charts';
+} from 'lowcode-component/es/education/charts';
 const options =  {
     radar: {
         shape: 'polygon',
@@ -90,7 +90,7 @@ const options =  {
 <script lang="ts" setup>
 import {
     LcRadarChart,
-} from 'locode-component/es/education/charts';
+} from 'lowcode-component/es/education/charts';
 const options =  {
     radar: {
         shape: 'polygon',
@@ -130,7 +130,7 @@ const options =  {
 <script lang="ts" setup>
 import {
     LcRadarChart,
-} from 'locode-component/es/education/charts';
+} from 'lowcode-component/es/education/charts';
 const options =  {
     radar: {
         shape: 'polygon',
@@ -168,7 +168,7 @@ code5: `
 <script lang="ts" setup>
 import {
     LcRadarChart,
-} from 'locode-component/es/education/charts';
+} from 'lowcode-component/es/education/charts';
 const options =  {
     radar: {
         shape: 'circle',
@@ -217,7 +217,7 @@ code6: `
 <script lang="ts" setup>
 import {
     LcRadarChart,
-} from 'locode-component/es/education/charts';
+} from 'lowcode-component/es/education/charts';
 const options =  {
     radar: {
         shape: 'polygon',
@@ -265,7 +265,7 @@ code7: `
 <script lang="ts" setup>
 import {
     LcRadarChart,
-} from 'locode-component/es/education/charts';
+} from 'lowcode-component/es/education/charts';
 const options =  {
     radar: {
         shape: 'polygon',
