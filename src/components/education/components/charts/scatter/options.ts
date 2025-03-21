@@ -19,8 +19,8 @@ export function useCommonScatterOptions(opts: EChartsCoreOption | EChartsOption)
     return merge({}, commonScatterOptions, opts);
 }
 
-function mregeSeriesRecord(newSeries: SeriesOption, seriesIndex: number) {
-    const color = scatterColors[seriesIndex % scatterColors.length];
+function mregeSeriesRecord(newSeries: SeriesOption, seriesIndex: number, colors: string[]) {
+    const color = colors[seriesIndex % scatterColors.length];
     return merge({},
         commonScatterSeries,
         {
@@ -32,11 +32,14 @@ function mregeSeriesRecord(newSeries: SeriesOption, seriesIndex: number) {
          newSeries);
 }
 
-export function useCommonScatterSeries(series: EChartsOption['series']): EChartsOption['series'] {
+export function useCommonScatterSeries(
+    series: EChartsOption['series'],
+    colors: string[]
+): EChartsOption['series'] {
     if (Array.isArray(series)) {
         return series.map((item, index) => {
-            return mregeSeriesRecord(item, index);
+            return mregeSeriesRecord(item, index, colors);
         });
     }
-    return mregeSeriesRecord(series ?? {}, 0);
+    return mregeSeriesRecord(series ?? {}, 0, colors);
 }

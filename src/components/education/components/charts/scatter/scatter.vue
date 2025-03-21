@@ -14,6 +14,7 @@ import {
     useCommonScatterSeries,
 } from './options';
 import merge from 'lodash-es/merge';
+import { scatterColors } from './const';
 const {
     options = {},
 } = defineProps({
@@ -21,7 +22,8 @@ const {
 });
 
 const renderOptions = computed(() => {
-    options.series = useCommonScatterSeries(options.series || []);
+    const colors = merge([], scatterColors, options?.color ?? []);
+    options.series = useCommonScatterSeries(options.series || [], colors);
     const newOptions = useCommonScatterOptions(options);
     return merge({}, newOptions);
 });

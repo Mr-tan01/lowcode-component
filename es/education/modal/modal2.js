@@ -1,8 +1,8 @@
-import { defineComponent as h, mergeDefaults as p, computed as a, openBlock as g, createBlock as w, unref as s, normalizeProps as f, guardReactiveProps as v, withCtx as z, createElementVNode as e, normalizeStyle as x, createVNode as y, normalizeClass as _, renderSlot as n } from "vue";
-import { NModal as b } from "naive-ui/es/modal";
+import { defineComponent as g, mergeDefaults as p, computed as r, openBlock as w, createBlock as f, unref as n, normalizeProps as v, guardReactiveProps as z, withCtx as b, createElementVNode as e, normalizeStyle as x, renderSlot as i, createVNode as y, normalizeClass as M } from "vue";
+import { NModal as k } from "naive-ui/es/modal";
 import { options as o } from "./config.js";
-import M from "./decoratorTitle/index.js";
-const k = { class: "lc-modal__header" }, S = { class: "lc-modal__wrapper" }, D = /* @__PURE__ */ h({
+import _ from "./decoratorTitle/index.js";
+const S = { class: "lc-modal__header" }, N = { class: "lc-modal__wrapper" }, I = /* @__PURE__ */ g({
   __name: "modal",
   props: /* @__PURE__ */ p({
     width: {
@@ -25,46 +25,49 @@ const k = { class: "lc-modal__header" }, S = { class: "lc-modal__wrapper" }, D =
   }),
   emits: ["update:show"],
   setup(t, { emit: d }) {
-    const m = d;
-    function i(l) {
-      return a(() => o.size[l] || { width: t.width, height: t.height });
+    const u = d;
+    function a(l) {
+      return r(() => o.size[l] || { width: t.width, height: t.height });
     }
-    const u = a(() => ({
-      "--modal-width": i(t.sizeMode).value.width + "px",
-      "--modal-height": i(t.sizeMode).value.height + "px"
+    const m = r(() => `url(${o.bgImgs[t.sizeMode]}) no-repeat`), c = r(() => ({
+      "--modal-width": a(t.sizeMode).value.width + "px",
+      "--modal-height": a(t.sizeMode).value.height + "px",
+      "--modal-bg": m.value
     }));
-    function c() {
-      m("update:show", !1);
+    function h() {
+      u("update:show", !1);
     }
-    return (l, r) => (g(), w(
-      s(b),
-      f(v(l.$attrs)),
+    return (l, s) => (w(), f(
+      n(k),
+      v(z(l.$attrs)),
       {
-        default: z(() => [
+        default: b(() => [
           e(
             "div",
             {
               class: "lc-modal",
-              style: x(u.value)
+              style: x(c.value)
             },
             [
-              e("div", k, [
-                y(s(M), { title: t.title }, null, 8, ["title"])
-              ]),
               e("div", S, [
+                i(l.$slots, "header", {}, () => [
+                  y(n(_), { text: t.title }, null, 8, ["text"])
+                ], !0)
+              ]),
+              e("div", N, [
                 e(
                   "div",
                   {
-                    class: _(["lc-modal__wrapper__closeable", {
+                    class: M(["lc-modal__wrapper__closeable", {
                       [t.sizeMode]: !0
                     }])
                   },
                   [
-                    n(l.$slots, "closeable", {}, () => [
+                    i(l.$slots, "closeable", {}, () => [
                       e("button", {
                         class: "lc-modal__wrapper__closeable__button",
-                        onClick: c
-                      }, r[0] || (r[0] = [
+                        onClick: h
+                      }, s[0] || (s[0] = [
                         e(
                           "svg",
                           {
@@ -94,7 +97,7 @@ const k = { class: "lc-modal__header" }, S = { class: "lc-modal__wrapper" }, D =
                   2
                   /* CLASS */
                 ),
-                n(l.$slots, "default", {}, void 0, !0)
+                i(l.$slots, "default", {}, void 0, !0)
               ])
             ],
             4
@@ -110,5 +113,5 @@ const k = { class: "lc-modal__header" }, S = { class: "lc-modal__wrapper" }, D =
   }
 });
 export {
-  D as default
+  I as default
 };

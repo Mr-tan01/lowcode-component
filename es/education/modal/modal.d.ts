@@ -3,6 +3,7 @@ import { Options } from './config';
 declare function __VLS_template(): {
     attrs: Partial<{}>;
     slots: {
+        header?(_: {}): any;
         closeable?(_: {}): any;
         default?(_: {}): any;
     };

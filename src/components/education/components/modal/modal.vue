@@ -2,7 +2,9 @@
     <n-modal v-bind="$attrs">
         <div class="lc-modal" :style="layoutStyle">
             <div class="lc-modal__header">
-                <LcDecoratorTitle :title="title"></LcDecoratorTitle>
+                <slot name="header">
+                    <LcDecoratorTitle :text="title"></LcDecoratorTitle>
+                </slot>
             </div>
             <div class="lc-modal__wrapper">
                 
@@ -64,12 +66,17 @@ function getModalSize(mode: Options['sizeMode']) {
         return options.size[mode] || { width, height, };
     });
 }
+const backgroundImage = computed(() => {
+    return `url(${options.bgImgs[sizeMode]}) no-repeat`;
+});
 const layoutStyle = computed(() => {
     return {
         '--modal-width': getModalSize(sizeMode).value.width + 'px',
         '--modal-height': getModalSize(sizeMode).value.height + 'px',
+        '--modal-bg': backgroundImage.value,
     };
 });
+
 function close() {
     emit('update:show', false);
 }
@@ -79,7 +86,7 @@ function close() {
 .lc-modal {
     width: var(--modal-width);
     height: var(--modal-height);
-    background: url(./images/large-bg.png) no-repeat;
+    background: var(--modal-bg);
     background-position: center center;
     background-size: 100% 101%;
     box-sizing: border-box;

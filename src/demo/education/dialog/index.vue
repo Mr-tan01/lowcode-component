@@ -3,31 +3,25 @@
         <DemoHelpBox title="弹出窗" description="大尺寸弹窗" :code="code1">
             <NButton @click="show = true">点击弹窗</NButton>
             <LcModal v-model:show="show" title="弹窗标题">
-                <template #header>
-                    <div class="header">
-                        弹窗标题
-                    </div>
-                </template>
-                <template #default>
-                    <div class="text">
-                        {{ code1 }}
-                    </div>
-                </template>
+                <div class="text">
+                    {{ code1 }}
+                </div>
             </LcModal>
         </DemoHelpBox>
-        <DemoHelpBox title="弹出窗" description="中等尺寸弹窗"  :code="code2">
+        <DemoHelpBox title="弹出窗" description="中等尺寸弹窗" :code="code2">
             <NButton @click="show2 = true">点击弹窗</NButton>
             <LcModal v-model:show="show2" size-mode="medium" title="弹窗标题">
-                <template #header>
-                    <div class="header">
-                        弹窗标题
-                    </div>
-                </template>
-                <template #default>
-                    <div class="text">
-                        这里是内容区域，这里是内容区域，这里是内容区域，这里是内容区域，这里是内容区域，这里是内容区域，这里是内容区域，这里是内容区域，这里是内容区域，这里是内容区域，这里是内容
-                    </div>
-                </template>
+                <div class="text">
+                    这里是内容区域，这里是内容区域，这里是内容区域，这里是内容区域，这里是内容区域，这里是内容区域，这里是内容区域，这里是内容区域，这里是内容区域，这里是内容区域，这里是内容
+                </div>
+            </LcModal>
+        </DemoHelpBox>
+        <DemoHelpBox title="弹出窗" description="16x9尺寸弹窗">
+            <NButton @click="show3 = true">点击弹窗</NButton>
+            <LcModal v-model:show="show3" size-mode="a169" title="弹窗标题">
+                <div class="text">
+                    这里是内容区域，这里是内容区域，这里是内容区域，这里是内容区域，这里是内容区域，这里是内容区域，这里是内容区域，这里是内容区域，这里是内容区域，这里是内容区域，这里是内容
+                </div>
             </LcModal>
         </DemoHelpBox>
     </div>
@@ -41,6 +35,7 @@ import { code1, code2 } from './demo-codes';
 import { NButton } from 'naive-ui';
 const show = ref(false);
 const show2 = ref(false);
+const show3 = ref(false);
 
 </script>
 <style lang="scss" scoped>
@@ -51,6 +46,7 @@ const show2 = ref(false);
     align-items: center;
     flex: 1;
 }
+
 .text {
     color: #fff;
 }

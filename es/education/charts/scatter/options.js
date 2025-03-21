@@ -1,38 +1,38 @@
 import s from "lodash-es/merge";
-import { deepMergeArrayOptions as c } from "@mmj-code-lib/lowcode/es/components";
-import { tooltipOptions as p, legendOptions as l, gridOptions as a, xAxisOptions as u, yAxisOptions as O, scatterColors as i, commonScatterSeries as m } from "./const.js";
-import { setRgbaAlpha as g } from "lowcode-share/es/share";
-const e = {
-  tooltip: p,
+import { deepMergeArrayOptions as p } from "@mmj-code-lib/lowcode/es/components";
+import { tooltipOptions as a, legendOptions as l, gridOptions as u, xAxisOptions as O, yAxisOptions as g, scatterColors as m, commonScatterSeries as c } from "./const.js";
+import { setRgbaAlpha as f } from "lowcode-share/es/share";
+const i = {
+  tooltip: a,
   legend: l,
-  grid: a,
-  xAxis: u,
-  yAxis: O,
-  color: i,
-  series: m
+  grid: u,
+  xAxis: O,
+  yAxis: g,
+  color: m,
+  series: c
 };
-function x(o) {
-  return c(o, Object.keys(e), Object.values(e)), s({}, e, o);
+function y(r) {
+  return p(r, Object.keys(i), Object.values(i)), s({}, i, r);
 }
-function n(o, t) {
-  const r = i[t % i.length];
+function n(r, o, e) {
+  const t = e[o % m.length];
   return s(
     {},
-    m,
+    c,
     {
       itemStyle: {
-        color: () => g(r, 0.2),
-        borderColor: r
+        color: () => f(t, 0.2),
+        borderColor: t
       }
     },
-    o
+    r
   );
 }
-function y(o) {
-  return Array.isArray(o) ? o.map((t, r) => n(t, r)) : n(o ?? {}, 0);
+function b(r, o) {
+  return Array.isArray(r) ? r.map((e, t) => n(e, t, o)) : n(r ?? {}, 0, o);
 }
 export {
-  e as commonScatterOptions,
-  x as useCommonScatterOptions,
-  y as useCommonScatterSeries
+  i as commonScatterOptions,
+  y as useCommonScatterOptions,
+  b as useCommonScatterSeries
 };

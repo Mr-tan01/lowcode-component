@@ -1,6 +1,14 @@
 import { type ScatterSeriesOption, type EChartsOption } from "echarts";
 
-export const scatterColors = ['rgba(15, 251, 248, 1)', 'rgba(34, 118, 252, 1)', 'rgba(225, 188, 75, 1)', 'rgba(222, 56, 4, 1)'];
+export const scatterColors = [
+    'rgba(15, 251, 248, 1)',
+    'rgba(254, 210, 77, 1)',
+    'rgba(34, 252, 158, 1)',
+    'rgba(255, 132, 83, 1)',
+    'rgba(173, 210, 255, 1)',
+    'rgba(222, 56, 4, 1)',
+
+];
 export const yAxisOptions: EChartsOption['yAxis'] = {
     nameLocation: 'end',
     nameTextStyle: {
