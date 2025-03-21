@@ -1,5 +1,6 @@
-import { defineComponent as f, ref as h, watch as w, computed as S, openBlock as d, createElementBlock as c, createElementVNode as i, Fragment as y, renderList as L, normalizeStyle as b, renderSlot as k, toDisplayString as M } from "vue";
-const $ = { class: "lc-common-legend" }, C = { class: "lc-common-legend__wrapper__legend" }, A = ["title", "onClick", "onMouseenter", "onMouseleave"], B = { class: "lc-common-legend__wrapper__legend__item__label" }, D = /* @__PURE__ */ f({
+import { defineComponent as h, ref as w, watch as L, computed as M, openBlock as c, createElementBlock as i, createElementVNode as a, Fragment as S, renderList as y, normalizeStyle as b, renderSlot as k, createVNode as C, unref as T, withCtx as g } from "vue";
+import { NTooltip as $ } from "naive-ui/es/tooltip";
+const H = { class: "lc-common-legend" }, A = { class: "lc-common-legend__wrapper__legend" }, B = ["onClick", "onMouseenter", "onMouseleave"], E = { class: "lc-common-legend__trigger" }, N = ["innerHTML"], F = ["innerHTML"], z = /* @__PURE__ */ h({
   __name: "legend",
   props: {
     options: { default: () => ({}) },
@@ -7,9 +8,9 @@ const $ = { class: "lc-common-legend" }, C = { class: "lc-common-legend__wrapper
     disabled: { type: Boolean, default: !1 }
   },
   emits: ["legend:click", "legend:toggleSelect"],
-  setup(t, { emit: g }) {
-    const s = h(/* @__PURE__ */ new Map());
-    w(() => t.options.series, () => {
+  setup(t, { emit: m }) {
+    const s = w(/* @__PURE__ */ new Map());
+    L(() => t.options.series, () => {
       var e, n;
       s.value.clear(), Array.isArray(t.options.series) && ((n = (e = t.options.series[0]) == null ? void 0 : e.data) == null || n.forEach((l) => {
         if (!l.name)
@@ -23,25 +24,25 @@ const $ = { class: "lc-common-legend" }, C = { class: "lc-common-legend__wrapper
       deep: 2,
       immediate: !0
     });
-    const r = g;
-    function a(e, n) {
+    const r = m;
+    function d(e, n) {
       r("legend:toggleSelect", {
         type: e,
         name: n
       });
     }
-    function m(e) {
+    function _(e) {
       if (!s.value.has(e) || t.disabled) return;
       const n = s.value.get(e);
-      a(n != null && n.selected ? "legendUnSelect" : "legendSelect", e), s.value.set(e, {
+      d(n != null && n.selected ? "legendUnSelect" : "legendSelect", e), s.value.set(e, {
         ...n,
         selected: !(n != null && n.selected)
       });
     }
-    function _(e) {
-      m(e.name), r("legend:click", e);
+    function p(e) {
+      _(e.name), r("legend:click", e);
     }
-    function p(e, n) {
+    function f(e, n) {
       var o;
       const { color: l = [] } = t.options ?? {};
       return {
@@ -49,41 +50,56 @@ const $ = { class: "lc-common-legend" }, C = { class: "lc-common-legend__wrapper
         "--unselect-color": (o = s.value.get(n.name)) != null && o.selected ? 1 : 0.5
       };
     }
-    const v = S(() => {
+    const v = M(() => {
       var e, n, l, o;
       return ((n = (e = t.options) == null ? void 0 : e.series) == null ? void 0 : n[0].data) ?? ((o = (l = t.options) == null ? void 0 : l.series) == null ? void 0 : o.data) ?? [];
     });
-    return (e, n) => (d(), c("div", $, [
-      i("div", C, [
-        (d(!0), c(
-          y,
+    return (e, n) => (c(), i("div", H, [
+      a("div", A, [
+        (c(!0), i(
+          S,
           null,
-          L(v.value, (l, o) => (d(), c("div", {
+          y(v.value, (l, o) => (c(), i("div", {
             class: "lc-common-legend__wrapper__legend__item",
             key: o,
-            style: b(p(o, l)),
-            title: e.legendLabel(l.name, l.value),
-            onClick: (u) => _(l),
-            onMouseenter: (u) => a("highlight", l.name),
-            onMouseleave: (u) => a("downplay", l.name)
+            style: b(f(o, l)),
+            onClick: (u) => p(l),
+            onMouseenter: (u) => d("highlight", l.name),
+            onMouseleave: (u) => d("downplay", l.name)
           }, [
-            k(e.$slots, "legend", {}, () => [
-              n[0] || (n[0] = i(
-                "div",
-                { class: "lc-common-legend__wrapper__legend__item__icon" },
-                null,
-                -1
-                /* HOISTED */
-              )),
-              i(
-                "div",
-                B,
-                M(e.legendLabel(l.name, l.value)),
-                1
-                /* TEXT */
+            k(e.$slots, "legend", { record: l }, () => [
+              C(
+                T($),
+                { delay: 800 },
+                {
+                  trigger: g(() => [
+                    a("div", E, [
+                      n[0] || (n[0] = a(
+                        "div",
+                        { class: "lc-common-legend__wrapper__legend__item__icon" },
+                        null,
+                        -1
+                        /* HOISTED */
+                      )),
+                      a("div", {
+                        class: "lc-common-legend__wrapper__legend__item__label",
+                        innerHTML: e.legendLabel(l.name, l.value)
+                      }, null, 8, N)
+                    ])
+                  ]),
+                  default: g(() => [
+                    a("span", {
+                      innerHTML: e.legendLabel(l.name, l.value)
+                    }, null, 8, F)
+                  ]),
+                  _: 2
+                  /* DYNAMIC */
+                },
+                1024
+                /* DYNAMIC_SLOTS */
               )
             ], !0)
-          ], 44, A))),
+          ], 44, B))),
           128
           /* KEYED_FRAGMENT */
         ))
@@ -92,5 +108,5 @@ const $ = { class: "lc-common-legend" }, C = { class: "lc-common-legend__wrapper
   }
 });
 export {
-  D as default
+  z as default
 };
