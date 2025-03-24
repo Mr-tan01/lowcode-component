@@ -14,16 +14,16 @@ export type Options = {
     sizeMode: SizeMode;
     size: {
         [sizeModeEnum.large]: {
-            width: number;
-            height: number;
+            width: string;
+            height: string;
         };
         [sizeModeEnum.medium]: {
-            width: number;
-            height: number;
+            width: string;
+            height: string;
         };
         [sizeModeEnum.a169]: {
-            width: number;
-            height: number;
+            width: string;
+            height: string;
         };
     };
     bgImgs: Record<SizeMode, string>;
@@ -32,16 +32,16 @@ export type Options = {
 export const options: Options = {
     size: {
         [sizeModeEnum.large]: {
-            width: 1000,
-            height: 680
+            width: '1000px',
+            height: '680px'
         },
         [sizeModeEnum.medium]: {
-            width: 600,
-            height: 300
+            width: '600px',
+            height: '300px'
         },
         [sizeModeEnum.a169]: {
-            width: 1520,
-            height: 683
+            width: '1520px',
+            height: '683px'
         }
     },
     sizeMode: sizeModeEnum.custom,

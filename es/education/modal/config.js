@@ -8,16 +8,16 @@ const m = {
 }, g = {
   size: {
     [m.large]: {
-      width: 1e3,
-      height: 680
+      width: "1000px",
+      height: "680px"
     },
     [m.medium]: {
-      width: 600,
-      height: 300
+      width: "600px",
+      height: "300px"
     },
     [m.a169]: {
-      width: 1520,
-      height: 683
+      width: "1520px",
+      height: "683px"
     }
   },
   sizeMode: m.custom,
