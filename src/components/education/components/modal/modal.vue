@@ -7,7 +7,7 @@
                 </slot>
             </div>
             <div class="lc-modal__wrapper">
-                
+
                 <div class="lc-modal__wrapper__closeable" :class="{
                     [sizeMode]: true,
                 }">
@@ -39,16 +39,16 @@ import { options, type Options } from './config';
 import { LcDecoratorTitle } from '@/components/education/components/decoratorTitle';
 
 const {
-    width = options.size.large.width,
-    height = options.size.large.height,
+    width,
+    height,
     sizeMode = 'large',
     title = '',
 } = defineProps({
     width: {
-        type: Number,
+        type: String,
     },
     height: {
-        type: Number,
+        type: String,
     },
     sizeMode: {
         type: String as PropType<Options['sizeMode']>,
@@ -63,7 +63,7 @@ const emit = defineEmits<{
 
 function getModalSize(mode: Options['sizeMode']) {
     return computed(() => {
-        return options.size[mode] || { width, height, };
+        return options.size[mode];
     });
 }
 const backgroundImage = computed(() => {
@@ -71,8 +71,8 @@ const backgroundImage = computed(() => {
 });
 const layoutStyle = computed(() => {
     return {
-        '--modal-width': getModalSize(sizeMode).value.width + 'px',
-        '--modal-height': getModalSize(sizeMode).value.height + 'px',
+        '--modal-width': width || getModalSize(sizeMode).value.width,
+        '--modal-height': width || getModalSize(sizeMode).value.height,
         '--modal-bg': backgroundImage.value,
     };
 });

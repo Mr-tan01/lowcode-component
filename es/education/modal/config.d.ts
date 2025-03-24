@@ -10,16 +10,16 @@ export type Options = {
     sizeMode: SizeMode;
     size: {
         [sizeModeEnum.large]: {
-            width: number;
-            height: number;
+            width: string;
+            height: string;
         };
         [sizeModeEnum.medium]: {
-            width: number;
-            height: number;
+            width: string;
+            height: string;
         };
         [sizeModeEnum.a169]: {
-            width: number;
-            height: number;
+            width: string;
+            height: string;
         };
     };
     bgImgs: Record<SizeMode, string>;

@@ -1,15 +1,15 @@
-import { defineComponent as g, mergeDefaults as p, computed as r, openBlock as w, createBlock as f, unref as n, normalizeProps as v, guardReactiveProps as z, withCtx as b, createElementVNode as e, normalizeStyle as x, renderSlot as i, createVNode as y, normalizeClass as M } from "vue";
-import { NModal as k } from "naive-ui/es/modal";
-import { options as o } from "./config.js";
-import _ from "./decoratorTitle/index.js";
-const S = { class: "lc-modal__header" }, N = { class: "lc-modal__wrapper" }, I = /* @__PURE__ */ g({
+import { defineComponent as p, mergeDefaults as w, computed as o, openBlock as h, createBlock as f, unref as n, normalizeProps as v, guardReactiveProps as z, withCtx as b, createElementVNode as e, normalizeStyle as x, renderSlot as r, createVNode as y, normalizeClass as M } from "vue";
+import { NModal as S } from "naive-ui/es/modal";
+import { options as s } from "./config.js";
+import k from "./decoratorTitle/index.js";
+const _ = { class: "lc-modal__header" }, $ = { class: "lc-modal__wrapper" }, I = /* @__PURE__ */ p({
   __name: "modal",
-  props: /* @__PURE__ */ p({
+  props: /* @__PURE__ */ w({
     width: {
-      type: Number
+      type: String
     },
     height: {
-      type: Number
+      type: String
     },
     sizeMode: {
       type: String
@@ -18,8 +18,6 @@ const S = { class: "lc-modal__header" }, N = { class: "lc-modal__wrapper" }, I =
       type: String
     }
   }, {
-    width: () => o.size.large.width,
-    height: () => o.size.large.height,
     sizeMode: "large",
     title: ""
   }),
@@ -27,18 +25,18 @@ const S = { class: "lc-modal__header" }, N = { class: "lc-modal__wrapper" }, I =
   setup(t, { emit: d }) {
     const u = d;
     function a(l) {
-      return r(() => o.size[l] || { width: t.width, height: t.height });
+      return o(() => s.size[l]);
     }
-    const m = r(() => `url(${o.bgImgs[t.sizeMode]}) no-repeat`), c = r(() => ({
-      "--modal-width": a(t.sizeMode).value.width + "px",
-      "--modal-height": a(t.sizeMode).value.height + "px",
+    const m = o(() => `url(${s.bgImgs[t.sizeMode]}) no-repeat`), c = o(() => ({
+      "--modal-width": t.width || a(t.sizeMode).value.width,
+      "--modal-height": t.width || a(t.sizeMode).value.height,
       "--modal-bg": m.value
     }));
-    function h() {
+    function g() {
       u("update:show", !1);
     }
-    return (l, s) => (w(), f(
-      n(k),
+    return (l, i) => (h(), f(
+      n(S),
       v(z(l.$attrs)),
       {
         default: b(() => [
@@ -49,12 +47,12 @@ const S = { class: "lc-modal__header" }, N = { class: "lc-modal__wrapper" }, I =
               style: x(c.value)
             },
             [
-              e("div", S, [
-                i(l.$slots, "header", {}, () => [
-                  y(n(_), { text: t.title }, null, 8, ["text"])
+              e("div", _, [
+                r(l.$slots, "header", {}, () => [
+                  y(n(k), { text: t.title }, null, 8, ["text"])
                 ], !0)
               ]),
-              e("div", N, [
+              e("div", $, [
                 e(
                   "div",
                   {
@@ -63,11 +61,11 @@ const S = { class: "lc-modal__header" }, N = { class: "lc-modal__wrapper" }, I =
                     }])
                   },
                   [
-                    i(l.$slots, "closeable", {}, () => [
+                    r(l.$slots, "closeable", {}, () => [
                       e("button", {
                         class: "lc-modal__wrapper__closeable__button",
-                        onClick: h
-                      }, s[0] || (s[0] = [
+                        onClick: g
+                      }, i[0] || (i[0] = [
                         e(
                           "svg",
                           {
@@ -97,7 +95,7 @@ const S = { class: "lc-modal__header" }, N = { class: "lc-modal__wrapper" }, I =
                   2
                   /* CLASS */
                 ),
-                i(l.$slots, "default", {}, void 0, !0)
+                r(l.$slots, "default", {}, void 0, !0)
               ])
             ],
             4
