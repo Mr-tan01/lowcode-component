@@ -72,7 +72,7 @@ const backgroundImage = computed(() => {
 const layoutStyle = computed(() => {
     return {
         '--modal-width': width || getModalSize(sizeMode).value.width,
-        '--modal-height': width || getModalSize(sizeMode).value.height,
+        '--modal-height': height || getModalSize(sizeMode).value.height,
         '--modal-bg': backgroundImage.value,
     };
 });
