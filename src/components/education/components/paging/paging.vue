@@ -1,9 +1,9 @@
 <template>
   <div class="pagination-container">
     <div class="pagination-left">
-      <button @click="prevPage" :disabled="currentPage === 1" class="arrow-button left-arrow"></button>
-      <span class="page-info">{{ currentPage }}</span> / <span class="page-info">{{ totalPages }}</span>
-      <button @click="nextPage" :disabled="currentPage === totalPages" class="arrow-button right-arrow"></button>
+      <button @click="prevPage" :disabled="model === 1" class="arrow-button left-arrow"></button>
+      <span class="page-info">{{ model }}</span> / <span class="page-info">{{ totalPages }}</span>
+      <button @click="nextPage" :disabled="model === totalPages" class="arrow-button right-arrow"></button>
     </div>
     <div class="pagination-right total-pages">
       <span>共 {{ totalPages }} 页</span>
@@ -12,41 +12,29 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, watch } from 'vue';
 import { EducationPagingProps } from './props';
 
 
 const {
   totalPages= 1,
-  modelValue= 1,
   fontSize= '16px',
   fontColor= '#FFFFFF',
 } = defineProps<EducationPagingProps>();
 
-const currentPage = ref(modelValue);
-
-const emit = defineEmits(['update:modelValue']);
+const model = defineModel<number>({ default: 1 });
 
 const prevPage = () => {
-  if (currentPage.value > 1) {
-    currentPage.value--;
-    emit('update:modelValue', currentPage.value);
+  if (model.value > 1) {
+    model.value--;
   }
 };
 
 const nextPage = () => {
-  if (currentPage.value < totalPages) {
-    currentPage.value++;
-    emit('update:modelValue', currentPage.value);
+  if (model.value <totalPages) {
+    model.value++;
   }
 };
 
-watch(
-  () => modelValue,
-  (newValue) => {
-    currentPage.value = newValue;
-  }
-);
 </script>
 
 <style scoped lang="scss">
