@@ -53,6 +53,14 @@
                 </n-space>
             </div>
         </DemoHelpBox>
+        <DemoHelpBox title="副标题" description="基础用法" :code="pageTitle.HeadlineCode" rswidth="1000px">
+            <div class="text-box">
+                <n-space>
+                    <LcSubhead text="福田区学前教育质量监测概况"/>
+                    <LcSubhead text="文字最多15个字符标题文字最多十五个字符标题文字最多十二个字符" :font-size="'20px'"/>
+                </n-space>
+            </div>
+        </DemoHelpBox>
     </div>
 </template>
 
@@ -64,7 +72,7 @@ import { LcDecoratorTitle } from '@/components/education/components/decoratorTit
 import * as pageTitle from './demo-codes';
 import VueResizable from 'vue-resizable'
 import { LcChartTitle } from '@/components/education/components/chartTitle';
-import { LcHeadline } from '@/components/education/components/headline';
+import { LcHeadline, LcSubhead } from '@/components/education/components/headline';
 import { LcIcon } from '@/components/education/components/icon';
 
 
