@@ -29,7 +29,7 @@ const _ = { class: "lc-modal__header" }, $ = { class: "lc-modal__wrapper" }, I =
     }
     const m = o(() => `url(${s.bgImgs[t.sizeMode]}) no-repeat`), c = o(() => ({
       "--modal-width": t.width || a(t.sizeMode).value.width,
-      "--modal-height": t.width || a(t.sizeMode).value.height,
+      "--modal-height": t.height || a(t.sizeMode).value.height,
       "--modal-bg": m.value
     }));
     function g() {
