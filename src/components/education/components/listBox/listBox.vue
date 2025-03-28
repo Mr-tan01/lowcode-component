@@ -1,0 +1,135 @@
+<template>
+  <div class="dynamic-data-list" :class="{ 'is-bordered': bordered }">
+    <div class="list-body">
+      <div
+        v-for="(row, rowIndex) in rows"
+        :key="`row-${rowIndex}`"
+        class="list-row"
+        :style="getRowStyle(rowIndex)"
+      >
+        <template v-for="(item, colIndex) in items" :key="`col-${colIndex}`">
+          <div 
+            class="key-cell" 
+            :style="getKeyCellStyle(colIndex)"
+          >
+            {{ row[item.key] }}
+          </div>
+          <div 
+            class="value-cell" 
+            :style="getValueCellStyle(colIndex)"
+          >
+            {{ row[item.value] }}
+          </div>
+        </template>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script setup lang="ts">
+import { CSSProperties } from 'vue'
+import type  {DataListProps, ColumnStyle } from './props'
+
+const {
+  items = [],
+  rows = [],
+  rowStyle = {},
+  bordered = false,
+  keyStyle = {
+    width: '150px',
+    backgroundColor: '#063B6B',
+    padding: '12px 15px',
+    textAlign: 'left'
+  },
+  valueStyle = {
+    width: '300px',
+    backgroundColor: '#063661',
+    padding: '12px 15px',
+    textAlign: 'left'
+  },
+  cellPadding = '12px 15px',
+  defaultAlign = 'left'
+} = defineProps<DataListProps>()
+
+// 获取键单元格样式
+const getKeyCellStyle = (index: number): ColumnStyle => {
+  const style: ColumnStyle = {
+    ...keyStyle,
+    padding: cellPadding || keyStyle?.padding,
+    textAlign: keyStyle.textAlign || defaultAlign,
+    ...(items[index]?.keyStyle || {})
+  }
+  
+  if (bordered) {
+    style.borderLeft = '1px solid #ddd'
+    style.borderTop = '1px solid #ddd'
+    style.borderBottom = '1px solid #ddd'
+    if (index === items.length - 1) {
+      style.borderRight = '1px solid #ddd'
+    }
+  }
+  
+  return style
+}
+
+// 获取值单元格样式
+const getValueCellStyle = (index: number): ColumnStyle => {
+  const style: ColumnStyle = {
+    ...valueStyle,
+    padding: cellPadding || valueStyle?.padding,
+    textAlign: valueStyle.textAlign || defaultAlign,
+    ...(items[index]?.valueStyle || {})
+  }
+  
+  if (bordered) {
+    style.borderTop = '1px solid #ddd'
+    style.borderBottom = '1px solid #ddd'
+    style.borderRight = '1px solid #ddd'
+  }
+  
+  return style
+}
+
+// 获取行样式
+const getRowStyle = (index: number): CSSProperties => {
+  const style: CSSProperties = {
+    display: 'flex',
+    width: '100%',
+    minWidth: 'fit-content'
+  }
+  
+  if (index % 2 === 0 && rowStyle.even) {
+    Object.assign(style, rowStyle.even)
+  } else if (index % 2 !== 0 && rowStyle.odd) {
+    Object.assign(style, rowStyle.odd)
+  }
+  
+  return style
+}
+</script>
+
+<style lang="scss" scoped>
+.dynamic-data-list {
+  width: 100%;
+  font-family: Arial, sans-serif;
+  overflow-x: auto;
+  min-width: fit-content;
+
+  .list-body {
+    min-width: fit-content;
+    
+    .list-row {
+      .key-cell,
+      .value-cell {
+        box-sizing: border-box;
+        word-break: break-word;
+        flex-shrink: 0;
+      }
+
+      .key-cell {
+        font-weight: bold;
+      }
+    }
+  }
+}
+</style>
