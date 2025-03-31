@@ -1,4 +1,4 @@
-import { ref as f } from "vue";
+import { ref as l } from "vue";
 const h = /* @__PURE__ */ Object.assign({
   "./images/func/add.png": () => import("./images/func/add.png.js").then((e) => e.default),
   "./images/func/blue-l-arrow.png": () => import("./images/func/blue-l-arrow.png.js").then((e) => e.default),
@@ -14,6 +14,7 @@ const h = /* @__PURE__ */ Object.assign({
   "./images/func/laptop.png": () => import("./images/func/laptop.png.js").then((e) => e.default),
   "./images/func/layers.png": () => import("./images/func/layers.png.js").then((e) => e.default),
   "./images/func/location.png": () => import("./images/func/location.png.js").then((e) => e.default),
+  "./images/func/pause.png": () => import("./images/func/pause.png.js").then((e) => e.default),
   "./images/func/refresh.png": () => import("./images/func/refresh.png.js").then((e) => e.default),
   "./images/func/remove.png": () => import("./images/func/remove.png.js").then((e) => e.default),
   "./images/func/search.png": () => import("./images/func/search.png.js").then((e) => e.default),
@@ -40,10 +41,10 @@ const h = /* @__PURE__ */ Object.assign({
   event: v
 };
 function b(e, i, a = ".png") {
-  var t, r, s, n, u, l;
-  const g = f(""), m = f("");
+  var t, r, s, n, u, f;
+  const g = l(""), m = l("");
   let c = `${e}/${i}${a}`, o = "";
-  return e === "event" && (c = `${e}/${i}/icon${a}`, o = `${e}/${i}/selected-icon${a}`), (s = (r = (t = d[e]) == null ? void 0 : t[`./images/${c}`]) == null ? void 0 : r.call(t)) == null || s.then((p) => g.value = p), o && ((l = (u = (n = d[e]) == null ? void 0 : n[`./images/${o}`]) == null ? void 0 : u.call(n)) == null || l.then((p) => m.value = p)), {
+  return e === "event" && (c = `${e}/${i}/icon${a}`, o = `${e}/${i}/selected-icon${a}`), (s = (r = (t = d[e]) == null ? void 0 : t[`./images/${c}`]) == null ? void 0 : r.call(t)) == null || s.then((p) => g.value = p), o && ((f = (u = (n = d[e]) == null ? void 0 : n[`./images/${o}`]) == null ? void 0 : u.call(n)) == null || f.then((p) => m.value = p)), {
     src: g,
     selectedSrc: m
   };

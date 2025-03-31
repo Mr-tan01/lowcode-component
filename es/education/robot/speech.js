@@ -15,7 +15,7 @@ function x() {
         return alert("您的浏览器不支持 SpeechRecognition API");
       e.value.starting || (e.value.starting = !0, e.value.error = !1, n.start(), e.value.helpText = "正在聆听...");
     }, f = function() {
-      e.value.starting = !1, n.stop(), e.value.helpText = "已停止聆听。", setTimeout(p, v);
+      e.value.starting = !1, n.stop(), e.value.helpText = "已停止聆听", setTimeout(p, v);
     }, p = function() {
       e.value.helpText = "";
     };

@@ -9,11 +9,11 @@
                             draggable="false" alt="">
                         {{ output.helpText }}
                     </div>
-                    <input type="text" :placeholder v-model="modelContext"
+                    <input type="text" :placeholder v-model="modelContext" :disabled="forbidden"
                         class="lc-main-robot__wrapper__inner-input--content__input">
                     <div class="lc-main-robot__wrapper__inner-input--content__suffix">
                         <img class="lc-main-robot__wrapper__inner-input--content__suffix--img"
-                            src="./images/microphone.png" draggable="false" @mousedown="start" @mouseup="stop" alt="" />
+                            src="./images/microphone.png" draggable="false" @mousedown="handleMouseDown" @mouseup="handleMouseUp" alt="" />
                     </div>
                 </div>
             </div>
@@ -44,6 +44,8 @@ import { LcIcon } from '@/components/education/components/icon';
 import { defStarData, StarType } from './const';
 import { useStarRotate } from './main-robot-hook';
 import memoize from 'lodash-es/memoize';
+import { useMessage } from 'naive-ui';
+const message = useMessage();
 
 const {
     placeholder = 'AI 智能问数',
@@ -53,6 +55,7 @@ const {
     startAngle = 90,
     maxShowCount = 7,
     fullAngle = 360,
+    forbidden = false
 } = defineProps({
     placeholder: String,
     stars: Array as PropType<StarType[]>,
@@ -61,9 +64,24 @@ const {
     startAngle: Number,
     maxShowCount: Number,
     fullAngle: Number,
+    forbidden: Boolean,
 });
 
 const { start, stop, output, on } = useSpeech();
+function handleMouseDown() {
+    if (forbidden) {
+    message.warning('此功能敬请期待');
+    } else {
+    start();
+    } 
+}
+function handleMouseUp() {
+    if (forbidden) {
+    } else {
+    stop();
+    }
+}
+
 const {
     starWrapperRef,
     customRotateStyle,

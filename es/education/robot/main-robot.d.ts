@@ -8,6 +8,7 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
     startAngle: NumberConstructor;
     maxShowCount: NumberConstructor;
     fullAngle: NumberConstructor;
+    forbidden: BooleanConstructor;
     value: {
         type: PropType<string>;
     };
@@ -23,6 +24,7 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
     startAngle: NumberConstructor;
     maxShowCount: NumberConstructor;
     fullAngle: NumberConstructor;
+    forbidden: BooleanConstructor;
     value: {
         type: PropType<string>;
     };
@@ -31,6 +33,7 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
     "onUpdate:value"?: ((value: string) => any) | undefined;
 }>, {
     animate: boolean;
+    forbidden: boolean;
 }, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {
     starWrapperRef: HTMLDivElement;
     starElRefs: HTMLDivElement[];

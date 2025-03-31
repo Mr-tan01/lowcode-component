@@ -1,7 +1,7 @@
 <template>
     <div class="demo-robot">
         <DemoHelpBox title="主入口机器人" description="深圳教育项目-主入口机器人" rswidth="806px" rs-height="966px" :code="codeStr0">
-            <LcMainRobot :animate="true"></LcMainRobot>
+            <LcMainRobot :animate="true" :forbidden="true"></LcMainRobot>
         </DemoHelpBox>
         <DemoHelpBox title="机器人图标" description="深圳教育项目-机器人图标" rswidth="1210px" rs-height="auto" :code="code1">
             <div class="size-box">
