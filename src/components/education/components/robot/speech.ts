@@ -1,7 +1,6 @@
 import { ref } from "vue";
 
 const timeoutTime = 2000; // 帮助文本显示时间
-
 export function useSpeech() {
     let isSupport = false;
     // 检查浏览器是否支持 SpeechRecognition
@@ -50,7 +49,7 @@ export function useSpeech() {
         function stop() {
             output.value.starting = false;
             recognition.stop();
-            output.value.helpText = "已停止聆听。";
+            output.value.helpText = "已停止聆听";
             setTimeout(clearHelpText, timeoutTime);
         }
 
