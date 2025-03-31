@@ -1,7 +1,7 @@
 <template>
   <div class="demo-listBox">
     <DemoHelpBox title="listBox" description="列表框" rswidth="962px" :code="code1">
-      <LclistBox :items="dataItems" :rows="dataRows" ></LclistBox>
+      <LclistBox :items="dataItems" :rows="dataRows" :bordered="true" ></LclistBox>
     </DemoHelpBox>
   </div>
 </template>

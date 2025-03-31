@@ -53,7 +53,7 @@
                 </n-space>
             </div>
         </DemoHelpBox>
-        <DemoHelpBox title="副标题" description="基础用法" :code="pageTitle.HeadlineCode" rswidth="1000px">
+        <DemoHelpBox title="副标题" description="基础用法" :code="pageTitle.SubheadCode" rswidth="1000px">
             <div class="text-box">
                 <n-space>
                     <LcSubhead text="福田区学前教育质量监测概况"/>

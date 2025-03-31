@@ -61,11 +61,11 @@ const getKeyCellStyle = (index: number): ColumnStyle => {
   }
   
   if (bordered) {
-    style.borderLeft = '1px solid #ddd'
-    style.borderTop = '1px solid #ddd'
-    style.borderBottom = '1px solid #ddd'
+    style.borderLeft = '1px solid #07467a'
+    style.borderTop = '1px solid #07467a'
+    style.borderBottom = '1px solid #07467a'
     if (index === items.length - 1) {
-      style.borderRight = '1px solid #ddd'
+      style.borderRight = '1px solid #07467a'
     }
   }
   
@@ -82,9 +82,10 @@ const getValueCellStyle = (index: number): ColumnStyle => {
   }
   
   if (bordered) {
-    style.borderTop = '1px solid #ddd'
-    style.borderBottom = '1px solid #ddd'
-    style.borderRight = '1px solid #ddd'
+    style.borderTop = '1px solid #07467A'
+    style.borderBottom = '1px solid #07467A'
+    style.borderRight = '1px solid #07467A'
+    style.borderLeft = '1px solid #07467A'
   }
   
   return style

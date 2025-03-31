@@ -1,26 +1,31 @@
 <template>
   <div class="demo-time">
-      <DemoBox title="sampling" description="基础用法" rswidth="500px" :code="code1">
-          <NSpace :size="150">
-            <LcSampling>
-              <template #left>
-                正常行驶
-              </template>
-              <template #center>
-                报警事件
-              </template>
-              <template #right>
-                预警事件
-              </template>
-            </LcSampling>
-          </NSpace>
-      </DemoBox>
+    <DemoBox title="sampling" description="基础用法" rswidth="500px" :code="code1">
+      <NSpace :size="150">
+        <LcSampling :list>
+        </LcSampling>
+      </NSpace>
+    </DemoBox>
   </div>
 </template>
 <script lang="ts" setup>
 import { DemoBox } from 'lowcode-share/es/demo';
 import { NSpace } from 'naive-ui';
-import  LcSampling  from '@/components/education/components/sampling/sampling.vue';
+import { LcSampling, type LcSamplingRecords } from '@/components/education/components/sampling';
 import { code1 } from './const';
 
+const list: LcSamplingRecords[] = [
+  {
+    icon: 'blue',
+    name: '正常行驶'
+  },
+  {
+    icon: 'yellow',
+    name: '预警事件'
+  },
+  {
+    icon: 'red',
+    name: '疲劳驾驶'
+  },
+]
 </script>
