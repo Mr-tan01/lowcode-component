@@ -1,9 +1,22 @@
 export const code1 = `
 <template>
-    <LcSampling>
-        <template #left>正常行驶</template>
-        <template #center>报警事件</template>
-        <template #right>预警事件</template>
-    </LcSampling>
+    <LcSampling :list>
+        </LcSampling>
 </template>
+<script lang="ts" setup>
+const list: LcSamplingRecords[] = [
+  {
+    icon: 'blue',
+    name: '正常行驶'
+  },
+  {
+    icon: 'yellow',
+    name: '预警事件'
+  },
+  {
+    icon: 'red',
+    name: '疲劳驾驶'
+  },
+]
+</script>
 `;
