@@ -16,14 +16,18 @@ export type Options = {
         [sizeModeEnum.large]: {
             width: string;
             height: string;
+            headerWidth: string;
+
         };
         [sizeModeEnum.medium]: {
             width: string;
             height: string;
+            headerWidth: string;
         };
         [sizeModeEnum.a169]: {
             width: string;
             height: string;
+            headerWidth: string;
         };
     };
     bgImgs: Record<SizeMode, string>;
@@ -33,15 +37,18 @@ export const options: Options = {
     size: {
         [sizeModeEnum.large]: {
             width: '1000px',
-            height: '680px'
+            height: '680px',
+            headerWidth: '401px',
         },
         [sizeModeEnum.medium]: {
             width: '600px',
-            height: '300px'
+            height: '300px',
+            headerWidth: '401px',
         },
         [sizeModeEnum.a169]: {
             width: '1520px',
-            height: '683px'
+            height: '683px',
+            headerWidth: '450px',
         }
     },
     sizeMode: sizeModeEnum.custom,

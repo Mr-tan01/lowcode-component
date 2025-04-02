@@ -1,34 +1,37 @@
-import e from "./images/large-bg.png.js";
+import m from "./images/large-bg.png.js";
 import i from "./images/16x9.png.js";
-const m = {
+const e = {
   large: "large",
   medium: "medium",
   custom: "custom",
   a169: "a169"
-}, g = {
+}, h = {
   size: {
-    [m.large]: {
+    [e.large]: {
       width: "1000px",
-      height: "680px"
+      height: "680px",
+      headerWidth: "401px"
     },
-    [m.medium]: {
+    [e.medium]: {
       width: "600px",
-      height: "300px"
+      height: "300px",
+      headerWidth: "401px"
     },
-    [m.a169]: {
+    [e.a169]: {
       width: "1520px",
-      height: "683px"
+      height: "683px",
+      headerWidth: "450px"
     }
   },
-  sizeMode: m.custom,
+  sizeMode: e.custom,
   bgImgs: {
-    [m.large]: e,
-    [m.medium]: e,
-    [m.a169]: i,
-    custom: e
+    [e.large]: m,
+    [e.medium]: m,
+    [e.a169]: i,
+    custom: m
   }
 };
 export {
-  g as options,
-  m as sizeModeEnum
+  h as options,
+  e as sizeModeEnum
 };
