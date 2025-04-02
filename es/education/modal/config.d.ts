@@ -12,14 +12,17 @@ export type Options = {
         [sizeModeEnum.large]: {
             width: string;
             height: string;
+            headerWidth: string;
         };
         [sizeModeEnum.medium]: {
             width: string;
             height: string;
+            headerWidth: string;
         };
         [sizeModeEnum.a169]: {
             width: string;
             height: string;
+            headerWidth: string;
         };
     };
     bgImgs: Record<SizeMode, string>;

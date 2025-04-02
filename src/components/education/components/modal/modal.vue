@@ -74,6 +74,7 @@ const layoutStyle = computed(() => {
         '--modal-width': width || getModalSize(sizeMode).value.width,
         '--modal-height': height || getModalSize(sizeMode).value.height,
         '--modal-bg': backgroundImage.value,
+        '--header-width': getModalSize(sizeMode).value.headerWidth,
     };
 });
 
@@ -94,7 +95,7 @@ function close() {
     position: relative;
 
     &__header {
-        width: 401px;
+        width: var(--header-width);
         height: 35px;
         position: absolute;
         top: -5px;
