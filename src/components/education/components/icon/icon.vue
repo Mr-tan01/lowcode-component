@@ -1,14 +1,21 @@
 <template>
-    <div class="lc-icon" :style="{
-        '--img-src': `url(${src})`,
-        '--img-selected-src': `url(${selectedSrc})`,
-    }" :class="{ 
-        'lc-icon--selected': selected,
-         }">
-        <div class="lc-icon__image" :class="{
-            'lc-icon__image--enhover': !!selectedSrc,
-        }">
-            <img class="lc-icon__img" :src="src" draggable="false" alt="">
+    <div
+        class="lc-icon"
+        :style="{
+            '--img-src': `url(${src})`,
+            '--img-selected-src': `url(${selectedSrc})`,
+        }"
+        :class="{
+            'lc-icon--selected': selected,
+        }"
+    >
+        <div
+            class="lc-icon__image"
+            :class="{
+                'lc-icon__image--enhover': !!selectedSrc,
+            }"
+        >
+            <img class="lc-icon__img" :src="src" draggable="false" alt="" />
         </div>
         <span class="lc-icon__span">
             <slot></slot>
@@ -17,34 +24,34 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, PropType } from 'vue';
-import { NameTypeFunc, useImage, type Domains, type NameTypes } from './icons';
-
-const {
-    domain = 'func',
-    name = 'add',
-    size = 16,
-    ext = '.png',
-    selected = void 0,
-} = defineProps({
-    domain: {
-        type: String as PropType<Domains>,
-    },
-    name: {
-        type: String as PropType<NameTypes>,
-    },
-    size: {
-        type: [Number, String] as PropType<number | string>,
-    },
-    ext: {
-        type: String as PropType<'.png'>,
-    },
-    selected: {
-        type: Boolean,
+import { computed, Ref, toRefs } from "vue";
+import { NameTypeFunc, useImage, type Domains, type NameTypes } from "./icons";
+const props = withDefaults(
+    defineProps<{
+        domain?: Domains;
+        name?: NameTypes;
+        size?: number | string;
+        ext?: string;
+        selected?: boolean;
+    }>(),
+    {
+        domain: "func",
+        name: "add",
+        size: 16,
+        ext: ".png",
+        selected: void 0,
     }
-});
-const { src, selectedSrc } = useImage(domain as Domains, name as NameTypeFunc<Domains>, ext);
-const iconWidth = computed(() => typeof size === 'number' ? `${size}px` : size);
+);
+
+const { domain, name, size, ext, selected } = toRefs(props);
+const { src, selectedSrc } = useImage(
+    domain as Ref<Domains>,
+    name as Ref<NameTypeFunc<Domains>>,
+    ext
+);
+const iconWidth = computed(() =>
+    typeof size === "number" ? `${size}px` : size
+);
 </script>
 
 <style lang="scss" scoped>
