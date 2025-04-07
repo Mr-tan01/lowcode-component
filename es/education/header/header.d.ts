@@ -29,11 +29,19 @@ declare const __VLS_component: import('vue').DefineComponent<__VLS_PublicProps, 
     "update:index": (value: number) => any;
 } & {
     scroll: (data: LcCarouseBoxChangeEvent) => any;
-    jump: (parent: ListRaw | null, item: NavData, i: number) => any;
+    jump: (jumpParams: {
+        parent: ListRaw | null;
+        item: NavData;
+        index: number;
+    }) => any;
 }, string, import('vue').PublicProps, Readonly<__VLS_PublicProps> & Readonly<{
     "onUpdate:index"?: ((value: number) => any) | undefined;
     onScroll?: ((data: LcCarouseBoxChangeEvent) => any) | undefined;
-    onJump?: ((parent: ListRaw | null, item: NavData, i: number) => any) | undefined;
+    onJump?: ((jumpParams: {
+        parent: ListRaw | null;
+        item: NavData;
+        index: number;
+    }) => any) | undefined;
 }>, {}, {}, {}, {}, string, import('vue').ComponentProvideOptions, false, {}, HTMLDivElement>;
 declare const _default: __VLS_WithTemplateSlots<typeof __VLS_component, __VLS_TemplateResult["slots"]>;
 export default _default;

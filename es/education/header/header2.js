@@ -18,7 +18,7 @@ const z = { class: "lcc-header" }, F = { class: "lcc-header__prefix-slot" }, I =
   setup(l, { emit: k }) {
     const p = y(l, "index"), $ = M(() => l.navDatas === void 0 ? [] : l.navDatas), u = k;
     function v(_, r, o) {
-      u("jump", _, r, o);
+      u("jump", { parent: _, item: r, index: o });
     }
     function B(_) {
       u("scroll", _);

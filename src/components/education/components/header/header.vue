@@ -84,12 +84,12 @@ const listSource = computed(() => {
 });
 
 const $emit = defineEmits<{
-    (e: 'jump', parent: ListRaw | null, item: NavData, i: number): void;
+    (e: 'jump', jumpParams:{parent: ListRaw | null, item: NavData, index: number}): void;
     (e: 'scroll', data: LcCarouseBoxChangeEvent): void;
 }>();
 
 function jump(parent: ListRaw | null, item: NavData, i: number) {
-    $emit('jump', parent, item, i);
+    $emit("jump", { parent, item, index: i });
 }
 
 function carouseChange(value: LcCarouseBoxChangeEvent) {
@@ -238,6 +238,7 @@ function carouseChange(value: LcCarouseBoxChangeEvent) {
                 padding: 15px 30px;
                 box-sizing: border-box;
                 border-radius: 8px;
+                cursor: pointer;
 
                 &::before {
                     content: '';
