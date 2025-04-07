@@ -53,7 +53,7 @@ export const HeadlineCode = `
 export const SubheadCode = `
 <template>
     <LcSubhead text="福田区学前教育质量监测概况"/>
-    <LcSubhead text="文字最多15个字符标题文字最多十五个字符标题文字最多十二个字符"/>
+    <LcSubhead :font-size="'20px'" :reverseOrder="true" text="文字最多15个字符标题文字最多十五个字符标题文字最多十二个字符"/>
     <LcRadiohead domain="event" name="person" :size="56" text="师生师生比师生比师生比师生比师生比师生比师生比师生比师生比师生比师生比师生比师生比师生比师生比师生比比"/>
 </template>
 `;

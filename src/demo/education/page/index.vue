@@ -90,6 +90,7 @@
                     <LcSubhead
                         text="文字最多15个字符标题文字最多十五个字符标题文字最多十二个字符"
                         :font-size="'20px'"
+                        :reverseOrder="true"
                     />
                 </n-space>
             </div>
