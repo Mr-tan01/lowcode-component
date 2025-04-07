@@ -1,12 +1,18 @@
 <template>
     <div class="lc-subhead">
-        <div class="lc-subhead__imglft lc-subhead__img">
+        <div v-if="!reverseOrder" class="lc-subhead__imglft lc-subhead__img">
             <img src="./images/subhead-lft.png" alt="">
+        </div>
+        <div v-else class="lc-subhead__imgrgt lc-subhead__img">
+            <img src="./images/subhead-rgt.png" alt="">
         </div>
         <div class="lc-subhead__text" :title="text">
             {{ formatedText }}
         </div>
-        <div class="lc-subhead__imgrgt lc-subhead__img">
+        <div v-if="reverseOrder" class="lc-subhead__imglft lc-subhead__img">
+            <img src="./images/subhead-lft.png" alt="">
+        </div>
+        <div v-else class="lc-subhead__imgrgt lc-subhead__img">
             <img src="./images/subhead-rgt.png" alt="">
         </div>
     </div>
@@ -19,6 +25,7 @@ const {
     text = '',
     maxLength = 15,
     fontSize = '16px',
+    reverseOrder = false,
 } = defineProps({
     text: {
         type: String,
@@ -28,6 +35,9 @@ const {
     },
     fontSize: {
         type: String,
+    },
+    reverseOrder: {
+        type: Boolean,
     },
 });
 const formatedText = computed(() => {

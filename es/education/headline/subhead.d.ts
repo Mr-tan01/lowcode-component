@@ -8,6 +8,9 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
     fontSize: {
         type: StringConstructor;
     };
+    reverseOrder: {
+        type: BooleanConstructor;
+    };
 }>, {}, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
     text: {
         type: StringConstructor;
@@ -18,5 +21,10 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
     fontSize: {
         type: StringConstructor;
     };
-}>> & Readonly<{}>, {}, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, HTMLDivElement>;
+    reverseOrder: {
+        type: BooleanConstructor;
+    };
+}>> & Readonly<{}>, {
+    reverseOrder: boolean;
+}, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, HTMLDivElement>;
 export default _default;
