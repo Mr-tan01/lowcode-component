@@ -1,41 +1,49 @@
 <template>
     <div class="lcc-header">
         <div class="lcc-header__prefix-slot">
-            <slot name="prefix">
-            </slot>
+            <slot name="prefix"> </slot>
         </div>
         <div class="lcc-header__wrapper">
-
             <div class="lcc-header__wrapper__navs">
-                <LcCarouseBox :disabled="hideArrow" :list="listSource" :show-track="false" v-model:index="modelIndex"
-                    @change="carouseChange">
-                    <template #default="{ index, record, isActive }">
-                        <div class="lcc-header__wrapper__navs__item" :class="{
-                            'active': isActive,
-                        }">
+                <LcCarouseBox :disabled="hideArrow" :list="listSource" :show-track="false" v-model:index="modelIndex" @change="carouseChange">
+                    <template #default="{ index, record, isActive, handleClick }">
+                        <div
+                            class="lcc-header__wrapper__navs__item"
+                            :class="{
+                                active: isActive,
+                            }"
+                        >
                             <n-popover trigger="hover" arrow-class="header-arrow-class" class="header-popover-class">
                                 <template #trigger>
-                                    <a class="lcc-header__wrapper__navs__item__link"
-                                        @click="jump(null, record as NavData, index)">
+                                    <a
+                                        class="lcc-header__wrapper__navs__item__link"
+                                        @click="
+                                            jump({
+                                                item: record as NavData,
+                                                index,
+                                            })
+                                        "
+                                    >
                                         {{ record.label }}
                                     </a>
                                 </template>
                                 <div class="lcc-header__wrapper__navs__drop" v-if="record.list?.length">
-                                    <div class="lcc-header__wrapper__navs__drop__group" v-for="(el, key) in record.list"
-                                        :key>
+                                    <div class="lcc-header__wrapper__navs__drop__group" v-for="(el, key) in record.list" :key>
                                         <div class="lcc-header__wrapper__navs__drop__group__label">
                                             <div class="lcc-header__wrapper__navs__drop__group__label--icon">
-                                                <img class="lcc-header__wrapper__navs__drop__group__label--icon--image"
-                                                    src="./images/right-arrow.png" alt="">
+                                                <img class="lcc-header__wrapper__navs__drop__group__label--icon--image" src="./images/right-arrow.png" alt="" />
                                             </div>
                                             <div class="lcc-header__wrapper__navs__drop__group__label--text">
                                                 {{ el.label }}
                                             </div>
                                         </div>
                                         <div class="lcc-header__wrapper__navs__drop__group__item__group">
-                                            <div class="lcc-header__wrapper__navs__drop__group__item__group__nav"
-                                                v-for="(child, ckey) in el.children" :key="ckey"
-                                                @click="jump(el, child, ckey)">
+                                            <div
+                                                class="lcc-header__wrapper__navs__drop__group__item__group__nav"
+                                                v-for="(child, ckey) in el.children"
+                                                :key="ckey"
+                                                @click="jump({ parent: el, item: child, index, handleClick })"
+                                            >
                                                 {{ child.label }}
                                             </div>
                                         </div>
@@ -46,56 +54,57 @@
                     </template>
                 </LcCarouseBox>
             </div>
-
         </div>
         <div class="lcc-header__suffix-slot">
-            <slot name="suffix">
-            </slot>
+            <slot name="suffix"> </slot>
         </div>
     </div>
 </template>
 
 <script lang="ts" setup>
-import { computed } from 'vue';
-import { NPopover } from 'naive-ui/es/popover';
-import { LcCarouseBox, type LcCarouseBoxChangeEvent, } from '@/components/education/components/carouseBox';
+import { computed } from "vue";
+import { NPopover } from "naive-ui/es/popover";
+import { LcCarouseBox, type LcCarouseBoxChangeEvent } from "@/components/education/components/carouseBox";
 
 type ListRaw = {
     label: string;
     children: NavData[];
-}
+};
 export type NavData = {
     label: string;
     path: string;
     list?: ListRaw[];
 };
 
-const {
-    navDatas,
-    hideArrow,
-} = defineProps<{
+export type jumpParams = {
+    parent?: ListRaw | null;
+    item: NavData;
+    index: number;
+    handleClick?: (item: ListRaw, index: number) => void;
+};
+const { navDatas, hideArrow } = defineProps<{
     navDatas?: NavData[];
     hideArrow?: boolean;
 }>();
 
-const modelIndex = defineModel<number>('index', { default: 0, });
+const modelIndex = defineModel<number>("index", { default: 0 });
 const listSource = computed(() => {
     return navDatas === void 0 ? [] : navDatas;
 });
 
 const $emit = defineEmits<{
-    (e: 'jump', jumpParams:{parent: ListRaw | null, item: NavData, index: number}): void;
-    (e: 'scroll', data: LcCarouseBoxChangeEvent): void;
+    (e: "jump", jumpParams: jumpParams): void;
+    (e: "scroll", data: LcCarouseBoxChangeEvent): void;
 }>();
 
-function jump(parent: ListRaw | null, item: NavData, i: number) {
-    $emit("jump", { parent, item, index: i });
+function jump({ parent, item, index, handleClick }: jumpParams) {
+    parent && !hideArrow && handleClick?.(parent, index);
+    $emit("jump", { parent, item, index });
 }
 
 function carouseChange(value: LcCarouseBoxChangeEvent) {
-    $emit('scroll', value);
+    $emit("scroll", value);
 }
-
 </script>
 
 <style lang="scss">
@@ -105,7 +114,6 @@ function carouseChange(value: LcCarouseBoxChangeEvent) {
 
     .n-popover-arrow-wrapper {
         overflow: visible;
-
     }
 
     .header-arrow-class {
@@ -191,8 +199,8 @@ function carouseChange(value: LcCarouseBoxChangeEvent) {
                     color: #fff;
 
                     &::before {
-                        content: '';
-                        background: url('./images/focus-point-light.png') no-repeat;
+                        content: "";
+                        background: url("./images/focus-point-light.png") no-repeat;
                         background-size: 100% 100%;
                         width: 100%;
                         height: 100%;
@@ -212,7 +220,6 @@ function carouseChange(value: LcCarouseBoxChangeEvent) {
                             display: block;
                         }
                     }
-
                 }
 
                 &.active {
@@ -231,7 +238,7 @@ function carouseChange(value: LcCarouseBoxChangeEvent) {
                 width: 100%;
                 display: flex;
                 gap: 40px;
-                background: linear-gradient(174deg, #123479 0%, #0B2952 66%, #10507D 100%);
+                background: linear-gradient(174deg, #123479 0%, #0b2952 66%, #10507d 100%);
                 box-shadow: 0px 20px 20px -10px rgba(0, 0, 0, 0.31);
                 border-radius: 8px;
                 border: 1px solid #207097;
@@ -241,7 +248,7 @@ function carouseChange(value: LcCarouseBoxChangeEvent) {
                 cursor: pointer;
 
                 &::before {
-                    content: '';
+                    content: "";
                     position: absolute;
                     top: calc(var(--offsetY) * -1);
                     left: 0;
@@ -273,7 +280,7 @@ function carouseChange(value: LcCarouseBoxChangeEvent) {
                         &--text {
                             font-family: HarmonyOS_Sans_SC_Bold;
                             font-size: 16px;
-                            color: #F2F3F4;
+                            color: #f2f3f4;
                             line-height: 24px;
                             text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.5);
                             text-align: left;
@@ -290,7 +297,7 @@ function carouseChange(value: LcCarouseBoxChangeEvent) {
                         &__nav {
                             font-family: HarmonyOS_Sans_SC_Medium;
                             font-size: 16px;
-                            color: #F2F3F4;
+                            color: #f2f3f4;
                             line-height: 24px;
                             text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.5);
                             text-align: left;
@@ -301,7 +308,6 @@ function carouseChange(value: LcCarouseBoxChangeEvent) {
                             &:hover {
                                 color: rgba(15, 251, 248, 1);
                             }
-
                         }
                     }
                 }

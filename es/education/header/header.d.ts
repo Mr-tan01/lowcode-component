@@ -8,12 +8,18 @@ export type NavData = {
     path: string;
     list?: ListRaw[];
 };
+export type jumpParams = {
+    parent?: ListRaw | null;
+    item: NavData;
+    index: number;
+    handleClick?: (item: ListRaw, index: number) => void;
+};
 type __VLS_Props = {
     navDatas?: NavData[];
     hideArrow?: boolean;
 };
 type __VLS_PublicProps = {
-    'index'?: number;
+    "index"?: number;
 } & __VLS_Props;
 declare function __VLS_template(): {
     attrs: Partial<{}>;
@@ -29,19 +35,11 @@ declare const __VLS_component: import('vue').DefineComponent<__VLS_PublicProps, 
     "update:index": (value: number) => any;
 } & {
     scroll: (data: LcCarouseBoxChangeEvent) => any;
-    jump: (jumpParams: {
-        parent: ListRaw | null;
-        item: NavData;
-        index: number;
-    }) => any;
+    jump: (jumpParams: jumpParams) => any;
 }, string, import('vue').PublicProps, Readonly<__VLS_PublicProps> & Readonly<{
     "onUpdate:index"?: ((value: number) => any) | undefined;
     onScroll?: ((data: LcCarouseBoxChangeEvent) => any) | undefined;
-    onJump?: ((jumpParams: {
-        parent: ListRaw | null;
-        item: NavData;
-        index: number;
-    }) => any) | undefined;
+    onJump?: ((jumpParams: jumpParams) => any) | undefined;
 }>, {}, {}, {}, {}, string, import('vue').ComponentProvideOptions, false, {}, HTMLDivElement>;
 declare const _default: __VLS_WithTemplateSlots<typeof __VLS_component, __VLS_TemplateResult["slots"]>;
 export default _default;
