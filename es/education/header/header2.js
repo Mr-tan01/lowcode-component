@@ -1,84 +1,87 @@
-import { defineComponent as j, mergeModels as f, useModel as y, computed as M, openBlock as s, createElementBlock as a, createElementVNode as e, renderSlot as g, createVNode as w, unref as x, withCtx as i, normalizeClass as S, toDisplayString as c, Fragment as C, renderList as b, createCommentVNode as V } from "vue";
-import A from "./images/right-arrow.png.js";
-import { NPopover as E } from "naive-ui/es/popover";
-import L from "./carouseBox/index.js";
-const z = { class: "lcc-header" }, F = { class: "lcc-header__prefix-slot" }, I = { class: "lcc-header__wrapper" }, P = { class: "lcc-header__wrapper__navs" }, U = ["onClick"], q = {
+import { defineComponent as j, mergeModels as h, useModel as A, computed as M, openBlock as o, createElementBlock as t, createElementVNode as e, renderSlot as f, createVNode as g, unref as w, withCtx as n, normalizeClass as S, toDisplayString as c, Fragment as x, renderList as b, createCommentVNode as V } from "vue";
+import E from "./images/right-arrow.png.js";
+import { NPopover as L } from "naive-ui/es/popover";
+import z from "./carouseBox/index.js";
+const F = { class: "lcc-header" }, I = { class: "lcc-header__prefix-slot" }, P = { class: "lcc-header__wrapper" }, U = { class: "lcc-header__wrapper__navs" }, q = ["onClick"], G = {
   key: 0,
   class: "lcc-header__wrapper__navs__drop"
-}, G = { class: "lcc-header__wrapper__navs__drop__group__label" }, H = { class: "lcc-header__wrapper__navs__drop__group__label--text" }, J = { class: "lcc-header__wrapper__navs__drop__group__item__group" }, K = ["onClick"], O = { class: "lcc-header__suffix-slot" }, Y = /* @__PURE__ */ j({
+}, H = { class: "lcc-header__wrapper__navs__drop__group__label" }, J = { class: "lcc-header__wrapper__navs__drop__group__label--text" }, K = { class: "lcc-header__wrapper__navs__drop__group__item__group" }, O = ["onClick"], Q = { class: "lcc-header__suffix-slot" }, Z = /* @__PURE__ */ j({
   __name: "header",
-  props: /* @__PURE__ */ f({
+  props: /* @__PURE__ */ h({
     navDatas: {},
     hideArrow: { type: Boolean }
   }, {
     index: { default: 0 },
     indexModifiers: {}
   }),
-  emits: /* @__PURE__ */ f(["jump", "scroll"], ["update:index"]),
-  setup(l, { emit: k }) {
-    const p = y(l, "index"), $ = M(() => l.navDatas === void 0 ? [] : l.navDatas), u = k;
-    function v(_, r, o) {
-      u("jump", { parent: _, item: r, index: o });
+  emits: /* @__PURE__ */ h(["jump", "scroll"], ["update:index"]),
+  setup(l, { emit: C }) {
+    const p = A(l, "index"), k = M(() => l.navDatas === void 0 ? [] : l.navDatas), u = C;
+    function v({ parent: _, item: a, index: s, handleClick: r }) {
+      _ && !l.hideArrow && (r == null || r(_, s)), u("jump", { parent: _, item: a, index: s });
     }
-    function B(_) {
+    function $(_) {
       u("scroll", _);
     }
-    return (_, r) => (s(), a("div", z, [
-      e("div", F, [
-        g(_.$slots, "prefix", {}, void 0, !0)
-      ]),
+    return (_, a) => (o(), t("div", F, [
       e("div", I, [
-        e("div", P, [
-          w(x(L), {
+        f(_.$slots, "prefix", {}, void 0, !0)
+      ]),
+      e("div", P, [
+        e("div", U, [
+          g(w(z), {
             disabled: _.hideArrow,
-            list: $.value,
+            list: k.value,
             "show-track": !1,
             index: p.value,
-            "onUpdate:index": r[0] || (r[0] = (o) => p.value = o),
-            onChange: B
+            "onUpdate:index": a[0] || (a[0] = (s) => p.value = s),
+            onChange: $
           }, {
-            default: i(({ index: o, record: t, isActive: D }) => [
+            default: n(({ index: s, record: r, isActive: y, handleClick: B }) => [
               e(
                 "div",
                 {
                   class: S(["lcc-header__wrapper__navs__item", {
-                    active: D
+                    active: y
                   }])
                 },
                 [
-                  w(
-                    x(E),
+                  g(
+                    w(L),
                     {
                       trigger: "hover",
                       "arrow-class": "header-arrow-class",
                       class: "header-popover-class"
                     },
                     {
-                      trigger: i(() => [
+                      trigger: n(() => [
                         e("a", {
                           class: "lcc-header__wrapper__navs__item__link",
-                          onClick: (n) => v(null, t, o)
-                        }, c(t.label), 9, U)
+                          onClick: (i) => v({
+                            item: r,
+                            index: s
+                          })
+                        }, c(r.label), 9, q)
                       ]),
-                      default: i(() => {
-                        var n;
+                      default: n(() => {
+                        var i;
                         return [
-                          (n = t.list) != null && n.length ? (s(), a("div", q, [
-                            (s(!0), a(
-                              C,
+                          (i = r.list) != null && i.length ? (o(), t("div", G, [
+                            (o(!0), t(
+                              x,
                               null,
-                              b(t.list, (d, N) => (s(), a("div", {
+                              b(r.list, (d, D) => (o(), t("div", {
                                 class: "lcc-header__wrapper__navs__drop__group",
-                                key: N
+                                key: D
                               }, [
-                                e("div", G, [
-                                  r[1] || (r[1] = e(
+                                e("div", H, [
+                                  a[1] || (a[1] = e(
                                     "div",
                                     { class: "lcc-header__wrapper__navs__drop__group__label--icon" },
                                     [
                                       e("img", {
                                         class: "lcc-header__wrapper__navs__drop__group__label--icon--image",
-                                        src: A,
+                                        src: E,
                                         alt: ""
                                       })
                                     ],
@@ -87,21 +90,21 @@ const z = { class: "lcc-header" }, F = { class: "lcc-header__prefix-slot" }, I =
                                   )),
                                   e(
                                     "div",
-                                    H,
+                                    J,
                                     c(d.label),
                                     1
                                     /* TEXT */
                                   )
                                 ]),
-                                e("div", J, [
-                                  (s(!0), a(
-                                    C,
+                                e("div", K, [
+                                  (o(!0), t(
+                                    x,
                                     null,
-                                    b(d.children, (h, m) => (s(), a("div", {
+                                    b(d.children, (m, N) => (o(), t("div", {
                                       class: "lcc-header__wrapper__navs__drop__group__item__group__nav",
-                                      key: m,
-                                      onClick: (Q) => v(d, h, m)
-                                    }, c(h.label), 9, K))),
+                                      key: N,
+                                      onClick: (R) => v({ parent: d, item: m, index: s, handleClick: B })
+                                    }, c(m.label), 9, O))),
                                     128
                                     /* KEYED_FRAGMENT */
                                   ))
@@ -129,12 +132,12 @@ const z = { class: "lcc-header" }, F = { class: "lcc-header__prefix-slot" }, I =
           }, 8, ["disabled", "list", "index"])
         ])
       ]),
-      e("div", O, [
-        g(_.$slots, "suffix", {}, void 0, !0)
+      e("div", Q, [
+        f(_.$slots, "suffix", {}, void 0, !0)
       ])
     ]));
   }
 });
 export {
-  Y as default
+  Z as default
 };

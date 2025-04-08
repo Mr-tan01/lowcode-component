@@ -9,6 +9,7 @@ declare function __VLS_template(): {
             isEven: boolean;
             isTransition: boolean;
             index: number;
+            handleClick: (_item: TabListRaw, index: number) => void;
         }): any;
         track?(_: {}): any;
     };
