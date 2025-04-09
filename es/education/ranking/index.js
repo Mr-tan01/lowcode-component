@@ -1,4 +1,6 @@
-import { default as f } from "./ranking.js";
+import { default as e } from "./ranking.js";
+import { default as f } from "./progress.js";
 export {
-  f as LcRanking
+  f as LcProgress,
+  e as LcRanking
 };
