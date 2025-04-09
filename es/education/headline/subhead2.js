@@ -1,20 +1,20 @@
-import { defineComponent as d, mergeDefaults as a, useCssVars as u, computed as _, openBlock as s, createElementBlock as r, createElementVNode as l, toDisplayString as c } from "vue";
-import i from "./images/subhead-lft.png.js";
-import o from "./images/subhead-rgt.png.js";
-import { overflowStr as g } from "lowcode-share/es/share";
-const f = { class: "lc-subhead" }, h = {
+import { defineComponent as n, mergeDefaults as a, useCssVars as u, computed as g, openBlock as s, createElementBlock as r, Fragment as c, createElementVNode as i, createCommentVNode as f, toDisplayString as _ } from "vue";
+import l from "./images/subhead-lft.png.js";
+import m from "./images/subhead-rgt.png.js";
+import { overflowStr as h } from "lowcode-share/es/share";
+const b = { class: "lc-subhead" }, v = {
   key: 0,
   class: "lc-subhead__imglft lc-subhead__img"
 }, x = {
   key: 1,
   class: "lc-subhead__imgrgt lc-subhead__img"
-}, b = ["title"], v = {
-  key: 2,
+}, y = ["title"], p = {
+  key: 1,
   class: "lc-subhead__imglft lc-subhead__img"
-}, p = {
-  key: 3,
+}, k = {
+  key: 2,
   class: "lc-subhead__imgrgt lc-subhead__img"
-}, z = /* @__PURE__ */ d({
+}, z = /* @__PURE__ */ n({
   __name: "subhead",
   props: /* @__PURE__ */ a({
     text: {
@@ -28,62 +28,74 @@ const f = { class: "lc-subhead" }, h = {
     },
     reverseOrder: {
       type: Boolean
+    },
+    hideLeftImg: {
+      type: Boolean
     }
   }, {
     text: "",
     maxLength: 15,
     fontSize: "16px",
-    reverseOrder: !1
+    reverseOrder: !1,
+    hideLeftImg: !0
   }),
   setup(t) {
-    u((n) => ({
-      46952955: t.fontSize
+    u((d) => ({
+      f6bfd678: t.fontSize
     }));
-    const m = _(() => g(t.text, t.maxLength));
-    return (n, e) => (s(), r("div", f, [
-      t.reverseOrder ? (s(), r("div", x, e[1] || (e[1] = [
-        l(
-          "img",
-          {
-            src: o,
-            alt: ""
-          },
-          null,
-          -1
-          /* HOISTED */
-        )
-      ]))) : (s(), r("div", h, e[0] || (e[0] = [
-        l(
-          "img",
-          {
-            src: i,
-            alt: ""
-          },
-          null,
-          -1
-          /* HOISTED */
-        )
-      ]))),
-      l("div", {
+    const o = g(() => h(t.text, t.maxLength));
+    return (d, e) => (s(), r("div", b, [
+      t.hideLeftImg ? (s(), r(
+        c,
+        { key: 0 },
+        [
+          t.reverseOrder ? (s(), r("div", x, e[1] || (e[1] = [
+            i(
+              "img",
+              {
+                src: m,
+                alt: ""
+              },
+              null,
+              -1
+              /* HOISTED */
+            )
+          ]))) : (s(), r("div", v, e[0] || (e[0] = [
+            i(
+              "img",
+              {
+                src: l,
+                alt: ""
+              },
+              null,
+              -1
+              /* HOISTED */
+            )
+          ])))
+        ],
+        64
+        /* STABLE_FRAGMENT */
+      )) : f("v-if", !0),
+      i("div", {
         class: "lc-subhead__text",
         title: t.text
-      }, c(m.value), 9, b),
-      t.reverseOrder ? (s(), r("div", v, e[2] || (e[2] = [
-        l(
+      }, _(o.value), 9, y),
+      t.reverseOrder ? (s(), r("div", p, e[2] || (e[2] = [
+        i(
           "img",
           {
-            src: i,
+            src: l,
             alt: ""
           },
           null,
           -1
           /* HOISTED */
         )
-      ]))) : (s(), r("div", p, e[3] || (e[3] = [
-        l(
+      ]))) : (s(), r("div", k, e[3] || (e[3] = [
+        i(
           "img",
           {
-            src: o,
+            src: m,
             alt: ""
           },
           null,
