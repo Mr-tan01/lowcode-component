@@ -1,0 +1,28 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+# 检查 commit message 是否符合规范的格式
+
+# 提供 commit-msg 文件的路径作为参数
+COMMIT_MSG_FILE=$1
+
+# 定义 commit message 的正则表达式规则
+COMMIT_MSG_PATTERN="^(feat|fix|chore)(\(.+\)): .{1,100}"
+
+# 读取 commit message 文件的内容
+COMMIT_MSG=$(cat "$COMMIT_MSG_FILE")
+
+# 使用正则表达式匹配 commit message
+if ! echo "$COMMIT_MSG" | grep -E -q "$COMMIT_MSG_PATTERN"; then
+  echo "❌ 提交失败！commit message 不符合规范，请修改后重试"
+  echo "--------------------------------------------------------"
+  echo "💡 提交规范："
+  echo " type(scoped): xxxxxx"
+  echo " type为feat | fix | chore, scope表示你修改了那个组件库, xxx表示你本次改动做了什么功能或修改了什么bug"
+  echo " 注意冒号后面有个空格"
+  echo "--------------------------------------------------------"
+  exit 1
+fi
+
+# 如果 commit message 符合规范的格式，脚本返回 0 作为成功的退出码
+exit 0
