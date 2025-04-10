@@ -1,22 +1,23 @@
-import { defineComponent as n, mergeDefaults as a, useCssVars as u, computed as g, openBlock as s, createElementBlock as r, Fragment as c, createElementVNode as i, createCommentVNode as f, toDisplayString as _ } from "vue";
-import l from "./images/subhead-lft.png.js";
-import m from "./images/subhead-rgt.png.js";
-import { overflowStr as h } from "lowcode-share/es/share";
-const b = { class: "lc-subhead" }, v = {
+import { defineComponent as a, mergeDefaults as c, useCssVars as u, computed as f, openBlock as l, createElementBlock as o, createElementVNode as n, createCommentVNode as s, toDisplayString as g } from "vue";
+import r from "./images/subhead-lft.png.js";
+import h from "./images/subhead-rgt.png.js";
+import y from "./images/subhead-lgt.png.js";
+import { overflowStr as b } from "lowcode-share/es/share";
+const x = { class: "lc-subhead" }, _ = {
   key: 0,
   class: "lc-subhead__imglft lc-subhead__img"
-}, x = {
+}, v = {
   key: 1,
-  class: "lc-subhead__imgrgt lc-subhead__img"
-}, y = ["title"], p = {
-  key: 1,
-  class: "lc-subhead__imglft lc-subhead__img"
-}, k = {
+  class: "lc-subhead__imglgt lc-subhead__img"
+}, p = ["title"], S = {
   key: 2,
+  class: "lc-subhead__imgrft lc-subhead__img"
+}, k = {
+  key: 3,
   class: "lc-subhead__imgrgt lc-subhead__img"
-}, z = /* @__PURE__ */ n({
+}, L = /* @__PURE__ */ a({
   __name: "subhead",
-  props: /* @__PURE__ */ a({
+  props: /* @__PURE__ */ c({
     text: {
       type: String
     },
@@ -26,86 +27,84 @@ const b = { class: "lc-subhead" }, v = {
     fontSize: {
       type: String
     },
-    reverseOrder: {
-      type: Boolean
+    type: {
+      type: String
     },
-    hideLeftImg: {
+    hideRadioIcon: {
       type: Boolean
     }
   }, {
     text: "",
     maxLength: 15,
     fontSize: "16px",
-    reverseOrder: !1,
-    hideLeftImg: !0
+    type: "left",
+    hideRadioIcon: !1
   }),
   setup(t) {
     u((d) => ({
-      f6bfd678: t.fontSize
+      "48b25678": t.fontSize
     }));
-    const o = g(() => h(t.text, t.maxLength));
-    return (d, e) => (s(), r("div", b, [
-      t.hideLeftImg ? (s(), r(
-        c,
-        { key: 0 },
-        [
-          t.reverseOrder ? (s(), r("div", x, e[1] || (e[1] = [
-            i(
-              "img",
-              {
-                src: m,
-                alt: ""
-              },
-              null,
-              -1
-              /* HOISTED */
-            )
-          ]))) : (s(), r("div", v, e[0] || (e[0] = [
-            i(
-              "img",
-              {
-                src: l,
-                alt: ""
-              },
-              null,
-              -1
-              /* HOISTED */
-            )
-          ])))
-        ],
-        64
-        /* STABLE_FRAGMENT */
-      )) : f("v-if", !0),
-      i("div", {
+    const i = {
+      right: "right",
+      center: "center",
+      left: "left"
+    }, m = f(() => b(t.text, t.maxLength));
+    return (d, e) => (l(), o("div", x, [
+      t.type === i.left && !t.hideRadioIcon ? (l(), o("div", _, e[0] || (e[0] = [
+        n(
+          "img",
+          {
+            src: r,
+            alt: ""
+          },
+          null,
+          -1
+          /* HOISTED */
+        )
+      ]))) : s("v-if", !0),
+      t.type === i.right || t.type === i.center ? (l(), o("div", v, e[1] || (e[1] = [
+        n(
+          "img",
+          {
+            src: h,
+            alt: ""
+          },
+          null,
+          -1
+          /* HOISTED */
+        )
+      ]))) : s("v-if", !0),
+      n("div", {
         class: "lc-subhead__text",
         title: t.text
-      }, _(o.value), 9, y),
-      t.reverseOrder ? (s(), r("div", p, e[2] || (e[2] = [
-        i(
+      }, g(m.value), 9, p),
+      t.type === i.right && !t.hideRadioIcon ? (l(), o("div", S, e[2] || (e[2] = [
+        n(
           "img",
           {
-            src: l,
+            src: r,
             alt: ""
           },
           null,
           -1
           /* HOISTED */
         )
-      ]))) : (s(), r("div", k, e[3] || (e[3] = [
-        i(
+      ]))) : s("v-if", !0),
+      t.type === i.left || t.type === i.center ? (l(), o("div", k, e[3] || (e[3] = [
+        n(
           "img",
           {
-            src: m,
+            src: y,
             alt: ""
           },
           null,
           -1
           /* HOISTED */
         )
-      ])))
+      ]))) : s("v-if", !0)
     ]));
   }
 });
 export {
-  z as default
+  L as default
 };

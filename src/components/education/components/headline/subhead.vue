@@ -1,34 +1,37 @@
 <template>
     <div class="lc-subhead">
-        <template v-if="hideLeftImg">
-            <div v-if="!reverseOrder" class="lc-subhead__imglft lc-subhead__img">
-                <img src="./images/subhead-lft.png" alt="" />
-            </div>
-            <div v-else class="lc-subhead__imgrgt lc-subhead__img">
-                <img src="./images/subhead-rgt.png" alt="" />
-            </div>
-        </template>
+        <div v-if="type === direction.left && !hideRadioIcon" class="lc-subhead__imglft lc-subhead__img">
+            <img src="./images/subhead-lft.png" alt="" />
+        </div>
+        <div v-if="type === direction.right || type === direction.center" class="lc-subhead__imglgt lc-subhead__img">
+            <img src="./images/subhead-rgt.png" alt="" />
+        </div>
         <div class="lc-subhead__text" :title="text">
             {{ formatedText }}
         </div>
-        <div v-if="reverseOrder" class="lc-subhead__imglft lc-subhead__img">
+        <div v-if="type === direction.right && !hideRadioIcon" class="lc-subhead__imgrft lc-subhead__img">
             <img src="./images/subhead-lft.png" alt="" />
         </div>
-        <div v-else class="lc-subhead__imgrgt lc-subhead__img">
-            <img src="./images/subhead-rgt.png" alt="" />
+        <div v-if="type === direction.left || type === direction.center" class="lc-subhead__imgrgt lc-subhead__img">
+            <img src="./images/subhead-lgt.png" alt="" />
         </div>
     </div>
 </template>
 <script lang="ts" setup>
-import { computed } from "vue";
+import { computed, PropType } from "vue";
 import { overflowStr } from "lowcode-share/es/share";
-
+const direction = {
+    right: "right",
+    center: "center",
+    left: "left",
+} as const;
+type DirectionType = typeof direction;
 const {
     text = "",
     maxLength = 15,
     fontSize = "16px",
-    reverseOrder = false,
-    hideLeftImg = true,
+    type = "left",
+    hideRadioIcon = false,
 } = defineProps({
     text: {
         type: String,
@@ -39,10 +42,10 @@ const {
     fontSize: {
         type: String,
     },
-    reverseOrder: {
-        type: Boolean,
+    type: {
+        type: String as PropType<DirectionType[keyof DirectionType]>,
     },
-    hideLeftImg: {
+    hideRadioIcon: {
         type: Boolean,
     },
 });
@@ -57,8 +60,14 @@ const formatedText = computed(() => {
     &__imglft {
         margin-right: 6px;
     }
-    &__imgrgt {
+    &__imgrft {
         margin-left: 4px;
+    }
+    &__imglgt {
+        margin-right: 6px;
+    }
+    &__imgrgt {
+        margin-left: 6px;
     }
     &__img {
         display: flex;

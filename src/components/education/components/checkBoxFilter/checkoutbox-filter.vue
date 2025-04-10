@@ -28,7 +28,7 @@
 
         <LcCheckboxGroup v-model:value="checkboxAllValue">
             <template v-for="(item, index) in dataList" :key="index">
-                <LcSubhead class="lc-checkbox-filter__check__title" :hideLeftImg="false" :text="item.label" />
+                <LcSubhead class="lc-checkbox-filter__check__title" :hideRadioIcon="true" :text="item.label" />
                 <div class="lc-checkbox-gaid">
                     <LcCheckbox class="lc-checkbox-gaid__row" :value="check.value" v-for="check in item.children" :key="check.value">
                         <span class="lc-checkbox-filter__check__label" :class="{ 'lc-checkbox-filter__check__label--selected': checkboxAllValue.includes(check.value) }">{{
