@@ -20,6 +20,11 @@
                 <LcIndicatorCard :value="3457" fixed hint="教职工人(人)" type="noborder"></LcIndicatorCard>
                 <LcIndicatorCard :value="3457" fixed hint="教职工人(人)" type="noborder"></LcIndicatorCard>
             </NSpace>
+            <br>
+            <NSpace>
+                <LcPlanningIndicators :data="data"></LcPlanningIndicators>
+            </NSpace>
+            
         </DemoHelpBox>
         <DemoHelpBox title="指标卡" description="基本用法" rswidth="1000px" :code="code2">
             <NSpace>
@@ -71,9 +76,26 @@ import {
     LcIndicatorCard,
     LcRangeIndicator,
     LcIndicatorList,
+    LcPlanningIndicators,
 } from '@/components/education/components/dataIndicator';
 import { code1, code2, code3, } from './demo-codes';
-
+import Icon from './image/test.png'
+const data = {
+    header: "学校建设",
+    icon: Icon,
+    leftItem: {
+        title: "规划学生用地",
+        value: 11111,
+        unit: "个",
+        decimal: 0,
+    },
+    righItem: {
+        title: "建设学生用地",
+        value: 11111,
+        unit: "个",
+        decimal: 0,
+    },
+};
 </script>
 <style lang="scss" scoped>
 .demo-data-indicator {
