@@ -1,4 +1,6 @@
-import { default as o } from "./mapButton.js";
+import { default as r } from "./mapButton.js";
+import { default as a } from "./legendProgress.js";
 export {
-  o as LcMapButton
+  a as LcLegendProgress,
+  r as LcMapButton
 };
