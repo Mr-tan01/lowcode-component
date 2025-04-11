@@ -5,6 +5,13 @@
                 <LcSkewIndicator label="总教职工人" :value="3336" unit="人" tip="测试tip"></LcSkewIndicator>
                 <LcSkewIndicator label="总教职工人" :value="3533336" unit="人"></LcSkewIndicator>
 
+                <lcArrowIndicators label="心理教师总数" :value="2370" unit="人"></lcArrowIndicators>
+                <lcArrowIndicators label="心理教师总数" :icon="'reward'">
+                    <template #value>
+                        1:900
+                    </template>
+                </lcArrowIndicators>
+
                 <LcRangeIndicator :data="[{ label: '配备1名的学校', value: 32323 }, { label: '配备2名以上的学校', value: 125 }]"
                     unit="所"></LcRangeIndicator>
                 <LcRangeIndicator :data="[{ label: '配备1名的学校', value: 32323 }, { label: '配备2名以上的学校', value: 125 }]"
@@ -14,6 +21,7 @@
             <NSpace>
                 <LcSkewIndicator label="总教职工人" :value="3533336" unit="人" type="tile"></LcSkewIndicator>
                 <LcSkewIndicator label="总教职工人" :value="3533336" unit="人" type="tile"></LcSkewIndicator>
+                
             </NSpace>
             <br>
             <NSpace>
@@ -23,6 +31,11 @@
             <br>
             <NSpace>
                 <LcPlanningIndicators :data="data"></LcPlanningIndicators>
+            </NSpace>
+            <br>
+            <NSpace>
+                <lcBimodalIndex :data="[{ label: '双一流学科', value: '数学' }, { label: '关联学校', value: '南方科技大学' }]"></lcBimodalIndex>
+                <lcBimodalIndex :data="[{ label: '只能保留两组', value: '只能保留两组' }, { label: '只能保留两组', value: '只能保留两组' }, { label: '学科专业', value: '数学' }]"></lcBimodalIndex>
             </NSpace>
             
         </DemoHelpBox>
@@ -77,6 +90,8 @@ import {
     LcRangeIndicator,
     LcIndicatorList,
     LcPlanningIndicators,
+    lcBimodalIndex,
+    lcArrowIndicators
 } from '@/components/education/components/dataIndicator';
 import { code1, code2, code3, } from './demo-codes';
 import Icon from './image/test.png'
