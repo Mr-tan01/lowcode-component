@@ -9,9 +9,13 @@ const u = { class: "bimodal-index" }, b = { class: "bimodal-index__indicator__la
     data: () => []
   }),
   setup(e) {
-    return s(() => e.data, (d) => {
-      d.length > 2 && e.data.splice(2);
-    }, { immediate: !0, deep: !0 }), (d, x) => (a(), t("div", u, [
+    return s(
+      () => e.data,
+      (d) => {
+        d.length > 2 && e.data.splice(2);
+      },
+      { immediate: !0, deep: !0 }
+    ), (d, x) => (a(), t("div", u, [
       (a(!0), t(
         _,
         null,

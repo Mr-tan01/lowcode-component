@@ -1,7 +1,9 @@
+import { NameTypes } from '../icon/icons';
+import { PropType } from 'vue';
 declare function __VLS_template(): {
     attrs: Partial<{}>;
     slots: {
-        default?(_: {}): any;
+        value?(_: {}): any;
     };
     refs: {};
     rootEl: HTMLDivElement;
@@ -21,7 +23,7 @@ declare const __VLS_component: import('vue').DefineComponent<import('vue').Extra
         type: NumberConstructor;
     };
     icon: {
-        type: StringConstructor;
+        type: PropType<NameTypes>;
     };
     unit: {
         type: StringConstructor;
@@ -40,7 +42,7 @@ declare const __VLS_component: import('vue').DefineComponent<import('vue').Extra
         type: NumberConstructor;
     };
     icon: {
-        type: StringConstructor;
+        type: PropType<NameTypes>;
     };
     unit: {
         type: StringConstructor;

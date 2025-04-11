@@ -7,7 +7,7 @@
 
                 <lcArrowIndicators label="心理教师总数" :value="2370" unit="人"></lcArrowIndicators>
                 <lcArrowIndicators label="心理教师总数" :icon="'reward'">
-                    <template #default>
+                    <template #value>
                         1:900
                     </template>
                 </lcArrowIndicators>

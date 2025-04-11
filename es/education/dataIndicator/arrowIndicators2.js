@@ -1,8 +1,8 @@
-import { defineComponent as u, mergeDefaults as d, computed as i, openBlock as r, createElementBlock as s, createElementVNode as n, createVNode as m, unref as a, toDisplayString as c, createBlock as f, createCommentVNode as v, renderSlot as b } from "vue";
-import _ from "./icon/index.js";
-import { NNumberAnimation as h } from "naive-ui/es/number-animation";
-import { bigNumber as o } from "lowcode-share/es/share";
-const w = { class: "lc-arrow-indicators" }, y = { class: "lc-arrow-indicators__icon" }, N = { class: "lc-arrow-indicators__center" }, g = { class: "lc-arrow-indicators__center__lable" }, x = { class: "lc-arrow-indicators__center__value" }, S = { class: "lc-arrow-indicators__center__value__unit" }, D = /* @__PURE__ */ u({
+import { defineComponent as u, mergeDefaults as d, computed as i, openBlock as m, createElementBlock as v, createElementVNode as n, createVNode as r, unref as a, toDisplayString as o, renderSlot as f } from "vue";
+import _ from "./icon/index2.js";
+import { NNumberAnimation as b } from "naive-ui/es/number-animation";
+import { bigNumber as c } from "lowcode-share/es/share";
+const h = { class: "lc-arrow-indicators" }, w = { class: "lc-arrow-indicators__icon" }, y = { class: "lc-arrow-indicators__center" }, N = { class: "lc-arrow-indicators__center__lable" }, g = { class: "lc-arrow-indicators__center__value" }, x = { class: "lc-arrow-indicators__center__value__unit" }, D = /* @__PURE__ */ u({
   __name: "arrowIndicators",
   props: /* @__PURE__ */ d({
     label: {
@@ -34,50 +34,50 @@ const w = { class: "lc-arrow-indicators" }, y = { class: "lc-arrow-indicators__i
   setup(e) {
     const l = i(() => {
       if (e.fixed) {
-        const { result: t } = o(e.value, e.decimal);
+        const { result: t } = c(e.value, e.decimal);
         return t;
       }
       return e.value;
-    });
-    return i(() => {
+    }), s = i(() => {
       if (e.fixed) {
-        const { unit: t } = o(e.value, e.decimal);
+        const { unit: t } = c(e.value, e.decimal);
         return `${t}${e.unit}`;
       }
       return e.unit;
-    }), (t, k) => (r(), s("div", w, [
-      n("div", y, [
-        m(a(_), {
+    });
+    return (t, S) => (m(), v("div", h, [
+      n("div", w, [
+        r(a(_), {
           domain: "event",
           name: e.icon,
           size: 70
         }, null, 8, ["name"])
       ]),
-      n("div", N, [
+      n("div", y, [
         n(
           "div",
-          g,
-          c(e.label),
+          N,
+          o(e.label),
           1
           /* TEXT */
         ),
-        n("div", x, [
-          e.value ? (r(), f(a(h), {
-            key: 0,
-            "show-separator": "",
-            from: 0,
-            to: l.value,
-            active: "",
-            precision: e.decimal
-          }, null, 8, ["to", "precision"])) : v("v-if", !0),
-          b(t.$slots, "default", {}, void 0, !0),
-          n(
-            "span",
-            S,
-            c(e.unit),
-            1
-            /* TEXT */
-          )
+        n("div", g, [
+          f(t.$slots, "value", {}, () => [
+            r(a(b), {
+              "show-separator": "",
+              from: 0,
+              to: l.value,
+              active: "",
+              precision: e.decimal
+            }, null, 8, ["to", "precision"]),
+            n(
+              "span",
+              x,
+              o(s.value),
+              1
+              /* TEXT */
+            )
+          ], !0)
         ])
       ])
     ]));

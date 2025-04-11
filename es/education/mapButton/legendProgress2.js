@@ -1,5 +1,5 @@
-import { defineComponent as n, mergeDefaults as o, useCssVars as a, openBlock as d, createElementBlock as i, createElementVNode as t, toDisplayString as s } from "vue";
-const g = { class: "legend-progress" }, _ = { class: "legend-progress__lable" }, c = { class: "legend-progress__center" }, m = { class: "legend-progress__center__min-value sample-text" }, u = { class: "legend-progress__center__max-value sample-text" }, x = /* @__PURE__ */ n({
+import { defineComponent as n, mergeDefaults as o, useCssVars as a, openBlock as i, createElementBlock as d, createElementVNode as t, toDisplayString as s } from "vue";
+const c = { class: "legend-progress" }, g = { class: "legend-progress__lable" }, _ = { class: "legend-progress__center" }, m = { class: "legend-progress__center__min-value sample-text" }, u = { class: "legend-progress__center__max-value sample-text" }, x = /* @__PURE__ */ n({
   __name: "legendProgress",
   props: /* @__PURE__ */ o({
     lable: {
@@ -26,17 +26,17 @@ const g = { class: "legend-progress" }, _ = { class: "legend-progress__lable" },
   }),
   setup(e) {
     return a((r) => ({
-      "14b05bd2": e.startColor,
-      c7781284: e.endColor
-    })), (r, l) => (d(), i("div", g, [
+      "0c02804c": e.startColor,
+      "55f17941": e.endColor
+    })), (r, l) => (i(), d("div", c, [
       t(
         "div",
-        _,
+        g,
         s(e.lable),
         1
         /* TEXT */
       ),
-      t("div", c, [
+      t("div", _, [
         t(
           "div",
           m,
