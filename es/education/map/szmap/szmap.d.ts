@@ -28,6 +28,7 @@ declare function __VLS_template(): {
                 show?: boolean;
                 precision?: number;
             };
+            currentMapKey: string;
         }): any;
     };
     refs: {};

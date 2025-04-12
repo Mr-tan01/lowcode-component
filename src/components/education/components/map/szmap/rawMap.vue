@@ -10,14 +10,22 @@
             <g id="页面-2" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                 <g id="编组-76" transform="translate(4, 0)">
                     <g id="编组" transform="translate(0, 35)" fill-rule="nonzero">
-                        <component :class="blockClass" v-for="(is, key, index) in blockList" :key="index" :is v-bind="getBlockProperties(key)"></component>
+                        <component
+                            :class="blockClass"
+                            v-for="(is, key, index) in blockList"
+                            :key="index"
+                            :is
+                            v-bind="getBlockProperties(key)"
+                            @mouseover="getHoverMapKey(key)"
+                            @mouseleave="hidePopver"
+                        ></component>
                         <Labels v-if="showLabel" :labels :values></Labels>
                     </g>
                 </g>
             </g>
         </svg>
         <div class="lc-szmap-raw__mark-group" v-if="showLabel">
-            <slot name="mapLabel" :blockList="blockList" :labelClass="labelClass" :getVlaue="getMarkProp">
+            <slot name="mapLabel" :blockList="blockList" :labelClass="labelClass" :getVlaue="getMarkProp" :currentMapKey="currentMapKey">
                 <LcMark v-for="(_, key) in blockList" :key :class="labelClass(key)" v-bind="getMarkProp(key)" size="small" @click="markClick(key)"></LcMark>
             </slot>
         </div>
@@ -65,6 +73,7 @@ const $emits = defineEmits<{
     (e: "markClick", value: EducationMarkProps): void;
 }>();
 
+const currentMapKey = ref("");
 function getMarkProp(key: BlockName) {
     const markMate = values[key]! ?? { value: 0 };
     const currentLevelIndex = levelsList.value.findIndex(([_, item]) => markMate.value >= item?.range?.[0]! && markMate.value <= item?.range?.[1]!);
@@ -122,6 +131,14 @@ const mapRotateX = computed(() => `rotateX(${rotateX}deg)`);
 const labelWrapInsetY = computed(() => Math.abs(rotateX));
 const labelClass = (key) => {
     return ["lc-szmap-raw__mark-group--item", `mark-${key}`];
+};
+
+function getHoverMapKey(key: BlockName) {
+    currentMapKey.value = key;
+}
+
+const hidePopver = () => {
+    currentMapKey.value = "";
 };
 </script>
 

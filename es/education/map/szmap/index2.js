@@ -1,11 +1,11 @@
-import { defineComponent as d, openBlock as p, createElementBlock as i, createVNode as a, mergeProps as l, withCtx as n, renderSlot as m } from "vue";
-import { propsRaw as v } from "./props.js";
+import { defineComponent as p, openBlock as i, createElementBlock as n, createVNode as a, mergeProps as l, withCtx as m, renderSlot as v } from "vue";
+import { propsRaw as u } from "./props.js";
 import s from "./rawMap.js";
-const u = { class: "lc-szmap" }, X = /* @__PURE__ */ d({
+const b = { class: "lc-szmap" }, k = /* @__PURE__ */ p({
   __name: "szmap",
-  props: v,
-  setup(b) {
-    return (e, f) => (p(), i("div", u, [
+  props: u,
+  setup(f) {
+    return (e, c) => (i(), n("div", b, [
       a(s, l({
         class: "back-block-map level-map",
         "show-label": !1,
@@ -23,11 +23,12 @@ const u = { class: "lc-szmap" }, X = /* @__PURE__ */ d({
         levels: e.levels,
         values: e.values
       }, e.$attrs), {
-        mapLabel: n(({ blockList: r, labelClass: o, getVlaue: t }) => [
-          m(e.$slots, "mapLabel", {
+        mapLabel: m(({ blockList: r, labelClass: o, getVlaue: t, currentMapKey: d }) => [
+          v(e.$slots, "mapLabel", {
             blockList: r,
             labelClass: o,
-            getVlaue: t
+            getVlaue: t,
+            currentMapKey: d
           }, void 0, !0)
         ]),
         _: 3
@@ -37,5 +38,5 @@ const u = { class: "lc-szmap" }, X = /* @__PURE__ */ d({
   }
 });
 export {
-  X as default
+  k as default
 };

@@ -33,6 +33,7 @@ declare function __VLS_template(): {
             blockList: Record<BlockName, Component>;
             labelClass: (key: any) => string[];
             getVlaue: typeof getMarkProp;
+            currentMapKey: string;
         }): any;
     };
     refs: {};

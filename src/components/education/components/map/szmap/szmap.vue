@@ -2,8 +2,8 @@
     <div class="lc-szmap">
         <RawMap class="back-block-map level-map" :show-label="false" :disabledGradient :rotateX :levels :values v-bind="$attrs" />
         <RawMap class="float-block-map level-map" fill-model="hover" :disabledGradient :rotateX :show-label="true" :levels :values v-bind="$attrs">
-            <template #mapLabel="{ blockList, labelClass, getVlaue }">
-                <slot name="mapLabel" :blockList="blockList" :labelClass="labelClass" :getVlaue="getVlaue"> </slot>
+            <template #mapLabel="{ blockList, labelClass, getVlaue, currentMapKey }">
+                <slot name="mapLabel" :blockList="blockList" :labelClass="labelClass" :getVlaue="getVlaue" :currentMapKey="currentMapKey"> </slot>
             </template>
         </RawMap>
     </div>
