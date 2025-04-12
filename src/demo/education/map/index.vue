@@ -8,10 +8,10 @@
                 <Szmap :values :disabledGradient="true"></Szmap>
             </div>
         </DemoHelpBox>
-        <DemoHelpBox title="深圳地图" description="深圳教育项目-深圳地图" rswidth="962px" :code="demoCodes.code1">
+        <DemoHelpBox title="深圳地图" description="深圳教育项目-深圳地图自定义" rswidth="962px" :code="demoCodes.code1">
             <div class="size-box">
                 <Szmap :values :disabledGradient="true">
-                    <template #mapLabel="{ blockList, labelClass, getVlaue }">
+                    <template #mapLabel="{ blockList, labelClass, getVlaue, currentMapKey }">
                         <MapMarker
                             v-for="(item, index) in getBlockList(blockList)"
                             :class="labelClass(index)"
@@ -19,6 +19,23 @@
                             :value="getVlaue(index).value"
                             unit="所"
                         ></MapMarker>
+                    </template>
+                </Szmap>
+            </div>
+        </DemoHelpBox>
+        <DemoHelpBox title="深圳地图" description="深圳教育项目-深圳地图悬浮" rswidth="962px" :code="demoCodes.code1">
+            <div class="size-box">
+                <Szmap :values :disabledGradient="true">
+                    <template #mapLabel="{ labelClass, getVlaue, currentMapKey }">
+                        <span>
+                            <MapMarker
+                                v-if="currentMapKey"
+                                :class="labelClass(currentMapKey)"
+                                :label="getVlaue(currentMapKey as BlockName).mapLabel"
+                                :value="getVlaue(currentMapKey as BlockName).value"
+                                unit="所"
+                            ></MapMarker>
+                        </span>
                     </template>
                 </Szmap>
             </div>
