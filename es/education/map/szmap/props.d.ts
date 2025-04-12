@@ -5,8 +5,8 @@ export type Levels = Partial<Record<string, {
     range: number[];
     scale?: number;
     stop: ({
-        'stop-color': string;
-        'stop-opacity': number;
+        "stop-color": string;
+        "stop-opacity": number;
         offset: string;
     } & {})[] | string;
 }>>;
@@ -29,5 +29,8 @@ export declare const propsRaw: {
     };
     readonly rotateX: {
         readonly type: PropType<number>;
+    };
+    readonly disabledGradient: {
+        readonly type: BooleanConstructor;
     };
 };
