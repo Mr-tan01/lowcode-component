@@ -5,7 +5,22 @@
         </DemoHelpBox>
         <DemoHelpBox title="深圳地图" description="深圳教育项目-深圳地图" rswidth="962px" :code="demoCodes.code1">
             <div class="size-box">
-                <Szmap :values></Szmap>
+                <Szmap :values :disabledGradient="true"></Szmap>
+            </div>
+        </DemoHelpBox>
+        <DemoHelpBox title="深圳地图" description="深圳教育项目-深圳地图" rswidth="962px" :code="demoCodes.code1">
+            <div class="size-box">
+                <Szmap :values :disabledGradient="true">
+                    <template #mapLabel="{ blockList, labelClass, getVlaue }">
+                        <MapMarker
+                            v-for="(item, index) in getBlockList(blockList)"
+                            :class="labelClass(index)"
+                            :label="getVlaue(index).mapLabel"
+                            :value="getVlaue(index).value"
+                            unit="所"
+                        ></MapMarker>
+                    </template>
+                </Szmap>
             </div>
         </DemoHelpBox>
         <DemoHelpBox title="深圳地图" description="深圳教育项目-深圳地图" rswidth="962px" :code="demoCodes.code2">
@@ -16,19 +31,26 @@
     </div>
 </template>
 <script lang="ts" setup>
-import { DemoHelpBox } from '@/components/common/DemoHelpBox';
-import { Szmap, type SZMapMarkProps, LcTianditu } from '@/components/education/components/map';
-import { demoCodes } from './demo-codes';
+import { DemoHelpBox } from "@/components/common/DemoHelpBox";
+import { Szmap, type SZMapMarkProps, LcTianditu, BlockName } from "@/components/education/components/map";
+import { demoCodes } from "./demo-codes";
+import MapMarker from "./components/index.vue";
+import { omit } from "lodash-es";
+
+type FilteredBlockName = Exclude<BlockName, "shenshan">;
+
+const getBlockList = (list): Record<FilteredBlockName, string> => {
+    return omit(list, ["shenshan"]) as Record<FilteredBlockName, string>;
+};
 
 const values: SZMapMarkProps = {
     guangming: {
         value: 1,
-        unit: '人'
+        unit: "人",
     },
     longgang: {
         value: 10000,
-        unit: '人'
+        unit: "人",
     },
-}
-
+};
 </script>
