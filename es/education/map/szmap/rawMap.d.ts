@@ -1,6 +1,45 @@
+import { Component } from 'vue';
 import { Levels } from './props';
+import { BlockName } from './const';
 import { EducationMarkProps } from '../../mark/props';
-declare const _default: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
+declare function getMarkProp(key: BlockName): {
+    mapLabel: string;
+    style: {
+        "--level-scale": number | {
+            range: number[];
+            scale?: number;
+            stop: ({
+                "stop-color": string;
+                "stop-opacity": number;
+                offset: string;
+            } & {})[] | string;
+        };
+    };
+    value: number;
+    unit?: string;
+    model?: "hover" | "focus" | "default";
+    meta?: Record<string, any>;
+    size?: "small" | "medium";
+    iconName?: string;
+    iconSrc?: string;
+    label?: string;
+    show?: boolean;
+    precision?: number;
+};
+declare function __VLS_template(): {
+    attrs: Partial<{}>;
+    slots: {
+        mapLabel?(_: {
+            blockList: Record<BlockName, Component>;
+            labelClass: (key: any) => string[];
+            getVlaue: typeof getMarkProp;
+        }): any;
+    };
+    refs: {};
+    rootEl: HTMLDivElement;
+};
+type __VLS_TemplateResult = ReturnType<typeof __VLS_template>;
+declare const __VLS_component: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
     readonly showLabel: {
         readonly type: BooleanConstructor;
     };
@@ -18,6 +57,9 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
     };
     readonly rotateX: {
         readonly type: import('vue').PropType<number>;
+    };
+    readonly disabledGradient: {
+        readonly type: BooleanConstructor;
     };
 }>, {}, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {} & {
     markClick: (value: EducationMarkProps) => any;
@@ -40,9 +82,19 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
     readonly rotateX: {
         readonly type: import('vue').PropType<number>;
     };
+    readonly disabledGradient: {
+        readonly type: BooleanConstructor;
+    };
 }>> & Readonly<{
     onMarkClick?: ((value: EducationMarkProps) => any) | undefined;
 }>, {
     readonly showLabel: boolean;
+    readonly disabledGradient: boolean;
 }, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, HTMLDivElement>;
+declare const _default: __VLS_WithTemplateSlots<typeof __VLS_component, __VLS_TemplateResult["slots"]>;
 export default _default;
+type __VLS_WithTemplateSlots<T, S> = T & {
+    new (): {
+        $slots: S;
+    };
+};

@@ -1,15 +1,16 @@
-import { defineComponent as r, openBlock as e, createElementBlock as t, createVNode as p, unref as m, normalizeProps as a, guardReactiveProps as i } from "vue";
+import { defineComponent as r, openBlock as t, createElementBlock as e, createVNode as p, unref as m, normalizeProps as a, guardReactiveProps as i } from "vue";
 import n from "./szmap/index.js";
 import "lodash-es/merge";
 import "./szmap/const.js";
-import './assets/szmap/rawMap.css';import './assets/mark/mark.css';import './assets/szmap/comp/labels.css';/* empty css                  */
+import './assets/szmap/rawMap2.css';import './assets/szmap/rawMap.css';import './assets/mark/mark.css';import './assets/szmap/comp/labels.css';/* empty css                  */
 import "naive-ui/es/number-animation";
 /* empty css           */
 /* empty css              */
-const c = { class: "lc-map" }, B = /* @__PURE__ */ r({
+/* empty css              */
+const c = { class: "lc-map" }, P = /* @__PURE__ */ r({
   __name: "map",
   setup(s) {
-    return (o, l) => (e(), t("div", c, [
+    return (o, l) => (t(), e("div", c, [
       p(
         m(n),
         a(i(o.$attrs)),
@@ -21,5 +22,5 @@ const c = { class: "lc-map" }, B = /* @__PURE__ */ r({
   }
 });
 export {
-  B as default
+  P as default
 };

@@ -16,6 +16,10 @@ const e = {
   },
   rotateX: {
     type: Number
+  },
+  //是否禁用根据数量地图渐变色
+  disabledGradient: {
+    type: Boolean
   }
 };
 export {

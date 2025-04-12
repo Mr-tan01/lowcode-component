@@ -1,29 +1,41 @@
-import { defineComponent as o, openBlock as r, createElementBlock as t, createVNode as l, mergeProps as a } from "vue";
-import { propsRaw as p } from "./props.js";
+import { defineComponent as d, openBlock as p, createElementBlock as i, createVNode as a, mergeProps as l, withCtx as n, renderSlot as m } from "vue";
+import { propsRaw as v } from "./props.js";
 import s from "./rawMap.js";
-const m = { class: "lc-szmap" }, i = /* @__PURE__ */ o({
+const u = { class: "lc-szmap" }, X = /* @__PURE__ */ d({
   __name: "szmap",
-  props: p,
-  setup(v) {
-    return (e, n) => (r(), t("div", m, [
-      l(s, a({
+  props: v,
+  setup(b) {
+    return (e, f) => (p(), i("div", u, [
+      a(s, l({
         class: "back-block-map level-map",
         "show-label": !1,
+        disabledGradient: e.disabledGradient,
         rotateX: e.rotateX,
         levels: e.levels,
         values: e.values
-      }, e.$attrs), null, 16, ["rotateX", "levels", "values"]),
-      l(s, a({
+      }, e.$attrs), null, 16, ["disabledGradient", "rotateX", "levels", "values"]),
+      a(s, l({
         class: "float-block-map level-map",
         "fill-model": "hover",
+        disabledGradient: e.disabledGradient,
         rotateX: e.rotateX,
         "show-label": !0,
         levels: e.levels,
         values: e.values
-      }, e.$attrs), null, 16, ["rotateX", "levels", "values"])
+      }, e.$attrs), {
+        mapLabel: n(({ blockList: r, labelClass: o, getVlaue: t }) => [
+          m(e.$slots, "mapLabel", {
+            blockList: r,
+            labelClass: o,
+            getVlaue: t
+          }, void 0, !0)
+        ]),
+        _: 3
+        /* FORWARDED */
+      }, 16, ["disabledGradient", "rotateX", "levels", "values"])
     ]));
   }
 });
 export {
-  i as default
+  X as default
 };
