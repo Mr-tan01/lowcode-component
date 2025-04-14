@@ -1,129 +1,131 @@
-import { defineComponent as F, mergeDefaults as K, useCssVars as j, ref as z, onMounted as E, computed as d, openBlock as t, createElementBlock as s, createVNode as M, createElementVNode as v, Fragment as p, renderList as g, mergeProps as C, resolveDynamicComponent as R, createBlock as S, createCommentVNode as B, renderSlot as Y, unref as q } from "vue";
-import H from "./comp/sshzq.js";
-import O from "./comp/baoan.js";
-import T from "./comp/dapeng.js";
+import { defineComponent as x, mergeDefaults as K, useCssVars as R, ref as $, onMounted as T, computed as d, openBlock as s, createElementBlock as i, createVNode as M, createElementVNode as v, Fragment as p, renderList as g, mergeProps as w, resolveDynamicComponent as j, createBlock as H, createCommentVNode as B, renderSlot as O, unref as S } from "vue";
+import Y from "./comp/sshzq.js";
+import q from "./comp/baoan.js";
+import U from "./comp/dapeng.js";
 import W from "./comp/futian.js";
 import J from "./comp/guangming.js";
 import Q from "./comp/longgang.js";
-import U from "./comp/luohu.js";
-import Z from "./comp/pingshan.js";
-import ee from "./comp/yantian.js";
-import re from "./comp/nanshan.js";
+import Z from "./comp/luohu.js";
+import ee from "./comp/pingshan.js";
+import re from "./comp/yantian.js";
+import le from "./comp/nanshan.js";
 import ae from "./comp/longhua.js";
-import le from "./comp/defines.js";
-import oe from "./comp/labels2.js";
-import te from "../mark/index2.js";
-import { propsRaw as ne } from "./props.js";
-import { defFloatLevelConfig as se, szBlockNames as o, defBlockLableMap as ue } from "./const.js";
-import ie from "lodash-es/merge";
-const ce = { class: "lc-szmap-raw" }, fe = {
+import oe from "./comp/defines.js";
+import te from "./comp/labels2.js";
+import ne from "../mark/index2.js";
+import { propsRaw as se } from "./props.js";
+import { LabelModelEnum as N, defFloatLevelConfig as ue, szBlockNames as t, defBlockLableMap as ie } from "./const.js";
+import ce from "lodash-es/merge";
+const fe = { class: "lc-szmap-raw" }, me = {
   class: "lc-szmap-raw__svg",
   viewBox: "0 0 922 527",
   version: "1.1"
-}, me = ["id"], de = {
+}, de = ["id"], ve = {
   id: "页面-2",
   stroke: "none",
   "stroke-width": "1",
   fill: "none",
   "fill-rule": "evenodd"
-}, ve = {
+}, pe = {
   id: "编组-76",
   transform: "translate(4, 0)"
-}, pe = {
+}, ge = {
   id: "编组",
   transform: "translate(0, 35)",
   "fill-rule": "nonzero"
-}, ge = {
+}, be = {
   key: 0,
   class: "lc-szmap-raw__mark-group"
-}, xe = /* @__PURE__ */ F({
+}, Ae = /* @__PURE__ */ x({
   __name: "rawMap",
-  props: /* @__PURE__ */ K(ne, {
+  props: /* @__PURE__ */ K(se, {
     showLabel: !0,
     levels: () => ({}),
     values: () => ({}),
     fillModel: "default",
     rotateX: 0,
-    disabledGradient: !1
+    disabledGradient: !1,
+    labelModel: () => N.DEFAULT
   }),
   emits: ["markClick"],
-  setup(f, { emit: N }) {
-    j((e) => ({
-      "0212d4cf": X.value,
-      "954989a8": x.value
+  setup(c, { emit: V }) {
+    R((e) => ({
+      c37d54de: X.value,
+      "3d48e3aa": A.value
     }));
-    const k = {
-      [o.光明]: J,
-      [o.宝安]: O,
-      [o.龙华]: ae,
-      [o.南山]: re,
-      [o.福田]: W,
-      [o.罗湖]: U,
-      [o.盐田]: ee,
-      [o.坪山]: Z,
-      [o.龙岗]: Q,
-      [o.大鹏新区]: T,
-      [o.深汕合作区]: H
-    }, b = z(0), G = N, _ = z("");
-    function h(e) {
-      const u = f.values[e] ?? { value: 0 }, i = m.value.findIndex(([c, l]) => {
-        var L, n;
-        return u.value >= ((L = l == null ? void 0 : l.range) == null ? void 0 : L[0]) && u.value <= ((n = l == null ? void 0 : l.range) == null ? void 0 : n[1]);
-      }), [r, a] = m.value[i] ?? [];
+    const b = {
+      [t.光明]: J,
+      [t.宝安]: q,
+      [t.龙华]: ae,
+      [t.南山]: le,
+      [t.福田]: W,
+      [t.罗湖]: Z,
+      [t.盐田]: re,
+      [t.坪山]: ee,
+      [t.龙岗]: Q,
+      [t.大鹏新区]: U,
+      [t.深汕合作区]: Y
+    }, k = $(0), G = V, L = $("");
+    function _(e) {
+      const l = c.values[e] ?? { value: 0 }, f = m.value.findIndex(([n, o]) => {
+        var h, u;
+        return l.value >= ((h = o == null ? void 0 : o.range) == null ? void 0 : h[0]) && l.value <= ((u = o == null ? void 0 : o.range) == null ? void 0 : u[1]);
+      }), [r, a] = m.value[f] ?? [];
       return {
-        ...u,
-        mapLabel: ue[e],
+        ...l,
+        mapLabel: ie[e],
         style: {
-          "--level-scale": b.value ? (a == null ? void 0 : a.scale) ?? 1 : b.value
+          "--level-scale": k.value ? (a == null ? void 0 : a.scale) ?? 1 : k.value
         }
       };
     }
-    function V(e) {
-      G("markClick", h(e));
+    function E(e) {
+      G("markClick", _(e));
     }
-    E(() => {
+    T(() => {
       setTimeout(() => {
-        b.value = 1;
+        k.value = 1;
       }, 300);
     });
-    const I = d(() => ["lc-szmap-raw__block", `visible--${f.fillModel}`]), m = d(() => Object.entries(ie({}, se, f.levels)));
+    const I = d(() => ["lc-szmap-raw__block", `visible--${c.fillModel}`]), m = d(() => Object.entries(ce({}, ue, c.levels)));
     function P(e) {
-      const u = f.values[e];
-      if (!u || f.disabledGradient) return {};
-      const i = m.value.findIndex(([L, n]) => {
-        var y, $;
-        return u.value >= ((y = n == null ? void 0 : n.range) == null ? void 0 : y[0]) && u.value <= (($ = n == null ? void 0 : n.range) == null ? void 0 : $[1]);
-      }), [r, a] = m.value[i] ?? [];
-      let c = [], l = {};
-      return a && r && (c.push("float-active"), typeof a.stop == "string" ? l["--linear-gradient-fill"] = a.stop : l["--linear-gradient-fill"] = `url(#linearGradient-float-${r})`), {
-        class: c,
-        style: l
+      const l = c.values[e];
+      if (!l || c.disabledGradient) return {};
+      const f = m.value.findIndex(([h, u]) => {
+        var y, z;
+        return l.value >= ((y = u == null ? void 0 : u.range) == null ? void 0 : y[0]) && l.value <= ((z = u == null ? void 0 : u.range) == null ? void 0 : z[1]);
+      }), [r, a] = m.value[f] ?? [];
+      let n = [], o = {};
+      return a && r && (n.push("float-active"), typeof a.stop == "string" ? o["--linear-gradient-fill"] = a.stop : o["--linear-gradient-fill"] = `url(#linearGradient-float-${r})`), {
+        class: n,
+        style: o
       };
     }
-    const X = d(() => `rotateX(${f.rotateX}deg)`), x = d(() => Math.abs(f.rotateX)), w = (e) => ["lc-szmap-raw__mark-group--item", `mark-${e}`];
-    function A(e) {
-      _.value = e;
+    const X = d(() => `rotateX(${c.rotateX}deg)`), A = d(() => Math.abs(c.rotateX)), C = (e) => ["lc-szmap-raw__mark-group--item", `mark-${e}`];
+    function D(e) {
+      c.labelModel === N.HOVER && (L.value = e);
     }
-    const D = () => {
-      _.value = "";
+    const F = (e) => {
+      const l = e.relatedTarget;
+      l && l.closest(".lc-szmap-raw__mark-group") || (L.value = "");
     };
-    return (e, u) => (t(), s("div", ce, [
-      (t(), s("svg", fe, [
-        M(le),
+    return (e, l) => (s(), i("div", fe, [
+      (s(), i("svg", me, [
+        M(oe),
         v("defs", null, [
-          (t(!0), s(
+          (s(!0), i(
             p,
             null,
-            g(m.value, ([i, r], a) => (t(), s("linearGradient", {
+            g(m.value, ([f, r], a) => (s(), i("linearGradient", {
               key: a,
-              id: `linearGradient-float-${i}`
+              id: `linearGradient-float-${f}`
             }, [
-              (t(!0), s(
+              (s(!0), i(
                 p,
                 null,
-                g(r == null ? void 0 : r.stop, (c, l) => (t(), s(
+                g(r == null ? void 0 : r.stop, (n, o) => (s(), i(
                   "stop",
-                  C({ ref_for: !0 }, typeof c == "object" && !Array.isArray(c) ? c : {}, { key: l }),
+                  w({ ref_for: !0 }, typeof n == "object" && !Array.isArray(n) ? n : {}, { key: o }),
                   null,
                   16
                   /* FULL_PROPS */
@@ -131,29 +133,29 @@ const ce = { class: "lc-szmap-raw" }, fe = {
                 128
                 /* KEYED_FRAGMENT */
               ))
-            ], 8, me))),
+            ], 8, de))),
             128
             /* KEYED_FRAGMENT */
           ))
         ]),
-        v("g", de, [
-          v("g", ve, [
-            v("g", pe, [
-              (t(), s(
+        v("g", ve, [
+          v("g", pe, [
+            v("g", ge, [
+              (s(), i(
                 p,
                 null,
-                g(k, (i, r, a) => M(R(i), C({
+                g(b, (f, r, a) => M(j(f), w({
                   class: I.value,
                   key: a,
                   ref_for: !0
                 }, P(r), {
-                  onMouseover: (c) => A(r),
-                  onMouseleave: D
+                  onMouseover: (n) => D(r),
+                  onMouseleave: l[0] || (l[0] = (n) => F(n))
                 }), null, 16, ["class", "onMouseover"])),
                 64
                 /* STABLE_FRAGMENT */
               )),
-              e.showLabel ? (t(), S(oe, {
+              e.showLabel ? (s(), H(te, {
                 key: 0,
                 labels: e.labels,
                 values: e.values
@@ -162,23 +164,23 @@ const ce = { class: "lc-szmap-raw" }, fe = {
           ])
         ])
       ])),
-      e.showLabel ? (t(), s("div", ge, [
-        Y(e.$slots, "mapLabel", {
-          blockList: k,
-          labelClass: w,
-          getVlaue: h,
-          currentMapKey: _.value
+      e.showLabel ? (s(), i("div", be, [
+        O(e.$slots, "mapLabel", {
+          blockList: b,
+          labelClass: C,
+          getVlaue: _,
+          currentMapKey: L.value
         }, () => [
-          (t(), s(
+          (s(), i(
             p,
             null,
-            g(k, (i, r) => M(q(te), C({
+            g(b, (f, r) => M(S(ne), w({
               key: r,
-              class: w(r),
+              class: C(r),
               ref_for: !0
-            }, h(r), {
+            }, _(r), {
               size: "small",
-              onClick: (a) => V(r)
+              onClick: (a) => E(r)
             }), null, 16, ["class", "onClick"])),
             64
             /* STABLE_FRAGMENT */
@@ -189,5 +191,5 @@ const ce = { class: "lc-szmap-raw" }, fe = {
   }
 });
 export {
-  xe as default
+  Ae as default
 };
