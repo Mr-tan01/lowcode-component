@@ -1,5 +1,5 @@
 import { PropType } from 'vue';
-import { BlockLableMapType, BlockName } from './const';
+import { LabelModelEnum, BlockLableMapType, BlockName } from './const';
 import { EducationMarkProps } from '../../mark/props';
 export type Levels = Partial<Record<string, {
     range: number[];
@@ -32,5 +32,8 @@ export declare const propsRaw: {
     };
     readonly disabledGradient: {
         readonly type: BooleanConstructor;
+    };
+    readonly labelModel: {
+        readonly type: PropType<LabelModelEnum>;
     };
 };

@@ -1,3 +1,4 @@
+import { LabelModelEnum } from './const';
 declare function __VLS_template(): {
     attrs: Partial<{}>;
     slots: {
@@ -57,6 +58,9 @@ declare const __VLS_component: import('vue').DefineComponent<import('vue').Extra
     readonly disabledGradient: {
         readonly type: BooleanConstructor;
     };
+    readonly labelModel: {
+        readonly type: import('vue').PropType<LabelModelEnum>;
+    };
 }>, {}, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
     readonly showLabel: {
         readonly type: BooleanConstructor;
@@ -78,6 +82,9 @@ declare const __VLS_component: import('vue').DefineComponent<import('vue').Extra
     };
     readonly disabledGradient: {
         readonly type: BooleanConstructor;
+    };
+    readonly labelModel: {
+        readonly type: import('vue').PropType<LabelModelEnum>;
     };
 }>> & Readonly<{}>, {
     readonly showLabel: boolean;

@@ -10,7 +10,9 @@ const o = {
   龙岗: "longgang",
   大鹏新区: "dapeng",
   深汕合作区: "shenshan"
-}, n = {
+};
+var a = /* @__PURE__ */ ((t) => (t.HOVER = "hover", t.DEFAULT = "default", t))(a || {});
+const n = {
   [o.光明]: "光明区",
   [o.宝安]: "宝安区",
   [o.龙华]: "龙华区",
@@ -57,6 +59,7 @@ const o = {
   }
 };
 export {
+  a as LabelModelEnum,
   n as defBlockLableMap,
   s as defFloatLevelConfig,
   o as szBlockNames

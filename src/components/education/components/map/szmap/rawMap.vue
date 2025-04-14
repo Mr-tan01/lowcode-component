@@ -17,7 +17,7 @@
                             :is
                             v-bind="getBlockProperties(key)"
                             @mouseover="getHoverMapKey(key)"
-                            @mouseleave="hidePopver"
+                            @mouseleave="hidePopver($event)"
                         ></component>
                         <Labels v-if="showLabel" :labels :values></Labels>
                     </g>
@@ -48,11 +48,20 @@ import Labels from "./comp/labels.vue";
 import { LcMark } from "@/components/education/components/mark";
 import { type Component, computed, onMounted, ref } from "vue";
 import { type Levels, propsRaw } from "./props";
-import { defFloatLevelConfig, type BlockName, szBlockNames, defBlockLableMap } from "./const";
+import { defFloatLevelConfig, LabelModelEnum, type BlockName, szBlockNames, defBlockLableMap } from "./const";
 import merge from "lodash-es/merge";
 import { EducationMarkProps } from "../../mark/props";
 
-const { labels, showLabel = true, levels = {}, values = {}, fillModel = "default", rotateX = 0, disabledGradient = false } = defineProps(propsRaw);
+const {
+    labels,
+    showLabel = true,
+    levels = {},
+    values = {},
+    fillModel = "default",
+    rotateX = 0,
+    disabledGradient = false,
+    labelModel = LabelModelEnum.DEFAULT,
+} = defineProps(propsRaw);
 
 const blockList: Record<BlockName, Component> = {
     [szBlockNames["光明"]]: Guangming,
@@ -134,10 +143,15 @@ const labelClass = (key) => {
 };
 
 function getHoverMapKey(key: BlockName) {
+    if (labelModel !== LabelModelEnum.HOVER) return;
     currentMapKey.value = key;
 }
 
-const hidePopver = () => {
+const hidePopver = (event: MouseEvent) => {
+    const target = event.relatedTarget as HTMLElement | null;
+    if (target && target.closest(".lc-szmap-raw__mark-group")) {
+        return;
+    }
     currentMapKey.value = "";
 };
 </script>

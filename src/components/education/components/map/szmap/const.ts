@@ -15,7 +15,10 @@ export const szBlockNames = {
 } as const;
 export type SzBlockNames = typeof szBlockNames
 export type BlockName = SzBlockNames[keyof SzBlockNames];
-
+export enum LabelModelEnum {
+    HOVER = 'hover',
+    DEFAULT = 'default',
+}
 export const defBlockLableMap = {
     [szBlockNames['光明']]: '光明区',
     [szBlockNames['宝安']]: '宝安区',

@@ -25,7 +25,7 @@
         </DemoHelpBox>
         <DemoHelpBox title="深圳地图" description="深圳教育项目-深圳地图悬浮" rswidth="962px" :code="demoCodes.code1">
             <div class="size-box">
-                <Szmap :values :disabledGradient="true">
+                <Szmap :values :disabledGradient="true" :labelModel="LabelModelEnum.HOVER">
                     <template #mapLabel="{ labelClass, getVlaue, currentMapKey }">
                         <span>
                             <MapMarker
@@ -49,7 +49,7 @@
 </template>
 <script lang="ts" setup>
 import { DemoHelpBox } from "@/components/common/DemoHelpBox";
-import { Szmap, type SZMapMarkProps, LcTianditu, BlockName } from "@/components/education/components/map";
+import { Szmap, LabelModelEnum, type SZMapMarkProps, LcTianditu, BlockName } from "@/components/education/components/map";
 import { demoCodes } from "./demo-codes";
 import MapMarker from "./components/index.vue";
 import { omit } from "lodash-es";

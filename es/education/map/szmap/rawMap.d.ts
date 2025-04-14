@@ -1,6 +1,6 @@
 import { Component } from 'vue';
 import { Levels } from './props';
-import { BlockName } from './const';
+import { LabelModelEnum, BlockName } from './const';
 import { EducationMarkProps } from '../../mark/props';
 declare function getMarkProp(key: BlockName): {
     mapLabel: string;
@@ -62,6 +62,9 @@ declare const __VLS_component: import('vue').DefineComponent<import('vue').Extra
     readonly disabledGradient: {
         readonly type: BooleanConstructor;
     };
+    readonly labelModel: {
+        readonly type: import('vue').PropType<LabelModelEnum>;
+    };
 }>, {}, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {} & {
     markClick: (value: EducationMarkProps) => any;
 }, string, import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
@@ -85,6 +88,9 @@ declare const __VLS_component: import('vue').DefineComponent<import('vue').Extra
     };
     readonly disabledGradient: {
         readonly type: BooleanConstructor;
+    };
+    readonly labelModel: {
+        readonly type: import('vue').PropType<LabelModelEnum>;
     };
 }>> & Readonly<{
     onMarkClick?: ((value: EducationMarkProps) => any) | undefined;
