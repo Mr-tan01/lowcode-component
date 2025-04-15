@@ -154,6 +154,7 @@ const renderUnit = computed(() => {
                 }
 
                 &--unit {
+                    margin-left: 8px;
                     font-size: 14px;
                     line-height: 27px;
                 }

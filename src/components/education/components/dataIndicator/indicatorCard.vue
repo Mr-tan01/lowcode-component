@@ -112,6 +112,7 @@ const unit = computed(() => {
                     }
 
                     &--unit {
+                        margin-left: 8px;
                         font-size: 16px;
                     }
                 }
