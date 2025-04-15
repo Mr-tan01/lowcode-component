@@ -122,6 +122,7 @@ const formatedText = (text, maxLength) => {
         color: #0fd4fb;
     }
     .lc-number-unit {
+        margin-left: 8px;
         font-family: PingFangSC, PingFang SC;
         font-weight: 400;
         font-size: 12px;

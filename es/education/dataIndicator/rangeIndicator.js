@@ -1,7 +1,7 @@
 import o from "./rangeIndicator2.js";
 import './assets/rangeIndicator.css';/* empty css                */
-import a from "./_virtual/_plugin-vue_export-helper.js";
-const m = /* @__PURE__ */ a(o, [["__scopeId", "data-v-ff7b8a4a"]]);
+import r from "./_virtual/_plugin-vue_export-helper.js";
+const m = /* @__PURE__ */ r(o, [["__scopeId", "data-v-3dc79113"]]);
 export {
   m as default
 };
