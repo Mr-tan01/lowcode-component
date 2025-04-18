@@ -11,7 +11,8 @@
         "build": "cd /scripts && node ./vite.lib.js",
         "build:lib": "vue-tsc -b && vite build --config vite.config.lib.ts",
         "lib": "pnpm --filter scripts build",
-        "preview": "vite preview"
+        "preview": "vite preview",
+        "prepare": "husky install"
     },
     "files": [
         "es",
