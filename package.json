@@ -1,7 +1,7 @@
 {
     "name": "lowcode-component",
     "private": true,
-    "version": "0.1.0-alpha.2.0.6",
+    "version": "0.1.0-alpha.2.1.6",
     "type": "module",
     "main": "dist/index.prod.mjs",
     "types": "dist/types/index.d.ts",
@@ -20,8 +20,11 @@
     ],
     "dependencies": {
         "@mmj-code-lib/lowcode": "git+http://liangweizhu@siteshun:txTYq7HFHNZHrp4yVjpJ@code.siteshun.com:800/front-component/STS/mmj-code-lib.git#lowcode-0.1.0",
+        "axios": "^1.8.4",
+        "cesium": "^1.128.0",
         "lowcode-share": "git+http://code.siteshun.com:800/front-component/lowcode-sview/lowcode-share.git#develop",
-        "resize-observer-polyfill": "^1.5.1"
+        "resize-observer-polyfill": "^1.5.1",
+        "vite-plugin-cesium": "^1.2.23"
     },
     "devDependencies": {
         "@mmj-code-lib/scripts": "git+http://code.siteshun.com:800/front-component/STS/mmj-code-lib.git#scripts",
