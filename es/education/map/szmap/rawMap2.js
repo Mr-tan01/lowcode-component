@@ -1,121 +1,131 @@
-import { defineComponent as x, mergeDefaults as G, useCssVars as P, ref as A, onMounted as D, computed as d, openBlock as t, createElementBlock as s, createVNode as b, createElementVNode as v, Fragment as p, renderList as g, mergeProps as h, resolveDynamicComponent as F, createBlock as j, createCommentVNode as z, unref as E } from "vue";
-import R from "./comp/sshzq.js";
-import Y from "./comp/baoan.js";
-import q from "./comp/dapeng.js";
-import O from "./comp/futian.js";
-import S from "./comp/guangming.js";
-import T from "./comp/longgang.js";
-import W from "./comp/luohu.js";
-import H from "./comp/pingshan.js";
-import J from "./comp/yantian.js";
-import K from "./comp/nanshan.js";
-import Q from "./comp/longhua.js";
-import U from "./comp/defines.js";
-import Z from "./comp/labels2.js";
-import ee from "../mark/index2.js";
-import { propsRaw as re } from "./props.js";
-import { defFloatLevelConfig as le, szBlockNames as o } from "./const.js";
-import ae from "lodash-es/merge";
-const oe = { class: "lc-szmap-raw" }, te = {
+import { defineComponent as x, mergeDefaults as K, useCssVars as R, ref as $, onMounted as T, computed as d, openBlock as s, createElementBlock as i, createVNode as M, createElementVNode as v, Fragment as p, renderList as g, mergeProps as w, resolveDynamicComponent as j, createBlock as H, createCommentVNode as B, renderSlot as O, unref as S } from "vue";
+import Y from "./comp/sshzq.js";
+import q from "./comp/baoan.js";
+import U from "./comp/dapeng.js";
+import W from "./comp/futian.js";
+import J from "./comp/guangming.js";
+import Q from "./comp/longgang.js";
+import Z from "./comp/luohu.js";
+import ee from "./comp/pingshan.js";
+import re from "./comp/yantian.js";
+import le from "./comp/nanshan.js";
+import ae from "./comp/longhua.js";
+import oe from "./comp/defines.js";
+import te from "./comp/labels2.js";
+import ne from "../mark/index2.js";
+import { propsRaw as se } from "./props.js";
+import { LabelModelEnum as N, defFloatLevelConfig as ue, szBlockNames as t, defBlockLableMap as ie } from "./const.js";
+import ce from "lodash-es/merge";
+const fe = { class: "lc-szmap-raw" }, me = {
   class: "lc-szmap-raw__svg",
   viewBox: "0 0 922 527",
   version: "1.1"
-}, ne = ["id"], se = {
+}, de = ["id"], ve = {
   id: "页面-2",
   stroke: "none",
   "stroke-width": "1",
   fill: "none",
   "fill-rule": "evenodd"
-}, ue = {
+}, pe = {
   id: "编组-76",
   transform: "translate(4, 0)"
-}, ce = {
+}, ge = {
   id: "编组",
   transform: "translate(0, 35)",
   "fill-rule": "nonzero"
-}, ie = {
+}, be = {
   key: 0,
   class: "lc-szmap-raw__mark-group"
-}, Ne = /* @__PURE__ */ x({
+}, Ae = /* @__PURE__ */ x({
   __name: "rawMap",
-  props: /* @__PURE__ */ G(re, {
+  props: /* @__PURE__ */ K(se, {
     showLabel: !0,
     levels: () => ({}),
     values: () => ({}),
     fillModel: "default",
-    rotateX: 0
+    rotateX: 0,
+    disabledGradient: !1,
+    labelModel: () => N.DEFAULT
   }),
   emits: ["markClick"],
-  setup(f, { emit: M }) {
-    P((a) => ({
-      "2db2c736": V.value,
-      ccb49db6: X.value
+  setup(c, { emit: V }) {
+    R((e) => ({
+      c37d54de: X.value,
+      "3d48e3aa": A.value
     }));
-    const L = {
-      [o.光明]: S,
-      [o.宝安]: Y,
-      [o.龙华]: Q,
-      [o.南山]: K,
-      [o.福田]: O,
-      [o.罗湖]: W,
-      [o.盐田]: J,
-      [o.坪山]: H,
-      [o.龙岗]: T,
-      [o.大鹏新区]: q,
-      [o.深汕合作区]: R
-    }, k = A(0), $ = M;
-    function w(a) {
-      const u = f.values[a] ?? { value: 0 }, c = m.value.findIndex(([i, l]) => {
-        var _, n;
-        return u.value >= ((_ = l == null ? void 0 : l.range) == null ? void 0 : _[0]) && u.value <= ((n = l == null ? void 0 : l.range) == null ? void 0 : n[1]);
-      }), [e, r] = m.value[c] ?? [];
+    const b = {
+      [t.光明]: J,
+      [t.宝安]: q,
+      [t.龙华]: ae,
+      [t.南山]: le,
+      [t.福田]: W,
+      [t.罗湖]: Z,
+      [t.盐田]: re,
+      [t.坪山]: ee,
+      [t.龙岗]: Q,
+      [t.大鹏新区]: U,
+      [t.深汕合作区]: Y
+    }, k = $(0), G = V, L = $("");
+    function _(e) {
+      const l = c.values[e] ?? { value: 0 }, f = m.value.findIndex(([n, o]) => {
+        var h, u;
+        return l.value >= ((h = o == null ? void 0 : o.range) == null ? void 0 : h[0]) && l.value <= ((u = o == null ? void 0 : o.range) == null ? void 0 : u[1]);
+      }), [r, a] = m.value[f] ?? [];
       return {
-        ...u,
+        ...l,
+        mapLabel: ie[e],
         style: {
-          "--level-scale": k.value ? (r == null ? void 0 : r.scale) ?? 1 : k.value
+          "--level-scale": k.value ? (a == null ? void 0 : a.scale) ?? 1 : k.value
         }
       };
     }
-    function B(a) {
-      $("markClick", w(a));
+    function E(e) {
+      G("markClick", _(e));
     }
-    D(() => {
+    T(() => {
       setTimeout(() => {
         k.value = 1;
       }, 300);
     });
-    const N = d(() => ["lc-szmap-raw__block", `visible--${f.fillModel}`]), m = d(() => Object.entries(ae({}, le, f.levels)));
-    function I(a) {
-      const u = f.values[a];
-      if (!u) return {};
-      const c = m.value.findIndex(([_, n]) => {
-        var C, y;
-        return u.value >= ((C = n == null ? void 0 : n.range) == null ? void 0 : C[0]) && u.value <= ((y = n == null ? void 0 : n.range) == null ? void 0 : y[1]);
-      }), [e, r] = m.value[c] ?? [];
-      let i = [], l = {};
-      return r && e && (i.push("float-active"), typeof r.stop == "string" ? l["--linear-gradient-fill"] = r.stop : l["--linear-gradient-fill"] = `url(#linearGradient-float-${e})`), {
-        class: i,
-        style: l
+    const I = d(() => ["lc-szmap-raw__block", `visible--${c.fillModel}`]), m = d(() => Object.entries(ce({}, ue, c.levels)));
+    function P(e) {
+      const l = c.values[e];
+      if (!l || c.disabledGradient) return {};
+      const f = m.value.findIndex(([h, u]) => {
+        var y, z;
+        return l.value >= ((y = u == null ? void 0 : u.range) == null ? void 0 : y[0]) && l.value <= ((z = u == null ? void 0 : u.range) == null ? void 0 : z[1]);
+      }), [r, a] = m.value[f] ?? [];
+      let n = [], o = {};
+      return a && r && (n.push("float-active"), typeof a.stop == "string" ? o["--linear-gradient-fill"] = a.stop : o["--linear-gradient-fill"] = `url(#linearGradient-float-${r})`), {
+        class: n,
+        style: o
       };
     }
-    const V = d(() => `rotateX(${f.rotateX}deg)`), X = d(() => Math.abs(f.rotateX));
-    return (a, u) => (t(), s("div", oe, [
-      (t(), s("svg", te, [
-        b(U),
+    const X = d(() => `rotateX(${c.rotateX}deg)`), A = d(() => Math.abs(c.rotateX)), C = (e) => ["lc-szmap-raw__mark-group--item", `mark-${e}`];
+    function D(e) {
+      c.labelModel === N.HOVER && (L.value = e);
+    }
+    const F = (e) => {
+      const l = e.relatedTarget;
+      l && l.closest(".lc-szmap-raw__mark-group") || (L.value = "");
+    };
+    return (e, l) => (s(), i("div", fe, [
+      (s(), i("svg", me, [
+        M(oe),
         v("defs", null, [
-          (t(!0), s(
+          (s(!0), i(
             p,
             null,
-            g(m.value, ([c, e], r) => (t(), s("linearGradient", {
-              key: r,
-              id: `linearGradient-float-${c}`
+            g(m.value, ([f, r], a) => (s(), i("linearGradient", {
+              key: a,
+              id: `linearGradient-float-${f}`
             }, [
-              (t(!0), s(
+              (s(!0), i(
                 p,
                 null,
-                g(e == null ? void 0 : e.stop, (i, l) => (t(), s(
+                g(r == null ? void 0 : r.stop, (n, o) => (s(), i(
                   "stop",
-                  h({ ref_for: !0 }, typeof i == "object" && !Array.isArray(i) ? i : {}, { key: l }),
+                  w({ ref_for: !0 }, typeof n == "object" && !Array.isArray(n) ? n : {}, { key: o }),
                   null,
                   16
                   /* FULL_PROPS */
@@ -123,53 +133,63 @@ const oe = { class: "lc-szmap-raw" }, te = {
                 128
                 /* KEYED_FRAGMENT */
               ))
-            ], 8, ne))),
+            ], 8, de))),
             128
             /* KEYED_FRAGMENT */
           ))
         ]),
-        v("g", se, [
-          v("g", ue, [
-            v("g", ce, [
-              (t(), s(
+        v("g", ve, [
+          v("g", pe, [
+            v("g", ge, [
+              (s(), i(
                 p,
                 null,
-                g(L, (c, e, r) => b(F(c), h({
-                  class: N.value,
-                  key: r,
+                g(b, (f, r, a) => M(j(f), w({
+                  class: I.value,
+                  key: a,
                   ref_for: !0
-                }, I(e)), null, 16, ["class"])),
+                }, P(r), {
+                  onMouseover: (n) => D(r),
+                  onMouseleave: l[0] || (l[0] = (n) => F(n))
+                }), null, 16, ["class", "onMouseover"])),
                 64
                 /* STABLE_FRAGMENT */
               )),
-              a.showLabel ? (t(), j(Z, {
+              e.showLabel ? (s(), H(te, {
                 key: 0,
-                labels: a.labels,
-                values: a.values
-              }, null, 8, ["labels", "values"])) : z("v-if", !0)
+                labels: e.labels,
+                values: e.values
+              }, null, 8, ["labels", "values"])) : B("v-if", !0)
             ])
           ])
         ])
       ])),
-      a.showLabel ? (t(), s("div", ie, [
-        (t(), s(
-          p,
-          null,
-          g(L, (c, e) => b(E(ee), h({
-            key: e,
-            class: ["lc-szmap-raw__mark-group--item", `mark-${e}`],
-            ref_for: !0
-          }, w(e), {
-            size: "small",
-            onClick: (r) => B(e)
-          }), null, 16, ["class", "onClick"])),
-          64
-          /* STABLE_FRAGMENT */
-        ))
-      ])) : z("v-if", !0)
+      e.showLabel ? (s(), i("div", be, [
+        O(e.$slots, "mapLabel", {
+          blockList: b,
+          labelClass: C,
+          getVlaue: _,
+          currentMapKey: L.value
+        }, () => [
+          (s(), i(
+            p,
+            null,
+            g(b, (f, r) => M(S(ne), w({
+              key: r,
+              class: C(r),
+              ref_for: !0
+            }, _(r), {
+              size: "small",
+              onClick: (a) => E(r)
+            }), null, 16, ["class", "onClick"])),
+            64
+            /* STABLE_FRAGMENT */
+          ))
+        ], !0)
+      ])) : B("v-if", !0)
     ]));
   }
 });
 export {
-  Ne as default
+  Ae as default
 };
