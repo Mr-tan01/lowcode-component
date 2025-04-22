@@ -5,6 +5,7 @@
  * @param changeType 变化类型
  * @returns Promise<{canvas: HTMLCanvasElement, cleanup: () => void}>
  */
+export declare const changeIconOption: any;
 export declare const createInfoCanvas: (info: any, valueKey?: string, changeType?: string) => Promise<{
     canvas: HTMLCanvasElement;
     cleanup: () => void;

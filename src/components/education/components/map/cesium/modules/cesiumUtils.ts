@@ -12,7 +12,7 @@ import {
     ScreenSpaceEventType,
     Viewer,
 } from "cesium";
-import { areaData, type controlStatusType, type optionType, type pointType } from "./type";
+import { areaData, type controlStatusType, type optionType, type pointType, type newEntity } from "./type";
 import { createInfoCanvas } from "./tools";
 export class cesiumService {
     public viewer: Viewer | null = null;
@@ -76,13 +76,15 @@ export class cesiumService {
     }
 
     // 添加点标记
-    async addPoint(point: pointType, type?: string): Promise<Entity | null> {
+    async addPoint(point: pointType, type?: string, changeType?: string): Promise<Entity | null> {
         if (!this.viewer) return null;
-        const valueInfo = await createInfoCanvas(point, type);
+        const valueInfo = await createInfoCanvas(point, type, changeType);
         const entity: Entity = this.viewer.entities.add({
             position: Cartesian3.fromDegrees(point.lng, point.lat),
             name: type ? point.name : `${point.name}Label`,
             value: point?.value,
+            changeIcon: point?.changeIconType,
+            changeType: changeType,
             text: point?.text,
             billboard: {
                 image: valueInfo.canvas,
@@ -173,7 +175,7 @@ export class cesiumService {
     }
 
     // 控制窗体
-    pointClickHandler(pickedObject: Entity): void {
+    pointClickHandler(pickedObject: newEntity): void {
         const findValue = this.pointData?.findIndex((item) => item.name === pickedObject.name);
         const findLabelValue = this.pointEntities?.findIndex((item) => item.name === pickedObject.name + "Label");
         if (findValue != -1 && findValue !== undefined && findLabelValue == -1 && this.pointData) {

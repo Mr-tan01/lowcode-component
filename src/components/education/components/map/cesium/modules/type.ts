@@ -22,14 +22,20 @@ export const areaData = {
     罗湖区: { lng: 114.14519824740296, lat: 22.58076759041863, position: shenZhen.features[9] },
 };
 
+export type baseIconType = "primary" | "success" | "warning" | "danger";
+export type changeIconType = "icon_success" | "icon_primary";
+export type iconType = baseIconType | changeIconType;
+export type textIconType = `${baseIconType}_label`;
+
 export interface pointType {
     name: string; // 唯一name属性 获取唯一entity实例 切勿重复
     lng: number;
     lat: number;
     value?: string; // 文字内容
-    iconType?: string | "primary" | "success" | "warning" | "danger" | "icon_primary" | "icon_success"; // 点图标
+    iconType?: iconType | string; // 点图标
     text?: string; // 窗体文字内容
-    textIconType?: string | "primary_label" | "success_label" | "warning_label" | "danger_label"; // 窗体图标
+    textIconType?: textIconType | string; // 窗体图标
+    changeIconType?: changeIconType | string; // 变动图标
 }
 
 export interface polygonType {
@@ -84,7 +90,14 @@ export interface optionType {
     pointHandler: (value: Entity) => void;
 }
 
-export type changeModelType =  "polygonClickHandler" | "setCameraHeight" | "ZoomIn" | "ZoomOut";
+export type changeModelType = "polygonClickHandler" | "setCameraHeight" | "ZoomIn" | "ZoomOut";
+
+export interface newEntity extends Entity {
+    value?: string | undefined;
+    changeIcon?: string | undefined;
+    changeType?: string | undefined;
+    text?: string | undefined;
+}
 
 export const pointInfo = {
     宝安区: [
@@ -105,6 +118,7 @@ export const pointInfo = {
             iconType: "icon_primary",
             text: "怀德社区",
             textIconType: "primary_label",
+            changeIconType: "icon_success",
         },
         {
             name: "c",
@@ -123,6 +137,7 @@ export const pointInfo = {
             iconType: "icon_success",
             text: "立湖新公园园园美林峰美林峰",
             textIconType: "success_label",
+            changeIconType: "icon_primary",
         },
     ],
     龙华区: [

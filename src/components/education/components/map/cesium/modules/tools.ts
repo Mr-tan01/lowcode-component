@@ -49,6 +49,11 @@ const imageUrlOption: any = {
     icon_success: iconSuccess,
 };
 
+export const changeIconOption: any = {
+    icon_success: iconSuccess,
+    icon_primary: iconPrimary,
+};
+
 const options = {
     width: 50,
     height: 75,
@@ -84,18 +89,18 @@ export const createInfoCanvas = (
         canvas.width = info?.width ?? options.width;
         canvas.height = info?.height ?? options.height;
 
+        const { iconType, textIconType, changeIconType } = info;
         const icons = {
-            icon: info.iconType ? imageUrlOption[info.iconType] : undefined,
-            textIcon: info.textIconType
-                ? imageUrlOption[info.textIconType]
-                : undefined,
+            icon: iconType ? imageUrlOption[iconType] : undefined,
+            textIcon: textIconType ? imageUrlOption[textIconType] : undefined,
+            changeIcon: changeIconType ? changeIconOption[changeIconType] : undefined,
         };
 
         // 绘制背景
         const bgImageUrl = changeType
-            ? icons.icon
-            : icons?.[valueKey ? "icon" : "textIcon"] ??
-            (valueKey ? icons.icon : icons.textIcon);
+            ? icons.changeIcon
+            : icons?.[valueKey ? "icon" : "textIcon"] ?? (valueKey ? icons.icon : icons.textIcon);
+
         const text = info?.[valueKey ?? "text"] || "";
 
         // 清理dom中的canvas
@@ -117,9 +122,7 @@ export const createInfoCanvas = (
         // 绘制文本
         const reloadText = (textOption: any) => {
             textOption.font = valueKey ? valueFont : textFont;
-            textOption.fillStyle =
-                (valueKey ? info?.fontStyle?.color : info?.textStyle?.color) ??
-                options.fontStyle?.color;
+            textOption.fillStyle = (valueKey ? info?.fontStyle?.color : info?.textStyle?.color) ?? options.fontStyle?.color;
             textOption.textBaseline = "middle";
             textOption.textAlign = "left";
             const textX = valueKey ? info?.textOffsetX ?? 13 : 40;
@@ -133,24 +136,16 @@ export const createInfoCanvas = (
             image.onload = () => {
                 // 先绘制文本 获取添加文字后的宽高
                 reloadText(ctx);
-                canvas.width = valueKey
-                    ? info?.width ?? image.width
-                    : ctx.measureText(text).width + 80;
+                canvas.width = valueKey ? info?.width ?? image.width : ctx.measureText(text).width + 80;
                 canvas.height = info?.height ?? image.height;
 
                 // 绘制图片到画布 宽高为获取后的值
-                ctx.drawImage(
-                    image,
-                    0,
-                    0,
-                    valueKey ? canvas.width : canvas.width,
-                    canvas.height
-                );
+                ctx.drawImage(image, 0, 0, valueKey ? canvas.width : canvas.width, canvas.height);
 
                 // 重新绘制文本 绘制图片会清空画布
                 reloadText(ctx);
 
-                resolve({canvas, cleanup});
+                resolve({ canvas, cleanup });
             };
 
             image.onerror = () => {
@@ -160,7 +155,7 @@ export const createInfoCanvas = (
             image.src = bgImageUrl;
         } else {
             reloadText(ctx);
-            resolve({canvas, cleanup});
+            resolve({ canvas, cleanup });
         }
     });
 };
@@ -170,14 +165,14 @@ export const createInfoCanvas = (
  * @returns Promise<{position: GeolocationPosition}>
  */
 
-export async function geolocation(): Promise<{position: GeolocationPosition }> {
+export async function geolocation(): Promise<{ position: GeolocationPosition }> {
     return new Promise((resolve, reject) => {
         if ("geolocation" in navigator) {
             navigator.geolocation.getCurrentPosition(function (position) {
-                resolve({position});
+                resolve({ position });
             });
         } else {
             reject(new Error("Geolocation is not available."));
         }
-    })
+    });
 }

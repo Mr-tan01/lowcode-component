@@ -1,5 +1,5 @@
 
-import LcCesium from  './component.vue';
+import LcCesium from  './cesium.vue';
 export type CesiumInstanceType = InstanceType<typeof LcCesium>;
 
 export default LcCesium;

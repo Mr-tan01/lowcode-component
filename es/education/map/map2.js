@@ -2,9 +2,9 @@ import { defineComponent as r, openBlock as t, createElementBlock as e, createVN
 import n from "./szmap/index.js";
 import "lodash-es/merge";
 import "./szmap/const.js";
-import './assets/szmap/rawMap2.css';import './assets/szmap/rawMap.css';import './assets/mark/mark.css';import './assets/szmap/comp/labels.css';/* empty css                  */
+import './assets/szmap/rawMap2.css';import './assets/szmap/rawMap.css';import './assets/src/components/education/components/mark/mark.css';import './assets/szmap/comp/labels.css';/* empty css                  */
 import "naive-ui/es/number-animation";
-/* empty css           */
+/* empty css                                               */
 /* empty css              */
 /* empty css              */
 const c = { class: "lc-map" }, P = /* @__PURE__ */ r({
