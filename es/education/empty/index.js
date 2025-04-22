@@ -1,4 +1,4 @@
-import { default as e } from "./index2.js";
+import { default as e } from "./empty.js";
 export {
   e as LcEmpty
 };
