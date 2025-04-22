@@ -151,14 +151,19 @@ export declare const areaData: {
         };
     };
 };
+export type baseIconType = "primary" | "success" | "warning" | "danger";
+export type changeIconType = "icon_success" | "icon_primary";
+export type iconType = baseIconType | changeIconType;
+export type textIconType = `${baseIconType}_label`;
 export interface pointType {
     name: string;
     lng: number;
     lat: number;
     value?: string;
-    iconType?: string | "primary" | "success" | "warning" | "danger" | "icon_primary" | "icon_success";
+    iconType?: iconType | string;
     text?: string;
-    textIconType?: string | "primary_label" | "success_label" | "warning_label" | "danger_label";
+    textIconType?: textIconType | string;
+    changeIconType?: changeIconType | string;
 }
 export interface polygonType {
     name: string;
@@ -209,8 +214,14 @@ export interface optionType {
     pointHandler: (value: Entity) => void;
 }
 export type changeModelType = "polygonClickHandler" | "setCameraHeight" | "ZoomIn" | "ZoomOut";
+export interface newEntity extends Entity {
+    value?: string | undefined;
+    changeIcon?: string | undefined;
+    changeType?: string | undefined;
+    text?: string | undefined;
+}
 export declare const pointInfo: {
-    宝安区: {
+    宝安区: ({
         name: string;
         lng: number;
         lat: number;
@@ -218,7 +229,17 @@ export declare const pointInfo: {
         iconType: string;
         text: string;
         textIconType: string;
-    }[];
+        changeIconType?: undefined;
+    } | {
+        name: string;
+        lng: number;
+        lat: number;
+        value: string;
+        iconType: string;
+        text: string;
+        textIconType: string;
+        changeIconType: string;
+    })[];
     龙华区: {
         name: string;
         lng: number;

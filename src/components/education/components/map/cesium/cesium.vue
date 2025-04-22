@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts" setup>
-import { LcCesium } from "./index";
+import LcCesium from "./component.vue";
 </script>
 
 <style lang="scss" scoped>

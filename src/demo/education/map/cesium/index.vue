@@ -16,7 +16,7 @@
 import { ref } from "vue";
 import { LcSwitchTabs } from "@/components/education";
 import LcMapButton from "@/components/education/components/mapButton/mapButton.vue";
-import { LcCesium } from "@/components/education/components/map/cesium/index";
+import { LcCesium } from "@/components/education/components/map";
 import { DemoHelpBox } from "@/components/common/DemoHelpBox";
 import type { ChangeEvent } from "@/components/education/components/carouseBox/types";
 import { type Entity } from "cesium";
@@ -24,7 +24,7 @@ import { pointInfo, basicConfigType } from "@/components/education/components/ma
 import { Color } from "cesium";
 
 const tabValue = ref("宝安区");
-let cesiumMap = ref<InstanceType<typeof LcCesium> | null>(null);
+let cesiumMap = ref<any>(null);
 let optionInfo = ref(pointInfo["宝安区"]);
 let basicConfig = ref<basicConfigType>({
     maxZoom: 90000,
