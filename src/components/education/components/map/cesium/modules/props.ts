@@ -3,6 +3,9 @@ import type { controlStatusType, pointType, basicConfigType } from "./type";
 import { Cartesian3, Color } from "cesium";
 
 export const cesiumProps = {
+    clientId: String as PropType<string>,
+    accessToken: String as PropType<string | null>,
+    imageryLayersUrl: String as PropType<string>,
     centerPosition: {
         type: Object as PropType<Cartesian3>,
     },

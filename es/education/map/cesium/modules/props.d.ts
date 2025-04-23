@@ -2,6 +2,9 @@ import { PropType } from 'vue';
 import { controlStatusType, pointType, basicConfigType } from './type';
 import { Cartesian3, Color } from 'cesium';
 export declare const cesiumProps: {
+    clientId: PropType<string>;
+    accessToken: PropType<string | null>;
+    imageryLayersUrl: PropType<string>;
     centerPosition: {
         type: PropType<Cartesian3>;
     };
