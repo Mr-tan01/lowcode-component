@@ -1,18 +1,17 @@
 import {
+    Viewer,
     Cartesian2,
     Cartesian3,
     Color,
     defined,
     Entity,
-    ImageryLayer,
     Math as cesiumMath,
     NearFarScalar,
     PolylineDashMaterialProperty,
     ScreenSpaceEventHandler,
     ScreenSpaceEventType,
-    Viewer,
 } from "cesium";
-import { areaData, type controlStatusType, type optionType, type pointType, type newEntity } from "./type";
+import { areaData, type controlStatusType, type optionType, type pointType } from "./type";
 import { createInfoCanvas } from "./tools";
 export class cesiumService {
     public viewer: Viewer | null = null;
@@ -22,12 +21,14 @@ export class cesiumService {
     public screenSpaceEventHandler: void | null = null;
 
     constructor(public containerId: string, public options: optionType) {}
-    
+
     // 初始化Cesium Viewer
     async initViewer(controlStatus: controlStatusType): Promise<boolean> {
         if (this.viewer) this.destroy();
         try {
             this.viewer = new Viewer(this.containerId, controlStatus);
+            // @ts-ignore
+            this.viewer.cesiumWidget.creditContainer.style.display = "none";
             this.viewer.scene.debugShowFramesPerSecond = false;
             this.viewer.scene.screenSpaceCameraController.enableTranslate = true;
             this.viewer.scene.screenSpaceCameraController.minimumZoomDistance = this.options.config.minZoom;
@@ -69,10 +70,20 @@ export class cesiumService {
         }
     }
     // 加载瓦片图层
-    async loadTileLayer(url: string): Promise<ImageryLayer | null> {
+    async loadTileLayer(url: string): Promise<void> {
         const provider = await Zondy.WebMapTileServiceImageryProvider.fromUrl(url);
-        if (!this.viewer || !provider) return null;
-        return this.viewer.imageryLayers.addImageryProvider(provider);
+        if (this.viewer && provider) {
+            this.viewer.imageryLayers.addImageryProvider(provider);
+            this.viewer.scene.globe.tileLoadProgressEvent.addEventListener((remaining) => {
+                // 瓦片加载状完成（首次添加point、polygon）
+                if (remaining === 0) {
+                    console.log(this.options.config.areaName)
+                    this.addPolygon(this.options.config.areaName);
+                    this.pointData?.forEach((point: pointType) => this.addPoint(point, "value"));
+                    this.options.loadTileLayerHandler(false);
+                }
+            });
+        }
     }
 
     // 添加点标记
@@ -83,8 +94,6 @@ export class cesiumService {
             position: Cartesian3.fromDegrees(point.lng, point.lat),
             name: type ? point.name : `${point.name}Label`,
             value: point?.value,
-            changeIcon: point?.changeIconType,
-            changeType: changeType,
             text: point?.text,
             billboard: {
                 image: valueInfo.canvas,
@@ -175,7 +184,7 @@ export class cesiumService {
     }
 
     // 控制窗体
-    pointClickHandler(pickedObject: newEntity): void {
+    pointClickHandler(pickedObject: Entity): void {
         const findValue = this.pointData?.findIndex((item) => item.name === pickedObject.name);
         const findLabelValue = this.pointEntities?.findIndex((item) => item.name === pickedObject.name + "Label");
         if (findValue != -1 && findValue !== undefined && findLabelValue == -1 && this.pointData) {
@@ -215,6 +224,11 @@ export class cesiumService {
         if (this.viewer) {
             this.viewer.camera.flyTo({ destination: centerPosition, duration: 1 });
         }
+    }
+
+    // 切换图层
+    setViewerLayer(imageryLayersUrl: string): void {
+        this.viewer?.entities.removeAll();
     }
 
     destroy(): void {

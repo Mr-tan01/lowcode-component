@@ -1,6 +1,6 @@
 import { defineComponent as f, shallowRef as o, useTemplateRef as p, openBlock as m, createElementBlock as v, createElementVNode as w } from "vue";
 import { useScriptTag as _ } from "@vueuse/core";
-import k from "../src/components/education/components/mark/images/normal.png.js";
+import k from "../mark/images/normal.png.js";
 const L = { class: "lc-tianditu" }, h = {
   class: "lc-tianditu__map",
   ref: "tiandituCanvasEl"

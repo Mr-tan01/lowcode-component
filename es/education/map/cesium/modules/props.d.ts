@@ -1,6 +1,6 @@
 import { PropType } from 'vue';
 import { controlStatusType, pointType, basicConfigType } from './type';
-import { Cartesian3, Color } from 'cesium';
+import { Color, Cartesian3 } from 'cesium';
 export declare const cesiumProps: {
     clientId: PropType<string>;
     accessToken: PropType<string | null>;

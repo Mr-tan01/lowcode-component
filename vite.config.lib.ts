@@ -80,6 +80,7 @@ export default defineConfig({
         /lowcode-share*/,
         'resize-observer-polyfill',
         /@mmj-code-lib\/lowcode*/,
+        /@cesium*/,
       ],
     },
   }

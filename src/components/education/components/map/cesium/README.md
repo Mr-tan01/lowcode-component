@@ -4,6 +4,7 @@
 
 ```bash
 pnpm add cesium
+pnpm i @cesium/engine @cesium/widtgets --save
 pnpm add vite-plugin-cesium
 
 ```
@@ -14,8 +15,6 @@ pnpm add vite-plugin-cesium
 plugins中添加vite-plugin-cesium模块
 
 # 需引入外部文件
-style.css
-widgets.css
 Cesium.js
 webclient-cesium-plugin.min.js
 webclient-common.min.j

@@ -2,7 +2,7 @@
     <div class="demo-headers mr-setting-w">
         <DemoHelpBox title="深圳地图" description="深圳教育项目-高德地图" rswidth="962px" rsHeight="600px">
             <div class="size-box">
-                <LcCesium ref="cesiumMap" :access-token="accessToken" :basic-config="basicConfig" :point-data="optionInfo" @pointHandler="pointHandler"></LcCesium>
+                <LcCesium ref="cesiumMap" :access-token="accessToken" :point-data="optionInfo" @pointHandler="pointHandler"></LcCesium>
             </div>
         </DemoHelpBox>
         <div style="position: absolute; top: 30%; left: 70%">
@@ -22,7 +22,6 @@ import { DemoHelpBox } from "@/components/common/DemoHelpBox";
 import type { ChangeEvent } from "@/components/education/components/carouseBox/types";
 import { type Entity } from "cesium";
 import { pointInfo, basicConfigType } from "@/components/education/components/map/cesium/modules/type";
-import { Color } from "cesium";
 import { getToken } from "@/request"
 
 let accessToken = ref<string | null>(null)
@@ -30,12 +29,6 @@ let accessToken = ref<string | null>(null)
 const tabValue = ref("宝安区");
 let cesiumMap = ref<CesiumInstanceType | null>(null);
 let optionInfo = ref(pointInfo["宝安区"]);
-let basicConfig = ref<basicConfigType>({
-    maxZoom: 90000,
-    minZoom: 200,
-    areaName: "宝安区",
-    baseColor: Color.TRANSPARENT,
-});
 
 function changePolygon(value: ChangeEvent): void {
     cesiumMap.value?.changeModel("polygonClickHandler", value.label);
@@ -43,7 +36,7 @@ function changePolygon(value: ChangeEvent): void {
 }
 
 function iconHandler(alt: string) {
-    cesiumMap.value?.changeModel("setCameraHeight", alt);
+    cesiumMap.value?.changeModel((alt ==='Layer' ? "setViewerLayer" : "setCameraHeight"), alt);
 }
 
 function pointHandler(value: Entity) {

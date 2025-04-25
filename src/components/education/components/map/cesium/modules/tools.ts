@@ -160,6 +160,7 @@ export const createInfoCanvas = (
     });
 };
 
+
 /**
  * 获取设备地理位置
  * @returns Promise<{position: GeolocationPosition}>
