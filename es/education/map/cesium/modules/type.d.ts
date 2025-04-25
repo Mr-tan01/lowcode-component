@@ -212,14 +212,9 @@ export interface basicConfigType {
 export interface optionType {
     config: basicConfigType;
     pointHandler: (value: Entity) => void;
+    loadTileLayerHandler: (status: boolean) => void;
 }
 export type changeModelType = "polygonClickHandler" | "setCameraHeight" | "ZoomIn" | "ZoomOut";
-export interface newEntity extends Entity {
-    value?: string | undefined;
-    changeIcon?: string | undefined;
-    changeType?: string | undefined;
-    text?: string | undefined;
-}
 export declare const pointInfo: {
     宝安区: ({
         name: string;

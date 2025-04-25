@@ -12,7 +12,7 @@ import le from "./comp/nanshan.js";
 import ae from "./comp/longhua.js";
 import oe from "./comp/defines.js";
 import te from "./comp/labels2.js";
-import ne from "../src/components/education/components/mark/index2.js";
+import ne from "../mark/index2.js";
 import { propsRaw as se } from "./props.js";
 import { LabelModelEnum as N, defFloatLevelConfig as ue, szBlockNames as t, defBlockLableMap as ie } from "./const.js";
 import ce from "lodash-es/merge";

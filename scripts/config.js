@@ -29,6 +29,7 @@ export default {
                 /lowcode-share*/,
                 'resize-observer-polyfill',
                 /@mmj-code-lib\/lowcode*/,
+                /@cesium*/,
             ],
             output: {
                 globals: {

@@ -1,5 +1,5 @@
-import { Cartesian3, Entity } from 'cesium';
 import { changeModelType } from './modules/type';
+import { Entity, Cartesian3 } from 'cesium';
 declare function changeModel(type: changeModelType, value: string): void;
 declare const _default: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
     clientId: import('vue').PropType<string>;

@@ -10,10 +10,10 @@
 import { ref, onMounted, onBeforeUnmount, watch } from "vue";
 import { cesiumService } from "./modules/cesiumUtils";
 import { cesiumProps } from "./modules/props";
-import { Cartesian3, Entity } from "cesium";
 import { changeModelType } from "./modules/type";
+import { Entity, Cartesian3 } from "cesium";
 
-const initImageryLayersStatus = ref(true);
+const initImageryLayersStatus = ref<boolean | null>(true);
 const error = ref<string | null>(null);
 const emit = defineEmits<{
     (e: "pointHandler", value: Entity): void;
@@ -29,11 +29,18 @@ const {
     pointData = [],
 } = defineProps(cesiumProps);
 
+function loadedTileLayer(status: boolean | null): void {
+    initImageryLayersStatus.value = status;
+}
+
 // 初始化 Cesium 服务
 const cesiumUtils = new cesiumService("cesium-3d-viewer", {
     config: basicConfig,
     pointHandler: (value: Entity) => {
         emit("pointHandler", value);
+    },
+    loadTileLayerHandler: (status: boolean | null) => {
+        loadedTileLayer(status);
     },
 });
 
@@ -56,7 +63,6 @@ function errMessage(message: string) {
 async function initCesium(): Promise<{ status: boolean }> {
     try {
         if (!accessToken) {
-            console.log("请先获取token");
             return { status: false };
         }
         // 同步点数据
@@ -72,19 +78,11 @@ async function initCesium(): Promise<{ status: boolean }> {
         cesiumUtils.setInitialView(centerPosition);
 
         // 加载瓦片图层
-        const titleUrl = imageryLayersUrl || `jysl/service/api/e99b765798d1412b9c2b458a1473396e/igs/rest/services/SZMAP/SZDZDT_2024_Yingji_T1_4490/WMTSServer?client_id=${clientId}&access_token=${accessToken}`;
+        const titleUrl =
+            imageryLayersUrl ||
+            `jysl/service/api/e99b765798d1412b9c2b458a1473396e/igs/rest/services/SZMAP/SZDZDT_2024_Yingji_T1_4490/WMTSServer?client_id=${clientId}&access_token=${accessToken}`;
 
         await cesiumUtils.loadTileLayer(titleUrl);
-
-        // 监听瓦片加载状态
-        cesiumUtils.viewer?.scene.globe.tileLoadProgressEvent.addEventListener(function (remaining) {
-            // 瓦片加载状完成（首次添加point、polygon）
-            if (remaining === 0 && initImageryLayersStatus.value) {
-                cesiumUtils.addPolygon(basicConfig.areaName);
-                pointData?.forEach((point) => cesiumUtils.addPoint(point, "value"));
-                initImageryLayersStatus.value = false;
-            }
-        });
         return { status: true };
     } catch (err: any) {
         cesiumUtils.addPolygon(basicConfig.areaName);
@@ -106,10 +104,16 @@ watch(
         newVal?.forEach((point) => cesiumUtils.addPoint(point, "value"));
     }
 );
-
 watch(
     () => accessToken,
     () => {
+        initCesium();
+    }
+);
+watch(
+    () => imageryLayersUrl,
+    () => {
+        cesiumUtils.destroy();
         initCesium();
     }
 );
@@ -151,7 +155,7 @@ onBeforeUnmount(() => {
     .initImageryLayersStatus-indicator,
     .error-message {
         position: absolute;
-        top: 20px;
+        top: 40%;
         left: 50%;
         transform: translateX(-50%);
         padding: 10px 20px;
@@ -159,7 +163,7 @@ onBeforeUnmount(() => {
         background: rgba(0, 0, 0, 0.7);
         color: white;
         border-radius: 4px;
-        z-index: 999;
+        z-index: 10;
     }
 
     .error-message {

@@ -1,4 +1,4 @@
-import e from "../../node_modules/.pnpm/@cesium_engine@16.0.0/node_modules/@cesium/engine/Source/Core/Color.js";
+import { Color as e } from "@cesium/engine";
 const a = {
   clientId: String,
   accessToken: String,
