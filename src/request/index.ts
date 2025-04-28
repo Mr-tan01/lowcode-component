@@ -99,8 +99,8 @@ export const setToken = (token: string): void => {
  * @param token 认证令牌
  */
 export const getToken = getResponse<{ id: string; secret: string }>("jysl/oauth/token", {
-    client_id: import.meta.env.VITE_JYSLAPI_CLIENT_ID,
-    client_secret: import.meta.env.VITE_JYSLAPI_CLIENT_SECRET,
+    client_id: '74109f7095974ab1a5e930c8e998580d',
+    client_secret: 'JqvrFbO!',
 }).then((res: any) => {
     if (res.status === 200 && res.data.access_token) {
         localStorage.setItem("access_token", res.data.access_token);

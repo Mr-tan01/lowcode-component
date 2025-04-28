@@ -81,6 +81,7 @@ export default defineConfig({
         'resize-observer-polyfill',
         /@mmj-code-lib\/lowcode*/,
         /@cesium*/,
+        'cesium-heatmap-es6'
       ],
     },
   }

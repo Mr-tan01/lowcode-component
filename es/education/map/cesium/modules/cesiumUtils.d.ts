@@ -8,8 +8,12 @@ export declare class cesiumService {
     pointEntities: Entity[] | null;
     polygonEntities: Entity[] | null;
     screenSpaceEventHandler: void | null;
+    private imageLayerState;
+    private imageLayerUrl;
+    private tileLoadCallback;
     constructor(containerId: string, options: optionType);
     initViewer(controlStatus: controlStatusType): Promise<boolean>;
+    handleTileLoadProgress(remaining: number): void;
     loadTileLayer(url: string): Promise<void>;
     addPoint(point: pointType, type?: string, changeType?: string): Promise<Entity | null>;
     clearEntity(key: string): Promise<void>;
@@ -21,5 +25,6 @@ export declare class cesiumService {
     polygonClickHandler(name: string): void;
     setInitialView(centerPosition: Cartesian3): void;
     setViewerLayer(imageryLayersUrl: string): void;
+    addHeatmap(): void;
     destroy(): void;
 }

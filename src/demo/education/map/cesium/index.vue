@@ -36,7 +36,8 @@ function changePolygon(value: ChangeEvent): void {
 }
 
 function iconHandler(alt: string) {
-    cesiumMap.value?.changeModel((alt ==='Layer' ? "setViewerLayer" : "setCameraHeight"), alt);
+  const state = alt === "Layer"
+    cesiumMap.value?.changeModel((state ? "setViewerLayer" : "setCameraHeight"), state ? "https://services.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer" : alt);
 }
 
 function pointHandler(value: Entity) {
@@ -45,7 +46,7 @@ function pointHandler(value: Entity) {
 
 onMounted(async() => {
     await getToken
-    accessToken.value = localStorage.getItem('access_token')
+    accessToken.value = localStorage.getItem('access_token') + "1"
 })
 </script>
 
