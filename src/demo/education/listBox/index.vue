@@ -1,7 +1,7 @@
 <template>
   <div class="demo-listBox">
     <DemoHelpBox title="listBox" description="列表框" rswidth="962px" :code="code1">
-      <LclistBox :items="dataItems" :rows="dataRows" :bordered="true" ></LclistBox>
+      <LclistBox :rows="dataRows" :bordered="true" ></LclistBox>
     </DemoHelpBox>
   </div>
 </template>
@@ -10,13 +10,11 @@ import { DemoHelpBox } from '@/components/common/DemoHelpBox';
 import { LclistBox } from '@/components/education/components/listBox';
 import { code1 } from './demo-codes';
 
-const dataItems = [
-  { key: 'name', value: 'nameValue' },
-  { key: 'age', value: 'ageValue' }
-]
-
 const dataRows = [
-  { name: '姓名', nameValue: '张三', age: '年龄', ageValue: 28 },
-  { name: '职业', nameValue: '前端工程师', age: '经验', ageValue: '5年' }
+  { indicatorId: "1", indicatorName: '姓名', indicatorValue: '张三'},
+  { indicatorId: "2", indicatorName: '职业', indicatorValue: '前端工程师'},
+  { indicatorId: "3", indicatorName: '年龄', indicatorValue: '36岁'},
+  { indicatorId: "4", indicatorName: '工龄', indicatorValue: '10年'},
+
 ]
 </script>

@@ -30,6 +30,7 @@ export default {
                 'resize-observer-polyfill',
                 /@mmj-code-lib\/lowcode*/,
                 /@cesium*/,
+                'cesium-heatmap-es6'
             ],
             output: {
                 globals: {

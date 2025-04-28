@@ -214,7 +214,7 @@ export interface optionType {
     pointHandler: (value: Entity) => void;
     loadTileLayerHandler: (status: boolean) => void;
 }
-export type changeModelType = "polygonClickHandler" | "setCameraHeight" | "ZoomIn" | "ZoomOut";
+export type changeModelType = "polygonClickHandler" | "setCameraHeight" | "setViewerLayer" | "ZoomIn" | "ZoomOut";
 export declare const pointInfo: {
     宝安区: ({
         name: string;

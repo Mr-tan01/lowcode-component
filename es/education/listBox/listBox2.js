@@ -1,8 +1,8 @@
-import { defineComponent as m, openBlock as a, createElementBlock as n, normalizeClass as x, createElementVNode as r, Fragment as s, renderList as g, normalizeStyle as y, toDisplayString as c } from "vue";
-const v = { class: "list-body" }, A = /* @__PURE__ */ m({
+import { defineComponent as x, openBlock as i, createElementBlock as n, normalizeClass as S, createVNode as b, unref as r, withCtx as s, Fragment as m, renderList as w, createBlock as A, normalizeStyle as o, createElementVNode as y, toDisplayString as c } from "vue";
+import { NGrid as k, NGi as v } from "naive-ui";
+const C = /* @__PURE__ */ x({
   __name: "listBox",
   props: {
-    items: { default: () => [] },
     rows: { default: () => [] },
     rowStyle: { default: () => ({}) },
     bordered: { type: Boolean, default: !1 },
@@ -19,97 +19,88 @@ const v = { class: "list-body" }, A = /* @__PURE__ */ m({
       textAlign: "left"
     }) },
     cellPadding: { default: "12px 15px" },
-    defaultAlign: { default: "left" }
+    defaultAlign: { default: "left" },
+    gap: { default: 0 },
+    cols: { default: 2 }
   },
   setup(e) {
-    const f = (l) => {
-      var d, i;
-      const t = {
+    const u = (t) => {
+      var a, d;
+      const l = {
         ...e.keyStyle,
-        padding: e.cellPadding || ((d = e.keyStyle) == null ? void 0 : d.padding),
+        padding: e.cellPadding || ((a = e.keyStyle) == null ? void 0 : a.padding),
         textAlign: e.keyStyle.textAlign || e.defaultAlign,
-        ...((i = e.items[l]) == null ? void 0 : i.keyStyle) || {}
+        ...((d = e.rows[t]) == null ? void 0 : d.keyStyle) || {}
       };
-      return e.bordered && (t.borderLeft = "1px solid #07467a", t.borderTop = "1px solid #07467a", t.borderBottom = "1px solid #07467a", l === e.items.length - 1 && (t.borderRight = "1px solid #07467a")), t;
-    }, S = (l) => {
-      var d, i;
-      const t = {
+      return e.bordered && (l.borderLeft = "1px solid #07467a", l.borderTop = "1px solid #07467a", l.borderBottom = "1px solid #07467a", t === e.rows.length - 1 && (l.borderRight = "1px solid #07467a")), l;
+    }, g = (t) => {
+      var a, d;
+      const l = {
         ...e.valueStyle,
-        padding: e.cellPadding || ((d = e.valueStyle) == null ? void 0 : d.padding),
+        padding: e.cellPadding || ((a = e.valueStyle) == null ? void 0 : a.padding),
         textAlign: e.valueStyle.textAlign || e.defaultAlign,
-        ...((i = e.items[l]) == null ? void 0 : i.valueStyle) || {}
+        ...((d = e.rows[t]) == null ? void 0 : d.valueStyle) || {}
       };
-      return e.bordered && (t.borderTop = "1px solid #07467A", t.borderBottom = "1px solid #07467A", t.borderRight = "1px solid #07467A", t.borderLeft = "1px solid #07467A"), t;
-    }, b = (l) => {
-      const t = {
+      return e.bordered && (l.borderTop = "1px solid #07467A", l.borderBottom = "1px solid #07467A", l.borderRight = "1px solid #07467A", l.borderLeft = "1px solid #07467A"), l;
+    }, f = (t) => {
+      const l = {
         display: "flex",
         width: "100%",
         minWidth: "fit-content"
       };
-      return l % 2 === 0 && e.rowStyle.even ? Object.assign(t, e.rowStyle.even) : l % 2 !== 0 && e.rowStyle.odd && Object.assign(t, e.rowStyle.odd), t;
+      return t % 2 === 0 && e.rowStyle.even ? Object.assign(l, e.rowStyle.even) : t % 2 !== 0 && e.rowStyle.odd && Object.assign(l, e.rowStyle.odd), l;
     };
-    return (l, t) => (a(), n(
+    return (t, l) => (i(), n(
       "div",
       {
-        class: x(["dynamic-data-list", { "is-bordered": l.bordered }])
+        class: S(["dynamic-data-list", { "is-bordered": t.bordered }])
       },
       [
-        r("div", v, [
-          (a(!0), n(
-            s,
-            null,
-            g(l.rows, (d, i) => (a(), n(
-              "div",
-              {
-                key: `row-${i}`,
+        b(r(k), {
+          "x-gap": t.gap,
+          cols: t.cols
+        }, {
+          default: s(() => [
+            (i(!0), n(
+              m,
+              null,
+              w(t.rows, (a, d) => (i(), A(r(v), {
+                key: `row-${d}`,
                 class: "list-row",
-                style: y(b(i))
-              },
-              [
-                (a(!0), n(
-                  s,
-                  null,
-                  g(l.items, (u, o) => (a(), n(
-                    s,
+                style: o(f(d))
+              }, {
+                default: s(() => [
+                  y(
+                    "div",
                     {
-                      key: `col-${o}`
+                      class: "key-cell",
+                      style: o(u(d))
                     },
-                    [
-                      r(
-                        "div",
-                        {
-                          class: "key-cell",
-                          style: y(f(o))
-                        },
-                        c(d[u.key]),
-                        5
-                        /* TEXT, STYLE */
-                      ),
-                      r(
-                        "div",
-                        {
-                          class: "value-cell",
-                          style: y(S(o))
-                        },
-                        c(d[u.value]),
-                        5
-                        /* TEXT, STYLE */
-                      )
-                    ],
-                    64
-                    /* STABLE_FRAGMENT */
-                  ))),
-                  128
-                  /* KEYED_FRAGMENT */
-                ))
-              ],
-              4
-              /* STYLE */
-            ))),
-            128
-            /* KEYED_FRAGMENT */
-          ))
-        ])
+                    c(a.indicatorName),
+                    5
+                    /* TEXT, STYLE */
+                  ),
+                  y(
+                    "div",
+                    {
+                      class: "value-cell",
+                      style: o(g(d))
+                    },
+                    c(a.indicatorValue),
+                    5
+                    /* TEXT, STYLE */
+                  )
+                ]),
+                _: 2
+                /* DYNAMIC */
+              }, 1032, ["style"]))),
+              128
+              /* KEYED_FRAGMENT */
+            ))
+          ]),
+          _: 1
+          /* STABLE */
+        }, 8, ["x-gap", "cols"])
       ],
       2
       /* CLASS */
@@ -117,5 +108,5 @@ const v = { class: "list-body" }, A = /* @__PURE__ */ m({
   }
 });
 export {
-  A as default
+  C as default
 };

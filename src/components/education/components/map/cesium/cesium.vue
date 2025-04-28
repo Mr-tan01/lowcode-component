@@ -137,6 +137,7 @@ onBeforeUnmount(() => {
     width: 100%;
     height: 100%;
     box-sizing: border-box;
+    border: 1px solid transparent;
 
     &_map {
         position: relative;
@@ -159,7 +160,7 @@ onBeforeUnmount(() => {
         left: 50%;
         transform: translateX(-50%);
         padding: 10px 20px;
-        width: 50%;
+        width: 40%;
         background: rgba(0, 0, 0, 0.7);
         color: white;
         border-radius: 4px;

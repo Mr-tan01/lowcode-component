@@ -10,17 +10,29 @@ import {
     PolylineDashMaterialProperty,
     ScreenSpaceEventHandler,
     ScreenSpaceEventType,
+    WebMapTileServiceImageryProvider,
+    ArcGisMapServerImageryProvider,
 } from "cesium";
-import { areaData, type controlStatusType, type optionType, type pointType } from "./type";
-import { createInfoCanvas } from "./tools";
+
+import {CesiumHeatmap} from "cesium-heatmap-es6";
+
+import {areaData, type controlStatusType, type optionType, type pointType} from "./type";
+import {createInfoCanvas} from "./tools";
+
 export class cesiumService {
     public viewer: Viewer | null = null;
     public pointData: pointType[] | null = [];
     public pointEntities: Entity[] | null = [];
     public polygonEntities: Entity[] | null = [];
     public screenSpaceEventHandler: void | null = null;
+    private imageLayerState: boolean | null = true;
+    private imageLayerUrl: String | null = null;
+    private tileLoadCallback: OmitThisParameter<(remaining: number) => void> | null = null;
 
-    constructor(public containerId: string, public options: optionType) {}
+    constructor(public containerId: string, public options: optionType) {
+        // 图层加载监听器
+        this.tileLoadCallback = this.handleTileLoadProgress.bind(this);
+    }
 
     // 初始化Cesium Viewer
     async initViewer(controlStatus: controlStatusType): Promise<boolean> {
@@ -30,6 +42,7 @@ export class cesiumService {
             // @ts-ignore
             this.viewer.cesiumWidget.creditContainer.style.display = "none";
             this.viewer.scene.debugShowFramesPerSecond = false;
+            this.viewer.scene.globe.depthTestAgainstTerrain = true; 
             this.viewer.scene.screenSpaceCameraController.enableTranslate = true;
             this.viewer.scene.screenSpaceCameraController.minimumZoomDistance = this.options.config.minZoom;
             this.viewer.scene.screenSpaceCameraController.maximumZoomDistance = this.options.config.maxZoom;
@@ -69,20 +82,53 @@ export class cesiumService {
             return false;
         }
     }
+
+    // 瓦片加载状完成（首次添加point、polygon）
+    handleTileLoadProgress(remaining: number) {
+        if (remaining === 0) {
+            this.addPolygon(this.options.config.areaName);
+            this.pointData?.forEach((point) => this.addPoint(point, "value"));
+            this.options.loadTileLayerHandler(false);
+            // 移除监听器
+            if (this.tileLoadCallback) {
+                this.viewer?.scene?.globe.tileLoadProgressEvent.removeEventListener(this.tileLoadCallback);
+            }
+        }
+    }
+
     // 加载瓦片图层
     async loadTileLayer(url: string): Promise<void> {
-        const provider = await Zondy.WebMapTileServiceImageryProvider.fromUrl(url);
-        if (this.viewer && provider) {
-            this.viewer.imageryLayers.addImageryProvider(provider);
-            this.viewer.scene.globe.tileLoadProgressEvent.addEventListener((remaining) => {
-                // 瓦片加载状完成（首次添加point、polygon）
-                if (remaining === 0) {
-                    console.log(this.options.config.areaName)
-                    this.addPolygon(this.options.config.areaName);
-                    this.pointData?.forEach((point: pointType) => this.addPoint(point, "value"));
-                    this.options.loadTileLayerHandler(false);
-                }
-            });
+        // 加载动画
+        this.options.loadTileLayerHandler(true);
+        let provider: WebMapTileServiceImageryProvider | ArcGisMapServerImageryProvider | undefined;
+        const {viewer, imageLayerState, imageLayerUrl} = this;
+
+        // 移除现有监听器
+        if (this.tileLoadCallback) {
+            viewer?.scene.globe.tileLoadProgressEvent.removeEventListener(this.tileLoadCallback);
+        }
+
+        // 更新图层URL
+        if (!imageLayerUrl) {
+            this.imageLayerUrl = url;
+        }
+
+        // 切换图层状态并获取新的provider
+        this.imageLayerState = !imageLayerState;
+        if (imageLayerState) {
+            provider = await Zondy.WebMapTileServiceImageryProvider.fromUrl(imageLayerUrl ? imageLayerUrl : url);
+        } else {
+            provider = await ArcGisMapServerImageryProvider.fromUrl(url);
+        }
+
+        if (viewer && provider) {
+            viewer.imageryLayers.addImageryProvider(provider);
+
+            // 重新添加监听器
+            if (this.tileLoadCallback) {
+                viewer.scene?.globe?.tileLoadProgressEvent.addEventListener(this.tileLoadCallback);
+
+            }
         }
     }
 
@@ -93,6 +139,7 @@ export class cesiumService {
         const entity: Entity = this.viewer.entities.add({
             position: Cartesian3.fromDegrees(point.lng, point.lat),
             name: type ? point.name : `${point.name}Label`,
+            id: type ? point.name : `${point.name}Label`,
             value: point?.value,
             text: point?.text,
             billboard: {
@@ -161,7 +208,7 @@ export class cesiumService {
     setCameraHeight(type: string) {
         if (type === "ZoomIn" || type === "ZoomOut") {
             const value: number[] | undefined = this.getPositionCartographic();
-            const { maxZoom, minZoom } = this.options.config;
+            const {maxZoom, minZoom} = this.options.config;
             const heightLimit =
                 value && value[2] ? (value[2] >= 30000 ? 20000 : value[2] >= 20000 ? 10000 : value[2] >= 10000 ? 8000 : 1000) : 1000;
             const height = value![2] - (type === "ZoomIn" ? heightLimit : -heightLimit);
@@ -206,7 +253,7 @@ export class cesiumService {
                     this.addPolygon(name);
                 }, 300);
             }
-            const { lng, lat } = areaData[name];
+            const {lng, lat} = areaData[name];
             this.polygonEntities?.forEach((item) => {
                 item.show = item.name === name;
             });
@@ -222,13 +269,42 @@ export class cesiumService {
     // 设置初始视角
     setInitialView(centerPosition: Cartesian3): void {
         if (this.viewer) {
-            this.viewer.camera.flyTo({ destination: centerPosition, duration: 1 });
+            this.viewer.camera.flyTo({destination: centerPosition, duration: 1});
         }
     }
 
     // 切换图层
     setViewerLayer(imageryLayersUrl: string): void {
+        this.viewer?.imageryLayers.removeAll();
         this.viewer?.entities.removeAll();
+        this.loadTileLayer(imageryLayersUrl);
+    }
+
+    // 热力图
+    addHeatmap(): void {
+        const points = areaData['宝安区'].position.geometry.coordinates.flat(2).map(([lng, lat]) => {
+            return {
+                x: lng,
+                y: lat,
+                value: Number((Math.random() * (2 - 0.1) + 0.1).toFixed(1))
+            }
+        })
+
+        new CesiumHeatmap(this.viewer!, {
+            zoomToLayer: true,
+            points,
+            heatmapOptions: {
+                maxOpacity: 0,
+                minOpacity: 1,
+                gradient: {
+                    "0.00": "#A3E76A",
+                    "0.25": "#E7D35E",
+                    "0.50": "#E2EE66",
+                    "0.75": "#DF684D",
+                    "1.00": "#EE5442",
+                },
+            },
+        });
     }
 
     destroy(): void {
@@ -238,6 +314,10 @@ export class cesiumService {
             this.pointEntities = null;
             this.polygonEntities = null;
             this.screenSpaceEventHandler = null;
+            this.imageLayerState= null;
+            this.imageLayerUrl = null;
+            this.tileLoadCallback = null;
+        
         }
     }
 }

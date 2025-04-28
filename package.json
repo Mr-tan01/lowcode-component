@@ -1,7 +1,7 @@
 {
     "name": "lowcode-component",
     "private": true,
-    "version": "0.1.0-alpha.2.2.0",
+    "version": "0.1.0-alpha.2.2.1",
     "type": "module",
     "main": "dist/index.prod.mjs",
     "types": "dist/types/index.d.ts",
@@ -21,9 +21,11 @@
     "dependencies": {
         "@mmj-code-lib/lowcode": "git+http://liangweizhu@siteshun:txTYq7HFHNZHrp4yVjpJ@code.siteshun.com:800/front-component/STS/mmj-code-lib.git#lowcode-0.1.0",
         "lowcode-share": "git+http://code.siteshun.com:800/front-component/lowcode-sview/lowcode-share.git#develop"
-
     },
     "devDependencies": {
+        "@cesium/engine": "^16.0.0",
+        "@cesium/widgets": "^11.1.0",
+        "cesium-heatmap-es6": "^0.8.0",
         "@mmj-code-lib/scripts": "git+http://code.siteshun.com:800/front-component/STS/mmj-code-lib.git#scripts",
         "@types/echarts": "^5.0.0",
         "@types/lodash-es": "^4.17.12",
@@ -33,27 +35,25 @@
         "@vue/repl": "^4.5.1",
         "@vue/tsconfig": "^0.7.0",
         "@vueuse/core": "^12.5.0",
+        "axios": "^1.8.4",
+        "cesium": "^1.128.0",
         "commander": "^13.1.0",
         "echarts": "^5.6.0",
         "highlight.js": "^11.11.1",
         "husky": "8.0.0",
         "lodash-es": "^4.17.21",
         "naive-ui": "^2.41.0",
+        "resize-observer-polyfill": "^1.5.1",
         "sass-embedded": "^1.83.4",
         "tsup": "^8.4.0",
         "typescript": "~5.6.2",
         "vite": "^5.4.13",
+        "vite-plugin-cesium": "^1.2.23",
         "vite-plugin-dts": "^4.5.0",
         "vite-plugin-lib-inject-css": "^2.2.1",
         "vue": "^3.5.13",
         "vue-resizable": "^2.1.7",
         "vue-router": "^4.5.0",
-        "vue-tsc": "^2.2.0",
-        "resize-observer-polyfill": "^1.5.1",
-        "axios": "^1.8.4",
-        "cesium": "^1.128.0",
-        "@cesium/engine": "^16.0.0",
-        "@cesium/widgets": "^11.1.0",
-        "vite-plugin-cesium": "^1.2.23"
+        "vue-tsc": "^2.2.0"
     }
 }
