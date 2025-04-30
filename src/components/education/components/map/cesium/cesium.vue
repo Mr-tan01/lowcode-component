@@ -23,7 +23,7 @@ const {
     clientId = "74109f7095974ab1a5e930c8e998580d",
     accessToken,
     imageryLayersUrl,
-    centerPosition = Cartesian3.fromDegrees(114.155799, 22.617691, 90000),
+    centerPosition = Cartesian3.fromDegrees(114.15057,22.593059, 100000),
     controlStatus,
     basicConfig,
     pointData = [],

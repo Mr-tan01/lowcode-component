@@ -10,6 +10,7 @@ import {
 import shenZhen from "./深圳市（各区）.json";
 
 export const areaData = {
+    深圳: {lng: 114.063109, lat: 22.544522, position: []},
     光明区: { lng: 113.91634116522685, lat: 22.77147302900205, position: shenZhen.features[0] },
     坪山区: { lng: 114.35193598950553, lat: 22.688581371110487, position: shenZhen.features[1] },
     龙华区: { lng: 114.01646181978259, lat: 22.68598921119512, position: shenZhen.features[2] },

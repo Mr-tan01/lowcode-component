@@ -84,7 +84,7 @@ class Z {
     }
   }
   addPolygon(e) {
-    if (!this.viewer) return null;
+    if (!this.viewer || !(e in d)) return null;
     const i = d[e].position.geometry.coordinates.flat(2).map(([a, s]) => c.fromDegrees(a, s)), t = this.viewer.entities.add({
       name: e,
       polyline: {

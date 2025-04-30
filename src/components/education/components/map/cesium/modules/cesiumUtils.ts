@@ -116,7 +116,7 @@ export class cesiumService {
         // 切换图层状态并获取新的provider
         this.imageLayerState = !imageLayerState;
         if (imageLayerState) {
-            provider = await Zondy.WebMapTileServiceImageryProvider.fromUrl(imageLayerUrl ? imageLayerUrl : url);
+                provider = await Zondy.WebMapTileServiceImageryProvider.fromUrl(imageLayerUrl ? imageLayerUrl : url);
         } else {
             provider = await ArcGisMapServerImageryProvider.fromUrl(url);
         }
@@ -168,7 +168,7 @@ export class cesiumService {
     }
 
     addPolygon(name: string): Entity | null {
-        if (!this.viewer) return null;
+        if (!this.viewer || !(name in areaData)) return null;
         const positions = areaData[name].position.geometry.coordinates.flat(2).map(([lng, lat]) => Cartesian3.fromDegrees(lng, lat));
 
         const entity = this.viewer.entities.add({

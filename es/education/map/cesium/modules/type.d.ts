@@ -1,5 +1,10 @@
 import { SceneMode, SkyAtmosphere, SkyBox, Color, Entity, Cartesian3, PolylineDashMaterialProperty } from 'cesium';
 export declare const areaData: {
+    深圳: {
+        lng: number;
+        lat: number;
+        position: never[];
+    };
     光明区: {
         lng: number;
         lat: number;
