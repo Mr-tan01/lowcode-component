@@ -14,10 +14,10 @@ import {
     ArcGisMapServerImageryProvider,
 } from "cesium";
 
-import {CesiumHeatmap} from "cesium-heatmap-es6";
+import { CesiumHeatmap } from "cesium-heatmap-es6";
 
-import {areaData, type controlStatusType, type optionType, type pointType} from "./type";
-import {createInfoCanvas} from "./tools";
+import { areaData, type controlStatusType, type optionType, type pointType, type changeModelParamType } from "./type";
+import { createInfoCanvas, updateViewerEntityInfo } from "./tools";
 
 export class cesiumService {
     public viewer: Viewer | null = null;
@@ -29,9 +29,31 @@ export class cesiumService {
     private imageLayerUrl: String | null = null;
     private tileLoadCallback: OmitThisParameter<(remaining: number) => void> | null = null;
 
+    doubleClickHandler = (event: MouseEvent): void => {
+        event.preventDefault();
+        event.stopPropagation();
+        this.setCameraHeight("ZoomIn");
+    };
+
+    changeHeightHandler = (): void => {
+        const height = Math.ceil(this.viewer!.camera.positionCartographic.height);
+        if (height === (this.options.config?.maxZoom ?? 130000)) {
+            this.options.limitHeightHandler(height);
+        }
+    };
+
     constructor(public containerId: string, public options: optionType) {
         // 图层加载监听器
         this.tileLoadCallback = this.handleTileLoadProgress.bind(this);
+    }
+
+    // Cesium属性更新
+    updateViewerAttribute(): void {
+        if (this.viewer) {
+            this.viewer.scene.screenSpaceCameraController.minimumZoomDistance = this.options.config?.minZoom ?? 200;
+            this.viewer.scene.screenSpaceCameraController.maximumZoomDistance = this.options.config?.maxZoom ?? 130000;
+            this.viewer.scene.globe.baseColor = this.options.config.baseColor;
+        }
     }
 
     // 初始化Cesium Viewer
@@ -42,24 +64,14 @@ export class cesiumService {
             // @ts-ignore
             this.viewer.cesiumWidget.creditContainer.style.display = "none";
             this.viewer.scene.debugShowFramesPerSecond = false;
-            this.viewer.scene.globe.depthTestAgainstTerrain = true; 
+            this.viewer.scene.globe.depthTestAgainstTerrain = true;
             this.viewer.scene.screenSpaceCameraController.enableTranslate = true;
-            this.viewer.scene.screenSpaceCameraController.minimumZoomDistance = this.options.config.minZoom;
-            this.viewer.scene.screenSpaceCameraController.maximumZoomDistance = this.options.config.maxZoom;
-            this.viewer.scene.globe.baseColor = this.options.config.baseColor;
+
+            this.updateViewerAttribute();
 
             this.viewer.cesiumWidget.screenSpaceEventHandler.removeInputAction(ScreenSpaceEventType.LEFT_DOUBLE_CLICK);
 
-            this.viewer.scene.canvas.addEventListener(
-                "dblclick",
-                (event) => {
-                    // 阻止默认行为
-                    event.preventDefault();
-                    event.stopPropagation();
-                    this.setCameraHeight("ZoomIn");
-                },
-                false
-            );
+            this.viewer.scene.canvas.addEventListener("dblclick", this.doubleClickHandler, false);
 
             // 注册单击事件
             this.screenSpaceEventHandler = new ScreenSpaceEventHandler(this.viewer?.scene.canvas).setInputAction(
@@ -76,6 +88,9 @@ export class cesiumService {
                 ScreenSpaceEventType.LEFT_CLICK
             );
 
+            // 监听相机停止移动后的高度变化
+            this.viewer.scene.camera.moveEnd.addEventListener(this.changeHeightHandler);
+
             return true;
         } catch (error) {
             console.error("初始化Cesium失败:", error);
@@ -86,8 +101,6 @@ export class cesiumService {
     // 瓦片加载状完成（首次添加point、polygon）
     handleTileLoadProgress(remaining: number) {
         if (remaining === 0) {
-            this.addPolygon(this.options.config.areaName);
-            this.pointData?.forEach((point) => this.addPoint(point, "value"));
             this.options.loadTileLayerHandler(false);
             // 移除监听器
             if (this.tileLoadCallback) {
@@ -101,7 +114,7 @@ export class cesiumService {
         // 加载动画
         this.options.loadTileLayerHandler(true);
         let provider: WebMapTileServiceImageryProvider | ArcGisMapServerImageryProvider | undefined;
-        const {viewer, imageLayerState, imageLayerUrl} = this;
+        const { viewer, imageLayerState, imageLayerUrl } = this;
 
         // 移除现有监听器
         if (this.tileLoadCallback) {
@@ -116,7 +129,13 @@ export class cesiumService {
         // 切换图层状态并获取新的provider
         this.imageLayerState = !imageLayerState;
         if (imageLayerState) {
+            try {
+                // @ts-ignore
                 provider = await Zondy.WebMapTileServiceImageryProvider.fromUrl(imageLayerUrl ? imageLayerUrl : url);
+            } catch (initError) {
+                console.error("瓦片加载失败, 切换默认瓦片");
+                provider = await ArcGisMapServerImageryProvider.fromUrl(url);
+            }
         } else {
             provider = await ArcGisMapServerImageryProvider.fromUrl(url);
         }
@@ -127,21 +146,23 @@ export class cesiumService {
             // 重新添加监听器
             if (this.tileLoadCallback) {
                 viewer.scene?.globe?.tileLoadProgressEvent.addEventListener(this.tileLoadCallback);
-
             }
         }
     }
 
     // 添加点标记
-    async addPoint(point: pointType, type?: string, changeType?: string): Promise<Entity | null> {
+    async addPoint(point: pointType, type?: string): Promise<Entity | null> {
         if (!this.viewer) return null;
-        const valueInfo = await createInfoCanvas(point, type, changeType);
+        const valueInfo = await createInfoCanvas(point, type);
         const entity: Entity = this.viewer.entities.add({
             position: Cartesian3.fromDegrees(point.lng, point.lat),
             name: type ? point.name : `${point.name}Label`,
-            id: type ? point.name : `${point.name}Label`,
-            value: point?.value,
-            text: point?.text,
+            // 自定义属性
+            properties: {
+                value: point?.value,
+                text: point?.text,
+                changeState: false,
+            },
             billboard: {
                 image: valueInfo.canvas,
                 disableDepthTestDistance: Number.POSITIVE_INFINITY,
@@ -152,6 +173,9 @@ export class cesiumService {
         });
 
         if (entity && this.pointEntities) {
+            this.pointEntities.push(entity);
+        } else {
+            this.pointEntities = [];
             this.pointEntities.push(entity);
         }
         return entity;
@@ -167,31 +191,33 @@ export class cesiumService {
         }
     }
 
-    addPolygon(name: string): Entity | null {
-        if (!this.viewer || !(name in areaData)) return null;
-        const positions = areaData[name].position.geometry.coordinates.flat(2).map(([lng, lat]) => Cartesian3.fromDegrees(lng, lat));
+    addPolygon(name: string): void {
+        if (this.viewer && name in areaData) {
+            const positions = areaData[name].position.geometry.coordinates.flat(2).map(([lng, lat]) => Cartesian3.fromDegrees(lng, lat));
+            const entity: Entity = this.viewer.entities.add({
+                name: name,
+                polyline: {
+                    positions,
+                    material: new PolylineDashMaterialProperty({
+                        color: Color.fromCssColorString("#1E9EFA").withAlpha(0.7),
+                    }),
+                    width: 2,
+                },
+                polygon: {
+                    hierarchy: positions,
+                    material: Color.fromCssColorString("#A2D8FF").withAlpha(0.3),
+                    outline: true,
+                    outlineColor: Color.fromCssColorString("#4694CD"),
+                },
+            });
 
-        const entity = this.viewer.entities.add({
-            name,
-            polyline: {
-                positions,
-                material: new PolylineDashMaterialProperty({
-                    color: Color.fromCssColorString("#1E9EFA").withAlpha(0.7),
-                }),
-                width: 2,
-            },
-            polygon: {
-                hierarchy: positions,
-                material: Color.fromCssColorString("#A2D8FF").withAlpha(0.3),
-                outline: true,
-                outlineColor: Color.fromCssColorString("#4694CD"),
-            },
-        });
-
-        if (entity && this.polygonEntities) {
-            this.polygonEntities.push(entity);
+            if (entity && this.polygonEntities) {
+                this.polygonEntities.push(entity);
+            } else {
+                this.polygonEntities = [];
+                this.polygonEntities.push(entity);
+            }
         }
-        return entity;
     }
 
     // 获取当前地图经纬度、高度
@@ -208,9 +234,8 @@ export class cesiumService {
     setCameraHeight(type: string) {
         if (type === "ZoomIn" || type === "ZoomOut") {
             const value: number[] | undefined = this.getPositionCartographic();
-            const {maxZoom, minZoom} = this.options.config;
-            const heightLimit =
-                value && value[2] ? (value[2] >= 30000 ? 20000 : value[2] >= 20000 ? 10000 : value[2] >= 10000 ? 8000 : 1000) : 1000;
+            const { maxZoom, minZoom } = this.options.config;
+            const heightLimit = value && value[2] ? (value[2] >= 30000 ? 20000 : value[2] >= 20000 ? 10000 : value[2] >= 10000 ? 8000 : 1000) : 1000;
             const height = value![2] - (type === "ZoomIn" ? heightLimit : -heightLimit);
             const heightResult = height <= maxZoom && height >= minZoom ? height : type === "ZoomIn" ? minZoom : maxZoom;
             this.viewer?.camera.flyTo({
@@ -232,15 +257,37 @@ export class cesiumService {
 
     // 控制窗体
     pointClickHandler(pickedObject: Entity): void {
-        const findValue = this.pointData?.findIndex((item) => item.name === pickedObject.name);
-        const findLabelValue = this.pointEntities?.findIndex((item) => item.name === pickedObject.name + "Label");
-        if (findValue != -1 && findValue !== undefined && findLabelValue == -1 && this.pointData) {
-            this.addPoint(this.pointData[findValue]);
+        const { name } = pickedObject;
+        const labelName = `${name}Label`;
+
+        const dataIndex = this.pointData?.findIndex((item) => item.name === name) ?? -1; // 确认点位存在
+        const entityIndex = this.pointEntities?.findIndex((item) => item.name === name) ?? -1; // 匹配对应点位
+        const labelEntityIndex = this.pointEntities?.findIndex((item) => item.name === labelName) ?? -1; // 是否已添加文字描述
+
+        const shouldAddPoint = dataIndex !== -1 && labelEntityIndex === -1 && !this.options.defaultShowState;
+        if (shouldAddPoint && this.pointData) {
+            // 添加文字描述
+            this.addPoint(this.pointData[dataIndex]);
         }
-        this.pointEntities?.forEach((item) => {
-            const nameValue = item.name;
-            if (nameValue?.slice(-5) === "Label") item.show = pickedObject.name + "Label" === nameValue && !item.show;
-        });
+
+        // 内容图标变动
+        updateViewerEntityInfo(this.pointData?.[dataIndex], this.pointEntities?.[entityIndex], "value");
+
+        // 文字描述图标变动
+        if (labelEntityIndex !== -1 && this.options.defaultShowState) {
+            updateViewerEntityInfo(this.pointData?.[dataIndex], this.pointEntities?.[labelEntityIndex]);
+        }
+
+        // 未全部展开时 隐藏其他文字描述
+        if (!this.options.defaultShowState) {
+            this.pointEntities?.forEach((item) => {
+                if (item.name?.endsWith("Label")) {
+                    item.show = item.name === labelName && !item.show;
+                }
+            });
+        }
+
+        // Entity事件回调
         this.options.pointHandler(pickedObject);
     }
 
@@ -249,16 +296,14 @@ export class cesiumService {
         if (name in areaData) {
             const findValue = this.polygonEntities?.find((item) => item.name === name);
             if (!findValue) {
-                setTimeout(() => {
-                    this.addPolygon(name);
-                }, 300);
+                this.addPolygon(name);
             }
-            const {lng, lat} = areaData[name];
+            const { lng, lat } = areaData[name];
             this.polygonEntities?.forEach((item) => {
                 item.show = item.name === name;
             });
             this.viewer?.camera.flyTo({
-                destination: Cartesian3.fromDegrees(lng, lat, 30000),
+                destination: Cartesian3.fromDegrees(lng, lat, this.options?.flyToHeight || 28000),
                 duration: 1,
             });
         } else {
@@ -267,9 +312,9 @@ export class cesiumService {
     }
 
     // 设置初始视角
-    setInitialView(centerPosition: Cartesian3): void {
+    setInitialView(option: changeModelParamType["setInitialView"]): void {
         if (this.viewer) {
-            this.viewer.camera.flyTo({destination: centerPosition, duration: 1});
+            this.viewer.camera.flyTo({ destination: option.destination, duration: option.duration || 1 });
         }
     }
 
@@ -277,18 +322,20 @@ export class cesiumService {
     setViewerLayer(imageryLayersUrl: string): void {
         this.viewer?.imageryLayers.removeAll();
         this.viewer?.entities.removeAll();
+        this.pointEntities = null;
+        this.polygonEntities = null;
         this.loadTileLayer(imageryLayersUrl);
     }
 
     // 热力图
     addHeatmap(): void {
-        const points = areaData['宝安区'].position.geometry.coordinates.flat(2).map(([lng, lat]) => {
+        const points = areaData["宝安区"].position.geometry.coordinates.flat(2).map(([lng, lat]) => {
             return {
                 x: lng,
                 y: lat,
-                value: Number((Math.random() * (2 - 0.1) + 0.1).toFixed(1))
-            }
-        })
+                value: Number((Math.random() * (2 - 0.1) + 0.1).toFixed(1)),
+            };
+        });
 
         new CesiumHeatmap(this.viewer!, {
             zoomToLayer: true,
@@ -309,15 +356,16 @@ export class cesiumService {
 
     destroy(): void {
         if (this.viewer) {
+            this.viewer.scene.canvas.removeEventListener("dblclick", this.doubleClickHandler, false);
+            this.viewer.scene.camera.moveEnd.removeEventListener(this.changeHeightHandler);
             this.viewer.destroy();
             this.viewer = null;
             this.pointEntities = null;
             this.polygonEntities = null;
             this.screenSpaceEventHandler = null;
-            this.imageLayerState= null;
+            this.imageLayerState = null;
             this.imageLayerUrl = null;
             this.tileLoadCallback = null;
-        
         }
     }
 }

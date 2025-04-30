@@ -1,5 +1,5 @@
 import { Viewer, Cartesian3, Entity } from 'cesium';
-import { controlStatusType, optionType, pointType } from './type';
+import { controlStatusType, optionType, pointType, changeModelParamType } from './type';
 export declare class cesiumService {
     containerId: string;
     options: optionType;
@@ -11,19 +11,22 @@ export declare class cesiumService {
     private imageLayerState;
     private imageLayerUrl;
     private tileLoadCallback;
+    doubleClickHandler: (event: MouseEvent) => void;
+    changeHeightHandler: () => void;
     constructor(containerId: string, options: optionType);
+    updateViewerAttribute(): void;
     initViewer(controlStatus: controlStatusType): Promise<boolean>;
     handleTileLoadProgress(remaining: number): void;
     loadTileLayer(url: string): Promise<void>;
-    addPoint(point: pointType, type?: string, changeType?: string): Promise<Entity | null>;
+    addPoint(point: pointType, type?: string): Promise<Entity | null>;
     clearEntity(key: string): Promise<void>;
-    addPolygon(name: string): Entity | null;
+    addPolygon(name: string): void;
     getPositionCartographic(): number[] | undefined;
     setCameraHeight(type: string): void;
     convertCartographic(cartesian: Cartesian3): Cartesian3;
     pointClickHandler(pickedObject: Entity): void;
     polygonClickHandler(name: string): void;
-    setInitialView(centerPosition: Cartesian3): void;
+    setInitialView(option: changeModelParamType["setInitialView"]): void;
     setViewerLayer(imageryLayersUrl: string): void;
     addHeatmap(): void;
     destroy(): void;

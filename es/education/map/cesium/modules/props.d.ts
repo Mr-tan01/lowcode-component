@@ -2,9 +2,38 @@ import { PropType } from 'vue';
 import { controlStatusType, pointType, basicConfigType } from './type';
 import { Color, Cartesian3 } from 'cesium';
 export declare const cesiumProps: {
-    clientId: PropType<string>;
-    accessToken: PropType<string | null>;
-    imageryLayersUrl: PropType<string>;
+    clientId: {
+        type: PropType<string>;
+    };
+    accessToken: {
+        type: PropType<string | null>;
+    };
+    imageryLayersUrl: {
+        type: PropType<string>;
+    };
+    areaName: {
+        type: PropType<string>;
+    };
+    defaultShowState: {
+        type: PropType<boolean>;
+        default: boolean;
+    };
+    flyToHeight: {
+        type: PropType<number>;
+        default: number;
+    };
+    spinStroke: {
+        type: PropType<string>;
+        default: string;
+    };
+    spinContainerBg: {
+        type: PropType<string>;
+        default: string;
+    };
+    spinDescriptionColor: {
+        type: PropType<string>;
+        default: string;
+    };
     centerPosition: {
         type: PropType<Cartesian3>;
     };
@@ -38,7 +67,6 @@ export declare const cesiumProps: {
             minZoom: number;
             maxZoom: number;
             baseColor: Color;
-            areaName: string;
         };
     };
     pointData: {

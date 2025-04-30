@@ -1,8 +1,20 @@
 import { Color as e } from "@cesium/engine";
 const a = {
-  clientId: String,
-  accessToken: String,
-  imageryLayersUrl: String,
+  clientId: { type: String },
+  accessToken: { type: String },
+  imageryLayersUrl: { type: String },
+  areaName: { type: String },
+  // 初始化区域
+  defaultShowState: { type: Boolean, default: !1 },
+  // 默认展示状态
+  flyToHeight: { type: Number, default: 28e3 },
+  // 相机飞行高度
+  spinStroke: { type: String, default: "#046ab1" },
+  // spin图标颜色
+  spinContainerBg: { type: String, default: "#F6FBF8" },
+  // spin遮挡背景
+  spinDescriptionColor: { type: String, default: "#046ab1" },
+  // spin文字颜色
   centerPosition: {
     type: Object
   },
@@ -34,9 +46,8 @@ const a = {
     type: Object,
     default: {
       minZoom: 200,
-      maxZoom: 1e5,
-      baseColor: e.TRANSPARENT,
-      areaName: ""
+      maxZoom: 13e4,
+      baseColor: e.TRANSPARENT
     }
   },
   pointData: {

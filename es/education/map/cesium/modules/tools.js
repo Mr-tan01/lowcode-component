@@ -1,27 +1,25 @@
-import q from "../image/primary.png.js";
-import D from "../image/success.png.js";
-import G from "../image/warning.png.js";
-import J from "../image/danger.png.js";
-import P from "../image/primary_label.png.js";
-import N from "../image/warning_label.png.js";
-import Q from "../image/danger_label.png.js";
-import X from "../image/icon_primary.png.js";
-import Y from "../image/icon_success.png.js";
-const U = {
-  primary: q,
-  success: D,
-  warning: G,
-  danger: J,
-  primary_label: P,
-  success_label: P,
-  warning_label: N,
-  danger_label: Q,
-  icon_primary: X,
-  icon_success: Y
-}, V = {
-  icon_success: Y,
-  icon_primary: X
-}, e = {
+import $ from "../image/primary.png.js";
+import P from "../image/success.png.js";
+import L from "../image/warning.png.js";
+import A from "../image/danger.png.js";
+import z from "../image/primary_label.png.js";
+import D from "../image/warning_label.png.js";
+import F from "../image/danger_label.png.js";
+import H from "../image/icon_primary.png.js";
+import R from "../image/icon_success.png.js";
+import { JulianDate as U, CallbackProperty as V } from "@cesium/engine";
+const w = {
+  primary: $,
+  success: P,
+  warning: L,
+  danger: A,
+  primary_label: z,
+  success_label: z,
+  warning_label: D,
+  danger_label: F,
+  icon_primary: H,
+  icon_success: R
+}, r = {
   width: 50,
   height: 75,
   fontStyle: {
@@ -36,43 +34,69 @@ const U = {
     color: "#fff",
     weight: "normal"
   }
-}, rt = (t, a, B) => new Promise((h, g) => {
-  var _, b, p, u, n, T, z, $, C, O, E, F;
-  const r = document.createElement("canvas"), l = r.getContext("2d");
-  if (!l) {
-    g(new Error("Could not get canvas context"));
+}, x = (e) => {
+  var m, i, o, u, y, S, p, I, b, T, _, C, O, v, E;
+  const { info: t, valueKey: l, canvas: c, ctx: a, text: s } = e, g = `
+    ${((m = t == null ? void 0 : t.fontStyle) == null ? void 0 : m.weight) ?? ((i = r == null ? void 0 : r.fontStyle) == null ? void 0 : i.weight)} 
+    ${((o = t == null ? void 0 : t.fontStyle) == null ? void 0 : o.size) ?? ((u = r == null ? void 0 : r.fontStyle) == null ? void 0 : u.size)}
+    ${((y = t == null ? void 0 : t.fontStyle) == null ? void 0 : y.family) ?? ((S = r == null ? void 0 : r.fontStyle) == null ? void 0 : S.family)}`, d = `
+    ${((p = t == null ? void 0 : t.textStyle) == null ? void 0 : p.weight) ?? ((I = r == null ? void 0 : r.textStyle) == null ? void 0 : I.weight)} 
+    ${((b = t == null ? void 0 : t.textStyle) == null ? void 0 : b.size) ?? ((T = r == null ? void 0 : r.textStyle) == null ? void 0 : T.size)}
+    ${((_ = t == null ? void 0 : t.textStyle) == null ? void 0 : _.family) ?? ((C = r == null ? void 0 : r.textStyle) == null ? void 0 : C.family)}`;
+  a.font = l ? g : d, a.fillStyle = (l ? (O = t == null ? void 0 : t.fontStyle) == null ? void 0 : O.color : (v = t == null ? void 0 : t.textStyle) == null ? void 0 : v.color) ?? ((E = r.fontStyle) == null ? void 0 : E.color), a.textBaseline = "middle", a.textAlign = "left";
+  const h = l ? (t == null ? void 0 : t.textOffsetX) ?? 13 : 40, n = (t == null ? void 0 : t.textOffsetY) ?? c.height / 2 - (l ? 10 : 6);
+  a.fillText(s, h, n);
+}, j = (e, t) => new Promise((l, c) => {
+  const a = document.createElement("canvas"), s = a.getContext("2d");
+  if (!s) {
+    c(new Error("Could not get canvas context"));
     return;
   }
-  r.width = (t == null ? void 0 : t.width) ?? e.width, r.height = (t == null ? void 0 : t.height) ?? e.height;
-  const { iconType: d, textIconType: y, changeIconType: x } = t, m = {
-    icon: d ? U[d] : void 0,
-    textIcon: y ? U[y] : void 0,
-    changeIcon: x ? V[x] : void 0
-  }, w = B ? m.changeIcon : (m == null ? void 0 : m[a ? "icon" : "textIcon"]) ?? (a ? m.icon : m.textIcon), S = (t == null ? void 0 : t[a ?? "text"]) || "", I = () => {
-    l.setTransform(1, 0, 0, 1, 0, 0), l.clearRect(0, 0, r.width, r.height);
-  }, M = `
-    ${((_ = t == null ? void 0 : t.fontStyle) == null ? void 0 : _.weight) ?? ((b = e == null ? void 0 : e.fontStyle) == null ? void 0 : b.weight)} 
-    ${((p = t == null ? void 0 : t.fontStyle) == null ? void 0 : p.size) ?? ((u = e == null ? void 0 : e.fontStyle) == null ? void 0 : u.size)}
-    ${((n = t == null ? void 0 : t.fontStyle) == null ? void 0 : n.family) ?? ((T = e == null ? void 0 : e.fontStyle) == null ? void 0 : T.family)}`, R = `
-    ${((z = t == null ? void 0 : t.textStyle) == null ? void 0 : z.weight) ?? (($ = e == null ? void 0 : e.textStyle) == null ? void 0 : $.weight)} 
-    ${((C = t == null ? void 0 : t.textStyle) == null ? void 0 : C.size) ?? ((O = e == null ? void 0 : e.textStyle) == null ? void 0 : O.size)}
-    ${((E = t == null ? void 0 : t.textStyle) == null ? void 0 : E.family) ?? ((F = e == null ? void 0 : e.textStyle) == null ? void 0 : F.family)}`, s = (c) => {
-    var L, A, H;
-    c.font = a ? M : R, c.fillStyle = (a ? (L = t == null ? void 0 : t.fontStyle) == null ? void 0 : L.color : (A = t == null ? void 0 : t.textStyle) == null ? void 0 : A.color) ?? ((H = e.fontStyle) == null ? void 0 : H.color), c.textBaseline = "middle", c.textAlign = "left";
-    const k = a ? (t == null ? void 0 : t.textOffsetX) ?? 13 : 40, o = (t == null ? void 0 : t.textOffsetY) ?? r.height / 2 - (a ? 10 : 6);
-    l.fillText(S, k, o);
+  a.width = (e == null ? void 0 : e.width) ?? r.width, a.height = (e == null ? void 0 : e.height) ?? r.height;
+  const { iconType: g, textIconType: d } = e, h = {
+    icon: g ? w[g] : w.primary,
+    textIcon: d ? w[d] : w.success_label
+  }, n = h == null ? void 0 : h[t ? "icon" : "textIcon"], m = (e == null ? void 0 : e[t ?? "text"]) || "", i = () => {
+    s.setTransform(1, 0, 0, 1, 0, 0), s.clearRect(0, 0, a.width, a.height);
   };
-  if (w) {
-    const c = new Image();
-    c.crossOrigin = "Anonymous", c.onload = () => {
-      s(l), r.width = a ? (t == null ? void 0 : t.width) ?? c.width : l.measureText(S).width + 80, r.height = (t == null ? void 0 : t.height) ?? c.height, l.drawImage(c, 0, 0, r.width, r.height), s(l), h({ canvas: r, cleanup: I });
-    }, c.onerror = () => {
-      g(new Error("Failed to load image"));
-    }, c.src = w;
+  if (x({ info: e, valueKey: t, canvas: a, ctx: s, text: m }), n) {
+    const o = new Image();
+    o.crossOrigin = "Anonymous", o.onload = () => {
+      x({ info: e, valueKey: t, canvas: a, ctx: s, text: m }), a.width = t ? (e == null ? void 0 : e.width) ?? o.width : s.measureText(m).width + 80, a.height = (e == null ? void 0 : e.height) ?? o.height, s.drawImage(o, 0, 0, a.width, a.height), x({ info: e, valueKey: t, canvas: a, ctx: s, text: m }), l({ canvas: a, cleanup: i });
+    }, o.onerror = () => {
+      c(new Error("Failed to load image"));
+    }, o.src = n;
   } else
-    s(l), h({ canvas: r, cleanup: I });
+    x({ info: e, valueKey: t, canvas: a, ctx: s, text: m }), l({ canvas: a, cleanup: i });
+}), X = (e) => new Promise((t, l) => {
+  const c = new Image();
+  c.crossOrigin = "Anonymous", c.onload = () => t(c), c.onerror = l, c.src = e;
 });
+async function Y(e) {
+  return new Promise((t, l) => {
+    const c = new Image();
+    c.crossOrigin = "anonymous", c.src = e, c.onload = () => {
+      try {
+        const a = document.createElement("canvas"), s = a.getContext("2d");
+        if (!s) return l(new Error("无法获取2D上下文"));
+        a.width = c.naturalWidth, a.height = c.naturalHeight, s.drawImage(c, 0, 0, a.width, a.height), t(a);
+      } catch (a) {
+        l(new Error("画布创建失败", { cause: a }));
+      }
+    };
+  });
+}
+async function f(e, t, l) {
+  var c, a;
+  if (t != null && t.billboard && t.properties) {
+    const s = U.now(), g = (c = t.properties) == null ? void 0 : c.getValue(s).changeState, d = g ? e.iconType : e.changeIconType ?? "success", h = g ? e.textIconType : e.changeTextIconType ?? "success_label";
+    let n = (a = t.billboard.image) == null ? void 0 : a.getValue();
+    n = typeof n == "string" ? await Y(n) : n;
+    const m = n.getContext("2d"), i = await X(w[l ? d : h]);
+    m == null || m.clearRect(0, 0, n.width, n.height), m.drawImage(i, 0, 0, n.width, n.height), x({ info: e, valueKey: l, canvas: n, ctx: m, text: l ? e.value : e.text }), t.billboard.image = n.toDataURL("image/png"), t.properties.changeState = new V(() => !g, !1);
+  }
+}
 export {
-  V as changeIconOption,
-  rt as createInfoCanvas
+  j as createInfoCanvas,
+  f as updateViewerEntityInfo
 };

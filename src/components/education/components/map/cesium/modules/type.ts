@@ -1,16 +1,8 @@
-import {
-    SceneMode,
-    type SkyAtmosphere,
-    type SkyBox,
-    type Color,
-    type Entity,
-    type Cartesian3,
-    type PolylineDashMaterialProperty,
-} from "cesium";
+import { SceneMode, type SkyAtmosphere, type SkyBox, type Color, type Entity, type Cartesian3, type PolylineDashMaterialProperty } from "cesium";
 import shenZhen from "./深圳市（各区）.json";
 
 export const areaData = {
-    深圳: {lng: 114.063109, lat: 22.544522, position: []},
+    深圳: { lng: 114.063109, lat: 22.544522, position: [] },
     光明区: { lng: 113.91634116522685, lat: 22.77147302900205, position: shenZhen.features[0] },
     坪山区: { lng: 114.35193598950553, lat: 22.688581371110487, position: shenZhen.features[1] },
     龙华区: { lng: 114.01646181978259, lat: 22.68598921119512, position: shenZhen.features[2] },
@@ -37,6 +29,7 @@ export interface pointType {
     text?: string; // 窗体文字内容
     textIconType?: textIconType | string; // 窗体图标
     changeIconType?: changeIconType | string; // 变动图标
+    changeTextIconType?: textIconType | string; // 窗体变动图标
 }
 
 export interface polygonType {
@@ -83,16 +76,27 @@ export interface basicConfigType {
     minZoom: number;
     maxZoom: number;
     baseColor: Color;
-    areaName: string;
 }
 
 export interface optionType {
     config: basicConfigType;
+    defaultShowState: boolean;
+    flyToHeight: number;
     pointHandler: (value: Entity) => void;
+    limitHeightHandler: (value: number) => void;
     loadTileLayerHandler: (status: boolean) => void;
 }
 
-export type changeModelType = "polygonClickHandler" | "setCameraHeight"  | "setViewerLayer" | "ZoomIn" | "ZoomOut";
+export type changeModelType = "polygonClickHandler" | "setCameraHeight" | "setInitialView" | "setViewerLayer" | "ZoomIn" | "ZoomOut";
+
+export type changeModelParamType = {
+    polygonClickHandler: string;
+    setCameraHeight: string;
+    setInitialView: { destination: Cartesian3; duration?: number };
+    setViewerLayer: string;
+    ZoomIn: string;
+    ZoomOut: string;
+};
 
 export const pointInfo = {
     宝安区: [

@@ -1,10 +1,39 @@
-import { changeModelType } from './modules/type';
+import { changeModelType, changeModelParamType } from './modules/type';
 import { Entity, Cartesian3 } from 'cesium';
-declare function changeModel(type: changeModelType, value: string): void;
+declare function changeModel<T extends changeModelType>(type: changeModelType, value: changeModelParamType[T]): void;
 declare const _default: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
-    clientId: import('vue').PropType<string>;
-    accessToken: import('vue').PropType<string | null>;
-    imageryLayersUrl: import('vue').PropType<string>;
+    clientId: {
+        type: import('vue').PropType<string>;
+    };
+    accessToken: {
+        type: import('vue').PropType<string | null>;
+    };
+    imageryLayersUrl: {
+        type: import('vue').PropType<string>;
+    };
+    areaName: {
+        type: import('vue').PropType<string>;
+    };
+    defaultShowState: {
+        type: import('vue').PropType<boolean>;
+        default: boolean;
+    };
+    flyToHeight: {
+        type: import('vue').PropType<number>;
+        default: number;
+    };
+    spinStroke: {
+        type: import('vue').PropType<string>;
+        default: string;
+    };
+    spinContainerBg: {
+        type: import('vue').PropType<string>;
+        default: string;
+    };
+    spinDescriptionColor: {
+        type: import('vue').PropType<string>;
+        default: string;
+    };
     centerPosition: {
         type: import('vue').PropType<Cartesian3>;
     };
@@ -38,7 +67,6 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
             minZoom: number;
             maxZoom: number;
             baseColor: import('cesium').Color;
-            areaName: string;
         };
     };
     pointData: {
@@ -48,10 +76,41 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
     changeModel: typeof changeModel;
 }, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {} & {
     pointHandler: (value: Entity) => any;
+    limitHeightHandler: (value: number) => any;
+    loadHandler: (value: boolean) => any;
 }, string, import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
-    clientId: import('vue').PropType<string>;
-    accessToken: import('vue').PropType<string | null>;
-    imageryLayersUrl: import('vue').PropType<string>;
+    clientId: {
+        type: import('vue').PropType<string>;
+    };
+    accessToken: {
+        type: import('vue').PropType<string | null>;
+    };
+    imageryLayersUrl: {
+        type: import('vue').PropType<string>;
+    };
+    areaName: {
+        type: import('vue').PropType<string>;
+    };
+    defaultShowState: {
+        type: import('vue').PropType<boolean>;
+        default: boolean;
+    };
+    flyToHeight: {
+        type: import('vue').PropType<number>;
+        default: number;
+    };
+    spinStroke: {
+        type: import('vue').PropType<string>;
+        default: string;
+    };
+    spinContainerBg: {
+        type: import('vue').PropType<string>;
+        default: string;
+    };
+    spinDescriptionColor: {
+        type: import('vue').PropType<string>;
+        default: string;
+    };
     centerPosition: {
         type: import('vue').PropType<Cartesian3>;
     };
@@ -85,7 +144,6 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
             minZoom: number;
             maxZoom: number;
             baseColor: import('cesium').Color;
-            areaName: string;
         };
     };
     pointData: {
@@ -93,7 +151,14 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
     };
 }>> & Readonly<{
     onPointHandler?: ((value: Entity) => any) | undefined;
+    onLimitHeightHandler?: ((value: number) => any) | undefined;
+    onLoadHandler?: ((value: boolean) => any) | undefined;
 }>, {
+    defaultShowState: boolean;
+    flyToHeight: number;
+    spinStroke: string;
+    spinContainerBg: string;
+    spinDescriptionColor: string;
     controlStatus: import('./modules/type').controlStatusType;
     basicConfig: import('./modules/type').basicConfigType;
 }, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, HTMLDivElement>;

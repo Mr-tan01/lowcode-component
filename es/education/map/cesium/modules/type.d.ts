@@ -169,6 +169,7 @@ export interface pointType {
     text?: string;
     textIconType?: textIconType | string;
     changeIconType?: changeIconType | string;
+    changeTextIconType?: textIconType | string;
 }
 export interface polygonType {
     name: string;
@@ -212,14 +213,27 @@ export interface basicConfigType {
     minZoom: number;
     maxZoom: number;
     baseColor: Color;
-    areaName: string;
 }
 export interface optionType {
     config: basicConfigType;
+    defaultShowState: boolean;
+    flyToHeight: number;
     pointHandler: (value: Entity) => void;
+    limitHeightHandler: (value: number) => void;
     loadTileLayerHandler: (status: boolean) => void;
 }
-export type changeModelType = "polygonClickHandler" | "setCameraHeight" | "setViewerLayer" | "ZoomIn" | "ZoomOut";
+export type changeModelType = "polygonClickHandler" | "setCameraHeight" | "setInitialView" | "setViewerLayer" | "ZoomIn" | "ZoomOut";
+export type changeModelParamType = {
+    polygonClickHandler: string;
+    setCameraHeight: string;
+    setInitialView: {
+        destination: Cartesian3;
+        duration?: number;
+    };
+    setViewerLayer: string;
+    ZoomIn: string;
+    ZoomOut: string;
+};
 export declare const pointInfo: {
     宝安区: ({
         name: string;
