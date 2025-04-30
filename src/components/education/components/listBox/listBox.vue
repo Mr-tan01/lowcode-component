@@ -23,13 +23,13 @@ const {
     rowStyle = {},
     bordered = false,
     keyStyle = {
-        width: "150px",
+        flex: 3,
         backgroundColor: "#063B6B",
         padding: "12px 15px",
         textAlign: "left",
     },
     valueStyle = {
-        width: "300px",
+        flex: 6,
         backgroundColor: "#063661",
         padding: "12px 15px",
         textAlign: "left",
@@ -85,7 +85,6 @@ const getRowStyle = (index: number): CSSProperties => {
     const style: CSSProperties = {
         display: "flex",
         width: "100%",
-        minWidth: "fit-content",
     };
 
     if (index % 2 === 0 && rowStyle.even) {
@@ -103,7 +102,6 @@ const getRowStyle = (index: number): CSSProperties => {
     width: 100%;
     font-family: Arial, sans-serif;
     overflow-x: auto;
-    min-width: fit-content;
 
     .list-body {
         min-width: fit-content;

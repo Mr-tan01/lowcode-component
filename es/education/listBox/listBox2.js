@@ -1,19 +1,19 @@
-import { defineComponent as x, openBlock as i, createElementBlock as n, normalizeClass as S, createVNode as b, unref as r, withCtx as s, Fragment as m, renderList as w, createBlock as A, normalizeStyle as o, createElementVNode as y, toDisplayString as c } from "vue";
-import { NGrid as k, NGi as v } from "naive-ui";
-const C = /* @__PURE__ */ x({
+import { defineComponent as x, openBlock as i, createElementBlock as r, normalizeClass as S, createVNode as b, unref as n, withCtx as s, Fragment as m, renderList as A, createBlock as k, normalizeStyle as o, createElementVNode as y, toDisplayString as u } from "vue";
+import { NGrid as v, NGi as w } from "naive-ui";
+const h = /* @__PURE__ */ x({
   __name: "listBox",
   props: {
     rows: { default: () => [] },
     rowStyle: { default: () => ({}) },
     bordered: { type: Boolean, default: !1 },
     keyStyle: { default: () => ({
-      width: "150px",
+      flex: 3,
       backgroundColor: "#063B6B",
       padding: "12px 15px",
       textAlign: "left"
     }) },
     valueStyle: { default: () => ({
-      width: "300px",
+      flex: 6,
       backgroundColor: "#063661",
       padding: "12px 15px",
       textAlign: "left"
@@ -24,7 +24,7 @@ const C = /* @__PURE__ */ x({
     cols: { default: 2 }
   },
   setup(e) {
-    const u = (t) => {
+    const c = (t) => {
       var a, d;
       const l = {
         ...e.keyStyle,
@@ -33,7 +33,7 @@ const C = /* @__PURE__ */ x({
         ...((d = e.rows[t]) == null ? void 0 : d.keyStyle) || {}
       };
       return e.bordered && (l.borderLeft = "1px solid #07467a", l.borderTop = "1px solid #07467a", l.borderBottom = "1px solid #07467a", t === e.rows.length - 1 && (l.borderRight = "1px solid #07467a")), l;
-    }, g = (t) => {
+    }, f = (t) => {
       var a, d;
       const l = {
         ...e.valueStyle,
@@ -42,41 +42,40 @@ const C = /* @__PURE__ */ x({
         ...((d = e.rows[t]) == null ? void 0 : d.valueStyle) || {}
       };
       return e.bordered && (l.borderTop = "1px solid #07467A", l.borderBottom = "1px solid #07467A", l.borderRight = "1px solid #07467A", l.borderLeft = "1px solid #07467A"), l;
-    }, f = (t) => {
+    }, g = (t) => {
       const l = {
         display: "flex",
-        width: "100%",
-        minWidth: "fit-content"
+        width: "100%"
       };
       return t % 2 === 0 && e.rowStyle.even ? Object.assign(l, e.rowStyle.even) : t % 2 !== 0 && e.rowStyle.odd && Object.assign(l, e.rowStyle.odd), l;
     };
-    return (t, l) => (i(), n(
+    return (t, l) => (i(), r(
       "div",
       {
         class: S(["dynamic-data-list", { "is-bordered": t.bordered }])
       },
       [
-        b(r(k), {
+        b(n(v), {
           "x-gap": t.gap,
           cols: t.cols
         }, {
           default: s(() => [
-            (i(!0), n(
+            (i(!0), r(
               m,
               null,
-              w(t.rows, (a, d) => (i(), A(r(v), {
+              A(t.rows, (a, d) => (i(), k(n(w), {
                 key: `row-${d}`,
                 class: "list-row",
-                style: o(f(d))
+                style: o(g(d))
               }, {
                 default: s(() => [
                   y(
                     "div",
                     {
                       class: "key-cell",
-                      style: o(u(d))
+                      style: o(c(d))
                     },
-                    c(a.indicatorName),
+                    u(a.indicatorName),
                     5
                     /* TEXT, STYLE */
                   ),
@@ -84,9 +83,9 @@ const C = /* @__PURE__ */ x({
                     "div",
                     {
                       class: "value-cell",
-                      style: o(g(d))
+                      style: o(f(d))
                     },
-                    c(a.indicatorValue),
+                    u(a.indicatorValue),
                     5
                     /* TEXT, STYLE */
                   )
@@ -108,5 +107,5 @@ const C = /* @__PURE__ */ x({
   }
 });
 export {
-  C as default
+  h as default
 };

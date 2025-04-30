@@ -34,9 +34,9 @@ const a = {
     type: Object,
     default: {
       minZoom: 200,
-      maxZoom: 1e7,
+      maxZoom: 1e5,
       baseColor: e.TRANSPARENT,
-      areaName: "龙华区"
+      areaName: ""
     }
   },
   pointData: {

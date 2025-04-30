@@ -37,9 +37,9 @@ export const cesiumProps = {
         type: Object as PropType<basicConfigType>,
         default: {
             minZoom: 200,
-            maxZoom: 10000000,
+            maxZoom: 100000,
             baseColor: Color.TRANSPARENT,
-            areaName: "龙华区",
+            areaName: "",
         },
     },
     pointData: {

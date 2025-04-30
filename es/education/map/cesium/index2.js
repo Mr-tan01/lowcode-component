@@ -12,7 +12,7 @@ const C = { class: "lc-cesium" }, U = {
   __name: "cesium",
   props: /* @__PURE__ */ w(P, {
     clientId: "74109f7095974ab1a5e930c8e998580d",
-    centerPosition: () => b.fromDegrees(114.155799, 22.617691, 9e4),
+    centerPosition: () => b.fromDegrees(114.15057, 22.593059, 1e5),
     pointData: () => []
   }),
   emits: ["pointHandler"],

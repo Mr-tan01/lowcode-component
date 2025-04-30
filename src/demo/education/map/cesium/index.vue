@@ -1,6 +1,6 @@
 <template>
     <div class="demo-headers mr-setting-w">
-        <DemoHelpBox title="深圳地图" description="深圳教育项目-高德地图" rswidth="962px" rsHeight="600px">
+        <DemoHelpBox title="深圳地图" description="深圳教育项目-高德地图" rswidth="1262px" rsHeight="900px">
             <div class="size-box">
                 <LcCesium ref="cesiumMap" :access-token="accessToken" :point-data="optionInfo" @pointHandler="pointHandler"></LcCesium>
             </div>
@@ -28,7 +28,7 @@ let accessToken = ref<string | null>(null)
 
 const tabValue = ref("宝安区");
 let cesiumMap = ref<CesiumInstanceType | null>(null);
-let optionInfo = ref(pointInfo["宝安区"]);
+let optionInfo = ref([]);
 
 function changePolygon(value: ChangeEvent): void {
     cesiumMap.value?.changeModel("polygonClickHandler", value.label);
@@ -46,7 +46,7 @@ function pointHandler(value: Entity) {
 
 onMounted(async() => {
     await getToken
-    accessToken.value = localStorage.getItem('access_token') + "1"
+    accessToken.value = localStorage.getItem('access_token')
 })
 </script>
 
