@@ -1,100 +1,109 @@
-import { defineComponent as T, mergeDefaults as w, ref as m, watch as c, onMounted as h, onBeforeUnmount as k, openBlock as l, createElementBlock as u, createElementVNode as E, createCommentVNode as d, toDisplayString as I } from "vue";
+import { defineComponent as y, mergeDefaults as h, ref as w, computed as H, watch as r, onMounted as v, onBeforeUnmount as T, openBlock as D, createElementBlock as b, createVNode as k, unref as P, normalizeStyle as C, withCtx as c, createTextVNode as E, createElementVNode as I } from "vue";
 import { cesiumService as L } from "./modules/cesiumUtils.js";
-import { cesiumProps as P } from "./modules/props.js";
-import { Cartesian3 as b } from "@cesium/engine";
-const C = { class: "lc-cesium" }, U = {
-  key: 0,
-  class: "initImageryLayersStatus-indicator"
-}, M = {
-  key: 1,
-  class: "error-message"
-}, Z = /* @__PURE__ */ T({
+import { cesiumProps as N } from "./modules/props.js";
+import { NSpin as U } from "naive-ui";
+import { Cartesian3 as B } from "@cesium/engine";
+const x = { class: "lc-cesium" }, z = /* @__PURE__ */ y({
   __name: "cesium",
-  props: /* @__PURE__ */ w(P, {
+  props: /* @__PURE__ */ h(N, {
     clientId: "74109f7095974ab1a5e930c8e998580d",
-    centerPosition: () => b.fromDegrees(114.15057, 22.593059, 1e5),
+    centerPosition: () => B.fromDegrees(114.187446, 22.674131, 13e4),
     pointData: () => []
   }),
-  emits: ["pointHandler"],
-  setup(t, { expose: f, emit: v }) {
-    const s = m(!0), n = m(null), y = v;
-    function g(e) {
-      s.value = e;
+  emits: ["pointHandler", "limitHeightHandler", "loadHandler"],
+  setup(e, { expose: d, emit: u }) {
+    const l = w(!0), a = u;
+    function f(t) {
+      console.log(t), l.value = t, t || a("loadHandler", t);
     }
     const i = new L("cesium-3d-viewer", {
-      config: t.basicConfig,
-      pointHandler: (e) => {
-        y("pointHandler", e);
+      config: e.basicConfig,
+      defaultShowState: e.defaultShowState,
+      flyToHeight: e.flyToHeight,
+      pointHandler: (t) => {
+        a("pointHandler", t);
       },
-      loadTileLayerHandler: (e) => {
-        g(e);
+      limitHeightHandler: (t) => {
+        a("limitHeightHandler", t);
+      },
+      loadTileLayerHandler: (t) => {
+        f(t);
       }
     });
-    function D(e, a) {
-      i[e] ? i[e](a) : console.log("未匹配cesiumUtils的方法");
+    function m(t, n) {
+      i[t] ? i[t](n) : console.log("未匹配cesiumUtils的方法");
     }
-    function S(e) {
-      s.value = !1, n.value = `地图初始化失败: ${e}`, setTimeout(() => {
-        n.value = null;
-      }, 600);
-    }
-    async function r() {
-      var e;
+    async function o() {
+      var t;
       try {
-        if (!t.accessToken)
+        if (!e.accessToken)
           return { status: !1 };
-        if (i.pointData = t.pointData, !await i.initViewer(t.controlStatus))
+        if (i.pointData = e.pointData, i.options.config = e.basicConfig, i.options.defaultShowState = e.defaultShowState, i.options.flyToHeight = e.flyToHeight, !await i.initViewer(e.controlStatus))
           throw new Error("Viewer 初始化失败");
-        i.setInitialView(t.centerPosition);
-        const o = t.imageryLayersUrl || `jysl/service/api/e99b765798d1412b9c2b458a1473396e/igs/rest/services/SZMAP/SZDZDT_2024_Yingji_T1_4490/WMTSServer?client_id=${t.clientId}&access_token=${t.accessToken}`;
-        return await i.loadTileLayer(o), { status: !0 };
-      } catch (a) {
-        return i.addPolygon(t.basicConfig.areaName), (e = t.pointData) == null || e.forEach((o) => i.addPoint(o, "value")), S(a.message), { status: !1 };
+        i.updateViewerAttribute(), i.setInitialView({ destination: e.centerPosition });
+        const S = e.imageryLayersUrl || `jysl/service/api/e99b765798d1412b9c2b458a1473396e/igs/rest/services/SZMAP/SZDZDT_2024_Yingji_T1_4490/WMTSServer?client_id=${e.clientId}&access_token=${e.accessToken}`;
+        return await i.loadTileLayer(S), e.areaName && i.addPolygon(e.areaName), (t = e.pointData) == null || t.forEach((s) => {
+          e.defaultShowState && i.addPoint(s), i.addPoint(s, "value");
+        }), { status: !0 };
+      } catch (n) {
+        return console.log(`地图初始化失败: ${n}`), { status: !1 };
       }
     }
-    return f({
-      changeModel: D
-    }), c(
-      () => t.pointData,
-      (e) => {
-        i.clearEntity("pointEntities"), i.pointData = e, e == null || e.forEach((a) => i.addPoint(a, "value"));
+    const g = H(() => ({
+      "--spin-container-bg": e.spinContainerBg ?? "#F6FBF8",
+      "--n-spin-description-color": e.spinDescriptionColor ?? "#046ab1"
+    }));
+    return d({
+      changeModel: m
+    }), r(
+      () => e.pointData,
+      (t) => {
+        i.clearEntity("pointEntities"), i.pointData = t, t == null || t.forEach((n) => {
+          i.addPoint(n, "value"), e.defaultShowState && i.addPoint(n);
+        });
       }
-    ), c(
-      () => t.accessToken,
+    ), r(
+      () => e.accessToken,
       () => {
-        r();
+        o();
       }
-    ), c(
-      () => t.imageryLayersUrl,
+    ), r(
+      () => e.imageryLayersUrl,
       () => {
-        i.destroy(), r();
+        i.destroy(), o();
       }
-    ), h(async () => {
-      await r();
-    }), k(() => {
+    ), v(async () => {
+      await o();
+    }), T(() => {
       i.destroy();
-    }), (e, a) => (l(), u("div", C, [
-      a[0] || (a[0] = E(
-        "div",
-        {
-          class: "lc-cesium_map",
-          id: "cesium-3d-viewer"
-        },
-        null,
-        -1
-        /* HOISTED */
-      )),
-      s.value ? (l(), u("div", U, "地图加载中...")) : d("v-if", !0),
-      n.value ? (l(), u(
-        "div",
-        M,
-        "地图加载失败: " + I(n.value),
-        1
-        /* TEXT */
-      )) : d("v-if", !0)
+    }), (t, n) => (D(), b("div", x, [
+      k(P(U), {
+        show: l.value,
+        stroke: t.spinStroke,
+        style: C(g.value),
+        size: "large"
+      }, {
+        description: c(() => n[0] || (n[0] = [
+          E(" 地图加载中... ")
+        ])),
+        default: c(() => [
+          n[1] || (n[1] = I(
+            "div",
+            {
+              class: "lc-cesium_map",
+              id: "cesium-3d-viewer"
+            },
+            null,
+            -1
+            /* HOISTED */
+          ))
+        ]),
+        _: 1
+        /* STABLE */
+      }, 8, ["show", "stroke", "style"])
     ]));
   }
 });
 export {
-  Z as default
+  z as default
 };

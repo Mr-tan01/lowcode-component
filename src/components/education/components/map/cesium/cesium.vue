@@ -1,50 +1,68 @@
 <template>
     <div class="lc-cesium">
-        <div class="lc-cesium_map" id="cesium-3d-viewer"></div>
-        <div v-if="initImageryLayersStatus" class="initImageryLayersStatus-indicator">地图加载中...</div>
-        <div v-if="error" class="error-message">地图加载失败: {{ error }}</div>
+        <NSpin :show="initImageryLayersStatus" :stroke="spinStroke" :style="spinStyle" size="large">
+            <div class="lc-cesium_map" id="cesium-3d-viewer"></div>
+            <template #description> 地图加载中... </template>
+        </NSpin>
     </div>
 </template>
 
 <script lang="ts" setup>
-import { ref, onMounted, onBeforeUnmount, watch } from "vue";
+import { ref, onMounted, onBeforeUnmount, watch, computed } from "vue";
 import { cesiumService } from "./modules/cesiumUtils";
 import { cesiumProps } from "./modules/props";
-import { changeModelType } from "./modules/type";
+import type { changeModelType, changeModelParamType } from "./modules/type";
 import { Entity, Cartesian3 } from "cesium";
+import { NSpin } from "naive-ui";
 
-const initImageryLayersStatus = ref<boolean | null>(true);
-const error = ref<string | null>(null);
+const initImageryLayersStatus = ref<boolean>(true);
 const emit = defineEmits<{
     (e: "pointHandler", value: Entity): void;
+    (e: "limitHeightHandler", value: number): void;
+    (e: "loadHandler", value: boolean): void;
 }>();
 
 const {
     clientId = "74109f7095974ab1a5e930c8e998580d",
     accessToken,
     imageryLayersUrl,
-    centerPosition = Cartesian3.fromDegrees(114.15057,22.593059, 100000),
+    areaName,
+    defaultShowState,
+    flyToHeight,
+    spinStroke,
+    spinContainerBg,
+    spinDescriptionColor,
+    centerPosition = Cartesian3.fromDegrees(114.187446, 22.674131, 130000),
     controlStatus,
     basicConfig,
     pointData = [],
 } = defineProps(cesiumProps);
 
-function loadedTileLayer(status: boolean | null): void {
+function loadedTileLayer(status: boolean): void {
+    console.log(status)
     initImageryLayersStatus.value = status;
+    if(!status) {
+        emit("loadHandler", status);
+    }
 }
 
 // 初始化 Cesium 服务
 const cesiumUtils = new cesiumService("cesium-3d-viewer", {
     config: basicConfig,
+    defaultShowState: defaultShowState,
+    flyToHeight: flyToHeight,
     pointHandler: (value: Entity) => {
         emit("pointHandler", value);
     },
-    loadTileLayerHandler: (status: boolean | null) => {
+    limitHeightHandler: (value: number) => {
+        emit("limitHeightHandler", value);
+    },
+    loadTileLayerHandler: (status: boolean) => {
         loadedTileLayer(status);
     },
 });
 
-function changeModel(type: changeModelType, value: string): void {
+function changeModel<T extends changeModelType>(type: changeModelType, value: changeModelParamType[T]): void {
     if (cesiumUtils[type]) {
         cesiumUtils[type](value);
     } else {
@@ -52,21 +70,16 @@ function changeModel(type: changeModelType, value: string): void {
     }
 }
 
-function errMessage(message: string) {
-    initImageryLayersStatus.value = false;
-    error.value = `地图初始化失败: ${message}`;
-    setTimeout(() => {
-        error.value = null;
-    }, 600);
-}
-
 async function initCesium(): Promise<{ status: boolean }> {
     try {
         if (!accessToken) {
             return { status: false };
         }
-        // 同步点数据
+        // 同步数据
         cesiumUtils.pointData = pointData;
+        cesiumUtils.options.config = basicConfig;
+        cesiumUtils.options.defaultShowState = defaultShowState;
+        cesiumUtils.options.flyToHeight = flyToHeight;
 
         // 初始化 Viewer
         const viewerInitSuccess = await cesiumUtils.initViewer(controlStatus);
@@ -74,8 +87,11 @@ async function initCesium(): Promise<{ status: boolean }> {
             throw new Error("Viewer 初始化失败");
         }
 
+        // 更新属性
+        cesiumUtils.updateViewerAttribute();
+
         // 设置初始视角
-        cesiumUtils.setInitialView(centerPosition);
+        cesiumUtils.setInitialView({ destination: centerPosition });
 
         // 加载瓦片图层
         const titleUrl =
@@ -83,14 +99,28 @@ async function initCesium(): Promise<{ status: boolean }> {
             `jysl/service/api/e99b765798d1412b9c2b458a1473396e/igs/rest/services/SZMAP/SZDZDT_2024_Yingji_T1_4490/WMTSServer?client_id=${clientId}&access_token=${accessToken}`;
 
         await cesiumUtils.loadTileLayer(titleUrl);
+        if (areaName) {
+            cesiumUtils.addPolygon(areaName);
+        }
+        pointData?.forEach((point) => {
+            if (defaultShowState) {
+                cesiumUtils.addPoint(point);
+            }
+            cesiumUtils.addPoint(point, "value");
+        });
         return { status: true };
     } catch (err: any) {
-        cesiumUtils.addPolygon(basicConfig.areaName);
-        pointData?.forEach((point) => cesiumUtils.addPoint(point, "value"));
-        errMessage(err.message);
+        console.log(`地图初始化失败: ${err}`);
         return { status: false };
     }
 }
+
+const spinStyle = computed(() => {
+    return {
+        "--spin-container-bg": spinContainerBg ?? "#F6FBF8",
+        "--n-spin-description-color": spinDescriptionColor ?? "#046ab1",
+    };
+});
 
 defineExpose({
     changeModel,
@@ -101,7 +131,12 @@ watch(
     (newVal) => {
         cesiumUtils.clearEntity("pointEntities");
         cesiumUtils.pointData = newVal;
-        newVal?.forEach((point) => cesiumUtils.addPoint(point, "value"));
+        newVal?.forEach((point) => {
+            cesiumUtils.addPoint(point, "value");
+            if (defaultShowState) {
+                cesiumUtils.addPoint(point);
+            }
+        });
     }
 );
 watch(
@@ -137,7 +172,24 @@ onBeforeUnmount(() => {
     width: 100%;
     height: 100%;
     box-sizing: border-box;
-    border: 1px solid transparent;
+
+    :deep(.n-spin-container) {
+        position: absolute;
+        box-sizing: border-box;
+
+        width: 100%;
+        height: 100%;
+        background: var(--spin-container-bg);
+
+        .n-spin-content--spinning {
+            width: 100%;
+            height: 100%;
+        }
+
+        .n-spin-description {
+            color: var(--n-spin-description-color);
+        }
+    }
 
     &_map {
         position: relative;
@@ -153,22 +205,16 @@ onBeforeUnmount(() => {
         }
     }
 
-    .initImageryLayersStatus-indicator,
-    .error-message {
+    .initImageryLayersStatus-indicator {
         position: absolute;
         top: 40%;
         left: 50%;
         transform: translateX(-50%);
         padding: 10px 20px;
-        width: 40%;
         background: rgba(0, 0, 0, 0.7);
         color: white;
         border-radius: 4px;
         z-index: 10;
-    }
-
-    .error-message {
-        background: rgba(255, 0, 0, 0.7);
     }
 }
 </style>

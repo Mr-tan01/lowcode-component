@@ -1,11 +1,17 @@
-import type { PropType } from "vue";
+import type { Prop, PropType } from "vue";
 import type { controlStatusType, pointType, basicConfigType } from "./type";
-import { Color, Cartesian3 } from 'cesium'
+import { Color, Cartesian3 } from "cesium";
 
 export const cesiumProps = {
-    clientId: String as PropType<string>,
-    accessToken: String as PropType<string | null>,
-    imageryLayersUrl: String as PropType<string>,
+    clientId: { type: String as PropType<string> },
+    accessToken: { type: String as PropType<string | null> },
+    imageryLayersUrl: { type: String as PropType<string> },
+    areaName: { type: String as PropType<string> }, // 初始化区域
+    defaultShowState: { type: Boolean as PropType<boolean>, default: false }, // 默认展示状态
+    flyToHeight: { type: Number as PropType<number>, default: 28000 }, // 相机飞行高度
+    spinStroke: {type: String as PropType<string>, default: "#046ab1"}, // spin图标颜色
+    spinContainerBg: {type: String as PropType<string>, default: "#F6FBF8"}, // spin遮挡背景
+    spinDescriptionColor: {type: String as PropType<string>, default: "#046ab1"}, // spin文字颜色
     centerPosition: {
         type: Object as PropType<Cartesian3>,
     },
@@ -37,9 +43,8 @@ export const cesiumProps = {
         type: Object as PropType<basicConfigType>,
         default: {
             minZoom: 200,
-            maxZoom: 100000,
+            maxZoom: 130000,
             baseColor: Color.TRANSPARENT,
-            areaName: "",
         },
     },
     pointData: {
