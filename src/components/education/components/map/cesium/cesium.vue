@@ -25,6 +25,7 @@ const emit = defineEmits<{
 const {
     clientId = "74109f7095974ab1a5e930c8e998580d",
     accessToken,
+    baseUrl,
     imageryLayersUrl,
     areaName,
     defaultShowState,
@@ -39,11 +40,8 @@ const {
 } = defineProps(cesiumProps);
 
 function loadedTileLayer(status: boolean): void {
-    console.log(status)
     initImageryLayersStatus.value = status;
-    if(!status) {
-        emit("loadHandler", status);
-    }
+    emit("loadHandler", !status);
 }
 
 // 初始化 Cesium 服务
@@ -95,8 +93,8 @@ async function initCesium(): Promise<{ status: boolean }> {
 
         // 加载瓦片图层
         const titleUrl =
-            imageryLayersUrl ||
-            `jysl/service/api/e99b765798d1412b9c2b458a1473396e/igs/rest/services/SZMAP/SZDZDT_2024_Yingji_T1_4490/WMTSServer?client_id=${clientId}&access_token=${accessToken}`;
+            imageryLayersUrl ??
+            `${baseUrl}/service/api/e99b765798d1412b9c2b458a1473396e/igs/rest/services/SZMAP/SZDZDT_2024_Yingji_T1_4490/WMTSServer?client_id=${clientId}&access_token=${accessToken}`;
 
         await cesiumUtils.loadTileLayer(titleUrl);
         if (areaName) {
@@ -111,13 +109,14 @@ async function initCesium(): Promise<{ status: boolean }> {
         return { status: true };
     } catch (err: any) {
         console.log(`地图初始化失败: ${err}`);
+        loadedTileLayer(false);
         return { status: false };
     }
 }
 
 const spinStyle = computed(() => {
     return {
-        "--spin-container-bg": spinContainerBg ?? "#F6FBF8",
+        "--spin-container-bg": spinContainerBg ?? "#6C7E93",
         "--n-spin-description-color": spinDescriptionColor ?? "#046ab1",
     };
 });

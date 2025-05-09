@@ -2,6 +2,7 @@ import { Color as e } from "@cesium/engine";
 const a = {
   clientId: { type: String },
   accessToken: { type: String },
+  baseUrl: { type: String, default: "/jysl" },
   imageryLayersUrl: { type: String },
   areaName: { type: String },
   // 初始化区域
@@ -11,7 +12,7 @@ const a = {
   // 相机飞行高度
   spinStroke: { type: String, default: "#046ab1" },
   // spin图标颜色
-  spinContainerBg: { type: String, default: "#F6FBF8" },
+  spinContainerBg: { type: String, default: "#6C7E93" },
   // spin遮挡背景
   spinDescriptionColor: { type: String, default: "#046ab1" },
   // spin文字颜色

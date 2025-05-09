@@ -8,6 +8,10 @@ export declare const cesiumProps: {
     accessToken: {
         type: PropType<string | null>;
     };
+    baseUrl: {
+        type: PropType<string | null>;
+        default: string;
+    };
     imageryLayersUrl: {
         type: PropType<string>;
     };
