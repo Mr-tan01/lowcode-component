@@ -8,6 +8,10 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
     accessToken: {
         type: import('vue').PropType<string | null>;
     };
+    baseUrl: {
+        type: import('vue').PropType<string | null>;
+        default: string;
+    };
     imageryLayersUrl: {
         type: import('vue').PropType<string>;
     };
@@ -85,6 +89,10 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
     accessToken: {
         type: import('vue').PropType<string | null>;
     };
+    baseUrl: {
+        type: import('vue').PropType<string | null>;
+        default: string;
+    };
     imageryLayersUrl: {
         type: import('vue').PropType<string>;
     };
@@ -154,6 +162,7 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
     onLimitHeightHandler?: ((value: number) => any) | undefined;
     onLoadHandler?: ((value: boolean) => any) | undefined;
 }>, {
+    baseUrl: string | null;
     defaultShowState: boolean;
     flyToHeight: number;
     spinStroke: string;

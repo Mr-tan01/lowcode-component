@@ -98,7 +98,7 @@ export const setToken = (token: string): void => {
  * 获取认证Token
  * @param token 认证令牌
  */
-export const getToken = getResponse<{ id: string; secret: string }>("jysl/oauth/token", {
+export const getToken = getResponse<{ id: string; secret: string }>("/jysl/oauth/token", {
     client_id: '74109f7095974ab1a5e930c8e998580d',
     client_secret: 'JqvrFbO!',
 }).then((res: any) => {

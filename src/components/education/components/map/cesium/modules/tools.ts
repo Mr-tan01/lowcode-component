@@ -10,6 +10,7 @@ import success from "../image/success.png";
 import warning from "../image/warning.png";
 import danger from "../image/danger.png";
 import primaryLabel from "../image/primary_label.png";
+import successLabel from "../image/success_label.png";
 import warningLabel from "../image/warning_label.png";
 import dangerLabel from "../image/danger_label.png";
 import iconPrimary from "../image/icon_primary.png";
@@ -41,7 +42,7 @@ const imageUrlOption: any = {
     warning: warning,
     danger: danger,
     primary_label: primaryLabel,
-    success_label: primaryLabel,
+    success_label: successLabel,
     warning_label: warningLabel,
     danger_label: dangerLabel,
     icon_primary: iconPrimary,
