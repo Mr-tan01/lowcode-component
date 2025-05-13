@@ -1,4 +1,4 @@
-import { defineComponent as x, mergeDefaults as K, useCssVars as R, ref as $, onMounted as T, computed as d, openBlock as s, createElementBlock as i, createVNode as M, createElementVNode as v, Fragment as p, renderList as g, mergeProps as w, resolveDynamicComponent as j, createBlock as H, createCommentVNode as B, renderSlot as O, unref as S } from "vue";
+import { defineComponent as x, mergeDefaults as K, useCssVars as R, ref as B, onMounted as T, computed as d, openBlock as s, createElementBlock as i, createVNode as M, createElementVNode as v, Fragment as p, renderList as g, mergeProps as C, resolveDynamicComponent as j, createBlock as H, createCommentVNode as N, renderSlot as O, unref as S } from "vue";
 import Y from "./comp/sshzq.js";
 import q from "./comp/baoan.js";
 import U from "./comp/dapeng.js";
@@ -14,7 +14,7 @@ import oe from "./comp/defines.js";
 import te from "./comp/labels2.js";
 import ne from "../mark/index2.js";
 import { propsRaw as se } from "./props.js";
-import { LabelModelEnum as N, defFloatLevelConfig as ue, szBlockNames as t, defBlockLableMap as ie } from "./const.js";
+import { LabelModelEnum as V, defFloatLevelConfig as ue, szBlockNames as n, defBlockLableMap as ie } from "./const.js";
 import ce from "lodash-es/merge";
 const fe = { class: "lc-szmap-raw" }, me = {
   class: "lc-szmap-raw__svg",
@@ -45,29 +45,29 @@ const fe = { class: "lc-szmap-raw" }, me = {
     fillModel: "default",
     rotateX: 0,
     disabledGradient: !1,
-    labelModel: () => N.DEFAULT
+    labelModel: () => V.DEFAULT
   }),
   emits: ["markClick"],
-  setup(c, { emit: V }) {
+  setup(c, { emit: G }) {
     R((e) => ({
-      c37d54de: X.value,
-      "3d48e3aa": A.value
+      "4f5b889a": X.value,
+      "42f22e41": A.value
     }));
     const b = {
-      [t.光明]: J,
-      [t.宝安]: q,
-      [t.龙华]: ae,
-      [t.南山]: le,
-      [t.福田]: W,
-      [t.罗湖]: Z,
-      [t.盐田]: re,
-      [t.坪山]: ee,
-      [t.龙岗]: Q,
-      [t.大鹏新区]: U,
-      [t.深汕合作区]: Y
-    }, k = $(0), G = V, L = $("");
+      [n.光明]: J,
+      [n.宝安]: q,
+      [n.龙华]: ae,
+      [n.南山]: le,
+      [n.福田]: W,
+      [n.罗湖]: Z,
+      [n.盐田]: re,
+      [n.坪山]: ee,
+      [n.龙岗]: Q,
+      [n.大鹏新区]: U,
+      [n.深汕合作区]: Y
+    }, k = B(0), E = G, L = B("");
     function _(e) {
-      const l = c.values[e] ?? { value: 0 }, f = m.value.findIndex(([n, o]) => {
+      const l = c.values[e] ?? { value: 0 }, f = m.value.findIndex(([t, o]) => {
         var h, u;
         return l.value >= ((h = o == null ? void 0 : o.range) == null ? void 0 : h[0]) && l.value <= ((u = o == null ? void 0 : o.range) == null ? void 0 : u[1]);
       }), [r, a] = m.value[f] ?? [];
@@ -79,8 +79,8 @@ const fe = { class: "lc-szmap-raw" }, me = {
         }
       };
     }
-    function E(e) {
-      G("markClick", _(e));
+    function w(e) {
+      E("markClick", _(e));
     }
     T(() => {
       setTimeout(() => {
@@ -91,19 +91,21 @@ const fe = { class: "lc-szmap-raw" }, me = {
     function P(e) {
       const l = c.values[e];
       if (!l || c.disabledGradient) return {};
-      const f = m.value.findIndex(([h, u]) => {
-        var y, z;
-        return l.value >= ((y = u == null ? void 0 : u.range) == null ? void 0 : y[0]) && l.value <= ((z = u == null ? void 0 : u.range) == null ? void 0 : z[1]);
-      }), [r, a] = m.value[f] ?? [];
-      let n = [], o = {};
-      return a && r && (n.push("float-active"), typeof a.stop == "string" ? o["--linear-gradient-fill"] = a.stop : o["--linear-gradient-fill"] = `url(#linearGradient-float-${r})`), {
-        class: n,
+      const f = m.value.findIndex(
+        ([h, u]) => {
+          var $, z;
+          return l.value >= (($ = u == null ? void 0 : u.range) == null ? void 0 : $[0]) && l.value <= ((z = u == null ? void 0 : u.range) == null ? void 0 : z[1]);
+        }
+      ), [r, a] = m.value[f] ?? [];
+      let t = [], o = {};
+      return a && r && (t.push("float-active"), typeof a.stop == "string" ? o["--linear-gradient-fill"] = a.stop : o["--linear-gradient-fill"] = `url(#linearGradient-float-${r})`), {
+        class: t,
         style: o
       };
     }
-    const X = d(() => `rotateX(${c.rotateX}deg)`), A = d(() => Math.abs(c.rotateX)), C = (e) => ["lc-szmap-raw__mark-group--item", `mark-${e}`];
+    const X = d(() => `rotateX(${c.rotateX}deg)`), A = d(() => Math.abs(c.rotateX)), y = (e) => ["lc-szmap-raw__mark-group--item", `mark-${e}`];
     function D(e) {
-      c.labelModel === N.HOVER && (L.value = e);
+      c.labelModel === V.HOVER && (L.value = e);
     }
     const F = (e) => {
       const l = e.relatedTarget;
@@ -123,9 +125,9 @@ const fe = { class: "lc-szmap-raw" }, me = {
               (s(!0), i(
                 p,
                 null,
-                g(r == null ? void 0 : r.stop, (n, o) => (s(), i(
+                g(r == null ? void 0 : r.stop, (t, o) => (s(), i(
                   "stop",
-                  w({ ref_for: !0 }, typeof n == "object" && !Array.isArray(n) ? n : {}, { key: o }),
+                  C({ ref_for: !0 }, typeof t == "object" && !Array.isArray(t) ? t : {}, { key: o }),
                   null,
                   16
                   /* FULL_PROPS */
@@ -144,14 +146,15 @@ const fe = { class: "lc-szmap-raw" }, me = {
               (s(), i(
                 p,
                 null,
-                g(b, (f, r, a) => M(j(f), w({
+                g(b, (f, r, a) => M(j(f), C({
                   class: I.value,
                   key: a,
                   ref_for: !0
                 }, P(r), {
-                  onMouseover: (n) => D(r),
-                  onMouseleave: l[0] || (l[0] = (n) => F(n))
-                }), null, 16, ["class", "onMouseover"])),
+                  onMouseover: (t) => D(r),
+                  onMouseleave: l[0] || (l[0] = (t) => F(t)),
+                  onClick: (t) => w(r)
+                }), null, 16, ["class", "onMouseover", "onClick"])),
                 64
                 /* STABLE_FRAGMENT */
               )),
@@ -159,7 +162,7 @@ const fe = { class: "lc-szmap-raw" }, me = {
                 key: 0,
                 labels: e.labels,
                 values: e.values
-              }, null, 8, ["labels", "values"])) : B("v-if", !0)
+              }, null, 8, ["labels", "values"])) : N("v-if", !0)
             ])
           ])
         ])
@@ -167,26 +170,26 @@ const fe = { class: "lc-szmap-raw" }, me = {
       e.showLabel ? (s(), i("div", be, [
         O(e.$slots, "mapLabel", {
           blockList: b,
-          labelClass: C,
+          labelClass: y,
           getVlaue: _,
           currentMapKey: L.value
         }, () => [
           (s(), i(
             p,
             null,
-            g(b, (f, r) => M(S(ne), w({
+            g(b, (f, r) => M(S(ne), C({
               key: r,
-              class: C(r),
+              class: y(r),
               ref_for: !0
             }, _(r), {
               size: "small",
-              onClick: (a) => E(r)
+              onClick: (a) => w(r)
             }), null, 16, ["class", "onClick"])),
             64
             /* STABLE_FRAGMENT */
           ))
         ], !0)
-      ])) : B("v-if", !0)
+      ])) : N("v-if", !0)
     ]));
   }
 });

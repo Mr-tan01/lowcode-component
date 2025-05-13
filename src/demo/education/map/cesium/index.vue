@@ -7,7 +7,7 @@
                     :access-token="accessToken"
                     :point-data="optionInfo"
                     :basic-config="basicConfig"
-                    :default-show-state="false"
+                    :default-show-state="true"
                     :fly-to-height="30000"
                     v-on:load-handler="loadHandler"
                 ></LcCesium>
@@ -63,7 +63,7 @@ function iconHandler(alt: string) {
 
 onMounted(async () => {
     await getToken;
-    accessToken.value = localStorage.getItem("access_token");
+    accessToken.value = localStorage.getItem("access_token") + "1";
 });
 </script>
 

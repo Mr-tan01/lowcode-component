@@ -218,6 +218,7 @@ export interface optionType {
     config: basicConfigType;
     defaultShowState: boolean;
     flyToHeight: number;
+    offsetState: boolean;
     pointHandler: (value: Entity) => void;
     limitHeightHandler: (value: number) => void;
     loadTileLayerHandler: (status: boolean) => void;
@@ -240,9 +241,27 @@ export declare const pointInfo: {
         lng: number;
         lat: number;
         value: string;
+        text: string;
+        iconType?: undefined;
+        textIconType?: undefined;
+        changeIconType?: undefined;
+    } | {
+        name: string;
+        lng: number;
+        lat: number;
+        value: string;
         iconType: string;
         text: string;
         textIconType: string;
+        changeIconType?: undefined;
+    } | {
+        name: string;
+        lng: number;
+        lat: number;
+        value: string;
+        iconType: string;
+        text: string;
+        textIconType?: undefined;
         changeIconType?: undefined;
     } | {
         name: string;

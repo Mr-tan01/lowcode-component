@@ -10,6 +10,8 @@ const a = {
   // 默认展示状态
   flyToHeight: { type: Number, default: 28e3 },
   // 相机飞行高度
+  offsetState: { type: Boolean, default: !1 },
+  // 启用/禁用 缩放偏移
   spinStroke: { type: String, default: "#046ab1" },
   // spin图标颜色
   spinContainerBg: { type: String, default: "#6C7E93" },

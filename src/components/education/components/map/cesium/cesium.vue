@@ -30,6 +30,7 @@ const {
     areaName,
     defaultShowState,
     flyToHeight,
+    offsetState,
     spinStroke,
     spinContainerBg,
     spinDescriptionColor,
@@ -49,6 +50,7 @@ const cesiumUtils = new cesiumService("cesium-3d-viewer", {
     config: basicConfig,
     defaultShowState: defaultShowState,
     flyToHeight: flyToHeight,
+    offsetState: offsetState,
     pointHandler: (value: Entity) => {
         emit("pointHandler", value);
     },
@@ -78,6 +80,7 @@ async function initCesium(): Promise<{ status: boolean }> {
         cesiumUtils.options.config = basicConfig;
         cesiumUtils.options.defaultShowState = defaultShowState;
         cesiumUtils.options.flyToHeight = flyToHeight;
+        cesiumUtils.options.offsetState = offsetState;
 
         // 初始化 Viewer
         const viewerInitSuccess = await cesiumUtils.initViewer(controlStatus);
@@ -108,7 +111,6 @@ async function initCesium(): Promise<{ status: boolean }> {
         });
         return { status: true };
     } catch (err: any) {
-        console.log(`地图初始化失败: ${err}`);
         loadedTileLayer(false);
         return { status: false };
     }
@@ -121,8 +123,14 @@ const spinStyle = computed(() => {
     };
 });
 
+const initCesiumDebounced = () => {
+    cesiumUtils.destroy();
+    initCesium();
+};
+
 defineExpose({
     changeModel,
+    loadedTileLayer
 });
 
 watch(
@@ -138,18 +146,18 @@ watch(
         });
     }
 );
+
+watch([() => accessToken, () => imageryLayersUrl], initCesiumDebounced);
+
 watch(
-    () => accessToken,
-    () => {
-        initCesium();
-    }
-);
-watch(
-    () => imageryLayersUrl,
-    () => {
-        cesiumUtils.destroy();
-        initCesium();
-    }
+    () => offsetState,
+    (newValue) => {
+        cesiumUtils.options = {
+            ...cesiumUtils.options,
+            offsetState: newValue,
+        };
+    },
+    { deep: true }
 );
 
 onMounted(async () => {

@@ -82,6 +82,7 @@ export interface optionType {
     config: basicConfigType;
     defaultShowState: boolean;
     flyToHeight: number;
+    offsetState: boolean;
     pointHandler: (value: Entity) => void;
     limitHeightHandler: (value: number) => void;
     loadTileLayerHandler: (status: boolean) => void;
@@ -105,9 +106,7 @@ export const pointInfo = {
             lng: 113.808156,
             lat: 22.636116,
             value: "机",
-            iconType: "warning",
             text: "深圳宝安国际机场是个大机场哟！",
-            textIconType: "warning_label",
         },
         {
             name: "dad",
@@ -115,9 +114,8 @@ export const pointInfo = {
             lat: 22.666691,
             value: "",
             iconType: "icon_primary",
-            text: "怀德社区",
+            text: "怀德社区怀德社区怀德社区",
             textIconType: "primary_label",
-            changeIconType: "icon_success",
         },
         {
             name: "c",
@@ -126,7 +124,6 @@ export const pointInfo = {
             value: "峰",
             iconType: "primary",
             text: "美林峰美林峰",
-            textIconType: "primary_label",
         },
         {
             name: "d",

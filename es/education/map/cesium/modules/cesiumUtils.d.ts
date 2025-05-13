@@ -18,7 +18,7 @@ export declare class cesiumService {
     initViewer(controlStatus: controlStatusType): Promise<boolean>;
     handleTileLoadProgress(remaining: number): void;
     loadTileLayer(url: string): Promise<void>;
-    addPoint(point: pointType, type?: string): Promise<Entity | null>;
+    addPoint(point: pointType, type?: string, labelType?: string): Promise<Entity | null>;
     clearEntity(key: string): Promise<void>;
     addPolygon(name: string): void;
     getPositionCartographic(): number[] | undefined;

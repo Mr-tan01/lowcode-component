@@ -18,6 +18,7 @@
                             v-bind="getBlockProperties(key)"
                             @mouseover="getHoverMapKey(key)"
                             @mouseleave="hidePopver($event)"
+                            @click="markClick(key)"
                         ></component>
                         <Labels v-if="showLabel" :labels :values></Labels>
                     </g>
@@ -26,7 +27,14 @@
         </svg>
         <div class="lc-szmap-raw__mark-group" v-if="showLabel">
             <slot name="mapLabel" :blockList="blockList" :labelClass="labelClass" :getVlaue="getMarkProp" :currentMapKey="currentMapKey">
-                <LcMark v-for="(_, key) in blockList" :key :class="labelClass(key)" v-bind="getMarkProp(key)" size="small" @click="markClick(key)"></LcMark>
+                <LcMark
+                    v-for="(_, key) in blockList"
+                    :key
+                    :class="labelClass(key)"
+                    v-bind="getMarkProp(key)"
+                    size="small"
+                    @click="markClick(key)"
+                ></LcMark>
             </slot>
         </div>
     </div>
@@ -118,7 +126,9 @@ function getBlockProperties(key: BlockName) {
     const currentValueConf = values[key];
 
     if (!currentValueConf || disabledGradient) return {};
-    const currentLevelIndex = levelsList.value.findIndex(([_, item]) => currentValueConf.value >= item?.range?.[0]! && currentValueConf.value <= item?.range?.[1]!);
+    const currentLevelIndex = levelsList.value.findIndex(
+        ([_, item]) => currentValueConf.value >= item?.range?.[0]! && currentValueConf.value <= item?.range?.[1]!
+    );
     const [type, currentLevelConf] = levelsList.value[currentLevelIndex] ?? [];
 
     let className: string[] = [];
