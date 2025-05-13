@@ -26,6 +26,10 @@ export declare const cesiumProps: {
         type: PropType<number>;
         default: number;
     };
+    offsetState: {
+        type: PropType<boolean>;
+        default: boolean;
+    };
     spinStroke: {
         type: PropType<string>;
         default: string;

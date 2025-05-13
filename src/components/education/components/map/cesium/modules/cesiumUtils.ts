@@ -6,12 +6,12 @@ import {
     defined,
     Entity,
     Math as cesiumMath,
-    NearFarScalar,
     PolylineDashMaterialProperty,
     ScreenSpaceEventHandler,
     ScreenSpaceEventType,
     WebMapTileServiceImageryProvider,
     ArcGisMapServerImageryProvider,
+    JulianDate,
 } from "cesium";
 
 import { CesiumHeatmap } from "cesium-heatmap-es6";
@@ -78,6 +78,12 @@ export class cesiumService {
                 (click: { position: Cartesian2 }) => {
                     if (this.viewer) {
                         this.viewer.selectedEntity = undefined; // 取消选中，阻止默认弹窗
+                        if (this.options?.offsetState) {
+                            // 处理缩放偏移
+                            click.position.x *= 1.18;
+                            click.position.y *= 1.18;
+                        }
+
                         const pickedObject: any = this.viewer.scene.pick(click.position);
                         const cartesian: Cartesian3 = this.viewer.scene.pickPosition(click.position); // 点击位置的经纬度、高度
                         if (defined(pickedObject) && pickedObject.id) {
@@ -90,7 +96,6 @@ export class cesiumService {
 
             // 监听相机停止移动后的高度变化
             this.viewer.scene.camera.moveEnd.addEventListener(this.changeHeightHandler);
-
             return true;
         } catch (error) {
             console.error("初始化Cesium失败:", error);
@@ -151,9 +156,9 @@ export class cesiumService {
     }
 
     // 添加点标记
-    async addPoint(point: pointType, type?: string): Promise<Entity | null> {
+    async addPoint(point: pointType, type?: string, labelType?: string): Promise<Entity | null> {
         if (!this.viewer) return null;
-        const valueInfo = await createInfoCanvas(point, type);
+        const valueInfo = await createInfoCanvas(point, type, labelType);
         const entity: Entity = this.viewer.entities.add({
             position: Cartesian3.fromDegrees(point.lng, point.lat),
             name: type ? point.name : `${point.name}Label`,
@@ -166,9 +171,7 @@ export class cesiumService {
             billboard: {
                 image: valueInfo.canvas,
                 disableDepthTestDistance: Number.POSITIVE_INFINITY,
-                pixelOffset: type ? new Cartesian2(0, 0) : new Cartesian2(valueInfo.canvas.width / 2.2, 19),
-                scale: type ? 1 : 0.9,
-                translucencyByDistance: new NearFarScalar(1.0e3, 1.0, 2.0e3, type ? 0.9 : 1),
+                pixelOffset: type ? new Cartesian2(0, 0) : new Cartesian2(valueInfo.canvas.width / 2.1, 4),
             },
         });
 
@@ -258,16 +261,17 @@ export class cesiumService {
     // 控制窗体
     pointClickHandler(pickedObject: Entity): void {
         const { name } = pickedObject;
-        const labelName = `${name}Label`;
+        const replaceName = name?.endsWith("Label") ? name?.replace("Label", "") : name;
+        const labelName = `${replaceName}Label`;
 
-        const dataIndex = this.pointData?.findIndex((item) => item.name === name) ?? -1; // 确认点位存在
-        const entityIndex = this.pointEntities?.findIndex((item) => item.name === name) ?? -1; // 匹配对应点位
+        const dataIndex = this.pointData?.findIndex((item) => item.name === replaceName) ?? -1; // 确认点位存在
+        const entityIndex = this.pointEntities?.findIndex((item) => item.name === replaceName) ?? -1; // 匹配对应点位
         const labelEntityIndex = this.pointEntities?.findIndex((item) => item.name === labelName) ?? -1; // 是否已添加文字描述
 
         const shouldAddPoint = dataIndex !== -1 && labelEntityIndex === -1 && !this.options.defaultShowState;
         if (shouldAddPoint && this.pointData) {
             // 添加文字描述
-            this.addPoint(this.pointData[dataIndex]);
+            this.addPoint(this.pointData[dataIndex], undefined, "Label");
         }
 
         // 内容图标变动
@@ -283,6 +287,15 @@ export class cesiumService {
             this.pointEntities?.forEach((item) => {
                 if (item.name?.endsWith("Label")) {
                     item.show = item.name === labelName && !item.show;
+                } else {
+                    const currentTime = JulianDate.now(); // 获取当前时间戳
+                    const changeState = item.properties?.getValue(currentTime).changeState; // 直接访问属性
+                    if (changeState) {
+                        const valueIndex = this.pointData?.findIndex((option) => option.name === item.name) ?? -1;
+                        if (valueIndex !== -1) {
+                            updateViewerEntityInfo(this.pointData?.[valueIndex], item, "value");
+                        }
+                    }
                 }
             });
         }

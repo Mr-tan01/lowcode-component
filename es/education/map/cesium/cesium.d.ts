@@ -1,5 +1,6 @@
 import { changeModelType, changeModelParamType } from './modules/type';
 import { Entity, Cartesian3 } from 'cesium';
+declare function loadedTileLayer(status: boolean): void;
 declare function changeModel<T extends changeModelType>(type: changeModelType, value: changeModelParamType[T]): void;
 declare const _default: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
     clientId: {
@@ -25,6 +26,10 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
     flyToHeight: {
         type: import('vue').PropType<number>;
         default: number;
+    };
+    offsetState: {
+        type: import('vue').PropType<boolean>;
+        default: boolean;
     };
     spinStroke: {
         type: import('vue').PropType<string>;
@@ -78,6 +83,7 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
     };
 }>, {
     changeModel: typeof changeModel;
+    loadedTileLayer: typeof loadedTileLayer;
 }, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {} & {
     pointHandler: (value: Entity) => any;
     limitHeightHandler: (value: number) => any;
@@ -106,6 +112,10 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
     flyToHeight: {
         type: import('vue').PropType<number>;
         default: number;
+    };
+    offsetState: {
+        type: import('vue').PropType<boolean>;
+        default: boolean;
     };
     spinStroke: {
         type: import('vue').PropType<string>;
@@ -165,6 +175,7 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
     baseUrl: string | null;
     defaultShowState: boolean;
     flyToHeight: number;
+    offsetState: boolean;
     spinStroke: string;
     spinContainerBg: string;
     spinDescriptionColor: string;

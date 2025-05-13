@@ -3,10 +3,11 @@ import { Entity } from 'cesium';
  * 创建信息Canvas元素
  * @param info 信息对象
  * @param valueKey 值键名
+ * @param labelType 文字键值
  * @returns Promise<{canvas: HTMLCanvasElement, cleanup: () => void}>
  */
 export declare const changeIconOption: any;
-export declare const createInfoCanvas: (info: any, valueKey?: string) => Promise<{
+export declare const createInfoCanvas: (info: any, valueKey?: string, labelType?: string) => Promise<{
     canvas: HTMLCanvasElement;
     cleanup: () => void;
 }>;

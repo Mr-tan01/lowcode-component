@@ -2,6 +2,7 @@
  * 创建信息Canvas元素
  * @param info 信息对象
  * @param valueKey 值键名
+ * @param labelType 文字键值
  * @returns Promise<{canvas: HTMLCanvasElement, cleanup: () => void}>
  */
 
@@ -82,9 +83,10 @@ interface reloadTextOption {
 /**
  * 绘制文本信息
  * @param option 信息对象 reloadTextOption
+ * @returns void
  */
 
-const reloadText = (option: reloadTextOption) => {
+const reloadText = (option: reloadTextOption): void => {
     const { info, valueKey, canvas, ctx, text } = option;
 
     const valueFont = `
@@ -102,12 +104,34 @@ const reloadText = (option: reloadTextOption) => {
     ctx.fillStyle = (valueKey ? info?.fontStyle?.color : info?.textStyle?.color) ?? options.fontStyle?.color;
     ctx.textBaseline = "middle";
     ctx.textAlign = "left";
-    const textX = valueKey ? info?.textOffsetX ?? 13 : 40;
+    const textX = valueKey ? info?.textOffsetX ?? 13 : 46;
     const textY = info?.textOffsetY ?? canvas.height / 2 - (valueKey ? 10 : 6);
     ctx.fillText(text, textX, textY);
 };
 
-export const createInfoCanvas = (info: any, valueKey?: string): Promise<{ canvas: HTMLCanvasElement; cleanup: () => void }> => {
+/**
+ * 擦除重叠部分
+ * @param ctx canvas内容 CanvasRenderingContext2D
+ * @returns void
+ */
+const eraseOverlapImage = (ctx: CanvasRenderingContext2D): void => {
+    // 设置透明区域
+    ctx.save();
+    ctx.beginPath();
+    ctx.moveTo(0, 0);
+    ctx.lineTo(28, 0);
+    ctx.quadraticCurveTo(30, 20, 20, 26);
+    ctx.lineTo(0, 56);
+    ctx.closePath();
+
+    // 擦除区域
+    ctx.globalCompositeOperation = "destination-out";
+    ctx.fillStyle = "rgba(0,0,0,1)";
+    ctx.fill();
+    ctx.restore();
+};
+
+export const createInfoCanvas = (info: any, valueKey?: string, labelType?: string): Promise<{ canvas: HTMLCanvasElement; cleanup: () => void }> => {
     return new Promise((resolve, reject) => {
         // 创建canvas元素
         const canvas = document.createElement("canvas");
@@ -124,7 +148,7 @@ export const createInfoCanvas = (info: any, valueKey?: string): Promise<{ canvas
         const { iconType, textIconType } = info;
         const icons = {
             icon: iconType ? imageUrlOption[iconType] : imageUrlOption["primary"],
-            textIcon: textIconType ? imageUrlOption[textIconType] : imageUrlOption["success_label"],
+            textIcon: textIconType ? imageUrlOption[textIconType] : imageUrlOption[(labelType ? "success" : "primary") + "_label"],
         };
 
         // 绘制背景
@@ -143,6 +167,7 @@ export const createInfoCanvas = (info: any, valueKey?: string): Promise<{ canvas
         if (bgImageUrl) {
             const image = new Image();
             image.crossOrigin = "Anonymous";
+            image.src = bgImageUrl;
             image.onload = () => {
                 // 先绘制文本 获取添加文字后的宽高
                 reloadText({ info: info, valueKey: valueKey, canvas: canvas, ctx: ctx, text: text });
@@ -153,6 +178,10 @@ export const createInfoCanvas = (info: any, valueKey?: string): Promise<{ canvas
                 // 绘制图片到画布 宽高为获取后的值
                 ctx.drawImage(image, 0, 0, valueKey ? canvas.width : canvas.width, canvas.height);
 
+                if (!valueKey) {
+                    eraseOverlapImage(ctx);
+                }
+
                 // 重新绘制文本 绘制图片会清空画布
                 reloadText({ info: info, valueKey: valueKey, canvas: canvas, ctx: ctx, text: text });
 
@@ -162,8 +191,6 @@ export const createInfoCanvas = (info: any, valueKey?: string): Promise<{ canvas
             image.onerror = () => {
                 reject(new Error("Failed to load image"));
             };
-
-            image.src = bgImageUrl;
         } else {
             reloadText({ info: info, valueKey: valueKey, canvas: canvas, ctx: ctx, text: text });
             resolve({ canvas, cleanup });
@@ -203,7 +230,6 @@ async function drawImageCanvas(imgSrc: string): Promise<HTMLCanvasElement> {
                 const canvas = document.createElement("canvas");
                 const ctx = canvas.getContext("2d");
                 if (!ctx) return reject(new Error("无法获取2D上下文"));
-
                 canvas.width = image.naturalWidth;
                 canvas.height = image.naturalHeight;
                 ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
@@ -225,14 +251,17 @@ export async function updateViewerEntityInfo(info: any, entity: Entity | undefin
     if (entity?.billboard && entity.properties) {
         const currentTime = JulianDate.now(); // 获取当前时间戳
         const changeState = entity.properties?.getValue(currentTime).changeState; // 直接访问属性
-        const valueIcon = changeState ? info.iconType : info.changeIconType ?? "success";
-        const textIcon = changeState ? info.textIconType : info.changeTextIconType ?? "success_label";
+        const valueIcon = changeState ? info?.iconType ?? "primary" : info?.changeIconType ?? "success";
+        const textIcon = changeState ? info?.textIconType ?? "primary_label" : info?.changeTextIconType ?? "success_label";
         let valueInfo = entity.billboard.image?.getValue();
         valueInfo = typeof valueInfo === "string" ? await drawImageCanvas(valueInfo) : valueInfo;
         const ctx = valueInfo.getContext("2d");
         const image = await loadImage(imageUrlOption[type ? valueIcon : textIcon]);
         ctx?.clearRect(0, 0, valueInfo.width, valueInfo.height);
         ctx.drawImage(image, 0, 0, valueInfo.width, valueInfo.height);
+        if (!type) {
+            eraseOverlapImage(ctx);
+        }
         reloadText({ info: info, valueKey: type, canvas: valueInfo, ctx: ctx, text: type ? info.value : info.text });
         entity.billboard.image = valueInfo.toDataURL("image/png");
         // 动态修改changeState属性
