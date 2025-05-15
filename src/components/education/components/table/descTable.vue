@@ -1,26 +1,67 @@
 <template>
     <div class="lc-desc-list">
         <div class="lc-desc-list__wrapper">
-            <LcElasticScrollbar>
-                <div class="lc-desc-list__head">
-                    <div v-for="(thRecord, thIndex) in columns" :key="thIndex" :style="customRecordStyle(thRecord)"
-                        class="lc-desc-list__head--item">
-                        <div class="lc-desc-list__head--item__cell" :title="getThCellNode(thRecord, thIndex)">
-                            {{ getThCellNode(thRecord, thIndex) }}
-                        </div>
+            <div class="lc-desc-list__head">
+                <div
+                    v-for="(thRecord, thIndex) in columns"
+                    :key="thIndex"
+                    :style="customRecordStyle(thRecord)"
+                    class="lc-desc-list__head--item"
+                >
+                    <div
+                        class="lc-desc-list__head--item__cell"
+                        :title="getThCellNode(thRecord, thIndex)"
+                    >
+                        {{ getThCellNode(thRecord, thIndex) }}
                     </div>
                 </div>
+            </div>
+            <LcElasticScrollbar>
                 <div class="lc-desc-list__tbody">
-                    <div class="lc-desc-list__tbody__tr" v-for="(tdRecord, tdIndex) in data" :key="tdIndex">
-                        <div class="lc-desc-list__tbody__tr__cell" v-for="(thRecord, thIndex) in columns" :key="thIndex"
-                            :style="customRecordStyle(thRecord)">
-                            <slot :name="getTdCellSlotName(thRecord)" :record="tdRecord" :index="tdIndex"
-                                :column="thRecord" :colIndex="thIndex"
-                                :value="getTdCellNode(tdRecord, thRecord, tdIndex, thIndex)">
-                                <span class="lc-desc-list__tbody__tr__cell__span"
-                                    :title="getTdCellNode(tdRecord, thRecord, tdIndex, thIndex)">
+                    <div
+                        class="lc-desc-list__tbody__tr"
+                        v-for="(tdRecord, tdIndex) in data"
+                        :key="tdIndex"
+                    >
+                        <div
+                            class="lc-desc-list__tbody__tr__cell"
+                            v-for="(thRecord, thIndex) in columns"
+                            :key="thIndex"
+                            :style="customRecordStyle(thRecord)"
+                        >
+                            <slot
+                                :name="getTdCellSlotName(thRecord)"
+                                :record="tdRecord"
+                                :index="tdIndex"
+                                :column="thRecord"
+                                :colIndex="thIndex"
+                                :value="
+                                    getTdCellNode(
+                                        tdRecord,
+                                        thRecord,
+                                        tdIndex,
+                                        thIndex
+                                    )
+                                "
+                            >
+                                <span
+                                    class="lc-desc-list__tbody__tr__cell__span"
+                                    :title="
+                                        getTdCellNode(
+                                            tdRecord,
+                                            thRecord,
+                                            tdIndex,
+                                            thIndex
+                                        )
+                                    "
+                                >
                                     {{
-                                        getTdCellNode(tdRecord, thRecord, tdIndex, thIndex)
+                                        getTdCellNode(
+                                            tdRecord,
+                                            thRecord,
+                                            tdIndex,
+                                            thIndex
+                                        )
                                     }}
                                 </span>
                             </slot>
@@ -47,51 +88,63 @@ export interface Columns {
     align?: string;
     width?: string;
     flex?: string | number;
-
 }
-const { } = defineProps({
+const {} = defineProps({
     columns: {
         type: Array as PropType<Columns[]>,
-        default: () => [],
+        default: () => []
     },
     data: {
         type: Array as PropType<Record<string, any>[]>,
-        default: () => [],
-    },
+        default: () => []
+    }
 });
 
 const tdCellTypeMap = {
-    index: ((_tdRecord, _thRecord, _tdIndex: number, _thIndex: number) => {
+    index: (_tdRecord, _thRecord, _tdIndex: number, _thIndex: number) => {
         return _tdIndex + 1;
-    }),
-    default: ((_tdRecord, _thRecord, _tdIndex: number, _thIndex: number) => {
+    },
+    default: (_tdRecord, _thRecord, _tdIndex: number, _thIndex: number) => {
         const val = _tdRecord[_thRecord.dataIndex];
         return typeof val === 'number' ? val : val || '-';
-    })
-}
+    }
+};
 
-const getThCellNode: (_record: Columns, _index: number) => string = memoize((_record: Columns, _index: number) => {
-    return _record.title;
-});
+const getThCellNode: (_record: Columns, _index: number) => string = memoize(
+    (_record: Columns, _index: number) => {
+        return _record.title;
+    }
+);
 
-function createTdCellNode(_tdRecord, _thRecord: Columns, _tdIndex: number, _thIndex: number) {
-    const renderHandler = _thRecord.type ? tdCellTypeMap[_thRecord.type] : tdCellTypeMap.default;
+function createTdCellNode(
+    _tdRecord,
+    _thRecord: Columns,
+    _tdIndex: number,
+    _thIndex: number
+) {
+    const renderHandler = _thRecord.type
+        ? tdCellTypeMap[_thRecord.type]
+        : tdCellTypeMap.default;
     return renderHandler(_tdRecord, _thRecord, _tdIndex, _thIndex);
 }
-const getTdCellNode: typeof createTdCellNode = memoize(createTdCellNode, createTdCellNode);
+const getTdCellNode: typeof createTdCellNode = memoize(
+    createTdCellNode,
+    createTdCellNode
+);
 
-const customRecordStyle: (_record: Columns) => Record<string, any> = memoize((thRecord) => {
-    return {
-        '--text-align': thRecord.align ?? 'left',
-        '--cell-flex': thRecord.flex ?? 1,
-        '--cell-width': thRecord.width ?? 'auto',
+const customRecordStyle: (_record: Columns) => Record<string, any> = memoize(
+    (thRecord) => {
+        return {
+            '--text-align': thRecord.align ?? 'left',
+            '--cell-flex': thRecord.flex ?? 1,
+            '--cell-width': thRecord.width ?? 'auto'
+        };
     }
-});
+);
 
 function getTdCellSlotName(_thRecord) {
     return _thRecord.dataIndex ?? 'default';
 }
-
 </script>
 
 <style lang="scss" scoped>
@@ -105,7 +158,6 @@ function getTdCellSlotName(_thRecord) {
     }
 
     @include scrollbar-flex;
-
 
     &__wrapper {
         position: relative;
@@ -125,9 +177,18 @@ function getTdCellSlotName(_thRecord) {
 
     &__head {
         z-index: 9;
-        background: linear-gradient(180deg, rgba(0, 96, 163, 0.1) 0%, rgba(0, 127, 206, 0.5) 100%);
+        background: linear-gradient(
+            180deg,
+            rgba(0, 96, 163, 0.1) 0%,
+            rgba(0, 127, 206, 0.5) 100%
+        );
         border: 1px solid;
-        border-image: linear-gradient(180deg, rgba(49, 175, 255, 0.2), rgba(15, 194, 251, 0.8)) 1 1;
+        border-image: linear-gradient(
+                180deg,
+                rgba(49, 175, 255, 0.2),
+                rgba(15, 194, 251, 0.8)
+            )
+            1 1;
         backdrop-filter: blur(1.44px);
         display: flex;
         position: sticky;
@@ -141,7 +202,7 @@ function getTdCellSlotName(_thRecord) {
             &__cell {
                 font-family: HarmonyOS_Sans_SC;
                 font-size: 14px;
-                color: #FFFFFF;
+                color: #ffffff;
                 line-height: 20px;
                 font-style: normal;
                 padding: 9px;
@@ -187,9 +248,18 @@ function getTdCellSlotName(_thRecord) {
             }
 
             &:hover {
-                background: linear-gradient(90deg, rgba(15, 251, 248, 0) 0%, rgba(15, 251, 248, 0.35) 100%);
+                background: linear-gradient(
+                    90deg,
+                    rgba(15, 251, 248, 0) 0%,
+                    rgba(15, 251, 248, 0.35) 100%
+                );
                 border: 1px solid;
-                border-image: linear-gradient(90deg, rgba(34, 253, 252, 0), rgba(15, 251, 248, 1)) 1 1;
+                border-image: linear-gradient(
+                        90deg,
+                        rgba(34, 253, 252, 0),
+                        rgba(15, 251, 248, 1)
+                    )
+                    1 1;
                 &::before {
                     opacity: 1;
                 }
@@ -198,7 +268,7 @@ function getTdCellSlotName(_thRecord) {
             &__cell {
                 font-family: HarmonyOS_Sans_SC;
                 font-size: 14px;
-                color: #FFFFFF;
+                color: #ffffff;
                 line-height: 20px;
                 font-style: normal;
                 line-height: 26px;
@@ -228,8 +298,6 @@ function getTdCellSlotName(_thRecord) {
                 }
             }
         }
-
-
     }
 }
 </style>
