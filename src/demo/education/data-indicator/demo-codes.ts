@@ -5,6 +5,9 @@ export const code1 = `
         <LcSkewIndicator label="总教职工人" :value="3336" unit="人" tip="测试tip"></LcSkewIndicator>
         <LcSkewIndicator label="总教职工人" :value="3533336" unit="人"></LcSkewIndicator>
 
+        <LcLargesKewIndicator label="正增长" :value="3336" unit="人" :year-value="30"></LcLargesKewIndicator>
+        <LcLargesKewIndicator label="负增长" :value="3336" unit="人" :year-value="-10"></LcLargesKewIndicator>
+
         <LcRangeIndicator :data="[{ label: '配备1名的学校', value: 32323 }, { label: '配备2名以上的学校', value: 125 }]"
             unit="所"></LcRangeIndicator>
         <LcRangeIndicator :data="[{ label: '配备1名的学校', value: 32323 }, { label: '配备2名以上的学校', value: 125 }]"
