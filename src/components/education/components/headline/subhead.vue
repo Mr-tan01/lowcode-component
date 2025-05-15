@@ -6,8 +6,14 @@
         <div v-if="type === direction.right || type === direction.center" class="lc-subhead__imglgt lc-subhead__img">
             <img src="./images/subhead-rgt.png" alt="" />
         </div>
+        <div class="lc-subhead__icon-left">
+            <slot name="icon-left"></slot>
+        </div>
         <div class="lc-subhead__text" :title="text">
             {{ formatedText }}
+        </div>
+        <div class="lc-subhead__icon-right">
+            <slot name="icon-right"></slot>
         </div>
         <div v-if="type === direction.right && !hideRadioIcon" class="lc-subhead__imgrft lc-subhead__img">
             <img src="./images/subhead-lft.png" alt="" />
@@ -82,6 +88,16 @@ const formatedText = computed(() => {
         line-height: v-bind(fontSize);
         text-align: left;
         font-style: normal;
+    }
+    &__icon-left {
+        margin-right: 3px;
+        max-width: 15px;
+        max-height: 15px;
+    }
+    &__icon-right {
+        margin-left: 3px;
+        max-width: 15px;
+        max-height: 15px;
     }
 }
 </style>

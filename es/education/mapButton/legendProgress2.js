@@ -1,122 +1,125 @@
-import { defineComponent as _, mergeDefaults as I, ref as M, computed as V, openBlock as v, createElementBlock as p, createElementVNode as u, toDisplayString as C, Fragment as F, renderList as S, normalizeStyle as R, createCommentVNode as k } from "vue";
-const B = { class: "legend-progress" }, P = { class: "legend-progress__lable" }, w = { class: "legend-progress__center" }, z = { class: "legend-progress__center__min-value sample-text" }, A = ["onMouseenter"], D = {
-  key: 0,
-  class: "segment-tooltip"
-}, E = { class: "legend-progress__center__max-value sample-text" }, L = /* @__PURE__ */ _({
+import { defineComponent as I, ref as b, computed as n, watch as J, openBlock as M, createElementBlock as f, createElementVNode as a, toDisplayString as h, Fragment as K, renderList as O, normalizeStyle as S, withDirectives as Q, vShow as U } from "vue";
+const Y = { class: "legend-progress" }, Z = { class: "legend-progress__label" }, ee = { class: "legend-progress__center" }, te = { class: "legend-progress__center__min-value sample-text" }, oe = ["onMouseenter"], se = { class: "legend-progress__center__max-value sample-text" }, ae = /* @__PURE__ */ I({
   __name: "legendProgress",
-  props: /* @__PURE__ */ I({
-    lable: {
-      type: String
+  props: {
+    label: {
+      type: String,
+      default: "预警人数占比"
     },
-    minValue: {
-      type: String
-    },
-    maxValue: {
-      type: String
-    },
-    startColor: {
-      type: String
-    },
-    endColor: {
-      type: String
+    data: {
+      type: Array,
+      required: !0,
+      validator: (r) => r.every((l) => l >= 0 && l <= 1)
     }
-  }, {
-    lable: "预警人数占比",
-    minValue: "0%",
-    maxValue: "20%",
-    startColor: "rgba(34, 253, 252, 0)",
-    endColor: "#FF4545"
-  }),
-  setup(s) {
-    const i = M(null), b = M(null), m = V(() => {
-      const r = [], e = parseFloat(s.minValue), h = (parseFloat(s.maxValue) - e) / 5;
-      for (let l = 0; l < 5; l++) {
-        const t = e + l * h, o = e + (l + 1) * h, g = l / 5, d = (l + 1) / 5;
-        r.push({
-          range: `${t.toFixed(1)}%~${o.toFixed(1)}%`,
-          style: {
-            width: `${100 / 5}%`,
-            background: `linear-gradient(to right, 
-                    ${x(g)}, 
-                    ${x(d)})`
-          }
-        });
+  },
+  emits: ["update-stops"],
+  setup(r, { emit: l }) {
+    const k = r, w = l, u = b({ value: null, x: 0 }), $ = n(() => {
+      var e;
+      return {
+        left: `${Math.min(Math.max(u.value.x, 0), ((e = c.value) == null ? void 0 : e.clientWidth) || 0)}px`
+      };
+    }), B = (e, t) => {
+      if (!c.value) return;
+      const o = c.value.getBoundingClientRect();
+      u.value = {
+        value: e,
+        x: t.clientX - o.left
+      };
+    }, E = () => {
+      u.value = { value: null, x: 0 };
+    }, F = (e) => e * 100 % 10 < 1 ? Math.floor(e * 10) / 10 : Math.ceil(e * 10) / 10, T = (e) => Math.round(e * 100), s = n(() => [...new Set(k.data)].sort((t, o) => t - o)), q = n(() => s.value.length > 0 ? F(s.value[0]) : 0), C = n(() => s.value.length > 0 ? T(s.value[s.value.length - 1]) : 0), D = n(() => q.value.toFixed(1)), R = n(() => C.value.toFixed(1)), W = (e) => {
+      if (e === 0) return [];
+      const t = [], o = 240, g = (60 - o) / Math.max(1, e - 1);
+      for (let _ = 0; _ < e - 1; _++) {
+        const A = o + _ * g, L = 80 + Math.random() * 15, N = 45 + Math.random() * 15, P = (V, x, d) => {
+          x /= 100, d /= 100;
+          const y = (p) => (p + V / 30) % 12, X = x * Math.min(d, 1 - d), m = (p) => d - X * Math.max(Math.min(y(p) - 3, 9 - y(p), 1), -1), j = Math.round(m(0) * 255), G = Math.round(m(8) * 255), H = Math.round(m(4) * 255);
+          return `rgba(${j}, ${G}, ${H}, 1)`;
+        };
+        t.push(P(A, L, N));
       }
-      return r;
-    }), x = (n) => {
-      if (n <= 0) return s.startColor;
-      if (n >= 1) return s.endColor;
-      if (s.startColor.startsWith("rgba")) {
-        const t = s.startColor.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*(\d*\.?\d+))?\)/), o = s.endColor.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*(\d*\.?\d+))?\)/);
-        if (t && o) {
-          const g = Math.round(parseInt(t[1]) + (parseInt(o[1]) - parseInt(t[1])) * n), d = Math.round(parseInt(t[2]) + (parseInt(o[2]) - parseInt(t[2])) * n), f = Math.round(parseInt(t[3]) + (parseInt(o[3]) - parseInt(t[3])) * n), $ = t[4] ? parseFloat(t[4]) + (parseFloat(o[4] || "1") - parseFloat(t[4])) * n : 1;
-          return `rgba(${g}, ${d}, ${f}, ${$})`;
+      return e > 0 && t.push("rgba(255, 80, 80, 1)"), t;
+    }, v = n(() => {
+      if (s.value.length === 0) return [];
+      const e = W(s.value.length), t = 100 / s.value.length;
+      return s.value.map((o, i) => ({
+        value: o,
+        style: {
+          width: `${t}%`,
+          background: e[i]
         }
-      }
-      const r = (t) => {
-        const o = parseInt(t.slice(1), 16), g = o >> 16 & 255, d = o >> 8 & 255, f = o & 255;
-        return [g, d, f];
-      }, e = r(s.startColor), a = r(s.endColor), c = Math.round(e[0] + (a[0] - e[0]) * n), h = Math.round(e[1] + (a[1] - e[1]) * n), l = Math.round(e[2] + (a[2] - e[2]) * n);
-      return `rgb(${c}, ${h}, ${l})`;
-    }, y = (n) => {
-      if (!b.value) return;
-      const r = b.value.getBoundingClientRect(), a = (n.clientX - r.left) / r.width, c = Math.floor(a * m.value.length);
-      c >= 0 && c < m.value.length && (i.value = m.value[c].range);
-    };
-    return (n, r) => (v(), p("div", B, [
-      u(
+      }));
+    }), z = n(() => v.value.map((e, t) => ({
+      range: [e.value],
+      stop: [{
+        "stop-color": e.style.background,
+        "stop-opacity": 1,
+        offset: `${t / v.value.length * 100}%`
+      }]
+    })));
+    J(z, (e) => {
+      w("update-stops", e);
+    }, { immediate: !0, deep: !0 });
+    const c = b(null);
+    return (e, t) => (M(), f("div", Y, [
+      a(
         "div",
-        P,
-        C(s.lable),
+        Z,
+        h(r.label),
         1
         /* TEXT */
       ),
-      u("div", w, [
-        u(
+      a("div", ee, [
+        a(
           "div",
-          z,
-          C(s.minValue),
+          te,
+          h(D.value) + "% ",
           1
           /* TEXT */
         ),
-        u(
+        a(
           "div",
           {
             class: "legend-progress__center__progress-bar",
             ref_key: "progressBar",
-            ref: b,
-            onMousemove: y,
-            onMouseleave: r[0] || (r[0] = (e) => i.value = null)
+            ref: c
           },
           [
-            (v(!0), p(
-              F,
+            (M(!0), f(
+              K,
               null,
-              S(m.value, (e, a) => (v(), p("div", {
-                key: a,
+              O(v.value, (o, i) => (M(), f("div", {
+                key: i,
                 class: "progress-segment",
-                style: R(e.style),
-                onMouseenter: (c) => i.value = e.range
+                style: S(o.style),
+                onMouseenter: (g) => B(o.value, g),
+                onMouseleave: E
               }, [
-                i.value === e.range ? (v(), p(
+                Q(a(
                   "div",
-                  D,
-                  C(e.range),
-                  1
-                  /* TEXT */
-                )) : k("v-if", !0)
-              ], 44, A))),
+                  {
+                    class: "segment-tooltip",
+                    style: S($.value)
+                  },
+                  h((o.value * 100).toFixed(1)) + "% ",
+                  5
+                  /* TEXT, STYLE */
+                ), [
+                  [U, u.value.value === o.value]
+                ])
+              ], 44, oe))),
               128
               /* KEYED_FRAGMENT */
             ))
           ],
-          544
-          /* NEED_HYDRATION, NEED_PATCH */
+          512
+          /* NEED_PATCH */
         ),
-        u(
+        a(
           "div",
-          E,
-          C(s.maxValue),
+          se,
+          h(R.value) + "% ",
           1
           /* TEXT */
         )
@@ -125,5 +128,5 @@ const B = { class: "legend-progress" }, P = { class: "legend-progress__lable" },
   }
 });
 export {
-  L as default
+  ae as default
 };

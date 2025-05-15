@@ -51,6 +51,9 @@
                     <LcSubhead text="福田区学前教育质量监测概况" />
                     <LcSubhead text="文字最多15个字符标题文字最多十五个字符标题文字最多十二个字符" :font-size="'20px'" type="right" />
                     <LcSubhead text="文字最多15个字符标题文字最多十五个字符标题文字最多十二个字符" :font-size="'20px'" type="center" />
+                    <LcSubhead text="添加图标">
+                        <template #icon-right><LcIcon name="pause"></LcIcon></template>
+                    </LcSubhead>
                 </n-space>
             </div>
             <div>

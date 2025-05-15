@@ -1,23 +1,23 @@
-import { defineComponent as a, mergeDefaults as c, useCssVars as u, computed as f, openBlock as l, createElementBlock as o, createElementVNode as n, createCommentVNode as s, toDisplayString as g } from "vue";
-import r from "./images/subhead-lft.png.js";
-import h from "./images/subhead-rgt.png.js";
+import { defineComponent as m, mergeDefaults as u, useCssVars as f, computed as g, openBlock as l, createElementBlock as o, createElementVNode as i, createCommentVNode as n, renderSlot as r, toDisplayString as h } from "vue";
+import c from "./images/subhead-lft.png.js";
+import _ from "./images/subhead-rgt.png.js";
 import y from "./images/subhead-lgt.png.js";
 import { overflowStr as b } from "lowcode-share/es/share";
-const x = { class: "lc-subhead" }, _ = {
+const v = { class: "lc-subhead" }, x = {
   key: 0,
   class: "lc-subhead__imglft lc-subhead__img"
-}, v = {
+}, S = {
   key: 1,
   class: "lc-subhead__imglgt lc-subhead__img"
-}, p = ["title"], S = {
+}, p = { class: "lc-subhead__icon-left" }, k = ["title"], I = { class: "lc-subhead__icon-right" }, R = {
   key: 2,
   class: "lc-subhead__imgrft lc-subhead__img"
-}, k = {
+}, z = {
   key: 3,
   class: "lc-subhead__imgrgt lc-subhead__img"
-}, L = /* @__PURE__ */ a({
+}, D = /* @__PURE__ */ m({
   __name: "subhead",
-  props: /* @__PURE__ */ c({
+  props: /* @__PURE__ */ u({
     text: {
       type: String
     },
@@ -41,57 +41,63 @@ const x = { class: "lc-subhead" }, _ = {
     hideRadioIcon: !1
   }),
   setup(t) {
-    u((d) => ({
-      "48b25678": t.fontSize
+    f((d) => ({
+      "48251db4": t.fontSize
     }));
-    const i = {
+    const s = {
       right: "right",
       center: "center",
       left: "left"
-    }, m = f(() => b(t.text, t.maxLength));
-    return (d, e) => (l(), o("div", x, [
-      t.type === i.left && !t.hideRadioIcon ? (l(), o("div", _, e[0] || (e[0] = [
-        n(
+    }, a = g(() => b(t.text, t.maxLength));
+    return (d, e) => (l(), o("div", v, [
+      t.type === s.left && !t.hideRadioIcon ? (l(), o("div", x, e[0] || (e[0] = [
+        i(
           "img",
           {
-            src: r,
+            src: c,
             alt: ""
           },
           null,
           -1
           /* HOISTED */
         )
-      ]))) : s("v-if", !0),
-      t.type === i.right || t.type === i.center ? (l(), o("div", v, e[1] || (e[1] = [
-        n(
+      ]))) : n("v-if", !0),
+      t.type === s.right || t.type === s.center ? (l(), o("div", S, e[1] || (e[1] = [
+        i(
           "img",
           {
-            src: h,
+            src: _,
             alt: ""
           },
           null,
           -1
           /* HOISTED */
         )
-      ]))) : s("v-if", !0),
-      n("div", {
+      ]))) : n("v-if", !0),
+      i("div", p, [
+        r(d.$slots, "icon-left", {}, void 0, !0)
+      ]),
+      i("div", {
         class: "lc-subhead__text",
         title: t.text
-      }, g(m.value), 9, p),
-      t.type === i.right && !t.hideRadioIcon ? (l(), o("div", S, e[2] || (e[2] = [
-        n(
+      }, h(a.value), 9, k),
+      i("div", I, [
+        r(d.$slots, "icon-right", {}, void 0, !0)
+      ]),
+      t.type === s.right && !t.hideRadioIcon ? (l(), o("div", R, e[2] || (e[2] = [
+        i(
           "img",
           {
-            src: r,
+            src: c,
             alt: ""
           },
           null,
           -1
           /* HOISTED */
         )
-      ]))) : s("v-if", !0),
-      t.type === i.left || t.type === i.center ? (l(), o("div", k, e[3] || (e[3] = [
-        n(
+      ]))) : n("v-if", !0),
+      t.type === s.left || t.type === s.center ? (l(), o("div", z, e[3] || (e[3] = [
+        i(
           "img",
           {
             src: y,
@@ -101,10 +107,10 @@ const x = { class: "lc-subhead" }, _ = {
           -1
           /* HOISTED */
         )
-      ]))) : s("v-if", !0)
+      ]))) : n("v-if", !0)
     ]));
   }
 });
 export {
-  L as default
+  D as default
 };

@@ -1,36 +1,30 @@
 declare const _default: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
-    lable: {
+    label: {
         type: StringConstructor;
+        default: string;
     };
-    minValue: {
+    data: {
+        type: () => number[];
+        required: true;
+        validator: (value: number[]) => boolean;
+    };
+}>, {}, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {
+    "update-stops": (...args: any[]) => void;
+}, string, import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
+    label: {
         type: StringConstructor;
+        default: string;
     };
-    maxValue: {
-        type: StringConstructor;
+    data: {
+        type: () => number[];
+        required: true;
+        validator: (value: number[]) => boolean;
     };
-    startColor: {
-        type: StringConstructor;
-    };
-    endColor: {
-        type: StringConstructor;
-    };
-}>, {}, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
-    lable: {
-        type: StringConstructor;
-    };
-    minValue: {
-        type: StringConstructor;
-    };
-    maxValue: {
-        type: StringConstructor;
-    };
-    startColor: {
-        type: StringConstructor;
-    };
-    endColor: {
-        type: StringConstructor;
-    };
-}>> & Readonly<{}>, {}, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {
+}>> & Readonly<{
+    "onUpdate-stops"?: ((...args: any[]) => any) | undefined;
+}>, {
+    label: string;
+}, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {
     progressBar: HTMLDivElement;
 }, HTMLDivElement>;
 export default _default;
