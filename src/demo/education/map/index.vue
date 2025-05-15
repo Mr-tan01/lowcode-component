@@ -25,7 +25,7 @@
         </DemoHelpBox>
         <DemoHelpBox title="深圳地图" description="深圳教育项目-深圳地图悬浮" rswidth="962px" :code="demoCodes.code1">
             <div class="size-box">
-                <Szmap :values :disabledGradient="true" :labelModel="LabelModelEnum.HOVER">
+                <Szmap :levels :values :disabledGradient='false' :labelModel="LabelModelEnum.HOVER">
                     <template #mapLabel="{ labelClass, getVlaue, currentMapKey }">
                         <span>
                             <MapMarker
@@ -49,7 +49,7 @@
 </template>
 <script lang="ts" setup>
 import { DemoHelpBox } from "@/components/common/DemoHelpBox";
-import { Szmap, LabelModelEnum, type SZMapMarkProps, LcTianditu, BlockName } from "@/components/education/components/map";
+import { Szmap, LabelModelEnum, type SZMapMarkProps, LcTianditu, BlockName, Levels } from "@/components/education/components/map";
 import { demoCodes } from "./demo-codes";
 import MapMarker from "./components/index.vue";
 import { omit } from "lodash-es";
@@ -70,4 +70,39 @@ const values: SZMapMarkProps = {
         unit: "人",
     },
 };
+
+const levels: Levels = {
+    warning: {
+        range: [1, 100],
+        scale: 1.1,
+        stop: [
+            {
+                'stop-color': 'rgba(225, 188, 75, 1)',
+                'stop-opacity': 1,
+                offset: '0%',
+            },
+            {
+                'stop-color': 'rgba(225, 188, 75, 0)',
+                'stop-opacity': 1,
+                offset: '100%',
+            }
+        ],
+    },
+    series: {
+        range: [101, 100000],
+        scale: 1.2,
+        stop: [
+            {
+                'stop-color': 'rgba(238, 111, 124, 1)',
+                'stop-opacity': 1,
+                offset: '0%',
+            },
+            {
+                'stop-color': 'rgba(238, 111, 124, 0)',
+                'stop-opacity': 1,
+                offset: '100%',
+            }
+        ],
+    },
+}
 </script>

@@ -5,6 +5,7 @@ import LcIndicatorList from "./indicatorList.vue";
 import lcBimodalIndex from "./bimodalIndex.vue";
 import lcArrowIndicators from "./arrowIndicators.vue";
 import LcPlanningIndicators, { Data as LcPlanningIndicatorsDataType, Item as LcPlanningIndicatorsItemType } from "./planningIndicatorsCard.vue";
+import LcLargesKewIndicator from './LargesKewIndicator.vue'
 export type LcRangeIndicatorInstanceType = InstanceType<typeof LcRangeIndicator>;
 export type LcSkewIndicatorInstanceType = InstanceType<typeof LcSkewIndicator>;
 export type LcIndicatorCardInstanceType = InstanceType<typeof LcIndicatorCard>;
@@ -12,4 +13,5 @@ export type LcIndicatorListInstanceType = InstanceType<typeof LcIndicatorList>;
 export type LcPlanningIndicatorsInstanceType = InstanceType<typeof LcPlanningIndicators>;
 export type lCBimodalIndexInstanceType = InstanceType<typeof lcBimodalIndex>;
 export type lcArrowIndicatorsInstanceType = InstanceType<typeof lcArrowIndicators>;
-export { LcPlanningIndicators, LcRangeIndicator, LcSkewIndicator, LcIndicatorCard, LcIndicatorList, lcBimodalIndex, lcArrowIndicators, type LcPlanningIndicatorsDataType, type LcPlanningIndicatorsItemType };
+export type LcLargesKewIndicatorType = InstanceType<typeof LcLargesKewIndicator>;
+export { LcPlanningIndicators, LcRangeIndicator, LcSkewIndicator, LcIndicatorCard, LcIndicatorList, lcBimodalIndex, lcArrowIndicators, LcLargesKewIndicator, type LcPlanningIndicatorsDataType, type LcPlanningIndicatorsItemType };
