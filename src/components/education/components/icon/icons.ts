@@ -44,6 +44,7 @@ export const innerImageDomain = {
         pause: "pause",
         expand: "expand",
         retract: "retract",
+        parallel: "parallel",
     },
     event: {
         domain: "domain",

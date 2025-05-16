@@ -1,5 +1,6 @@
-export declare const funcDomainIcons: Record<string, () => Promise<string>>;
-export declare const eventDomainIcons: Record<string, () => Promise<string>>;
+import { Ref } from 'vue';
+export declare const funcdomainIcons: Record<string, () => Promise<string>>;
+export declare const eventdomainIcons: Record<string, () => Promise<string>>;
 export declare const innerImageDomain: {
     readonly func: {
         readonly add: "add";
@@ -21,6 +22,9 @@ export declare const innerImageDomain: {
         readonly blueLArrow: "blue-l-arrow";
         readonly blueRArrow: "blue-r-arrow";
         readonly pause: "pause";
+        readonly expand: "expand";
+        readonly retract: "retract";
+        readonly parallel: "parallel";
     };
     readonly event: {
         readonly domain: "domain";
@@ -33,13 +37,13 @@ export declare const innerImageDomain: {
         readonly reward: "reward";
     };
 };
-type InnerImageDomain = typeof innerImageDomain;
+type innerImageDomain = typeof innerImageDomain;
 type ReadValue<T> = T[keyof T];
-export type Domains = keyof InnerImageDomain;
-export type NameTypeFunc<D extends Domains> = ReadValue<InnerImageDomain[D]>;
-export type NameTypes = NameTypeFunc<'event'> | NameTypeFunc<'func'>;
-export declare function useImage<D extends Domains>(domain: D, name: NameTypeFunc<D>, ext?: string): {
-    src: import('vue').Ref<string, string>;
-    selectedSrc: import('vue').Ref<string, string>;
+export type Domains = keyof innerImageDomain;
+export type NameTypeFunc<D extends Domains> = ReadValue<innerImageDomain[D]>;
+export type NameTypes = NameTypeFunc<"event"> | NameTypeFunc<"func">;
+export declare function useImage<D extends Domains>(domain: Ref<D>, name: Ref<NameTypeFunc<D>>, ext: Ref<string>): {
+    src: Ref<string, string>;
+    selectedSrc: Ref<string, string>;
 };
 export {};
