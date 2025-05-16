@@ -1,5 +1,5 @@
 <template>
-    <LcEmpty description="你什么也找不到" />
+    <LcEmpty />
 </template>
 <script lang="ts" setup>
 import { LcEmpty } from "~/src/components/education/components/empty";
