@@ -26,6 +26,7 @@ const innerImageDomain = {
         remove: 'remove',
         search: 'search',
         time: 'time',
+        parallel: 'parallel',
     },
     event: {
         domain: 'domain',

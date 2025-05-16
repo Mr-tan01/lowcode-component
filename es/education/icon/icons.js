@@ -1,5 +1,5 @@
-import { ref as f } from "vue";
-const h = /* @__PURE__ */ Object.assign({
+import { ref as h, watch as w } from "vue";
+const b = /* @__PURE__ */ Object.assign({
   "./images/func/add.png": () => import("./images/func/add.png.js").then((e) => e.default),
   "./images/func/blue-l-arrow.png": () => import("./images/func/blue-l-arrow.png.js").then((e) => e.default),
   "./images/func/blue-r-arrow.png": () => import("./images/func/blue-r-arrow.png.js").then((e) => e.default),
@@ -8,18 +8,21 @@ const h = /* @__PURE__ */ Object.assign({
   "./images/func/caret-up.png": () => import("./images/func/caret-up.png.js").then((e) => e.default),
   "./images/func/chevron-down.png": () => import("./images/func/chevron-down.png.js").then((e) => e.default),
   "./images/func/chevron-up.png": () => import("./images/func/chevron-up.png.js").then((e) => e.default),
+  "./images/func/expand.png": () => import("./images/func/expand.png.js").then((e) => e.default),
   "./images/func/help-circle.png": () => import("./images/func/help-circle.png.js").then((e) => e.default),
   "./images/func/info-circle.png": () => import("./images/func/info-circle.png.js").then((e) => e.default),
   "./images/func/internet.png": () => import("./images/func/internet.png.js").then((e) => e.default),
   "./images/func/laptop.png": () => import("./images/func/laptop.png.js").then((e) => e.default),
   "./images/func/layers.png": () => import("./images/func/layers.png.js").then((e) => e.default),
   "./images/func/location.png": () => import("./images/func/location.png.js").then((e) => e.default),
+  "./images/func/parallel.png": () => import("./images/func/parallel.png.js").then((e) => e.default),
   "./images/func/pause.png": () => import("./images/func/pause.png.js").then((e) => e.default),
   "./images/func/refresh.png": () => import("./images/func/refresh.png.js").then((e) => e.default),
   "./images/func/remove.png": () => import("./images/func/remove.png.js").then((e) => e.default),
+  "./images/func/retract.png": () => import("./images/func/retract.png.js").then((e) => e.default),
   "./images/func/search.png": () => import("./images/func/search.png.js").then((e) => e.default),
   "./images/func/time.png": () => import("./images/func/time.png.js").then((e) => e.default)
-}), v = /* @__PURE__ */ Object.assign({
+}), $ = /* @__PURE__ */ Object.assign({
   "./images/event/building/icon.png": () => import("./images/event/building/icon.png.js").then((e) => e.default),
   "./images/event/building/selected-icon.png": () => import("./images/event/building/selected-icon.png.js").then((e) => e.default),
   "./images/event/domain/icon.png": () => import("./images/event/domain/icon.png.js").then((e) => e.default),
@@ -36,10 +39,10 @@ const h = /* @__PURE__ */ Object.assign({
   "./images/event/reward/selected-icon.png": () => import("./images/event/reward/selected-icon.png.js").then((e) => e.default),
   "./images/event/style/icon.png": () => import("./images/event/style/icon.png.js").then((e) => e.default),
   "./images/event/style/selected-icon.png": () => import("./images/event/style/selected-icon.png.js").then((e) => e.default)
-}), d = {
-  func: h,
-  event: v
-}, b = {
+}), v = {
+  func: b,
+  event: $
+}, I = {
   func: {
     add: "add",
     caretDown: "caret-down",
@@ -59,7 +62,10 @@ const h = /* @__PURE__ */ Object.assign({
     time: "time",
     blueLArrow: "blue-l-arrow",
     blueRArrow: "blue-r-arrow",
-    pause: "pause"
+    pause: "pause",
+    expand: "expand",
+    retract: "retract",
+    parallel: "parallel"
   },
   event: {
     domain: "domain",
@@ -72,18 +78,22 @@ const h = /* @__PURE__ */ Object.assign({
     reward: "reward"
   }
 };
-function $(e, i, r = ".png") {
-  var t, m, g, n, l, u;
-  const p = f(""), c = f("");
-  let s = `${e}/${i}${r}`, a = "";
-  return e === "event" && (s = `${e}/${i}/icon${r}`, a = `${e}/${i}/selected-icon${r}`), (g = (m = (t = d[e]) == null ? void 0 : t[`./images/${s}`]) == null ? void 0 : m.call(t)) == null || g.then((o) => p.value = o), a && ((u = (l = (n = d[e]) == null ? void 0 : n[`./images/${a}`]) == null ? void 0 : l.call(n)) == null || u.then((o) => c.value = o)), {
-    src: p,
+function P(e, p, i) {
+  const l = h(""), c = h(""), u = (t) => {
+    var n, m, g, a, f, d;
+    let s = `${e.value}/${t}${i.value}`, r = "";
+    e.value === "event" && (s = `${e.value}/${t}/icon${i.value}`, r = `${e.value}/${t}/selected-icon${i.value}`), (g = (m = (n = v[e.value]) == null ? void 0 : n[`./images/${s}`]) == null ? void 0 : m.call(n)) == null || g.then((o) => l.value = o), r && ((d = (f = (a = v[e.value]) == null ? void 0 : a[`./images/${r}`]) == null ? void 0 : f.call(a)) == null || d.then((o) => c.value = o));
+  };
+  return u(p.value), w(p, (t) => {
+    u(t);
+  }), {
+    src: l,
     selectedSrc: c
   };
 }
 export {
-  v as eventDomainIcons,
-  h as funcDomainIcons,
-  b as innerImageDomain,
-  $ as useImage
+  $ as eventdomainIcons,
+  b as funcdomainIcons,
+  I as innerImageDomain,
+  P as useImage
 };
