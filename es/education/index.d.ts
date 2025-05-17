@@ -36,3 +36,4 @@ export * from './tree';
 export * from './checkBoxFilter';
 export * from './empty'
 export * from "./bubble";
+export * from "./watermark";

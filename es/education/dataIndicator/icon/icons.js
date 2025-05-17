@@ -15,6 +15,7 @@ const w = /* @__PURE__ */ Object.assign({
   "./images/func/laptop.png": () => import("./images/func/laptop.png.js").then((e) => e.default),
   "./images/func/layers.png": () => import("./images/func/layers.png.js").then((e) => e.default),
   "./images/func/location.png": () => import("./images/func/location.png.js").then((e) => e.default),
+  "./images/func/parallel.png": () => import("./images/func/parallel.png.js").then((e) => e.default),
   "./images/func/pause.png": () => import("./images/func/pause.png.js").then((e) => e.default),
   "./images/func/refresh.png": () => import("./images/func/refresh.png.js").then((e) => e.default),
   "./images/func/remove.png": () => import("./images/func/remove.png.js").then((e) => e.default),
@@ -42,11 +43,11 @@ const w = /* @__PURE__ */ Object.assign({
   func: w,
   event: b
 };
-function P(e, g, a) {
+function P(e, g, i) {
   const u = h(""), m = h(""), c = (t) => {
-    var n, s, l, i, f, d;
-    let r = `${e.value}/${t}${a.value}`, p = "";
-    e.value === "event" && (r = `${e.value}/${t}/icon${a.value}`, p = `${e.value}/${t}/selected-icon${a.value}`), (l = (s = (n = v[e.value]) == null ? void 0 : n[`./images/${r}`]) == null ? void 0 : s.call(n)) == null || l.then((o) => u.value = o), p && ((d = (f = (i = v[e.value]) == null ? void 0 : i[`./images/${p}`]) == null ? void 0 : f.call(i)) == null || d.then((o) => m.value = o));
+    var n, r, s, a, f, d;
+    let l = `${e.value}/${t}${i.value}`, p = "";
+    e.value === "event" && (l = `${e.value}/${t}/icon${i.value}`, p = `${e.value}/${t}/selected-icon${i.value}`), (s = (r = (n = v[e.value]) == null ? void 0 : n[`./images/${l}`]) == null ? void 0 : r.call(n)) == null || s.then((o) => u.value = o), p && ((d = (f = (a = v[e.value]) == null ? void 0 : a[`./images/${p}`]) == null ? void 0 : f.call(a)) == null || d.then((o) => m.value = o));
   };
   return c(g.value), $(g, (t) => {
     c(t);

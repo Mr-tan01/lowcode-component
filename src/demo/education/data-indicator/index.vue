@@ -42,6 +42,13 @@
             </NSpace>
             
         </DemoHelpBox>
+
+        <DemoHelpBox title="指标卡" description="基本用法" rswidth="1000px" :code="code4">
+            <NSpace>
+                <LcIndicatorCardArrows label="已建成并投入运行设施(个)" :value="20" ></LcIndicatorCardArrows>
+                <LcMinitypeCard label="已建成并投入运行设施(个)" :value="20"></LcMinitypeCard>
+            </NSpace>
+        </DemoHelpBox>
         <DemoHelpBox title="指标卡" description="基本用法" rswidth="1000px" :code="code2">
             <NSpace>
                 <LcIndicatorCard :value="3457" fixed hint="教职工人(人)"></LcIndicatorCard>
@@ -95,9 +102,11 @@ import {
     LcPlanningIndicators,
     lcBimodalIndex,
     lcArrowIndicators,
-    LcLargesKewIndicator
+    LcLargesKewIndicator,
+    LcIndicatorCardArrows,
+    LcMinitypeCard
 } from '@/components/education/components/dataIndicator';
-import { code1, code2, code3, } from './demo-codes';
+import { code1, code2, code3, code4 } from './demo-codes';
 import Icon from './image/test.png'
 const data = {
     header: "学校建设",
@@ -120,4 +129,5 @@ const data = {
 .demo-data-indicator {
     overflow: auto;
 }
+
 </style>

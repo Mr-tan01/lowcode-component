@@ -66,3 +66,10 @@ export const code3 = `
     </NSpace>
 </template>
 `;
+
+export const code4 = `
+<template>
+    <LcIndicatorCardArrows label="已建成并投入运行设施(个)" :value="20" ></LcIndicatorCardArrows>
+    <LcMinitypeCard label="已建成并投入运行设施(个)" :value="20"></LcMinitypeCard>
+</template>
+`;
