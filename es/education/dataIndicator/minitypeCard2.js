@@ -1,31 +1,36 @@
-import { defineComponent as a, mergeDefaults as o, openBlock as r, createElementBlock as n, createElementVNode as e, toDisplayString as s, createVNode as l, unref as m } from "vue";
-import c from "./images/card/small-substrate-bg.png.js";
-import { NNumberAnimation as _ } from "naive-ui/es/number-animation";
-const p = { class: "minitype-card" }, d = { class: "minitype-card__label" }, u = { class: "minitype-card__value" }, v = { class: "minitype-card__value__num" }, N = /* @__PURE__ */ a({
+import { defineComponent as i, mergeDefaults as a, openBlock as n, createElementBlock as o, createElementVNode as e, toDisplayString as c, createVNode as s, unref as r } from "vue";
+import { NNumberAnimation as l } from "naive-ui/es/number-animation";
+import _ from "./images/card/small-substrate-bg.png.js";
+const m = { class: "minitype-card" }, d = { class: "minitype-card__label" }, p = { class: "minitype-card__value" }, u = { class: "minitype-card__value__num" }, g = { class: "minitype-card__img" }, b = ["src"], N = /* @__PURE__ */ i({
   __name: "minitypeCard",
-  props: /* @__PURE__ */ o({
+  props: /* @__PURE__ */ a({
     label: {
       type: String
     },
     value: {
       type: Number
+    },
+    bgIcon: {
+      type: String
     }
   }, {
     label: "已建成并投入运行设施(个)",
-    value: 0
+    value: 0,
+    bgIcon: _,
+    __skip_bgIcon: !0
   }),
   setup(t) {
-    return (f, i) => (r(), n("div", p, [
+    return (f, v) => (n(), o("div", m, [
       e(
         "div",
         d,
-        s(t.label),
+        c(t.label),
         1
         /* TEXT */
       ),
-      e("div", u, [
-        e("span", v, [
-          l(m(_), {
+      e("div", p, [
+        e("span", u, [
+          s(r(l), {
             "show-separator": "",
             from: 0,
             to: t.value,
@@ -34,18 +39,12 @@ const p = { class: "minitype-card" }, d = { class: "minitype-card__label" }, u =
           }, null, 8, ["to"])
         ])
       ]),
-      i[0] || (i[0] = e(
-        "div",
-        { class: "minitype-card__img" },
-        [
-          e("img", {
-            src: c,
-            alt: ""
-          })
-        ],
-        -1
-        /* HOISTED */
-      ))
+      e("div", g, [
+        e("img", {
+          src: t.bgIcon,
+          alt: ""
+        }, null, 8, b)
+      ])
     ]));
   }
 });

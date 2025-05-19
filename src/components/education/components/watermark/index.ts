@@ -1,6 +1,6 @@
 import LcWatermark from './watermark.vue';
 
-export type LcTooltipInstanceType = InstanceType<typeof LcWatermark>;
+export type LcWatermarkInstanceType = InstanceType<typeof LcWatermark>;
 
 export {
     LcWatermark
