@@ -11,6 +11,7 @@ const b = /* @__PURE__ */ Object.assign({
   "./images/func/expand.png": () => import("./images/func/expand.png.js").then((e) => e.default),
   "./images/func/help-circle.png": () => import("./images/func/help-circle.png.js").then((e) => e.default),
   "./images/func/info-circle.png": () => import("./images/func/info-circle.png.js").then((e) => e.default),
+  "./images/func/international.png": () => import("./images/func/international.png.js").then((e) => e.default),
   "./images/func/internet.png": () => import("./images/func/internet.png.js").then((e) => e.default),
   "./images/func/laptop.png": () => import("./images/func/laptop.png.js").then((e) => e.default),
   "./images/func/layers.png": () => import("./images/func/layers.png.js").then((e) => e.default),
@@ -21,6 +22,8 @@ const b = /* @__PURE__ */ Object.assign({
   "./images/func/remove.png": () => import("./images/func/remove.png.js").then((e) => e.default),
   "./images/func/retract.png": () => import("./images/func/retract.png.js").then((e) => e.default),
   "./images/func/search.png": () => import("./images/func/search.png.js").then((e) => e.default),
+  "./images/func/student.png": () => import("./images/func/student.png.js").then((e) => e.default),
+  "./images/func/teacher.png": () => import("./images/func/teacher.png.js").then((e) => e.default),
   "./images/func/time.png": () => import("./images/func/time.png.js").then((e) => e.default)
 }), $ = /* @__PURE__ */ Object.assign({
   "./images/event/building/icon.png": () => import("./images/event/building/icon.png.js").then((e) => e.default),
@@ -65,7 +68,10 @@ const b = /* @__PURE__ */ Object.assign({
     pause: "pause",
     expand: "expand",
     retract: "retract",
-    parallel: "parallel"
+    parallel: "parallel",
+    student: "student",
+    teacher: "teacher",
+    international: "international"
   },
   event: {
     domain: "domain",

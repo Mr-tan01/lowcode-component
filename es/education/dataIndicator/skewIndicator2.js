@@ -1,15 +1,15 @@
-import { defineComponent as m, mergeDefaults as f, computed as a, openBlock as n, createElementBlock as r, normalizeClass as p, createElementVNode as t, renderSlot as w, toDisplayString as c, createVNode as l, unref as s, createCommentVNode as d, withCtx as v, createTextVNode as k } from "vue";
-import y from "./images/skew/icon/person.png.js";
-import { bigNumber as u } from "lowcode-share/es/share";
-import { NNumberAnimation as b } from "naive-ui/es/number-animation";
-import h from "./tooltip/index.js";
+import { defineComponent as p, mergeDefaults as f, computed as l, openBlock as r, createElementBlock as n, normalizeClass as w, createElementVNode as t, renderSlot as v, unref as c, toDisplayString as o, createVNode as s, createCommentVNode as d, withCtx as k, createTextVNode as h } from "vue";
+import u from "./images/skew/icon/person.png.js";
+import { bigNumber as _ } from "lowcode-share/es/share";
+import { NNumberAnimation as y } from "naive-ui/es/number-animation";
+import b from "./tooltip/index.js";
 const g = { class: "lc-skew-indicator__wrapper" }, N = { class: "lc-skew-indicator__wrapper__table--bg" }, x = { class: "lc-skew-indicator__wrapper__table--bg--icon" }, S = ["src"], V = { class: "lc-skew-indicator__wrapper__info" }, C = { class: "lc-skew-indicator__wrapper__info--label" }, $ = { class: "lc-skew-indicator__wrapper__info--result" }, B = { class: "lc-skew-indicator__wrapper__info--result--value" }, D = {
   key: 0,
   class: "lc-skew-indicator__wrapper__info--result--unit"
 }, E = {
   key: 1,
   class: "lc-skew-indicator__wrapper__info--result--altericon"
-}, j = /* @__PURE__ */ m({
+}, j = /* @__PURE__ */ p({
   __name: "skewIndicator",
   props: /* @__PURE__ */ f({
     label: {
@@ -41,37 +41,37 @@ const g = { class: "lc-skew-indicator__wrapper" }, N = { class: "lc-skew-indicat
     value: 0,
     fixed: !0,
     decimal: 0,
-    icon: y,
+    icon: u,
     __skip_icon: !0,
     tip: "",
     type: "skew"
   }),
   setup(e) {
-    const _ = a(() => {
+    const m = l(() => {
       if (e.fixed) {
-        const { result: i } = u(e.value, e.decimal);
+        const { result: i } = _(e.value, e.decimal);
         return i;
       }
       return e.value;
-    }), o = a(() => {
+    }), a = l(() => {
       if (e.fixed) {
-        const { unit: i } = u(e.value, e.decimal);
+        const { unit: i } = _(e.value, e.decimal);
         return `${i}${e.unit}`;
       }
       return e.unit;
     });
-    return (i, I) => (n(), r(
+    return (i, I) => (r(), n(
       "div",
       {
-        class: p(["lc-skew-indicator", [`lc-skew-indicator--${e.type}`]])
+        class: w(["lc-skew-indicator", [`lc-skew-indicator--${e.type}`]])
       },
       [
         t("div", g, [
           t("div", N, [
             t("div", x, [
-              w(i.$slots, "default", {}, () => [
+              v(i.$slots, "helper", {}, () => [
                 t("img", {
-                  src: e.icon,
+                  src: c(u),
                   alt: ""
                 }, null, 8, S)
               ], !0)
@@ -81,32 +81,32 @@ const g = { class: "lc-skew-indicator__wrapper" }, N = { class: "lc-skew-indicat
             t(
               "div",
               C,
-              c(e.label),
+              o(e.label),
               1
               /* TEXT */
             ),
             t("div", $, [
               t("div", B, [
-                l(s(b), {
+                s(c(y), {
                   "show-separator": "",
                   from: 0,
-                  to: _.value,
+                  to: m.value,
                   active: "",
                   precision: e.decimal
                 }, null, 8, ["to", "precision"])
               ]),
-              o.value ? (n(), r(
+              a.value ? (r(), n(
                 "div",
                 D,
-                c(o.value),
+                o(a.value),
                 1
                 /* TEXT */
               )) : d("v-if", !0),
-              e.tip ? (n(), r("div", E, [
-                l(s(h), null, {
-                  default: v(() => [
-                    k(
-                      c(e.tip),
+              e.tip ? (r(), n("div", E, [
+                s(c(b), null, {
+                  default: k(() => [
+                    h(
+                      o(e.tip),
                       1
                       /* TEXT */
                     )

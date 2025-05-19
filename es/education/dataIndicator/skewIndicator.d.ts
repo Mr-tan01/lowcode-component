@@ -2,7 +2,7 @@ import { PropType } from 'vue';
 declare function __VLS_template(): {
     attrs: Partial<{}>;
     slots: {
-        default?(_: {}): any;
+        helper?(_: {}): any;
     };
     refs: {};
     rootEl: HTMLDivElement;
