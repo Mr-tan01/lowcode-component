@@ -1,46 +1,54 @@
 <template>
-    <div class="lc-indicator-card" :class="{
-        'lc-indicator-card--noborder': type === 'noborder',
-        }">
+    <div
+        class="lc-indicator-card"
+        :class="{
+            'lc-indicator-card--noborder': type === 'noborder',
+        }"
+    >
         <div class="lc-indicator-card__wrapper">
-            <div class="lc-indicator-card__wrapper--tooltip" v-if="tip">
-                <LcTooltip>{{ tip }}</LcTooltip>
+            <div class="lc-indicator-card__wrapper--content">
+                <div class="lc-indicator-card__wrapper--tooltip" v-if="tip">
+                    <LcTooltip>{{ tip }}</LcTooltip>
+                </div>
+                <div class="lc-indicator-card__wrapper--result">
+                    <span class="lc-indicator-card__wrapper--result--value">
+                        <NNumberAnimation show-separator :from="0" :to="renderValue" active :precision="decimal" />
+                    </span>
+                    <span class="lc-indicator-card__wrapper--result--unit" v-if="fixed">
+                        {{ unit }}
+                    </span>
+                </div>
+                <div class="lc-indicator-card__wrapper--text">
+                    {{ hint }}
+                </div>
             </div>
-            <div class="lc-indicator-card__wrapper--result">
-                <span class="lc-indicator-card__wrapper--result--value">
-                    <NNumberAnimation show-separator :from="0" :to="renderValue" active :precision="decimal" />
-                </span>
-                <span class="lc-indicator-card__wrapper--result--unit" v-if="fixed">
-                    {{ unit }}
-                </span>
-            </div>
-            <div class="lc-indicator-card__wrapper--text">
-                {{ hint }}
-            </div>
+            <slot name="footer">
+                <div class="lc-indicator-card__footer"></div>
+            </slot>
         </div>
     </div>
 </template>
 
 <script lang="ts" setup>
-import { computed, PropType } from 'vue';
-import { NNumberAnimation } from 'naive-ui/es/number-animation'
-import { bigNumber } from 'lowcode-share/es/share';
-import { LcTooltip } from '@/components/education/components/tooltip';
+import { computed, PropType } from "vue";
+import { NNumberAnimation } from "naive-ui/es/number-animation";
+import { bigNumber } from "lowcode-share/es/share";
+import { LcTooltip } from "@/components/education/components/tooltip";
 
 const SIZE = {
-    small: 'small',
-    medium: 'medium',
-    large: 'large',
+    small: "small",
+    medium: "medium",
+    large: "large",
 } as const;
 type Size = typeof SIZE;
 const {
     value = 0,
-    hint = '',
-    size = 'small',
+    hint = "",
+    size = "small",
     fixed = false,
     decimal = 0,
-    valueColor = '#ffffff',
-    hintColor = '#F2F3F4',
+    valueColor = "#ffffff",
+    hintColor = "#F2F3F4",
 } = defineProps({
     value: {
         type: Number,
@@ -49,7 +57,7 @@ const {
         type: String,
     },
     size: {
-        type: String as PropType<Size[keyof Size]>
+        type: String as PropType<Size[keyof Size]>,
     },
     fixed: {
         type: Boolean,
@@ -58,7 +66,7 @@ const {
         type: Number,
     },
     type: {
-        type: String as PropType<'border' | 'noborder'>,
+        type: String as PropType<"border" | "noborder">,
     },
     tip: {
         type: String,
@@ -78,9 +86,9 @@ const renderValue = computed(() => {
     return value;
 });
 const innerPad = {
-    [SIZE.small]: '22px 32px 24px',
-    [SIZE.medium]: '22px 54px 24px',
-    [SIZE.large]: '22px 116px 24px',
+    [SIZE.small]: "22px 32px 0",
+    [SIZE.medium]: "22px 54px 0",
+    [SIZE.large]: "22px 116px 0",
 };
 const padValue = computed(() => {
     return innerPad[size];
@@ -125,7 +133,7 @@ const unit = computed(() => {
     }
 
     &::after {
-        content: '';
+        content: "";
         position: absolute;
         width: 100%;
         height: 100%;
@@ -133,15 +141,19 @@ const unit = computed(() => {
         backdrop-filter: blur(26px);
         z-index: -1;
     }
-
+    &__footer {
+        height: 24px;
+    }
     &__wrapper {
         background: url(./images/card/bg-border.png) no-repeat;
         background-repeat: no-repeat;
         background-size: 100% 100%;
-        padding: 22px 32px 24px;
-        padding: v-bind(padValue);
-        position: relative;
 
+        position: relative;
+        &--content {
+            padding: 22px 32px 24px;
+            padding: v-bind(padValue);
+        }
         &--tooltip {
             position: absolute;
             right: 10px;
@@ -168,7 +180,6 @@ const unit = computed(() => {
             &--value {
                 font-size: 40px;
                 line-height: 42px;
-           
             }
 
             &--unit {

@@ -1,23 +1,20 @@
-import { defineComponent as P, useCssVars as S, useTemplateRef as z, shallowRef as O, computed as g, onMounted as T, watchPostEffect as B, ref as D, onBeforeUnmount as R, openBlock as h, createElementBlock as v, normalizeClass as A, normalizeStyle as V, createElementVNode as a, createVNode as W, unref as E, createCommentVNode as N } from "vue";
-import { init as $ } from "echarts";
-import { useCommonPieOptions as M, usePieCommonSeries as F } from "./options.js";
-import G from "lodash-es/merge";
+import { defineComponent as T, useCssVars as z, useTemplateRef as A, shallowRef as O, computed as a, onMounted as B, watchPostEffect as D, ref as R, onBeforeUnmount as V, openBlock as h, createElementBlock as _, normalizeClass as v, normalizeStyle as W, createElementVNode as s, createVNode as E, unref as N, createCommentVNode as $ } from "vue";
+import { init as M } from "echarts";
+import { useCommonPieOptions as F, usePieCommonSeries as G } from "./options.js";
+import H from "lodash-es/merge";
 import { useResizeObserver as I } from "@vueuse/core";
 import { debounce as U } from "lodash-es";
 import { innerGraphicColors as j } from "./const.js";
 import q from "../common/components/Charts/legend/index.js";
-const x = { class: "lc-pie__wrapper" }, H = {
+const x = { class: "lc-pie__wrapper" }, J = {
   key: 0,
   class: "lc-pie__wrapper__legend"
-}, J = { class: "lc-pie__wrapper__chart" }, K = {
-  class: "lc-pie__wrapper__chart__inner",
-  ref: "chartDom"
-}, le = /* @__PURE__ */ P({
+}, K = { class: "lc-pie__wrapper__chart" }, le = /* @__PURE__ */ T({
   __name: "pie",
   props: {
     options: {},
     debounceTime: { default: 300 },
-    legendLabel: { type: Function, default: (t) => t },
+    legendLabel: { type: Function, default: (n) => n },
     graphicColors: { default: () => j },
     flexDirection: { default: "row" },
     showCustomLegend: { type: Boolean, default: !0 },
@@ -28,85 +25,87 @@ const x = { class: "lc-pie__wrapper" }, H = {
     legendWidth: { default: "128px" }
   },
   emits: ["legend:click", "legend:toggleSelect"],
-  setup(t, { expose: C, emit: b }) {
-    S((e) => ({
-      "7e03f28a": e.flexDirection,
-      ef7bafd2: k.value,
-      "9562d87e": e.legendPosition,
-      "86f8b2c2": e.legendLeft,
-      "58a987bd": e.legendTop,
-      "553b0996": f.value
+  setup(n, { expose: w, emit: y }) {
+    z((e) => ({
+      a77ae368: e.flexDirection,
+      "7386afa8": S.value,
+      "329afe50": e.legendPosition,
+      b9dc9ea4: e.legendLeft,
+      "378b0064": e.legendTop,
+      "5f226836": f.value
     }));
-    const r = z("chartDom"), l = O(), s = g(() => {
-      const e = M(t.options);
-      return e.series = F(
-        e.series,
-        t.graphicColors,
-        e.color,
-        t.layout
-      ), e.series && !Array.isArray(e.series) && (e.series = [e.series]), G({}, e);
+    const c = A("chartDom"), l = O(), i = a(() => {
+      const e = F(n.options);
+      return e.series = G(e.series, n.graphicColors, e.color, n.layout), e.series && !Array.isArray(e.series) && (e.series = [e.series]), H({}, e);
     });
-    function c(e, o) {
-      var n;
-      (n = l.value) == null || n.dispatchAction({
+    function d(e, t) {
+      var o;
+      (o = l.value) == null || o.dispatchAction({
         type: e,
-        name: o
+        name: t
       });
     }
-    const d = b;
-    function _(e) {
-      d("legend:click", e);
+    const u = y;
+    function C(e) {
+      u("legend:click", e);
     }
-    function w(e) {
-      c(e.type, e.name), d("legend:toggleSelect", e);
+    function b(e) {
+      d(e.type, e.name), u("legend:toggleSelect", e);
     }
-    T(y), B(() => {
-      u(s.value, !0);
+    B(k), D(() => {
+      p(i.value, !0);
     });
-    function y() {
-      l.value = $(r.value, s.value);
+    const L = a(() => {
+      const { title: e } = i.value;
+      return Array.isArray(e) ? e.every((t) => (t == null ? void 0 : t.show) === !1) : (e == null ? void 0 : e.show) === !1;
+    });
+    function k() {
+      l.value = M(c.value, i.value);
     }
-    function u(e, o, n) {
-      var i;
-      (i = l.value) == null || i.setOption(e, o, n);
+    function p(e, t, o) {
+      var r;
+      (r = l.value) == null || r.setOption(e, t, o);
     }
-    const f = D("100%");
-    function L(e) {
-      var p;
-      const o = e[0], { width: n, height: i } = o.contentRect;
-      f.value = Math.min(n, i) + "px", (p = l.value) == null || p.resize();
+    const f = R("100%");
+    function P(e) {
+      var g;
+      const t = e[0], { width: o, height: r } = t.contentRect;
+      f.value = Math.min(o, r) + "px", (g = l.value) == null || g.resize();
     }
-    const { stop: m } = I(r, U(L, t.debounceTime)), k = g(() => t.legendPosition === "absolute" ? `0 ${t.legendWidth}` : "0");
-    return R(m), C({
+    const { stop: m } = I(c, U(P, n.debounceTime)), S = a(() => n.legendPosition === "absolute" ? `0 ${n.legendWidth}` : "0");
+    return V(m), w({
       chartInstance: l,
       stop: m,
-      setOptions: u,
-      dispatchAction: c
-    }), (e, o) => (h(), v(
+      setOptions: p,
+      dispatchAction: d
+    }), (e, t) => (h(), _(
       "div",
       {
-        class: A(["lc-pie", [`lc-pie--${e.layout}`]]),
-        style: V({
+        class: v(["lc-pie", [`lc-pie--${e.layout}`]]),
+        style: W({
           "--legendWidth": e.legendWidth
         })
       },
       [
-        a("div", x, [
-          e.showCustomLegend ? (h(), v("div", H, [
-            W(E(q), {
+        s("div", x, [
+          e.showCustomLegend ? (h(), _("div", J, [
+            E(N(q), {
               "legend-label": e.legendLabel,
-              options: s.value,
-              "onLegend:click": _,
-              "onLegend:toggleSelect": w
+              options: i.value,
+              "onLegend:click": C,
+              "onLegend:toggleSelect": b
             }, null, 8, ["legend-label", "options"])
-          ])) : N("v-if", !0),
-          a("div", J, [
-            a(
+          ])) : $("v-if", !0),
+          s("div", K, [
+            s(
               "div",
-              K,
+              {
+                class: v(["lc-pie__wrapper__chart__inner", [L.value ? "lc-pie__wrapper__chart__inner--not--title" : "lc-pie__wrapper__chart__inner--title"]]),
+                ref: "chartDom"
+              },
               null,
-              512
-              /* NEED_PATCH */
+              2
+              /* CLASS */
             )
           ])
         ])

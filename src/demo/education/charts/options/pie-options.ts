@@ -25,6 +25,26 @@ export function usePieOptions(): { options: EChartsOption } {
         options: merge({}, baeOptions),
     };
 }
+
+export function usePieNotTileOptions(): { options: EChartsOption; showCustomLegend: boolean } {
+    return {
+        showCustomLegend: false,
+        options: merge(
+            {},
+            {
+                title: {
+                    show: false,
+                },
+                series: [
+                    {
+                        name: "学校类别",
+                        data,
+                    },
+                ],
+            }
+        ),
+    };
+}
 export function useLabelPieOptions(): {
     options: EChartsOption;
     showCustomLegend: boolean;

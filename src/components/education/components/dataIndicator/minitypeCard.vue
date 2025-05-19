@@ -2,38 +2,41 @@
     <div class="minitype-card">
         <div class="minitype-card__label">{{ label }}</div>
         <div class="minitype-card__value">
-            <span class="minitype-card__value__num">
-                <NNumberAnimation
-                    show-separator
-                    :from="0"
-                    :to="value"
-                    active
-                    :precision="0"
-            /></span>
+            <span class="minitype-card__value__num"> <NNumberAnimation show-separator :from="0" :to="value" active :precision="0" /></span>
         </div>
         <div class="minitype-card__img">
-            <img src="./images/card/small-substrate-bg.png" alt="" />
+            <img :src="bgIcon" alt="" />
         </div>
     </div>
 </template>
 
 <script lang="ts" setup>
 import { NNumberAnimation } from "naive-ui/es/number-animation";
-
-const { label = "已建成并投入运行设施(个)", value = 0 } = defineProps({
+import defaultImage from "./images/card/small-substrate-bg.png";
+const {
+    label = "已建成并投入运行设施(个)",
+    value = 0,
+    bgIcon = defaultImage,
+} = defineProps({
     label: {
         type: String,
     },
     value: {
         type: Number,
     },
+    bgIcon: {
+        type: String,
+    },
 });
 </script>
 
 <style lang="scss" scoped>
 .minitype-card {
+    width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
     &__label {
         font-family: HarmonyOS_Sans_SC;

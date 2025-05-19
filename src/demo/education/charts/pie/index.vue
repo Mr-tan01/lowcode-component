@@ -5,6 +5,9 @@
                 <DemoHelpBox title="饼图-自定义label" rswidth="547px" rs-height="306px" :code="demoCodes.customLabel">
                     <LcPieChart v-bind="usePieOptions()" :legend-label="legendLabel" legend-width="fit-content"></LcPieChart>
                 </DemoHelpBox>
+                <DemoHelpBox title="饼图-没有设置text" rswidth="547px" rs-height="306px" :code="demoCodes.customLabel">
+                    <LcPieChart :options="usePieNotTileOptions().options"></LcPieChart>
+                </DemoHelpBox>
                 <DemoHelpBox title="饼图" rswidth="547px" rs-height="306px" :code="demoCodes.code1">
                     <LcPieChart v-bind="usePieOptions()"></LcPieChart>
                 </DemoHelpBox>
@@ -15,7 +18,7 @@
                     <LcPieChart v-bind="useProperctionPieOptions()"></LcPieChart>
                 </DemoHelpBox>
                 <DemoHelpBox title="南丁格尔玫瑰图" rswidth="447px" rs-height="306px" :code="demoCodes.code3">
-                    <LcPieChart v-bind="useFlorenceNightingaleRoseChartPieOption()"></LcPieChart>
+                    <LcPieChart v-bind="useFlorenceNightingaleRoseChartPieOption()" class="florence-nightingale-rose"></LcPieChart>
                 </DemoHelpBox>
             </NSpace>
         </DemoHelpBox>
@@ -25,16 +28,18 @@
 import { NSpace } from "naive-ui";
 import { DemoHelpBox } from "@/components/common/DemoHelpBox";
 import { LcPieChart } from "@/components/education/components/charts";
-import { usePieOptions, useLabelPieOptions, useProperctionPieOptions, useFlorenceNightingaleRoseChartPieOption } from "../options/pie-options";
+import { usePieOptions, usePieNotTileOptions, useLabelPieOptions, useProperctionPieOptions, useFlorenceNightingaleRoseChartPieOption } from "../options/pie-options";
 import { demoCodes } from "./demo-codes";
 const legendLabel = (name, value) => `${name} <span style="margin-left: 20px;color: yellow;">${value}</span>`;
 </script>
 <style lang="scss" scoped>
 .demo-charts {
     overflow: auto;
-    :deep(.lc-pie__wrapper__chart__inner) {
-        &::before {
-            display: none;
+    .florence-nightingale-rose {
+        :deep(.lc-pie__wrapper__chart__inner) {
+            &::before {
+                display: none;
+            }
         }
     }
 }
