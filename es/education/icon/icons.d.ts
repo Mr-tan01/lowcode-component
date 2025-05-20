@@ -25,6 +25,9 @@ export declare const innerImageDomain: {
         readonly expand: "expand";
         readonly retract: "retract";
         readonly parallel: "parallel";
+        readonly student: "student";
+        readonly teacher: "teacher";
+        readonly international: "international";
     };
     readonly event: {
         readonly domain: "domain";

@@ -3,8 +3,8 @@
         <div class="lc-skew-indicator__wrapper">
             <div class="lc-skew-indicator__wrapper__table--bg">
                 <div class="lc-skew-indicator__wrapper__table--bg--icon">
-                    <slot>
-                        <img :src="icon" alt="">
+                    <slot name="helper">
+                        <img :src="personIcon" alt="" />
                     </slot>
                 </div>
             </div>
@@ -13,13 +13,27 @@
                     {{ label }}
                 </div>
                 <div class="lc-skew-indicator__wrapper__info--result">
-                    <div class="lc-skew-indicator__wrapper__info--result--value">
-                        <NNumberAnimation show-separator :from="0" :to="renderValue" active :precision="decimal" />
+                    <div
+                        class="lc-skew-indicator__wrapper__info--result--value"
+                    >
+                        <NNumberAnimation
+                            show-separator
+                            :from="0"
+                            :to="renderValue"
+                            active
+                            :precision="decimal"
+                        />
                     </div>
-                    <div class="lc-skew-indicator__wrapper__info--result--unit" v-if="renderUnit">
+                    <div
+                        class="lc-skew-indicator__wrapper__info--result--unit"
+                        v-if="renderUnit"
+                    >
                         {{ renderUnit }}
                     </div>
-                    <div class="lc-skew-indicator__wrapper__info--result--altericon" v-if="tip">
+                    <div
+                        class="lc-skew-indicator__wrapper__info--result--altericon"
+                        v-if="tip"
+                    >
                         <LcTooltip>{{ tip }}</LcTooltip>
                     </div>
                 </div>
@@ -29,21 +43,22 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, PropType } from 'vue';
-import personIcon from './images/skew/icon/person.png';
-import { bigNumber } from 'lowcode-share/es/share';
-import { NNumberAnimation } from 'naive-ui/es/number-animation';
-import { LcTooltip } from '@/components/education/components/tooltip';
+import { computed, PropType } from "vue";
+import personIcon from "./images/skew/icon/person.png";
+import { bigNumber } from "lowcode-share/es/share";
+import { NNumberAnimation } from "naive-ui/es/number-animation";
+import { LcTooltip } from "@/components/education/components/tooltip";
 
 const {
-    label = '',
+    label = "",
     value = 0,
     unit,
     fixed = true,
     decimal = 0,
     icon = personIcon,
-    tip = '',
-    type = 'skew'
+
+    tip = "",
+    type = "skew",
 } = defineProps({
     label: {
         type: String,
@@ -67,8 +82,8 @@ const {
         type: String,
     },
     type: {
-        type: String as PropType<'tile' | 'skew'>,
-    }
+        type: String as PropType<"tile" | "skew">,
+    },
 });
 
 const renderValue = computed(() => {
@@ -133,7 +148,7 @@ const renderUnit = computed(() => {
 
             &--label {
                 font-size: 16px;
-                color: #FFFFFF;
+                color: #ffffff;
                 line-height: 20px;
                 text-align: left;
                 font-style: normal;
@@ -141,7 +156,7 @@ const renderUnit = computed(() => {
 
             &--result {
                 font-family: HarmonyOS_Sans_SC_Medium;
-                color: #FFFFFF;
+                color: #ffffff;
                 line-height: 37px;
                 text-shadow: 0px 0px 20px rgba(0, 129, 255, 0.4);
                 text-align: left;
@@ -167,7 +182,7 @@ const renderUnit = computed(() => {
                     transition: opacity linear 0.3s;
 
                     :deep(svg) {
-                        color: #0FFBF8;
+                        color: #0ffbf8;
                         width: 14px;
                         height: 14px;
                         margin-bottom: -6px;
@@ -181,17 +196,15 @@ const renderUnit = computed(() => {
             bottom: 15%;
             left: 10%;
             z-index: 0;
-
         }
 
         &::before,
         &::after {
-            content: '';
+            content: "";
             position: absolute;
             opacity: 0;
             transition: linear 0.3s;
         }
-
 
         &__table--bg {
             position: absolute;
@@ -222,7 +235,6 @@ const renderUnit = computed(() => {
         }
 
         &::before {
-
             left: 0;
             top: 50%;
             transform: translate(-50%, -50%);
