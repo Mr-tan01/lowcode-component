@@ -1,16 +1,16 @@
-import { defineComponent as Q, mergeModels as w, mergeDefaults as X, computed as g, watchEffect as Y, ref as Z, useModel as ee, openBlock as s, createElementBlock as i, createElementVNode as n, withDirectives as b, createTextVNode as te, toDisplayString as x, unref as u, vShow as ae, vModelText as ne, Fragment as A, renderList as S, normalizeStyle as M, createVNode as re } from "vue";
-import oe from "./images/main-robot.png.js";
-import le from "./images/voice.png.js";
-import se from "./images/microphone.png.js";
-import { useSpeech as ie } from "./speech.js";
-import ue from "./icon/index.js";
-import { defStarData as y } from "./const.js";
-import { useStarRotate as me } from "./main-robot-hook.js";
-import ce from "lodash-es/memoize";
-import { useMessage as de } from "naive-ui";
-const fe = { class: "lc-main-robot" }, _e = { class: "lc-main-robot__wrapper" }, pe = { class: "lc-main-robot__wrapper__inner-input" }, ve = { class: "lc-main-robot__wrapper__inner-input--content" }, ge = { class: "lc-main-robot__wrapper__inner-input--help" }, he = ["placeholder", "disabled"], we = { class: "lc-main-robot__wrapper__inner-input--content__suffix" }, be = ["onClick"], xe = { class: "lc-main-robot__wrapper__star-wrap--star__meta" }, Ae = { class: "lc-main-robot__wrapper__star-wrap--star__meta--item--text" }, ze = /* @__PURE__ */ Q({
+import { defineComponent as Y, mergeModels as C, mergeDefaults as Z, computed as g, watchEffect as ee, ref as te, useModel as ae, openBlock as l, createElementBlock as o, createElementVNode as r, withDirectives as S, createTextVNode as ne, toDisplayString as w, unref as d, vShow as re, vModelText as le, Fragment as k, renderList as M, normalizeStyle as y, createVNode as oe } from "vue";
+import ie from "./images/main-robot.png.js";
+import se from "./images/voice.png.js";
+import ue from "./images/microphone.png.js";
+import { useSpeech as me } from "./speech.js";
+import ce from "./icon/index.js";
+import { defStarData as N } from "./const.js";
+import { useStarRotate as de } from "./main-robot-hook.js";
+import fe from "lodash-es/memoize";
+import { useMessage as _e } from "naive-ui";
+const pe = { class: "lc-main-robot" }, ve = { class: "lc-main-robot__wrapper" }, ge = { class: "lc-main-robot__wrapper__inner-input" }, we = { class: "lc-main-robot__wrapper__inner-input--content" }, be = { class: "lc-main-robot__wrapper__inner-input--help" }, he = ["placeholder", "disabled"], xe = { class: "lc-main-robot__wrapper__inner-input--content__suffix" }, Ae = { class: "lc-main-robot__wrapper__star-wrap--star__meta" }, Ce = ["onClick"], Se = ["onClick"], Fe = /* @__PURE__ */ Y({
   __name: "main-robot",
-  props: /* @__PURE__ */ w(/* @__PURE__ */ X({
+  props: /* @__PURE__ */ C(/* @__PURE__ */ Z({
     placeholder: String,
     stars: Array,
     duration: Number,
@@ -33,75 +33,81 @@ const fe = { class: "lc-main-robot" }, _e = { class: "lc-main-robot__wrapper" },
     value: { default: "" },
     valueModifiers: {}
   }),
-  emits: /* @__PURE__ */ w(["click"], ["update:value"]),
-  setup(a, { emit: C }) {
-    const k = de(), { start: N, stop: R, output: f, on: T } = ie();
-    function D() {
-      a.forbidden ? k.warning("此功能敬请期待") : N();
+  emits: /* @__PURE__ */ C(["click", "itemClick"], ["update:value"]),
+  setup(a, { emit: R }) {
+    const T = _e(), { start: D, stop: E, output: _, on: $ } = me();
+    function z() {
+      a.forbidden ? T.warning("此功能敬请期待") : D();
     }
-    function E() {
-      a.forbidden || R();
+    function F() {
+      a.forbidden || E();
     }
     const {
-      starWrapperRef: z,
-      customRotateStyle: F,
-      starLneght: B,
-      starElRefs: I,
+      starWrapperRef: I,
+      customRotateStyle: B,
+      starLneght: V,
+      starElRefs: q,
       angleOffset: m,
-      averageAngle: V,
-      startAngle: $,
-      starMaxShowCount: q,
-      displayAlternately: L,
-      fullAngle: U
-    } = me(), W = ce((e, t) => e - (t + 1), (e, t) => `${e}-${t}`), c = g(() => {
+      averageAngle: b,
+      startAngle: L,
+      starMaxShowCount: U,
+      displayAlternately: W,
+      fullAngle: O
+    } = de(), j = fe(
+      (e, t) => e - (t + 1),
+      (e, t) => `${e}-${t}`
+    ), f = g(() => {
       var e;
-      return (e = a.stars) != null && e.length ? a.stars : y;
+      return (e = a.stars) != null && e.length ? a.stars : N;
     });
-    Y(() => {
+    ee(() => {
       var t;
-      B.value = ((t = c.value) == null ? void 0 : t.length) || 0, $.value = a.startAngle, q.value = a.maxShowCount, U.value = a.fullAngle;
-      const e = c.value.length - a.maxShowCount;
-      e < 0 || y.slice(e * -1).forEach((r, l) => {
-        const d = c.value.length - e + l;
-        L.value.push(d);
+      V.value = ((t = f.value) == null ? void 0 : t.length) || 0, L.value = a.startAngle, U.value = a.maxShowCount, O.value = a.fullAngle;
+      const e = f.value.length - a.maxShowCount;
+      e < 0 || N.slice(e * -1).forEach((n, s) => {
+        const u = f.value.length - e + s;
+        W.value.push(u);
       });
     });
-    const O = g(() => 360 / a.duration), j = g(() => 1e3 / a.duration), o = Z(a.animate);
+    const G = g(() => 360 / a.duration), H = g(() => 1e3 / a.duration), i = te(a.animate);
     let h;
-    function G(e) {
+    function J(e) {
       window.requestAnimationFrame ? window.requestAnimationFrame.call(this, e) : e();
     }
-    function _() {
-      o.value && setTimeout(() => {
-        o.value && G(() => {
-          m.value += O.value, m.value >= 360 && (m.value = 0), _();
+    function p() {
+      i.value && setTimeout(() => {
+        i.value && J(() => {
+          m.value += G.value, m.value >= 360 && (m.value = 0), p();
         });
-      }, j.value);
+      }, H.value);
     }
-    o.value && _();
-    const H = C;
-    function J(e, t) {
-      m.value = V.value * t * -1, H("click", e, t);
+    i.value && p();
+    const x = R;
+    function A(e, t) {
+      m.value = b.value * t * -1, x("click", e, t);
     }
-    function K() {
-      clearTimeout(h), o.value = !1;
+    function K(e, t) {
+      m.value = b.value * t * -1, x("itemClick", e, t);
     }
     function P() {
+      clearTimeout(h), i.value = !1;
+    }
+    function Q() {
       h = setTimeout(() => {
-        o.value || (o.value = a.animate, _());
+        i.value || (i.value = a.animate, p());
       }, 2e3);
     }
-    const p = ee(a, "value");
-    return T("result", () => {
+    const v = ae(a, "value");
+    return $("result", () => {
       var e;
-      p.value = ((e = f.value) == null ? void 0 : e.textContent) || "";
-    }), (e, t) => (s(), i("div", fe, [
-      n("div", _e, [
-        t[2] || (t[2] = n(
+      v.value = ((e = _.value) == null ? void 0 : e.textContent) || "";
+    }), (e, t) => (l(), o("div", pe, [
+      r("div", ve, [
+        t[2] || (t[2] = r(
           "img",
           {
             class: "lc-main-robot__img",
-            src: oe,
+            src: ie,
             draggable: "false",
             alt: ""
           },
@@ -109,17 +115,17 @@ const fe = { class: "lc-main-robot" }, _e = { class: "lc-main-robot__wrapper" },
           -1
           /* HOISTED */
         )),
-        n("div", pe, [
-          n("div", ve, [
-            b(n(
+        r("div", ge, [
+          r("div", we, [
+            S(r(
               "div",
-              ge,
+              be,
               [
-                t[1] || (t[1] = n(
+                t[1] || (t[1] = r(
                   "img",
                   {
                     class: "lc-main-robot__wrapper__inner-input--help--voice",
-                    src: le,
+                    src: se,
                     draggable: "false",
                     alt: ""
                   },
@@ -127,8 +133,8 @@ const fe = { class: "lc-main-robot" }, _e = { class: "lc-main-robot__wrapper" },
                   -1
                   /* HOISTED */
                 )),
-                te(
-                  " " + x(u(f).helpText),
+                ne(
+                  " " + w(d(_).helpText),
                   1
                   /* TEXT */
                 )
@@ -136,26 +142,26 @@ const fe = { class: "lc-main-robot" }, _e = { class: "lc-main-robot__wrapper" },
               512
               /* NEED_PATCH */
             ), [
-              [ae, u(f).helpText]
+              [re, d(_).helpText]
             ]),
-            b(n("input", {
+            S(r("input", {
               type: "text",
               placeholder: a.placeholder,
-              "onUpdate:modelValue": t[0] || (t[0] = (r) => p.value = r),
+              "onUpdate:modelValue": t[0] || (t[0] = (n) => v.value = n),
               disabled: a.forbidden,
               class: "lc-main-robot__wrapper__inner-input--content__input"
             }, null, 8, he), [
-              [ne, p.value]
+              [le, v.value]
             ]),
-            n("div", we, [
-              n(
+            r("div", xe, [
+              r(
                 "img",
                 {
                   class: "lc-main-robot__wrapper__inner-input--content__suffix--img",
-                  src: se,
+                  src: ue,
                   draggable: "false",
-                  onMousedown: D,
-                  onMouseup: E,
+                  onMousedown: z,
+                  onMouseup: F,
                   alt: ""
                 },
                 null,
@@ -165,61 +171,69 @@ const fe = { class: "lc-main-robot" }, _e = { class: "lc-main-robot__wrapper" },
             ])
           ])
         ]),
-        n(
+        r(
           "div",
           {
             class: "lc-main-robot__wrapper__star-wrap",
             ref_key: "starWrapperRef",
-            ref: z
+            ref: I
           },
           [
-            (s(!0), i(
-              A,
+            (l(!0), o(
+              k,
               null,
-              S(c.value, (r, l) => (s(), i("div", {
-                class: "lc-main-robot__wrapper__star-wrap--star",
-                style: M(u(F)(l)),
-                key: r.key ?? l,
-                ref_for: !0,
-                ref_key: "starElRefs",
-                ref: I,
-                onMouseenter: K,
-                onMouseleave: P,
-                onClick: (d) => J(r, l)
-              }, [
-                re(u(ue), {
-                  domain: r.domain,
-                  name: r.name,
-                  size: r.size
-                }, null, 8, ["domain", "name", "size"]),
-                n("div", xe, [
-                  (s(!0), i(
-                    A,
-                    null,
-                    S(r.meta, (d, v) => (s(), i(
-                      "div",
-                      {
-                        class: "lc-main-robot__wrapper__star-wrap--star__meta--item",
-                        key: v,
-                        style: M({ "--left-offset-number": v, "--left-reverse-offset-number": u(W)(r.meta.length, v) })
-                      },
-                      [
-                        n(
-                          "div",
-                          Ae,
-                          x(d.label),
-                          1
-                          /* TEXT */
-                        )
-                      ],
-                      4
-                      /* STYLE */
-                    ))),
-                    128
-                    /* KEYED_FRAGMENT */
-                  ))
-                ])
-              ], 44, be))),
+              M(f.value, (n, s) => (l(), o(
+                "div",
+                {
+                  class: "lc-main-robot__wrapper__star-wrap--star",
+                  style: y(d(B)(s)),
+                  key: n.key ?? s,
+                  ref_for: !0,
+                  ref_key: "starElRefs",
+                  ref: q,
+                  onMouseenter: P,
+                  onMouseleave: Q
+                },
+                [
+                  oe(d(ce), {
+                    onClick: (u) => A(n, s),
+                    domain: n.domain,
+                    name: n.name,
+                    size: n.size
+                  }, null, 8, ["onClick", "domain", "name", "size"]),
+                  r("div", Ae, [
+                    (l(!0), o(
+                      k,
+                      null,
+                      M(n.meta, (u, c) => (l(), o(
+                        "div",
+                        {
+                          class: "lc-main-robot__wrapper__star-wrap--star__meta--item",
+                          key: c,
+                          style: y({ "--left-offset-number": c, "--left-reverse-offset-number": d(j)(n.meta.length, c) })
+                        },
+                        [
+                          c === 0 ? (l(), o("div", {
+                            key: 0,
+                            class: "lc-main-robot__wrapper__star-wrap--star__meta--item--text",
+                            onClick: (X) => A(n, s)
+                          }, w(u.label), 9, Ce)) : (l(), o("div", {
+                            key: 1,
+                            class: "lc-main-robot__wrapper__star-wrap--star__meta--item--text",
+                            onClick: (X) => K(u, c)
+                          }, w(u.label), 9, Se))
+                        ],
+                        4
+                        /* STYLE */
+                      ))),
+                      128
+                      /* KEYED_FRAGMENT */
+                    ))
+                  ])
+                ],
+                36
+                /* STYLE, NEED_HYDRATION */
+              ))),
               128
               /* KEYED_FRAGMENT */
             ))
@@ -232,5 +246,5 @@ const fe = { class: "lc-main-robot" }, _e = { class: "lc-main-robot__wrapper" },
   }
 });
 export {
-  ze as default
+  Fe as default
 };

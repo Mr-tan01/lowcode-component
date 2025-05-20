@@ -1,5 +1,5 @@
 import { PropType } from 'vue';
-import { StarType } from './const';
+import { StarType, StarItemType } from './const';
 declare const _default: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
     placeholder: StringConstructor;
     stars: PropType<StarType[]>;
@@ -16,6 +16,7 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
     "update:value": (value: string) => any;
 } & {
     click: (item: StarType, index: number) => any;
+    itemClick: (item: StarItemType, index: number) => any;
 }, string, import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
     placeholder: StringConstructor;
     stars: PropType<StarType[]>;
@@ -30,6 +31,7 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
     };
 }>> & Readonly<{
     onClick?: ((item: StarType, index: number) => any) | undefined;
+    onItemClick?: ((item: StarItemType, index: number) => any) | undefined;
     "onUpdate:value"?: ((value: string) => any) | undefined;
 }>, {
     animate: boolean;
