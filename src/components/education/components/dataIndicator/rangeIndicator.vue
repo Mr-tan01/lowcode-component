@@ -7,11 +7,9 @@
                     <div class="lc-range-indicator__wrapper__info__decorator--bg"></div>
                     <div class="lc-range-indicator__wrapper__info--result">
                         <div class="lc-range-indicator__wrapper__info--result--value">
-                            <NNumberAnimation show-separator :from="0" :to="renderValue(item.value)" active
-                                :precision="decimal" />
+                            <NNumberAnimation show-separator :from="0" :to="renderValue(item.value)" active :precision="decimal" />
                         </div>
-                        <div class="lc-range-indicator__wrapper__info--result--unit"
-                            v-if="renderUnit(item.value, item.unit)">
+                        <div class="lc-range-indicator__wrapper__info--result--unit" v-if="renderUnit(item.value, item.unit)">
                             {{ renderUnit(item.value, item.unit) }}
                         </div>
                     </div>
@@ -25,20 +23,20 @@
 </template>
 
 <script lang="ts" setup>
-import { PropType } from 'vue';
-import { bigNumber } from 'lowcode-share/es/share';
-import { NNumberAnimation } from 'naive-ui/es/number-animation';
-import memoize from 'lodash-es/memoize';
+import { PropType } from "vue";
+import { bigNumber } from "lowcode-share/es/share";
+import { NNumberAnimation } from "naive-ui/es/number-animation";
+import memoize from "lodash-es/memoize";
 type Data = {
     label?: string;
     value?: number;
     unit?: string;
-}
+};
 const {
     data = [],
     fixed = true,
     decimal = 0,
-    unit = '',
+    unit = "",
 } = defineProps({
     data: {
         type: Object as PropType<Data[]>,
@@ -67,7 +65,7 @@ const renderUnit = memoize((value, _unit) => {
         const { unit: numUnit } = bigNumber(value, decimal);
         return `${numUnit}${_unit || unit}`;
     }
-    return unit;
+    return _unit || unit;
 });
 </script>
 
@@ -113,7 +111,6 @@ const renderUnit = memoize((value, _unit) => {
                 .lc-range-indicator {
                     &__wrapper {
                         &__info {
-
                             &__decorator--bg {
                                 &::before {
                                     background-image: url(./images/range/radius-r-bg.png);
@@ -122,9 +119,7 @@ const renderUnit = memoize((value, _unit) => {
                         }
                     }
                 }
-
             }
-
 
             &__decorator--bg {
                 position: absolute;
@@ -134,9 +129,9 @@ const renderUnit = memoize((value, _unit) => {
                 bottom: -7px;
                 opacity: 0;
                 transition: linear 0.3s;
-                
+
                 &::before {
-                    content: '';
+                    content: "";
                     position: absolute;
                     width: 100%;
                     height: 100%;
@@ -169,7 +164,6 @@ const renderUnit = memoize((value, _unit) => {
                 }
 
                 &:nth-last-of-type(1) {
-
                     @include __decorator--bg {
                         background-image: url(./images/range/hover-radius-r-bg.png);
                     }
@@ -184,14 +178,13 @@ const renderUnit = memoize((value, _unit) => {
 
             &::before,
             &::after {
-                content: '';
+                content: "";
                 position: absolute;
                 opacity: 0;
                 transition: linear 0.3s;
             }
 
             &::before {
-
                 left: 0;
                 top: 50%;
                 transform: translate(-50%, -50%);
@@ -209,10 +202,9 @@ const renderUnit = memoize((value, _unit) => {
                 background: url(./images/blue-l-arrow.png) no-repeat;
             }
 
-
             &--label {
                 font-size: 14px;
-                color: #FFFFFF;
+                color: #ffffff;
                 line-height: 20px;
                 text-align: left;
                 font-style: normal;
@@ -220,7 +212,7 @@ const renderUnit = memoize((value, _unit) => {
 
             &--result {
                 font-family: HarmonyOS_Sans_SC_Medium;
-                color: #FFFFFF;
+                color: #ffffff;
                 line-height: 37px;
                 text-shadow: 0px 0px 20px rgba(0, 129, 255, 0.4);
                 text-align: left;

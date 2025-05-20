@@ -26,23 +26,23 @@ const x = { class: "lc-range-indicator" }, y = { class: "lc-range-indicator__wra
     decimal: 0,
     unit: ""
   }),
-  setup(e) {
+  setup(r) {
     const _ = u((i) => {
-      if (e.fixed) {
-        const { result: r } = s(i, e.decimal);
-        return r;
+      if (r.fixed) {
+        const { result: e } = s(i, r.decimal);
+        return e;
       }
       return i;
-    }), l = u((i, r) => {
-      if (e.fixed) {
-        const { unit: t } = s(i, e.decimal);
-        return `${t}${r || e.unit}`;
+    }), l = u((i, e) => {
+      if (r.fixed) {
+        const { unit: t } = s(i, r.decimal);
+        return `${t}${e || r.unit}`;
       }
-      return e.unit;
+      return e || r.unit;
     });
-    return (i, r) => (a(), o("div", x, [
+    return (i, e) => (a(), o("div", x, [
       n("div", y, [
-        r[1] || (r[1] = n(
+        e[1] || (e[1] = n(
           "div",
           { class: "lc-range-indicator__wrapper__table--bg" },
           null,
@@ -53,11 +53,11 @@ const x = { class: "lc-range-indicator" }, y = { class: "lc-range-indicator__wra
           (a(!0), o(
             g,
             null,
-            v(e.data, (t, m) => (a(), o("div", {
+            v(r.data, (t, m) => (a(), o("div", {
               class: "lc-range-indicator__wrapper__info",
               key: m
             }, [
-              r[0] || (r[0] = n(
+              e[0] || (e[0] = n(
                 "div",
                 { class: "lc-range-indicator__wrapper__info__decorator--bg" },
                 null,
@@ -71,7 +71,7 @@ const x = { class: "lc-range-indicator" }, y = { class: "lc-range-indicator__wra
                     from: 0,
                     to: c(_)(t.value),
                     active: "",
-                    precision: e.decimal
+                    precision: r.decimal
                   }, null, 8, ["to", "precision"])
                 ]),
                 c(l)(t.value, t.unit) ? (a(), o(
