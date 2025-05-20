@@ -18,14 +18,16 @@ export declare const imageHideDir: {
     readonly auto: "auto";
 };
 export type ImageHideDir = ReadValue<typeof imageHideDir>;
+export type StarItemType = {
+    key?: string | number;
+    label: string;
+};
 export type StarType = {
     key: string | number;
     domain: Domains;
     name: NameTypes;
     size: number | string;
-    meta: {
-        label: string;
-    }[];
+    meta: StarItemType[];
 };
 export declare const defStarData: StarType[];
 export {};
