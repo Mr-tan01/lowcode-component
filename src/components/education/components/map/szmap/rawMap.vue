@@ -17,7 +17,7 @@
                             :is
                             v-bind="getBlockProperties(key)"
                             @mouseover="getHoverMapKey(key)"
-                            @mouseleave="hidePopver($event)"
+                            @mouseleave="hidePopver($event, key)"
                             @click="markClick(key)"
                         ></component>
                         <Labels v-if="showLabel" :labels :values></Labels>
@@ -88,6 +88,8 @@ const blockList: Record<BlockName, Component> = {
 const labelAnimateNum = ref(0);
 const $emits = defineEmits<{
     (e: "markClick", value: EducationMarkProps): void;
+    (e: "markMouseover", value: BlockName): void;
+    (e: "markMouseleave", value: BlockName): void;
 }>();
 
 const currentMapKey = ref("");
@@ -155,14 +157,16 @@ const labelClass = (key) => {
 function getHoverMapKey(key: BlockName) {
     if (labelModel !== LabelModelEnum.HOVER) return;
     currentMapKey.value = key;
+    $emits("markMouseover", key);
 }
 
-const hidePopver = (event: MouseEvent) => {
+const hidePopver = (event: MouseEvent, key: BlockName) => {
     const target = event.relatedTarget as HTMLElement | null;
     if (target && target.closest(".lc-szmap-raw__mark-group")) {
         return;
     }
     currentMapKey.value = "";
+    $emits("markMouseleave", key);
 };
 </script>
 
