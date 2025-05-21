@@ -1,7 +1,7 @@
 import { PropType } from 'vue';
 export interface Columns {
     title: string;
-    type?: 'index' | 'default';
+    type?: "index" | "default";
     dataIndex?: string;
     align?: string;
     width?: string;
@@ -15,7 +15,9 @@ declare function __VLS_template(): {
         column: Columns;
         colIndex: number;
         value: any;
-    }) => any>>;
+    }) => any>> & {
+        empty?(_: {}): any;
+    };
     refs: {};
     rootEl: HTMLDivElement;
 };
