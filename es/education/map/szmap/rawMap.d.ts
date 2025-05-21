@@ -67,6 +67,8 @@ declare const __VLS_component: import('vue').DefineComponent<import('vue').Extra
     };
 }>, {}, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {} & {
     markClick: (value: EducationMarkProps) => any;
+    markMouseover: (value: BlockName) => any;
+    markMouseleave: (value: BlockName) => any;
 }, string, import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
     readonly showLabel: {
         readonly type: BooleanConstructor;
@@ -94,6 +96,8 @@ declare const __VLS_component: import('vue').DefineComponent<import('vue').Extra
     };
 }>> & Readonly<{
     onMarkClick?: ((value: EducationMarkProps) => any) | undefined;
+    onMarkMouseover?: ((value: BlockName) => any) | undefined;
+    onMarkMouseleave?: ((value: BlockName) => any) | undefined;
 }>, {
     readonly showLabel: boolean;
     readonly disabledGradient: boolean;
