@@ -14,10 +14,16 @@ const Y = { class: "legend-progress" }, Z = { class: "legend-progress__label" },
   },
   emits: ["update-stops"],
   setup(r, { emit: l }) {
-    const k = r, w = l, u = b({ value: null, x: 0 }), $ = n(() => {
+    const k = r, w = l, u = b({
+      value: null,
+      x: 0
+    }), $ = n(() => {
       var e;
       return {
-        left: `${Math.min(Math.max(u.value.x, 0), ((e = c.value) == null ? void 0 : e.clientWidth) || 0)}px`
+        left: `${Math.min(
+          Math.max(u.value.x, 0),
+          ((e = c.value) == null ? void 0 : e.clientWidth) || 0
+        )}px`
       };
     }), B = (e, t) => {
       if (!c.value) return;
@@ -28,7 +34,7 @@ const Y = { class: "legend-progress" }, Z = { class: "legend-progress__label" },
       };
     }, E = () => {
       u.value = { value: null, x: 0 };
-    }, F = (e) => e * 100 % 10 < 1 ? Math.floor(e * 10) / 10 : Math.ceil(e * 10) / 10, T = (e) => Math.round(e * 100), s = n(() => [...new Set(k.data)].sort((t, o) => t - o)), q = n(() => s.value.length > 0 ? F(s.value[0]) : 0), C = n(() => s.value.length > 0 ? T(s.value[s.value.length - 1]) : 0), D = n(() => q.value.toFixed(1)), R = n(() => C.value.toFixed(1)), W = (e) => {
+    }, F = (e) => e * 100 % 10 < 1 ? Math.floor(e * 1e3) / 10 : Math.ceil(e * 1e3) / 10, T = (e) => Math.round(e * 100), s = n(() => [...new Set(k.data)].sort((t, o) => t - o)), q = n(() => s.value.length > 0 ? F(s.value[0]) : 0), C = n(() => s.value.length > 0 ? T(s.value[s.value.length - 1]) : 0), D = n(() => q.value.toFixed(1)), R = n(() => C.value.toFixed(1)), W = (e) => {
       if (e === 0) return [];
       const t = [], o = 240, g = (60 - o) / Math.max(1, e - 1);
       for (let _ = 0; _ < e - 1; _++) {
@@ -52,15 +58,21 @@ const Y = { class: "legend-progress" }, Z = { class: "legend-progress__label" },
       }));
     }), z = n(() => v.value.map((e, t) => ({
       range: [e.value],
-      stop: [{
-        "stop-color": e.style.background,
-        "stop-opacity": 1,
-        offset: `${t / v.value.length * 100}%`
-      }]
+      stop: [
+        {
+          "stop-color": e.style.background,
+          "stop-opacity": 1,
+          offset: `${t / v.value.length * 100}%`
+        }
+      ]
     })));
-    J(z, (e) => {
-      w("update-stops", e);
-    }, { immediate: !0, deep: !0 });
+    J(
+      z,
+      (e) => {
+        w("update-stops", e);
+      },
+      { immediate: !0, deep: !0 }
+    );
     const c = b(null);
     return (e, t) => (M(), f("div", Y, [
       a(
