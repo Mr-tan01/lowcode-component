@@ -3,8 +3,8 @@
         <div class="lc-skew-indicator__wrapper">
             <div class="lc-skew-indicator__wrapper__table--bg">
                 <div class="lc-skew-indicator__wrapper__table--bg--icon">
-                    <slot name="helper">
-                        <img :src="personIcon" alt="" />
+                    <slot name="icon">
+                        <img :src="icon" alt="" />
                     </slot>
                 </div>
             </div>
@@ -13,27 +13,13 @@
                     {{ label }}
                 </div>
                 <div class="lc-skew-indicator__wrapper__info--result">
-                    <div
-                        class="lc-skew-indicator__wrapper__info--result--value"
-                    >
-                        <NNumberAnimation
-                            show-separator
-                            :from="0"
-                            :to="renderValue"
-                            active
-                            :precision="decimal"
-                        />
+                    <div class="lc-skew-indicator__wrapper__info--result--value" :title="value.toString()">
+                        <NNumberAnimation show-separator :from="0" :to="renderValue" active :precision="decimal" />
                     </div>
-                    <div
-                        class="lc-skew-indicator__wrapper__info--result--unit"
-                        v-if="renderUnit"
-                    >
+                    <div class="lc-skew-indicator__wrapper__info--result--unit" v-if="renderUnit">
                         {{ renderUnit }}
                     </div>
-                    <div
-                        class="lc-skew-indicator__wrapper__info--result--altericon"
-                        v-if="tip"
-                    >
+                    <div class="lc-skew-indicator__wrapper__info--result--altericon" v-if="tip">
                         <LcTooltip>{{ tip }}</LcTooltip>
                     </div>
                 </div>
