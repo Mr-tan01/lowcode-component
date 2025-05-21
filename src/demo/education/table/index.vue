@@ -10,6 +10,15 @@
             >
                 <LcDescTable :columns :data> </LcDescTable>
             </DemoHelpBox>
+               <DemoHelpBox
+                title="描述列表"
+                description="描述列表-空数据"
+                rswidth="500px"
+                rs-height="500px"
+                :code="demoCodes.code1"
+            >
+                <LcDescTable :columns :data="[]"> </LcDescTable>
+            </DemoHelpBox>
         </DemoHelpBox>
         <DemoHelpBox title="Table" description="基础用法" rswidth="1300px">
             <DemoHelpBox
