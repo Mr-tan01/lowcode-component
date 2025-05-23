@@ -11,7 +11,7 @@
                     <LcTooltip>{{ tip }}</LcTooltip>
                 </div>
                 <div class="lc-indicator-card__wrapper--result">
-                    <span class="lc-indicator-card__wrapper--result--value">
+                    <span class="lc-indicator-card__wrapper--result--value" :title="value.toString()">
                         <NNumberAnimation show-separator :from="0" :to="renderValue" active :precision="decimal" />
                     </span>
                     <span class="lc-indicator-card__wrapper--result--unit" v-if="fixed">
