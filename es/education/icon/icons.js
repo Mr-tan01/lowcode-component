@@ -8,6 +8,7 @@ const b = /* @__PURE__ */ Object.assign({
   "./images/func/caret-up.png": () => import("./images/func/caret-up.png.js").then((e) => e.default),
   "./images/func/chevron-down.png": () => import("./images/func/chevron-down.png.js").then((e) => e.default),
   "./images/func/chevron-up.png": () => import("./images/func/chevron-up.png.js").then((e) => e.default),
+  "./images/func/doctor.png": () => import("./images/func/doctor.png.js").then((e) => e.default),
   "./images/func/expand.png": () => import("./images/func/expand.png.js").then((e) => e.default),
   "./images/func/help-circle.png": () => import("./images/func/help-circle.png.js").then((e) => e.default),
   "./images/func/info-circle.png": () => import("./images/func/info-circle.png.js").then((e) => e.default),
@@ -71,7 +72,8 @@ const b = /* @__PURE__ */ Object.assign({
     parallel: "parallel",
     student: "student",
     teacher: "teacher",
-    international: "international"
+    international: "international",
+    doctor: "doctor"
   },
   event: {
     domain: "domain",
@@ -85,16 +87,16 @@ const b = /* @__PURE__ */ Object.assign({
   }
 };
 function P(e, p, i) {
-  const l = h(""), c = h(""), u = (t) => {
-    var n, m, g, a, f, d;
-    let s = `${e.value}/${t}${i.value}`, r = "";
-    e.value === "event" && (s = `${e.value}/${t}/icon${i.value}`, r = `${e.value}/${t}/selected-icon${i.value}`), (g = (m = (n = v[e.value]) == null ? void 0 : n[`./images/${s}`]) == null ? void 0 : m.call(n)) == null || g.then((o) => l.value = o), r && ((d = (f = (a = v[e.value]) == null ? void 0 : a[`./images/${r}`]) == null ? void 0 : f.call(a)) == null || d.then((o) => c.value = o));
+  const c = h(""), l = h(""), u = (t) => {
+    var n, s, g, a, d, f;
+    let m = `${e.value}/${t}${i.value}`, r = "";
+    e.value === "event" && (m = `${e.value}/${t}/icon${i.value}`, r = `${e.value}/${t}/selected-icon${i.value}`), (g = (s = (n = v[e.value]) == null ? void 0 : n[`./images/${m}`]) == null ? void 0 : s.call(n)) == null || g.then((o) => c.value = o), r && ((f = (d = (a = v[e.value]) == null ? void 0 : a[`./images/${r}`]) == null ? void 0 : d.call(a)) == null || f.then((o) => l.value = o));
   };
   return u(p.value), w(p, (t) => {
     u(t);
   }), {
-    src: l,
-    selectedSrc: c
+    src: c,
+    selectedSrc: l
   };
 }
 export {

@@ -1,20 +1,14 @@
 import { ref, type Ref, watch } from "vue";
 
-export const funcdomainIcons = import.meta.glob<string>(
-    "./images/func/**/*.png",
-    {
-        import: "default",
-        eager: false,
-    }
-);
+export const funcdomainIcons = import.meta.glob<string>("./images/func/**/*.png", {
+    import: "default",
+    eager: false,
+});
 
-export const eventdomainIcons = import.meta.glob<string>(
-    "./images/event/**/*icon.png",
-    {
-        import: "default",
-        eager: false,
-    }
-);
+export const eventdomainIcons = import.meta.glob<string>("./images/event/**/*icon.png", {
+    import: "default",
+    eager: false,
+});
 
 const imageIconPromise = {
     func: funcdomainIcons,
@@ -48,6 +42,7 @@ export const innerImageDomain = {
         student: "student",
         teacher: "teacher",
         international: "international",
+        doctor: "doctor",
     },
     event: {
         domain: "domain",
@@ -66,11 +61,7 @@ type ReadValue<T> = T[keyof T];
 export type Domains = keyof innerImageDomain;
 export type NameTypeFunc<D extends Domains> = ReadValue<innerImageDomain[D]>;
 export type NameTypes = NameTypeFunc<"event"> | NameTypeFunc<"func">;
-export function useImage<D extends Domains>(
-    domain: Ref<D>,
-    name: Ref<NameTypeFunc<D>>,
-    ext: Ref<string>
-) {
+export function useImage<D extends Domains>(domain: Ref<D>, name: Ref<NameTypeFunc<D>>, ext: Ref<string>) {
     const src = ref<string>("");
     const selectedSrc = ref<string>("");
     const updatePaths = (name: NameTypeFunc<D>) => {
@@ -80,13 +71,9 @@ export function useImage<D extends Domains>(
             iconPath = `${domain.value}/${name}/icon${ext.value}`;
             selectedPath = `${domain.value}/${name}/selected-icon${ext.value}`;
         }
-        imageIconPromise[domain.value]
-            ?.[`./images/${iconPath}`]?.()
-            ?.then((val) => (src.value = val));
+        imageIconPromise[domain.value]?.[`./images/${iconPath}`]?.()?.then((val) => (src.value = val));
         if (selectedPath) {
-            imageIconPromise[domain.value]
-                ?.[`./images/${selectedPath}`]?.()
-                ?.then((val) => (selectedSrc.value = val));
+            imageIconPromise[domain.value]?.[`./images/${selectedPath}`]?.()?.then((val) => (selectedSrc.value = val));
         }
     };
 
