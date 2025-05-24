@@ -1,11 +1,11 @@
-import { defineComponent as f, mergeDefaults as p, openBlock as a, createElementBlock as o, createElementVNode as n, Fragment as g, renderList as v, createVNode as b, unref as c, toDisplayString as d, createCommentVNode as w } from "vue";
+import { defineComponent as f, mergeDefaults as p, openBlock as a, createElementBlock as o, createElementVNode as i, Fragment as g, renderList as v, createVNode as b, unref as c, toDisplayString as d, createCommentVNode as w } from "vue";
 import { bigNumber as s } from "lowcode-share/es/share";
 import { NNumberAnimation as N } from "naive-ui/es/number-animation";
 import u from "lodash-es/memoize";
-const x = { class: "lc-range-indicator" }, y = { class: "lc-range-indicator__wrapper" }, h = { class: "lc-range-indicator__wrapper__info-range" }, V = { class: "lc-range-indicator__wrapper__info--result" }, k = { class: "lc-range-indicator__wrapper__info--result--value" }, B = {
+const x = { class: "lc-range-indicator" }, y = { class: "lc-range-indicator__wrapper" }, h = { class: "lc-range-indicator__wrapper__info-range" }, V = { class: "lc-range-indicator__wrapper__info--result" }, $ = { class: "lc-range-indicator__wrapper__info--result--value" }, k = {
   key: 0,
   class: "lc-range-indicator__wrapper__info--result--unit"
-}, C = { class: "lc-range-indicator__wrapper__info--label" }, $ = /* @__PURE__ */ f({
+}, B = { class: "lc-range-indicator__wrapper__info--label" }, U = /* @__PURE__ */ f({
   __name: "rangeIndicator",
   props: /* @__PURE__ */ p({
     data: {
@@ -27,29 +27,32 @@ const x = { class: "lc-range-indicator" }, y = { class: "lc-range-indicator__wra
     unit: ""
   }),
   setup(r) {
-    const _ = u((i) => {
+    const _ = u((n) => {
       if (r.fixed) {
-        const { result: e } = s(i, r.decimal);
+        const { result: e } = s(n, r.decimal);
         return e;
       }
-      return i;
-    }), l = u((i, e) => {
-      if (r.fixed) {
-        const { unit: t } = s(i, r.decimal);
-        return `${t}${e || r.unit}`;
-      }
-      return e || r.unit;
-    });
-    return (i, e) => (a(), o("div", x, [
-      n("div", y, [
-        e[1] || (e[1] = n(
+      return n;
+    }), l = u(
+      (n, e) => {
+        if (r.fixed) {
+          const { unit: t } = s(n, r.decimal);
+          return `${t}${e || r.unit}`;
+        }
+        return e || r.unit;
+      },
+      (n, e) => `${n}_${e || r.unit}`
+    );
+    return (n, e) => (a(), o("div", x, [
+      i("div", y, [
+        e[1] || (e[1] = i(
           "div",
           { class: "lc-range-indicator__wrapper__table--bg" },
           null,
           -1
           /* HOISTED */
         )),
-        n("div", h, [
+        i("div", h, [
           (a(!0), o(
             g,
             null,
@@ -57,15 +60,15 @@ const x = { class: "lc-range-indicator" }, y = { class: "lc-range-indicator__wra
               class: "lc-range-indicator__wrapper__info",
               key: m
             }, [
-              e[0] || (e[0] = n(
+              e[0] || (e[0] = i(
                 "div",
                 { class: "lc-range-indicator__wrapper__info__decorator--bg" },
                 null,
                 -1
                 /* HOISTED */
               )),
-              n("div", V, [
-                n("div", k, [
+              i("div", V, [
+                i("div", $, [
                   b(c(N), {
                     "show-separator": "",
                     from: 0,
@@ -76,15 +79,15 @@ const x = { class: "lc-range-indicator" }, y = { class: "lc-range-indicator__wra
                 ]),
                 c(l)(t.value, t.unit) ? (a(), o(
                   "div",
-                  B,
+                  k,
                   d(c(l)(t.value, t.unit)),
                   1
                   /* TEXT */
                 )) : w("v-if", !0)
               ]),
-              n(
+              i(
                 "div",
-                C,
+                B,
                 d(t.label),
                 1
                 /* TEXT */
@@ -99,5 +102,5 @@ const x = { class: "lc-range-indicator" }, y = { class: "lc-range-indicator__wra
   }
 });
 export {
-  $ as default
+  U as default
 };
