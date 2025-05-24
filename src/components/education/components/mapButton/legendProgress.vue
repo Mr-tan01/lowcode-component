@@ -205,7 +205,6 @@ const progressBar = ref<HTMLElement | null>(null);
 
 <style scoped lang="scss">
 .legend-progress {
-    width: 351px;
     height: 39px;
     background: rgba(8, 68, 113, 0.75);
     border-radius: 8px;
