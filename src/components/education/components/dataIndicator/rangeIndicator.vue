@@ -60,13 +60,16 @@ const renderValue = memoize((value) => {
     return value;
 });
 
-const renderUnit = memoize((value, _unit) => {
-    if (fixed) {
-        const { unit: numUnit } = bigNumber(value, decimal);
-        return `${numUnit}${_unit || unit}`;
-    }
-    return _unit || unit;
-});
+const renderUnit = memoize(
+    (value, _unit) => {
+        if (fixed) {
+            const { unit: numUnit } = bigNumber(value, decimal);
+            return `${numUnit}${_unit || unit}`;
+        }
+        return _unit || unit;
+    },
+    (value, _unit) => `${value}_${_unit || unit}`
+);
 </script>
 
 <style lang="scss" scoped>
