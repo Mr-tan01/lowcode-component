@@ -1,15 +1,17 @@
 <template>
     <div class="dynamic-data-list" :class="{ 'is-bordered': bordered }">
-        <NGrid :x-gap="gap" :cols="cols">
-            <NGi v-for="(row, rowIndex) in rows" :key="`row-${rowIndex}`" class="list-row" :style="getRowStyle(rowIndex)">
-                <div class="key-cell" :style="getKeyCellStyle(rowIndex)">
-                    {{ row.indicatorName }}
-                </div>
-                <div class="value-cell" :style="getValueCellStyle(rowIndex)">
-                    {{ row.indicatorValue }}
-                </div>
-            </NGi>
-        </NGrid>
+        <LcElasticScrollbar>
+            <NGrid :x-gap="gap" :cols="cols">
+                <NGi v-for="(row, rowIndex) in rows" :key="`row-${rowIndex}`" class="list-row" :style="getRowStyle(rowIndex)">
+                    <div class="key-cell" :style="getKeyCellStyle(rowIndex)">
+                        {{ row.indicatorName }}
+                    </div>
+                    <div class="value-cell" :style="getValueCellStyle(rowIndex)">
+                        {{ row.indicatorValue }}
+                    </div>
+                </NGi>
+            </NGrid>
+        </LcElasticScrollbar>
     </div>
 </template>
 
@@ -17,35 +19,28 @@
 import { CSSProperties } from "vue";
 import type { DataListProps, ColumnStyle } from "./props";
 import { NGrid, NGi } from "naive-ui";
-
+import { LcElasticScrollbar } from "@/components/education/components/elasticScrollbar";
 const {
     rows = [],
     rowStyle = {},
     bordered = false,
-    keyStyle = {
-        flex: 3,
-        backgroundColor: "#063B6B",
-        padding: "12px 15px",
-        textAlign: "left",
-    },
-    valueStyle = {
-        flex: 6,
-        backgroundColor: "#063661",
-        padding: "12px 15px",
-        textAlign: "left",
-    },
+    keyStyle = {},
+    valueStyle = {},
     cellPadding = "12px 15px",
     defaultAlign = "left",
     gap = 0,
-    cols = 2
+    cols = 2,
 } = defineProps<DataListProps>();
 
 // 获取键单元格样式
 const getKeyCellStyle = (index: number): ColumnStyle => {
     const style: ColumnStyle = {
+        whiteSpace: "pre",
+        flex: 3,
+        backgroundColor: "#063B6B",
         ...keyStyle,
-        padding: cellPadding || keyStyle?.padding,
-        textAlign: keyStyle.textAlign || defaultAlign,
+        padding: cellPadding || "12px 15px",
+        textAlign: keyStyle.textAlign || "left",
         ...(rows[index]?.keyStyle || {}),
     };
 
@@ -64,9 +59,12 @@ const getKeyCellStyle = (index: number): ColumnStyle => {
 // 获取值单元格样式
 const getValueCellStyle = (index: number): ColumnStyle => {
     const style: ColumnStyle = {
+        whiteSpace: "pre",
+        flex: 6,
+        backgroundColor: "#063661",
         ...valueStyle,
-        padding: cellPadding || valueStyle?.padding,
-        textAlign: valueStyle.textAlign || defaultAlign,
+        padding: cellPadding || "12px 15px",
+        textAlign: valueStyle.textAlign || "left",
         ...(rows[index]?.valueStyle || {}),
     };
 
@@ -100,9 +98,11 @@ const getRowStyle = (index: number): CSSProperties => {
 <style lang="scss" scoped>
 .dynamic-data-list {
     width: 100%;
+    height: 100%;
     font-family: Arial, sans-serif;
-    overflow-x: auto;
-
+    :deep(.lc-elastic-scrollbar){
+        height: 100%;
+    }
     .list-body {
         min-width: fit-content;
 

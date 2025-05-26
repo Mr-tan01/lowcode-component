@@ -2,7 +2,7 @@
     <div class="lc-empty">
         <NEmpty v-bind="$attrs" :description>
             <template #icon>
-                <img src="./empty_image.svg" alt="" />
+                <img class="lc-empty__iamge" src="./empty_image.svg" alt="" />
             </template>
         </NEmpty>
     </div>
@@ -18,7 +18,7 @@ const { description = "暂无数据" } = defineProps<{
     :deep(.n-empty__icon) {
         width: 181px;
         height: 106px;
-        .image {
+        .lc-empty__iamge {
             width: 100%;
             height: 100%;
             object-fit: cover;
