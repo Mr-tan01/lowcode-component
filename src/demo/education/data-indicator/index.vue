@@ -22,7 +22,7 @@
 
                 <LcStudentIndicatorCard label="总教职工人" :value="3533336" unit="人"></LcStudentIndicatorCard>
 
-                <LcLargesKewIndicator label="正增长" :value="3336" unit="人" :year-value="30"></LcLargesKewIndicator>
+                <LcLargesKewIndicator label="正增长" :value="100000" :fixed="true" :decimal="2" unit="人" :year-value="30"></LcLargesKewIndicator>
                 <LcLargesKewIndicator label="负增长" :value="3336" unit="人" :year-value="-10"></LcLargesKewIndicator>
 
                 <lcArrowIndicators label="心理教师总数" :value="2370" unit="人"></lcArrowIndicators>

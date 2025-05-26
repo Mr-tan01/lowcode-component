@@ -13,21 +13,10 @@
                     {{ label }}
                 </div>
                 <div class="lc-skew-indicator__wrapper__info--result">
-                    <div
-                        class="lc-skew-indicator__wrapper__info--result--value"
-                    >
-                        <NNumberAnimation
-                            show-separator
-                            :from="0"
-                            :to="renderValue"
-                            active
-                            :precision="decimal"
-                        />
+                    <div class="lc-skew-indicator__wrapper__info--result--value">
+                        <NNumberAnimation show-separator :from="0" :to="renderValue" active :precision="decimals" />
                     </div>
-                    <div
-                        class="lc-skew-indicator__wrapper__info--result--unit"
-                        v-if="renderUnit"
-                    >
+                    <div class="lc-skew-indicator__wrapper__info--result--unit" v-if="renderUnit">
                         {{ renderUnit }}
                     </div>
                     <div
@@ -36,39 +25,16 @@
                             down: yearValue < 0,
                         }"
                     >
-                        <div
-                            class="lc-skew-indicator__wrapper__info--result--year--label"
-                        >
+                        <div class="lc-skew-indicator__wrapper__info--result--year--label">
                             {{ yearLabel }}
                         </div>
-                        <div
-                            class="lc-skew-indicator__wrapper__info--result--year--value"
-                        >
-                            <NNumberAnimation
-                                show-separator
-                                :from="0"
-                                :to="yearValue"
-                                active
-                                :precision="decimal"
-                            />%
+                        <div class="lc-skew-indicator__wrapper__info--result--year--value">
+                            <NNumberAnimation show-separator :from="0" :to="yearValue" active :precision="decimal" />%
                         </div>
-                        <div
-                            class="lc-skew-indicator__wrapper__info--result--year--up"
-                            v-if="yearValue > 0"
-                        >
-                            ↑
-                        </div>
-                        <div
-                            class="lc-skew-indicator__wrapper__info--result--year--down"
-                            v-else
-                        >
-                            ↓
-                        </div>
+                        <div class="lc-skew-indicator__wrapper__info--result--year--up" v-if="yearValue > 0">↑</div>
+                        <div class="lc-skew-indicator__wrapper__info--result--year--down" v-else>↓</div>
                     </div>
-                    <div
-                        class="lc-skew-indicator__wrapper__info--result--altericon"
-                        v-if="tip"
-                    >
+                    <div class="lc-skew-indicator__wrapper__info--result--altericon" v-if="tip">
                         <LcTooltip>{{ tip }}</LcTooltip>
                     </div>
                 </div>
@@ -128,6 +94,13 @@ const {
     },
 });
 
+const decimals = computed(() => {
+    const { unit: numUnit } = bigNumber(value);
+    if (Number.isInteger(value) && !numUnit) {
+        return 0;
+    }
+    return decimal;
+});
 const renderValue = computed(() => {
     if (fixed) {
         const { result } = bigNumber(value, decimal);
@@ -135,7 +108,6 @@ const renderValue = computed(() => {
     }
     return value;
 });
-
 const renderUnit = computed(() => {
     if (fixed) {
         const { unit: numUnit } = bigNumber(value, decimal);
