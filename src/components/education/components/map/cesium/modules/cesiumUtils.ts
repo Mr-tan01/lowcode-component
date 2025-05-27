@@ -88,6 +88,7 @@ export class cesiumService {
                 cluster.label.font = "24px sans-serif";
                 cluster.label.verticalOrigin = VerticalOrigin.CENTER;
                 cluster.label.pixelOffset = new Cartesian2(0, 0);
+                cluster.label.disableDepthTestDistance = Number.POSITIVE_INFINITY;
             });
         }
     }
