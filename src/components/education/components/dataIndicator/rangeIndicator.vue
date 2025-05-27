@@ -6,12 +6,14 @@
                 <div class="lc-range-indicator__wrapper__info" v-for="(item, key) in data" :key>
                     <div class="lc-range-indicator__wrapper__info__decorator--bg"></div>
                     <div class="lc-range-indicator__wrapper__info--result">
-                        <div class="lc-range-indicator__wrapper__info--result--value">
-                            <NNumberAnimation show-separator :from="0" :to="renderValue(item.value)" active :precision="decimal" />
-                        </div>
-                        <div class="lc-range-indicator__wrapper__info--result--unit" v-if="renderUnit(item.value, item.unit)">
-                            {{ renderUnit(item.value, item.unit) }}
-                        </div>
+                        <slot :name="item.customSlot" :item="item">
+                            <div class="lc-range-indicator__wrapper__info--result--value" :title="item.value?.toString()">
+                                <NNumberAnimation show-separator :from="0" :to="renderValue(item.value)" active :precision="renderdecimals(item.value)" />
+                            </div>
+                            <div class="lc-range-indicator__wrapper__info--result--unit" v-if="renderUnit(item.value, item.unit)">
+                                {{ renderUnit(item.value, item.unit) }}
+                            </div>
+                        </slot>
                     </div>
                     <div class="lc-range-indicator__wrapper__info--label">
                         {{ item.label }}
@@ -31,6 +33,8 @@ type Data = {
     label?: string;
     value?: number;
     unit?: string;
+    customSlot?: string;
+    customValue?: string | number;
 };
 const {
     data = [],
@@ -52,6 +56,13 @@ const {
     },
 });
 
+const renderdecimals = memoize((value) => {
+    const { unit: numUnit } = bigNumber(value);
+    if (Number.isInteger(value) && !numUnit) {
+        return 0;
+    }
+    return decimal;
+});
 const renderValue = memoize((value) => {
     if (fixed) {
         const { result } = bigNumber(value, decimal);
