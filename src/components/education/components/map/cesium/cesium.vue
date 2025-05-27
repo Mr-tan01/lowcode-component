@@ -102,6 +102,7 @@ async function initCesium(): Promise<{ status: boolean }> {
         await cesiumUtils.loadTileLayer(titleUrl);
         if (areaName) {
             cesiumUtils.addPolygon(areaName);
+            cesiumUtils.polygonClickHandler(areaName);
         }
         pointData?.forEach((point) => {
             if (defaultShowState) {
@@ -130,7 +131,7 @@ const initCesiumDebounced = () => {
 
 defineExpose({
     changeModel,
-    loadedTileLayer
+    loadedTileLayer,
 });
 
 watch(
@@ -179,6 +180,7 @@ onBeforeUnmount(() => {
     width: 100%;
     height: 100%;
     box-sizing: border-box;
+    cursor: pointer;
 
     :deep(.n-spin-container) {
         position: absolute;

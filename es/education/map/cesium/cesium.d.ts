@@ -76,6 +76,9 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
             minZoom: number;
             maxZoom: number;
             baseColor: import('cesium').Color;
+            clusteringEnabled: boolean;
+            clusteringPixelRange: number;
+            clusteringMinimumClusterSize: number;
         };
     };
     pointData: {
@@ -162,6 +165,9 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
             minZoom: number;
             maxZoom: number;
             baseColor: import('cesium').Color;
+            clusteringEnabled: boolean;
+            clusteringPixelRange: number;
+            clusteringMinimumClusterSize: number;
         };
     };
     pointData: {

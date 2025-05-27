@@ -1,14 +1,14 @@
 <template>
     <div class="demo-headers mr-setting-w">
-        <DemoHelpBox title="深圳地图" description="深圳教育项目-高德地图" rswidth="900px" rsHeight="600px">
+        <DemoHelpBox title="深圳地图" description="深圳教育项目-高德地图" rswidth="1600px" rsHeight="740px">
             <div class="size-box">
                 <LcCesium
                     ref="cesiumMap"
                     :access-token="accessToken"
                     :point-data="optionInfo"
                     :basic-config="basicConfig"
-                    :default-show-state="true"
-                    :fly-to-height="30000"
+                    :default-show-state="false"
+                    :area-name="'福田区'"
                     v-on:load-handler="loadHandler"
                 ></LcCesium>
             </div>
@@ -16,7 +16,7 @@
         <div style="position: absolute; top: 30%; left: 70%">
             <LcMapButton v-if="show" @iconClicked="iconHandler"></LcMapButton>
         </div>
-        <LcSwitchTabs v-model:value="tabValue" @change="changePolygon"></LcSwitchTabs>
+        <LcSwitchTabs v-model:value="tabValue" @change="changePolygon" style="margin-top: 20px"></LcSwitchTabs>
     </div>
 </template>
 
@@ -28,9 +28,9 @@ import { LcCesium, CesiumInstanceType } from "@/components/education/components/
 // import { LcCesium, CesiumInstanceType } from "~/es/education/map/index"
 import { DemoHelpBox } from "@/components/common/DemoHelpBox";
 import type { ChangeEvent } from "@/components/education/components/carouseBox/types";
-import { pointInfo, basicConfigType } from "@/components/education/components/map/cesium/modules/type";
-import { Color, Cartesian3 } from "cesium";
-const basicConfig = ref<basicConfigType>({ minZoom: 200, maxZoom: 130000, baseColor: Color.TRANSPARENT });
+import { pointType, basicConfigType, testData } from "@/components/education/components/map/cesium/modules/type";
+import {  Cartesian3 } from "cesium";
+const basicConfig = ref<basicConfigType>({ clusteringEnabled: false });
 import { getToken } from "@/request";
 
 const show = ref<boolean>(false);
@@ -38,11 +38,19 @@ let accessToken = ref<string | null>(null);
 
 const tabValue = ref("宝安区");
 let cesiumMap = ref<CesiumInstanceType | null>(null);
-let optionInfo = ref([]);
+let optionInfo = ref<pointType[]>([]);
 
 function changePolygon(value: ChangeEvent): void {
     cesiumMap.value?.changeModel("polygonClickHandler", value.label);
-    optionInfo.value = pointInfo[value.label];
+    const result = testData?.map((item: any) => ({
+        name: item.schoolName,
+        lng: Number(item.schoolLng),
+        lat: Number(item.schoolLat),
+        value: "中",
+        text: item.schoolName,
+        iconType: item.isQualify ? "primary" : "danger",
+    }));
+    optionInfo.value = result;
 }
 
 function loadHandler(state: boolean) {
