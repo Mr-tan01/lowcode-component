@@ -102,6 +102,7 @@ const customLegendData = computed(() => {
 <style lang="scss" scoped>
 .lc-common-legend {
     &__trigger {
+        width: 100%;
         display: flex;
         align-items: center;
         gap: 8px;
@@ -177,6 +178,7 @@ const customLegendData = computed(() => {
                 }
 
                 &__label {
+                    width: 100%;
                     white-space: nowrap;
                     overflow: hidden;
                     text-overflow: ellipsis;

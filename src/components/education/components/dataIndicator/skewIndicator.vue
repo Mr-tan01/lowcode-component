@@ -14,7 +14,7 @@
                 </div>
                 <div class="lc-skew-indicator__wrapper__info--result">
                     <div class="lc-skew-indicator__wrapper__info--result--value" :title="value.toString()">
-                        <NNumberAnimation show-separator :from="0" :to="renderValue" active :precision="decimal" />
+                        <NNumberAnimation show-separator :from="0" :to="renderValue" active :precision="decimals" />
                     </div>
                     <div class="lc-skew-indicator__wrapper__info--result--unit" v-if="renderUnit">
                         {{ renderUnit }}
@@ -72,6 +72,13 @@ const {
     },
 });
 
+const decimals = computed(() => {
+    const { unit: numUnit } = bigNumber(value);
+    if (Number.isInteger(value) && !numUnit) {
+        return 0;
+    }
+    return decimal;
+});
 const renderValue = computed(() => {
     if (fixed) {
         const { result } = bigNumber(value, decimal);

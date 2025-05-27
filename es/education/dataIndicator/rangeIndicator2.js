@@ -1,13 +1,13 @@
-import { defineComponent as f, mergeDefaults as p, openBlock as a, createElementBlock as o, createElementVNode as i, Fragment as g, renderList as v, createVNode as b, unref as c, toDisplayString as d, createCommentVNode as w } from "vue";
-import { bigNumber as s } from "lowcode-share/es/share";
-import { NNumberAnimation as N } from "naive-ui/es/number-animation";
-import u from "lodash-es/memoize";
-const x = { class: "lc-range-indicator" }, y = { class: "lc-range-indicator__wrapper" }, h = { class: "lc-range-indicator__wrapper__info-range" }, V = { class: "lc-range-indicator__wrapper__info--result" }, $ = { class: "lc-range-indicator__wrapper__info--result--value" }, k = {
+import { defineComponent as p, mergeDefaults as v, openBlock as o, createElementBlock as l, createElementVNode as i, Fragment as b, renderList as w, renderSlot as N, createVNode as y, unref as a, toDisplayString as _, createCommentVNode as h } from "vue";
+import { bigNumber as c } from "lowcode-share/es/share";
+import { NNumberAnimation as x } from "naive-ui/es/number-animation";
+import s from "lodash-es/memoize";
+const S = { class: "lc-range-indicator" }, $ = { class: "lc-range-indicator__wrapper" }, V = { class: "lc-range-indicator__wrapper__info-range" }, k = { class: "lc-range-indicator__wrapper__info--result" }, B = ["title"], U = {
   key: 0,
   class: "lc-range-indicator__wrapper__info--result--unit"
-}, B = { class: "lc-range-indicator__wrapper__info--label" }, U = /* @__PURE__ */ f({
+}, C = { class: "lc-range-indicator__wrapper__info--label" }, z = /* @__PURE__ */ p({
   __name: "rangeIndicator",
-  props: /* @__PURE__ */ p({
+  props: /* @__PURE__ */ v({
     data: {
       type: Object
     },
@@ -26,25 +26,28 @@ const x = { class: "lc-range-indicator" }, y = { class: "lc-range-indicator__wra
     decimal: 0,
     unit: ""
   }),
-  setup(r) {
-    const _ = u((n) => {
-      if (r.fixed) {
-        const { result: e } = s(n, r.decimal);
+  setup(n) {
+    const f = s((t) => {
+      const { unit: e } = c(t);
+      return Number.isInteger(t) && !e ? 0 : n.decimal;
+    }), m = s((t) => {
+      if (n.fixed) {
+        const { result: e } = c(t, n.decimal);
         return e;
       }
-      return n;
-    }), l = u(
-      (n, e) => {
-        if (r.fixed) {
-          const { unit: t } = s(n, r.decimal);
-          return `${t}${e || r.unit}`;
+      return t;
+    }), d = s(
+      (t, e) => {
+        if (n.fixed) {
+          const { unit: r } = c(t, n.decimal);
+          return `${r}${e || n.unit}`;
         }
-        return e || r.unit;
+        return e || n.unit;
       },
-      (n, e) => `${n}_${e || r.unit}`
+      (t, e) => `${t}_${e || n.unit}`
     );
-    return (n, e) => (a(), o("div", x, [
-      i("div", y, [
+    return (t, e) => (o(), l("div", S, [
+      i("div", $, [
         e[1] || (e[1] = i(
           "div",
           { class: "lc-range-indicator__wrapper__table--bg" },
@@ -52,13 +55,13 @@ const x = { class: "lc-range-indicator" }, y = { class: "lc-range-indicator__wra
           -1
           /* HOISTED */
         )),
-        i("div", h, [
-          (a(!0), o(
-            g,
+        i("div", V, [
+          (o(!0), l(
+            b,
             null,
-            v(r.data, (t, m) => (a(), o("div", {
+            w(n.data, (r, g) => (o(), l("div", {
               class: "lc-range-indicator__wrapper__info",
-              key: m
+              key: g
             }, [
               e[0] || (e[0] = i(
                 "div",
@@ -67,28 +70,36 @@ const x = { class: "lc-range-indicator" }, y = { class: "lc-range-indicator__wra
                 -1
                 /* HOISTED */
               )),
-              i("div", V, [
-                i("div", $, [
-                  b(c(N), {
-                    "show-separator": "",
-                    from: 0,
-                    to: c(_)(t.value),
-                    active: "",
-                    precision: r.decimal
-                  }, null, 8, ["to", "precision"])
-                ]),
-                c(l)(t.value, t.unit) ? (a(), o(
-                  "div",
-                  k,
-                  d(c(l)(t.value, t.unit)),
-                  1
-                  /* TEXT */
-                )) : w("v-if", !0)
+              i("div", k, [
+                N(t.$slots, r.customSlot, { item: r }, () => {
+                  var u;
+                  return [
+                    i("div", {
+                      class: "lc-range-indicator__wrapper__info--result--value",
+                      title: (u = r.value) == null ? void 0 : u.toString()
+                    }, [
+                      y(a(x), {
+                        "show-separator": "",
+                        from: 0,
+                        to: a(m)(r.value),
+                        active: "",
+                        precision: a(f)(r.value)
+                      }, null, 8, ["to", "precision"])
+                    ], 8, B),
+                    a(d)(r.value, r.unit) ? (o(), l(
+                      "div",
+                      U,
+                      _(a(d)(r.value, r.unit)),
+                      1
+                      /* TEXT */
+                    )) : h("v-if", !0)
+                  ];
+                }, !0)
               ]),
               i(
                 "div",
-                B,
-                d(t.label),
+                C,
+                _(r.label),
                 1
                 /* TEXT */
               )
@@ -102,5 +113,5 @@ const x = { class: "lc-range-indicator" }, y = { class: "lc-range-indicator__wra
   }
 });
 export {
-  U as default
+  z as default
 };
