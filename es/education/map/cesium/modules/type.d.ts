@@ -210,9 +210,12 @@ export interface controlStatusType {
     };
 }
 export interface basicConfigType {
-    minZoom: number;
-    maxZoom: number;
-    baseColor: Color;
+    minZoom?: number;
+    maxZoom?: number;
+    baseColor?: Color;
+    clusteringEnabled?: boolean;
+    clusteringPixelRange?: number;
+    clusteringMinimumClusterSize?: number;
 }
 export interface optionType {
     config: basicConfigType;
@@ -235,6 +238,14 @@ export type changeModelParamType = {
     ZoomIn: string;
     ZoomOut: string;
 };
+export declare const testData: {
+    schoolType: string;
+    schoolName: string;
+    schoolLng: string;
+    schoolLat: string;
+    area: string;
+    isQualify: number;
+}[];
 export declare const pointInfo: {
     宝安区: ({
         name: string;

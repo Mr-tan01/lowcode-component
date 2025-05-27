@@ -8,7 +8,7 @@ const a = {
   // 初始化区域
   defaultShowState: { type: Boolean, default: !1 },
   // 默认展示状态
-  flyToHeight: { type: Number, default: 28e3 },
+  flyToHeight: { type: Number, default: 26e3 },
   // 相机飞行高度
   offsetState: { type: Boolean, default: !1 },
   // 启用/禁用 缩放偏移
@@ -50,7 +50,10 @@ const a = {
     default: {
       minZoom: 200,
       maxZoom: 13e4,
-      baseColor: e.TRANSPARENT
+      baseColor: e.TRANSPARENT,
+      clusteringEnabled: !1,
+      clusteringPixelRange: 30,
+      clusteringMinimumClusterSize: 2
     }
   },
   pointData: {

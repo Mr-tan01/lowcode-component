@@ -9,7 +9,7 @@ export const cesiumProps = {
     imageryLayersUrl: { type: String as PropType<string> },
     areaName: { type: String as PropType<string> }, // 初始化区域
     defaultShowState: { type: Boolean as PropType<boolean>, default: false }, // 默认展示状态
-    flyToHeight: { type: Number as PropType<number>, default: 28000 }, // 相机飞行高度
+    flyToHeight: { type: Number as PropType<number>, default: 26000 }, // 相机飞行高度
     offsetState: { type: Boolean as PropType<boolean>, default: false }, // 启用/禁用 缩放偏移
     spinStroke: { type: String as PropType<string>, default: "#046ab1" }, // spin图标颜色
     spinContainerBg: { type: String as PropType<string>, default: "#6C7E93" }, // spin遮挡背景
@@ -47,6 +47,9 @@ export const cesiumProps = {
             minZoom: 200,
             maxZoom: 130000,
             baseColor: Color.TRANSPARENT,
+            clusteringEnabled: false,
+            clusteringPixelRange: 30,
+            clusteringMinimumClusterSize: 2
         },
     },
     pointData: {

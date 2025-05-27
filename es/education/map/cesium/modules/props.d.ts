@@ -75,6 +75,9 @@ export declare const cesiumProps: {
             minZoom: number;
             maxZoom: number;
             baseColor: Color;
+            clusteringEnabled: boolean;
+            clusteringPixelRange: number;
+            clusteringMinimumClusterSize: number;
         };
     };
     pointData: {
