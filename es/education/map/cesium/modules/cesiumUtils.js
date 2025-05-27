@@ -1,10 +1,10 @@
-var V = Object.defineProperty;
-var N = (c, e, i) => e in c ? V(c, e, { enumerable: !0, configurable: !0, writable: !0, value: i }) : c[e] = i;
-var r = (c, e, i) => N(c, typeof e != "symbol" ? e + "" : e, i);
+var k = Object.defineProperty;
+var V = (c, e, i) => e in c ? k(c, e, { enumerable: !0, configurable: !0, writable: !0, value: i }) : c[e] = i;
+var r = (c, e, i) => V(c, typeof e != "symbol" ? e + "" : e, i);
 import { CesiumHeatmap as F } from "cesium-heatmap-es6";
 import { areaData as f } from "./type.js";
 import { createInfoCanvas as M, updateViewerEntityInfo as C } from "./tools.js";
-import { Color as m, CustomDataSource as O, LabelStyle as U, VerticalOrigin as R, Cartesian2 as y, ScreenSpaceEventType as x, ScreenSpaceEventHandler as _, defined as W, Cartesian3 as g, PolylineDashMaterialProperty as z, Math as v, JulianDate as K, ArcGisMapServerImageryProvider as A } from "@cesium/engine";
+import { Color as m, CustomDataSource as O, LabelStyle as U, VerticalOrigin as _, Cartesian2 as y, ScreenSpaceEventType as x, ScreenSpaceEventHandler as R, defined as W, Cartesian3 as g, PolylineDashMaterialProperty as z, Math as v, JulianDate as K, ArcGisMapServerImageryProvider as A } from "@cesium/engine";
 import { Viewer as $ } from "@cesium/widgets";
 class j {
   constructor(e, i) {
@@ -52,7 +52,7 @@ class j {
     this.dataSource = new O("clusterSource"), this.viewer.dataSources.add(this.dataSource);
     const e = this.options.config;
     this.dataSource.clustering.enabled = (e == null ? void 0 : e.clusteringEnabled) ?? this.defaultConfig.clusteringEnabled, this.dataSource.clustering.pixelRange = (e == null ? void 0 : e.clusteringPixelRange) ?? this.defaultConfig.clusteringPixelRange, this.dataSource.clustering.minimumClusterSize = (e == null ? void 0 : e.clusteringMinimumClusterSize) ?? this.defaultConfig.clusteringMinimumClusterSize, this.dataSource.clustering.enabled && this.dataSource.clustering.clusterEvent.addEventListener((i, t) => {
-      t.billboard.show = !0, t.label.show = !0, t.label.scale = 1, t.label.fillColor = m.WHITE, t.label.style = U.FILL_AND_OUTLINE, t.label.outlineColor = m.BLACK, t.label.outlineWidth = 2, t.label.font = "24px sans-serif", t.label.verticalOrigin = R.CENTER, t.label.pixelOffset = new y(0, 0);
+      t.billboard.show = !0, t.label.show = !0, t.label.scale = 1, t.label.fillColor = m.WHITE, t.label.style = U.FILL_AND_OUTLINE, t.label.outlineColor = m.BLACK, t.label.outlineWidth = 2, t.label.font = "24px sans-serif", t.label.verticalOrigin = _.CENTER, t.label.pixelOffset = new y(0, 0), t.label.disableDepthTestDistance = Number.POSITIVE_INFINITY;
     });
   }
   // 初始化Cesium Viewer
@@ -60,7 +60,7 @@ class j {
     var i;
     this.viewer && this.destroy();
     try {
-      return this.viewer = new $(this.containerId, e), this.viewer.cesiumWidget.creditContainer.style.display = "none", this.viewer.scene.debugShowFramesPerSecond = !1, this.viewer.scene.globe.depthTestAgainstTerrain = !0, this.viewer.scene.screenSpaceCameraController.enableTranslate = !0, this.updateViewerAttribute(), this.viewer.cesiumWidget.screenSpaceEventHandler.removeInputAction(x.LEFT_DOUBLE_CLICK), this.viewer.scene.canvas.addEventListener("dblclick", this.doubleClickHandler, !1), this.setupClustering(), this.screenSpaceEventHandler = new _((i = this.viewer) == null ? void 0 : i.scene.canvas).setInputAction(
+      return this.viewer = new $(this.containerId, e), this.viewer.cesiumWidget.creditContainer.style.display = "none", this.viewer.scene.debugShowFramesPerSecond = !1, this.viewer.scene.globe.depthTestAgainstTerrain = !0, this.viewer.scene.screenSpaceCameraController.enableTranslate = !0, this.updateViewerAttribute(), this.viewer.cesiumWidget.screenSpaceEventHandler.removeInputAction(x.LEFT_DOUBLE_CLICK), this.viewer.scene.canvas.addEventListener("dblclick", this.doubleClickHandler, !1), this.setupClustering(), this.screenSpaceEventHandler = new R((i = this.viewer) == null ? void 0 : i.scene.canvas).setInputAction(
         (t) => {
           var o;
           if (this.viewer) {
@@ -196,14 +196,14 @@ class j {
     var s, u, w, p, E, b, L, S;
     const { name: i } = e, t = i != null && i.endsWith("Label") ? i == null ? void 0 : i.replace("Label", "") : i, o = `${t}Label`, a = ((s = this.pointData) == null ? void 0 : s.findIndex((n) => n.name === t)) ?? -1, h = ((u = this.pointEntities) == null ? void 0 : u.findIndex((n) => n.name === t)) ?? -1, l = ((w = this.pointEntities) == null ? void 0 : w.findIndex((n) => n.name === o)) ?? -1;
     a !== -1 && l === -1 && !this.options.defaultShowState && this.pointData && this.addPoint(this.pointData[a], void 0, "Label"), C((p = this.pointData) == null ? void 0 : p[a], (E = this.pointEntities) == null ? void 0 : E[h], "value"), l !== -1 && this.options.defaultShowState && C((b = this.pointData) == null ? void 0 : b[a], (L = this.pointEntities) == null ? void 0 : L[l]), this.options.defaultShowState || (S = this.pointEntities) == null || S.forEach((n) => {
-      var T, D, H, I;
-      if ((T = n.name) != null && T.endsWith("Label"))
+      var I, T, D, H;
+      if ((I = n.name) != null && I.endsWith("Label"))
         n.show = n.name === o && !n.show;
       else {
         const Z = K.now();
-        if ((D = n.properties) == null ? void 0 : D.getValue(Z).changeState) {
-          const P = ((H = this.pointData) == null ? void 0 : H.findIndex((k) => k.name === n.name)) ?? -1;
-          P !== -1 && C((I = this.pointData) == null ? void 0 : I[P], n, "value");
+        if ((T = n.properties) == null ? void 0 : T.getValue(Z).changeState) {
+          const P = ((D = this.pointData) == null ? void 0 : D.findIndex((N) => N.name === n.name)) ?? -1;
+          P !== -1 && C((H = this.pointData) == null ? void 0 : H[P], n, "value");
         }
       }
     }), this.options.pointHandler(e);

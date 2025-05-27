@@ -30,7 +30,7 @@ import { DemoHelpBox } from "@/components/common/DemoHelpBox";
 import type { ChangeEvent } from "@/components/education/components/carouseBox/types";
 import { pointType, basicConfigType, testData } from "@/components/education/components/map/cesium/modules/type";
 import {  Cartesian3 } from "cesium";
-const basicConfig = ref<basicConfigType>({ clusteringEnabled: false });
+const basicConfig = ref<basicConfigType>({ clusteringEnabled: true });
 import { getToken } from "@/request";
 
 const show = ref<boolean>(false);
@@ -71,7 +71,7 @@ function iconHandler(alt: string) {
 
 onMounted(async () => {
     await getToken;
-    accessToken.value = localStorage.getItem("access_token") + "1";
+    accessToken.value = localStorage.getItem("access_token");
 });
 </script>
 
