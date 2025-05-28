@@ -1,9 +1,10 @@
-import { defineComponent as i, mergeDefaults as p, openBlock as a, createElementBlock as o, createVNode as u, unref as d, withCtx as m, createElementVNode as r, Fragment as f, renderList as g, normalizeStyle as b, toDisplayString as t } from "vue";
-import h from "./elasticScrollbar/index.js";
-import { bigNumber as v } from "lowcode-share/es/share";
-const y = { class: "lc-progress" }, w = { class: "lc-progress__wrapper" }, x = { class: "lc-progress__wrapper__item__left__label" }, L = ["title"], C = /* @__PURE__ */ i({
+import { defineComponent as u, mergeDefaults as m, openBlock as o, createElementBlock as n, createVNode as f, unref as i, withCtx as g, createElementVNode as r, Fragment as b, renderList as h, normalizeStyle as v, toDisplayString as a } from "vue";
+import x from "./elasticScrollbar/index.js";
+import { bigNumber as c } from "lowcode-share/es/share";
+import y from "lodash-es/memoize";
+const w = { class: "lc-progress" }, L = { class: "lc-progress__wrapper" }, N = { class: "lc-progress__wrapper__item__left__label" }, S = ["title"], V = /* @__PURE__ */ u({
   __name: "progress",
-  props: /* @__PURE__ */ p({
+  props: /* @__PURE__ */ m({
     fixed: {
       type: Boolean
     },
@@ -18,47 +19,56 @@ const y = { class: "lc-progress" }, w = { class: "lc-progress__wrapper" }, x = {
     decimal: 2,
     dataList: () => []
   }),
-  setup(l) {
-    const _ = (s) => {
-      if (l.fixed) {
-        const { result: n, unit: e } = v(s, l.decimal);
-        return `${n}${e}`;
+  setup(s) {
+    const _ = (t) => {
+      if (s.fixed) {
+        const { result: l } = c(t, s.decimal);
+        return l;
       }
-      return s;
-    };
-    return (s, n) => (a(), o("div", y, [
-      u(d(h), null, {
-        default: m(() => [
-          r("div", w, [
-            (a(!0), o(
-              f,
+      return t;
+    }, p = y(
+      (t, l) => {
+        if (s.fixed) {
+          const { unit: e } = c(t, s.decimal);
+          return `${e}${l}`;
+        }
+        return l;
+      },
+      (t, l) => `${t}_${l}`
+    );
+    return (t, l) => (o(), n("div", w, [
+      f(i(x), null, {
+        default: g(() => [
+          r("div", L, [
+            (o(!0), n(
+              b,
               null,
-              g(l.dataList, (e, c) => (a(), o("div", {
+              h(s.dataList, (e, d) => (o(), n("div", {
                 class: "lc-progress__wrapper__item",
-                key: c
+                key: d
               }, [
                 r(
                   "div",
                   {
                     class: "lc-progress__wrapper__item__left",
-                    style: b({
+                    style: v({
                       "--progress": e.value,
                       "--bgColor": e.color
                     })
                   },
                   [
-                    r("span", x, [
+                    r("span", N, [
                       r(
                         "span",
                         null,
-                        t(e.label),
+                        a(e.label),
                         1
                         /* TEXT */
                       ),
                       r(
                         "span",
                         null,
-                        t(e.value) + "%",
+                        a(e.value) + "%",
                         1
                         /* TEXT */
                       )
@@ -74,18 +84,18 @@ const y = { class: "lc-progress" }, w = { class: "lc-progress__wrapper" }, x = {
                   r(
                     "span",
                     null,
-                    t(_(e.tootal)),
+                    a(_(e.tootal)),
                     1
                     /* TEXT */
                   ),
                   r(
                     "span",
                     null,
-                    t(e.unit),
+                    a(i(p)(e.tootal, e.unit)),
                     1
                     /* TEXT */
                   )
-                ], 8, L)
+                ], 8, S)
               ]))),
               128
               /* KEYED_FRAGMENT */
@@ -99,5 +109,5 @@ const y = { class: "lc-progress" }, w = { class: "lc-progress__wrapper" }, x = {
   }
 });
 export {
-  C as default
+  V as default
 };
