@@ -158,7 +158,7 @@ const data = {
         unit: "个",
         decimal: 0,
     },
-    righItem: {
+    rightItem: {
         title: "建设学生用地",
         value: 11111,
         unit: "个",

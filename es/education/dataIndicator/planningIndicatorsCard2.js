@@ -83,7 +83,7 @@ const M = { class: "lc-planning-indicators" }, P = { class: "lc-planning-indicat
             e(
               "span",
               at,
-              s(m((S = (N = t.data) == null ? void 0 : N.righItem) == null ? void 0 : S.title, (B = (w = t.data) == null ? void 0 : w.righItem) == null ? void 0 : B.maxLength)),
+              s(m((S = (N = t.data) == null ? void 0 : N.rightItem) == null ? void 0 : S.title, (B = (w = t.data) == null ? void 0 : w.rightItem) == null ? void 0 : B.maxLength)),
               1
               /* TEXT */
             ),
@@ -92,15 +92,15 @@ const M = { class: "lc-planning-indicators" }, P = { class: "lc-planning-indicat
                 o(n(A), {
                   "show-separator": "",
                   from: 0,
-                  to: n(r)((L = t.data) == null ? void 0 : L.righItem.value, (k = (V = t.data) == null ? void 0 : V.righItem) == null ? void 0 : k.decimal),
+                  to: n(r)((L = t.data) == null ? void 0 : L.rightItem.value, (k = (V = t.data) == null ? void 0 : V.rightItem) == null ? void 0 : k.decimal),
                   active: "",
-                  precision: (C = t.data) == null ? void 0 : C.righItem.decimal
+                  precision: (C = t.data) == null ? void 0 : C.rightItem.decimal
                 }, null, 8, ["to", "precision"])
               ]),
               e(
                 "span",
                 lt,
-                s(n(d)((E = (D = t.data) == null ? void 0 : D.righItem) == null ? void 0 : E.value, ($ = (U = t.data) == null ? void 0 : U.righItem) == null ? void 0 : $.unit, (z = (j = t.data) == null ? void 0 : j.righItem) == null ? void 0 : z.decimal)),
+                s(n(d)((E = (D = t.data) == null ? void 0 : D.rightItem) == null ? void 0 : E.value, ($ = (U = t.data) == null ? void 0 : U.rightItem) == null ? void 0 : $.unit, (z = (j = t.data) == null ? void 0 : j.rightItem) == null ? void 0 : z.decimal)),
                 1
                 /* TEXT */
               )

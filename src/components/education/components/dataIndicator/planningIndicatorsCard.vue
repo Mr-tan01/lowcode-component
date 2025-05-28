@@ -17,12 +17,12 @@
                 <img :src="data?.icon" alt="" />
             </div>
             <div class="lc-planning-indicators__item__right">
-                <span class="lc-planning-indicators__item__right">{{ formatedText(data?.righItem?.title, data?.righItem?.maxLength) }}</span>
+                <span class="lc-planning-indicators__item__right">{{ formatedText(data?.rightItem?.title, data?.rightItem?.maxLength) }}</span>
                 <span class="lc-planning-indicators__item__right--value">
                     <span class="lc-number-value"
-                        ><NNumberAnimation show-separator :from="0" :to="renderValue(data?.righItem.value, data?.righItem?.decimal)" active :precision="data?.righItem.decimal"
+                        ><NNumberAnimation show-separator :from="0" :to="renderValue(data?.rightItem.value, data?.rightItem?.decimal)" active :precision="data?.rightItem.decimal"
                     /></span>
-                    <span class="lc-number-unit">{{ renderUnit(data?.righItem?.value, data?.righItem?.unit, data?.righItem?.decimal) }}</span>
+                    <span class="lc-number-unit">{{ renderUnit(data?.rightItem?.value, data?.rightItem?.unit, data?.rightItem?.decimal) }}</span>
                 </span>
             </div>
         </div>
@@ -46,7 +46,7 @@ export type Data = {
     header: string;
     icon: string;
     leftItem: Item;
-    righItem: Item;
+    rightItem: Item;
 };
 const { fixed = true } = defineProps({
     unit: {

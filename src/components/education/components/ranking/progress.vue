@@ -17,7 +17,7 @@
                     </div>
                     <div class="lc-progress__wrapper__item__right" :title="item.tootal.toString()">
                         <span>{{ renderValue(item.tootal) }}</span>
-                        <span>{{ item.unit }}</span>
+                        <span>{{ renderUnit(item.tootal, item.unit) }}</span>
                     </div>
                 </div>
             </div>
@@ -28,6 +28,7 @@
 import { LcElasticScrollbar } from "@/components/education/components/elasticScrollbar";
 import { bigNumber } from "lowcode-share/es/share";
 import { PropType } from "vue";
+import memoize from "lodash-es/memoize";
 
 export type ProgereeDataList = {
     label: string; // 类目名称
@@ -54,11 +55,21 @@ const {
 
 const renderValue = (tootal) => {
     if (fixed) {
-        const { result, unit } = bigNumber(tootal, decimal);
-        return `${result}${unit}`;
+        const { result } = bigNumber(tootal, decimal);
+        return result;
     }
     return tootal;
 };
+const renderUnit = memoize(
+    (value, _unit) => {
+        if (fixed) {
+            const { unit: numUnit } = bigNumber(value, decimal);
+            return `${numUnit}${_unit}`;
+        }
+        return _unit;
+    },
+    (value, _unit) => `${value}_${_unit}`
+);
 </script>
 <style lang="scss" scoped>
 @keyframes progressAnimation {

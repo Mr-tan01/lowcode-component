@@ -10,7 +10,7 @@ export type Data = {
     header: string;
     icon: string;
     leftItem: Item;
-    righItem: Item;
+    rightItem: Item;
 };
 declare const _default: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
     unit: {
