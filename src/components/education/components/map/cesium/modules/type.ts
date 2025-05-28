@@ -79,6 +79,7 @@ export interface basicConfigType {
     clusteringEnabled?: boolean; // 启用聚合
     clusteringPixelRange?: number; // 聚合像素范围
     clusteringMinimumClusterSize?: number; // 最小聚合数量
+    cameraLimitsEnabled?: boolean; // 启用相机控制限制
 }
 
 export interface optionType {

@@ -13,14 +13,16 @@ import {
     ArcGisMapServerImageryProvider,
     JulianDate,
     CustomDataSource,
-    LabelStyle,
     VerticalOrigin,
+    HorizontalOrigin,
+    Rectangle,
+    Cartographic,
 } from "cesium";
 
 import { CesiumHeatmap } from "cesium-heatmap-es6";
 
 import { areaData, type controlStatusType, type optionType, type pointType, type changeModelParamType } from "./type";
-import { createInfoCanvas, updateViewerEntityInfo } from "./tools";
+import { createInfoCanvas, createClusterBillboard, updateViewerEntityInfo } from "./tools";
 
 export class cesiumService {
     public viewer: Viewer | null = null;
@@ -40,7 +42,19 @@ export class cesiumService {
         clusteringPixelRange: 30,
         clusteringMinimumClusterSize: 2,
         flyToHeight: 26000,
+        cameraLimitsEnabled: false,
     };
+    private lastValidCameraPosition: Cartesian3 | null = null;
+    private isCheckingBounds = false;
+    private removePreUpdateListener: Function | null = null;
+
+    // 深圳市地理边界（根据瓦片定义经纬度范围）
+    private shenzhenBounds = Rectangle.fromDegrees(
+        113.8, // 西边界 - 经度
+        22.36, // 南边界 - 纬度
+        114.6, // 东边界 - 经度
+        22.7 // 北边界 - 纬度
+    );
 
     constructor(public containerId: string, public options: optionType) {
         // 合并配置
@@ -76,19 +90,43 @@ export class cesiumService {
         this.dataSource.clustering.minimumClusterSize = config?.clusteringMinimumClusterSize ?? this.defaultConfig.clusteringMinimumClusterSize;
 
         if (this.dataSource.clustering.enabled) {
-            this.dataSource.clustering.clusterEvent.addEventListener((_, cluster) => {
-                // 设置聚合点的样式
+            this.dataSource.clustering.clusterEvent.addEventListener((clusteredEntities, cluster) => {
+                // 设置聚合点的基本样式
                 cluster.billboard.show = true;
-                cluster.label.show = true;
-                cluster.label.scale = 1.0;
-                cluster.label.fillColor = Color.WHITE;
-                cluster.label.style = LabelStyle.FILL_AND_OUTLINE;
-                cluster.label.outlineColor = Color.BLACK;
-                cluster.label.outlineWidth = 2;
-                cluster.label.font = "24px sans-serif";
-                cluster.label.verticalOrigin = VerticalOrigin.CENTER;
-                cluster.label.pixelOffset = new Cartesian2(0, 0);
-                cluster.label.disableDepthTestDistance = Number.POSITIVE_INFINITY;
+                cluster.label.show = false; // 隐藏默认标签，使用自定义图标
+
+                // 统计各类型点位数量
+                const typeCount = {};
+                let primaryType = "";
+                let maxCount = 0;
+
+                clusteredEntities.forEach((entity) => {
+                    if (entity.properties) {
+                        const entityType = entity.properties.type?.getValue(JulianDate.now());
+                        if (entityType) {
+                            typeCount[entityType] = (typeCount[entityType] || 0) + 1;
+
+                            // 记录数量最多的类型
+                            if (typeCount[entityType] > maxCount) {
+                                maxCount = typeCount[entityType];
+                                primaryType = entityType;
+                            }
+                        }
+                    }
+                });
+
+                // 默认类型
+                if (!primaryType) primaryType = "primary";
+
+                // 创建自定义聚合点图标
+                const canvas = createClusterBillboard(clusteredEntities.length, primaryType);
+
+                cluster.billboard.image = canvas.toDataURL();
+                cluster.billboard.width = 50;
+                cluster.billboard.height = 50;
+                cluster.billboard.verticalOrigin = VerticalOrigin.CENTER;
+                cluster.billboard.horizontalOrigin = HorizontalOrigin.CENTER;
+                cluster.billboard.disableDepthTestDistance = Number.POSITIVE_INFINITY;
             });
         }
     }
@@ -97,13 +135,6 @@ export class cesiumService {
         event.preventDefault();
         event.stopPropagation();
         this.setCameraHeight("ZoomIn");
-    };
-
-    changeHeightHandler = (): void => {
-        const height = Math.ceil(this.viewer!.camera.positionCartographic.height);
-        if (height === (this.options.config?.maxZoom ?? 130000)) {
-            this.options.limitHeightHandler(height);
-        }
     };
 
     // 初始化Cesium Viewer
@@ -123,8 +154,13 @@ export class cesiumService {
 
             this.viewer.scene.canvas.addEventListener("dblclick", this.doubleClickHandler, false);
 
-            // 初始化完成后设置聚类
+            // 设置聚类
             this.setupClustering();
+
+            if (this.options.config?.cameraLimitsEnabled ?? this.defaultConfig.cameraLimitsEnabled) {
+                // 设置相机控制限制
+                this.setupCameraLimits();
+            }
 
             // 注册单击事件
             this.screenSpaceEventHandler = new ScreenSpaceEventHandler(this.viewer?.scene.canvas).setInputAction(
@@ -148,7 +184,14 @@ export class cesiumService {
             );
 
             // 监听相机停止移动后的高度变化
-            this.viewer.scene.camera.moveEnd.addEventListener(this.changeHeightHandler);
+            if (this.viewer.scene && this.viewer.scene.camera) {
+                // 添加移动监听（可选，用于实时响应）
+                this.viewer.scene.camera.changed.addEventListener(() => {
+                    const height = Math.ceil(this.viewer!.camera.positionCartographic.height);
+                    // 可以添加额外的实时响应逻辑
+                });
+            }
+
             return true;
         } catch (error) {
             console.error("初始化Cesium失败:", error);
@@ -158,8 +201,8 @@ export class cesiumService {
 
     // 瓦片加载状完成（首次添加point、polygon）
     handleTileLoadProgress(remaining: number) {
-        // 预留100个请求 图片瓦片基本加载完成 减少等待时间
-        if (remaining <= 100) {
+        // 需等待瓦片加载完成
+        if (remaining  === 0) {
             this.options.loadTileLayerHandler(false);
             // 移除监听器
             if (this.tileLoadCallback) {
@@ -199,7 +242,7 @@ export class cesiumService {
                     // @ts-ignore
                     const providerPromise = Zondy.WebMapTileServiceImageryProvider.fromUrl(imageLayerUrl ? imageLayerUrl : url);
 
-                    // 超时控制
+                    // 使用 Promise.race 实现超时控制
                     provider = await Promise.race([providerPromise, timeoutPromise]);
                 } else {
                     provider = await ArcGisMapServerImageryProvider.fromUrl(url);
@@ -234,7 +277,6 @@ export class cesiumService {
             }
         };
 
-        // 执行加载
         await loadProvider();
     }
 
@@ -246,11 +288,11 @@ export class cesiumService {
             const entity: Entity = this.dataSource.entities.add({
                 position: Cartesian3.fromDegrees(point.lng, point.lat),
                 name: type ? point.name : `${point.name}Label`,
-                // 自定义属性
                 properties: {
                     value: point?.value,
                     text: point?.text,
                     changeState: false,
+                    type: point?.iconType ?? "primary",
                 },
                 billboard: {
                     image: valueInfo.canvas,
@@ -271,9 +313,9 @@ export class cesiumService {
 
     // 清除指定entity
     async clearEntity(key: string): Promise<void> {
-        if (this.viewer && this[key]) {
+        if (this.dataSource && this[key]) {
             for (let entity of this[key]) {
-                this.viewer.entities.remove(entity);
+                this.dataSource.entities.remove(entity);
             }
             this[key] = [];
         }
@@ -420,6 +462,13 @@ export class cesiumService {
     setViewerLayer(imageryLayersUrl: string): void {
         this.viewer?.imageryLayers.removeAll();
         this.viewer?.entities.removeAll();
+        if (this.dataSource) {
+            this.dataSource.entities.removeAll();
+            if (this.viewer) {
+                this.viewer.dataSources.remove(this.dataSource);
+                this.setupClustering();
+            }
+        }
         this.pointEntities = null;
         this.polygonEntities = null;
         this.loadTileLayer(imageryLayersUrl);
@@ -452,15 +501,138 @@ export class cesiumService {
         });
     }
 
+    // 检查是否在深圳边界内
+    private isPointInShenzhen(longitude: number, latitude: number): boolean {
+        return (
+            longitude >= cesiumMath.toDegrees(this.shenzhenBounds.west) &&
+            longitude <= cesiumMath.toDegrees(this.shenzhenBounds.east) &&
+            latitude >= cesiumMath.toDegrees(this.shenzhenBounds.south) &&
+            latitude <= cesiumMath.toDegrees(this.shenzhenBounds.north)
+        );
+    }
+
+    // 设置视角移动限制
+    private setupCameraLimits(): void {
+        if (!this.viewer) return;
+        const scene = this.viewer.scene;
+        scene.screenSpaceCameraController.enableRotate = true;
+        scene.screenSpaceCameraController.enableTranslate = true;
+        scene.screenSpaceCameraController.enableZoom = true;
+        scene.screenSpaceCameraController.enableTilt = true;
+        scene.screenSpaceCameraController.enableLook = true;
+
+        // 预更新阻止相机移出边界
+        this.removePreUpdateListener = scene.preUpdate.addEventListener(() => {
+            if (this.isCheckingBounds || !this.viewer) return;
+
+            try {
+                this.isCheckingBounds = true;
+
+                // 获取当前视口中心点
+                const centerPosition = new Cartesian2(
+                    Math.floor(this.viewer.canvas.clientWidth / 2),
+                    Math.floor(this.viewer.canvas.clientHeight / 2)
+                );
+
+                // 获取视口中心点的世界坐标
+                const pickRay = this.viewer.camera.getPickRay(centerPosition);
+                if (!pickRay) return;
+
+                const worldPosition = this.viewer.scene.globe.pick(pickRay, this.viewer.scene);
+                if (!worldPosition) {
+                    // 直接获取
+                    const viewCenter = this.getCameraViewCenter();
+                    if (!viewCenter) return;
+
+                    const centerLon = cesiumMath.toDegrees(viewCenter.longitude);
+                    const centerLat = cesiumMath.toDegrees(viewCenter.latitude);
+
+                    if (!this.isPointInShenzhen(centerLon, centerLat)) {
+                        // 恢复到上一个有效位置
+                        if (this.lastValidCameraPosition) {
+                            this.viewer.camera.position = this.lastValidCameraPosition.clone();
+                        }
+                    } else {
+                        // 更新有效位置
+                        this.lastValidCameraPosition = this.viewer.camera.position.clone();
+                    }
+                    return;
+                }
+
+                // 将世界坐标转换为地理坐标
+                const cartographic = Cartographic.fromCartesian(worldPosition);
+                const longitude = cesiumMath.toDegrees(cartographic.longitude);
+                const latitude = cesiumMath.toDegrees(cartographic.latitude);
+
+                // 判断是否在边界内
+                if (!this.isPointInShenzhen(longitude, latitude)) {
+                    // 恢复到上一个有效位置
+                    if (this.lastValidCameraPosition) {
+                        this.viewer.camera.position = this.lastValidCameraPosition.clone();
+                        this.viewer.camera.direction = this.viewer.scene.camera.direction.clone();
+                    }
+                } else {
+                    // 更新有效位置
+                    this.lastValidCameraPosition = this.viewer.camera.position.clone();
+                }
+            } finally {
+                this.isCheckingBounds = false;
+            }
+        });
+    }
+
+    // 获取相机视角中心
+    private getCameraViewCenter(): Cartographic | undefined {
+        if (!this.viewer) return undefined;
+
+        try {
+            // 获取视口中心
+            const windowCenter = new Cartesian2(this.viewer.canvas.clientWidth / 2, this.viewer.canvas.clientHeight / 2);
+
+            // 尝试拾取地球表面的点
+            const ray = this.viewer.camera.getPickRay(windowCenter);
+            if (!ray) return undefined;
+
+            // 尝试获取射线与地球表面的交点
+            const cartesian = this.viewer.scene.globe.pick(ray, this.viewer.scene);
+            if (cartesian) {
+                // 如果有交点，转换为地理坐标
+                return Cartographic.fromCartesian(cartesian);
+            }
+
+            // 如果没有交点，使用相机位置
+            return this.viewer.camera.positionCartographic;
+        } catch (e) {
+            console.warn("获取相机视角中心失败", e);
+            return this.viewer.camera.positionCartographic;
+        }
+    }
+
     destroy(): void {
         if (this.viewer) {
             this.viewer.scene.canvas.removeEventListener("dblclick", this.doubleClickHandler, false);
-            this.viewer.scene.camera.moveEnd.removeEventListener(this.changeHeightHandler);
+            if (this.viewer.scene && this.viewer.scene.camera) {
+                // 移除边界限制监听器
+                if (this.removePreUpdateListener) {
+                    this.removePreUpdateListener();
+                    this.removePreUpdateListener = null;
+                }
+            }
+            if (this.screenSpaceEventHandler) {
+                // @ts-ignore
+                this.screenSpaceEventHandler.destroy();
+                this.screenSpaceEventHandler = null;
+            }
+            if (this.dataSource) {
+                this.viewer.dataSources.remove(this.dataSource);
+                this.dataSource = null;
+            }
+
+            this.lastValidCameraPosition = null;
             this.viewer.destroy();
             this.viewer = null;
             this.pointEntities = null;
             this.polygonEntities = null;
-            this.screenSpaceEventHandler = null;
             this.imageLayerState = null;
             this.imageLayerUrl = null;
             this.tileLoadCallback = null;

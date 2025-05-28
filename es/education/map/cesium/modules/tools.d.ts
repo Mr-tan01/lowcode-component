@@ -11,6 +11,7 @@ export declare const createInfoCanvas: (info: any, valueKey?: string, labelType?
     canvas: HTMLCanvasElement;
     cleanup: () => void;
 }>;
+export declare const createClusterBillboard: (count: number, primaryType: string) => HTMLCanvasElement;
 /**
  * 修改entity信息
  */

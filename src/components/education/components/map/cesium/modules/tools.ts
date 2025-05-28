@@ -176,7 +176,7 @@ export const createInfoCanvas = (info: any, valueKey?: string, labelType?: strin
                 canvas.height = info?.height ?? image.height;
 
                 // 绘制图片到画布 宽高为获取后的值
-                ctx.drawImage(image, 0, 0, valueKey ? canvas.width : canvas.width, canvas.height);
+                ctx.drawImage(image, 0, 0, image.width, image.height, 0, 0, canvas.width, canvas.height);
 
                 if (!valueKey) {
                     eraseOverlapImage(ctx);
@@ -239,6 +239,60 @@ async function drawImageCanvas(imgSrc: string): Promise<HTMLCanvasElement> {
             }
         };
     });
+}
+
+
+// 创建聚合点图标
+export const createClusterBillboard = (count: number, primaryType: string): HTMLCanvasElement => {
+    const canvas = document.createElement('canvas');
+    canvas.width = 80;
+    canvas.height = 80;
+    const ctx = canvas.getContext('2d');
+    
+    if (!ctx) return canvas;
+    
+    // 设置背景颜色
+    let colorFill = '#1E9EFA';
+    let colorStroke = '#167bca';
+    
+    switch(primaryType) {
+        case 'primary':
+            colorFill = '#1E9EFA';
+            colorStroke = '#167bca';
+            break;
+        case 'success':
+            colorFill = '#67C23A';
+            colorStroke = '#529a2e';
+            break;
+        case 'warning':
+            colorFill = '#E6A23C';
+            colorStroke = '#b87d2f';
+            break;
+        case 'danger':
+            colorFill = '#E41F1F';
+            colorStroke = '#C01A1A';
+            break;
+    }
+    
+    // 绘制圆形背景
+    ctx.beginPath();
+    ctx.arc(40, 40, 35, 0, Math.PI * 2, true);
+    ctx.fillStyle = colorFill;
+    ctx.fill();
+    
+    // 绘制边框
+    ctx.lineWidth = 4;
+    ctx.strokeStyle = colorStroke;
+    ctx.stroke();
+    
+    // 绘制文本
+    ctx.fillStyle = 'white';
+    ctx.font = 'bold 32px Arial';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(count.toString(), 40, 40);
+    
+    return canvas;
 }
 
 import { type Entity, JulianDate, CallbackProperty } from "cesium";
