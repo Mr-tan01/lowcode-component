@@ -1,6 +1,6 @@
 <template>
     <div class="demo-headers mr-setting-w">
-        <DemoHelpBox title="深圳地图" description="深圳教育项目-高德地图" rswidth="1600px" rsHeight="740px">
+        <DemoHelpBox title="深圳地图" description="深圳教育项目-cesium" rswidth="1500px" rsHeight="740px">
             <div class="size-box">
                 <LcCesium
                     ref="cesiumMap"
@@ -28,9 +28,9 @@ import { LcCesium, CesiumInstanceType } from "@/components/education/components/
 // import { LcCesium, CesiumInstanceType } from "~/es/education/map/index"
 import { DemoHelpBox } from "@/components/common/DemoHelpBox";
 import type { ChangeEvent } from "@/components/education/components/carouseBox/types";
-import { pointType, basicConfigType, testData } from "@/components/education/components/map/cesium/modules/type";
+import { pointType, basicConfigType, testData, pointInfo } from "@/components/education/components/map/cesium/modules/type";
 import {  Cartesian3 } from "cesium";
-const basicConfig = ref<basicConfigType>({ clusteringEnabled: true });
+const basicConfig = ref<basicConfigType>({ clusteringEnabled: true, cameraLimitsEnabled: true });
 import { getToken } from "@/request";
 
 const show = ref<boolean>(false);

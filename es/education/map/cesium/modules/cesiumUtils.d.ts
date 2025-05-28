@@ -13,11 +13,14 @@ export declare class cesiumService {
     private tileLoadCallback;
     private dataSource;
     private defaultConfig;
+    private lastValidCameraPosition;
+    private isCheckingBounds;
+    private removePreUpdateListener;
+    private shenzhenBounds;
     constructor(containerId: string, options: optionType);
     updateViewerAttribute(): void;
     private setupClustering;
     doubleClickHandler: (event: MouseEvent) => void;
-    changeHeightHandler: () => void;
     initViewer(controlStatus: controlStatusType): Promise<boolean>;
     handleTileLoadProgress(remaining: number): void;
     loadTileLayer(url: string): Promise<void>;
@@ -32,5 +35,8 @@ export declare class cesiumService {
     setInitialView(option: changeModelParamType["setInitialView"]): void;
     setViewerLayer(imageryLayersUrl: string): void;
     addHeatmap(): void;
+    private isPointInShenzhen;
+    private setupCameraLimits;
+    private getCameraViewCenter;
     destroy(): void;
 }

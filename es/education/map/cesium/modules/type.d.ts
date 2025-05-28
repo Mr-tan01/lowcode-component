@@ -216,6 +216,7 @@ export interface basicConfigType {
     clusteringEnabled?: boolean;
     clusteringPixelRange?: number;
     clusteringMinimumClusterSize?: number;
+    cameraLimitsEnabled?: boolean;
 }
 export interface optionType {
     config: basicConfigType;
