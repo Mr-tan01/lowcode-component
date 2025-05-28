@@ -12,7 +12,7 @@
                 </div>
                 <div class="lc-indicator-card__wrapper--result">
                     <span class="lc-indicator-card__wrapper--result--value" :title="value.toString()">
-                        <NNumberAnimation show-separator :from="0" :to="renderValue" active :precision="decimal" />
+                        <NNumberAnimation show-separator :from="0" :to="renderValue" active :precision="decimals" />
                     </span>
                     <span class="lc-indicator-card__wrapper--result--unit" v-if="fixed">
                         {{ unit }}
@@ -84,6 +84,13 @@ const renderValue = computed(() => {
         return bigNumber(value, decimal).result;
     }
     return value;
+});
+const decimals = computed(() => {
+    const { unit: numUnit } = bigNumber(value);
+    if (Number.isInteger(value) && !numUnit) {
+        return 0;
+    }
+    return decimal;
 });
 const innerPad = {
     [SIZE.small]: "22px 32px 0",
