@@ -49,6 +49,7 @@ const handleClick = (alt: string) => {
     flex-direction: column;
     align-items: center;
     &-icon{
+      cursor: pointer;
       width: 52px;
       height: 52px;
     }

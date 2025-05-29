@@ -8,6 +8,7 @@ const w = /* @__PURE__ */ Object.assign({
   "./images/func/caret-up.png": () => import("./images/func/caret-up.png.js").then((e) => e.default),
   "./images/func/chevron-down.png": () => import("./images/func/chevron-down.png.js").then((e) => e.default),
   "./images/func/chevron-up.png": () => import("./images/func/chevron-up.png.js").then((e) => e.default),
+  "./images/func/doctor.png": () => import("./images/func/doctor.png.js").then((e) => e.default),
   "./images/func/expand.png": () => import("./images/func/expand.png.js").then((e) => e.default),
   "./images/func/help-circle.png": () => import("./images/func/help-circle.png.js").then((e) => e.default),
   "./images/func/info-circle.png": () => import("./images/func/info-circle.png.js").then((e) => e.default),
@@ -46,13 +47,13 @@ const w = /* @__PURE__ */ Object.assign({
   func: w,
   event: b
 };
-function P(e, o, i) {
+function P(e, g, i) {
   const u = h(""), m = h(""), c = (t) => {
     var n, l, s, a, f, d;
     let r = `${e.value}/${t}${i.value}`, p = "";
-    e.value === "event" && (r = `${e.value}/${t}/icon${i.value}`, p = `${e.value}/${t}/selected-icon${i.value}`), (s = (l = (n = v[e.value]) == null ? void 0 : n[`./images/${r}`]) == null ? void 0 : l.call(n)) == null || s.then((g) => u.value = g), p && ((d = (f = (a = v[e.value]) == null ? void 0 : a[`./images/${p}`]) == null ? void 0 : f.call(a)) == null || d.then((g) => m.value = g));
+    e.value === "event" && (r = `${e.value}/${t}/icon${i.value}`, p = `${e.value}/${t}/selected-icon${i.value}`), (s = (l = (n = v[e.value]) == null ? void 0 : n[`./images/${r}`]) == null ? void 0 : l.call(n)) == null || s.then((o) => u.value = o), p && ((d = (f = (a = v[e.value]) == null ? void 0 : a[`./images/${p}`]) == null ? void 0 : f.call(a)) == null || d.then((o) => m.value = o));
   };
-  return c(o.value), $(o, (t) => {
+  return c(g.value), $(g, (t) => {
     c(t);
   }), {
     src: u,
