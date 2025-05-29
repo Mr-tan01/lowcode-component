@@ -1,44 +1,45 @@
-import { defineComponent as x, computed as p, openBlock as n, createElementBlock as r, createElementVNode as m, unref as h, Fragment as S, renderList as y, normalizeClass as v, normalizeStyle as P, toDisplayString as M } from "vue";
-import _ from "./images/spiral-figure.png.js";
-const k = { class: "symmetric-layout" }, C = { class: "center-image-container" }, I = ["src"], E = /* @__PURE__ */ x({
+import { defineComponent as x, computed as p, openBlock as n, createElementBlock as r, createElementVNode as m, Fragment as h, renderList as S, normalizeClass as y, normalizeStyle as v, toDisplayString as I } from "vue";
+import P from "./images/spiral-figure.png.js";
+const M = { class: "symmetric-layout" }, k = { class: "center-image-container" }, C = ["src"], B = /* @__PURE__ */ x({
   __name: "spiral-figure",
   props: {
     texts: { default: () => [] },
     radius: { default: 150 },
-    maxPerSide: { default: 5 }
+    maxPerSide: { default: 5 },
+    centerImage: { default: () => P }
   },
-  setup(s) {
-    const i = p(() => {
-      const e = s.maxPerSide * 2;
-      return s.texts.slice(0, e);
+  setup(a) {
+    const l = p(() => {
+      const e = a.maxPerSide * 2;
+      return a.texts.slice(0, e);
     }), d = (e) => e % 2 === 0 ? "right-side" : "left-side", u = (e) => {
-      i.value.length;
-      const l = e % 2 === 0, a = Math.floor(e / 2), t = 120, o = t / (s.maxPerSide - 1) * a - t / 2, c = (l ? 180 + o : -o) * Math.PI / 180, g = s.radius * Math.cos(c), f = s.radius * Math.sin(c);
+      l.value.length;
+      const c = e % 2 === 0, s = Math.floor(e / 2), t = 120, i = t / (a.maxPerSide - 1) * s - t / 2, o = (c ? 180 + i : -i) * Math.PI / 180, g = a.radius * Math.cos(o), f = a.radius * Math.sin(o);
       return {
         left: `calc(50% + ${g}px)`,
         top: `calc(50% + ${f}px)`,
         transform: "translate(-50%, -50%)"
       };
     };
-    return (e, l) => (n(), r("div", k, [
-      m("div", C, [
+    return (e, c) => (n(), r("div", M, [
+      m("div", k, [
         m("img", {
-          src: h(_),
+          src: e.centerImage,
           alt: "Center image",
           class: "center-image"
-        }, null, 8, I)
+        }, null, 8, C)
       ]),
       (n(!0), r(
-        S,
+        h,
         null,
-        y(i.value, (a, t) => (n(), r(
+        S(l.value, (s, t) => (n(), r(
           "div",
           {
             key: t,
-            class: v(["text-item", d(t)]),
-            style: P(u(t))
+            class: y(["text-item", d(t)]),
+            style: v(u(t))
           },
-          M(a),
+          I(s),
           7
           /* TEXT, CLASS, STYLE */
         ))),
@@ -49,5 +50,5 @@ const k = { class: "symmetric-layout" }, C = { class: "center-image-container" }
   }
 });
 export {
-  E as default
+  B as default
 };

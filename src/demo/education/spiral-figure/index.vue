@@ -1,13 +1,13 @@
 <template>
   <div class="demo-tabs">
-      <DemoHelpBox title="spiralFigure" description="基础用法" rswidth="700px" rs-height="auto" :code="code1">
+      <DemoHelpBox title="spiralFigure" description="基础用法" rswidth="700px" :rs-height="500" :code="code1">
           <LcSpiralFigure 
             image-url="/path/to/image.jpg"
             :texts="texts" 
             :radius="120"
             :max-per-side="5" />
       </DemoHelpBox>
-      <DemoHelpBox title="spiralFigure" description="基础用法" rswidth="700px" rs-height="auto" :code="code2">
+      <DemoHelpBox title="spiralFigure" description="基础用法" rswidth="700px" :rs-height="500" :code="code2">
           <LcSpiralFigure 
             image-url="/path/to/image.jpg"
             :texts="texts" 
