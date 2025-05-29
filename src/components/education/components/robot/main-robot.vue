@@ -8,13 +8,7 @@
                         <img class="lc-main-robot__wrapper__inner-input--help--voice" src="./images/voice.png" draggable="false" alt="" />
                         {{ output.helpText }}
                     </div>
-                    <input
-                        type="text"
-                        :placeholder
-                        v-model="modelContext"
-                        :disabled="forbidden"
-                        class="lc-main-robot__wrapper__inner-input--content__input"
-                    />
+                    <input type="text" :placeholder v-model="modelContext" :disabled="forbidden" class="lc-main-robot__wrapper__inner-input--content__input" />
                     <div class="lc-main-robot__wrapper__inner-input--content__suffix">
                         <img
                             class="lc-main-robot__wrapper__inner-input--content__suffix--img"
@@ -45,10 +39,10 @@
                             :key="ckey"
                             :style="{ '--left-offset-number': ckey, '--left-reverse-offset-number': reverseIndex(item.meta.length, ckey) }"
                         >
-                            <div class="lc-main-robot__wrapper__star-wrap--star__meta--item--text" v-if="ckey === 0" @click="starClick(item, key)">
+                            <div class="lc-main-robot__wrapper__star-wrap--star__meta--item--text" :style="getTextStyle(key)" v-if="ckey === 0" @click="starClick(item, key)">
                                 {{ el.label }}
                             </div>
-                            <div class="lc-main-robot__wrapper__star-wrap--star__meta--item--text" v-else @click="starItemClick(el, ckey)">
+                            <div class="lc-main-robot__wrapper__star-wrap--star__meta--item--text" :style="getTextStyle(key)" v-else @click="starItemClick(el, ckey)">
                                 {{ el.label }}
                             </div>
                         </div>
@@ -107,6 +101,7 @@ function handleMouseUp() {
 const {
     starWrapperRef,
     customRotateStyle,
+    getTextStyle,
     starLneght,
     starElRefs,
     angleOffset,
@@ -298,7 +293,7 @@ on("result", () => {
                         opacity: 0;
                         will-change: transform, opacity;
                         position: relative;
-
+                        transform: rotateY(180deg);
                         &::after {
                             content: "";
                             z-index: -1;
@@ -324,7 +319,7 @@ on("result", () => {
                             font-size: 16px;
                             color: #ffffff;
                             line-height: 16px;
-                            text-align: right;
+                            text-align: center;
                         }
                     }
                 }

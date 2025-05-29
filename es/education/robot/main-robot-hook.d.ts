@@ -1,4 +1,7 @@
 export declare function useStarRotate(): {
+    getTextStyle: (index: number) => {
+        transform: string;
+    };
     starLneght: import('vue').Ref<number, number>;
     starWrapperRef: import('vue').ShallowRef<HTMLElement | undefined, HTMLElement | undefined>;
     angleOffset: import('vue').Ref<number, number>;
@@ -8,13 +11,13 @@ export declare function useStarRotate(): {
         opacity: number;
         zIndex: number;
         transform?: undefined;
-        '--z-index-number'?: undefined;
+        "--z-index-number"?: undefined;
     } | {
         left: string;
         top: string;
         transform: string;
         opacity: number;
-        '--z-index-number': number;
+        "--z-index-number": number;
         zIndex?: undefined;
     };
     starElRefs: import('vue').ShallowRef<HTMLElement[] | undefined, HTMLElement[] | undefined>;
