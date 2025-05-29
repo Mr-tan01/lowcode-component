@@ -101,7 +101,6 @@ function jump({ parent, item, index, handleClick }: jumpParams) {
     parent && !hideArrow && handleClick?.(parent, index);
     $emit("jump", { parent, item, index });
 }
-
 function carouseChange(value: LcCarouseBoxChangeEvent) {
     $emit("scroll", value);
 }

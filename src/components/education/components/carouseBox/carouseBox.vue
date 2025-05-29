@@ -124,6 +124,12 @@ watch(
     }
 );
 
+watch(
+    () => modelIndex.value,
+    () => {
+        onParentElResize();
+    }
+);
 onMounted(appendBeforeAfterData); // 初始化
 
 // 追加前后临时数据
@@ -141,6 +147,7 @@ function appendBeforeAfterData() {
         return;
     }
     const listClone = listSource.value ?? [];
+
     beforeAfterTempData.value.before = listClone.slice(-appendCount).map(uuCloneKey); // 把结尾的{maxAppendCount}个追加到前面
     beforeAfterTempData.value.after = listClone.slice(0, appendCount).map(uuCloneKey); // 把开始的{maxAppendCount}个追加到后面
 }
@@ -280,7 +287,9 @@ const handleClick = throttle((_item: TabListRaw, index: number) => {
         transitionCallabckLoop(appendCount);
         _index = 0;
     }
+
     modelIndex.value = _index;
+
     const _newItem = listSource.value[_index];
     modelValue.value = _newItem?.value;
     const _newChangeEventData = {
