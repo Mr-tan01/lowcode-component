@@ -84,6 +84,8 @@ const formatedText = (text, maxLength) => {
 .lc-planning-indicators {
     min-width: 310px;
     &__header {
+        display: flex;
+        justify-content: center;
         margin-bottom: 8px;
     }
     &__item {

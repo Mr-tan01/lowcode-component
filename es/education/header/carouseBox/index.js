@@ -1,7 +1,7 @@
 import o from "./index2.js";
 import '../assets/carouseBox/carouseBox.css';/* empty css       */
-import a from "../_virtual/_plugin-vue_export-helper.js";
-const m = /* @__PURE__ */ a(o, [["__scopeId", "data-v-1a91e70a"]]);
+import r from "../_virtual/_plugin-vue_export-helper.js";
+const m = /* @__PURE__ */ r(o, [["__scopeId", "data-v-d8718a3c"]]);
 export {
   m as default
 };
