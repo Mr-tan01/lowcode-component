@@ -133,7 +133,22 @@ function carouseChange(value: LcCarouseBoxChangeEvent) {
     --min-width: 1100px;
     position: relative;
     min-width: var(--min-width);
-
+    &::before {
+        content: "";
+        background: url("./images/focus-point-light.png") no-repeat;
+        background-size: 100% 100%;
+        filter: brightness(8);
+        mix-blend-mode: screen;
+        left: 50%;
+        width: 245px;
+        height: 100%;
+        transform: translateX(-50%);
+        position: absolute;
+        bottom: -28%;
+        user-select: none;
+        pointer-events: none;
+        z-index: 9;
+    }
     &__prefix-slot {
         position: absolute;
         left: 0;
@@ -197,27 +212,9 @@ function carouseChange(value: LcCarouseBoxChangeEvent) {
                     transition: transform linear 0.3s;
                     color: #fff;
 
-                    &::before {
-                        content: "";
-                        background: url("./images/focus-point-light.png") no-repeat;
-                        background-size: 100% 100%;
-                        width: 100%;
-                        height: 100%;
-                        position: absolute;
-                        bottom: -43%;
-                        user-select: none;
-                        pointer-events: none;
-                        z-index: 9;
-                        display: none;
-                    }
-
                     &:hover {
                         cursor: pointer;
                         opacity: 0.8;
-
-                        &::before {
-                            display: block;
-                        }
                     }
                 }
 
@@ -225,7 +222,6 @@ function carouseChange(value: LcCarouseBoxChangeEvent) {
                     width: 245px;
                     min-width: 245px;
                     font-size: 30px;
-
                     .lcc-header__wrapper__navs__item__link {
                         transform: translateY(-10%);
                     }
