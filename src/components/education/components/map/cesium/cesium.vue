@@ -40,10 +40,24 @@ const {
     pointData = [],
 } = defineProps(cesiumProps);
 
-function loadedTileLayer(status: boolean): void {
+const reloadPointData = (): void => {
+    cesiumUtils.clearEntity("pointEntities", "dataSource");
+    cesiumUtils.pointData = pointData;
+    pointData?.forEach((point) => {
+        cesiumUtils.addPoint(point, "value");
+        if (defaultShowState) {
+            cesiumUtils.addPoint(point);
+        }
+    });
+};
+
+const loadedTileLayer = (status: boolean): void => {
     initImageryLayersStatus.value = status;
     emit("loadHandler", !status);
-}
+    if (!status) {
+        reloadPointData();
+    }
+};
 
 // 初始化 Cesium 服务
 const cesiumUtils = new cesiumService("cesium-3d-viewer", {
@@ -62,15 +76,15 @@ const cesiumUtils = new cesiumService("cesium-3d-viewer", {
     },
 });
 
-function changeModel<T extends changeModelType>(type: changeModelType, value: changeModelParamType[T]): void {
+const changeModel = <T extends changeModelType>(type: changeModelType, value: changeModelParamType[T]): void => {
     if (cesiumUtils[type]) {
         cesiumUtils[type](value);
     } else {
         console.log("未匹配cesiumUtils的方法");
     }
-}
+};
 
-async function initCesium(): Promise<{ status: boolean }> {
+const initCesium = async (): Promise<{ status: boolean }> => {
     try {
         if (!accessToken) {
             return { status: false };
@@ -104,18 +118,12 @@ async function initCesium(): Promise<{ status: boolean }> {
             cesiumUtils.addPolygon(areaName);
             cesiumUtils.polygonClickHandler(areaName);
         }
-        pointData?.forEach((point) => {
-            if (defaultShowState) {
-                cesiumUtils.addPoint(point);
-            }
-            cesiumUtils.addPoint(point, "value");
-        });
         return { status: true };
     } catch (err: any) {
         loadedTileLayer(false);
         return { status: false };
     }
-}
+};
 
 const spinStyle = computed(() => {
     return {
@@ -133,20 +141,6 @@ defineExpose({
     changeModel,
     loadedTileLayer,
 });
-
-watch(
-    () => pointData,
-    (newVal) => {
-        cesiumUtils.clearEntity("pointEntities");
-        cesiumUtils.pointData = newVal;
-        newVal?.forEach((point) => {
-            cesiumUtils.addPoint(point, "value");
-            if (defaultShowState) {
-                cesiumUtils.addPoint(point);
-            }
-        });
-    }
-);
 
 watch([() => accessToken, () => imageryLayersUrl], initCesiumDebounced);
 
