@@ -45,6 +45,9 @@ export declare const cesiumProps: {
     centerPosition: {
         type: PropType<Cartesian3>;
     };
+    defaultCenterKey: {
+        type: StringConstructor;
+    };
     controlStatus: {
         type: PropType<controlStatusType>;
         default: {

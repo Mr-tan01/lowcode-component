@@ -4,7 +4,7 @@ var l = (m, e, t) => U(m, typeof e != "symbol" ? e + "" : e, t);
 import { CesiumHeatmap as N } from "cesium-heatmap-es6";
 import { areaData as g } from "./type.js";
 import { createClusterBillboard as M, createInfoCanvas as B, updateViewerEntityInfo as y } from "./tools.js";
-import { Color as v, Rectangle as O, CustomDataSource as F, JulianDate as x, VerticalOrigin as W, HorizontalOrigin as _, ScreenSpaceEventType as k, ScreenSpaceEventHandler as $, defined as K, Cartesian3 as f, Cartesian2 as w, PolylineDashMaterialProperty as Y, PolygonHierarchy as G, Math as u, Cartographic as V, ArcGisMapServerImageryProvider as A } from "@cesium/engine";
+import { Color as v, Rectangle as O, CustomDataSource as F, JulianDate as x, VerticalOrigin as K, HorizontalOrigin as W, ScreenSpaceEventType as V, ScreenSpaceEventHandler as _, defined as $, Cartesian3 as f, Cartesian2 as w, PolylineDashMaterialProperty as Y, PolygonHierarchy as G, Math as u, Cartographic as k, ArcGisMapServerImageryProvider as A } from "@cesium/engine";
 import { Viewer as J } from "@cesium/widgets";
 class se {
   constructor(e, t) {
@@ -17,6 +17,8 @@ class se {
     l(this, "imageLayerUrl", null);
     l(this, "tileLoadCallback", null);
     l(this, "dataSource", null);
+    l(this, "centerPosition", null);
+    l(this, "defaultCenterKey", "深圳市");
     l(this, "defaultConfig", {
       minZoom: 200,
       maxZoom: 13e4,
@@ -47,7 +49,7 @@ class se {
     this.containerId = e, this.options = t, this.options.config = {
       ...this.defaultConfig,
       ...this.options.config || {}
-    }, this.tileLoadCallback = this.handleTileLoadProgress.bind(this);
+    }, this.centerPosition = t.centerPosition, this.defaultCenterKey = t.defaultCenterKey, this.tileLoadCallback = this.handleTileLoadProgress.bind(this);
   }
   // Cesium属性更新
   updateViewerAttribute() {
@@ -73,7 +75,7 @@ class se {
         }
       }), a || (a = "primary");
       const n = M(t.length, a);
-      i.billboard.image = n.toDataURL(), i.billboard.width = 50, i.billboard.height = 50, i.billboard.verticalOrigin = W.CENTER, i.billboard.horizontalOrigin = _.CENTER, i.billboard.disableDepthTestDistance = Number.POSITIVE_INFINITY;
+      i.billboard.image = n.toDataURL(), i.billboard.width = 50, i.billboard.height = 50, i.billboard.verticalOrigin = K.CENTER, i.billboard.horizontalOrigin = W.CENTER, i.billboard.disableDepthTestDistance = Number.POSITIVE_INFINITY;
     });
   }
   // 初始化Cesium Viewer
@@ -81,17 +83,14 @@ class se {
     var t, i;
     this.viewer && this.destroy();
     try {
-      return this.viewer = new J(this.containerId, e), this.viewer.cesiumWidget.creditContainer.style.display = "none", this.viewer.scene.debugShowFramesPerSecond = !1, this.viewer.scene.globe.depthTestAgainstTerrain = !0, this.viewer.scene.screenSpaceCameraController.enableTranslate = !0, this.updateViewerAttribute(), this.viewer.cesiumWidget.screenSpaceEventHandler.removeInputAction(k.LEFT_DOUBLE_CLICK), this.viewer.scene.canvas.addEventListener("dblclick", this.doubleClickHandler, !1), this.setupClustering(), (((t = this.options.config) == null ? void 0 : t.cameraLimitsEnabled) ?? this.defaultConfig.cameraLimitsEnabled) && this.setupCameraLimits(), this.screenSpaceEventHandler = new $((i = this.viewer) == null ? void 0 : i.scene.canvas).setInputAction(
-        (s) => {
-          var a;
-          if (this.viewer) {
-            this.viewer.selectedEntity = void 0, (a = this.options) != null && a.offsetState && (s.position.x *= 1.18, s.position.y *= 1.18);
-            const r = this.viewer.scene.pick(s.position), n = this.viewer.scene.pickPosition(s.position);
-            K(r) && r.id && this.pointClickHandler(r == null ? void 0 : r.id);
-          }
-        },
-        k.LEFT_CLICK
-      ), this.viewer.scene && this.viewer.scene.camera && this.viewer.scene.camera.changed.addEventListener(() => {
+      return this.viewer = new J(this.containerId, e), this.viewer.cesiumWidget.creditContainer.style.display = "none", this.viewer.scene.debugShowFramesPerSecond = !1, this.viewer.scene.globe.depthTestAgainstTerrain = !0, this.viewer.scene.screenSpaceCameraController.enableTranslate = !0, this.updateViewerAttribute(), this.viewer.cesiumWidget.screenSpaceEventHandler.removeInputAction(V.LEFT_DOUBLE_CLICK), this.viewer.scene.canvas.addEventListener("dblclick", this.doubleClickHandler, !1), this.setupClustering(), (((t = this.options.config) == null ? void 0 : t.cameraLimitsEnabled) ?? this.defaultConfig.cameraLimitsEnabled) && this.setupCameraLimits(), this.screenSpaceEventHandler = new _((i = this.viewer) == null ? void 0 : i.scene.canvas).setInputAction((s) => {
+        var a;
+        if (this.viewer) {
+          this.viewer.selectedEntity = void 0, (a = this.options) != null && a.offsetState && (s.position.x *= 1.18, s.position.y *= 1.18);
+          const r = this.viewer.scene.pick(s.position), n = this.viewer.scene.pickPosition(s.position);
+          $(r) && r.id && this.pointClickHandler(r == null ? void 0 : r.id);
+        }
+      }, V.LEFT_CLICK), this.viewer.scene && this.viewer.scene.camera && this.viewer.scene.camera.changed.addEventListener(() => {
         const s = Math.ceil(this.viewer.camera.positionCartographic.height);
       }), !0;
     } catch (s) {
@@ -190,7 +189,7 @@ class se {
   }
   // 深圳全市添加Polygon
   addAllDistricts() {
-    this.clearEntity("polygonEntities", "viewer"), Object.keys(g).filter((e) => e !== "深圳市").forEach((e) => {
+    this.clearEntity("polygonEntities", "viewer"), Object.keys(g).filter((e) => e !== this.defaultCenterKey).forEach((e) => {
       this.addPolygon(e);
     });
   }
@@ -240,8 +239,8 @@ class se {
   //controlpolygon
   polygonClickHandler(e) {
     var t, i, s, a;
-    if (e === "深圳市") {
-      this.addAllDistricts();
+    if (e === this.defaultCenterKey && this.centerPosition) {
+      this.addAllDistricts(), this.setInitialView({ destination: this.centerPosition });
       return;
     }
     if (e in g) {
@@ -300,10 +299,7 @@ class se {
       if (!(this.isCheckingBounds || !this.viewer))
         try {
           this.isCheckingBounds = !0;
-          const t = new w(
-            Math.floor(this.viewer.canvas.clientWidth / 2),
-            Math.floor(this.viewer.canvas.clientHeight / 2)
-          ), i = this.viewer.camera.getPickRay(t);
+          const t = new w(Math.floor(this.viewer.canvas.clientWidth / 2), Math.floor(this.viewer.canvas.clientHeight / 2)), i = this.viewer.camera.getPickRay(t);
           if (!i) return;
           const s = this.viewer.scene.globe.pick(i, this.viewer.scene);
           if (!s) {
@@ -313,7 +309,7 @@ class se {
             this.isPointInShenzhen(o, h) ? this.lastValidCameraPosition = this.viewer.camera.position.clone() : this.lastValidCameraPosition && (this.viewer.camera.position = this.lastValidCameraPosition.clone());
             return;
           }
-          const a = V.fromCartesian(s), r = u.toDegrees(a.longitude), n = u.toDegrees(a.latitude);
+          const a = k.fromCartesian(s), r = u.toDegrees(a.longitude), n = u.toDegrees(a.latitude);
           this.isPointInShenzhen(r, n) ? this.lastValidCameraPosition = this.viewer.camera.position.clone() : this.lastValidCameraPosition && (this.viewer.camera.position = this.lastValidCameraPosition.clone(), this.viewer.camera.direction = this.viewer.scene.camera.direction.clone());
         } finally {
           this.isCheckingBounds = !1;
@@ -327,7 +323,7 @@ class se {
         const e = new w(this.viewer.canvas.clientWidth / 2, this.viewer.canvas.clientHeight / 2), t = this.viewer.camera.getPickRay(e);
         if (!t) return;
         const i = this.viewer.scene.globe.pick(t, this.viewer.scene);
-        return i ? V.fromCartesian(i) : this.viewer.camera.positionCartographic;
+        return i ? k.fromCartesian(i) : this.viewer.camera.positionCartographic;
       } catch (e) {
         return console.warn("获取相机视角中心失败", e), this.viewer.camera.positionCartographic;
       }

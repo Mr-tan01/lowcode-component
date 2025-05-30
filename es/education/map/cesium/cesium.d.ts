@@ -1,3 +1,4 @@
+import { cesiumService } from './modules/cesiumUtils';
 import { changeModelType, changeModelParamType } from './modules/type';
 import { Entity, Cartesian3 } from 'cesium';
 declare const _default: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
@@ -44,6 +45,9 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
     centerPosition: {
         type: import('vue').PropType<Cartesian3>;
     };
+    defaultCenterKey: {
+        type: StringConstructor;
+    };
     controlStatus: {
         type: import('vue').PropType<import('./modules/type').controlStatusType>;
         default: {
@@ -85,6 +89,8 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
 }>, {
     changeModel: <T extends changeModelType>(type: changeModelType, value: changeModelParamType[T]) => void;
     loadedTileLayer: (status: boolean) => void;
+    clearEntity: () => void;
+    cesiumUtils: cesiumService;
 }, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {} & {
     pointHandler: (value: Entity) => any;
     limitHeightHandler: (value: number) => any;
@@ -132,6 +138,9 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
     };
     centerPosition: {
         type: import('vue').PropType<Cartesian3>;
+    };
+    defaultCenterKey: {
+        type: StringConstructor;
     };
     controlStatus: {
         type: import('vue').PropType<import('./modules/type').controlStatusType>;

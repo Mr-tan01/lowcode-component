@@ -87,6 +87,8 @@ export interface optionType {
     defaultShowState: boolean;
     flyToHeight: number;
     offsetState: boolean;
+    centerPosition: Cartesian3;
+    defaultCenterKey: string;
     pointHandler: (value: Entity) => void;
     limitHeightHandler: (value: number) => void;
     loadTileLayerHandler: (status: boolean) => void;
