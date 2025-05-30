@@ -1,6 +1,6 @@
 import t from "./深圳市（各区）.json.js";
-const a = {
-  深圳: { lng: 114.063109, lat: 22.544522, position: [] },
+const e = {
+  深圳市: { lng: 114.063109, lat: 22.544522, position: t.features },
   光明区: { lng: 113.91634116522685, lat: 22.77147302900205, position: t.features[0] },
   坪山区: { lng: 114.35193598950553, lat: 22.688581371110487, position: t.features[1] },
   龙华区: { lng: 114.01646181978259, lat: 22.68598921119512, position: t.features[2] },
@@ -13,5 +13,5 @@ const a = {
   罗湖区: { lng: 114.14519824740296, lat: 22.58076759041863, position: t.features[9] }
 };
 export {
-  a as areaData
+  e as areaData
 };

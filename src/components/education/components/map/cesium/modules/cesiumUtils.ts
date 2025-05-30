@@ -17,6 +17,7 @@ import {
     HorizontalOrigin,
     Rectangle,
     Cartographic,
+    PolygonHierarchy,
 } from "cesium";
 
 import { CesiumHeatmap } from "cesium-heatmap-es6";
@@ -202,7 +203,7 @@ export class cesiumService {
     // 瓦片加载状完成（首次添加point、polygon）
     handleTileLoadProgress(remaining: number) {
         // 需等待瓦片加载完成
-        if (remaining  === 0) {
+        if (remaining === 0) {
             this.options.loadTileLayerHandler(false);
             // 移除监听器
             if (this.tileLoadCallback) {
@@ -312,42 +313,48 @@ export class cesiumService {
     }
 
     // 清除指定entity
-    async clearEntity(key: string): Promise<void> {
-        if (this.dataSource && this[key]) {
+    async clearEntity(key: "pointEntities" | "polygonEntities", type: "dataSource" | "viewer"): Promise<void> {
+        if (this[type] && this[key]) {
             for (let entity of this[key]) {
-                this.dataSource.entities.remove(entity);
+                this[type]?.entities.remove(entity);
             }
             this[key] = [];
         }
     }
 
     addPolygon(name: string): void {
-        if (this.viewer && name in areaData) {
-            const positions = areaData[name].position.geometry.coordinates.flat(2).map(([lng, lat]) => Cartesian3.fromDegrees(lng, lat));
-            const entity: Entity = this.viewer.entities.add({
-                name: name,
-                polyline: {
-                    positions,
-                    material: new PolylineDashMaterialProperty({
-                        color: Color.fromCssColorString("#1E9EFA").withAlpha(0.7),
-                    }),
-                    width: 2,
-                },
-                polygon: {
-                    hierarchy: positions,
-                    material: Color.fromCssColorString("#A2D8FF").withAlpha(0.3),
-                    outline: true,
-                    outlineColor: Color.fromCssColorString("#4694CD"),
-                },
-            });
+        if (!this.viewer || !(name in areaData)) return;
+        const getPositions = (data: any) => data.position.geometry.coordinates.flat(2).map(([lng, lat]) => Cartesian3.fromDegrees(lng, lat));
+        const positions = getPositions(areaData[name]);
+        const entity = this.viewer.entities.add({
+            name: name,
+            polyline: {
+                positions,
+                material: new PolylineDashMaterialProperty({
+                    color: Color.fromCssColorString("#1E9EFA").withAlpha(0.7),
+                }),
+                width: 2,
+            },
+            polygon: {
+                hierarchy: new PolygonHierarchy(positions),
+                material: Color.fromCssColorString("#A2D8FF").withAlpha(0.3),
+                outline: true,
+                outlineColor: Color.fromCssColorString("#4694CD"),
+            },
+        });
 
-            if (entity && this.polygonEntities) {
-                this.polygonEntities.push(entity);
-            } else {
-                this.polygonEntities = [];
-                this.polygonEntities.push(entity);
-            }
-        }
+        this.polygonEntities = this.polygonEntities || [];
+        this.polygonEntities.push(entity);
+    }
+
+    // 深圳全市添加Polygon
+    addAllDistricts() {
+        this.clearEntity("polygonEntities", "viewer");
+        (Object.keys(areaData) as Array<keyof typeof areaData>)
+            .filter((key) => key !== "深圳市")
+            .forEach((districtName) => {
+                this.addPolygon(districtName);
+            });
     }
 
     // 获取当前地图经纬度、高度
@@ -433,6 +440,10 @@ export class cesiumService {
 
     //controlpolygon
     polygonClickHandler(name: string) {
+        if (name === "深圳市") {
+            this.addAllDistricts();
+            return;
+        }
         if (name in areaData) {
             const findValue = this.polygonEntities?.find((item) => item.name === name);
             if (!findValue) {

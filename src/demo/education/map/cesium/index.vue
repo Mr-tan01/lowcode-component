@@ -29,8 +29,8 @@ import { LcCesium, CesiumInstanceType } from "@/components/education/components/
 import { DemoHelpBox } from "@/components/common/DemoHelpBox";
 import type { ChangeEvent } from "@/components/education/components/carouseBox/types";
 import { pointType, basicConfigType, testData, pointInfo } from "@/components/education/components/map/cesium/modules/type";
-import {  Cartesian3 } from "cesium";
-const basicConfig = ref<basicConfigType>({ clusteringEnabled: true, cameraLimitsEnabled: true });
+import { Cartesian3 } from "cesium";
+const basicConfig = ref<basicConfigType>({ clusteringEnabled: true, cameraLimitsEnabled: false });
 import { getToken } from "@/request";
 
 const show = ref<boolean>(false);
@@ -41,6 +41,7 @@ let cesiumMap = ref<CesiumInstanceType | null>(null);
 let optionInfo = ref<pointType[]>([]);
 
 function changePolygon(value: ChangeEvent): void {
+    cesiumMap.value?.loadedTileLayer(true);
     cesiumMap.value?.changeModel("polygonClickHandler", value.label);
     const result = testData?.map((item: any) => ({
         name: item.schoolName,
@@ -51,6 +52,9 @@ function changePolygon(value: ChangeEvent): void {
         iconType: item.isQualify ? "primary" : "danger",
     }));
     optionInfo.value = result;
+    setTimeout(() => {
+        cesiumMap.value?.loadedTileLayer(false);
+    }, 1000);
 }
 
 function loadHandler(state: boolean) {

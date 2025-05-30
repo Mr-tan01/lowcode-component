@@ -1,7 +1,5 @@
 import { changeModelType, changeModelParamType } from './modules/type';
 import { Entity, Cartesian3 } from 'cesium';
-declare function loadedTileLayer(status: boolean): void;
-declare function changeModel<T extends changeModelType>(type: changeModelType, value: changeModelParamType[T]): void;
 declare const _default: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
     clientId: {
         type: import('vue').PropType<string>;
@@ -85,8 +83,8 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
         type: import('vue').PropType<import('./modules/type').pointType[]>;
     };
 }>, {
-    changeModel: typeof changeModel;
-    loadedTileLayer: typeof loadedTileLayer;
+    changeModel: <T extends changeModelType>(type: changeModelType, value: changeModelParamType[T]) => void;
+    loadedTileLayer: (status: boolean) => void;
 }, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {} & {
     pointHandler: (value: Entity) => any;
     limitHeightHandler: (value: number) => any;

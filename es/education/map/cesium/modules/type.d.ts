@@ -1,9 +1,19 @@
 import { SceneMode, SkyAtmosphere, SkyBox, Color, Entity, Cartesian3, PolylineDashMaterialProperty } from 'cesium';
 export declare const areaData: {
-    深圳: {
+    深圳市: {
         lng: number;
         lat: number;
-        position: never[];
+        position: {
+            type: string;
+            properties: {
+                name: string;
+                gb: string;
+            };
+            geometry: {
+                type: string;
+                coordinates: number[][][][];
+            };
+        }[];
     };
     光明区: {
         lng: number;
@@ -227,7 +237,7 @@ export interface optionType {
     limitHeightHandler: (value: number) => void;
     loadTileLayerHandler: (status: boolean) => void;
 }
-export type changeModelType = "polygonClickHandler" | "setCameraHeight" | "setInitialView" | "setViewerLayer" | "ZoomIn" | "ZoomOut";
+export type changeModelType = "polygonClickHandler" | "setCameraHeight" | "setInitialView" | "setViewerLayer" | "ZoomIn" | "ZoomOut" | "clearEntity";
 export type changeModelParamType = {
     polygonClickHandler: string;
     setCameraHeight: string;
@@ -238,6 +248,10 @@ export type changeModelParamType = {
     setViewerLayer: string;
     ZoomIn: string;
     ZoomOut: string;
+    clearEntity: {
+        key: "pointEntities" | "polygonEntities";
+        type: "dataSource" | "viewer";
+    };
 };
 export declare const testData: {
     schoolType: string;

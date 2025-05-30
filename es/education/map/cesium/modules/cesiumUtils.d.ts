@@ -25,8 +25,9 @@ export declare class cesiumService {
     handleTileLoadProgress(remaining: number): void;
     loadTileLayer(url: string): Promise<void>;
     addPoint(point: pointType, type?: string, labelType?: string): Promise<Entity | null | void>;
-    clearEntity(key: string): Promise<void>;
+    clearEntity(key: "pointEntities" | "polygonEntities", type: "dataSource" | "viewer"): Promise<void>;
     addPolygon(name: string): void;
+    addAllDistricts(): void;
     getPositionCartographic(): number[] | undefined;
     setCameraHeight(type: string): void;
     convertCartographic(cartesian: Cartesian3): Cartesian3;
