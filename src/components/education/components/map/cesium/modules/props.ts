@@ -17,6 +17,9 @@ export const cesiumProps = {
     centerPosition: {
         type: Object as PropType<Cartesian3>,
     },
+    defaultCenterKey: {
+        type: String,
+    },
     controlStatus: {
         type: Object as PropType<controlStatusType>,
         default: {
@@ -49,7 +52,7 @@ export const cesiumProps = {
             baseColor: Color.TRANSPARENT,
             clusteringEnabled: false,
             clusteringPixelRange: 30,
-            clusteringMinimumClusterSize: 2
+            clusteringMinimumClusterSize: 2,
         },
     },
     pointData: {

@@ -12,6 +12,8 @@ export declare class cesiumService {
     private imageLayerUrl;
     private tileLoadCallback;
     private dataSource;
+    private centerPosition;
+    private defaultCenterKey;
     private defaultConfig;
     private lastValidCameraPosition;
     private isCheckingBounds;

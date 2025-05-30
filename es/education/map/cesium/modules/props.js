@@ -21,6 +21,9 @@ const a = {
   centerPosition: {
     type: Object
   },
+  defaultCenterKey: {
+    type: String
+  },
   controlStatus: {
     type: Object,
     default: {

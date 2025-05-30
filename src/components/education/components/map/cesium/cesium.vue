@@ -34,6 +34,7 @@ const {
     spinStroke,
     spinContainerBg,
     spinDescriptionColor,
+    defaultCenterKey ="深圳市",
     centerPosition = Cartesian3.fromDegrees(114.187446, 22.674131, 130000),
     controlStatus,
     basicConfig,
@@ -65,6 +66,8 @@ const cesiumUtils = new cesiumService("cesium-3d-viewer", {
     defaultShowState: defaultShowState,
     flyToHeight: flyToHeight,
     offsetState: offsetState,
+    centerPosition: centerPosition,
+    defaultCenterKey,
     pointHandler: (value: Entity) => {
         emit("pointHandler", value);
     },
@@ -76,6 +79,10 @@ const cesiumUtils = new cesiumService("cesium-3d-viewer", {
     },
 });
 
+// 清除选中图层
+const clearEntity = () => {
+    cesiumUtils.clearEntity("polygonEntities", "viewer");
+};
 const changeModel = <T extends changeModelType>(type: changeModelType, value: changeModelParamType[T]): void => {
     if (cesiumUtils[type]) {
         cesiumUtils[type](value);
@@ -115,7 +122,6 @@ const initCesium = async (): Promise<{ status: boolean }> => {
 
         await cesiumUtils.loadTileLayer(titleUrl);
         if (areaName) {
-            cesiumUtils.addPolygon(areaName);
             cesiumUtils.polygonClickHandler(areaName);
         }
         return { status: true };
@@ -140,6 +146,8 @@ const initCesiumDebounced = () => {
 defineExpose({
     changeModel,
     loadedTileLayer,
+    clearEntity,
+    cesiumUtils,
 });
 
 watch([() => accessToken, () => imageryLayersUrl], initCesiumDebounced);

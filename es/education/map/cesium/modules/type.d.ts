@@ -3,17 +3,7 @@ export declare const areaData: {
     深圳市: {
         lng: number;
         lat: number;
-        position: {
-            type: string;
-            properties: {
-                name: string;
-                gb: string;
-            };
-            geometry: {
-                type: string;
-                coordinates: number[][][][];
-            };
-        }[];
+        position: never[];
     };
     光明区: {
         lng: number;
@@ -233,6 +223,8 @@ export interface optionType {
     defaultShowState: boolean;
     flyToHeight: number;
     offsetState: boolean;
+    centerPosition: Cartesian3;
+    defaultCenterKey: string;
     pointHandler: (value: Entity) => void;
     limitHeightHandler: (value: number) => void;
     loadTileLayerHandler: (status: boolean) => void;

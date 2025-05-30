@@ -35,6 +35,8 @@ export class cesiumService {
     private imageLayerUrl: String | null = null;
     private tileLoadCallback: OmitThisParameter<(remaining: number) => void> | null = null;
     private dataSource: CustomDataSource | null = null;
+    private centerPosition: Cartesian3 | null = null;
+    private defaultCenterKey: string = "深圳市";
     private defaultConfig = {
         minZoom: 200,
         maxZoom: 130000,
@@ -63,6 +65,8 @@ export class cesiumService {
             ...this.defaultConfig,
             ...(this.options.config || {}),
         };
+        this.centerPosition = options.centerPosition;
+        this.defaultCenterKey = options.defaultCenterKey
         // 图层加载监听器
         this.tileLoadCallback = this.handleTileLoadProgress.bind(this);
     }
@@ -164,25 +168,22 @@ export class cesiumService {
             }
 
             // 注册单击事件
-            this.screenSpaceEventHandler = new ScreenSpaceEventHandler(this.viewer?.scene.canvas).setInputAction(
-                (click: { position: Cartesian2 }) => {
-                    if (this.viewer) {
-                        this.viewer.selectedEntity = undefined; // 取消选中，阻止默认弹窗
-                        if (this.options?.offsetState) {
-                            // 处理缩放偏移
-                            click.position.x *= 1.18;
-                            click.position.y *= 1.18;
-                        }
-
-                        const pickedObject: any = this.viewer.scene.pick(click.position);
-                        const cartesian: Cartesian3 = this.viewer.scene.pickPosition(click.position); // 点击位置的经纬度、高度
-                        if (defined(pickedObject) && pickedObject.id) {
-                            this.pointClickHandler(pickedObject?.id); // point
-                        }
+            this.screenSpaceEventHandler = new ScreenSpaceEventHandler(this.viewer?.scene.canvas).setInputAction((click: { position: Cartesian2 }) => {
+                if (this.viewer) {
+                    this.viewer.selectedEntity = undefined; // 取消选中，阻止默认弹窗
+                    if (this.options?.offsetState) {
+                        // 处理缩放偏移
+                        click.position.x *= 1.18;
+                        click.position.y *= 1.18;
                     }
-                },
-                ScreenSpaceEventType.LEFT_CLICK
-            );
+
+                    const pickedObject: any = this.viewer.scene.pick(click.position);
+                    const cartesian: Cartesian3 = this.viewer.scene.pickPosition(click.position); // 点击位置的经纬度、高度
+                    if (defined(pickedObject) && pickedObject.id) {
+                        this.pointClickHandler(pickedObject?.id); // point
+                    }
+                }
+            }, ScreenSpaceEventType.LEFT_CLICK);
 
             // 监听相机停止移动后的高度变化
             if (this.viewer.scene && this.viewer.scene.camera) {
@@ -351,7 +352,7 @@ export class cesiumService {
     addAllDistricts() {
         this.clearEntity("polygonEntities", "viewer");
         (Object.keys(areaData) as Array<keyof typeof areaData>)
-            .filter((key) => key !== "深圳市")
+            .filter((key) => key !== this.defaultCenterKey)
             .forEach((districtName) => {
                 this.addPolygon(districtName);
             });
@@ -440,8 +441,9 @@ export class cesiumService {
 
     //controlpolygon
     polygonClickHandler(name: string) {
-        if (name === "深圳市") {
+        if (name === this.defaultCenterKey && this.centerPosition) {
             this.addAllDistricts();
+            this.setInitialView({ destination: this.centerPosition });
             return;
         }
         if (name in areaData) {
@@ -540,10 +542,7 @@ export class cesiumService {
                 this.isCheckingBounds = true;
 
                 // 获取当前视口中心点
-                const centerPosition = new Cartesian2(
-                    Math.floor(this.viewer.canvas.clientWidth / 2),
-                    Math.floor(this.viewer.canvas.clientHeight / 2)
-                );
+                const centerPosition = new Cartesian2(Math.floor(this.viewer.canvas.clientWidth / 2), Math.floor(this.viewer.canvas.clientHeight / 2));
 
                 // 获取视口中心点的世界坐标
                 const pickRay = this.viewer.camera.getPickRay(centerPosition);

@@ -8,7 +8,7 @@
                     :point-data="optionInfo"
                     :basic-config="basicConfig"
                     :default-show-state="false"
-                    :area-name="'福田区'"
+                    :area-name="'深圳市'"
                     v-on:load-handler="loadHandler"
                 ></LcCesium>
             </div>
@@ -16,7 +16,7 @@
         <div style="position: absolute; top: 30%; left: 70%">
             <LcMapButton v-if="show" @iconClicked="iconHandler"></LcMapButton>
         </div>
-        <LcSwitchTabs v-model:value="tabValue" @change="changePolygon" style="margin-top: 20px"></LcSwitchTabs>
+        <LcSwitchTabs v-model:value="tabValue" :list="defSwitchTabList" @change="changePolygon" style="margin-top: 20px"></LcSwitchTabs>
     </div>
 </template>
 
@@ -32,6 +32,56 @@ import { pointType, basicConfigType, testData, pointInfo } from "@/components/ed
 import { Cartesian3 } from "cesium";
 const basicConfig = ref<basicConfigType>({ clusteringEnabled: true, cameraLimitsEnabled: false });
 import { getToken } from "@/request";
+const defSwitchTabList = [
+    {
+        label: "深圳市",
+        value: "深圳市",
+    },
+    {
+        label: "龙华区",
+        value: "龙华区",
+    },
+    {
+        label: "南山区",
+        value: "南山区",
+    },
+    {
+        label: "宝安区",
+        value: "宝安区",
+    },
+    {
+        label: "福田区",
+        value: "福田区",
+    },
+    {
+        label: "罗湖区",
+        value: "罗湖区",
+    },
+    {
+        label: "盐田区",
+        value: "盐田区",
+    },
+    {
+        label: "龙岗区",
+        value: "龙岗区",
+    },
+    {
+        label: "坪山区",
+        value: "坪山区",
+    },
+    {
+        label: "光明区",
+        value: "光明区",
+    },
+    {
+        label: "大鹏新区",
+        value: "大鹏新区",
+    },
+    {
+        label: "深汕特别合作区",
+        value: "深汕特别合作区",
+    },
+];
 
 const show = ref<boolean>(false);
 let accessToken = ref<string | null>(null);
@@ -41,6 +91,10 @@ let cesiumMap = ref<CesiumInstanceType | null>(null);
 let optionInfo = ref<pointType[]>([]);
 
 function changePolygon(value: ChangeEvent): void {
+    if (value.label === "深圳市") {
+        cesiumMap.value?.clearEntity();
+        // return;
+    }
     cesiumMap.value?.loadedTileLayer(true);
     cesiumMap.value?.changeModel("polygonClickHandler", value.label);
     const result = testData?.map((item: any) => ({
@@ -66,10 +120,7 @@ function iconHandler(alt: string) {
         cesiumMap.value?.changeModel("setInitialView", { destination: Cartesian3.fromDegrees(114.187446, 22.674131, 130000), duration: 0.8 });
     } else {
         const state = alt === "Layer";
-        cesiumMap.value?.changeModel(
-            state ? "setViewerLayer" : "setCameraHeight",
-            state ? "https://services.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer" : alt
-        );
+        cesiumMap.value?.changeModel(state ? "setViewerLayer" : "setCameraHeight", state ? "https://services.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer" : alt);
     }
 }
 
