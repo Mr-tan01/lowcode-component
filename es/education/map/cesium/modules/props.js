@@ -1,4 +1,4 @@
-import { Color as e } from "@cesium/engine";
+import { ArcGisMapServerImageryProvider as e, Color as t } from "@cesium/engine";
 const a = {
   clientId: { type: String },
   accessToken: { type: String },
@@ -33,6 +33,8 @@ const a = {
       homeButton: !1,
       sceneModePicker: !1,
       baseLayerPicker: !1,
+      imageryProvider: e.fromUrl("https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer"),
+      // 避免使用cesium ions资源
       navigationHelpButton: !1,
       fullscreenButton: !1,
       scene3DOnly: !0,
@@ -53,7 +55,7 @@ const a = {
     default: {
       minZoom: 200,
       maxZoom: 13e4,
-      baseColor: e.TRANSPARENT,
+      baseColor: t.TRANSPARENT,
       clusteringEnabled: !1,
       clusteringPixelRange: 30,
       clusteringMinimumClusterSize: 2

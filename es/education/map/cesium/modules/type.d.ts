@@ -155,6 +155,21 @@ export declare const areaData: {
             };
         };
     };
+    深汕合作区: {
+        lng: number;
+        lat: number;
+        position: {
+            type: string;
+            properties: {
+                name: string;
+                gb: string;
+            };
+            geometry: {
+                type: string;
+                coordinates: number[][][][];
+            };
+        };
+    };
 };
 export type baseIconType = "primary" | "success" | "warning" | "danger";
 export type changeIconType = "icon_success" | "icon_primary";
@@ -217,6 +232,7 @@ export interface basicConfigType {
     clusteringPixelRange?: number;
     clusteringMinimumClusterSize?: number;
     cameraLimitsEnabled?: boolean;
+    hoverState?: boolean;
 }
 export interface optionType {
     config: basicConfigType;
@@ -226,6 +242,8 @@ export interface optionType {
     centerPosition: Cartesian3;
     defaultCenterKey: string;
     pointHandler: (value: Entity) => void;
+    pointHoverHandler?: (value: Entity) => void;
+    pointHoverExitHandler?: (value: Entity) => void;
     limitHeightHandler: (value: number) => void;
     loadTileLayerHandler: (status: boolean) => void;
 }

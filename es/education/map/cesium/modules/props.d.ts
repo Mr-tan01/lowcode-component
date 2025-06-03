@@ -1,6 +1,6 @@
 import { PropType } from 'vue';
 import { controlStatusType, pointType, basicConfigType } from './type';
-import { Color, Cartesian3 } from 'cesium';
+import { Color, Cartesian3, ArcGisMapServerImageryProvider } from 'cesium';
 export declare const cesiumProps: {
     clientId: {
         type: PropType<string>;
@@ -57,6 +57,7 @@ export declare const cesiumProps: {
             homeButton: boolean;
             sceneModePicker: boolean;
             baseLayerPicker: boolean;
+            imageryProvider: Promise<ArcGisMapServerImageryProvider>;
             navigationHelpButton: boolean;
             fullscreenButton: boolean;
             scene3DOnly: boolean;
