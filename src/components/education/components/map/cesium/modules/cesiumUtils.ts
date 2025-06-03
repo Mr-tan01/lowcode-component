@@ -235,7 +235,7 @@ export class cesiumService {
                     });
                 }
             }
-            this.options.config.hoverState ? this.pointClickHandler(pickedObject.id) : this.options.pointHandler(pickedObject);
+            this.options.config.hoverState ? this.pointClickHandler(pickedObject.id) : this.options.pointHandler(pickedObject.id);
         }
     }
 
@@ -285,13 +285,13 @@ export class cesiumService {
 
     // 瓦片加载状完成（首次添加point、polygon）
     private handleTileLoadProgress(remaining: number) {
-        if (remaining !== 0) return;
-
-        this.options.loadTileLayerHandler(false);
-
-        // 移除监听器
-        if (this.tileLoadCallback) {
-            this.viewer?.scene?.globe.tileLoadProgressEvent.removeEventListener(this.tileLoadCallback);
+        // 需等待瓦片加载完成
+        if (remaining === 0) {
+            this.options.loadTileLayerHandler(false);
+            // 移除监听器
+            if (this.tileLoadCallback) {
+                this.viewer?.scene?.globe.tileLoadProgressEvent.removeEventListener(this.tileLoadCallback);
+            }
         }
     }
 
