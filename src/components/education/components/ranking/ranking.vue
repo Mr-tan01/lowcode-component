@@ -2,12 +2,17 @@
     <div class="lc-ranking">
         <LcElasticScrollbar>
             <div class="lc-ranking__wrapper">
-                <div class="lc-ranking__wrapper__item" :class="[`lc-ranking__wrapper__item--${type}`]"
-                    v-for="(item, key) in renderList" :key :style="{
+                <div
+                    class="lc-ranking__wrapper__item"
+                    :class="[`lc-ranking__wrapper__item--${type}`]"
+                    v-for="(item, key) in renderList"
+                    :key
+                    :style="{
                         '--proportion': getCurrentProportion(item.value),
                         '--ranking-num': key,
                         '--pre-proportion': getPreProportion(key),
-                    }">
+                    }"
+                >
                     <div class="lc-ranking__wrapper__item__top">
                         <div class="lc-ranking__wrapper__item__top__start">
                             <div class="lc-ranking__wrapper__item__top__start__index">{{ key + 1 }}</div>
@@ -33,49 +38,49 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, onMounted, ref } from 'vue';
-import { LcElasticScrollbar } from '@/components/education/components/elasticScrollbar';
+import { computed, onMounted, ref } from "vue";
+import { LcElasticScrollbar } from "@/components/education/components/elasticScrollbar";
 
 export type RankingRecord = {
     label: string;
-    unit?: string | '{b}';
+    unit?: string | "{b}";
     value: number;
-    formatter?: '{a}' | '{b}' | ((e: RankingRecord) => string | number);
-}
+    formatter?: "{a}" | "{b}" | ((e: RankingRecord) => string | number);
+};
 const {
     list = [],
-    sort = 'order',
+    sort = "order",
     animateIndex = 0,
-    type = 'ranking',
+    type = "ranking",
     showBall = true,
 } = defineProps<{
     list: RankingRecord[];
-    sort?: 'order' | 'reverse' | 'none';
+    sort?: "order" | "reverse" | "none";
     animateIndex?: 0 | 1;
-    type?: 'ranking' | 'proprotion';
+    type?: "ranking" | "proprotion";
     showBall?: boolean;
 }>();
 function complierTotal(data: RankingRecord[]) {
-    return data.reduce((pre: number, cur) => (pre += cur.value), 0)
+    return data.reduce((pre: number, cur) => (pre += cur.value), 0);
 }
 const total = computed(() => complierTotal(list));
 const isAnimate = ref(animateIndex);
-function getCurrentProportion(value?: RankingRecord['value']) {
+function getCurrentProportion(value?: RankingRecord["value"]) {
     if (!value) return 0;
-    return value / total.value * 100 * isAnimate.value;
+    return (value / total.value) * 100 * isAnimate.value;
 }
 function getPreProportion(i: number) {
-    return complierTotal(renderList.value.slice(0, i)) / total.value * 100 * isAnimate.value;
+    return (complierTotal(renderList.value.slice(0, i)) / total.value) * 100 * isAnimate.value;
 }
 
 function fromValue(item: RankingRecord) {
-    if (typeof item.formatter === 'function') {
+    if (typeof item.formatter === "function") {
         return item.formatter(item);
     }
     switch (item.formatter) {
-        case '{b}':
-            return (item.value / total.value * 100).toFixed(2);
-        case '{a}':
+        case "{b}":
+            return ((item.value / total.value) * 100).toFixed(2);
+        case "{a}":
             return item.value * total.value;
         default:
             return item.value;
@@ -83,11 +88,11 @@ function fromValue(item: RankingRecord) {
 }
 const renderList = computed(() => {
     switch (sort) {
-        case 'none':
+        case "none":
             return list;
-        case 'order':
+        case "order":
             return list.sort((a, b) => b.value - a.value);
-        case 'reverse':
+        case "reverse":
             return list.sort((a, b) => a.value - b.value);
         default:
             return list;
@@ -109,10 +114,10 @@ onMounted(() => {
         flex-direction: column;
         flex: 1;
         padding: 20px;
+        gap: 20px;
 
         &__item {
             width: 100%;
-            margin-bottom: 20px;
 
             @mixin rankingItemIndex {
                 .lc-ranking {
@@ -133,25 +138,22 @@ onMounted(() => {
             &:nth-of-type(1) {
                 @include rankingItemIndex() {
                     background: rgba(255, 179, 85, 0.1);
-                    border: 1px solid #FFB454;
+                    border: 1px solid #ffb454;
                 }
-
             }
 
             &:nth-of-type(2) {
                 @include rankingItemIndex() {
                     background: rgba(238, 111, 124, 0.1);
-                    border: 1px solid #EE6F7C;
+                    border: 1px solid #ee6f7c;
                 }
-
             }
 
             &:nth-of-type(3) {
                 @include rankingItemIndex() {
                     background: rgba(15, 251, 248, 0.1);
-                    border: 1px solid #0FFBF8;
+                    border: 1px solid #0ffbf8;
                 }
-
             }
 
             &__top {
@@ -161,7 +163,7 @@ onMounted(() => {
                 @mixin fontcss() {
                     font-family: HarmonyOS_Sans_SC;
                     font-size: 14px;
-                    color: #FFFFFF;
+                    color: #ffffff;
                     line-height: 20px;
                 }
 
@@ -177,10 +179,10 @@ onMounted(() => {
                         @include fontcss();
                         font-family: HarmonyOS_Sans_SC;
                         font-size: 14px;
-                        color: #FFFFFF;
+                        color: #ffffff;
                         line-height: 20px;
                         background: rgba(166, 207, 255, 0.1);
-                        border: 1px solid #A6CFFF;
+                        border: 1px solid #a6cfff;
                         padding: 0 8px;
                         box-sizing: border-box;
                     }
@@ -218,7 +220,7 @@ onMounted(() => {
                     left: 0;
                     width: calc(var(--proportion) * 1%);
                     height: 100%;
-                    background: linear-gradient(50deg, rgba(15, 251, 248, 0) 0%, #0FFBF8 100%);
+                    background: linear-gradient(50deg, rgba(15, 251, 248, 0) 0%, #0ffbf8 100%);
                     transition: linear 0.3s;
                     transition-property: width, left;
                     @include transitionDelay;
