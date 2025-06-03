@@ -1,9 +1,8 @@
-import { type SeriesOption, type EChartsCoreOption, type EChartsOption, } from "echarts";
-import merge from 'lodash-es/merge';
+import { type SeriesOption, type EChartsCoreOption, type EChartsOption } from "echarts";
+import merge from "lodash-es/merge";
 import { deepMergeArrayOptions } from "@mmj-code-lib/lowcode/es/components";
 import { commonScatterSeries, gridOptions, legendOptions, scatterColors, tooltipOptions, xAxisOptions, yAxisOptions } from "./const";
 import { setRgbaAlpha } from "lowcode-share/es/share";
-
 
 export const commonScatterOptions: EChartsOption = {
     tooltip: tooltipOptions,
@@ -12,7 +11,7 @@ export const commonScatterOptions: EChartsOption = {
     xAxis: xAxisOptions,
     yAxis: yAxisOptions,
     color: scatterColors,
-    series: commonScatterSeries
+    series: commonScatterSeries,
 };
 
 export function useCommonScatterOptions(opts: EChartsCoreOption | EChartsOption) {
@@ -22,7 +21,8 @@ export function useCommonScatterOptions(opts: EChartsCoreOption | EChartsOption)
 
 function mregeSeriesRecord(newSeries: SeriesOption, seriesIndex: number) {
     const color = scatterColors[seriesIndex % scatterColors.length];
-    return merge({},
+    return merge(
+        {},
         commonScatterSeries,
         {
             itemStyle: {
@@ -36,24 +36,25 @@ function mregeSeriesRecord(newSeries: SeriesOption, seriesIndex: number) {
                         borderColor: newSeries?.itemStyle?.borderColor ?? color,
                     },
                 },
-                data: (newSeries.data as { value: number; name: string; meta: { tooltipBg: string; } }[])?.map((item, index) => {
-                    return {
-                        name: item.name,
-                        coord: [index, item.value, item,],
-                        meta: {
-                            color,
-                            ...(item.meta ?? {})
-                        }
-                    }
-                }) ?? []
-            }
+                data:
+                    (newSeries.data as { value: number; name: string; meta: { tooltipBg: string } }[])?.map((item, index) => {
+                        return {
+                            name: item.name,
+                            coord: [index, item.value, item],
+                            meta: {
+                                color,
+                                ...(item.meta ?? {}),
+                            },
+                            item,
+                        };
+                    }) ?? [],
+            },
         },
-        newSeries);
+        newSeries
+    );
 }
 
-export function useCommonScatterSeries(
-    series: EChartsOption['series'],
-): EChartsOption['series'] {
+export function useCommonScatterSeries(series: EChartsOption["series"]): EChartsOption["series"] {
     if (Array.isArray(series)) {
         return series.map((item, index) => {
             return mregeSeriesRecord(item, index);

@@ -1,22 +1,22 @@
 import p from "lodash-es/merge";
 import { deepMergeArrayOptions as u } from "@mmj-code-lib/lowcode/es/components";
-import { tooltipOptions as d, legendOptions as O, gridOptions as g, xAxisOptions as y, yAxisOptions as f, scatterColors as n, commonScatterSeries as l } from "./const.js";
+import { tooltipOptions as d, legendOptions as O, gridOptions as g, xAxisOptions as y, yAxisOptions as f, scatterColors as m, commonScatterSeries as l } from "./const.js";
 import { setRgbaAlpha as A } from "lowcode-share/es/share";
-const m = {
+const n = {
   tooltip: d,
   legend: O,
   grid: g,
   xAxis: y,
   yAxis: f,
-  color: n,
+  color: m,
   series: l
 };
 function h(o) {
-  return u(o, Object.keys(m), Object.values(m)), p({}, m, o);
+  return u(o, Object.keys(n), Object.values(n)), p({}, n, o);
 }
 function c(o, e) {
   var a, i;
-  const r = n[e % n.length];
+  const r = m[e % m.length];
   return p(
     {},
     l,
@@ -38,7 +38,8 @@ function c(o, e) {
           meta: {
             color: r,
             ...t.meta ?? {}
-          }
+          },
+          item: t
         }))) ?? []
       }
     },
@@ -49,7 +50,7 @@ function j(o) {
   return Array.isArray(o) ? o.map((e, r) => c(e, r)) : c(o, 0);
 }
 export {
-  m as commonScatterOptions,
+  n as commonScatterOptions,
   h as useCommonScatterOptions,
   j as useCommonScatterSeries
 };
