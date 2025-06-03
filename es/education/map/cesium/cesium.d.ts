@@ -57,6 +57,7 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
             homeButton: boolean;
             sceneModePicker: boolean;
             baseLayerPicker: boolean;
+            imageryProvider: Promise<import('cesium').ArcGisMapServerImageryProvider>;
             navigationHelpButton: boolean;
             fullscreenButton: boolean;
             scene3DOnly: boolean;
@@ -151,6 +152,7 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
             homeButton: boolean;
             sceneModePicker: boolean;
             baseLayerPicker: boolean;
+            imageryProvider: Promise<import('cesium').ArcGisMapServerImageryProvider>;
             navigationHelpButton: boolean;
             fullscreenButton: boolean;
             scene3DOnly: boolean;

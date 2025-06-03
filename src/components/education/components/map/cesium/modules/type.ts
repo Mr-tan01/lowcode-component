@@ -13,6 +13,7 @@ export const areaData = {
     南山区: { lng: 113.93782045247285, lat: 22.564987074695313, position: shenZhen.features[7] },
     福田区: { lng: 114.04493542407288, lat: 22.551374363514963, position: shenZhen.features[8] },
     罗湖区: { lng: 114.14519824740296, lat: 22.58076759041863, position: shenZhen.features[9] },
+    深汕合作区: { lng: 115.05755762333229, lat: 22.864619116888704, position: shenZhen.features[10] },
 };
 
 export type baseIconType = "primary" | "success" | "warning" | "danger";
@@ -80,6 +81,7 @@ export interface basicConfigType {
     clusteringPixelRange?: number; // 聚合像素范围
     clusteringMinimumClusterSize?: number; // 最小聚合数量
     cameraLimitsEnabled?: boolean; // 启用相机控制限制
+    hoverState?: boolean; // 启用鼠标悬浮状态
 }
 
 export interface optionType {
@@ -90,6 +92,8 @@ export interface optionType {
     centerPosition: Cartesian3;
     defaultCenterKey: string;
     pointHandler: (value: Entity) => void;
+    pointHoverHandler?: (value: Entity) => void;
+    pointHoverExitHandler?: (value: Entity) => void;
     limitHeightHandler: (value: number) => void;
     loadTileLayerHandler: (status: boolean) => void;
 }

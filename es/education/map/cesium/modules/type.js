@@ -10,7 +10,8 @@ const a = {
   龙岗区: { lng: 114.22287589397995, lat: 22.69074582647359, position: t.features[5] },
   南山区: { lng: 113.93782045247285, lat: 22.564987074695313, position: t.features[7] },
   福田区: { lng: 114.04493542407288, lat: 22.551374363514963, position: t.features[8] },
-  罗湖区: { lng: 114.14519824740296, lat: 22.58076759041863, position: t.features[9] }
+  罗湖区: { lng: 114.14519824740296, lat: 22.58076759041863, position: t.features[9] },
+  深汕合作区: { lng: 115.05755762333229, lat: 22.864619116888704, position: t.features[10] }
 };
 export {
   a as areaData
