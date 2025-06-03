@@ -129,7 +129,7 @@ class K {
           duration: 0.3
         });
       }
-      this.options.config.hoverState ? this.pointClickHandler(t.id) : this.options.pointHandler(t);
+      this.options.config.hoverState ? this.pointClickHandler(t.id) : this.options.pointHandler(t.id);
     }
   }
   // 处理鼠标移动
