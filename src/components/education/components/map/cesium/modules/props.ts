@@ -1,4 +1,4 @@
-import type { Prop, PropType } from "vue";
+import type { PropType } from "vue";
 import type { controlStatusType, pointType, basicConfigType } from "./type";
 import { Color, Cartesian3, ArcGisMapServerImageryProvider } from "cesium";
 

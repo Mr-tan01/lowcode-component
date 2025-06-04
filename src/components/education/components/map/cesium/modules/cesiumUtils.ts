@@ -21,9 +21,9 @@ import {
 } from "cesium";
 
 import { CesiumHeatmap } from "cesium-heatmap-es6";
-
 import { areaData, type controlStatusType, type optionType, type pointType, type changeModelParamType } from "./type";
-import { createInfoCanvas, createClusterBillboard, updateViewerEntityInfo } from "./tools";
+import { createInfoCanvas, createClusterBillboard, updateViewerEntityInfo, createEntityConfig } from "./tools";
+import { useMessage } from "naive-ui";
 
 export class cesiumService {
     public viewer: Viewer | null = null;
@@ -33,7 +33,7 @@ export class cesiumService {
     public screenSpaceEventHandler: void | null = null;
     public screenMouseMoveHandler: void | null = null;
     private imageLayerState: boolean | null = true;
-    private imageLayerUrl: String | null = null;
+    private imageLayerUrl: string | null = null;
     private tileLoadCallback: OmitThisParameter<(remaining: number) => void> | null = null;
     private dataSource: CustomDataSource | null = null;
     private centerPosition: Cartesian3 | null = null;
@@ -48,6 +48,7 @@ export class cesiumService {
         flyToHeight: 26000,
         cameraLimitsEnabled: false,
         hoverState: true,
+        defaultUrl: "https://services.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer",
     };
     private lastValidCameraPosition: Cartesian3 | null = null;
     private isCheckingBounds = false;
@@ -63,6 +64,8 @@ export class cesiumService {
         114.6, // 东边界 - 经度
         22.7 // 北边界 - 纬度
     );
+
+    private message = useMessage();
 
     constructor(public containerId: string, public options: optionType) {
         // 合并配置
@@ -289,9 +292,7 @@ export class cesiumService {
         if (remaining === 0) {
             this.options.loadTileLayerHandler(false);
             // 移除监听器
-            if (this.tileLoadCallback) {
-                this.viewer?.scene?.globe.tileLoadProgressEvent.removeEventListener(this.tileLoadCallback);
-            }
+            this.cleanupTileLoadListener();
         }
     }
 
@@ -299,69 +300,81 @@ export class cesiumService {
     async loadTileLayer(url: string): Promise<void> {
         // 加载动画
         this.options.loadTileLayerHandler(true);
-        let provider: WebMapTileServiceImageryProvider | ArcGisMapServerImageryProvider | undefined;
         const { viewer, imageLayerState, imageLayerUrl } = this;
 
-        // 移除现有监听器
-        if (this.tileLoadCallback) {
-            viewer?.scene.globe.tileLoadProgressEvent.removeEventListener(this.tileLoadCallback);
-        }
+        // 清理资源
+        this.cleanupTileLoadListener();
 
-        // 更新图层URL
-        if (!imageLayerUrl) {
-            this.imageLayerUrl = url;
-        }
+        // 更新状态
+        this.updateLayerState(url);
 
-        // 切换图层状态并获取新的provider
-        this.imageLayerState = !imageLayerState;
-
-        const loadProvider = async () => {
-            try {
-                if (imageLayerState) {
-                    // 超时处理
-                    const timeoutPromise = new Promise((_, reject) => {
-                        setTimeout(() => reject(new Error("瓦片加载超时")), 10000); // 10秒超时
-                    });
-
-                    // @ts-ignore
-                    const providerPromise = Zondy.WebMapTileServiceImageryProvider.fromUrl(imageLayerUrl ? imageLayerUrl : url);
-
-                    // 使用 Promise.race 实现超时控制
-                    provider = await Promise.race([providerPromise, timeoutPromise]);
-                } else {
-                    provider = await ArcGisMapServerImageryProvider.fromUrl(url);
-                }
-            } catch (error) {
-                console.error("瓦片加载失败:", error);
-                // 切换到默认瓦片
-                try {
-                    provider = await ArcGisMapServerImageryProvider.fromUrl(url);
-                } catch (fallbackError) {
-                    console.error("默认瓦片加载失败:", fallbackError);
-                    this.options.loadTileLayerHandler(false);
-                    return;
-                }
-            }
+        try {
+            const provider = await this.loadProviderWithFallback({
+                targetUrl: imageLayerUrl || url,
+                useZondy: imageLayerState,
+                fallbackUrl: this.options.config.defaultUrl ?? this.defaultConfig.defaultUrl,
+            });
 
             if (viewer && provider) {
-                try {
-                    viewer.imageryLayers.addImageryProvider(provider);
-
-                    // 重新添加监听器
-                    if (this.tileLoadCallback) {
-                        viewer.scene?.globe?.tileLoadProgressEvent.addEventListener(this.tileLoadCallback);
-                    }
-                } catch (error) {
-                    console.error("添加图层失败:", error);
-                    this.options.loadTileLayerHandler(false);
-                }
-            } else {
-                console.error("viewer 或 provider 未初始化");
-                this.options.loadTileLayerHandler(false);
+                await this.addProviderToViewer(viewer, provider);
             }
-        };
+        } catch (error) {
+            this.handleLoadError(error);
+        }
+    }
 
-        await loadProvider();
+    private cleanupTileLoadListener(): void {
+        if (this.tileLoadCallback && this.viewer?.scene?.globe) {
+            this.viewer.scene.globe.tileLoadProgressEvent.removeEventListener(this.tileLoadCallback);
+        }
+    }
+
+    private updateLayerState(url: string): void {
+        if (!this.imageLayerUrl) {
+            this.imageLayerUrl = url;
+        }
+        this.imageLayerState = !this.imageLayerState;
+    }
+
+    private async loadProviderWithFallback(options: {
+        targetUrl: string;
+        useZondy: boolean | null;
+        fallbackUrl: string;
+    }): Promise<WebMapTileServiceImageryProvider | ArcGisMapServerImageryProvider> {
+        try {
+            if (options.useZondy) {
+                // @ts-ignore
+                return await Zondy.WebMapTileServiceImageryProvider.fromUrl(options.targetUrl);
+            }
+            return await ArcGisMapServerImageryProvider.fromUrl(options.targetUrl);
+        } catch (primaryError) {
+            if (options.useZondy) {
+                this.message.error("(Zondy)瓦片加载失败, 请刷新重试");
+            }
+            try {
+                return await ArcGisMapServerImageryProvider.fromUrl(options.fallbackUrl);
+            } catch (fallbackError) {
+                this.message.error("默认瓦片加载失败，请刷新重试");
+                this.options.loadTileLayerHandler(false);
+                throw fallbackError;
+            }
+        }
+    }
+
+    private async addProviderToViewer(viewer: Viewer, provider: WebMapTileServiceImageryProvider | ArcGisMapServerImageryProvider): Promise<void> {
+        try {
+            viewer.imageryLayers.addImageryProvider(provider);
+            if (this.tileLoadCallback) {
+                viewer.scene?.globe?.tileLoadProgressEvent.addEventListener(this.tileLoadCallback);
+            }
+        } catch (error) {
+            console.error("添加图层失败:", error);
+            throw error;
+        }
+    }
+
+    private handleLoadError(error: unknown): void {
+        console.error("图层加载流程失败:", error);
     }
 
     // 添加点标记
@@ -370,21 +383,8 @@ export class cesiumService {
         if (!this.dataSource) return null;
 
         const valueInfo = await createInfoCanvas(point, type, labelType);
-        const entity: Entity = this.dataSource.entities.add({
-            position: Cartesian3.fromDegrees(point.lng, point.lat),
-            name: type ? point.name : `${point.name}Label`,
-            properties: {
-                value: point?.value,
-                text: point?.text,
-                changeState: false,
-                type: point?.iconType ?? "primary",
-            },
-            billboard: {
-                image: valueInfo.canvas,
-                disableDepthTestDistance: Number.POSITIVE_INFINITY,
-                pixelOffset: type ? new Cartesian2(0, 0) : new Cartesian2(valueInfo.canvas.width / 2.1, 4),
-            },
-        });
+        const entityConfig = await createEntityConfig(point, valueInfo.canvas, type);
+        const entity: Entity = this.dataSource.entities.add(entityConfig);
 
         if (!this.pointEntities) {
             this.pointEntities = [];
@@ -485,16 +485,6 @@ export class cesiumService {
             destination: Cartesian3.fromDegrees(value[0], value[1], heightResult),
             duration: 0.3,
         });
-    }
-
-    // 转换笛卡尔坐标到经纬度
-    private convertCartographic(cartesian: Cartesian3): Cartesian3 {
-        const cartographic = this.viewer?.scene.globe.ellipsoid.cartesianToCartographic(cartesian);
-        if (!cartographic) return new Cartesian3();
-
-        const longitude = cesiumMath.toDegrees(cartographic.longitude);
-        const latitude = cesiumMath.toDegrees(cartographic.latitude);
-        return Cartesian3.fromDegrees(longitude, latitude, 30000);
     }
 
     // 获取实体名称相关信息

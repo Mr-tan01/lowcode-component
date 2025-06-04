@@ -10,11 +10,12 @@
                     :default-show-state="false"
                     :area-name="'深圳市'"
                     v-on:load-handler="loadHandler"
+                    @point-handler="onPointHandler"
                 ></LcCesium>
             </div>
         </DemoHelpBox>
         <div style="position: absolute; top: 30%; left: 70%">
-            <LcMapButton v-if="show" @iconClicked="iconHandler"></LcMapButton>
+            <LcMapButton @iconClicked="iconHandler"></LcMapButton>
         </div>
         <LcSwitchTabs v-model:value="tabValue" :list="defSwitchTabList" @change="changePolygon" style="margin-top: 20px"></LcSwitchTabs>
     </div>
@@ -28,7 +29,7 @@ import { LcCesium, CesiumInstanceType } from "@/components/education/components/
 // import { LcCesium, CesiumInstanceType } from "~/es/education/map/index"
 import { DemoHelpBox } from "@/components/common/DemoHelpBox";
 import type { ChangeEvent } from "@/components/education/components/carouseBox/types";
-import { pointType, basicConfigType, testData } from "@/components/education/components/map/cesium/modules/type";
+import { pointType, basicConfigType, pointInfo } from "@/components/education/components/map/cesium/modules/type";
 import { Cartesian3 } from "cesium";
 const basicConfig = ref<basicConfigType>({ clusteringEnabled: true, cameraLimitsEnabled: false });
 import { getToken } from "@/request";
@@ -93,19 +94,10 @@ let optionInfo = ref<pointType[]>([]);
 function changePolygon(value: ChangeEvent): void {
     if (value.label === "深圳市") {
         cesiumMap.value?.clearEntity();
-        // return;
     }
     cesiumMap.value?.loadedTileLayer(true);
     cesiumMap.value?.changeModel("polygonClickHandler", value.label);
-    const result = testData?.map((item: any) => ({
-        name: item.schoolName,
-        lng: Number(item.schoolLng),
-        lat: Number(item.schoolLat),
-        value: "中",
-        text: item.schoolName,
-        iconType: item.isQualify ? "primary" : "danger",
-    }));
-    optionInfo.value = result;
+    optionInfo.value = pointInfo[value.label];
     setTimeout(() => {
         cesiumMap.value?.loadedTileLayer(false);
     }, 1000);
@@ -120,8 +112,15 @@ function iconHandler(alt: string) {
         cesiumMap.value?.changeModel("setInitialView", { destination: Cartesian3.fromDegrees(114.187446, 22.674131, 130000), duration: 0.8 });
     } else {
         const state = alt === "Layer";
-        cesiumMap.value?.changeModel(state ? "setViewerLayer" : "setCameraHeight", state ? "https://services.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer" : alt);
+        cesiumMap.value?.changeModel(
+            state ? "setViewerLayer" : "setCameraHeight",
+            state ? "https://services.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer" : alt
+        );
     }
+}
+
+function onPointHandler(data) {
+    console.log(data);
 }
 
 onMounted(async () => {

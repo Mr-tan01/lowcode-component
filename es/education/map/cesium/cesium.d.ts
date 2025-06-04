@@ -1,6 +1,6 @@
 import { cesiumService } from './modules/cesiumUtils';
-import { changeModelType, changeModelParamType } from './modules/type';
-import { Entity, Cartesian3 } from 'cesium';
+import { changeModelType, changeModelParamType, EntityProperties } from './modules/type';
+import { Cartesian3 } from 'cesium';
 declare const _default: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
     clientId: {
         type: import('vue').PropType<string>;
@@ -89,11 +89,11 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
     };
 }>, {
     changeModel: <T extends changeModelType>(type: changeModelType, value: changeModelParamType[T]) => void;
-    loadedTileLayer: (status: boolean) => void;
+    loadedTileLayer: (status: boolean) => Promise<void>;
     clearEntity: () => void;
     cesiumUtils: cesiumService;
 }, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {} & {
-    pointHandler: (value: Entity) => any;
+    pointHandler: (value: EntityProperties) => any;
     limitHeightHandler: (value: number) => any;
     loadHandler: (value: boolean) => any;
 }, string, import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
@@ -183,7 +183,7 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
         type: import('vue').PropType<import('./modules/type').pointType[]>;
     };
 }>> & Readonly<{
-    onPointHandler?: ((value: Entity) => any) | undefined;
+    onPointHandler?: ((value: EntityProperties) => any) | undefined;
     onLimitHeightHandler?: ((value: number) => any) | undefined;
     onLoadHandler?: ((value: boolean) => any) | undefined;
 }>, {
