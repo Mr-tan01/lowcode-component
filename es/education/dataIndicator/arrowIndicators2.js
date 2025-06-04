@@ -1,5 +1,5 @@
 import { defineComponent as u, mergeDefaults as d, computed as i, openBlock as m, createElementBlock as v, createElementVNode as n, createVNode as r, unref as a, toDisplayString as o, renderSlot as f } from "vue";
-import _ from "./icon/index2.js";
+import _ from "./icon/index.js";
 import { NNumberAnimation as b } from "naive-ui/es/number-animation";
 import { bigNumber as c } from "lowcode-share/es/share";
 const h = { class: "lc-arrow-indicators" }, w = { class: "lc-arrow-indicators__icon" }, y = { class: "lc-arrow-indicators__center" }, N = { class: "lc-arrow-indicators__center__lable" }, g = { class: "lc-arrow-indicators__center__value" }, x = { class: "lc-arrow-indicators__center__value__unit" }, D = /* @__PURE__ */ u({

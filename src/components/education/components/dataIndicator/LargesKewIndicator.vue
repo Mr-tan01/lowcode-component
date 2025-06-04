@@ -23,6 +23,7 @@
                         class="lc-skew-indicator__wrapper__info--result--year"
                         :class="{
                             down: yearValue < 0,
+                            up: yearValue > 0,
                         }"
                     >
                         <div class="lc-skew-indicator__wrapper__info--result--year--label">
@@ -31,8 +32,7 @@
                         <div class="lc-skew-indicator__wrapper__info--result--year--value">
                             <NNumberAnimation show-separator :from="0" :to="yearValue" active :precision="decimal" />%
                         </div>
-                        <div class="lc-skew-indicator__wrapper__info--result--year--up" v-if="yearValue > 0">↑</div>
-                        <div class="lc-skew-indicator__wrapper__info--result--year--down" v-else>↓</div>
+                        <div class="lc-skew-indicator__wrapper__info--result--year--up" v-if="yearValue">{{ prefixIcon }}</div>
                     </div>
                     <div class="lc-skew-indicator__wrapper__info--result--altericon" v-if="tip">
                         <LcTooltip>{{ tip }}</LcTooltip>
@@ -115,6 +115,9 @@ const renderUnit = computed(() => {
     }
     return unit;
 });
+const prefixIcon = computed(() => {
+    return yearValue > 0 ? "↑" : "↓";
+});
 </script>
 
 <style lang="scss" scoped>
@@ -189,7 +192,7 @@ const renderUnit = computed(() => {
                     gap: 8px;
                     font-family: HarmonyOS_Sans_SC;
                     font-size: 14px;
-                    color: #ff6666;
+                    color: #8a94a8;
                     text-align: left;
                     font-style: normal;
                     text-transform: none;
@@ -308,5 +311,8 @@ const renderUnit = computed(() => {
 
 .down {
     color: #08c978;
+}
+.up {
+    color: #ff6666;
 }
 </style>

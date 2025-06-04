@@ -1,56 +1,61 @@
 <template>
     <div class="bimodal-index">
-        <div class="bimodal-index__indicator" v-for="(item, key) in data" :key>
+        <div class="bimodal-index__indicator">
             <div class="bimodal-index__indicator__lable">
-                {{ item.label }}
+                <span v-for="label in label"> {{ label }}</span>
             </div>
             <div class="bimodal-index__indicator__value">
-                {{ item.value }}
+                <span v-for="value in value" :title="value.toString()"> {{ value }}</span>
             </div>
         </div>
     </div>
 </template>
 
 <script setup lang="ts">
-import { PropType, watch } from "vue";
+import { PropType, computed } from "vue";
 
 type Data = {
     label?: string;
     value?: number | string;
 };
-const { data = [] } = defineProps({
+const { data = [], empty = "-" } = defineProps({
     data: {
         type: Array as PropType<Data[]>,
     },
-});
-
-watch(
-    () => data,
-    (newValue) => {
-        if (newValue.length > 2) {
-            data.splice(2);
-        }
+    empty: {
+        type: String,
     },
-    { immediate: true, deep: true }
-);
+});
+const list = computed(() => {
+    return data.slice(0, 2);
+});
+const label = computed(() => {
+    return list.value.map((item) => item.label);
+});
+const value = computed(() => {
+    return list.value.map((item) => item.value || empty);
+});
 </script>
 
 <style scoped lang="scss">
 .bimodal-index {
-    width: 390px;
-    height: 125px;
-    background-image: url("./images/skew/tile-bg.png");
+    min-width: 390px;
+    padding: 15px 30px 26px 30px;
+    background: url("./images/skew/tile-bg.png") no-repeat;
+    background-size: 100% 100%;
     display: flex;
     flex-direction: column;
-
+    box-sizing: border-box;
     &__indicator {
         display: flex;
-        height: 40%;
         align-items: center;
         gap: 25px;
-        padding: 0 30px;
 
         &__lable {
+            flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 22px;
             font-family: HarmonyOS_Sans_SC;
             font-size: 14px;
             color: #ffffff;
@@ -61,6 +66,10 @@ watch(
         }
 
         &__value {
+            flex: 1;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
             font-family: HarmonyOS_Sans_SC_Medium;
             font-size: 24px;
             color: #ffffff;
@@ -68,11 +77,14 @@ watch(
             text-align: left;
             font-style: normal;
             text-transform: none;
+            overflow: hidden;
+            span {
+                display: inline-block;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                overflow: hidden;
+            }
         }
-    }
-
-    &__indicator:nth-child(2) {
-        padding: 0 44px;
     }
 
     &:hover {

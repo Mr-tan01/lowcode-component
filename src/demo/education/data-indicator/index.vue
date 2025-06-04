@@ -7,7 +7,7 @@
 
                 <LcLargesKewIndicator label="正增长" :value="100000" :fixed="true" :decimal="2" unit="人" :year-value="30"></LcLargesKewIndicator>
                 <LcLargesKewIndicator label="负增长" :value="3336" unit="人" :year-value="-10"></LcLargesKewIndicator>
-
+                <LcLargesKewIndicator label="负增长" :value="3336" unit="人" :year-value="0" yearLabel=""></LcLargesKewIndicator>
                 <lcArrowIndicators label="心理教师总数" :value="2370" unit="人"></lcArrowIndicators>
                 <lcArrowIndicators label="心理教师总数" :icon="'reward'">
                     <template #value> 1:900 </template>
@@ -45,16 +45,21 @@
                 <lcBimodalIndex
                     :data="[
                         { label: '双一流学科', value: '数学' },
-                        { label: '关联学校', value: '南方科技大学' },
+                        { label: '关联学校', value: '' },
                     ]"
                 ></lcBimodalIndex>
-                <lcBimodalIndex
-                    :data="[
-                        { label: '只能保留两组', value: '只能保留两组' },
-                        { label: '只能保留两组', value: '只能保留两组' },
-                        { label: '学科专业', value: '数学' },
-                    ]"
-                ></lcBimodalIndex>
+                <div style="width: 500px">
+                    <lcBimodalIndex
+                        :data="[
+                            { label: '只能保留两组', value: '只能保留两组' },
+                            {
+                                label: '只能保留两组',
+                                value: '只能保留两组只能保留两组只能保留两组只能保留两组只能保留两组只能保留两组只能保留两组只能保留两组只能保留两组只能保留两组',
+                            },
+                            { label: '学科专业', value: '数学' },
+                        ]"
+                    ></lcBimodalIndex>
+                </div>
             </NSpace>
         </DemoHelpBox>
 
@@ -63,23 +68,23 @@
                 <LcIndicatorCardArrows label="已建成并投入运行设施(个)" :value="20"></LcIndicatorCardArrows>
                 <LcMinitypeCard label="已建成并投入运行设施(个)" :value="20"></LcMinitypeCard>
             </NSpace>
-            <br>
+            <br />
             <NSpace>
-                <LcHumanShapeCard 
-                :let-data="[
-                    { title: 'BMI达标', lefValue: 15000, rigValue: 5.56 },
-                    { title: 'BMI达标', lefValue: 150, rigValue: 5.56 },
-                    { title: 'BMI达标', lefValue: 150, rigValue: 5.56 },
-                    { title: 'BMI达标', lefValue: 150, rigValue: 5.56 },
-                ]"
-                :rig-data="[
-                    { title: '近视人数', lefValue: 15000, rigValue: 5.56 },
-                    { title: '近视人数', lefValue: 150, rigValue: 5.56 },
-                    { title: '近视人数', lefValue: 150, rigValue: 5.56 },
-                    { title: '近视人数', lefValue: 150, rigValue: 5.56 },
-                ]"
-                lef-unit="人"
-                rig-unit="%"
+                <LcHumanShapeCard
+                    :let-data="[
+                        { title: 'BMI达标', lefValue: 15000, rigValue: 5.56 },
+                        { title: 'BMI达标', lefValue: 150, rigValue: 5.56 },
+                        { title: 'BMI达标', lefValue: 150, rigValue: 5.56 },
+                        { title: 'BMI达标', lefValue: 150, rigValue: 5.56 },
+                    ]"
+                    :rig-data="[
+                        { title: '近视人数', lefValue: 15000, rigValue: 5.56 },
+                        { title: '近视人数', lefValue: 150, rigValue: 5.56 },
+                        { title: '近视人数', lefValue: 150, rigValue: 5.56 },
+                        { title: '近视人数', lefValue: 150, rigValue: 5.56 },
+                    ]"
+                    lef-unit="人"
+                    rig-unit="%"
                 ></LcHumanShapeCard>
             </NSpace>
         </DemoHelpBox>
