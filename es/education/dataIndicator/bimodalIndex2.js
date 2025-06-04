@@ -1,49 +1,51 @@
-import { defineComponent as r, mergeDefaults as c, watch as s, openBlock as a, createElementBlock as t, Fragment as _, renderList as m, createElementVNode as n, toDisplayString as l } from "vue";
-const u = { class: "bimodal-index" }, b = { class: "bimodal-index__indicator__lable" }, p = { class: "bimodal-index__indicator__value" }, h = /* @__PURE__ */ r({
+import { defineComponent as m, mergeDefaults as p, computed as l, openBlock as e, createElementBlock as t, createElementVNode as i, Fragment as s, renderList as d, toDisplayString as c } from "vue";
+const v = { class: "bimodal-index" }, b = { class: "bimodal-index__indicator" }, x = { class: "bimodal-index__indicator__lable" }, y = { class: "bimodal-index__indicator__value" }, h = ["title"], S = /* @__PURE__ */ m({
   __name: "bimodalIndex",
-  props: /* @__PURE__ */ c({
+  props: /* @__PURE__ */ p({
     data: {
       type: Array
+    },
+    empty: {
+      type: String
     }
   }, {
-    data: () => []
+    data: () => [],
+    empty: "-"
   }),
-  setup(e) {
-    return s(
-      () => e.data,
-      (d) => {
-        d.length > 2 && e.data.splice(2);
-      },
-      { immediate: !0, deep: !0 }
-    ), (d, x) => (a(), t("div", u, [
-      (a(!0), t(
-        _,
-        null,
-        m(e.data, (i, o) => (a(), t("div", {
-          class: "bimodal-index__indicator",
-          key: o
-        }, [
-          n(
-            "div",
-            b,
-            l(i.label),
-            1
-            /* TEXT */
-          ),
-          n(
-            "div",
-            p,
-            l(i.value),
-            1
-            /* TEXT */
-          )
-        ]))),
-        128
-        /* KEYED_FRAGMENT */
-      ))
+  setup(o) {
+    const r = l(() => o.data.slice(0, 2)), _ = l(() => r.value.map((a) => a.label)), u = l(() => r.value.map((a) => a.value || o.empty));
+    return (a, f) => (e(), t("div", v, [
+      i("div", b, [
+        i("div", x, [
+          (e(!0), t(
+            s,
+            null,
+            d(_.value, (n) => (e(), t(
+              "span",
+              null,
+              c(n),
+              1
+              /* TEXT */
+            ))),
+            256
+            /* UNKEYED_FRAGMENT */
+          ))
+        ]),
+        i("div", y, [
+          (e(!0), t(
+            s,
+            null,
+            d(u.value, (n) => (e(), t("span", {
+              title: n.toString()
+            }, c(n), 9, h))),
+            256
+            /* UNKEYED_FRAGMENT */
+          ))
+        ])
+      ])
     ]));
   }
 });
 export {
-  h as default
+  S as default
 };
