@@ -3,10 +3,10 @@
         <LcElasticScrollbar>
             <NGrid :x-gap="gap" :cols="cols">
                 <NGi v-for="(row, rowIndex) in rows" :key="`row-${rowIndex}`" class="list-row" :style="getRowStyle(rowIndex)">
-                    <div class="key-cell" :style="getKeyCellStyle(rowIndex)">
+                    <div class="key-cell" :style="getKeyCellStyle(rowIndex)" :title="row.indicatorName">
                         {{ row.indicatorName }}
                     </div>
-                    <div class="value-cell" :style="getValueCellStyle(rowIndex)">
+                    <div class="value-cell" :style="getValueCellStyle(rowIndex)" :title="row.indicatorValue">
                         {{ row.indicatorValue }}
                     </div>
                 </NGi>
@@ -24,10 +24,17 @@ const {
     rows = [],
     rowStyle = {},
     bordered = false,
-    keyStyle = {},
-    valueStyle = {},
+    keyStyle = {
+        whiteSpace: "nowrap",
+        overflow: "hidden",
+        textOverflow: "ellipsis",
+    },
+    valueStyle = {
+        whiteSpace: "nowrap",
+        overflow: "hidden",
+        textOverflow: "ellipsis",
+    },
     cellPadding = "12px 15px",
-    defaultAlign = "left",
     gap = 0,
     cols = 2,
 } = defineProps<DataListProps>();
@@ -36,7 +43,7 @@ const {
 const getKeyCellStyle = (index: number): ColumnStyle => {
     const style: ColumnStyle = {
         whiteSpace: "pre",
-        flex: 3,
+        flex: "4 1 0%",
         backgroundColor: "#063B6B",
         ...keyStyle,
         padding: cellPadding || "12px 15px",
@@ -60,7 +67,7 @@ const getKeyCellStyle = (index: number): ColumnStyle => {
 const getValueCellStyle = (index: number): ColumnStyle => {
     const style: ColumnStyle = {
         whiteSpace: "pre",
-        flex: 6,
+        flex: "6 1 0%",
         backgroundColor: "#063661",
         ...valueStyle,
         padding: cellPadding || "12px 15px",
@@ -100,7 +107,7 @@ const getRowStyle = (index: number): CSSProperties => {
     width: 100%;
     height: 100%;
     font-family: Arial, sans-serif;
-    :deep(.lc-elastic-scrollbar){
+    :deep(.lc-elastic-scrollbar) {
         height: 100%;
     }
     .list-body {

@@ -1,42 +1,50 @@
-import { defineComponent as b, openBlock as d, createElementBlock as s, normalizeClass as m, createVNode as c, unref as r, withCtx as i, Fragment as x, renderList as w, createBlock as k, normalizeStyle as n, createElementVNode as y, toDisplayString as f } from "vue";
-import { NGrid as p, NGi as v } from "naive-ui";
-import A from "./elasticScrollbar/index.js";
-const N = /* @__PURE__ */ b({
+import { defineComponent as x, openBlock as i, createElementBlock as s, normalizeClass as m, createVNode as c, unref as d, withCtx as r, Fragment as w, renderList as b, createBlock as p, normalizeStyle as n, createElementVNode as f, toDisplayString as y } from "vue";
+import { NGrid as h, NGi as v } from "naive-ui";
+import k from "./elasticScrollbar/index.js";
+const A = ["title"], B = ["title"], L = /* @__PURE__ */ x({
   __name: "listBox",
   props: {
     rows: { default: () => [] },
     rowStyle: { default: () => ({}) },
     bordered: { type: Boolean, default: !1 },
-    keyStyle: { default: () => ({}) },
-    valueStyle: { default: () => ({}) },
+    keyStyle: { default: () => ({
+      whiteSpace: "nowrap",
+      overflow: "hidden",
+      textOverflow: "ellipsis"
+    }) },
+    valueStyle: { default: () => ({
+      whiteSpace: "nowrap",
+      overflow: "hidden",
+      textOverflow: "ellipsis"
+    }) },
     cellPadding: { default: "12px 15px" },
-    defaultAlign: { default: "left" },
+    defaultAlign: {},
     gap: { default: 0 },
     cols: { default: 2 }
   },
   setup(l) {
     const u = (t) => {
-      var a;
+      var o;
       const e = {
         whiteSpace: "pre",
-        flex: 3,
+        flex: "4 1 0%",
         backgroundColor: "#063B6B",
         ...l.keyStyle,
         padding: l.cellPadding || "12px 15px",
         textAlign: l.keyStyle.textAlign || "left",
-        ...((a = l.rows[t]) == null ? void 0 : a.keyStyle) || {}
+        ...((o = l.rows[t]) == null ? void 0 : o.keyStyle) || {}
       };
       return l.bordered && (e.borderLeft = "1px solid #07467a", e.borderTop = "1px solid #07467a", e.borderBottom = "1px solid #07467a", t === l.rows.length - 1 && (e.borderRight = "1px solid #07467a")), e;
     }, g = (t) => {
-      var a;
+      var o;
       const e = {
         whiteSpace: "pre",
-        flex: 6,
+        flex: "6 1 0%",
         backgroundColor: "#063661",
         ...l.valueStyle,
         padding: l.cellPadding || "12px 15px",
         textAlign: l.valueStyle.textAlign || "left",
-        ...((a = l.rows[t]) == null ? void 0 : a.valueStyle) || {}
+        ...((o = l.rows[t]) == null ? void 0 : o.valueStyle) || {}
       };
       return l.bordered && (e.borderTop = "1px solid #07467A", e.borderBottom = "1px solid #07467A", e.borderRight = "1px solid #07467A", e.borderLeft = "1px solid #07467A"), e;
     }, S = (t) => {
@@ -46,48 +54,38 @@ const N = /* @__PURE__ */ b({
       };
       return t % 2 === 0 && l.rowStyle.even ? Object.assign(e, l.rowStyle.even) : t % 2 !== 0 && l.rowStyle.odd && Object.assign(e, l.rowStyle.odd), e;
     };
-    return (t, e) => (d(), s(
+    return (t, e) => (i(), s(
       "div",
       {
         class: m(["dynamic-data-list", { "is-bordered": t.bordered }])
       },
       [
-        c(r(A), null, {
-          default: i(() => [
-            c(r(p), {
+        c(d(k), null, {
+          default: r(() => [
+            c(d(h), {
               "x-gap": t.gap,
               cols: t.cols
             }, {
-              default: i(() => [
-                (d(!0), s(
-                  x,
+              default: r(() => [
+                (i(!0), s(
+                  w,
                   null,
-                  w(t.rows, (a, o) => (d(), k(r(v), {
-                    key: `row-${o}`,
+                  b(t.rows, (o, a) => (i(), p(d(v), {
+                    key: `row-${a}`,
                     class: "list-row",
-                    style: n(S(o))
+                    style: n(S(a))
                   }, {
-                    default: i(() => [
-                      y(
-                        "div",
-                        {
-                          class: "key-cell",
-                          style: n(u(o))
-                        },
-                        f(a.indicatorName),
-                        5
-                        /* TEXT, STYLE */
-                      ),
-                      y(
-                        "div",
-                        {
-                          class: "value-cell",
-                          style: n(g(o))
-                        },
-                        f(a.indicatorValue),
-                        5
-                        /* TEXT, STYLE */
-                      )
+                    default: r(() => [
+                      f("div", {
+                        class: "key-cell",
+                        style: n(u(a)),
+                        title: o.indicatorName
+                      }, y(o.indicatorName), 13, A),
+                      f("div", {
+                        class: "value-cell",
+                        style: n(g(a)),
+                        title: o.indicatorValue
+                      }, y(o.indicatorValue), 13, B)
                     ]),
                     _: 2
                     /* DYNAMIC */
@@ -110,5 +108,5 @@ const N = /* @__PURE__ */ b({
   }
 });
 export {
-  N as default
+  L as default
 };
