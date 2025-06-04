@@ -11,6 +11,7 @@ import LcPlanningIndicators, {
 import LcLargesKewIndicator from "./LargesKewIndicator.vue";
 import LcIndicatorCardArrows from "./indicatorCardArrows.vue";
 import LcMinitypeCard from "./minitypeCard.vue";
+import LcHumanShapeCard from './humanShapeCard.vue'
 
 export type LcRangeIndicatorInstanceType = InstanceType<
     typeof LcRangeIndicator
@@ -32,6 +33,7 @@ export type LcIndicatorCardViceType = InstanceType<
     typeof LcIndicatorCardArrows
 >;
 export type LcMinitypeCardType = InstanceType<typeof LcMinitypeCard>;
+export type LcHumanShapeCardType = InstanceType<typeof LcHumanShapeCard>;
 
 export {
     LcPlanningIndicators,
@@ -44,6 +46,7 @@ export {
     LcLargesKewIndicator,
     LcIndicatorCardArrows,
     LcMinitypeCard,
+    LcHumanShapeCard,
     type LcPlanningIndicatorsDataType,
     type LcPlanningIndicatorsItemType,
 };

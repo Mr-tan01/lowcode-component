@@ -8,6 +8,7 @@ import { default as LcPlanningIndicators, Data as LcPlanningIndicatorsDataType, 
 import { default as LcLargesKewIndicator } from './LargesKewIndicator';
 import { default as LcIndicatorCardArrows } from './indicatorCardArrows';
 import { default as LcMinitypeCard } from './minitypeCard';
+import { default as LcHumanShapeCard } from './humanShapeCard';
 export type LcRangeIndicatorInstanceType = InstanceType<typeof LcRangeIndicator>;
 export type LcSkewIndicatorInstanceType = InstanceType<typeof LcSkewIndicator>;
 export type LcIndicatorCardInstanceType = InstanceType<typeof LcIndicatorCard>;
@@ -18,4 +19,5 @@ export type lcArrowIndicatorsInstanceType = InstanceType<typeof lcArrowIndicator
 export type LcLargesKewIndicatorType = InstanceType<typeof LcLargesKewIndicator>;
 export type LcIndicatorCardViceType = InstanceType<typeof LcIndicatorCardArrows>;
 export type LcMinitypeCardType = InstanceType<typeof LcMinitypeCard>;
-export { LcPlanningIndicators, LcRangeIndicator, LcSkewIndicator, LcIndicatorCard, LcIndicatorList, lcBimodalIndex, lcArrowIndicators, LcLargesKewIndicator, LcIndicatorCardArrows, LcMinitypeCard, type LcPlanningIndicatorsDataType, type LcPlanningIndicatorsItemType, };
+export type LcHumanShapeCardType = InstanceType<typeof LcHumanShapeCard>;
+export { LcPlanningIndicators, LcRangeIndicator, LcSkewIndicator, LcIndicatorCard, LcIndicatorList, lcBimodalIndex, lcArrowIndicators, LcLargesKewIndicator, LcIndicatorCardArrows, LcMinitypeCard, LcHumanShapeCard, type LcPlanningIndicatorsDataType, type LcPlanningIndicatorsItemType, };

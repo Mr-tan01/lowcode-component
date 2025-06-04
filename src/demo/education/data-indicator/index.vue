@@ -4,23 +4,6 @@
             <NSpace>
                 <LcSkewIndicator label="总教职工人" :value="3336" unit="人" tip="测试tip"> </LcSkewIndicator>
                 <LcSkewIndicator label="总教职工人" :value="3533336" unit="人"></LcSkewIndicator>
-                <LcSkewIndicator label="总教职工人" :value="3533336" unit="人" icon-type="teacher">
-                    <template #helper>
-                        <LcIcon name="teacher"></LcIcon>
-                    </template>
-                </LcSkewIndicator>
-                <LcSkewIndicator label="总教职工人" :value="3533336" unit="人" icon-type="student">
-                    <template #helper>
-                        <LcIcon name="student"></LcIcon>
-                    </template>
-                </LcSkewIndicator>
-                <LcSkewIndicator label="总教职工人" :value="3533336" unit="人" icon-type="international">
-                    <template #helper>
-                        <LcIcon name="international"></LcIcon>
-                    </template>
-                </LcSkewIndicator>
-
-                <LcStudentIndicatorCard label="总教职工人" :value="3533336" unit="人"></LcStudentIndicatorCard>
 
                 <LcLargesKewIndicator label="正增长" :value="100000" :fixed="true" :decimal="2" unit="人" :year-value="30"></LcLargesKewIndicator>
                 <LcLargesKewIndicator label="负增长" :value="3336" unit="人" :year-value="-10"></LcLargesKewIndicator>
@@ -80,25 +63,33 @@
                 <LcIndicatorCardArrows label="已建成并投入运行设施(个)" :value="20"></LcIndicatorCardArrows>
                 <LcMinitypeCard label="已建成并投入运行设施(个)" :value="20"></LcMinitypeCard>
             </NSpace>
+            <br>
+            <NSpace>
+                <LcHumanShapeCard 
+                :let-data="[
+                    { title: 'BMI达标', lefValue: 15000, rigValue: 5.56 },
+                    { title: 'BMI达标', lefValue: 150, rigValue: 5.56 },
+                    { title: 'BMI达标', lefValue: 150, rigValue: 5.56 },
+                    { title: 'BMI达标', lefValue: 150, rigValue: 5.56 },
+                ]"
+                :rig-data="[
+                    { title: '近视人数', lefValue: 15000, rigValue: 5.56 },
+                    { title: '近视人数', lefValue: 150, rigValue: 5.56 },
+                    { title: '近视人数', lefValue: 150, rigValue: 5.56 },
+                    { title: '近视人数', lefValue: 150, rigValue: 5.56 },
+                ]"
+                lef-unit="人"
+                rig-unit="%"
+                ></LcHumanShapeCard>
+            </NSpace>
         </DemoHelpBox>
         <DemoHelpBox title="指标卡" description="基本用法" rswidth="1000px" :code="code2">
             <NSpace>
                 <LcIndicatorCard :value="3457" fixed hint="教职工人(人)"> </LcIndicatorCard>
                 <LcIndicatorCard :value="3457" fixed hint="在编教职工(人)"></LcIndicatorCard>
-                <LcIndicatorCard :value="102020.22" fixed :decimal="2" hint="公办教师(人)"></LcIndicatorCard>
-                <LcIndicatorCard :value="50000" fixed hint="民办教师(人)"></LcIndicatorCard>
             </NSpace>
-            <br />
-            <NSpace>
-                <LcIndicatorCard :value="3457" hint="教职工人(人)" size="medium"></LcIndicatorCard>
-                <LcIndicatorCard :value="3457" hint="在编教职工(人)" size="medium"></LcIndicatorCard>
-                <LcIndicatorCard :value="3457" hint="公办教师(人)" size="medium"></LcIndicatorCard>
-            </NSpace>
-            <br />
             <NSpace>
                 <LcIndicatorCard :value="30" unit="万" hint="教职工人(人)" size="large"></LcIndicatorCard>
-                <LcIndicatorCard :value="23" unit="万" hint="在编教职工(人)" size="large"></LcIndicatorCard>
-                <LcIndicatorCard :value="23" unit="万" hint="在编教职工(人)" size="large" value-color="rgba(15, 251, 248, 1)" hint-color="rgba(15, 251, 248, 1)"> </LcIndicatorCard>
                 <LcIndicatorCard :value="23" unit="万" hint="在编教职工(人)" size="large" value-color="rgba(15, 251, 248, 1)" hint-color="rgba(15, 251, 248, 1)"> </LcIndicatorCard>
             </NSpace>
         </DemoHelpBox>
@@ -134,7 +125,6 @@
 <script lang="ts" setup>
 import { NSpace } from "naive-ui";
 import { DemoHelpBox } from "@/components/common/DemoHelpBox";
-import { LcIcon } from "@/components/education/components/icon";
 import {
     LcSkewIndicator,
     LcIndicatorCard,
@@ -146,6 +136,7 @@ import {
     LcLargesKewIndicator,
     LcIndicatorCardArrows,
     LcMinitypeCard,
+    LcHumanShapeCard,
 } from "@/components/education/components/dataIndicator";
 import { code1, code2, code3, code4 } from "./demo-codes";
 import Icon from "./image/test.png";
