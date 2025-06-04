@@ -70,6 +70,23 @@ export const code3 = `
 export const code4 = `
 <template>
     <LcIndicatorCardArrows label="已建成并投入运行设施(个)" :value="20" ></LcIndicatorCardArrows>
-    <LcMinitypeCard label="已建成并投入运行设施(个)" :value="20"></LcMinitypeCard>
+    <LcMinitypeCard label="已建成并投入运行设施(个)" :value="20">
+    </LcMinitypeCard>
+        <LcHumanShapeCard
+            :let-data="[
+                { title: 'BMI达标', lefValue: 150, rigValue: 5.56 },
+                { title: 'BMI达标', lefValue: 150, rigValue: 5.56 },
+                { title: 'BMI达标', lefValue: 150, rigValue: 5.56 },
+                { title: 'BMI达标', lefValue: 150, rigValue: 5.56 },
+            ]"
+            :rig-data="[
+                { title: '近视人数', lefValue: 150, rigValue: 5.56 },
+                { title: '近视人数', lefValue: 150, rigValue: 5.56 },
+                { title: '近视人数', lefValue: 150, rigValue: 5.56 },
+                { title: '近视人数', lefValue: 150, rigValue: 5.56 },
+            ]"
+            lef-unit="人"
+            rig-unit="%"
+        ></LcHumanShapeCard>
 </template>
 `;
