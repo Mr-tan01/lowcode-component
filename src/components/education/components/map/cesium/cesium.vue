@@ -1,6 +1,6 @@
 <template>
     <div class="lc-cesium">
-        <NSpin :show="initImageryLayersStatus" :stroke="spinStroke" :style="spinStyle" size="large">
+        <NSpin :show="initImageryLayersStatus || initPointDataStatus" :stroke="spinStroke" :style="spinStyle" size="large">
             <div class="lc-cesium_map" id="cesium-3d-viewer"></div>
             <template #description> 地图加载中... </template>
         </NSpin>
@@ -11,13 +11,14 @@
 import { ref, onMounted, onBeforeUnmount, watch, computed } from "vue";
 import { cesiumService } from "./modules/cesiumUtils";
 import { cesiumProps } from "./modules/props";
-import type { changeModelType, changeModelParamType } from "./modules/type";
-import { Entity, Cartesian3 } from "cesium";
+import type { changeModelType, changeModelParamType, EntityProperties } from "./modules/type";
+import { Entity, Cartesian3, JulianDate } from "cesium";
 import { NSpin } from "naive-ui";
 
 const initImageryLayersStatus = ref<boolean>(true);
+const initPointDataStatus = ref<boolean>(true);
 const emit = defineEmits<{
-    (e: "pointHandler", value: Entity): void;
+    (e: "pointHandler", value: EntityProperties): void;
     (e: "limitHeightHandler", value: number): void;
     (e: "loadHandler", value: boolean): void;
 }>();
@@ -34,14 +35,14 @@ const {
     spinStroke,
     spinContainerBg,
     spinDescriptionColor,
-    defaultCenterKey ="深圳市",
+    defaultCenterKey = "深圳市",
     centerPosition = Cartesian3.fromDegrees(114.187446, 22.674131, 130000),
     controlStatus,
     basicConfig,
     pointData = [],
 } = defineProps(cesiumProps);
 
-const reloadPointData = (): void => {
+const reloadPointData = async (): Promise<void> => {
     cesiumUtils.clearEntity("pointEntities", "dataSource");
     cesiumUtils.pointData = pointData;
     pointData?.forEach((point) => {
@@ -52,11 +53,15 @@ const reloadPointData = (): void => {
     });
 };
 
-const loadedTileLayer = (status: boolean): void => {
-    initImageryLayersStatus.value = status;
+const loadedTileLayer = async (status: boolean): Promise<void> => {
+    initPointDataStatus.value = status;
+};
+
+const loadImageryLayers = async (status: boolean): Promise<void> => {
     emit("loadHandler", !status);
-    if (!status) {
-        reloadPointData();
+    initImageryLayersStatus.value = status;
+    if (initPointDataStatus.value) {
+        initPointDataStatus.value = status;
     }
 };
 
@@ -68,14 +73,16 @@ const cesiumUtils = new cesiumService("cesium-3d-viewer", {
     offsetState: offsetState,
     centerPosition: centerPosition,
     defaultCenterKey,
-    pointHandler: (value: Entity) => {
-        emit("pointHandler", value);
+    pointHandler: (data: Entity) => {
+        const currentTime = JulianDate.now();
+        const value0ption = data.properties?.getValue(currentTime);
+        emit("pointHandler", value0ption);
     },
     limitHeightHandler: (value: number) => {
         emit("limitHeightHandler", value);
     },
     loadTileLayerHandler: (status: boolean) => {
-        loadedTileLayer(status);
+        loadImageryLayers(status);
     },
 });
 
@@ -150,9 +157,9 @@ defineExpose({
     cesiumUtils,
 });
 
-watch([() => accessToken, () => imageryLayersUrl], initCesiumDebounced);
+const initCesiumDebouncedChange = watch([() => accessToken, () => imageryLayersUrl], initCesiumDebounced);
 
-watch(
+const offsetStateChange = watch(
     () => offsetState,
     (newValue) => {
         cesiumUtils.options = {
@@ -163,11 +170,20 @@ watch(
     { deep: true }
 );
 
+const initPointDataChange = watch([initPointDataStatus, pointData], () => {
+    if (!initPointDataStatus.value) {
+        reloadPointData();
+    }
+});
+
 onMounted(async () => {
     await initCesium();
 });
 
 onBeforeUnmount(() => {
+    initCesiumDebouncedChange();
+    offsetStateChange();
+    initPointDataChange();
     cesiumUtils.destroy();
 });
 </script>

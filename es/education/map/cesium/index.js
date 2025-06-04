@@ -1,7 +1,7 @@
 import o from "./index2.js";
 import '../assets/cesium/cesium.css';/* empty css       */
 import t from "../_virtual/_plugin-vue_export-helper.js";
-const p = /* @__PURE__ */ t(o, [["__scopeId", "data-v-a50b8375"]]);
+const s = /* @__PURE__ */ t(o, [["__scopeId", "data-v-61063b22"]]);
 export {
-  p as default
+  s as default
 };

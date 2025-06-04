@@ -23,6 +23,7 @@ export declare class cesiumService {
     private lastThrottleTime;
     private throttleDelay;
     private shenzhenBounds;
+    private message;
     constructor(containerId: string, options: optionType);
     updateViewerAttribute(): void;
     private setupClustering;
@@ -33,6 +34,11 @@ export declare class cesiumService {
     private handleMouseMove;
     private handleTileLoadProgress;
     loadTileLayer(url: string): Promise<void>;
+    private cleanupTileLoadListener;
+    private updateLayerState;
+    private loadProviderWithFallback;
+    private addProviderToViewer;
+    private handleLoadError;
     addPoint(point: pointType, type?: string, labelType?: string): Promise<Entity | null | void>;
     clearEntity(key: "pointEntities" | "polygonEntities", type: "dataSource" | "viewer"): Promise<void>;
     addPolygon(name: string): void;
@@ -40,7 +46,6 @@ export declare class cesiumService {
     private getClickPosition;
     private getPositionCartographic;
     setCameraHeight(type: string): void;
-    private convertCartographic;
     private getEntityNameInfo;
     pointClickHandler(pickedObject: Entity): void;
     private handleLabelsVisibility;

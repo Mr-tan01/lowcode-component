@@ -1,4 +1,4 @@
-import { SceneMode, SkyAtmosphere, SkyBox, Color, Entity, Cartesian3, PolylineDashMaterialProperty } from 'cesium';
+import { SceneMode, SkyAtmosphere, SkyBox, Color, Entity, Cartesian3, PolylineDashMaterialProperty, Cartesian2 } from 'cesium';
 export declare const areaData: {
     深圳市: {
         lng: number;
@@ -200,6 +200,24 @@ export interface polygonType {
         outlineColor?: boolean;
     };
 }
+export interface EntityProperties {
+    value?: any;
+    text?: string;
+    changeState: boolean;
+    type: string;
+    position: number[];
+    name: string;
+}
+export interface EntityConfig {
+    position: Cartesian3;
+    name: string;
+    properties: EntityProperties;
+    billboard: {
+        image: HTMLCanvasElement;
+        disableDepthTestDistance: number;
+        pixelOffset: Cartesian2;
+    };
+}
 export interface controlStatusType {
     timeline?: boolean;
     animation?: boolean;
@@ -233,6 +251,7 @@ export interface basicConfigType {
     clusteringMinimumClusterSize?: number;
     cameraLimitsEnabled?: boolean;
     hoverState?: boolean;
+    defaultUrl?: string;
 }
 export interface optionType {
     config: basicConfigType;
@@ -263,14 +282,6 @@ export type changeModelParamType = {
         type: "dataSource" | "viewer";
     };
 };
-export declare const testData: {
-    schoolType: string;
-    schoolName: string;
-    schoolLng: string;
-    schoolLat: string;
-    area: string;
-    isQualify: number;
-}[];
 export declare const pointInfo: {
     宝安区: ({
         name: string;

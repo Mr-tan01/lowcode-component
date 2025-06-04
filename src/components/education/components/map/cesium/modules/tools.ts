@@ -241,61 +241,62 @@ async function drawImageCanvas(imgSrc: string): Promise<HTMLCanvasElement> {
     });
 }
 
-
 // 创建聚合点图标
 export const createClusterBillboard = (count: number, primaryType: string): HTMLCanvasElement => {
-    const canvas = document.createElement('canvas');
+    const canvas = document.createElement("canvas");
     canvas.width = 80;
     canvas.height = 80;
-    const ctx = canvas.getContext('2d');
-    
+    const ctx = canvas.getContext("2d");
+
     if (!ctx) return canvas;
-    
+
     // 设置背景颜色
-    let colorFill = '#1E9EFA';
-    let colorStroke = '#167bca';
-    
-    switch(primaryType) {
-        case 'primary':
-            colorFill = '#1E9EFA';
-            colorStroke = '#167bca';
+    let colorFill = "#1E9EFA";
+    let colorStroke = "#167bca";
+
+    switch (primaryType) {
+        case "primary":
+            colorFill = "#1E9EFA";
+            colorStroke = "#167bca";
             break;
-        case 'success':
-            colorFill = '#67C23A';
-            colorStroke = '#529a2e';
+        case "success":
+            colorFill = "#67C23A";
+            colorStroke = "#529a2e";
             break;
-        case 'warning':
-            colorFill = '#E6A23C';
-            colorStroke = '#b87d2f';
+        case "warning":
+            colorFill = "#E6A23C";
+            colorStroke = "#b87d2f";
             break;
-        case 'danger':
-            colorFill = '#E41F1F';
-            colorStroke = '#C01A1A';
+        case "danger":
+            colorFill = "#E41F1F";
+            colorStroke = "#C01A1A";
             break;
     }
-    
+
     // 绘制圆形背景
     ctx.beginPath();
     ctx.arc(40, 40, 35, 0, Math.PI * 2, true);
     ctx.fillStyle = colorFill;
     ctx.fill();
-    
+
     // 绘制边框
     ctx.lineWidth = 4;
     ctx.strokeStyle = colorStroke;
     ctx.stroke();
-    
-    // 绘制文本
-    ctx.fillStyle = 'white';
-    ctx.font = 'bold 32px Arial';
-    ctx.textAlign = 'center';
-    ctx.textBaseline = 'middle';
-    ctx.fillText(count.toString(), 40, 40);
-    
-    return canvas;
-}
 
-import { type Entity, JulianDate, CallbackProperty } from "cesium";
+    // 绘制文本
+    ctx.fillStyle = "white";
+    ctx.font = "bold 32px Arial";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.fillText(count.toString(), 40, 40);
+
+    return canvas;
+};
+
+import { type Entity, JulianDate, CallbackProperty, Cartesian2, Cartesian3, Math as cesiumMath } from "cesium";
+import { EntityConfig, pointType } from "./type";
+import { EntityProperties } from "./type";
 
 /**
  * 修改entity信息
@@ -324,3 +325,44 @@ export async function updateViewerEntityInfo(info: any, entity: Entity | undefin
         }, false);
     }
 }
+
+/**
+ * 创建entity信息
+ * @returns EntityConfig
+ */
+export const createEntityConfig = async (point: pointType, valueInfo: HTMLCanvasElement, type?: string): Promise<EntityConfig> => {
+    const commonProperties: EntityProperties = {
+        value: point?.value,
+        text: point?.text,
+        changeState: false,
+        type: point?.iconType ?? "primary",
+        position: [point.lng, point.lat],
+        name: type ? point.name : `${point.name}Label`,
+    };
+
+    const commonBillboard = {
+        image: valueInfo,
+        disableDepthTestDistance: Number.POSITIVE_INFINITY,
+        pixelOffset: type ? new Cartesian2(0, 0) : new Cartesian2(valueInfo.width / 2.1, 4),
+    };
+
+    return {
+        position: Cartesian3.fromDegrees(point.lng, point.lat),
+        name: type ? point.name : `${point.name}Label`,
+        properties: commonProperties,
+        billboard: commonBillboard,
+    };
+};
+
+/**
+ * 转换笛卡尔坐标到经纬度
+ * @returns Cartesian3
+ */
+
+export const convertCartographic = async (viewerData: any, cartesian: Cartesian3): Promise<Cartesian3> => {
+    const cartographic = viewerData?.scene.globe.ellipsoid.cartesianToCartographic(cartesian);
+    if (!cartographic) return new Cartesian3();
+    const longitude = cesiumMath.toDegrees(cartographic.longitude);
+    const latitude = cesiumMath.toDegrees(cartographic.latitude);
+    return Cartesian3.fromDegrees(longitude, latitude, 30000);
+};
