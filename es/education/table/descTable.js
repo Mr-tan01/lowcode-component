@@ -1,7 +1,7 @@
 import o from "./descTable2.js";
 import './assets/descTable.css';/* empty css           */
 import t from "./_virtual/_plugin-vue_export-helper.js";
-const e = /* @__PURE__ */ t(o, [["__scopeId", "data-v-663b3c80"]]);
+const c = /* @__PURE__ */ t(o, [["__scopeId", "data-v-1915e8ca"]]);
 export {
-  e as default
+  c as default
 };
