@@ -1,56 +1,56 @@
 import p from "lodash-es/merge";
-import { deepMergeArrayOptions as u } from "@mmj-code-lib/lowcode/es/components";
-import { tooltipOptions as d, legendOptions as O, gridOptions as g, xAxisOptions as y, yAxisOptions as f, scatterColors as m, commonScatterSeries as l } from "./const.js";
+import { deepMergeArrayOptions as d } from "@mmj-code-lib/lowcode/es/components";
+import { tooltipOptions as u, legendOptions as f, gridOptions as y, xAxisOptions as O, yAxisOptions as g, scatterColors as m, commonScatterSeries as c } from "./const.js";
 import { setRgbaAlpha as A } from "lowcode-share/es/share";
 const n = {
-  tooltip: d,
-  legend: O,
-  grid: g,
-  xAxis: y,
-  yAxis: f,
+  tooltip: u,
+  legend: f,
+  grid: y,
+  xAxis: O,
+  yAxis: g,
   color: m,
-  series: l
+  series: c
 };
-function h(o) {
-  return u(o, Object.keys(n), Object.values(n)), p({}, n, o);
+function h(o, r) {
+  return r && Reflect.deleteProperty(n, "tooltip"), d(o, Object.keys(n), Object.values(n)), p({}, n, o);
 }
-function c(o, e) {
+function l(o, r) {
   var a, i;
-  const r = m[e % m.length];
+  const t = m[r % m.length];
   return p(
     {},
-    l,
+    c,
     {
       itemStyle: {
-        color: A(r, 0.51),
-        borderColor: r
+        color: A(t, 0.51),
+        borderColor: t
       },
       markPoint: {
         emphasis: {
           itemStyle: {
             // @ts-ignore
-            borderColor: ((a = o == null ? void 0 : o.itemStyle) == null ? void 0 : a.borderColor) ?? r
+            borderColor: ((a = o == null ? void 0 : o.itemStyle) == null ? void 0 : a.borderColor) ?? t
           }
         },
-        data: ((i = o.data) == null ? void 0 : i.map((t, s) => ({
-          name: t.name,
-          coord: [s, t.value, t],
+        data: ((i = o.data) == null ? void 0 : i.map((e, s) => ({
+          name: e.name,
+          coord: [s, e.value, e],
           meta: {
-            color: r,
-            ...t.meta ?? {}
+            color: t,
+            ...e.meta ?? {}
           },
-          item: t
+          item: e
         }))) ?? []
       }
     },
     o
   );
 }
-function j(o) {
-  return Array.isArray(o) ? o.map((e, r) => c(e, r)) : c(o, 0);
+function R(o) {
+  return Array.isArray(o) ? o.map((r, t) => l(r, t)) : l(o, 0);
 }
 export {
   n as commonScatterOptions,
   h as useCommonScatterOptions,
-  j as useCommonScatterSeries
+  R as useCommonScatterSeries
 };
