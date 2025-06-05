@@ -1,10 +1,10 @@
-import { defineComponent as k, openBlock as a, createElementBlock as i, createElementVNode as r, Fragment as u, renderList as m, normalizeStyle as b, unref as c, toDisplayString as C, withDirectives as S, createVNode as w, withCtx as E, renderSlot as N, vShow as T } from "vue";
-import y from "lodash-es/memoize";
-import x from "./elasticScrollbar/index.js";
-import L from "./empty/index.js";
-const z = { class: "lc-desc-list" }, A = { class: "lc-desc-list__wrapper" }, B = { class: "lc-desc-list__head" }, D = ["title"], H = { class: "lc-desc-list__tbody" }, V = ["title"], $ = { class: "lc-desc-list--empty" }, G = /* @__PURE__ */ k({
+import { defineComponent as $, mergeDefaults as D, ref as w, onMounted as L, watch as z, nextTick as A, openBlock as n, createElementBlock as r, createElementVNode as o, normalizeStyle as m, Fragment as f, renderList as y, unref as a, toDisplayString as C, withDirectives as T, createVNode as N, withCtx as B, renderSlot as x, vShow as E } from "vue";
+import p from "lodash-es/memoize";
+import M from "./elasticScrollbar/index.js";
+import V from "./empty/index.js";
+const F = { class: "lc-desc-list" }, j = { class: "lc-desc-list__wrapper" }, q = ["title"], G = { class: "lc-desc-list__tbody" }, J = ["title"], K = { class: "lc-desc-list--empty" }, W = /* @__PURE__ */ $({
   __name: "descTable",
-  props: {
+  props: /* @__PURE__ */ D({
     columns: {
       type: Array,
       default: () => []
@@ -13,87 +13,116 @@ const z = { class: "lc-desc-list" }, A = { class: "lc-desc-list__wrapper" }, B =
       type: Array,
       default: () => []
     }
-  },
-  setup(o) {
-    const f = {
-      index: (e, n, t, l) => t + 1,
-      default: (e, n, t, l) => {
-        const s = e[n.dataIndex];
+  }, {
+    data: () => []
+  }),
+  setup(i) {
+    const v = {
+      index: (e, c, t, l) => t + 1,
+      default: (e, c, t, l) => {
+        const s = e[c.dataIndex];
         return typeof s == "number" ? s : s || "-";
       }
-    }, p = y((e, n) => e.title);
-    function v(e, n, t, l) {
-      return (n.type ? f[n.type] : f.default)(e, n, t, l);
+    }, g = w(!1), u = w();
+    function b() {
+      u.value && (g.value = u.value.$el.scrollHeight > u.value.$el.clientHeight);
     }
-    const _ = y(v, v), g = y((e) => ({
+    L(() => {
+      b();
+    }), z(
+      () => i.data,
+      () => {
+        A(() => {
+          b();
+        });
+      },
+      { deep: !0 }
+    );
+    const h = p((e, c) => e.title);
+    function S(e, c, t, l) {
+      return (c.type ? v[c.type] : v.default)(e, c, t, l);
+    }
+    const _ = p(S, S), k = p((e) => ({
       "--text-align": e.align ?? "left",
       "--cell-flex": e.flex ?? 1,
       "--cell-width": e.width ?? "auto"
     }));
-    function h(e) {
+    function H(e) {
       return e.dataIndex ?? "default";
     }
-    return (e, n) => (a(), i("div", z, [
-      r("div", A, [
-        r("div", B, [
-          (a(!0), i(
-            u,
-            null,
-            m(o.columns, (t, l) => (a(), i(
-              "div",
-              {
-                key: l,
-                style: b(c(g)(t)),
-                class: "lc-desc-list__head--item"
-              },
-              [
-                r("div", {
-                  class: "lc-desc-list__head--item__cell",
-                  title: c(p)(t, l)
-                }, C(c(p)(t, l)), 9, D)
-              ],
-              4
-              /* STYLE */
-            ))),
-            128
-            /* KEYED_FRAGMENT */
-          ))
-        ]),
-        S(w(
-          c(x),
-          null,
+    return (e, c) => (n(), r("div", F, [
+      o("div", j, [
+        o(
+          "div",
           {
-            default: E(() => [
-              r("div", H, [
-                (a(!0), i(
-                  u,
+            class: "lc-desc-list__head",
+            style: m({ paddingRight: g.value ? "6px" : "0" })
+          },
+          [
+            (n(!0), r(
+              f,
+              null,
+              y(i.columns, (t, l) => (n(), r(
+                "div",
+                {
+                  key: l,
+                  style: m(a(k)(t)),
+                  class: "lc-desc-list__head--item"
+                },
+                [
+                  o("div", {
+                    class: "lc-desc-list__head--item__cell",
+                    title: a(h)(t, l)
+                  }, C(a(h)(t, l)), 9, q)
+                ],
+                4
+                /* STYLE */
+              ))),
+              128
+              /* KEYED_FRAGMENT */
+            ))
+          ],
+          4
+          /* STYLE */
+        ),
+        T(N(
+          a(M),
+          {
+            ref_key: "scrollbarRef",
+            ref: u
+          },
+          {
+            default: B(() => [
+              o("div", G, [
+                (n(!0), r(
+                  f,
                   null,
-                  m(o.data, (t, l) => (a(), i("div", {
+                  y(i.data, (t, l) => (n(), r("div", {
                     class: "lc-desc-list__tbody__tr",
                     key: l
                   }, [
-                    (a(!0), i(
-                      u,
+                    (n(!0), r(
+                      f,
                       null,
-                      m(o.columns, (s, d) => (a(), i(
+                      y(i.columns, (s, d) => (n(), r(
                         "div",
                         {
                           class: "lc-desc-list__tbody__tr__cell",
                           key: d,
-                          style: b(c(g)(s))
+                          style: m(a(k)(s))
                         },
                         [
-                          N(e.$slots, h(s), {
+                          x(e.$slots, H(s), {
                             record: t,
                             index: l,
                             column: s,
                             colIndex: d,
-                            value: c(_)(t, s, l, d)
+                            value: a(_)(t, s, l, d)
                           }, () => [
-                            r("span", {
+                            o("span", {
                               class: "lc-desc-list__tbody__tr__cell__span",
-                              title: c(_)(t, s, l, d)
-                            }, C(c(_)(t, s, l, d)), 9, V)
+                              title: a(_)(t, s, l, d)
+                            }, C(a(_)(t, s, l, d)), 9, J)
                           ], !0)
                         ],
                         4
@@ -114,25 +143,25 @@ const z = { class: "lc-desc-list" }, A = { class: "lc-desc-list__wrapper" }, B =
           512
           /* NEED_PATCH */
         ), [
-          [T, o.data.length]
+          [E, i.data.length]
         ]),
-        S(r(
+        T(o(
           "div",
-          $,
+          K,
           [
-            N(e.$slots, "empty", {}, () => [
-              w(c(L))
+            x(e.$slots, "empty", {}, () => [
+              N(a(V))
             ], !0)
           ],
           512
           /* NEED_PATCH */
         ), [
-          [T, !o.data.length]
+          [E, !i.data.length]
         ])
       ])
     ]));
   }
 });
 export {
-  G as default
+  W as default
 };

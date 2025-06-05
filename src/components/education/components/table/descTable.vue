@@ -1,14 +1,14 @@
 <template>
     <div class="lc-desc-list">
         <div class="lc-desc-list__wrapper">
-            <div class="lc-desc-list__head">
+            <div class="lc-desc-list__head" :style="{ paddingRight: hasScrollbar ? '6px' : '0' }">
                 <div v-for="(thRecord, thIndex) in columns" :key="thIndex" :style="customRecordStyle(thRecord)" class="lc-desc-list__head--item">
                     <div class="lc-desc-list__head--item__cell" :title="getThCellNode(thRecord, thIndex)">
                         {{ getThCellNode(thRecord, thIndex) }}
                     </div>
                 </div>
             </div>
-            <LcElasticScrollbar v-show="data.length">
+            <LcElasticScrollbar v-show="data.length" ref="scrollbarRef">
                 <div class="lc-desc-list__tbody">
                     <div class="lc-desc-list__tbody__tr" v-for="(tdRecord, tdIndex) in data" :key="tdIndex">
                         <div class="lc-desc-list__tbody__tr__cell" v-for="(thRecord, thIndex) in columns" :key="thIndex" :style="customRecordStyle(thRecord)">
@@ -38,7 +38,7 @@
 </template>
 
 <script lang="ts" setup>
-import { PropType } from "vue";
+import { PropType, ref, onMounted, watch, nextTick } from "vue";
 import memoize from "lodash-es/memoize";
 import { LcElasticScrollbar } from "@/components/education/components/elasticScrollbar";
 import { LcEmpty } from "@/components/education/components/empty";
@@ -51,7 +51,7 @@ export interface Columns {
     width?: string;
     flex?: string | number;
 }
-const {} = defineProps({
+const { data = [] } = defineProps({
     columns: {
         type: Array as PropType<Columns[]>,
         default: () => [],
@@ -71,6 +71,29 @@ const tdCellTypeMap = {
         return typeof val === "number" ? val : val || "-";
     },
 };
+
+const hasScrollbar = ref(false);
+const scrollbarRef = ref();
+
+function checkScrollbar() {
+    if (scrollbarRef.value) {
+        hasScrollbar.value = scrollbarRef.value.$el.scrollHeight > scrollbarRef.value.$el.clientHeight;
+    }
+}
+
+onMounted(() => {
+    checkScrollbar();
+});
+
+watch(
+    () => data,
+    () => {
+        nextTick(() => {
+            checkScrollbar();
+        });
+    },
+    { deep: true }
+);
 
 const getThCellNode: (_record: Columns, _index: number) => string = memoize((_record: Columns, _index: number) => {
     return _record.title;
@@ -135,6 +158,7 @@ function getTdCellSlotName(_thRecord) {
         &--item {
             flex: var(--cell-flex, none);
             width: var(--cell-width, auto);
+            padding: 9px 11px;
             box-sizing: border-box;
 
             &__cell {
@@ -143,7 +167,7 @@ function getTdCellSlotName(_thRecord) {
                 color: #ffffff;
                 line-height: 20px;
                 font-style: normal;
-                padding: 9px;
+
                 text-align: var(--text-align, "left");
             }
         }
@@ -206,9 +230,8 @@ function getTdCellSlotName(_thRecord) {
                 text-align: var(--text-align, "center");
                 flex: var(--cell-flex, 1);
                 width: var(--cell-width, auto);
-                box-sizing: border-box;
                 --line-clamp: 2;
-
+                box-sizing: border-box;
                 &__span {
                     display: -webkit-box;
                     /* 必须设置display属性为-webkit-box */

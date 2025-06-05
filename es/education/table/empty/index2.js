@@ -1,19 +1,20 @@
-import { defineComponent as o, openBlock as r, createElementBlock as p, createVNode as i, unref as n, mergeProps as s, withCtx as m, createElementVNode as c } from "vue";
-import d from "./empty_image.svg.js";
-import { NEmpty as l } from "naive-ui/es/empty";
-const a = { class: "lc-empty" }, E = /* @__PURE__ */ o({
+import { defineComponent as o, openBlock as r, createElementBlock as p, createVNode as i, unref as s, mergeProps as m, withCtx as n, createElementVNode as c } from "vue";
+import l from "./empty_image.svg.js";
+import { NEmpty as a } from "naive-ui/es/empty";
+const d = { class: "lc-empty" }, g = /* @__PURE__ */ o({
   __name: "empty",
   props: {
     description: { default: "暂无数据" }
   },
   setup(_) {
-    return (e, t) => (r(), p("div", a, [
-      i(n(l), s(e.$attrs, { description: e.description }), {
-        icon: m(() => t[0] || (t[0] = [
+    return (e, t) => (r(), p("div", d, [
+      i(s(a), m(e.$attrs, { description: e.description }), {
+        icon: n(() => t[0] || (t[0] = [
           c(
             "img",
             {
-              src: d,
+              class: "lc-empty__iamge",
+              src: l,
               alt: ""
             },
             null,
@@ -28,5 +29,5 @@ const a = { class: "lc-empty" }, E = /* @__PURE__ */ o({
   }
 });
 export {
-  E as default
+  g as default
 };

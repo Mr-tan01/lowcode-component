@@ -1,7 +1,7 @@
-import c from "./index2.js";
+import o from "./index2.js";
 import '../assets/empty/empty.css';/* empty css       */
-import o from "../_virtual/_plugin-vue_export-helper.js";
-const r = /* @__PURE__ */ o(c, [["__scopeId", "data-v-8ccdc83c"]]);
+import t from "../_virtual/_plugin-vue_export-helper.js";
+const c = /* @__PURE__ */ t(o, [["__scopeId", "data-v-711c49e8"]]);
 export {
-  r as default
+  c as default
 };
