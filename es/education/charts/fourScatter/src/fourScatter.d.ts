@@ -2,6 +2,7 @@ import { EChartsOption, EChartsCoreOption, ECElementEvent } from 'echarts';
 type __VLS_Props = {
     options: EChartsCoreOption | EChartsOption;
     isPushAxis?: boolean;
+    isDefaultTooltip?: boolean;
 };
 declare const _default: import('vue').DefineComponent<__VLS_Props, {
     instance: import('vue').ComputedRef<import('vue').CreateComponentPublicInstanceWithMixins<Readonly<import('vue').ExtractPropTypes<{

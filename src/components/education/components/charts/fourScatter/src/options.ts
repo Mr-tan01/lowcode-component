@@ -14,7 +14,10 @@ export const commonScatterOptions: EChartsOption = {
     series: commonScatterSeries,
 };
 
-export function useCommonScatterOptions(opts: EChartsCoreOption | EChartsOption) {
+export function useCommonScatterOptions(opts: EChartsCoreOption | EChartsOption, isDefaultTooltip: boolean) {
+    if (isDefaultTooltip) {
+        Reflect.deleteProperty(commonScatterOptions, 'tooltip')
+    }
     deepMergeArrayOptions(opts, Object.keys(commonScatterOptions), Object.values(commonScatterOptions));
     return merge({}, commonScatterOptions, opts);
 }
