@@ -19,24 +19,29 @@
                     <div class="lc-skew-indicator__wrapper__info--result--unit" v-if="renderUnit">
                         {{ renderUnit }}
                     </div>
-                    <div
-                        class="lc-skew-indicator__wrapper__info--result--year"
-                        :class="{
-                            down: yearValue < 0,
-                            up: yearValue > 0,
-                        }"
-                    >
+                    <div v-if="yearValue" class="lc-skew-indicator__wrapper__info--result--year" :class="{
+                        down: yearValue < 0,
+                        up: yearValue > 0,
+                    }">
                         <div class="lc-skew-indicator__wrapper__info--result--year--label">
                             {{ yearLabel }}
                         </div>
                         <div class="lc-skew-indicator__wrapper__info--result--year--value">
                             <NNumberAnimation show-separator :from="0" :to="yearValue" active :precision="decimal" />%
                         </div>
-                        <div class="lc-skew-indicator__wrapper__info--result--year--up" v-if="yearValue">{{ prefixIcon }}</div>
+                        <div class="lc-skew-indicator__wrapper__info--result--year--up" v-if="yearValue">{{ prefixIcon
+                            }}</div>
                     </div>
                     <div class="lc-skew-indicator__wrapper__info--result--altericon" v-if="tip">
                         <LcTooltip>{{ tip }}</LcTooltip>
                     </div>
+                </div>
+                <div class="lc-skew-indicator__wrapper__info--sub" v-if="subHead">
+                    <div class="lc-skew-indicator__wrapper__info--sub-wrapper">
+                        <div class="lc-skew-indicator__wrapper__info--sub-content">{{ subContent }}</div>
+                        <div v-if="subHead" class="lc-skew-indicator__wrapper__info--sub-head">{{ subHead }}</div>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -61,6 +66,9 @@ const {
     icon = personIcon,
     tip = "",
     type = "skew",
+    subHead = "",
+    subContent = "",
+    subUnit = ""
 } = defineProps({
     label: {
         type: String,
@@ -92,6 +100,18 @@ const {
     type: {
         type: String as PropType<"tile" | "skew">,
     },
+    subHead: {
+        type: String,
+    },
+    subContent: {
+        type: String,
+    },
+    subUnit: {
+        type: String
+    },
+    isShowIcon: {
+        type: Boolean
+    }
 });
 
 const decimals = computed(() => {
@@ -129,18 +149,23 @@ const prefixIcon = computed(() => {
         background-size: cover;
         background-repeat: no-repeat;
         transition: background 0.3s ease-in-out;
+
         &:hover {
             background-image: url(./images/skew/tile-selected-bg.png);
         }
+
         .lc-skew-indicator {
             &__wrapper {
                 min-height: 112px;
+
                 &__info {
                     padding: 35px 30px;
                 }
+
                 &__table--bg {
                     display: none;
                 }
+
                 &::before,
                 &::after {
                     display: none;
@@ -156,6 +181,7 @@ const prefixIcon = computed(() => {
 
         &__info {
             padding: 20px 0;
+            padding-right: 20px;
             padding-left: 35%;
             flex: 1;
             display: flex;
@@ -169,6 +195,7 @@ const prefixIcon = computed(() => {
                 line-height: 20px;
                 text-align: left;
                 font-style: normal;
+                max-width: 100px;
             }
 
             &--result {
@@ -219,6 +246,41 @@ const prefixIcon = computed(() => {
                         margin-bottom: -6px;
                     }
                 }
+            }
+
+            &--sub {
+
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                &-wrapper {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    flex-direction: column;
+                }
+
+                &-content {
+                    color: #0FD4FB;
+                    font-size: 30px;
+                }
+
+                &--head {
+                    color: #ffffff;
+                    font-size: 16px;
+                }
+
+            }
+
+            &--sub::before {
+                content: "";
+                display: inline-block;
+                width: 1px;
+                height: 31px;
+                background: #ccc;
+                margin: 0 12px 0 0;
+                vertical-align: middle;
             }
         }
 
@@ -312,6 +374,7 @@ const prefixIcon = computed(() => {
 .down {
     color: #08c978;
 }
+
 .up {
     color: #ff6666;
 }
