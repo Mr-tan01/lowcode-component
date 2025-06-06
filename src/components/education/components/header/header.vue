@@ -33,7 +33,7 @@
                                             <div class="lcc-header__wrapper__navs__drop__group__label--icon">
                                                 <img class="lcc-header__wrapper__navs__drop__group__label--icon--image" src="./images/right-arrow.png" alt="" />
                                             </div>
-                                            <div class="lcc-header__wrapper__navs__drop__group__label--text">
+                                            <div class="lcc-header__wrapper__navs__drop__group__label--text" :title="el.label">
                                                 {{ el.label }}
                                             </div>
                                         </div>
@@ -273,6 +273,10 @@ function carouseChange(value: LcCarouseBoxChangeEvent) {
                         }
 
                         &--text {
+                            white-space: nowrap;
+                            max-width: 165px;
+                            text-overflow: ellipsis;
+                            overflow: hidden;
                             font-family: HarmonyOS_Sans_SC_Bold;
                             font-size: 16px;
                             color: #f2f3f4;

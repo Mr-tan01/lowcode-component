@@ -271,7 +271,7 @@ export const pointInfo = {
             lat: 22.523143,
             value: "皇",
             iconType: "primary",
-            text: "皇岗村",
+            text: "皇岗村1",
             textIconType: "primary_label",
         },
         {
