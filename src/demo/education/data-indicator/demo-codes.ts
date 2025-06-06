@@ -47,6 +47,10 @@ export const code2 = `
         <LcIndicatorCard :value="23" unit="万" hint="在编教职工(人)"  size="large" value-color="rgba(15, 251, 248, 1)" hint-color="rgba(15, 251, 248, 1)"> </LcIndicatorCard>
         <LcIndicatorCard :value="23" unit="万" hint="在编教职工(人)" size="large" value-color="rgba(15, 251, 248, 1)" hint-color="rgba(15, 251, 248, 1)"></LcIndicatorCard>
     </NSpace>
+    <NSpace>
+        <LcBothwayCard label="深圳户籍" :data="[{ value:2311111, unit: '人'}]"></LcBothwayCard>
+        <LcBothwayCard label="深圳户籍" :data="[{ value:2311111, unit: '人'},{ value: 567, unit: '%'}]"></LcBothwayCard>
+    </NSpace>
 </template>
 `;
 

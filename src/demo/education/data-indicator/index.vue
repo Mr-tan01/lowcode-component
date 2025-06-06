@@ -89,6 +89,10 @@
                 <LcIndicatorCard :value="23" unit="万" hint="在编教职工(人)" size="large" value-color="rgba(15, 251, 248, 1)"
                     hint-color="rgba(15, 251, 248, 1)"> </LcIndicatorCard>
             </NSpace>
+            <NSpace>
+                <LcBothwayCard label="深圳户籍" :data="[{ value:2311111, unit: '人'}]"></LcBothwayCard>
+                <LcBothwayCard label="深圳户籍" :data="[{ value:2311111, unit: '人'},{ value: 567, unit: '%'}]"></LcBothwayCard>
+            </NSpace>
         </DemoHelpBox>
         <DemoHelpBox title="指标卡列表" description="基本用法" rswidth="1000px" :code="code3">
             <NSpace>
@@ -128,6 +132,7 @@ import {
     LcIndicatorCardArrows,
     LcMinitypeCard,
     LcHumanShapeCard,
+    LcBothwayCard
 } from "@/components/education/components/dataIndicator";
 import { code1, code2, code3, code4 } from "./demo-codes";
 import Icon from "./image/test.png";
