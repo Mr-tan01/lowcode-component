@@ -39,7 +39,7 @@ const defNavData = [
                 ],
             },
             {
-                label: "教师队伍建设",
+                label: "教师队伍建设教师队伍建设教师队伍建设教师队伍建设",
                 children: [
                     {
                         label: "基础教育教师队伍结构",
