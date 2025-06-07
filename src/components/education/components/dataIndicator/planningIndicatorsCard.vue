@@ -110,6 +110,10 @@ const formatedText = (text, maxLength) => {
         &__center {
             width: 101px;
             height: 77px;
+            img {
+                height: 100%;
+                width: 100%;
+            }
         }
         &__right {
             display: flex;

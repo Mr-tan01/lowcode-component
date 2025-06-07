@@ -28,5 +28,7 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
     };
 }>> & Readonly<{}>, {
     fixed: boolean;
-}, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, HTMLDivElement>;
+}, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {
+    valueRef: HTMLDivElement;
+}, HTMLDivElement>;
 export default _default;
