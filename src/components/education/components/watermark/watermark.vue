@@ -5,7 +5,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, defineProps, ref, watch, onMounted } from "vue";
+import { computed, defineProps, ref, watch, onUnmounted } from "vue";
 import type { CSSProperties } from "vue";
 
 const {
@@ -40,14 +40,8 @@ const generateWatermark = () => {
     const textHeight = fontSize;
 
     const rad = (rotate * Math.PI) / 180;
-    const rotatedWidth =
-        Math.abs(textWidth * Math.cos(rad)) +
-        Math.abs(textHeight * Math.sin(rad)) +
-        gap;
-    const rotatedHeight =
-        Math.abs(textWidth * Math.sin(rad)) +
-        Math.abs(textHeight * Math.cos(rad)) +
-        gap;
+    const rotatedWidth = Math.abs(textWidth * Math.cos(rad)) + Math.abs(textHeight * Math.sin(rad)) + gap;
+    const rotatedHeight = Math.abs(textWidth * Math.sin(rad)) + Math.abs(textHeight * Math.cos(rad)) + gap;
 
     canvas.width = rotatedWidth;
     canvas.height = rotatedHeight;
@@ -65,8 +59,11 @@ const generateWatermark = () => {
     backgroundUrl.value = canvas.toDataURL("image/png");
 };
 
-onMounted(generateWatermark);
-watch([text, fontSize, color, rotate, opacity, gap], generateWatermark);
+const changeWatermark = watch([() => text, () => fontSize, () => color, () => rotate, () => opacity, () => gap], generateWatermark, {
+    immediate: true,
+});
+
+onUnmounted(changeWatermark);
 
 const watermarkStyle = computed<CSSProperties>(() => {
     const baseStyle: CSSProperties = {
