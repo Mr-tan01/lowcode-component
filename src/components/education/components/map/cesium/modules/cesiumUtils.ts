@@ -19,11 +19,55 @@ import {
     Cartographic,
     PolygonHierarchy,
 } from "cesium";
-
+import localforage from "localforage";
 import { CesiumHeatmap } from "cesium-heatmap-es6";
 import { areaData, type controlStatusType, type optionType, type pointType, type changeModelParamType } from "./type";
 import { createInfoCanvas, createClusterBillboard, updateViewerEntityInfo, createEntityConfig } from "./tools";
 import { useMessage } from "naive-ui";
+class TileCacheHelper {
+    private storeName = "WMTS_Tiles";
+    private maxAge = 7 * 24 * 60 * 60 * 1000; // 缓存有效期7天
+
+    constructor() {
+        // 配置localforage
+        localforage.config({
+            driver: [localforage.INDEXEDDB, localforage.WEBSQL, localforage.LOCALSTORAGE],
+            name: "CesiumTileCache",
+            storeName: this.storeName,
+        });
+    }
+
+    async getTile(key: { url: string; level: number; x: number; y: number }): Promise<Blob | null> {
+        try {
+            const cacheKey = `${key.url}_${key.level}_${key.x}_${key.y}`;
+            const result = await localforage.getItem<{ data: Blob; timestamp: number }>(cacheKey);
+
+            if (result && Date.now() - result.timestamp < this.maxAge) {
+                return result.data;
+            }
+            // 自动清理过期缓存
+            if (result) await localforage.removeItem(cacheKey);
+            return null;
+        } catch (error) {
+            console.error("读取缓存失败:", error);
+            return null;
+        }
+    }
+
+    async putTile(key: { url: string; level: number; x: number; y: number }, blob: Blob): Promise<boolean> {
+        try {
+            const cacheKey = `${key.url}_${key.level}_${key.x}_${key.y}`;
+            await localforage.setItem(cacheKey, {
+                data: blob,
+                timestamp: Date.now(),
+            });
+            return true;
+        } catch (error) {
+            console.error("存储缓存失败:", error);
+            return false;
+        }
+    }
+}
 
 export class cesiumService {
     public viewer: Viewer | null = null;
@@ -56,6 +100,7 @@ export class cesiumService {
     private lastHoveredEntity: Entity | null = null;
     private lastThrottleTime: number = 0;
     private throttleDelay: number = 100;
+    private rretryCount: number = 3;
 
     // 深圳市地理边界（根据瓦片定义经纬度范围）
     private shenzhenBounds = Rectangle.fromDegrees(
@@ -66,7 +111,7 @@ export class cesiumService {
     );
 
     private message = useMessage();
-
+    private tileCache = new TileCacheHelper();
     constructor(public containerId: string, public options: optionType) {
         // 合并配置
         this.options.config = {
@@ -197,16 +242,10 @@ export class cesiumService {
         const canvas = this.viewer.scene.canvas;
 
         // 注册单击事件
-        this.screenSpaceEventHandler = new ScreenSpaceEventHandler(canvas).setInputAction(
-            this.handleLeftClick.bind(this),
-            ScreenSpaceEventType.LEFT_CLICK
-        );
+        this.screenSpaceEventHandler = new ScreenSpaceEventHandler(canvas).setInputAction(this.handleLeftClick.bind(this), ScreenSpaceEventType.LEFT_CLICK);
 
         // 注册鼠标悬浮事件
-        this.screenMouseMoveHandler = new ScreenSpaceEventHandler(canvas).setInputAction(
-            this.handleMouseMove.bind(this),
-            ScreenSpaceEventType.MOUSE_MOVE
-        );
+        this.screenMouseMoveHandler = new ScreenSpaceEventHandler(canvas).setInputAction(this.handleMouseMove.bind(this), ScreenSpaceEventType.MOUSE_MOVE);
 
         // 监听相机高度变化
         if (this.viewer.scene && this.viewer.scene.camera) {
@@ -298,6 +337,7 @@ export class cesiumService {
 
     // 加载瓦片图层
     async loadTileLayer(url: string): Promise<void> {
+        let provider;
         // 加载动画
         this.options.loadTileLayerHandler(true);
         const { viewer, imageLayerState, imageLayerUrl } = this;
@@ -309,7 +349,7 @@ export class cesiumService {
         this.updateLayerState(url);
 
         try {
-            const provider = await this.loadProviderWithFallback({
+            provider = await this.loadProviderWithFallback({
                 targetUrl: imageLayerUrl || url,
                 useZondy: imageLayerState,
                 fallbackUrl: this.options.config.defaultUrl ?? this.defaultConfig.defaultUrl,
@@ -319,6 +359,15 @@ export class cesiumService {
                 await this.addProviderToViewer(viewer, provider);
             }
         } catch (error) {
+            if (this.rretryCount > 0) {
+                new Promise((resolve) => resolve(setTimeout(resolve, 1000)));
+                provider = await this.loadProviderWithFallback({
+                    targetUrl: imageLayerUrl || url,
+                    useZondy: imageLayerState,
+                    fallbackUrl: this.options.config.defaultUrl ?? this.defaultConfig.defaultUrl,
+                });
+            }
+
             this.handleLoadError(error);
         }
     }
@@ -342,11 +391,59 @@ export class cesiumService {
         fallbackUrl: string;
     }): Promise<WebMapTileServiceImageryProvider | ArcGisMapServerImageryProvider> {
         try {
+            let provider: any;
             if (options.useZondy) {
                 // @ts-ignore
-                return await Zondy.WebMapTileServiceImageryProvider.fromUrl(options.targetUrl);
+                provider = await Zondy.WebMapTileServiceImageryProvider.fromUrl(options.targetUrl);
+            } else {
+                provider = await ArcGisMapServerImageryProvider.fromUrl(options.targetUrl);
             }
-            return await ArcGisMapServerImageryProvider.fromUrl(options.targetUrl);
+
+            // 添加缓存拦截器
+            const originalRequestImage = provider.requestImage.bind(provider);
+            provider.requestImage = async (x: number, y: number, level: number) => {
+                try {
+                    // 生成唯一缓存键
+                    const cacheKey = {
+                        url: options.targetUrl,
+                        x,
+                        y,
+                        level,
+                    };
+
+                    // 尝试从缓存获取
+                    const cached = await this.tileCache.getTile(cacheKey);
+                    if (cached) {
+                        return createImageBitmap(cached);
+                    }
+
+                    // 缓存未命中则发起请求
+                    const image = await originalRequestImage(x, y, level);
+
+                    // 转换为Blob进行存储
+                    if (image instanceof ImageBitmap) {
+                        const canvas = document.createElement("canvas");
+                        canvas.width = image.width;
+                        canvas.height = image.height;
+                        const ctx = canvas.getContext("2d");
+                        if (ctx) {
+                            ctx.drawImage(image, 0, 0);
+                            canvas.toBlob(async (blob) => {
+                                if (blob) {
+                                    await this.tileCache.putTile(cacheKey, blob);
+                                }
+                                image.close(); // 及时释放资源
+                            });
+                        }
+                    }
+                    return image;
+                } catch (error) {
+                    console.error("Tile load failed:", error);
+                    return originalRequestImage(x, y, level);
+                }
+            };
+
+            return provider;
         } catch (primaryError) {
             if (options.useZondy) {
                 this.message.error("(Zondy)瓦片加载失败, 请刷新重试");
@@ -792,10 +889,7 @@ export class cesiumService {
                 this.isCheckingBounds = true;
 
                 // 获取当前视口中心点
-                const centerPosition = new Cartesian2(
-                    Math.floor(this.viewer.canvas.clientWidth / 2),
-                    Math.floor(this.viewer.canvas.clientHeight / 2)
-                );
+                const centerPosition = new Cartesian2(Math.floor(this.viewer.canvas.clientWidth / 2), Math.floor(this.viewer.canvas.clientHeight / 2));
 
                 // 获取视口中心点的世界坐标
                 const pickRay = this.viewer.camera.getPickRay(centerPosition);
