@@ -15,7 +15,7 @@
                             <span>{{ item.value }}%</span>
                         </span>
                     </div>
-                    <div class="lc-progress__wrapper__item__right" :title="item.tootal.toString()">
+                    <div class="lc-progress__wrapper__item__right" :style="{ width: maxWidth }" ref="valueRef" :title="item.tootal.toString()">
                         <span>{{ renderValue(item.tootal) }}</span>
                         <span>{{ renderUnit(item.tootal, item.unit) }}</span>
                     </div>
@@ -27,7 +27,7 @@
 <script lang="ts" setup>
 import { LcElasticScrollbar } from "@/components/education/components/elasticScrollbar";
 import { bigNumber } from "lowcode-share/es/share";
-import { PropType } from "vue";
+import { PropType, useTemplateRef, computed } from "vue";
 import memoize from "lodash-es/memoize";
 
 export type ProgereeDataList = {
@@ -53,6 +53,14 @@ const {
     },
 });
 
+const valueRefS = useTemplateRef("valueRef");
+const maxWidth = computed(() => {
+    if (valueRefS.value && Array.isArray(valueRefS.value)) {
+        const widths = valueRefS.value.map((item) => Math.floor(item.offsetWidth));
+        const maxWidthValue = Math.max(...widths);
+        return `${maxWidthValue}px`;
+    }
+});
 const renderValue = (tootal) => {
     if (fixed) {
         const { result } = bigNumber(tootal, decimal);
@@ -133,7 +141,7 @@ const renderUnit = memoize(
             &__right {
                 margin-right: 6px;
                 text-align: right;
-                width: 80px;
+                padding-left: 8px;
             }
         }
     }

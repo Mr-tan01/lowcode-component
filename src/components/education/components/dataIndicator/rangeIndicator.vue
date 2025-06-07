@@ -85,7 +85,7 @@ const renderUnit = memoize(
 
 <style lang="scss" scoped>
 .lc-range-indicator {
-    width: fit-content;
+    width: 100%;
 
     &__wrapper {
         min-width: 393px;

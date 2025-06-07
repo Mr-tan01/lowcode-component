@@ -22,7 +22,7 @@ const progressList = [
         value: 23.8,
         unit: "个",
         color: "#00C2C0",
-        tootal: 9999999,
+        tootal: 80,
     },
     {
         label: "类目名称二",
