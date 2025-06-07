@@ -1,6 +1,7 @@
 <template>
     <div class="lc-cesium">
-        <NSpin :show="initImageryLayersStatus || initPointDataStatus" :stroke="spinStroke" :style="spinStyle" size="large">
+        <NSpin :show="initImageryLayersStatus || initPointDataStatus" :stroke="spinStroke" :style="spinStyle"
+            size="large">
             <div class="lc-cesium_map" id="cesium-3d-viewer"></div>
             <template #description> 地图加载中... </template>
         </NSpin>

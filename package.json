@@ -1,7 +1,7 @@
 {
     "name": "lowcode-component",
     "private": true,
-    "version": "0.1.0-alpha.2.7.1",
+    "version": "0.1.0-alpha.2.7.2",
     "type": "module",
     "main": "dist/index.prod.mjs",
     "types": "dist/types/index.d.ts",
@@ -25,7 +25,7 @@
     "devDependencies": {
         "@cesium/engine": "^16.0.0",
         "@cesium/widgets": "^11.1.0",
-        "cesium-heatmap-es6": "^0.8.0",
+        "localforage": "^1.10.0",
         "@mmj-code-lib/scripts": "git+http://code.siteshun.com:800/front-component/STS/mmj-code-lib.git#scripts",
         "@types/echarts": "^5.0.0",
         "@types/lodash-es": "^4.17.12",
@@ -37,6 +37,7 @@
         "@vueuse/core": "^12.5.0",
         "axios": "^1.8.4",
         "cesium": "^1.128.0",
+        "cesium-heatmap-es6": "^0.8.0",
         "commander": "^13.1.0",
         "echarts": "^5.6.0",
         "highlight.js": "^11.11.1",

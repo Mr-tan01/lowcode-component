@@ -22,8 +22,10 @@ export declare class cesiumService {
     private lastHoveredEntity;
     private lastThrottleTime;
     private throttleDelay;
+    private rretryCount;
     private shenzhenBounds;
     private message;
+    private tileCache;
     constructor(containerId: string, options: optionType);
     updateViewerAttribute(): void;
     private setupClustering;
