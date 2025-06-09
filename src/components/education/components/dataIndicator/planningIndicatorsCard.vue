@@ -1,7 +1,7 @@
 <template>
     <div class="lc-planning-indicators">
         <div class="lc-planning-indicators__header">
-            <LcSubhead :text="data?.header" type="center" :max-length="4" />
+            <LcSubhead :text="data?.header" type="center" font-size="12px" :max-length="4" />
         </div>
         <div class="lc-planning-indicators__item">
             <div class="lc-planning-indicators__item__left">
@@ -94,10 +94,10 @@ const formatedText = (text, maxLength) => {
         padding: 8px 0;
         width: 100%;
         height: 72px;
+        color: #ffffff;
+        font-family: PingFangSC, PingFang SC;
         background: url("./images/card/bg-plan-card.png");
         &__title {
-            font-family: PingFangSC, PingFang SC;
-            color: #ffffff;
             font-weight: 400;
             font-size: 16px;
         }
@@ -116,6 +116,7 @@ const formatedText = (text, maxLength) => {
             }
         }
         &__right {
+            font-size: 16px;
             display: flex;
             flex-direction: column;
             text-align: left;

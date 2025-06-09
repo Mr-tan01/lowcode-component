@@ -12,7 +12,7 @@
                 </div>
                 <div class="lc-indicator-card__wrapper--result">
                     <span class="lc-indicator-card__wrapper--result--value" :title="value.toString()">
-                        <NNumberAnimation show-separator :from="0" :to="renderValue" active :precision="decimals" locale="ru-RU" />
+                        <NNumberAnimation show-separator :from="0" :to="renderValue" active :precision="decimals" />
                     </span>
                     <span class="lc-indicator-card__wrapper--result--unit" v-if="fixed">
                         {{ unit }}
