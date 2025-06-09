@@ -6,7 +6,7 @@ import { CesiumHeatmap as I } from "cesium-heatmap-es6";
 import { areaData as f } from "./type.js";
 import { createClusterBillboard as x, createInfoCanvas as V, createEntityConfig as k, updateViewerEntityInfo as p } from "./tools.js";
 import { useMessage as U } from "naive-ui";
-import { Color as v, Rectangle as M, CustomDataSource as A, JulianDate as w, VerticalOrigin as Z, HorizontalOrigin as O, ScreenSpaceEventType as C, ScreenSpaceEventHandler as L, defined as S, ArcGisMapServerImageryProvider as P, PolylineDashMaterialProperty as N, PolygonHierarchy as R, Cartographic as E, Cartesian3 as y, Math as d, Cartesian2 as H } from "@cesium/engine";
+import { Color as v, Rectangle as M, CustomDataSource as A, JulianDate as w, VerticalOrigin as O, HorizontalOrigin as Z, ScreenSpaceEventType as C, ScreenSpaceEventHandler as b, defined as S, ArcGisMapServerImageryProvider as P, PolylineDashMaterialProperty as N, PolygonHierarchy as R, Cartographic as E, Cartesian3 as y, Math as d, Cartesian2 as H } from "@cesium/engine";
 import { Viewer as B } from "@cesium/widgets";
 class z {
   // 缓存有效期7天
@@ -120,8 +120,8 @@ class J {
         image: c.toDataURL(),
         width: 50,
         height: 50,
-        verticalOrigin: Z.CENTER,
-        horizontalOrigin: O.CENTER,
+        verticalOrigin: O.CENTER,
+        horizontalOrigin: Z.CENTER,
         disableDepthTestDistance: Number.POSITIVE_INFINITY
       });
     });
@@ -142,7 +142,7 @@ class J {
   setupEventHandlers() {
     if (!this.viewer) return;
     const e = this.viewer.scene.canvas;
-    this.screenSpaceEventHandler = new L(e).setInputAction(this.handleLeftClick.bind(this), C.LEFT_CLICK), this.screenMouseMoveHandler = new L(e).setInputAction(this.handleMouseMove.bind(this), C.MOUSE_MOVE), this.viewer.scene && this.viewer.scene.camera && this.viewer.scene.camera.changed.addEventListener(() => {
+    this.screenSpaceEventHandler = new b(e).setInputAction(this.handleLeftClick.bind(this), C.LEFT_CLICK), this.screenMouseMoveHandler = new b(e).setInputAction(this.handleMouseMove.bind(this), C.MOUSE_MOVE), this.viewer.scene && this.viewer.scene.camera && this.viewer.scene.camera.changed.addEventListener(() => {
       Math.ceil(this.viewer.camera.positionCartographic.height);
     });
   }
@@ -181,7 +181,7 @@ class J {
   handleTileLoadProgress(e) {
     e === 0 && (this.options.loadTileLayerHandler(!1), this.cleanupTileLoadListener());
   }
-  // 加载瓦片图层
+  // 加载瓦片
   async loadTileLayer(e) {
     let t;
     this.options.loadTileLayerHandler(!0);
@@ -194,12 +194,27 @@ class J {
         fallbackUrl: this.options.config.defaultUrl ?? this.defaultConfig.defaultUrl
       }), i && t && await this.addProviderToViewer(i, t);
     } catch (n) {
-      this.rretryCount > 0 && (new Promise((a) => a(setTimeout(a, 1e3))), t = await this.loadProviderWithFallback({
-        targetUrl: s || e,
-        useZondy: r,
-        fallbackUrl: this.options.config.defaultUrl ?? this.defaultConfig.defaultUrl
-      })), this.handleLoadError(n);
+      await this.retryLoadProvider(s || e, r), this.handleLoadError(n);
     }
+  }
+  // 重试
+  async retryLoadProvider(e, t) {
+    let i = 0;
+    for (; i < this.rretryCount; )
+      try {
+        await new Promise((s) => setTimeout(s, 1e3));
+        const r = await this.loadProviderWithFallback({
+          targetUrl: e,
+          useZondy: t,
+          fallbackUrl: this.options.config.defaultUrl ?? this.defaultConfig.defaultUrl
+        });
+        if (this.viewer && r) {
+          await this.addProviderToViewer(this.viewer, r);
+          return;
+        }
+      } catch {
+        i++, this.message.error("瓦片加载失败,请刷新重试");
+      }
   }
   cleanupTileLoadListener() {
     var e, t;
@@ -228,8 +243,8 @@ class J {
             const h = document.createElement("canvas");
             h.width = l.width, h.height = l.height;
             const u = h.getContext("2d");
-            u && (u.drawImage(l, 0, 0), h.toBlob(async (b) => {
-              b && await this.tileCache.putTile(a, b), l.close();
+            u && (u.drawImage(l, 0, 0), h.toBlob(async (L) => {
+              L && await this.tileCache.putTile(a, L), l.close();
             }));
           }
           return l;
@@ -238,11 +253,11 @@ class J {
         }
       }, t;
     } catch {
-      e.useZondy && this.message.error("(Zondy)瓦片加载失败, 请刷新重试");
+      e.useZondy;
       try {
         return await P.fromUrl(e.fallbackUrl);
       } catch (i) {
-        throw this.message.error("默认瓦片加载失败，请刷新重试"), this.options.loadTileLayerHandler(!1), i;
+        throw this.options.loadTileLayerHandler(!1), i;
       }
     }
   }

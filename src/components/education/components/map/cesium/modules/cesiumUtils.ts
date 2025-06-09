@@ -334,18 +334,13 @@ export class cesiumService {
             this.cleanupTileLoadListener();
         }
     }
-
-    // 加载瓦片图层
+    // 加载瓦片
     async loadTileLayer(url: string): Promise<void> {
         let provider;
-        // 加载动画
         this.options.loadTileLayerHandler(true);
         const { viewer, imageLayerState, imageLayerUrl } = this;
 
-        // 清理资源
         this.cleanupTileLoadListener();
-
-        // 更新状态
         this.updateLayerState(url);
 
         try {
@@ -359,16 +354,29 @@ export class cesiumService {
                 await this.addProviderToViewer(viewer, provider);
             }
         } catch (error) {
-            if (this.rretryCount > 0) {
-                new Promise((resolve) => resolve(setTimeout(resolve, 1000)));
-                provider = await this.loadProviderWithFallback({
-                    targetUrl: imageLayerUrl || url,
-                    useZondy: imageLayerState,
+            await this.retryLoadProvider(imageLayerUrl || url, imageLayerState);
+            this.handleLoadError(error);
+        }
+    }
+    // 重试
+    private async retryLoadProvider(url: string, useZondy: boolean | null): Promise<void> {
+        let attempts = 0;
+        while (attempts < this.rretryCount) {
+            try {
+                await new Promise((resolve) => setTimeout(resolve, 1000));
+                const provider = await this.loadProviderWithFallback({
+                    targetUrl: url,
+                    useZondy,
                     fallbackUrl: this.options.config.defaultUrl ?? this.defaultConfig.defaultUrl,
                 });
+                if (this.viewer && provider) {
+                    await this.addProviderToViewer(this.viewer, provider);
+                    return;
+                }
+            } catch (retryError) {
+                attempts++;
+                this.message.error("瓦片加载失败,请刷新重试");
             }
-
-            this.handleLoadError(error);
         }
     }
 
@@ -446,12 +454,12 @@ export class cesiumService {
             return provider;
         } catch (primaryError) {
             if (options.useZondy) {
-                this.message.error("(Zondy)瓦片加载失败, 请刷新重试");
+                // this.message.error("(Zondy)瓦片加载失败, 请刷新重试");
             }
             try {
                 return await ArcGisMapServerImageryProvider.fromUrl(options.fallbackUrl);
             } catch (fallbackError) {
-                this.message.error("默认瓦片加载失败，请刷新重试");
+                // this.message.error("默认瓦片加载失败，请刷新重试");
                 this.options.loadTileLayerHandler(false);
                 throw fallbackError;
             }

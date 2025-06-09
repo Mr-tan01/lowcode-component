@@ -36,6 +36,7 @@ export declare class cesiumService {
     private handleMouseMove;
     private handleTileLoadProgress;
     loadTileLayer(url: string): Promise<void>;
+    private retryLoadProvider;
     private cleanupTileLoadListener;
     private updateLayerState;
     private loadProviderWithFallback;

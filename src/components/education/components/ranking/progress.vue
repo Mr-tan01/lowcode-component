@@ -132,7 +132,6 @@ const renderUnit = memoize(
                     gap: 14px;
                     position: absolute;
                     left: 12px;
-                    font-family: HarmonyOS_Sans_SC_Medium;
                     font-size: 14px;
                     color: #ffffff;
                     line-height: 20px;
@@ -142,6 +141,8 @@ const renderUnit = memoize(
                 margin-right: 6px;
                 text-align: right;
                 padding-left: 8px;
+                font-size: 14px;
+                color: #ffffff;
             }
         }
     }

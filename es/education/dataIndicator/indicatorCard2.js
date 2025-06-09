@@ -1,4 +1,4 @@
-import { defineComponent as h, mergeDefaults as y, useCssVars as C, computed as r, openBlock as l, createElementBlock as n, normalizeClass as N, createElementVNode as t, createVNode as u, unref as s, withCtx as S, createTextVNode as w, toDisplayString as o, createCommentVNode as m, renderSlot as b } from "vue";
+import { defineComponent as h, mergeDefaults as y, useCssVars as C, computed as r, openBlock as l, createElementBlock as n, normalizeClass as N, createElementVNode as t, createVNode as s, unref as u, withCtx as S, createTextVNode as b, toDisplayString as o, createCommentVNode as m, renderSlot as w } from "vue";
 import { NNumberAnimation as V } from "naive-ui/es/number-animation";
 import { bigNumber as c } from "lowcode-share/es/share";
 import k from "./tooltip/index.js";
@@ -8,7 +8,7 @@ const z = { class: "lc-indicator-card__wrapper" }, B = { class: "lc-indicator-ca
 }, F = { class: "lc-indicator-card__wrapper--result" }, D = ["title"], I = {
   key: 0,
   class: "lc-indicator-card__wrapper--result--unit"
-}, T = { class: "lc-indicator-card__wrapper--text" }, R = /* @__PURE__ */ h({
+}, T = { class: "lc-indicator-card__wrapper--text" }, Z = /* @__PURE__ */ h({
   __name: "indicatorCard",
   props: /* @__PURE__ */ y({
     value: {
@@ -49,9 +49,9 @@ const z = { class: "lc-indicator-card__wrapper" }, B = { class: "lc-indicator-ca
   }),
   setup(e) {
     C((i) => ({
-      "95f5e1f4": x.value,
-      "25a0a64c": e.valueColor,
-      "69e62098": e.hintColor
+      "498a3924": x.value,
+      "5d420742": e.valueColor,
+      "6b91a84c": e.hintColor
     }));
     const a = {
       small: "small",
@@ -79,9 +79,9 @@ const z = { class: "lc-indicator-card__wrapper" }, B = { class: "lc-indicator-ca
         t("div", z, [
           t("div", B, [
             e.tip ? (l(), n("div", E, [
-              u(s(k), null, {
+              s(u(k), null, {
                 default: S(() => [
-                  w(
+                  b(
                     o(e.tip),
                     1
                     /* TEXT */
@@ -96,13 +96,12 @@ const z = { class: "lc-indicator-card__wrapper" }, B = { class: "lc-indicator-ca
                 class: "lc-indicator-card__wrapper--result--value",
                 title: e.value.toString()
               }, [
-                u(s(V), {
+                s(u(V), {
                   "show-separator": "",
                   from: 0,
                   to: f.value,
                   active: "",
-                  precision: v.value,
-                  locale: "ru-RU"
+                  precision: v.value
                 }, null, 8, ["to", "precision"])
               ], 8, D),
               e.fixed ? (l(), n(
@@ -121,7 +120,7 @@ const z = { class: "lc-indicator-card__wrapper" }, B = { class: "lc-indicator-ca
               /* TEXT */
             )
           ]),
-          b(i.$slots, "footer", {}, () => [
+          w(i.$slots, "footer", {}, () => [
             d[0] || (d[0] = t(
               "div",
               { class: "lc-indicator-card__footer" },
@@ -138,5 +137,5 @@ const z = { class: "lc-indicator-card__wrapper" }, B = { class: "lc-indicator-ca
   }
 });
 export {
-  R as default
+  Z as default
 };
