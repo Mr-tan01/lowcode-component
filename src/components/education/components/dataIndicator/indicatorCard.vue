@@ -190,6 +190,7 @@ const unit = computed(() => {
             }
 
             &--unit {
+                margin-left: 6px;
                 font-size: 16px;
                 line-height: 26px;
             }

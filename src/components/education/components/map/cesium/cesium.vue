@@ -1,7 +1,6 @@
 <template>
     <div class="lc-cesium">
-        <NSpin :show="initImageryLayersStatus || initPointDataStatus" :stroke="spinStroke" :style="spinStyle"
-            size="large">
+        <NSpin :show="initImageryLayersStatus || initPointDataStatus" :stroke="spinStroke" :style="spinStyle" size="large">
             <div class="lc-cesium_map" id="cesium-3d-viewer"></div>
             <template #description> 地图加载中... </template>
         </NSpin>
@@ -192,13 +191,10 @@ onBeforeUnmount(() => {
 
 <style lang="scss" scoped>
 .lc-cesium {
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
     width: 100%;
     height: 100%;
+    min-width: 1px;
+    min-height: 1px;
     box-sizing: border-box;
     cursor: pointer;
 
