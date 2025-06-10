@@ -21,6 +21,10 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
     disabled: {
         type: PropType<boolean>;
     };
+    backCenter: {
+        type: PropType<boolean>;
+        default: boolean;
+    };
 }>, {}, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
     list: {
         type: PropType<import('../carouseBox/types').TabListRaw[]>;
@@ -43,5 +47,11 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
     disabled: {
         type: PropType<boolean>;
     };
-}>> & Readonly<{}>, {}, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, HTMLDivElement>;
+    backCenter: {
+        type: PropType<boolean>;
+        default: boolean;
+    };
+}>> & Readonly<{}>, {
+    backCenter: boolean;
+}, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, HTMLDivElement>;
 export default _default;

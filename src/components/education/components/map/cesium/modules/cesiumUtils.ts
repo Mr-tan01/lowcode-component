@@ -86,11 +86,11 @@ export class cesiumService {
         minZoom: 200,
         maxZoom: 130000,
         baseColor: Color.TRANSPARENT,
-        clusteringEnabled: false,
+        clusteringEnabled: true,
         clusteringPixelRange: 30,
         clusteringMinimumClusterSize: 2,
         flyToHeight: 26000,
-        cameraLimitsEnabled: false,
+        cameraLimitsEnabled: true,
         hoverState: true,
         defaultUrl: "https://services.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer",
     };
@@ -242,10 +242,16 @@ export class cesiumService {
         const canvas = this.viewer.scene.canvas;
 
         // 注册单击事件
-        this.screenSpaceEventHandler = new ScreenSpaceEventHandler(canvas).setInputAction(this.handleLeftClick.bind(this), ScreenSpaceEventType.LEFT_CLICK);
+        this.screenSpaceEventHandler = new ScreenSpaceEventHandler(canvas).setInputAction(
+            this.handleLeftClick.bind(this),
+            ScreenSpaceEventType.LEFT_CLICK
+        );
 
         // 注册鼠标悬浮事件
-        this.screenMouseMoveHandler = new ScreenSpaceEventHandler(canvas).setInputAction(this.handleMouseMove.bind(this), ScreenSpaceEventType.MOUSE_MOVE);
+        this.screenMouseMoveHandler = new ScreenSpaceEventHandler(canvas).setInputAction(
+            this.handleMouseMove.bind(this),
+            ScreenSpaceEventType.MOUSE_MOVE
+        );
 
         // 监听相机高度变化
         if (this.viewer.scene && this.viewer.scene.camera) {
@@ -485,17 +491,18 @@ export class cesiumService {
     // 添加点标记
     async addPoint(point: pointType, type?: string, labelType?: string): Promise<Entity | null | void> {
         if (!this.viewer && !this.dataSource) return null;
-        if (!this.dataSource) return null;
-
         const valueInfo = await createInfoCanvas(point, type, labelType);
         const entityConfig = await createEntityConfig(point, valueInfo.canvas, type);
-        const entity: Entity = this.dataSource.entities.add(entityConfig);
+        const entity: Entity | null = this[labelType === "Label" ? "viewer" : "dataSource"]?.entities.add(entityConfig) ?? null;
 
         if (!this.pointEntities) {
             this.pointEntities = [];
         }
 
-        this.pointEntities.push(entity);
+        if (entity) {
+            this.pointEntities.push(entity);
+        }
+
         return entity;
     }
 
@@ -611,11 +618,8 @@ export class cesiumService {
         const { name } = pickedObject;
         const { labelName, dataIndex, entityIndex, labelEntityIndex } = this.getEntityNameInfo(name);
 
-        // 添加文字描述（如果需要）
+        // 文字描述状态
         const shouldAddPoint = dataIndex !== -1 && labelEntityIndex === -1 && !this.options.defaultShowState;
-        if (shouldAddPoint && this.pointData) {
-            this.addPoint(this.pointData[dataIndex], undefined, "Label");
-        }
 
         // 更新图标状态
         updateViewerEntityInfo(this.pointData?.[dataIndex], this.pointEntities?.[entityIndex], "value");
@@ -623,6 +627,11 @@ export class cesiumService {
         // 更新标签状态
         if (labelEntityIndex !== -1 && this.options.defaultShowState) {
             updateViewerEntityInfo(this.pointData?.[dataIndex], this.pointEntities?.[labelEntityIndex]);
+        }
+
+        // 添加文字描述
+        if (shouldAddPoint && this.pointData) {
+            this.addPoint(this.pointData[dataIndex], undefined, "Label");
         }
 
         // 处理标签显示/隐藏逻辑
@@ -676,13 +685,7 @@ export class cesiumService {
         // 检查是否需要添加新标签
         if (labelEntityIndex === -1 && this.pointData) {
             // 添加文字描述
-            this.addPoint(this.pointData[dataIndex], undefined, "Label").then(() => {
-                // 确保新添加的标签可见
-                const newLabelEntityIndex = this.pointEntities?.findIndex((item) => item.name === labelName) ?? -1;
-                if (newLabelEntityIndex !== -1 && this.pointEntities) {
-                    this.pointEntities[newLabelEntityIndex].show = true;
-                }
-            });
+            this.addPoint(this.pointData[dataIndex], undefined, "Label");
         } else if (labelEntityIndex !== -1 && this.pointEntities) {
             // 如果标签已存在但未显示，则显示它
             this.pointEntities[labelEntityIndex].show = true;
@@ -826,18 +829,6 @@ export class cesiumService {
 
         // 清除现有图层和实体
         this.viewer.imageryLayers.removeAll();
-        this.viewer.entities.removeAll();
-
-        // 清除数据源
-        if (this.dataSource && this.viewer) {
-            this.dataSource.entities.removeAll();
-            this.viewer.dataSources.remove(this.dataSource);
-            this.setupClustering();
-        }
-
-        // 重置实体集合
-        this.pointEntities = null;
-        this.polygonEntities = null;
 
         // 加载新图层
         this.loadTileLayer(imageryLayersUrl);
@@ -897,7 +888,10 @@ export class cesiumService {
                 this.isCheckingBounds = true;
 
                 // 获取当前视口中心点
-                const centerPosition = new Cartesian2(Math.floor(this.viewer.canvas.clientWidth / 2), Math.floor(this.viewer.canvas.clientHeight / 2));
+                const centerPosition = new Cartesian2(
+                    Math.floor(this.viewer.canvas.clientWidth / 2),
+                    Math.floor(this.viewer.canvas.clientHeight / 2)
+                );
 
                 // 获取视口中心点的世界坐标
                 const pickRay = this.viewer.camera.getPickRay(centerPosition);

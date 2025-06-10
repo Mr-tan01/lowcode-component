@@ -54,7 +54,15 @@ const _isTransition = ref(true);
 const modelIndex = defineModel<number>("index", { default: -1 });
 const modelValue = defineModel<TabListRaw["value"]>("value", { default: "" });
 
-const { list, offsetAnimationTime = 250, rowKey = (item: TabListRaw) => item.value ?? Math.random(), showTrack = true, gap = 10, disabled = false } = defineProps(propsRaw);
+const {
+    list,
+    offsetAnimationTime = 250,
+    rowKey = (item: TabListRaw) => item.value ?? Math.random(),
+    showTrack = true,
+    gap = 10,
+    disabled = false,
+    backCenter = true,
+} = defineProps(propsRaw);
 
 const listSource = computed(() => {
     return list ?? [];
@@ -214,11 +222,11 @@ const clientRect = computed(() => {
     const carouselWidth = carouselTrainElRef.value.offsetWidth;
 
     return {
-        normalButtonWidth,
-        maxButtonCount,
-        carouselWidth,
-        maxAppendCount,
-        offset: activeButtonWidth / 2, // 加上选中的按钮宽度一半, 让选中的按钮在中心点
+        normalButtonWidth: backCenter ? normalButtonWidth : 0,
+        maxButtonCount: backCenter ? maxButtonCount : 0,
+        carouselWidth: backCenter ? carouselWidth : 0,
+        maxAppendCount: backCenter ? maxAppendCount : 0,
+        offset: backCenter ? activeButtonWidth / 2 : 0, // 加上选中的按钮宽度一半, 让选中的按钮在中心点
     };
 });
 

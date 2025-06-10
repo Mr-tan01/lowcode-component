@@ -43,6 +43,10 @@ declare const __VLS_component: import('vue').DefineComponent<import('vue').Extra
     disabled: {
         type: PropType<boolean>;
     };
+    backCenter: {
+        type: PropType<boolean>;
+        default: boolean;
+    };
     index: {
         type: PropType<number>;
     };
@@ -76,6 +80,10 @@ declare const __VLS_component: import('vue').DefineComponent<import('vue').Extra
     disabled: {
         type: PropType<boolean>;
     };
+    backCenter: {
+        type: PropType<boolean>;
+        default: boolean;
+    };
     index: {
         type: PropType<number>;
     };
@@ -86,7 +94,9 @@ declare const __VLS_component: import('vue').DefineComponent<import('vue').Extra
     onChange?: ((value: ChangeEvent) => any) | undefined;
     "onUpdate:index"?: ((value: number) => any) | undefined;
     "onUpdate:value"?: ((value: string | number | undefined) => any) | undefined;
-}>, {}, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {
+}>, {
+    backCenter: boolean;
+}, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {
     tabButtonParentElRef: HTMLDivElement;
     carouselTrainElRef: HTMLDivElement;
     tabButtonRef: HTMLButtonElement[];

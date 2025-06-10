@@ -6,7 +6,7 @@ import { CesiumHeatmap as I } from "cesium-heatmap-es6";
 import { areaData as f } from "./type.js";
 import { createClusterBillboard as x, createInfoCanvas as V, createEntityConfig as k, updateViewerEntityInfo as p } from "./tools.js";
 import { useMessage as U } from "naive-ui";
-import { Color as v, Rectangle as M, CustomDataSource as A, JulianDate as w, VerticalOrigin as O, HorizontalOrigin as Z, ScreenSpaceEventType as C, ScreenSpaceEventHandler as b, defined as S, ArcGisMapServerImageryProvider as P, PolylineDashMaterialProperty as N, PolygonHierarchy as R, Cartographic as E, Cartesian3 as y, Math as d, Cartesian2 as H } from "@cesium/engine";
+import { Color as v, Rectangle as M, CustomDataSource as Z, JulianDate as w, VerticalOrigin as A, HorizontalOrigin as O, ScreenSpaceEventType as C, ScreenSpaceEventHandler as L, defined as S, ArcGisMapServerImageryProvider as P, PolylineDashMaterialProperty as N, PolygonHierarchy as R, Cartographic as E, Cartesian3 as y, Math as d, Cartesian2 as H } from "@cesium/engine";
 import { Viewer as B } from "@cesium/widgets";
 class z {
   // 缓存有效期7天
@@ -57,11 +57,11 @@ class J {
       minZoom: 200,
       maxZoom: 13e4,
       baseColor: v.TRANSPARENT,
-      clusteringEnabled: !1,
+      clusteringEnabled: !0,
       clusteringPixelRange: 30,
       clusteringMinimumClusterSize: 2,
       flyToHeight: 26e3,
-      cameraLimitsEnabled: !1,
+      cameraLimitsEnabled: !0,
       hoverState: !0,
       defaultUrl: "https://services.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer"
     });
@@ -102,26 +102,26 @@ class J {
   // 添加点聚合配置方法
   setupClustering() {
     if (!this.viewer) return;
-    this.dataSource = new A("clusterSource"), this.viewer.dataSources.add(this.dataSource);
+    this.dataSource = new Z("clusterSource"), this.viewer.dataSources.add(this.dataSource);
     const e = this.options.config, t = this.dataSource.clustering;
     t.enabled = (e == null ? void 0 : e.clusteringEnabled) ?? this.defaultConfig.clusteringEnabled, t.pixelRange = (e == null ? void 0 : e.clusteringPixelRange) ?? this.defaultConfig.clusteringPixelRange, t.minimumClusterSize = (e == null ? void 0 : e.clusteringMinimumClusterSize) ?? this.defaultConfig.clusteringMinimumClusterSize, t.enabled && t.clusterEvent.addEventListener((i, r) => {
       r.billboard.show = !0, r.label.show = !1;
-      const s = {};
-      let n = "", a = 0;
+      const n = {};
+      let s = "", a = 0;
       i.forEach((l) => {
         var u;
         if (!l.properties) return;
         const h = (u = l.properties.type) == null ? void 0 : u.getValue(w.now());
-        h && (s[h] = (s[h] || 0) + 1, s[h] > a && (a = s[h], n = h));
+        h && (n[h] = (n[h] || 0) + 1, n[h] > a && (a = n[h], s = h));
       });
-      const c = x(i.length, n || "primary");
+      const c = x(i.length, s || "primary");
       Object.assign(r.billboard, {
         id: "cluster",
         image: c.toDataURL(),
         width: 50,
         height: 50,
-        verticalOrigin: O.CENTER,
-        horizontalOrigin: Z.CENTER,
+        verticalOrigin: A.CENTER,
+        horizontalOrigin: O.CENTER,
         disableDepthTestDistance: Number.POSITIVE_INFINITY
       });
     });
@@ -142,7 +142,13 @@ class J {
   setupEventHandlers() {
     if (!this.viewer) return;
     const e = this.viewer.scene.canvas;
-    this.screenSpaceEventHandler = new b(e).setInputAction(this.handleLeftClick.bind(this), C.LEFT_CLICK), this.screenMouseMoveHandler = new b(e).setInputAction(this.handleMouseMove.bind(this), C.MOUSE_MOVE), this.viewer.scene && this.viewer.scene.camera && this.viewer.scene.camera.changed.addEventListener(() => {
+    this.screenSpaceEventHandler = new L(e).setInputAction(
+      this.handleLeftClick.bind(this),
+      C.LEFT_CLICK
+    ), this.screenMouseMoveHandler = new L(e).setInputAction(
+      this.handleMouseMove.bind(this),
+      C.MOUSE_MOVE
+    ), this.viewer.scene && this.viewer.scene.camera && this.viewer.scene.camera.changed.addEventListener(() => {
       Math.ceil(this.viewer.camera.positionCartographic.height);
     });
   }
@@ -165,7 +171,7 @@ class J {
   }
   // 处理鼠标移动
   handleMouseMove(e) {
-    var r, s;
+    var r, n;
     if (!this.viewer) return;
     const t = Date.now();
     if (t - this.lastThrottleTime < this.throttleDelay) return;
@@ -175,7 +181,7 @@ class J {
       this.lastHoveredEntity && (this.pointHoverExitHandler(this.lastHoveredEntity), this.lastHoveredEntity = null);
       return;
     }
-    (s = i.id.name) != null && s.includes("Label") || i.id !== this.lastHoveredEntity && (this.lastHoveredEntity && this.pointHoverExitHandler(this.lastHoveredEntity), this.pointHoverHandler(i.id), this.lastHoveredEntity = i.id);
+    (n = i.id.name) != null && n.includes("Label") || i.id !== this.lastHoveredEntity && (this.lastHoveredEntity && this.pointHoverExitHandler(this.lastHoveredEntity), this.pointHoverHandler(i.id), this.lastHoveredEntity = i.id);
   }
   // 瓦片加载状完成（首次添加point、polygon）
   handleTileLoadProgress(e) {
@@ -185,36 +191,21 @@ class J {
   async loadTileLayer(e) {
     let t;
     this.options.loadTileLayerHandler(!0);
-    const { viewer: i, imageLayerState: r, imageLayerUrl: s } = this;
+    const { viewer: i, imageLayerState: r, imageLayerUrl: n } = this;
     this.cleanupTileLoadListener(), this.updateLayerState(e);
     try {
       t = await this.loadProviderWithFallback({
-        targetUrl: s || e,
+        targetUrl: n || e,
         useZondy: r,
         fallbackUrl: this.options.config.defaultUrl ?? this.defaultConfig.defaultUrl
       }), i && t && await this.addProviderToViewer(i, t);
-    } catch (n) {
-      await this.retryLoadProvider(s || e, r), this.handleLoadError(n);
+    } catch (s) {
+      this.rretryCount > 0 && (new Promise((a) => a(setTimeout(a, 1e3))), t = await this.loadProviderWithFallback({
+        targetUrl: n || e,
+        useZondy: r,
+        fallbackUrl: this.options.config.defaultUrl ?? this.defaultConfig.defaultUrl
+      })), this.handleLoadError(s);
     }
-  }
-  // 重试
-  async retryLoadProvider(e, t) {
-    let i = 0;
-    for (; i < this.rretryCount; )
-      try {
-        await new Promise((s) => setTimeout(s, 1e3));
-        const r = await this.loadProviderWithFallback({
-          targetUrl: e,
-          useZondy: t,
-          fallbackUrl: this.options.config.defaultUrl ?? this.defaultConfig.defaultUrl
-        });
-        if (this.viewer && r) {
-          await this.addProviderToViewer(this.viewer, r);
-          return;
-        }
-      } catch {
-        i++, this.message.error("瓦片加载失败,请刷新重试");
-      }
   }
   cleanupTileLoadListener() {
     var e, t;
@@ -228,17 +219,17 @@ class J {
       let t;
       e.useZondy ? t = await Zondy.WebMapTileServiceImageryProvider.fromUrl(e.targetUrl) : t = await P.fromUrl(e.targetUrl);
       const i = t.requestImage.bind(t);
-      return t.requestImage = async (r, s, n) => {
+      return t.requestImage = async (r, n, s) => {
         try {
           const a = {
             url: e.targetUrl,
             x: r,
-            y: s,
-            level: n
+            y: n,
+            level: s
           }, c = await this.tileCache.getTile(a);
           if (c)
             return createImageBitmap(c);
-          const l = await i(r, s, n);
+          const l = await i(r, n, s);
           if (l instanceof ImageBitmap) {
             const h = document.createElement("canvas");
             h.width = l.width, h.height = l.height;
@@ -249,7 +240,7 @@ class J {
           }
           return l;
         } catch (a) {
-          return console.error("Tile load failed:", a), i(r, s, n);
+          return console.error("Tile load failed:", a), i(r, n, s);
         }
       }, t;
     } catch {
@@ -265,8 +256,8 @@ class J {
     var i, r;
     try {
       e.imageryLayers.addImageryProvider(t), this.tileLoadCallback && ((r = (i = e.scene) == null ? void 0 : i.globe) == null || r.tileLoadProgressEvent.addEventListener(this.tileLoadCallback));
-    } catch (s) {
-      throw console.error("添加图层失败:", s), s;
+    } catch (n) {
+      throw console.error("添加图层失败:", n), n;
     }
   }
   handleLoadError(e) {
@@ -274,9 +265,10 @@ class J {
   }
   // 添加点标记
   async addPoint(e, t, i) {
-    if (!this.viewer && !this.dataSource || !this.dataSource) return null;
-    const r = await V(e, t, i), s = await k(e, r.canvas, t), n = this.dataSource.entities.add(s);
-    return this.pointEntities || (this.pointEntities = []), this.pointEntities.push(n), n;
+    var a;
+    if (!this.viewer && !this.dataSource) return null;
+    const r = await V(e, t, i), n = await k(e, r.canvas, t), s = ((a = this[i === "Label" ? "viewer" : "dataSource"]) == null ? void 0 : a.entities.add(n)) ?? null;
+    return this.pointEntities || (this.pointEntities = []), s && this.pointEntities.push(s), s;
   }
   // 清除指定entity
   async clearEntity(e, t) {
@@ -289,7 +281,7 @@ class J {
   }
   addPolygon(e) {
     if (!this.viewer || !(e in f)) return;
-    const i = ((s) => s.position.geometry.coordinates.flat(2).map(([n, a]) => y.fromDegrees(n, a)))(f[e]), r = this.viewer.entities.add({
+    const i = ((n) => n.position.geometry.coordinates.flat(2).map(([s, a]) => y.fromDegrees(s, a)))(f[e]), r = this.viewer.entities.add({
       name: e,
       polyline: {
         positions: i,
@@ -333,7 +325,7 @@ class J {
     if (e !== "ZoomIn" && e !== "ZoomOut") return;
     const t = this.getPositionCartographic();
     if (!t || !this.viewer) return;
-    const { maxZoom: i = this.defaultConfig.maxZoom, minZoom: r = this.defaultConfig.minZoom } = this.options.config ?? {}, s = t[2] >= 3e4 ? 2e4 : t[2] >= 2e4 ? 1e4 : t[2] >= 1e4 ? 8e3 : 1e3, n = t[2] - (e === "ZoomIn" ? s : -s), a = n <= i && n >= r ? n : e === "ZoomIn" ? r : i;
+    const { maxZoom: i = this.defaultConfig.maxZoom, minZoom: r = this.defaultConfig.minZoom } = this.options.config ?? {}, n = t[2] >= 3e4 ? 2e4 : t[2] >= 2e4 ? 1e4 : t[2] >= 1e4 ? 8e3 : 1e3, s = t[2] - (e === "ZoomIn" ? n : -n), a = s <= i && s >= r ? s : e === "ZoomIn" ? r : i;
     this.viewer.camera.flyTo({
       destination: y.fromDegrees(t[0], t[1], a),
       duration: 0.3
@@ -341,33 +333,33 @@ class J {
   }
   // 获取实体名称相关信息
   getEntityNameInfo(e) {
-    var r, s, n;
+    var r, n, s;
     const t = e != null && e.endsWith("Label") ? e == null ? void 0 : e.replace("Label", "") : e, i = `${t}Label`;
     return {
       baseName: t,
       labelName: i,
       dataIndex: ((r = this.pointData) == null ? void 0 : r.findIndex((a) => a.name === t)) ?? -1,
-      entityIndex: ((s = this.pointEntities) == null ? void 0 : s.findIndex((a) => a.name === t)) ?? -1,
-      labelEntityIndex: ((n = this.pointEntities) == null ? void 0 : n.findIndex((a) => a.name === i)) ?? -1
+      entityIndex: ((n = this.pointEntities) == null ? void 0 : n.findIndex((a) => a.name === t)) ?? -1,
+      labelEntityIndex: ((s = this.pointEntities) == null ? void 0 : s.findIndex((a) => a.name === i)) ?? -1
     };
   }
   // 控制窗体
   pointClickHandler(e) {
     var c, l, h, u;
-    const { name: t } = e, { labelName: i, dataIndex: r, entityIndex: s, labelEntityIndex: n } = this.getEntityNameInfo(t);
-    r !== -1 && n === -1 && !this.options.defaultShowState && this.pointData && this.addPoint(this.pointData[r], void 0, "Label"), p((c = this.pointData) == null ? void 0 : c[r], (l = this.pointEntities) == null ? void 0 : l[s], "value"), n !== -1 && this.options.defaultShowState && p((h = this.pointData) == null ? void 0 : h[r], (u = this.pointEntities) == null ? void 0 : u[n]), this.handleLabelsVisibility(i), this.options.pointHandler(e);
+    const { name: t } = e, { labelName: i, dataIndex: r, entityIndex: n, labelEntityIndex: s } = this.getEntityNameInfo(t), a = r !== -1 && s === -1 && !this.options.defaultShowState;
+    p((c = this.pointData) == null ? void 0 : c[r], (l = this.pointEntities) == null ? void 0 : l[n], "value"), s !== -1 && this.options.defaultShowState && p((h = this.pointData) == null ? void 0 : h[r], (u = this.pointEntities) == null ? void 0 : u[s]), a && this.pointData && this.addPoint(this.pointData[r], void 0, "Label"), this.handleLabelsVisibility(i), this.options.pointHandler(e);
   }
   // 处理标签显示/隐藏
   handleLabelsVisibility(e) {
     if (this.options.defaultShowState || !this.pointEntities) return;
     const t = w.now();
     this.pointEntities.forEach((i) => {
-      var r, s, n, a;
+      var r, n, s, a;
       if ((r = i.name) != null && r.endsWith("Label"))
         i.show = i.name === e && !i.show;
       else {
-        if (!((s = i.properties) == null ? void 0 : s.getValue(t).changeState)) return;
-        const l = ((n = this.pointData) == null ? void 0 : n.findIndex((h) => h.name === i.name)) ?? -1;
+        if (!((n = i.properties) == null ? void 0 : n.getValue(t).changeState)) return;
+        const l = ((s = this.pointData) == null ? void 0 : s.findIndex((h) => h.name === i.name)) ?? -1;
         l !== -1 && p((a = this.pointData) == null ? void 0 : a[l], i, "value");
       }
     });
@@ -376,25 +368,21 @@ class J {
   pointHoverHandler(e) {
     const { name: t } = e;
     if (t != null && t.includes("Label")) return;
-    const { labelName: i, dataIndex: r, entityIndex: s, labelEntityIndex: n } = this.getEntityNameInfo(t);
-    this.handleHoverLabelDisplay(r, i, n), this.applyHoverEffect(r, s), this.hideOtherLabels(i);
+    const { labelName: i, dataIndex: r, entityIndex: n, labelEntityIndex: s } = this.getEntityNameInfo(t);
+    this.handleHoverLabelDisplay(r, i, s), this.applyHoverEffect(r, n), this.hideOtherLabels(i);
   }
   // 处理悬浮时标签显示
   handleHoverLabelDisplay(e, t, i) {
-    e === -1 || this.options.defaultShowState || (i === -1 && this.pointData ? this.addPoint(this.pointData[e], void 0, "Label").then(() => {
-      var s;
-      const r = ((s = this.pointEntities) == null ? void 0 : s.findIndex((n) => n.name === t)) ?? -1;
-      r !== -1 && this.pointEntities && (this.pointEntities[r].show = !0);
-    }) : i !== -1 && this.pointEntities && (this.pointEntities[i].show = !0));
+    e === -1 || this.options.defaultShowState || (i === -1 && this.pointData ? this.addPoint(this.pointData[e], void 0, "Label") : i !== -1 && this.pointEntities && (this.pointEntities[i].show = !0));
   }
   // 应用悬浮效果
   applyHoverEffect(e, t) {
-    var n;
+    var s;
     if (t === -1 || !this.pointEntities) return;
     const i = this.pointEntities[t];
     if (!i || !i.properties) return;
     const r = w.now();
-    i.properties.getValue(r).hoverState || i.properties.addProperty("hoverState", !0), p((n = this.pointData) == null ? void 0 : n[e], i, "value");
+    i.properties.getValue(r).hoverState || i.properties.addProperty("hoverState", !0), p((s = this.pointData) == null ? void 0 : s[e], i, "value");
   }
   // 隐藏其他标签
   hideOtherLabels(e) {
@@ -407,8 +395,8 @@ class J {
   pointHoverExitHandler(e) {
     const { name: t } = e;
     if (t != null && t.includes("Label")) return;
-    const { dataIndex: i, entityIndex: r, labelEntityIndex: s } = this.getEntityNameInfo(t);
-    this.restoreEntityState(i, r), this.handleLabelVisibilityOnExit(i, s), this.options.pointHoverExitHandler && this.options.pointHoverExitHandler(e);
+    const { dataIndex: i, entityIndex: r, labelEntityIndex: n } = this.getEntityNameInfo(t);
+    this.restoreEntityState(i, r), this.handleLabelVisibilityOnExit(i, n), this.options.pointHoverExitHandler && this.options.pointHoverExitHandler(e);
   }
   // 恢复实体状态
   restoreEntityState(e, t) {
@@ -416,10 +404,10 @@ class J {
     if (t === -1 || !this.pointEntities) return;
     const i = this.pointEntities[t];
     if (!i || !i.properties) return;
-    const r = w.now(), s = i.properties.getValue(r);
-    s.hoverState && i.properties.removeProperty("hoverState");
-    const n = (a = this.pointData) == null ? void 0 : a[e];
-    n && (s.changeState ? n.changeIconType ? p(n, i, "change") : p(n, i, "value") : p(n, i, "value"));
+    const r = w.now(), n = i.properties.getValue(r);
+    n.hoverState && i.properties.removeProperty("hoverState");
+    const s = (a = this.pointData) == null ? void 0 : a[e];
+    s && (n.changeState ? s.changeIconType ? p(s, i, "change") : p(s, i, "value") : p(s, i, "value"));
   }
   // 处理鼠标离开时标签可见性
   handleLabelVisibilityOnExit(e, t) {
@@ -428,7 +416,7 @@ class J {
   }
   // 控制多边形
   polygonClickHandler(e) {
-    var s, n, a, c;
+    var n, s, a, c;
     if (e === this.defaultCenterKey && this.centerPosition) {
       this.addAllDistricts(), this.setInitialView({ destination: this.centerPosition });
       return;
@@ -437,7 +425,7 @@ class J {
       console.log("未找到匹配的数据");
       return;
     }
-    ((s = this.polygonEntities) == null ? void 0 : s.find((l) => l.name === e)) || this.addPolygon(e), (n = this.polygonEntities) == null || n.forEach((l) => {
+    ((n = this.polygonEntities) == null ? void 0 : n.find((l) => l.name === e)) || this.addPolygon(e), (s = this.polygonEntities) == null || s.forEach((l) => {
       l.show = l.name === e;
     });
     const { lng: i, lat: r } = f[e];
@@ -455,7 +443,7 @@ class J {
   }
   // 切换图层
   setViewerLayer(e) {
-    this.viewer && (this.viewer.imageryLayers.removeAll(), this.viewer.entities.removeAll(), this.dataSource && this.viewer && (this.dataSource.entities.removeAll(), this.viewer.dataSources.remove(this.dataSource), this.setupClustering()), this.pointEntities = null, this.polygonEntities = null, this.loadTileLayer(e));
+    this.viewer && (this.viewer.imageryLayers.removeAll(), this.loadTileLayer(e));
   }
   // 热力图
   addHeatmap() {
@@ -493,7 +481,10 @@ class J {
       if (!(this.isCheckingBounds || !this.viewer))
         try {
           this.isCheckingBounds = !0;
-          const t = new H(Math.floor(this.viewer.canvas.clientWidth / 2), Math.floor(this.viewer.canvas.clientHeight / 2)), i = this.viewer.camera.getPickRay(t);
+          const t = new H(
+            Math.floor(this.viewer.canvas.clientWidth / 2),
+            Math.floor(this.viewer.canvas.clientHeight / 2)
+          ), i = this.viewer.camera.getPickRay(t);
           if (!i) return;
           const r = this.viewer.scene.globe.pick(i, this.viewer.scene);
           if (!r) {
@@ -503,8 +494,8 @@ class J {
             this.isPointInShenzhen(l, h) ? this.lastValidCameraPosition = this.viewer.camera.position.clone() : this.lastValidCameraPosition && (this.viewer.camera.position = this.lastValidCameraPosition.clone());
             return;
           }
-          const s = E.fromCartesian(r), n = d.toDegrees(s.longitude), a = d.toDegrees(s.latitude);
-          this.isPointInShenzhen(n, a) ? this.lastValidCameraPosition = this.viewer.camera.position.clone() : this.lastValidCameraPosition && (this.viewer.camera.position = this.lastValidCameraPosition.clone(), this.viewer.camera.direction = this.viewer.scene.camera.direction.clone());
+          const n = E.fromCartesian(r), s = d.toDegrees(n.longitude), a = d.toDegrees(n.latitude);
+          this.isPointInShenzhen(s, a) ? this.lastValidCameraPosition = this.viewer.camera.position.clone() : this.lastValidCameraPosition && (this.viewer.camera.position = this.lastValidCameraPosition.clone(), this.viewer.camera.direction = this.viewer.scene.camera.direction.clone());
         } finally {
           this.isCheckingBounds = !1;
         }

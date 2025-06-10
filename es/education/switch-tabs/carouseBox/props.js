@@ -19,6 +19,11 @@ const e = {
   },
   disabled: {
     type: Boolean
+  },
+  // 是否追加元素居中显示
+  backCenter: {
+    type: Boolean,
+    default: !0
   }
 };
 export {

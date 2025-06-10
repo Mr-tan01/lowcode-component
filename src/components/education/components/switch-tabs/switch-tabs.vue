@@ -1,9 +1,8 @@
 <template>
     <div class="lc-switch-tabs">
-        <LcCarouseBox :list="listSource" :offsetAnimationTime :rowKey v-bind="$attrs">
+        <LcCarouseBox :list="listSource" :back-center="backCenter" :offsetAnimationTime :rowKey v-bind="$attrs">
             <template #default="{ isActive, isEven, record: { label } }">
-                <button class="lc-switch-tabs__wrapper__tabs--train__button"
-                    :class="{ 'active': isActive, 'is-even': isEven, }">
+                <button class="lc-switch-tabs__wrapper__tabs--train__button" :class="{ active: isActive, 'is-even': isEven }">
                     <div class="lc-switch-tabs__wrapper__tabs--train__button--text" :title="label">
                         {{ label }}
                     </div>
@@ -14,14 +13,12 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, PropType, } from 'vue';
-import { LcCarouseBox, LcCarouseBoxProps } from '@/components/education/components/carouseBox';
-import { type TabListRaw } from './types';
-import { defSwitchTabList } from './const';
+import { computed, PropType } from "vue";
+import { LcCarouseBox, LcCarouseBoxProps } from "@/components/education/components/carouseBox";
+import { type TabListRaw } from "./types";
+import { defSwitchTabList } from "./const";
 
-const {
-    list,
-} = defineProps(LcCarouseBoxProps);
+const { list, backCenter = true } = defineProps(LcCarouseBoxProps);
 
 const listSource = computed(() => {
     return list ?? defSwitchTabList;
@@ -59,7 +56,6 @@ const listSource = computed(() => {
                     &.is-even {
                         &:nth-child(even) {
                             background-image: url(./images/rt-first.png);
-
                         }
 
                         &:nth-child(odd) {
@@ -78,20 +74,18 @@ const listSource = computed(() => {
                         .lc-switch-tabs__wrapper__tabs--train__button--text {
                             font-weight: normal;
                             font-size: 24px;
-                            color: #EDF6FF;
+                            color: #edf6ff;
                             line-height: 29px;
                             text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.12);
                             margin-bottom: 2px;
                         }
                     }
 
-
-
                     &--text {
                         font-family: AlimamaFangYuanTiVF-SemiBold, AlimamaFangYuanTiVF-SemiBold;
                         font-weight: normal;
                         font-size: 18px;
-                        color: #FFFFFF;
+                        color: #ffffff;
                         line-height: 18px;
                         overflow: hidden;
                         text-overflow: ellipsis;
@@ -99,8 +93,6 @@ const listSource = computed(() => {
                     }
                 }
             }
-
-
         }
     }
 }

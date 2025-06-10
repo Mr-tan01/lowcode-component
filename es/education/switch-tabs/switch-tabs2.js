@@ -1,29 +1,32 @@
-import { defineComponent as n, computed as c, openBlock as m, createElementBlock as l, createVNode as _, unref as p, mergeProps as f, withCtx as u, createElementVNode as o, normalizeClass as d, toDisplayString as w } from "vue";
-import b from "./carouseBox/index.js";
-import { propsRaw as h } from "./carouseBox/props.js";
-import { defSwitchTabList as v } from "./const.js";
-const y = { class: "lc-switch-tabs" }, C = ["title"], g = /* @__PURE__ */ n({
+import { defineComponent as n, mergeDefaults as c, computed as m, openBlock as l, createElementBlock as p, createVNode as _, unref as f, mergeProps as u, withCtx as b, createElementVNode as r, normalizeClass as d, toDisplayString as w } from "vue";
+import h from "./carouseBox/index.js";
+import { propsRaw as k } from "./carouseBox/props.js";
+import { defSwitchTabList as C } from "./const.js";
+const v = { class: "lc-switch-tabs" }, y = ["title"], S = /* @__PURE__ */ n({
   __name: "switch-tabs",
-  props: h,
-  setup(s) {
-    const i = c(() => s.list ?? v);
-    return (t, T) => (m(), l("div", y, [
-      _(p(b), f({
-        list: i.value,
+  props: /* @__PURE__ */ c(k, {
+    backCenter: !0
+  }),
+  setup(o) {
+    const s = m(() => o.list ?? C);
+    return (t, T) => (l(), p("div", v, [
+      _(f(h), u({
+        list: s.value,
+        "back-center": t.backCenter,
         offsetAnimationTime: t.offsetAnimationTime,
         rowKey: t.rowKey
       }, t.$attrs), {
-        default: u(({ isActive: r, isEven: a, record: { label: e } }) => [
-          o(
+        default: b(({ isActive: i, isEven: a, record: { label: e } }) => [
+          r(
             "button",
             {
-              class: d(["lc-switch-tabs__wrapper__tabs--train__button", { active: r, "is-even": a }])
+              class: d(["lc-switch-tabs__wrapper__tabs--train__button", { active: i, "is-even": a }])
             },
             [
-              o("div", {
+              r("div", {
                 class: "lc-switch-tabs__wrapper__tabs--train__button--text",
                 title: e
-              }, w(e), 9, C)
+              }, w(e), 9, y)
             ],
             2
             /* CLASS */
@@ -31,10 +34,10 @@ const y = { class: "lc-switch-tabs" }, C = ["title"], g = /* @__PURE__ */ n({
         ]),
         _: 1
         /* STABLE */
-      }, 16, ["list", "offsetAnimationTime", "rowKey"])
+      }, 16, ["list", "back-center", "offsetAnimationTime", "rowKey"])
     ]));
   }
 });
 export {
-  g as default
+  S as default
 };

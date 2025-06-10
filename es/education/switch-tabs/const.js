@@ -1,6 +1,10 @@
 const l = [
   {
     label: "龙华区",
+    value: "深圳市"
+  },
+  {
+    label: "龙华区",
     value: "龙华区"
   },
   {
