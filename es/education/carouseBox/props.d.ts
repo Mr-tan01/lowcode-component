@@ -22,4 +22,8 @@ export declare const propsRaw: {
     disabled: {
         type: PropType<boolean>;
     };
+    backCenter: {
+        type: PropType<boolean>;
+        default: boolean;
+    };
 };

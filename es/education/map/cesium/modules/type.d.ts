@@ -3,11 +3,13 @@ export declare const areaData: {
     深圳市: {
         lng: number;
         lat: number;
+        value: number;
         position: never[];
     };
     光明区: {
         lng: number;
         lat: number;
+        value: number;
         position: {
             type: string;
             properties: {
@@ -23,6 +25,7 @@ export declare const areaData: {
     坪山区: {
         lng: number;
         lat: number;
+        value: number;
         position: {
             type: string;
             properties: {
@@ -38,6 +41,7 @@ export declare const areaData: {
     龙华区: {
         lng: number;
         lat: number;
+        value: number;
         position: {
             type: string;
             properties: {
@@ -53,6 +57,7 @@ export declare const areaData: {
     盐田区: {
         lng: number;
         lat: number;
+        value: number;
         position: {
             type: string;
             properties: {
@@ -68,6 +73,7 @@ export declare const areaData: {
     大鹏新区: {
         lng: number;
         lat: number;
+        value: number;
         position: {
             type: string;
             properties: {
@@ -83,6 +89,7 @@ export declare const areaData: {
     宝安区: {
         lng: number;
         lat: number;
+        value: number;
         position: {
             type: string;
             properties: {
@@ -98,6 +105,7 @@ export declare const areaData: {
     龙岗区: {
         lng: number;
         lat: number;
+        value: number;
         position: {
             type: string;
             properties: {
@@ -113,6 +121,7 @@ export declare const areaData: {
     南山区: {
         lng: number;
         lat: number;
+        value: number;
         position: {
             type: string;
             properties: {
@@ -128,6 +137,7 @@ export declare const areaData: {
     福田区: {
         lng: number;
         lat: number;
+        value: number;
         position: {
             type: string;
             properties: {
@@ -143,6 +153,7 @@ export declare const areaData: {
     罗湖区: {
         lng: number;
         lat: number;
+        value: number;
         position: {
             type: string;
             properties: {
@@ -155,9 +166,10 @@ export declare const areaData: {
             };
         };
     };
-    深汕合作区: {
+    深汕特别合作区: {
         lng: number;
         lat: number;
+        value: number;
         position: {
             type: string;
             properties: {

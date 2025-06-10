@@ -22,5 +22,10 @@ export const propsRaw = {
     },
     disabled: {
         type: Boolean as PropType<boolean>,
-    }
-}
+    },
+    // 是否追加元素居中显示
+    backCenter: {
+        type: Boolean as PropType<boolean>,
+        default: true,
+    },
+};

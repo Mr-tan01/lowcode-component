@@ -45,6 +45,7 @@ const {
 
 const reloadPointData = async (): Promise<void> => {
     cesiumUtils.clearEntity("pointEntities", "dataSource");
+    cesiumUtils.clearEntity("pointEntities", "viewer");
     cesiumUtils.pointData = pointData;
     pointData?.forEach((point) => {
         cesiumUtils.addPoint(point, "value");
