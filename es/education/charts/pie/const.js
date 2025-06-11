@@ -1,6 +1,6 @@
-import { graphic as e } from "echarts";
-import t from "lodash-es/merge";
-const l = ["#0FFBF8", "#E1BC4B", "#2276FC", "#A6CFFF", "#7749FF", "#64D677", "#EE6F7C"], a = {
+import { graphic as t } from "echarts";
+import f from "lodash-es/merge";
+const b = ["#0FFBF8", "#E1BC4B", "#2276FC", "#A6CFFF", "#7749FF", "#64D677", "#EE6F7C"], h = {
   text: "0",
   subtext: "总数",
   left: "center",
@@ -23,7 +23,7 @@ const l = ["#0FFBF8", "#E1BC4B", "#2276FC", "#A6CFFF", "#7749FF", "#64D677", "#E
     lineHeight: 16,
     overflow: "truncate"
   }
-}, f = {
+}, m = {
   appendTo: "body",
   trigger: "item",
   backgroundColor: "rgba(0, 32, 61, 1)",
@@ -32,8 +32,25 @@ const l = ["#0FFBF8", "#E1BC4B", "#2276FC", "#A6CFFF", "#7749FF", "#64D677", "#E
     color: "#fff",
     fontSize: 14,
     lineHeight: 20
+  },
+  formatter: function(o) {
+    var r, n, i;
+    const e = ((r = c[o.dataIndex]) == null ? void 0 : r.colorStops) ?? [], l = ((n = e == null ? void 0 : e[0]) == null ? void 0 : n.color) ?? "rgba(166, 207, 255, 0.20)", a = ((i = e == null ? void 0 : e[1]) == null ? void 0 : i.color) ?? "rgba(166, 207, 255, 1)";
+    return `
+        <div style="display: flex; align-items: center;">
+          <span style="
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: linear-gradient(to bottom, ${l}, ${a});
+            margin-right: 6px;
+          "></span>
+          ${o.name}: ${o.value} (${o.percent}%)
+        </div>
+      `;
   }
-}, c = {
+}, u = {
   show: !1,
   orient: "vertical",
   left: "left",
@@ -41,30 +58,30 @@ const l = ["#0FFBF8", "#E1BC4B", "#2276FC", "#A6CFFF", "#7749FF", "#64D677", "#E
   textStyle: {
     color: "#fff"
   }
-}, g = [
-  new e.LinearGradient(0, 0, 0, 1, [
+}, c = [
+  new t.LinearGradient(0, 0, 0, 1, [
     { offset: 0, color: "rgba(15, 251, 248, 0.20)" },
     // 渐变色起始颜色
     { offset: 1, color: "#0FFBF8" }
     // 渐变色结束颜色
   ]),
-  new e.LinearGradient(0, 0, 0, 1, [
+  new t.LinearGradient(0, 0, 0, 1, [
     { offset: 0, color: "rgba(225, 188, 75, 0.20)" },
     { offset: 1, color: "rgba(225, 188, 75, 1)" }
   ]),
-  new e.LinearGradient(0, 0, 0, 1, [
+  new t.LinearGradient(0, 0, 0, 1, [
     { offset: 0, color: "rgba(0, 148, 255, 0.20)" },
     { offset: 1, color: "rgba(0, 148, 255, 1)" }
   ]),
-  new e.LinearGradient(0, 0, 0, 1, [
+  new t.LinearGradient(0, 0, 0, 1, [
     { offset: 0, color: "rgba(166, 207, 255, 0.20)" },
     { offset: 1, color: "rgba(166, 207, 255, 1)" }
   ]),
-  new e.LinearGradient(0, 0, 0, 1, [
+  new t.LinearGradient(0, 0, 0, 1, [
     { offset: 0, color: "rgba(119, 73, 255, 0.20)" },
     { offset: 1, color: "rgba(119, 73, 255, 1)" }
   ])
-], o = {
+], g = {
   name: "pie",
   type: "pie",
   radius: ["62%", "92%"],
@@ -75,7 +92,7 @@ const l = ["#0FFBF8", "#E1BC4B", "#2276FC", "#A6CFFF", "#7749FF", "#64D677", "#E
   emphasis: {
     itemStyle: {}
   }
-}, r = {
+}, s = {
   radius: ["42%", "62%"],
   label: {
     show: !0,
@@ -107,13 +124,13 @@ const l = ["#0FFBF8", "#E1BC4B", "#2276FC", "#A6CFFF", "#7749FF", "#64D677", "#E
     length2: 0,
     maxSurfaceAngle: 0
   }
-}, s = t({}, o, r);
+}, F = f({}, g, s);
 export {
-  g as innerGraphicColors,
-  s as innerLabelSeries1,
-  l as pieColors,
-  c as pieLegend,
-  o as pieSeriesRecord,
-  a as pieTitleOptions,
-  f as pieTooltipOptions
+  c as innerGraphicColors,
+  F as innerLabelSeries1,
+  b as pieColors,
+  u as pieLegend,
+  g as pieSeriesRecord,
+  h as pieTitleOptions,
+  m as pieTooltipOptions
 };
