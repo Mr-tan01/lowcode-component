@@ -29,6 +29,17 @@ export declare const innerImageDomain: {
         readonly teacher: "teacher";
         readonly international: "international";
         readonly doctor: "doctor";
+        readonly acreage: "acreage";
+        readonly flipbook: "flipbook";
+        readonly expenditure: "expenditure";
+        readonly pieChart: "pie-chart";
+        readonly reat: "reat";
+        readonly privateSchool: "private-school";
+        readonly publicSchool: "public-school";
+        readonly campusSchool: "campus-school";
+        readonly highSchool: "high-school";
+        readonly specialistSchool: "specialist-school";
+        readonly professionalHighSchool: "professional-high-school";
     };
     readonly event: {
         readonly domain: "domain";
