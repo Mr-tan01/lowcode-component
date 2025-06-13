@@ -1,7 +1,7 @@
 import o from "./time2.js";
 import './assets/time.css';/* empty css      */
 import t from "./_virtual/_plugin-vue_export-helper.js";
-const c = /* @__PURE__ */ t(o, [["__scopeId", "data-v-510c34ac"]]);
+const p = /* @__PURE__ */ t(o, [["__scopeId", "data-v-2d42aa63"]]);
 export {
-  c as default
+  p as default
 };
