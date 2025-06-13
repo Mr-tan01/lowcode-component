@@ -1,4 +1,4 @@
-import { ref as d, watch as b } from "vue";
+import { ref as f, watch as b } from "vue";
 const w = /* @__PURE__ */ Object.assign({
   "./images/func/acreage.png": () => import("./images/func/acreage.png.js").then((e) => e.default),
   "./images/func/add.png": () => import("./images/func/add.png.js").then((e) => e.default),
@@ -37,7 +37,7 @@ const w = /* @__PURE__ */ Object.assign({
   "./images/func/student.png": () => import("./images/func/student.png.js").then((e) => e.default),
   "./images/func/teacher.png": () => import("./images/func/teacher.png.js").then((e) => e.default),
   "./images/func/time.png": () => import("./images/func/time.png.js").then((e) => e.default)
-}), $ = /* @__PURE__ */ Object.assign({
+}), S = /* @__PURE__ */ Object.assign({
   "./images/event/building/icon.png": () => import("./images/event/building/icon.png.js").then((e) => e.default),
   "./images/event/building/selected-icon.png": () => import("./images/event/building/selected-icon.png.js").then((e) => e.default),
   "./images/event/domain/icon.png": () => import("./images/event/domain/icon.png.js").then((e) => e.default),
@@ -54,10 +54,32 @@ const w = /* @__PURE__ */ Object.assign({
   "./images/event/reward/selected-icon.png": () => import("./images/event/reward/selected-icon.png.js").then((e) => e.default),
   "./images/event/style/icon.png": () => import("./images/event/style/icon.png.js").then((e) => e.default),
   "./images/event/style/selected-icon.png": () => import("./images/event/style/selected-icon.png.js").then((e) => e.default)
+}), y = /* @__PURE__ */ Object.assign({
+  "./images/baseSupport/booth/icon.png": () => import("./images/baseSupport/booth/icon.png.js").then((e) => e.default),
+  "./images/baseSupport/booth/selected-icon.png": () => import("./images/baseSupport/booth/selected-icon.png.js").then((e) => e.default),
+  "./images/baseSupport/pedestal/icon.png": () => import("./images/baseSupport/pedestal/icon.png.js").then((e) => e.default),
+  "./images/baseSupport/pedestal/selected-icon.png": () => import("./images/baseSupport/pedestal/selected-icon.png.js").then((e) => e.default)
+}), $ = /* @__PURE__ */ Object.assign({
+  "./images/menus/basic-education.png": () => import("./images/menus/basic-education.png.js").then((e) => e.default),
+  "./images/menus/blue-print.png": () => import("./images/menus/blue-print.png.js").then((e) => e.default),
+  "./images/menus/campus-security.png": () => import("./images/menus/campus-security.png.js").then((e) => e.default),
+  "./images/menus/career-development.png": () => import("./images/menus/career-development.png.js").then((e) => e.default),
+  "./images/menus/conditions-guarantees.png": () => import("./images/menus/conditions-guarantees.png.js").then((e) => e.default),
+  "./images/menus/data-overview.png": () => import("./images/menus/data-overview.png.js").then((e) => e.default),
+  "./images/menus/degree-resources.png": () => import("./images/menus/degree-resources.png.js").then((e) => e.default),
+  "./images/menus/develop-simultaneously.png": () => import("./images/menus/develop-simultaneously.png.js").then((e) => e.default),
+  "./images/menus/digitization.png": () => import("./images/menus/digitization.png.js").then((e) => e.default),
+  "./images/menus/educational-fund.png": () => import("./images/menus/educational-fund.png.js").then((e) => e.default),
+  "./images/menus/exchange-cooperation.png": () => import("./images/menus/exchange-cooperation.png.js").then((e) => e.default),
+  "./images/menus/higher-education.png": () => import("./images/menus/higher-education.png.js").then((e) => e.default),
+  "./images/menus/supervisory-evaluation.png": () => import("./images/menus/supervisory-evaluation.png.js").then((e) => e.default),
+  "./images/menus/team-construction.png": () => import("./images/menus/team-construction.png.js").then((e) => e.default)
 }), v = {
   func: w,
-  event: $
-}, y = {
+  event: S,
+  menus: $,
+  baseSupport: y
+}, I = {
   func: {
     add: "add",
     caretDown: "caret-down",
@@ -106,24 +128,46 @@ const w = /* @__PURE__ */ Object.assign({
     mentor: "mentor",
     person2: "person2",
     reward: "reward"
+  },
+  baseSupport: {
+    booth: "booth",
+    pedestal: "pedestal"
+  },
+  menus: {
+    basicEducation: "basic-education",
+    bluePrint: "blue-print",
+    campusSecurity: "campus-security",
+    careerDevelopment: "career-development",
+    conditionsGuarantees: "conditions-guarantees",
+    dataOverview: "data-overview",
+    degreeResources: "degree-resources",
+    developSimultaneously: "develop-simultaneously",
+    digitization: "digitization",
+    educationalFund: "educational-fund",
+    exchangeCooperation: "exchange-cooperation",
+    highereducation: "higher-education",
+    supervisoryEvaluation: "supervisory-evaluation",
+    teamConstruction: "team-construction"
   }
 };
-function x(e, p, i) {
-  const c = d(""), l = d(""), s = (t) => {
-    var n, g, m, a, f, h;
-    let u = `${e.value}/${t}${i.value}`, o = "";
-    e.value === "event" && (u = `${e.value}/${t}/icon${i.value}`, o = `${e.value}/${t}/selected-icon${i.value}`), (m = (g = (n = v[e.value]) == null ? void 0 : n[`./images/${u}`]) == null ? void 0 : g.call(n)) == null || m.then((r) => c.value = r), o && ((h = (f = (a = v[e.value]) == null ? void 0 : a[`./images/${o}`]) == null ? void 0 : f.call(a)) == null || h.then((r) => l.value = r));
+function C(e, s, n) {
+  const u = f(""), c = f(""), l = (t) => {
+    var a, m, g, i, d, h;
+    let o = `${e.value}/${t}${n.value}`, r = "";
+    e.value === "event" || e.value === "baseSupport" ? (o = `${e.value}/${t}/icon${n.value}`, r = `${e.value}/${t}/selected-icon${n.value}`) : e.value === "menus" && (o = `${e.value}/${t}${n.value}`), (g = (m = (a = v[e.value]) == null ? void 0 : a[`./images/${o}`]) == null ? void 0 : m.call(a)) == null || g.then((p) => u.value = p), r && ((h = (d = (i = v[e.value]) == null ? void 0 : i[`./images/${r}`]) == null ? void 0 : d.call(i)) == null || h.then((p) => c.value = p));
   };
-  return s(p.value), b(p, (t) => {
-    s(t);
+  return l(s.value), b(s, (t) => {
+    l(t);
   }), {
-    src: c,
-    selectedSrc: l
+    src: u,
+    selectedSrc: c
   };
 }
 export {
-  $ as eventdomainIcons,
+  y as baseSupportdomainIcons,
+  S as eventdomainIcons,
   w as funcdomainIcons,
-  y as innerImageDomain,
-  x as useImage
+  I as innerImageDomain,
+  $ as menustdomainIcons,
+  C as useImage
 };

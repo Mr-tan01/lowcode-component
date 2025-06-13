@@ -11,7 +11,7 @@ const B = ["src"], C = { class: "lc-icon__span" }, E = /* @__PURE__ */ _({
   },
   setup(a) {
     p((l) => ({
-      "498fff03": f.value
+      "31542a44": f.value
     }));
     const i = a, { domain: r, name: d, size: s, ext: m, selected: u } = g(i), { src: t, selectedSrc: n } = $(
       r,

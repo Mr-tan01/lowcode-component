@@ -1,7 +1,7 @@
 import o from "./icon2.js";
 import './assets/icon.css';/* empty css      */
 import t from "./_virtual/_plugin-vue_export-helper.js";
-const p = /* @__PURE__ */ t(o, [["__scopeId", "data-v-75c72345"]]);
+const m = /* @__PURE__ */ t(o, [["__scopeId", "data-v-c1a80b73"]]);
 export {
-  p as default
+  m as default
 };
