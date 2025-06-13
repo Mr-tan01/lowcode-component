@@ -413,65 +413,74 @@ export class cesiumService {
                 provider = await ArcGisMapServerImageryProvider.fromUrl(options.targetUrl);
             }
 
-            // 添加缓存拦截器
             const originalRequestImage = provider.requestImage.bind(provider);
             provider.requestImage = async (x: number, y: number, level: number) => {
+                let image: ImageBitmap | undefined;
                 try {
-                    // 生成唯一缓存键
+                    // 1. 尝试从缓存获取
                     const cacheKey = {
                         url: options.targetUrl,
                         x,
                         y,
                         level,
                     };
-
-                    // 尝试从缓存获取
                     const cached = await this.tileCache.getTile(cacheKey);
                     if (cached) {
-                        return createImageBitmap(cached);
+                        image = await createImageBitmap(cached);
+                        return image;
                     }
 
-                    // 缓存未命中则发起请求
-                    const image = await originalRequestImage(x, y, level);
+                    // 2. 从原始源获取
+                    image = await originalRequestImage(x, y, level);
+                    if (!image || image.width === 0 || image.height === 0) {
+                        throw new Error("Invalid image dimensions");
+                    }
 
-                    // 转换为Blob进行存储
-                    if (image instanceof ImageBitmap) {
+                    // 3. 缓存新瓦片
+                    try {
                         const canvas = document.createElement("canvas");
                         canvas.width = image.width;
                         canvas.height = image.height;
                         const ctx = canvas.getContext("2d");
                         if (ctx) {
                             ctx.drawImage(image, 0, 0);
-                            canvas.toBlob(async (blob) => {
-                                if (blob) {
-                                    await this.tileCache.putTile(cacheKey, blob);
-                                }
-                                image.close(); // 及时释放资源
+                            await new Promise<void>((resolve) => {
+                                canvas.toBlob(async (blob) => {
+                                    if (blob) {
+                                        await this.tileCache.putTile(cacheKey, blob);
+                                    }
+                                    resolve();
+                                });
                             });
                         }
+                    } catch (cacheError) {
+                        console.warn("Failed to cache tile:", cacheError);
                     }
+
                     return image;
                 } catch (error) {
-                    console.error("Tile load failed:", error);
+                    if (image) {
+                        try {
+                            image.close();
+                        } catch (e) {
+                            console.warn("Failed to close image:", e);
+                        }
+                    }
+
                     return originalRequestImage(x, y, level);
                 }
             };
 
             return provider;
         } catch (primaryError) {
-            if (options.useZondy) {
-                // this.message.error("(Zondy)瓦片加载失败, 请刷新重试");
-            }
             try {
                 return await ArcGisMapServerImageryProvider.fromUrl(options.fallbackUrl);
             } catch (fallbackError) {
-                // this.message.error("默认瓦片加载失败，请刷新重试");
                 this.options.loadTileLayerHandler(false);
                 throw fallbackError;
             }
         }
     }
-
     private async addProviderToViewer(viewer: Viewer, provider: WebMapTileServiceImageryProvider | ArcGisMapServerImageryProvider): Promise<void> {
         try {
             viewer.imageryLayers.addImageryProvider(provider);

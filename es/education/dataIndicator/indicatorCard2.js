@@ -49,9 +49,9 @@ const z = { class: "lc-indicator-card__wrapper" }, B = { class: "lc-indicator-ca
   }),
   setup(e) {
     C((i) => ({
-      "498a3924": x.value,
-      "5d420742": e.valueColor,
-      "6b91a84c": e.hintColor
+      "4e9db765": x.value,
+      f9808d0e: e.valueColor,
+      64895335: e.hintColor
     }));
     const a = {
       small: "small",

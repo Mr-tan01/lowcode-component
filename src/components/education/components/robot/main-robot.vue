@@ -39,10 +39,22 @@
                             :key="ckey"
                             :style="{ '--left-offset-number': ckey, '--left-reverse-offset-number': reverseIndex(item.meta.length, ckey) }"
                         >
-                            <div class="lc-main-robot__wrapper__star-wrap--star__meta--item--text" :style="getTextStyle(key)" v-if="ckey === 0" @click="starClick(item, key)">
+                            <div
+                                class="lc-main-robot__wrapper__star-wrap--star__meta--item--text"
+                                :title="el.label"
+                                :style="getTextStyle(key)"
+                                v-if="ckey === 0"
+                                @click="starClick(item, key)"
+                            >
                                 {{ el.label }}
                             </div>
-                            <div class="lc-main-robot__wrapper__star-wrap--star__meta--item--text" :style="getTextStyle(key)" v-else @click="starItemClick(el, ckey)">
+                            <div
+                                class="lc-main-robot__wrapper__star-wrap--star__meta--item--text"
+                                :title="el.label"
+                                :style="getTextStyle(key)"
+                                v-else
+                                @click="starItemClick(el, ckey)"
+                            >
                                 {{ el.label }}
                             </div>
                         </div>
@@ -320,6 +332,9 @@ on("result", () => {
                             color: #ffffff;
                             line-height: 16px;
                             text-align: center;
+                            text-overflow: ellipsis;
+                            white-space: nowrap;
+                            overflow: hidden;
                         }
                     }
                 }
