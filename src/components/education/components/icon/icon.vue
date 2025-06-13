@@ -49,6 +49,7 @@ const { src, selectedSrc } = useImage(
     name as Ref<NameTypeFunc<Domains>>,
     ext
 );
+
 const iconWidth = computed(() =>
     typeof size === "number" ? `${size}px` : size
 );

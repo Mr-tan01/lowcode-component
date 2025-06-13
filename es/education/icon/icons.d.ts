@@ -1,6 +1,9 @@
 import { Ref } from 'vue';
 export declare const funcdomainIcons: Record<string, () => Promise<string>>;
 export declare const eventdomainIcons: Record<string, () => Promise<string>>;
+export declare const baseSupportdomainIcons: Record<string, () => Promise<string>>;
+export declare const menustdomainIcons: Record<string, () => Promise<string>>;
+export type backgroundImg = 'booth' | 'pedestal';
 export declare const innerImageDomain: {
     readonly func: {
         readonly add: "add";
@@ -51,12 +54,32 @@ export declare const innerImageDomain: {
         readonly person2: "person2";
         readonly reward: "reward";
     };
+    readonly baseSupport: {
+        readonly booth: "booth";
+        readonly pedestal: "pedestal";
+    };
+    readonly menus: {
+        readonly basicEducation: "basic-education";
+        readonly bluePrint: "blue-print";
+        readonly campusSecurity: "campus-security";
+        readonly careerDevelopment: "career-development";
+        readonly conditionsGuarantees: "conditions-guarantees";
+        readonly dataOverview: "data-overview";
+        readonly degreeResources: "degree-resources";
+        readonly developSimultaneously: "develop-simultaneously";
+        readonly digitization: "digitization";
+        readonly educationalFund: "educational-fund";
+        readonly exchangeCooperation: "exchange-cooperation";
+        readonly highereducation: "higher-education";
+        readonly supervisoryEvaluation: "supervisory-evaluation";
+        readonly teamConstruction: "team-construction";
+    };
 };
 type innerImageDomain = typeof innerImageDomain;
 type ReadValue<T> = T[keyof T];
 export type Domains = keyof innerImageDomain;
 export type NameTypeFunc<D extends Domains> = ReadValue<innerImageDomain[D]>;
-export type NameTypes = NameTypeFunc<"event"> | NameTypeFunc<"func">;
+export type NameTypes = NameTypeFunc<"event"> | NameTypeFunc<"func"> | NameTypeFunc<"menus"> | NameTypeFunc<"baseSupport">;
 export declare function useImage<D extends Domains>(domain: Ref<D>, name: Ref<NameTypeFunc<D>>, ext: Ref<string>): {
     src: Ref<string, string>;
     selectedSrc: Ref<string, string>;
