@@ -458,6 +458,7 @@ export class cesiumService {
                     }
 
                     return image;
+                  
                 } catch (error) {
                     if (image) {
                         try {
@@ -481,6 +482,7 @@ export class cesiumService {
             }
         }
     }
+
     private async addProviderToViewer(viewer: Viewer, provider: WebMapTileServiceImageryProvider | ArcGisMapServerImageryProvider): Promise<void> {
         try {
             viewer.imageryLayers.addImageryProvider(provider);

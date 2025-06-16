@@ -57,7 +57,11 @@
                 </n-space>
             </div>
             <div>
-                <LcRadiohead domain="event" name="person" :size="56" text="师生师生比师生比师生比师生比师生比师生比师生比师生比师生比师生比师生比师生比师生比师生比师生比师生比比">
+                <LcRadiohead
+                    domain="func"
+                    name="person"
+                    text="师生师生比师生比师生比师生比师生比师生比师生比师生比师生比师生比师生比师生比师生比师生比师生比师生比师生比师生比比"
+                >
                 </LcRadiohead>
             </div>
         </DemoHelpBox>
@@ -77,7 +81,4 @@ import { LcIcon } from "@/components/education/components/icon";
 import { LcRadiohead } from "@/components/education/components/headline";
 </script>
 
-<style lang="scss" scoped>
-.text-box {
-}
-</style>
+<style lang="scss" scoped></style>

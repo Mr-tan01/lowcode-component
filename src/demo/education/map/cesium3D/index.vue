@@ -1,5 +1,5 @@
 <template>
-    <LcCesiumEarth :echartsOptions="data" v-model:loading="loading" @handle-click="handleClick" />
+    <LcCesiumEarth :echartsOptions="data" v-model:loading="loading" :default-rotate="false" @handle-click="handleClick" />
 </template>
 <script lang="ts" setup>
 import { LcCesiumEarth } from "@/components/education/components/map";

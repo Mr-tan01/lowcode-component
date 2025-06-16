@@ -43,8 +43,7 @@ const {
 } = defineProps(cesiumProps);
 
 const reloadPointData = async (): Promise<void> => {
-    cesiumUtils.clearEntity("pointEntities", "dataSource");
-    cesiumUtils.clearEntity("pointEntities", "viewer");
+    clearEntity();
     cesiumUtils.pointData = pointData;
     pointData?.forEach((point) => {
         cesiumUtils.addPoint(point, "value");
@@ -89,7 +88,8 @@ const cesiumUtils = new cesiumService("cesium-3d-viewer", {
 
 // 清除选中图层
 const clearEntity = () => {
-    cesiumUtils.clearEntity("polygonEntities", "viewer");
+    cesiumUtils.clearEntity("pointEntities", "dataSource");
+    cesiumUtils.clearEntity("pointEntities", "viewer");
 };
 const changeModel = <T extends changeModelType>(type: changeModelType, value: changeModelParamType[T]): void => {
     if (cesiumUtils[type]) {

@@ -1,5 +1,6 @@
 export type EducationTimeProps = {
-  icon?: string;
-  color?: string;
-  fontSize?: string;
-}
+    icon?: string;
+    color?: string;
+    fontSize?: string;
+    isShowIcon?: boolean;
+};

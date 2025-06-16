@@ -3,8 +3,8 @@ var O = (n, t, e) => t in n ? E(n, t, { enumerable: !0, configurable: !0, writab
 var o = (n, t, e) => O(n, typeof t != "symbol" ? t + "" : t, e);
 import { ref as g } from "vue";
 import * as c from "echarts";
-import { Cartesian3 as p, Math as w, EllipsoidTerrainProvider as x, ScreenSpaceEventHandler as M, ScreenSpaceEventType as h, Color as P, SingleTileImageryProvider as S, SceneMode as k } from "@cesium/engine";
-import { Viewer as G } from "@cesium/widgets";
+import { Cartesian3 as h, Math as w, EllipsoidTerrainProvider as x, ScreenSpaceEventHandler as M, ScreenSpaceEventType as p, Color as S, SingleTileImageryProvider as G, SceneMode as P } from "@cesium/engine";
+import { Viewer as k } from "@cesium/widgets";
 const R = (n) => new Promise((t, e) => {
   const a = new Image();
   a.onload = () => t(!0), a.onerror = () => e(!1), a.src = n;
@@ -12,9 +12,9 @@ const R = (n) => new Promise((t, e) => {
   const t = g(!1), e = g(null);
   let a = null, i = null;
   const r = () => {
-    e.value && !a && (a = e.value.clock.onTick.addEventListener(() => {
+    e.value && !a && n.defaultRotate && (a = e.value.clock.onTick.addEventListener(() => {
       var l;
-      (l = e.value) == null || l.camera.rotate(p.UNIT_Z, w.toRadians(n.rotateSpeed));
+      (l = e.value) == null || l.camera.rotate(h.UNIT_Z, w.toRadians(n.rotateSpeed));
     }));
   }, s = () => {
     a && (a(), a = null);
@@ -24,7 +24,7 @@ const R = (n) => new Promise((t, e) => {
       e.value && (a && (a(), a = null), i && (i.destroy(), i = null), e.value.destroy(), e.value = null);
     },
     initViewer: async () => {
-      e.value = new G("cesium3D-box", {
+      e.value = new k("cesium3D-box", {
         animation: !1,
         //是否创建动画小器件，左下角仪表
         baseLayerPicker: !1,
@@ -59,18 +59,18 @@ const R = (n) => new Promise((t, e) => {
         ...n.cesiumOptions
       });
       const l = e.value.scene;
-      i = new M(l.canvas), i.setInputAction((b) => {
+      i = new M(l.canvas), i.setInputAction((L) => {
         var y, _;
-        const m = (y = e.value) == null ? void 0 : y.camera.getPickRay(b.endPosition), f = (_ = e.value) == null ? void 0 : _.scene.globe;
+        const m = (y = e.value) == null ? void 0 : y.camera.getPickRay(L.endPosition), f = (_ = e.value) == null ? void 0 : _.scene.globe;
         let v = !1;
         m && f && (v = !!f.pick(m, l)), v ? s() : n.defaultRotate && !a && r();
-      }, h.MOUSE_MOVE), e.value.scene.screenSpaceCameraController.minimumZoomDistance = 10, e.value.scene.screenSpaceCameraController.maximumZoomDistance = 5e7, e.value.scene.skyBox.show = !1, e.value.scene.sun.show = !1, e.value.scene.moon.show = !1, e.value.scene.skyAtmosphere.show = !1, e.value.scene.backgroundColor = P.TRANSPARENT;
-      let L = new S({
+      }, p.MOUSE_MOVE), e.value.scene.screenSpaceCameraController.minimumZoomDistance = 10, e.value.scene.screenSpaceCameraController.maximumZoomDistance = 5e7, e.value.scene.skyBox.show = !1, e.value.scene.sun.show = !1, e.value.scene.moon.show = !1, e.value.scene.skyAtmosphere.show = !1, e.value.scene.globe.showGroundAtmosphere = !0, e.value.scene.globe.atmosphereBrightnessShift = -1, e.value.scene.backgroundColor = S.TRANSPARENT;
+      let b = new G({
         url: n.baseUrl,
         tileWidth: 256,
         tileHeight: 256
       });
-      e.value.imageryLayers.addImageryProvider(L), e.value.cesiumWidget.creditContainer.style.display = "none", e.value.cesiumWidget.screenSpaceEventHandler.removeInputAction(h.LEFT_DOUBLE_CLICK), e.value.camera.flyTo({ destination: n.centerPosition }), t.value = await R(n.baseUrl);
+      e.value.imageryLayers.addImageryProvider(b), e.value.cesiumWidget.creditContainer.style.display = "none", e.value.cesiumWidget.screenSpaceEventHandler.removeInputAction(p.LEFT_DOUBLE_CLICK), e.value.camera.flyTo({ destination: n.centerPosition }), t.value = await R(n.baseUrl);
     },
     startRotation: r,
     stopRotation: s,
@@ -113,10 +113,10 @@ const R = (n) => new Promise((t, e) => {
   dataToPoint(t) {
     let e = [99999, 99999];
     t[1] = this.fixLat(t[1]);
-    let a = p.fromDegrees(t[0], t[1]);
+    let a = h.fromDegrees(t[0], t[1]);
     if (!a) return e;
     let i = this._GLMap.cartesianToCanvasCoordinates(a);
-    return i ? this._GLMap.mode === k.SCENE3D && p.angleBetween(this._GLMap.camera.position, a) > w.toRadians(75) ? [] : [i.x - this._mapOffset[0], i.y - this._mapOffset[1]] : e;
+    return i ? this._GLMap.mode === P.SCENE3D && h.angleBetween(this._GLMap.camera.position, a) > w.toRadians(75) ? [] : [i.x - this._mapOffset[0], i.y - this._mapOffset[1]] : e;
   }
   /**
    * 静态方法，创建并注册坐标系统
@@ -138,7 +138,7 @@ const R = (n) => new Promise((t, e) => {
 };
 o(u, "dimensions", ["lng", "lat"]);
 let d = u;
-const I = (n, t) => {
+const A = (n, t) => {
   const e = new MouseEvent("mousedown", { bubbles: !0, cancelable: !0 }), a = new MouseEvent("mouseup", { bubbles: !0, cancelable: !0 }), i = new MouseEvent("click", { bubbles: !0, cancelable: !0 });
   for (const s in n)
     try {
@@ -191,7 +191,7 @@ class N {
     const e = document.createElement("div");
     e.style.position = "absolute", e.style.top = "0px", e.style.left = "0px", e.style.width = t.canvas.width + "px", e.style.height = t.canvas.height + "px", e.style.pointerEvents = "none", e.setAttribute("id", "echarts"), e.setAttribute("class", "echartMap"), this._map.container.appendChild(e), this._echartsContainer = e, window.glMap = t;
     const a = c.init(e);
-    return new M(t.canvas).setInputAction((r) => I(event, a), h.LEFT_CLICK), a;
+    return new M(t.canvas).setInputAction((r) => A(event, a), p.LEFT_CLICK), a;
   }
   /**
    * 销毁图层，清理资源

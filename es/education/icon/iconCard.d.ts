@@ -2,15 +2,17 @@ import { Domains, NameTypes } from './icons';
 type __VLS_Props = {
     bagName?: "booth" | "pedestal";
     domain?: Domains;
-    name: NameTypes;
+    name?: NameTypes;
     size?: number | string;
+    iconSize?: number | string;
+    gap?: number | string;
     ext?: string;
     selected?: boolean;
 };
 declare function __VLS_template(): {
     attrs: Partial<{}>;
     slots: {
-        icon?(_: {}): any;
+        default?(_: {}): any;
     };
     refs: {};
     rootEl: HTMLDivElement;
@@ -23,6 +25,8 @@ declare const __VLS_component: import('vue').DefineComponent<__VLS_Props, {}, {}
     ext: string;
     selected: boolean;
     bagName: "booth" | "pedestal";
+    iconSize: number | string;
+    gap: number | string;
 }, {}, {}, {}, string, import('vue').ComponentProvideOptions, false, {}, HTMLDivElement>;
 declare const _default: __VLS_WithTemplateSlots<typeof __VLS_component, __VLS_TemplateResult["slots"]>;
 export default _default;
