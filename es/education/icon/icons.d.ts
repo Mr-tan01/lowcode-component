@@ -48,6 +48,7 @@ export declare const innerImageDomain: {
         readonly occupation: "occupation";
         readonly construction: "construction";
         readonly person: "person";
+        readonly creditRecognitionRate: "credit-recognition-rate";
     };
     readonly event: {
         readonly domain: "domain";
