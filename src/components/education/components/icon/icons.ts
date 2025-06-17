@@ -73,6 +73,7 @@ export const innerImageDomain = {
         occupation: "occupation",
         construction: "construction",
         person: "person",
+        creditRecognitionRate: "credit-recognition-rate",
     },
     event: {
         domain: "domain",

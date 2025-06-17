@@ -1,4 +1,4 @@
-import { ref as f, watch as b } from "vue";
+import { ref as h, watch as b } from "vue";
 const w = /* @__PURE__ */ Object.assign({
   "./images/func/acreage.png": () => import("./images/func/acreage.png.js").then((e) => e.default),
   "./images/func/add.png": () => import("./images/func/add.png.js").then((e) => e.default),
@@ -11,6 +11,7 @@ const w = /* @__PURE__ */ Object.assign({
   "./images/func/chevron-down.png": () => import("./images/func/chevron-down.png.js").then((e) => e.default),
   "./images/func/chevron-up.png": () => import("./images/func/chevron-up.png.js").then((e) => e.default),
   "./images/func/construction.png": () => import("./images/func/construction.png.js").then((e) => e.default),
+  "./images/func/credit-recognition-rate.png": () => import("./images/func/credit-recognition-rate.png.js").then((e) => e.default),
   "./images/func/doctor.png": () => import("./images/func/doctor.png.js").then((e) => e.default),
   "./images/func/expand.png": () => import("./images/func/expand.png.js").then((e) => e.default),
   "./images/func/expenditure.png": () => import("./images/func/expenditure.png.js").then((e) => e.default),
@@ -127,7 +128,8 @@ const w = /* @__PURE__ */ Object.assign({
     safety: "safety",
     occupation: "occupation",
     construction: "construction",
-    person: "person"
+    person: "person",
+    creditRecognitionRate: "credit-recognition-rate"
   },
   event: {
     domain: "domain",
@@ -161,10 +163,10 @@ const w = /* @__PURE__ */ Object.assign({
   }
 };
 function C(e, s, n) {
-  const u = f(""), c = f(""), l = (t) => {
-    var a, m, g, i, d, h;
+  const u = h(""), c = h(""), l = (t) => {
+    var a, m, g, i, d, f;
     let o = `${e.value}/${t}${n.value}`, r = "";
-    e.value === "event" || e.value === "baseSupport" ? (o = `${e.value}/${t}/icon${n.value}`, r = `${e.value}/${t}/selected-icon${n.value}`) : e.value === "menus" && (o = `${e.value}/${t}${n.value}`), (g = (m = (a = v[e.value]) == null ? void 0 : a[`./images/${o}`]) == null ? void 0 : m.call(a)) == null || g.then((p) => u.value = p), r && ((h = (d = (i = v[e.value]) == null ? void 0 : i[`./images/${r}`]) == null ? void 0 : d.call(i)) == null || h.then((p) => c.value = p));
+    e.value === "event" || e.value === "baseSupport" ? (o = `${e.value}/${t}/icon${n.value}`, r = `${e.value}/${t}/selected-icon${n.value}`) : e.value === "menus" && (o = `${e.value}/${t}${n.value}`), (g = (m = (a = v[e.value]) == null ? void 0 : a[`./images/${o}`]) == null ? void 0 : m.call(a)) == null || g.then((p) => u.value = p), r && ((f = (d = (i = v[e.value]) == null ? void 0 : i[`./images/${r}`]) == null ? void 0 : d.call(i)) == null || f.then((p) => c.value = p));
   };
   return l(s.value), b(s, (t) => {
     l(t);
