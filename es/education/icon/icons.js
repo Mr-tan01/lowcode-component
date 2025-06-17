@@ -10,6 +10,7 @@ const w = /* @__PURE__ */ Object.assign({
   "./images/func/caret-up.png": () => import("./images/func/caret-up.png.js").then((e) => e.default),
   "./images/func/chevron-down.png": () => import("./images/func/chevron-down.png.js").then((e) => e.default),
   "./images/func/chevron-up.png": () => import("./images/func/chevron-up.png.js").then((e) => e.default),
+  "./images/func/construction.png": () => import("./images/func/construction.png.js").then((e) => e.default),
   "./images/func/doctor.png": () => import("./images/func/doctor.png.js").then((e) => e.default),
   "./images/func/expand.png": () => import("./images/func/expand.png.js").then((e) => e.default),
   "./images/func/expenditure.png": () => import("./images/func/expenditure.png.js").then((e) => e.default),
@@ -17,13 +18,16 @@ const w = /* @__PURE__ */ Object.assign({
   "./images/func/help-circle.png": () => import("./images/func/help-circle.png.js").then((e) => e.default),
   "./images/func/high-school.png": () => import("./images/func/high-school.png.js").then((e) => e.default),
   "./images/func/info-circle.png": () => import("./images/func/info-circle.png.js").then((e) => e.default),
+  "./images/func/instrument.png": () => import("./images/func/instrument.png.js").then((e) => e.default),
   "./images/func/international.png": () => import("./images/func/international.png.js").then((e) => e.default),
   "./images/func/internet.png": () => import("./images/func/internet.png.js").then((e) => e.default),
   "./images/func/laptop.png": () => import("./images/func/laptop.png.js").then((e) => e.default),
   "./images/func/layers.png": () => import("./images/func/layers.png.js").then((e) => e.default),
   "./images/func/location.png": () => import("./images/func/location.png.js").then((e) => e.default),
+  "./images/func/occupation.png": () => import("./images/func/occupation.png.js").then((e) => e.default),
   "./images/func/parallel.png": () => import("./images/func/parallel.png.js").then((e) => e.default),
   "./images/func/pause.png": () => import("./images/func/pause.png.js").then((e) => e.default),
+  "./images/func/person.png": () => import("./images/func/person.png.js").then((e) => e.default),
   "./images/func/pie-chart.png": () => import("./images/func/pie-chart.png.js").then((e) => e.default),
   "./images/func/private-school.png": () => import("./images/func/private-school.png.js").then((e) => e.default),
   "./images/func/professional-high-school.png": () => import("./images/func/professional-high-school.png.js").then((e) => e.default),
@@ -32,12 +36,13 @@ const w = /* @__PURE__ */ Object.assign({
   "./images/func/refresh.png": () => import("./images/func/refresh.png.js").then((e) => e.default),
   "./images/func/remove.png": () => import("./images/func/remove.png.js").then((e) => e.default),
   "./images/func/retract.png": () => import("./images/func/retract.png.js").then((e) => e.default),
+  "./images/func/safety.png": () => import("./images/func/safety.png.js").then((e) => e.default),
   "./images/func/search.png": () => import("./images/func/search.png.js").then((e) => e.default),
   "./images/func/specialist-school.png": () => import("./images/func/specialist-school.png.js").then((e) => e.default),
   "./images/func/student.png": () => import("./images/func/student.png.js").then((e) => e.default),
   "./images/func/teacher.png": () => import("./images/func/teacher.png.js").then((e) => e.default),
   "./images/func/time.png": () => import("./images/func/time.png.js").then((e) => e.default)
-}), S = /* @__PURE__ */ Object.assign({
+}), y = /* @__PURE__ */ Object.assign({
   "./images/event/building/icon.png": () => import("./images/event/building/icon.png.js").then((e) => e.default),
   "./images/event/building/selected-icon.png": () => import("./images/event/building/selected-icon.png.js").then((e) => e.default),
   "./images/event/domain/icon.png": () => import("./images/event/domain/icon.png.js").then((e) => e.default),
@@ -54,7 +59,7 @@ const w = /* @__PURE__ */ Object.assign({
   "./images/event/reward/selected-icon.png": () => import("./images/event/reward/selected-icon.png.js").then((e) => e.default),
   "./images/event/style/icon.png": () => import("./images/event/style/icon.png.js").then((e) => e.default),
   "./images/event/style/selected-icon.png": () => import("./images/event/style/selected-icon.png.js").then((e) => e.default)
-}), y = /* @__PURE__ */ Object.assign({
+}), S = /* @__PURE__ */ Object.assign({
   "./images/baseSupport/booth/icon.png": () => import("./images/baseSupport/booth/icon.png.js").then((e) => e.default),
   "./images/baseSupport/booth/selected-icon.png": () => import("./images/baseSupport/booth/selected-icon.png.js").then((e) => e.default),
   "./images/baseSupport/pedestal/icon.png": () => import("./images/baseSupport/pedestal/icon.png.js").then((e) => e.default),
@@ -76,9 +81,9 @@ const w = /* @__PURE__ */ Object.assign({
   "./images/menus/team-construction.png": () => import("./images/menus/team-construction.png.js").then((e) => e.default)
 }), v = {
   func: w,
-  event: S,
+  event: y,
   menus: $,
-  baseSupport: y
+  baseSupport: S
 }, I = {
   func: {
     add: "add",
@@ -117,7 +122,12 @@ const w = /* @__PURE__ */ Object.assign({
     campusSchool: "campus-school",
     highSchool: "high-school",
     specialistSchool: "specialist-school",
-    professionalHighSchool: "professional-high-school"
+    professionalHighSchool: "professional-high-school",
+    instrument: "instrument",
+    safety: "safety",
+    occupation: "occupation",
+    construction: "construction",
+    person: "person"
   },
   event: {
     domain: "domain",
@@ -164,8 +174,8 @@ function C(e, s, n) {
   };
 }
 export {
-  y as baseSupportdomainIcons,
-  S as eventdomainIcons,
+  S as baseSupportdomainIcons,
+  y as eventdomainIcons,
   w as funcdomainIcons,
   I as innerImageDomain,
   $ as menustdomainIcons,

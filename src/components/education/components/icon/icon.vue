@@ -37,7 +37,7 @@ const props = withDefaults(
     {
         domain: "func",
         name: "add",
-        size: 16,
+        size: 32,
         ext: ".png",
         selected: void 0,
     }
@@ -51,7 +51,7 @@ const { src, selectedSrc } = useImage(
 );
 
 const iconWidth = computed(() =>
-    typeof size === "number" ? `${size}px` : size
+    typeof size.value === "number" ? `${size.value}px` : size.value
 );
 </script>
 

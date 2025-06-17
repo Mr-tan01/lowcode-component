@@ -1,29 +1,34 @@
-import { defineComponent as a, computed as l, openBlock as o, createElementBlock as s, renderSlot as i, createBlock as c, unref as d, normalizeProps as m, mergeProps as p, createElementVNode as u, toDisplayString as f } from "vue";
-import h from "./icon/index.js";
-import { overflowStr as _ } from "lowcode-share/es/share";
-const k = { class: "lc-radiohead" }, g = ["title"], L = /* @__PURE__ */ a({
+import { defineComponent as d, useCssVars as m, toRefs as f, computed as r, openBlock as a, createElementBlock as p, renderSlot as v, createBlock as _, unref as n, normalizeProps as h, mergeProps as x, createElementVNode as S, toDisplayString as k } from "vue";
+import './assets/icon/icon.css';/* empty css           */
+import g from "./icon/iconCard.js";
+import { overflowStr as y } from "lowcode-share/es/share";
+const z = { class: "lc-radiohead" }, $ = ["title"], V = /* @__PURE__ */ d({
   __name: "radiohead",
   props: {
     text: { default: "" },
-    maxLength: { default: 15 }
+    maxLength: { default: 15 },
+    fontSize: { default: 16 }
   },
-  setup(r) {
-    const t = r, n = l(() => _(t.text, t.maxLength));
-    return (e, v) => (o(), s("div", k, [
-      e.$slots.icon ? i(e.$slots, "icon", { key: 0 }, void 0, !0) : (o(), c(
-        d(h),
-        m(p({ key: 1 }, e.$attrs)),
+  setup(l) {
+    m((e) => ({
+      f9c9a1e4: u.value
+    }));
+    const s = l, { text: o, maxLength: c, fontSize: t } = f(s), i = r(() => y(o.value, c.value)), u = r(() => typeof t.value == "number" ? `${t.value}px` : t.value);
+    return (e, B) => (a(), p("div", z, [
+      e.$slots.icon ? v(e.$slots, "icon", { key: 0 }, void 0, !0) : (a(), _(
+        n(g),
+        h(x({ key: 1 }, e.$attrs)),
         null,
         16
         /* FULL_PROPS */
       )),
-      u("div", {
+      S("div", {
         class: "lc-radiohead__title",
-        title: e.text
-      }, f(n.value), 9, g)
+        title: n(o)
+      }, k(i.value), 9, $)
     ]));
   }
 });
 export {
-  L as default
+  V as default
 };

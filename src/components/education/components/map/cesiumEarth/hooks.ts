@@ -28,7 +28,7 @@ export const useInitPlanet = (props) => {
     let handler: Cesium.ScreenSpaceEventHandler | null = null; // 存储整个事件处理器对象
     // 旋转方法
     const startRotation = () => {
-        if (viewer.value && !rotateHandler) {
+        if (viewer.value && !rotateHandler && props.defaultRotate) {
             rotateHandler = viewer.value.clock.onTick.addEventListener(() => {
                 viewer.value?.camera.rotate(Cesium.Cartesian3.UNIT_Z, Cesium.Math.toRadians(props.rotateSpeed));
             });
@@ -95,6 +95,8 @@ export const useInitPlanet = (props) => {
         viewer.value.scene.sun.show = false; // 隐藏太阳
         viewer.value.scene.moon.show = false; // 隐藏月亮
         viewer.value.scene.skyAtmosphere.show = false; // 隐藏大气层效果
+        viewer.value.scene.globe.showGroundAtmosphere = true; // 隐藏大气散射效果
+        viewer.value.scene.globe.atmosphereBrightnessShift = -1; // 大气亮度偏题
 
         // 设置场景背景为透明
         viewer.value.scene.backgroundColor = Cesium.Color.TRANSPARENT;

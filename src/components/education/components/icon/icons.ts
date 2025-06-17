@@ -68,6 +68,11 @@ export const innerImageDomain = {
         highSchool: "high-school",
         specialistSchool: "specialist-school",
         professionalHighSchool: "professional-high-school",
+        instrument: "instrument",
+        safety: "safety",
+        occupation: "occupation",
+        construction: "construction",
+        person: "person",
     },
     event: {
         domain: "domain",
@@ -97,7 +102,7 @@ export const innerImageDomain = {
         exchangeCooperation: "exchange-cooperation",
         highereducation: "higher-education",
         supervisoryEvaluation: "supervisory-evaluation",
-        teamConstruction: "team-construction"
+        teamConstruction: "team-construction",
     }
 } as const;
 

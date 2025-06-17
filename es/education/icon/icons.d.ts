@@ -43,6 +43,11 @@ export declare const innerImageDomain: {
         readonly highSchool: "high-school";
         readonly specialistSchool: "specialist-school";
         readonly professionalHighSchool: "professional-high-school";
+        readonly instrument: "instrument";
+        readonly safety: "safety";
+        readonly occupation: "occupation";
+        readonly construction: "construction";
+        readonly person: "person";
     };
     readonly event: {
         readonly domain: "domain";
