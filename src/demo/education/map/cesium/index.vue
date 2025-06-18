@@ -7,6 +7,7 @@
                     :access-token="accessToken"
                     :point-data="optionInfo"
                     :basic-config="basicConfig"
+                    base-url="https://jysl.sz.edu.cn:8314"
                     :default-show-state="false"
                     :area-name="'深圳市'"
                     v-on:load-handler="loadHandler"

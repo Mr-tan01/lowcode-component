@@ -1,14 +1,14 @@
-var D = Object.defineProperty;
-var I = (m, e, t) => e in m ? D(m, e, { enumerable: !0, configurable: !0, writable: !0, value: t }) : m[e] = t;
-var o = (m, e, t) => I(m, typeof e != "symbol" ? e + "" : e, t);
+var I = Object.defineProperty;
+var D = (m, e, t) => e in m ? I(m, e, { enumerable: !0, configurable: !0, writable: !0, value: t }) : m[e] = t;
+var o = (m, e, t) => D(m, typeof e != "symbol" ? e + "" : e, t);
 import g from "localforage";
 import { CesiumHeatmap as x } from "cesium-heatmap-es6";
 import { areaData as f } from "./type.js";
 import { createClusterBillboard as V, createInfoCanvas as k, createEntityConfig as U, updateViewerEntityInfo as p } from "./tools.js";
 import { useMessage as M } from "naive-ui";
-import { Color as v, Rectangle as A, CustomDataSource as O, JulianDate as w, VerticalOrigin as N, HorizontalOrigin as Z, ScreenSpaceEventType as C, ScreenSpaceEventHandler as b, defined as S, ArcGisMapServerImageryProvider as P, PolylineDashMaterialProperty as R, PolygonHierarchy as z, Cartographic as E, Cartesian3 as y, Math as d, Cartesian2 as H } from "@cesium/engine";
+import { Color as v, Rectangle as A, CustomDataSource as O, JulianDate as w, VerticalOrigin as N, HorizontalOrigin as Z, ScreenSpaceEventType as C, ScreenSpaceEventHandler as S, defined as P, ArcGisMapServerImageryProvider as H, PolylineDashMaterialProperty as R, PolygonHierarchy as z, Cartographic as E, Cartesian3 as y, Math as u, Cartesian2 as T } from "@cesium/engine";
 import { Viewer as B } from "@cesium/widgets";
-class F {
+class W {
   // 缓存有效期7天
   constructor() {
     o(this, "storeName", "WMTS_Tiles");
@@ -84,7 +84,7 @@ class Q {
       // 北边界 - 纬度
     ));
     o(this, "message", M());
-    o(this, "tileCache", new F());
+    o(this, "tileCache", new W());
     o(this, "doubleClickHandler", (e) => {
       e.preventDefault(), e.stopPropagation(), this.setCameraHeight("ZoomIn");
     });
@@ -108,11 +108,11 @@ class Q {
       r.billboard.show = !0, r.label.show = !1;
       const n = {};
       let s = "", a = 0;
-      i.forEach((l) => {
-        var u;
-        if (!l.properties) return;
-        const h = (u = l.properties.type) == null ? void 0 : u.getValue(w.now());
-        h && (n[h] = (n[h] || 0) + 1, n[h] > a && (a = n[h], s = h));
+      i.forEach((h) => {
+        var d;
+        if (!h.properties) return;
+        const l = (d = h.properties.type) == null ? void 0 : d.getValue(w.now());
+        l && (n[l] = (n[l] || 0) + 1, n[l] > a && (a = n[l], s = l));
       });
       const c = V(i.length, s || "primary");
       Object.assign(r.billboard, {
@@ -142,13 +142,7 @@ class Q {
   setupEventHandlers() {
     if (!this.viewer) return;
     const e = this.viewer.scene.canvas;
-    this.screenSpaceEventHandler = new b(e).setInputAction(
-      this.handleLeftClick.bind(this),
-      C.LEFT_CLICK
-    ), this.screenMouseMoveHandler = new b(e).setInputAction(
-      this.handleMouseMove.bind(this),
-      C.MOUSE_MOVE
-    ), this.viewer.scene && this.viewer.scene.camera && this.viewer.scene.camera.changed.addEventListener(() => {
+    this.screenSpaceEventHandler = new S(e).setInputAction(this.handleLeftClick.bind(this), C.LEFT_CLICK), this.screenMouseMoveHandler = new S(e).setInputAction(this.handleMouseMove.bind(this), C.MOUSE_MOVE), this.viewer.scene && this.viewer.scene.camera && this.viewer.scene.camera.changed.addEventListener(() => {
       Math.ceil(this.viewer.camera.positionCartographic.height);
     });
   }
@@ -158,7 +152,7 @@ class Q {
     if (!this.viewer) return;
     this.viewer.selectedEntity = void 0, (i = this.options) != null && i.offsetState && (e.position.x *= 1.18, e.position.y *= 1.18);
     const t = this.viewer.scene.pick(e.position);
-    if (S(t) && t.id) {
+    if (P(t) && t.id) {
       if (t.id === "cluster") {
         const r = this.getClickPosition(e.position);
         r && this.viewer.camera.flyTo({
@@ -177,7 +171,7 @@ class Q {
     if (t - this.lastThrottleTime < this.throttleDelay) return;
     this.lastThrottleTime = t, (r = this.options) != null && r.offsetState && (e.endPosition.x *= 1.18, e.endPosition.y *= 1.18);
     const i = this.viewer.scene.pick(e.endPosition);
-    if (!S(i) || !i.id || i.id.name in f) {
+    if (!P(i) || !i.id || i.id.name in f) {
       this.lastHoveredEntity && (this.pointHoverExitHandler(this.lastHoveredEntity), this.lastHoveredEntity = null);
       return;
     }
@@ -232,47 +226,47 @@ class Q {
   async loadProviderWithFallback(e) {
     try {
       let t;
-      e.useZondy ? t = await Zondy.WebMapTileServiceImageryProvider.fromUrl(e.targetUrl) : t = await P.fromUrl(e.targetUrl);
-      const i = t.requestImage.bind(t);
-      return t.requestImage = async (r, n, s) => {
-        let a;
+      e.useZondy ? t = await Zondy.WebMapTileServiceImageryProvider.fromUrl(e.targetUrl) : t = await H.fromUrl(e.targetUrl);
+      const i = t.requestImage.bind(t), r = async (n) => {
         try {
-          const c = {
-            url: e.targetUrl,
-            x: r,
-            y: n,
-            level: s
-          }, l = await this.tileCache.getTile(c);
-          if (l)
-            return a = await createImageBitmap(l), a;
-          if (a = await i(r, n, s), !a || a.width === 0 || a.height === 0)
+          const s = await this.tileCache.getTile(n);
+          return s ? await createImageBitmap(s) : null;
+        } catch (s) {
+          return console.warn("读取缓存失败:", s), null;
+        }
+      };
+      return t.requestImage = async (n, s, a) => {
+        const c = {
+          url: e.targetUrl,
+          x: n,
+          y: s,
+          level: a
+        }, h = await r(c);
+        if (h)
+          return h;
+        try {
+          const l = await i(n, s, a);
+          if (!l || l.width === 0 || l.height === 0)
             throw new Error("Invalid image dimensions");
-          try {
-            const h = document.createElement("canvas");
-            h.width = a.width, h.height = a.height;
-            const u = h.getContext("2d");
-            u && (u.drawImage(a, 0, 0), await new Promise((T) => {
-              h.toBlob(async (L) => {
-                L && await this.tileCache.putTile(c, L), T();
-              });
-            }));
-          } catch (h) {
-            console.warn("Failed to cache tile:", h);
-          }
-          return a;
-        } catch {
-          if (a)
+          return setTimeout(async () => {
             try {
-              a.close();
-            } catch (l) {
-              console.warn("Failed to close image:", l);
+              const d = document.createElement("canvas");
+              d.width = l.width, d.height = l.height;
+              const b = d.getContext("2d");
+              b && (b.drawImage(l, 0, 0), d.toBlob(async (L) => {
+                L && await this.tileCache.putTile(c, L);
+              }));
+            } catch (d) {
+              console.warn("异步缓存失败:", d);
             }
-          return i(r, n, s);
+          }, 0), l;
+        } catch (l) {
+          return console.warn("获取瓦片失败:", l), await r(c) || i(n, s, a);
         }
       }, t;
     } catch {
       try {
-        return await P.fromUrl(e.fallbackUrl);
+        return await H.fromUrl(e.fallbackUrl);
       } catch (i) {
         throw this.options.loadTileLayerHandler(!1), i;
       }
@@ -343,7 +337,7 @@ class Q {
   // 获取当前地图经纬度、高度
   getPositionCartographic() {
     if (!this.viewer) return;
-    const e = this.viewer.camera.positionCartographic, t = d.toDegrees(e.longitude), i = d.toDegrees(e.latitude);
+    const e = this.viewer.camera.positionCartographic, t = u.toDegrees(e.longitude), i = u.toDegrees(e.latitude);
     return [t, i, e.height];
   }
   // 设置地图高度
@@ -371,9 +365,9 @@ class Q {
   }
   // 控制窗体
   pointClickHandler(e) {
-    var c, l, h, u;
+    var c, h, l, d;
     const { name: t } = e, { labelName: i, dataIndex: r, entityIndex: n, labelEntityIndex: s } = this.getEntityNameInfo(t), a = r !== -1 && s === -1 && !this.options.defaultShowState;
-    p((c = this.pointData) == null ? void 0 : c[r], (l = this.pointEntities) == null ? void 0 : l[n], "value"), s !== -1 && this.options.defaultShowState && p((h = this.pointData) == null ? void 0 : h[r], (u = this.pointEntities) == null ? void 0 : u[s]), a && this.pointData && this.addPoint(this.pointData[r], void 0, "Label"), this.handleLabelsVisibility(i), this.options.pointHandler(e);
+    p((c = this.pointData) == null ? void 0 : c[r], (h = this.pointEntities) == null ? void 0 : h[n], "value"), s !== -1 && this.options.defaultShowState && p((l = this.pointData) == null ? void 0 : l[r], (d = this.pointEntities) == null ? void 0 : d[s]), a && this.pointData && this.addPoint(this.pointData[r], void 0, "Label"), this.handleLabelsVisibility(i), this.options.pointHandler(e);
   }
   // 处理标签显示/隐藏
   handleLabelsVisibility(e) {
@@ -385,8 +379,8 @@ class Q {
         i.show = i.name === e && !i.show;
       else {
         if (!((n = i.properties) == null ? void 0 : n.getValue(t).changeState)) return;
-        const l = ((s = this.pointData) == null ? void 0 : s.findIndex((h) => h.name === i.name)) ?? -1;
-        l !== -1 && p((a = this.pointData) == null ? void 0 : a[l], i, "value");
+        const h = ((s = this.pointData) == null ? void 0 : s.findIndex((l) => l.name === i.name)) ?? -1;
+        h !== -1 && p((a = this.pointData) == null ? void 0 : a[h], i, "value");
       }
     });
   }
@@ -451,8 +445,8 @@ class Q {
       console.log("未找到匹配的数据");
       return;
     }
-    ((n = this.polygonEntities) == null ? void 0 : n.find((l) => l.name === e)) || this.addPolygon(e), (s = this.polygonEntities) == null || s.forEach((l) => {
-      l.show = l.name === e;
+    ((n = this.polygonEntities) == null ? void 0 : n.find((h) => h.name === e)) || this.addPolygon(e), (s = this.polygonEntities) == null || s.forEach((h) => {
+      h.show = h.name === e;
     });
     const { lng: i, lat: r } = f[e];
     (c = this.viewer) == null || c.camera.flyTo({
@@ -497,7 +491,7 @@ class Q {
   }
   // 检查是否在深圳边界内
   isPointInShenzhen(e, t) {
-    return e >= d.toDegrees(this.shenzhenBounds.west) && e <= d.toDegrees(this.shenzhenBounds.east) && t >= d.toDegrees(this.shenzhenBounds.south) && t <= d.toDegrees(this.shenzhenBounds.north);
+    return e >= u.toDegrees(this.shenzhenBounds.west) && e <= u.toDegrees(this.shenzhenBounds.east) && t >= u.toDegrees(this.shenzhenBounds.south) && t <= u.toDegrees(this.shenzhenBounds.north);
   }
   // 设置视角移动限制
   setupCameraLimits() {
@@ -507,20 +501,17 @@ class Q {
       if (!(this.isCheckingBounds || !this.viewer))
         try {
           this.isCheckingBounds = !0;
-          const t = new H(
-            Math.floor(this.viewer.canvas.clientWidth / 2),
-            Math.floor(this.viewer.canvas.clientHeight / 2)
-          ), i = this.viewer.camera.getPickRay(t);
+          const t = new T(Math.floor(this.viewer.canvas.clientWidth / 2), Math.floor(this.viewer.canvas.clientHeight / 2)), i = this.viewer.camera.getPickRay(t);
           if (!i) return;
           const r = this.viewer.scene.globe.pick(i, this.viewer.scene);
           if (!r) {
             const c = this.getCameraViewCenter();
             if (!c) return;
-            const l = d.toDegrees(c.longitude), h = d.toDegrees(c.latitude);
-            this.isPointInShenzhen(l, h) ? this.lastValidCameraPosition = this.viewer.camera.position.clone() : this.lastValidCameraPosition && (this.viewer.camera.position = this.lastValidCameraPosition.clone());
+            const h = u.toDegrees(c.longitude), l = u.toDegrees(c.latitude);
+            this.isPointInShenzhen(h, l) ? this.lastValidCameraPosition = this.viewer.camera.position.clone() : this.lastValidCameraPosition && (this.viewer.camera.position = this.lastValidCameraPosition.clone());
             return;
           }
-          const n = E.fromCartesian(r), s = d.toDegrees(n.longitude), a = d.toDegrees(n.latitude);
+          const n = E.fromCartesian(r), s = u.toDegrees(n.longitude), a = u.toDegrees(n.latitude);
           this.isPointInShenzhen(s, a) ? this.lastValidCameraPosition = this.viewer.camera.position.clone() : this.lastValidCameraPosition && (this.viewer.camera.position = this.lastValidCameraPosition.clone(), this.viewer.camera.direction = this.viewer.scene.camera.direction.clone());
         } finally {
           this.isCheckingBounds = !1;
@@ -531,7 +522,7 @@ class Q {
   getCameraViewCenter() {
     if (this.viewer)
       try {
-        const e = new H(this.viewer.canvas.clientWidth / 2, this.viewer.canvas.clientHeight / 2), t = this.viewer.camera.getPickRay(e);
+        const e = new T(this.viewer.canvas.clientWidth / 2, this.viewer.canvas.clientHeight / 2), t = this.viewer.camera.getPickRay(e);
         if (!t) return;
         const i = this.viewer.scene.globe.pick(t, this.viewer.scene);
         return i ? E.fromCartesian(i) : this.viewer.camera.positionCartographic;
