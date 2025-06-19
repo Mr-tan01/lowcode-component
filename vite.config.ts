@@ -4,7 +4,7 @@ import { pathResolve } from "lowcode-share/es/cli";
 import Cesium from "vite-plugin-cesium";
 // https://vite.dev/config/
 export default defineConfig({
-    base: "/lc-component",
+    base: "./",
     plugins: [vue(), Cesium()],
     resolve: {
         alias: [
