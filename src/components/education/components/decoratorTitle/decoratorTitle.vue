@@ -1,9 +1,11 @@
 <template>
     <div class="lc-decorator-title" :class="[`lc-decorator-title--${dir}`]">
         <div class="lc-decorator-title__wrapper">
-            <div class="lc-decorator-title__wrapper__text" :title="text">
-                {{ formatedText }}
-            </div>
+            <slot name="title">
+                <div class="lc-decorator-title__wrapper__text" :title="text">
+                    {{ formatedText }}
+                </div>
+            </slot>
             <div class="lc-decortator-title__slot" v-if="$slots.helper">
                 <slot name="helper"></slot>
             </div>
@@ -12,12 +14,12 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, PropType } from 'vue';
-import { overflowStr } from 'lowcode-share/es/share';
+import { computed, PropType } from "vue";
+import { overflowStr } from "lowcode-share/es/share";
 const {
-    text = '',
+    text = "",
     maxLength = 12,
-    dir = 'ltr',
+    dir = "ltr",
 } = defineProps({
     text: {
         type: String,
@@ -26,8 +28,8 @@ const {
         type: Number,
     },
     dir: {
-        type: String as PropType<'ltr' | 'rtl'>,
-    }
+        type: String as PropType<"ltr" | "rtl">,
+    },
 });
 const formatedText = computed(() => {
     return overflowStr(text, maxLength);
@@ -55,11 +57,10 @@ const formatedText = computed(() => {
                 margin-left: unset;
                 padding-left: 30%;
                 flex-direction: row-reverse;
-                &__text  {
+                &__text {
                     text-align: right;
                     padding-right: unset;
-                   
-                } 
+                }
             }
         }
     }
@@ -75,13 +76,12 @@ const formatedText = computed(() => {
             font-family: AlimamaFangYuanTiVF-SemiBold, AlimamaFangYuanTiVF-SemiBold;
             font-weight: normal;
             font-size: 18px;
-            color: #FFFFFF;
+            color: #ffffff;
             line-height: 18px;
             text-align: left;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
-           
         }
     }
 }

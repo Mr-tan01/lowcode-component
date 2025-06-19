@@ -13,10 +13,18 @@
         <DemoHelpBox title="标题头部" description="左右排序" rswidth="1000px" :code="pageTitle.decoratorCode">
             <n-space>
                 <VueResizable width="390px" height="35px">
-                    <LcDecoratorTitle text="标题文字最多十二个字符"></LcDecoratorTitle>
+                    <LcDecoratorTitle>
+                        <template #title>
+                            111
+                        </template>
+                    </LcDecoratorTitle>
                 </VueResizable>
                 <VueResizable width="390px" height="35px">
-                    <LcDecoratorTitle text="标题文字最多十二个字符" dir="rtl"></LcDecoratorTitle>
+                    <LcDecoratorTitle  dir="rtl">
+                          <template #title>
+                            标题文字最多十二个字符
+                        </template>
+                    </LcDecoratorTitle>
                 </VueResizable>
                 <VueResizable width="390px" height="35px">
                     <LcDecoratorTitle text="标题文字最多十二个字符标题文字最多十二个字符标题文字最多十二个字符"></LcDecoratorTitle>
