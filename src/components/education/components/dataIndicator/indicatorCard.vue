@@ -1,10 +1,7 @@
 <template>
-    <div
-        class="lc-indicator-card"
-        :class="{
-            'lc-indicator-card--noborder': type === 'noborder',
-        }"
-    >
+    <div class="lc-indicator-card" :class="{
+        'lc-indicator-card--noborder': type === 'noborder',
+    }">
         <div class="lc-indicator-card__wrapper">
             <div class="lc-indicator-card__wrapper--content">
                 <div class="lc-indicator-card__wrapper--tooltip" v-if="tip">
@@ -12,7 +9,9 @@
                 </div>
                 <div class="lc-indicator-card__wrapper--result">
                     <span class="lc-indicator-card__wrapper--result--value" :title="value.toString()">
-                        <NNumberAnimation show-separator :from="0" :to="renderValue" active :precision="decimals" />
+                        <slot name="value">
+                            <NNumberAnimation show-separator :from="0" :to="renderValue" active :precision="decimals" />
+                        </slot>
                     </span>
                     <span class="lc-indicator-card__wrapper--result--unit" v-if="fixed">
                         {{ unit }}
@@ -148,23 +147,28 @@ const unit = computed(() => {
         backdrop-filter: blur(26px);
         z-index: -1;
     }
+
     &__footer {
         height: 24px;
     }
+
     &__wrapper {
         background: url(./images/card/bg-border.png) no-repeat;
         background-repeat: no-repeat;
         background-size: 100% 100%;
 
         position: relative;
+
         &--content {
             padding: 22px 32px 0;
             padding: v-bind(padValue);
         }
+
         &--tooltip {
             position: absolute;
             right: 10px;
             top: 10px;
+
             :deep(.lc-tooltip__trigger_icon) {
                 width: 16px;
             }

@@ -8,6 +8,7 @@ type Size = typeof SIZE;
 declare function __VLS_template(): {
     attrs: Partial<{}>;
     slots: {
+        value?(_: {}): any;
         footer?(_: {}): any;
     };
     refs: {};

@@ -1,4 +1,4 @@
-import { defineComponent as h, mergeDefaults as y, useCssVars as C, computed as r, openBlock as l, createElementBlock as n, normalizeClass as N, createElementVNode as t, createVNode as s, unref as u, withCtx as S, createTextVNode as b, toDisplayString as o, createCommentVNode as m, renderSlot as w } from "vue";
+import { defineComponent as y, mergeDefaults as C, useCssVars as N, computed as r, openBlock as l, createElementBlock as n, normalizeClass as S, createElementVNode as t, createVNode as s, unref as u, withCtx as b, createTextVNode as w, toDisplayString as o, createCommentVNode as m, renderSlot as f } from "vue";
 import { NNumberAnimation as V } from "naive-ui/es/number-animation";
 import { bigNumber as c } from "lowcode-share/es/share";
 import k from "./tooltip/index.js";
@@ -8,9 +8,9 @@ const z = { class: "lc-indicator-card__wrapper" }, B = { class: "lc-indicator-ca
 }, F = { class: "lc-indicator-card__wrapper--result" }, D = ["title"], I = {
   key: 0,
   class: "lc-indicator-card__wrapper--result--unit"
-}, T = { class: "lc-indicator-card__wrapper--text" }, Z = /* @__PURE__ */ h({
+}, T = { class: "lc-indicator-card__wrapper--text" }, U = /* @__PURE__ */ y({
   __name: "indicatorCard",
-  props: /* @__PURE__ */ y({
+  props: /* @__PURE__ */ C({
     value: {
       type: Number
     },
@@ -48,30 +48,30 @@ const z = { class: "lc-indicator-card__wrapper" }, B = { class: "lc-indicator-ca
     hintColor: "#F2F3F4"
   }),
   setup(e) {
-    C((i) => ({
-      "4e9db765": x.value,
-      f9808d0e: e.valueColor,
-      64895335: e.hintColor
+    N((i) => ({
+      a0eda02e: g.value,
+      "572f20fd": e.valueColor,
+      "210ceb31": e.hintColor
     }));
     const a = {
       small: "small",
       medium: "medium",
       large: "large"
-    }, f = r(() => e.fixed ? c(e.value, e.decimal).result : e.value), v = r(() => {
+    }, v = r(() => e.fixed ? c(e.value, e.decimal).result : e.value), p = r(() => {
       const { unit: i } = c(e.value);
       return Number.isInteger(e.value) && !i ? 0 : e.decimal;
-    }), p = {
+    }), x = {
       [a.small]: "22px 32px 0",
       [a.medium]: "22px 54px 0",
       [a.large]: "22px 116px 0"
-    }, x = r(() => p[e.size]), g = r(() => {
+    }, g = r(() => x[e.size]), h = r(() => {
       if (e.fixed)
         return c(e.value, e.decimal).unit;
     });
     return (i, d) => (l(), n(
       "div",
       {
-        class: N(["lc-indicator-card", {
+        class: S(["lc-indicator-card", {
           "lc-indicator-card--noborder": e.type === "noborder"
         }])
       },
@@ -80,8 +80,8 @@ const z = { class: "lc-indicator-card__wrapper" }, B = { class: "lc-indicator-ca
           t("div", B, [
             e.tip ? (l(), n("div", E, [
               s(u(k), null, {
-                default: S(() => [
-                  b(
+                default: b(() => [
+                  w(
                     o(e.tip),
                     1
                     /* TEXT */
@@ -96,18 +96,20 @@ const z = { class: "lc-indicator-card__wrapper" }, B = { class: "lc-indicator-ca
                 class: "lc-indicator-card__wrapper--result--value",
                 title: e.value.toString()
               }, [
-                s(u(V), {
-                  "show-separator": "",
-                  from: 0,
-                  to: f.value,
-                  active: "",
-                  precision: v.value
-                }, null, 8, ["to", "precision"])
+                f(i.$slots, "value", {}, () => [
+                  s(u(V), {
+                    "show-separator": "",
+                    from: 0,
+                    to: v.value,
+                    active: "",
+                    precision: p.value
+                  }, null, 8, ["to", "precision"])
+                ], !0)
               ], 8, D),
               e.fixed ? (l(), n(
                 "span",
                 I,
-                o(g.value),
+                o(h.value),
                 1
                 /* TEXT */
               )) : m("v-if", !0)
@@ -120,7 +122,7 @@ const z = { class: "lc-indicator-card__wrapper" }, B = { class: "lc-indicator-ca
               /* TEXT */
             )
           ]),
-          w(i.$slots, "footer", {}, () => [
+          f(i.$slots, "footer", {}, () => [
             d[0] || (d[0] = t(
               "div",
               { class: "lc-indicator-card__footer" },
@@ -137,5 +139,5 @@ const z = { class: "lc-indicator-card__wrapper" }, B = { class: "lc-indicator-ca
   }
 });
 export {
-  Z as default
+  U as default
 };
