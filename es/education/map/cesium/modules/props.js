@@ -63,6 +63,9 @@ const a = {
   },
   pointData: {
     type: Array
+  },
+  openIndexDB: {
+    type: Boolean
   }
 };
 export {

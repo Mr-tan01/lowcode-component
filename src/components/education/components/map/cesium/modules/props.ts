@@ -59,4 +59,7 @@ export const cesiumProps = {
     pointData: {
         type: Array as PropType<pointType[]>,
     },
+    openIndexDB: {
+        type: Boolean,
+    },
 };

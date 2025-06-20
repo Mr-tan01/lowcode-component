@@ -87,4 +87,7 @@ export declare const cesiumProps: {
     pointData: {
         type: PropType<pointType[]>;
     };
+    openIndexDB: {
+        type: BooleanConstructor;
+    };
 };
