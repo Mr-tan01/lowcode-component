@@ -23,6 +23,7 @@ export declare class cesiumService {
     private lastThrottleTime;
     private throttleDelay;
     private rretryCount;
+    private openIndexDB;
     private shenzhenBounds;
     private message;
     private tileCache;

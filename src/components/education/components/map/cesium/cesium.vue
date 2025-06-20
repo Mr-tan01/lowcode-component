@@ -40,6 +40,7 @@ const {
     controlStatus,
     basicConfig,
     pointData = [],
+    openIndexDB = false,
 } = defineProps(cesiumProps);
 
 const reloadPointData = async (): Promise<void> => {
@@ -73,6 +74,7 @@ const cesiumUtils = new cesiumService("cesium-3d-viewer", {
     offsetState: offsetState,
     centerPosition: centerPosition,
     defaultCenterKey,
+    openIndexDB,
     pointHandler: (data: Entity) => {
         const currentTime = JulianDate.now();
         const value0ption = data.properties?.getValue(currentTime);

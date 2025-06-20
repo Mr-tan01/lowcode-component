@@ -87,6 +87,9 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
     pointData: {
         type: import('vue').PropType<import('./modules/type').pointType[]>;
     };
+    openIndexDB: {
+        type: BooleanConstructor;
+    };
 }>, {
     changeModel: <T extends changeModelType>(type: changeModelType, value: changeModelParamType[T]) => void;
     loadedTileLayer: (status: boolean) => Promise<void>;
@@ -182,6 +185,9 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
     pointData: {
         type: import('vue').PropType<import('./modules/type').pointType[]>;
     };
+    openIndexDB: {
+        type: BooleanConstructor;
+    };
 }>> & Readonly<{
     onPointHandler?: ((value: EntityProperties) => any) | undefined;
     onLimitHeightHandler?: ((value: number) => any) | undefined;
@@ -196,5 +202,6 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
     spinDescriptionColor: string;
     controlStatus: import('./modules/type').controlStatusType;
     basicConfig: import('./modules/type').basicConfigType;
+    openIndexDB: boolean;
 }, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, HTMLDivElement>;
 export default _default;

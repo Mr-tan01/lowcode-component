@@ -1,13 +1,13 @@
-var I = Object.defineProperty;
-var D = (m, e, t) => e in m ? I(m, e, { enumerable: !0, configurable: !0, writable: !0, value: t }) : m[e] = t;
-var o = (m, e, t) => D(m, typeof e != "symbol" ? e + "" : e, t);
+var D = Object.defineProperty;
+var T = (m, e, t) => e in m ? D(m, e, { enumerable: !0, configurable: !0, writable: !0, value: t }) : m[e] = t;
+var o = (m, e, t) => T(m, typeof e != "symbol" ? e + "" : e, t);
 import g from "localforage";
 import { CesiumHeatmap as x } from "cesium-heatmap-es6";
 import { areaData as f } from "./type.js";
 import { createClusterBillboard as V, createInfoCanvas as k, createEntityConfig as U, updateViewerEntityInfo as p } from "./tools.js";
 import { useMessage as M } from "naive-ui";
-import { Color as v, Rectangle as A, CustomDataSource as O, JulianDate as w, VerticalOrigin as N, HorizontalOrigin as Z, ScreenSpaceEventType as C, ScreenSpaceEventHandler as S, defined as P, ArcGisMapServerImageryProvider as H, PolylineDashMaterialProperty as R, PolygonHierarchy as z, Cartographic as E, Cartesian3 as y, Math as u, Cartesian2 as T } from "@cesium/engine";
-import { Viewer as B } from "@cesium/widgets";
+import { Color as v, Rectangle as A, CustomDataSource as O, JulianDate as w, VerticalOrigin as N, HorizontalOrigin as Z, ScreenSpaceEventType as C, ScreenSpaceEventHandler as S, defined as P, ArcGisMapServerImageryProvider as I, PolylineDashMaterialProperty as B, PolygonHierarchy as R, Cartographic as E, Cartesian3 as y, Math as u, Cartesian2 as H } from "@cesium/engine";
+import { Viewer as z } from "@cesium/widgets";
 class W {
   // 缓存有效期7天
   constructor() {
@@ -72,6 +72,7 @@ class Q {
     o(this, "lastThrottleTime", 0);
     o(this, "throttleDelay", 100);
     o(this, "rretryCount", 3);
+    o(this, "openIndexDB", !1);
     // 深圳市地理边界（根据瓦片定义经纬度范围）
     o(this, "shenzhenBounds", A.fromDegrees(
       113.8,
@@ -91,7 +92,7 @@ class Q {
     this.containerId = e, this.options = t, this.options.config = {
       ...this.defaultConfig,
       ...this.options.config || {}
-    }, this.centerPosition = t.centerPosition, this.defaultCenterKey = t.defaultCenterKey, this.tileLoadCallback = this.handleTileLoadProgress.bind(this);
+    }, this.centerPosition = t.centerPosition, this.defaultCenterKey = t.defaultCenterKey, this.openIndexDB = t.openIndexDB, this.tileLoadCallback = this.handleTileLoadProgress.bind(this);
   }
   // Cesium属性更新
   updateViewerAttribute() {
@@ -131,7 +132,7 @@ class Q {
     var t;
     this.viewer && this.destroy();
     try {
-      this.viewer = new B(this.containerId, e), this.viewer.cesiumWidget.creditContainer.style.display = "none";
+      this.viewer = new z(this.containerId, e), this.viewer.cesiumWidget.creditContainer.style.display = "none";
       const { scene: i } = this.viewer;
       return i.debugShowFramesPerSecond = !1, i.globe.depthTestAgainstTerrain = !0, i.screenSpaceCameraController.enableTranslate = !0, this.updateViewerAttribute(), this.viewer.cesiumWidget.screenSpaceEventHandler.removeInputAction(C.LEFT_DOUBLE_CLICK), this.viewer.scene.canvas.addEventListener("dblclick", this.doubleClickHandler, !1), this.setupClustering(), (((t = this.options.config) == null ? void 0 : t.cameraLimitsEnabled) ?? this.defaultConfig.cameraLimitsEnabled) && this.setupCameraLimits(), this.setupEventHandlers(), !0;
     } catch (i) {
@@ -226,47 +227,49 @@ class Q {
   async loadProviderWithFallback(e) {
     try {
       let t;
-      e.useZondy ? t = await Zondy.WebMapTileServiceImageryProvider.fromUrl(e.targetUrl) : t = await H.fromUrl(e.targetUrl);
-      const i = t.requestImage.bind(t), r = async (n) => {
-        try {
-          const s = await this.tileCache.getTile(n);
-          return s ? await createImageBitmap(s) : null;
-        } catch (s) {
-          return console.warn("读取缓存失败:", s), null;
-        }
-      };
-      return t.requestImage = async (n, s, a) => {
-        const c = {
-          url: e.targetUrl,
-          x: n,
-          y: s,
-          level: a
-        }, h = await r(c);
-        if (h)
-          return h;
-        try {
-          const l = await i(n, s, a);
-          if (!l || l.width === 0 || l.height === 0)
-            throw new Error("Invalid image dimensions");
-          return setTimeout(async () => {
-            try {
-              const d = document.createElement("canvas");
-              d.width = l.width, d.height = l.height;
-              const b = d.getContext("2d");
-              b && (b.drawImage(l, 0, 0), d.toBlob(async (L) => {
-                L && await this.tileCache.putTile(c, L);
-              }));
-            } catch (d) {
-              console.warn("异步缓存失败:", d);
-            }
-          }, 0), l;
-        } catch (l) {
-          return console.warn("获取瓦片失败:", l), await r(c) || i(n, s, a);
-        }
-      }, t;
+      if (e.useZondy ? t = await Zondy.WebMapTileServiceImageryProvider.fromUrl(e.targetUrl) : t = await I.fromUrl(e.targetUrl), this.openIndexDB) {
+        const i = t.requestImage.bind(t), r = async (n) => {
+          try {
+            const s = await this.tileCache.getTile(n);
+            return s ? await createImageBitmap(s) : null;
+          } catch (s) {
+            return console.warn("读取缓存失败:", s), null;
+          }
+        };
+        t.requestImage = async (n, s, a) => {
+          const c = {
+            url: e.targetUrl,
+            x: n,
+            y: s,
+            level: a
+          }, h = await r(c);
+          if (h)
+            return h;
+          try {
+            const l = await i(n, s, a);
+            if (!l || l.width === 0 || l.height === 0)
+              throw new Error("Invalid image dimensions");
+            return setTimeout(async () => {
+              try {
+                const d = document.createElement("canvas");
+                d.width = l.width, d.height = l.height;
+                const b = d.getContext("2d");
+                b && (b.drawImage(l, 0, 0), d.toBlob(async (L) => {
+                  L && await this.tileCache.putTile(c, L);
+                }));
+              } catch (d) {
+                console.warn("异步缓存失败:", d);
+              }
+            }, 0), l;
+          } catch (l) {
+            return console.warn("获取瓦片失败:", l), await r(c) || i(n, s, a);
+          }
+        };
+      }
+      return t;
     } catch {
       try {
-        return await H.fromUrl(e.fallbackUrl);
+        return await I.fromUrl(e.fallbackUrl);
       } catch (i) {
         throw this.options.loadTileLayerHandler(!1), i;
       }
@@ -305,13 +308,13 @@ class Q {
       name: e,
       polyline: {
         positions: i,
-        material: new R({
+        material: new B({
           color: v.fromCssColorString("#1E9EFA").withAlpha(0.7)
         }),
         width: 2
       },
       polygon: {
-        hierarchy: new z(i),
+        hierarchy: new R(i),
         material: v.fromCssColorString("#A2D8FF").withAlpha(0.3),
         outline: !0,
         outlineColor: v.fromCssColorString("#4694CD")
@@ -501,7 +504,7 @@ class Q {
       if (!(this.isCheckingBounds || !this.viewer))
         try {
           this.isCheckingBounds = !0;
-          const t = new T(Math.floor(this.viewer.canvas.clientWidth / 2), Math.floor(this.viewer.canvas.clientHeight / 2)), i = this.viewer.camera.getPickRay(t);
+          const t = new H(Math.floor(this.viewer.canvas.clientWidth / 2), Math.floor(this.viewer.canvas.clientHeight / 2)), i = this.viewer.camera.getPickRay(t);
           if (!i) return;
           const r = this.viewer.scene.globe.pick(i, this.viewer.scene);
           if (!r) {
@@ -522,7 +525,7 @@ class Q {
   getCameraViewCenter() {
     if (this.viewer)
       try {
-        const e = new T(this.viewer.canvas.clientWidth / 2, this.viewer.canvas.clientHeight / 2), t = this.viewer.camera.getPickRay(e);
+        const e = new H(this.viewer.canvas.clientWidth / 2, this.viewer.canvas.clientHeight / 2), t = this.viewer.camera.getPickRay(e);
         if (!t) return;
         const i = this.viewer.scene.globe.pick(t, this.viewer.scene);
         return i ? E.fromCartesian(i) : this.viewer.camera.positionCartographic;

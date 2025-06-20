@@ -123,6 +123,7 @@ export interface optionType {
     offsetState: boolean;
     centerPosition: Cartesian3;
     defaultCenterKey: string;
+    openIndexDB: boolean;
     pointHandler: (value: Entity) => void;
     pointHoverHandler?: (value: Entity) => void;
     pointHoverExitHandler?: (value: Entity) => void;

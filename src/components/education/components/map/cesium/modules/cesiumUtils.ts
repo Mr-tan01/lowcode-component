@@ -101,7 +101,7 @@ export class cesiumService {
     private lastThrottleTime: number = 0;
     private throttleDelay: number = 100;
     private rretryCount: number = 3;
-
+    private openIndexDB: boolean = false;
     // 深圳市地理边界（根据瓦片定义经纬度范围）
     private shenzhenBounds = Rectangle.fromDegrees(
         113.8, // 西边界 - 经度
@@ -120,6 +120,7 @@ export class cesiumService {
         };
         this.centerPosition = options.centerPosition;
         this.defaultCenterKey = options.defaultCenterKey;
+        this.openIndexDB = options.openIndexDB;
         // 图层加载监听器
         this.tileLoadCallback = this.handleTileLoadProgress.bind(this);
     }
@@ -406,72 +407,73 @@ export class cesiumService {
             } else {
                 provider = await ArcGisMapServerImageryProvider.fromUrl(options.targetUrl);
             }
+            if (this.openIndexDB) {
+                const originalRequestImage = provider.requestImage.bind(provider);
 
-            const originalRequestImage = provider.requestImage.bind(provider);
-
-            // 新增缓存检查方法
-            const getCachedImage = async (cacheKey: any) => {
-                try {
-                    const cached = await this.tileCache.getTile(cacheKey);
-                    if (cached) {
-                        return await createImageBitmap(cached);
+                // 新增缓存检查方法
+                const getCachedImage = async (cacheKey: any) => {
+                    try {
+                        const cached = await this.tileCache.getTile(cacheKey);
+                        if (cached) {
+                            return await createImageBitmap(cached);
+                        }
+                        return null;
+                    } catch (e) {
+                        console.warn("读取缓存失败:", e);
+                        return null;
                     }
-                    return null;
-                } catch (e) {
-                    console.warn("读取缓存失败:", e);
-                    return null;
-                }
-            };
-
-            provider.requestImage = async (x: number, y: number, level: number) => {
-                const cacheKey = {
-                    url: options.targetUrl,
-                    x,
-                    y,
-                    level,
                 };
 
-                // 1. 优先尝试从缓存获取
-                const cachedImage = await getCachedImage(cacheKey);
-                if (cachedImage) {
-                    return cachedImage;
-                }
+                provider.requestImage = async (x: number, y: number, level: number) => {
+                    const cacheKey = {
+                        url: options.targetUrl,
+                        x,
+                        y,
+                        level,
+                    };
 
-                // 2. 缓存未命中则从原始源获取
-                try {
-                    const image = await originalRequestImage(x, y, level);
-                    if (!image || image.width === 0 || image.height === 0) {
-                        throw new Error("Invalid image dimensions");
+                    // 1. 优先尝试从缓存获取
+                    const cachedImage = await getCachedImage(cacheKey);
+                    if (cachedImage) {
+                        return cachedImage;
                     }
 
-                    // 3. 异步缓存新获取的瓦片
-                    setTimeout(async () => {
-                        try {
-                            const canvas = document.createElement("canvas");
-                            canvas.width = image.width;
-                            canvas.height = image.height;
-                            const ctx = canvas.getContext("2d");
-                            if (ctx) {
-                                ctx.drawImage(image, 0, 0);
-                                canvas.toBlob(async (blob) => {
-                                    if (blob) {
-                                        await this.tileCache.putTile(cacheKey, blob);
-                                    }
-                                });
-                            }
-                        } catch (e) {
-                            console.warn("异步缓存失败:", e);
+                    // 2. 缓存未命中则从原始源获取
+                    try {
+                        const image = await originalRequestImage(x, y, level);
+                        if (!image || image.width === 0 || image.height === 0) {
+                            throw new Error("Invalid image dimensions");
                         }
-                    }, 0);
 
-                    return image;
-                } catch (error) {
-                    console.warn("获取瓦片失败:", error);
-                    // 4. 失败时再次尝试从缓存获取
-                    const fallbackImage = await getCachedImage(cacheKey);
-                    return fallbackImage || originalRequestImage(x, y, level);
-                }
-            };
+                        // 3. 异步缓存新获取的瓦片
+                        setTimeout(async () => {
+                            try {
+                                const canvas = document.createElement("canvas");
+                                canvas.width = image.width;
+                                canvas.height = image.height;
+                                const ctx = canvas.getContext("2d");
+                                if (ctx) {
+                                    ctx.drawImage(image, 0, 0);
+                                    canvas.toBlob(async (blob) => {
+                                        if (blob) {
+                                            await this.tileCache.putTile(cacheKey, blob);
+                                        }
+                                    });
+                                }
+                            } catch (e) {
+                                console.warn("异步缓存失败:", e);
+                            }
+                        }, 0);
+
+                        return image;
+                    } catch (error) {
+                        console.warn("获取瓦片失败:", error);
+                        // 4. 失败时再次尝试从缓存获取
+                        const fallbackImage = await getCachedImage(cacheKey);
+                        return fallbackImage || originalRequestImage(x, y, level);
+                    }
+                };
+            }
 
             return provider;
         } catch (primaryError) {
