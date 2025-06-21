@@ -187,7 +187,7 @@ export class cesiumService {
                 height: 50,
                 verticalOrigin: VerticalOrigin.CENTER,
                 horizontalOrigin: HorizontalOrigin.CENTER,
-                disableDepthTestDistance: Number.POSITIVE_INFINITY,
+                disableDepthTestDistance: undefined,
             });
         });
     }

@@ -1,12 +1,12 @@
-var D = Object.defineProperty;
-var T = (m, e, t) => e in m ? D(m, e, { enumerable: !0, configurable: !0, writable: !0, value: t }) : m[e] = t;
-var o = (m, e, t) => T(m, typeof e != "symbol" ? e + "" : e, t);
+var T = Object.defineProperty;
+var I = (m, e, t) => e in m ? T(m, e, { enumerable: !0, configurable: !0, writable: !0, value: t }) : m[e] = t;
+var o = (m, e, t) => I(m, typeof e != "symbol" ? e + "" : e, t);
 import g from "localforage";
 import { CesiumHeatmap as x } from "cesium-heatmap-es6";
 import { areaData as f } from "./type.js";
-import { createClusterBillboard as V, createInfoCanvas as k, createEntityConfig as U, updateViewerEntityInfo as p } from "./tools.js";
+import { createClusterBillboard as k, createInfoCanvas as V, createEntityConfig as U, updateViewerEntityInfo as p } from "./tools.js";
 import { useMessage as M } from "naive-ui";
-import { Color as v, Rectangle as A, CustomDataSource as O, JulianDate as w, VerticalOrigin as N, HorizontalOrigin as Z, ScreenSpaceEventType as C, ScreenSpaceEventHandler as S, defined as P, ArcGisMapServerImageryProvider as I, PolylineDashMaterialProperty as B, PolygonHierarchy as R, Cartographic as E, Cartesian3 as y, Math as u, Cartesian2 as H } from "@cesium/engine";
+import { Color as v, Rectangle as A, CustomDataSource as O, JulianDate as w, VerticalOrigin as Z, HorizontalOrigin as B, ScreenSpaceEventType as C, ScreenSpaceEventHandler as S, defined as P, ArcGisMapServerImageryProvider as H, PolylineDashMaterialProperty as N, PolygonHierarchy as R, Cartographic as E, Cartesian3 as y, Math as u, Cartesian2 as D } from "@cesium/engine";
 import { Viewer as z } from "@cesium/widgets";
 class W {
   // 缓存有效期7天
@@ -115,15 +115,15 @@ class Q {
         const l = (d = h.properties.type) == null ? void 0 : d.getValue(w.now());
         l && (n[l] = (n[l] || 0) + 1, n[l] > a && (a = n[l], s = l));
       });
-      const c = V(i.length, s || "primary");
+      const c = k(i.length, s || "primary");
       Object.assign(r.billboard, {
         id: "cluster",
         image: c.toDataURL(),
         width: 50,
         height: 50,
-        verticalOrigin: N.CENTER,
-        horizontalOrigin: Z.CENTER,
-        disableDepthTestDistance: Number.POSITIVE_INFINITY
+        verticalOrigin: Z.CENTER,
+        horizontalOrigin: B.CENTER,
+        disableDepthTestDistance: void 0
       });
     });
   }
@@ -227,7 +227,7 @@ class Q {
   async loadProviderWithFallback(e) {
     try {
       let t;
-      if (e.useZondy ? t = await Zondy.WebMapTileServiceImageryProvider.fromUrl(e.targetUrl) : t = await I.fromUrl(e.targetUrl), this.openIndexDB) {
+      if (e.useZondy ? t = await Zondy.WebMapTileServiceImageryProvider.fromUrl(e.targetUrl) : t = await H.fromUrl(e.targetUrl), this.openIndexDB) {
         const i = t.requestImage.bind(t), r = async (n) => {
           try {
             const s = await this.tileCache.getTile(n);
@@ -269,7 +269,7 @@ class Q {
       return t;
     } catch {
       try {
-        return await I.fromUrl(e.fallbackUrl);
+        return await H.fromUrl(e.fallbackUrl);
       } catch (i) {
         throw this.options.loadTileLayerHandler(!1), i;
       }
@@ -290,7 +290,7 @@ class Q {
   async addPoint(e, t, i) {
     var a;
     if (!this.viewer && !this.dataSource) return null;
-    const r = await k(e, t, i), n = await U(e, r.canvas, t), s = ((a = this[i === "Label" ? "viewer" : "dataSource"]) == null ? void 0 : a.entities.add(n)) ?? null;
+    const r = await V(e, t, i), n = await U(e, r.canvas, t), s = ((a = this[i === "Label" ? "viewer" : "dataSource"]) == null ? void 0 : a.entities.add(n)) ?? null;
     return this.pointEntities || (this.pointEntities = []), s && this.pointEntities.push(s), s;
   }
   // 清除指定entity
@@ -308,7 +308,7 @@ class Q {
       name: e,
       polyline: {
         positions: i,
-        material: new B({
+        material: new N({
           color: v.fromCssColorString("#1E9EFA").withAlpha(0.7)
         }),
         width: 2
@@ -504,7 +504,7 @@ class Q {
       if (!(this.isCheckingBounds || !this.viewer))
         try {
           this.isCheckingBounds = !0;
-          const t = new H(Math.floor(this.viewer.canvas.clientWidth / 2), Math.floor(this.viewer.canvas.clientHeight / 2)), i = this.viewer.camera.getPickRay(t);
+          const t = new D(Math.floor(this.viewer.canvas.clientWidth / 2), Math.floor(this.viewer.canvas.clientHeight / 2)), i = this.viewer.camera.getPickRay(t);
           if (!i) return;
           const r = this.viewer.scene.globe.pick(i, this.viewer.scene);
           if (!r) {
@@ -525,7 +525,7 @@ class Q {
   getCameraViewCenter() {
     if (this.viewer)
       try {
-        const e = new H(this.viewer.canvas.clientWidth / 2, this.viewer.canvas.clientHeight / 2), t = this.viewer.camera.getPickRay(e);
+        const e = new D(this.viewer.canvas.clientWidth / 2, this.viewer.canvas.clientHeight / 2), t = this.viewer.camera.getPickRay(e);
         if (!t) return;
         const i = this.viewer.scene.globe.pick(t, this.viewer.scene);
         return i ? E.fromCartesian(i) : this.viewer.camera.positionCartographic;
