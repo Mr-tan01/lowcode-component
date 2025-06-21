@@ -74,7 +74,7 @@ export interface EntityConfig {
     properties: EntityProperties;
     billboard: {
         image: HTMLCanvasElement;
-        disableDepthTestDistance: number;
+        disableDepthTestDistance: number | undefined;
         pixelOffset: Cartesian2;
     };
 }

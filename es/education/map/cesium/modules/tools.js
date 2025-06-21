@@ -1,25 +1,25 @@
-import F from "../image/primary.png.js";
-import k from "../image/success.png.js";
-import $ from "../image/warning.png.js";
-import L from "../image/danger.png.js";
-import z from "../image/primary_label.png.js";
-import D from "../image/success_label.png.js";
-import B from "../image/warning_label.png.js";
-import V from "../image/danger_label.png.js";
-import H from "../image/icon_primary.png.js";
-import N from "../image/icon_success.png.js";
-import { JulianDate as R, CallbackProperty as U, Cartesian2 as A, Cartesian3 as Y } from "@cesium/engine";
+import k from "../image/primary.png.js";
+import $ from "../image/success.png.js";
+import L from "../image/warning.png.js";
+import z from "../image/danger.png.js";
+import D from "../image/primary_label.png.js";
+import B from "../image/success_label.png.js";
+import V from "../image/warning_label.png.js";
+import N from "../image/danger_label.png.js";
+import R from "../image/icon_primary.png.js";
+import H from "../image/icon_success.png.js";
+import { JulianDate as M, CallbackProperty as U, Cartesian2 as A, VerticalOrigin as P, Cartesian3 as Y } from "@cesium/engine";
 const u = {
-  primary: F,
-  success: k,
-  warning: $,
-  danger: L,
-  primary_label: z,
-  success_label: D,
-  warning_label: B,
-  danger_label: V,
-  icon_primary: H,
-  icon_success: N
+  primary: k,
+  success: $,
+  warning: L,
+  danger: z,
+  primary_label: D,
+  success_label: B,
+  warning_label: V,
+  danger_label: N,
+  icon_primary: R,
+  icon_success: H
 }, s = {
   width: 50,
   height: 75,
@@ -35,115 +35,116 @@ const u = {
     color: "#fff",
     weight: "normal"
   }
-}, y = (e) => {
-  var g, h, w, o, b, x, S, I, T, C, p, E, v, _, O;
-  const { info: t, valueKey: c, canvas: a, ctx: r, text: l } = e, n = `
+}, b = (e) => {
+  var g, h, w, o, y, x, S, I, T, C, E, O, p, v, _;
+  const { info: t, valueKey: r, canvas: a, ctx: l, text: c } = e, n = `
     ${((g = t == null ? void 0 : t.fontStyle) == null ? void 0 : g.weight) ?? ((h = s == null ? void 0 : s.fontStyle) == null ? void 0 : h.weight)} 
     ${((w = t == null ? void 0 : t.fontStyle) == null ? void 0 : w.size) ?? ((o = s == null ? void 0 : s.fontStyle) == null ? void 0 : o.size)}
-    ${((b = t == null ? void 0 : t.fontStyle) == null ? void 0 : b.family) ?? ((x = s == null ? void 0 : s.fontStyle) == null ? void 0 : x.family)}`, i = `
+    ${((y = t == null ? void 0 : t.fontStyle) == null ? void 0 : y.family) ?? ((x = s == null ? void 0 : s.fontStyle) == null ? void 0 : x.family)}`, i = `
     ${((S = t == null ? void 0 : t.textStyle) == null ? void 0 : S.weight) ?? ((I = s == null ? void 0 : s.textStyle) == null ? void 0 : I.weight)} 
     ${((T = t == null ? void 0 : t.textStyle) == null ? void 0 : T.size) ?? ((C = s == null ? void 0 : s.textStyle) == null ? void 0 : C.size)}
-    ${((p = t == null ? void 0 : t.textStyle) == null ? void 0 : p.family) ?? ((E = s == null ? void 0 : s.textStyle) == null ? void 0 : E.family)}`;
-  r.font = c ? n : i, r.fillStyle = (c ? (v = t == null ? void 0 : t.fontStyle) == null ? void 0 : v.color : (_ = t == null ? void 0 : t.textStyle) == null ? void 0 : _.color) ?? ((O = s.fontStyle) == null ? void 0 : O.color), r.textBaseline = "middle", r.textAlign = "left";
-  const d = c ? (t == null ? void 0 : t.textOffsetX) ?? 13 : 46, m = (t == null ? void 0 : t.textOffsetY) ?? a.height / 2 - (c ? 10 : 6);
-  r.fillText(l, d, m);
-}, P = (e) => {
+    ${((E = t == null ? void 0 : t.textStyle) == null ? void 0 : E.family) ?? ((O = s == null ? void 0 : s.textStyle) == null ? void 0 : O.family)}`;
+  l.font = r ? n : i, l.fillStyle = (r ? (p = t == null ? void 0 : t.fontStyle) == null ? void 0 : p.color : (v = t == null ? void 0 : t.textStyle) == null ? void 0 : v.color) ?? ((_ = s.fontStyle) == null ? void 0 : _.color), l.textBaseline = "middle", l.textAlign = "left";
+  const d = r ? (t == null ? void 0 : t.textOffsetX) ?? 13 : 46, m = (t == null ? void 0 : t.textOffsetY) ?? a.height / 2 - (r ? 10 : 6);
+  l.fillText(c, d, m);
+}, F = (e) => {
   e.save(), e.beginPath(), e.moveTo(0, 0), e.lineTo(28, 0), e.quadraticCurveTo(30, 20, 20, 26), e.lineTo(0, 56), e.closePath(), e.globalCompositeOperation = "destination-out", e.fillStyle = "rgba(0,0,0,1)", e.fill(), e.restore();
-}, ae = (e, t, c) => new Promise((a, r) => {
-  const l = document.createElement("canvas"), n = l.getContext("2d");
+}, re = (e, t, r) => new Promise((a, l) => {
+  const c = document.createElement("canvas"), n = c.getContext("2d");
   if (!n) {
-    r(new Error("Could not get canvas context"));
+    l(new Error("Could not get canvas context"));
     return;
   }
-  l.width = (e == null ? void 0 : e.width) ?? s.width, l.height = (e == null ? void 0 : e.height) ?? s.height;
+  c.width = (e == null ? void 0 : e.width) ?? s.width, c.height = (e == null ? void 0 : e.height) ?? s.height;
   const { iconType: i, textIconType: d } = e, m = {
     icon: i ? u[i] : u.primary,
-    textIcon: d ? u[d] : u[(c ? "success" : "primary") + "_label"]
+    textIcon: d ? u[d] : u[(r ? "success" : "primary") + "_label"]
   }, g = m == null ? void 0 : m[t ? "icon" : "textIcon"], h = (e == null ? void 0 : e[t ?? "text"]) || "", w = () => {
-    n.setTransform(1, 0, 0, 1, 0, 0), n.clearRect(0, 0, l.width, l.height);
+    n.setTransform(1, 0, 0, 1, 0, 0), n.clearRect(0, 0, c.width, c.height);
   };
-  if (y({ info: e, valueKey: t, canvas: l, ctx: n, text: h }), g) {
+  if (b({ info: e, valueKey: t, canvas: c, ctx: n, text: h }), g) {
     const o = new Image();
     o.crossOrigin = "Anonymous", o.src = g, o.onload = () => {
-      y({ info: e, valueKey: t, canvas: l, ctx: n, text: h }), l.width = t ? (e == null ? void 0 : e.width) ?? o.width : n.measureText(h).width + 80, l.height = (e == null ? void 0 : e.height) ?? o.height, n.drawImage(o, 0, 0, o.width, o.height, 0, 0, l.width, l.height), t || P(n), y({ info: e, valueKey: t, canvas: l, ctx: n, text: h }), a({ canvas: l, cleanup: w });
+      b({ info: e, valueKey: t, canvas: c, ctx: n, text: h }), c.width = t ? (e == null ? void 0 : e.width) ?? o.width : n.measureText(h).width + 80, c.height = (e == null ? void 0 : e.height) ?? o.height, n.drawImage(o, 0, 0, o.width, o.height, 0, 0, c.width, c.height), t || F(n), b({ info: e, valueKey: t, canvas: c, ctx: n, text: h }), a({ canvas: c, cleanup: w });
     }, o.onerror = () => {
-      r(new Error("Failed to load image"));
+      l(new Error("Failed to load image"));
     };
   } else
-    y({ info: e, valueKey: t, canvas: l, ctx: n, text: h }), a({ canvas: l, cleanup: w });
-}), M = (e) => new Promise((t, c) => {
+    b({ info: e, valueKey: t, canvas: c, ctx: n, text: h }), a({ canvas: c, cleanup: w });
+}), W = (e) => new Promise((t, r) => {
   const a = new Image();
-  a.crossOrigin = "Anonymous", a.onload = () => t(a), a.onerror = c, a.src = e;
+  a.crossOrigin = "Anonymous", a.onload = () => t(a), a.onerror = r, a.src = e;
 });
-async function W(e) {
-  return new Promise((t, c) => {
+async function X(e) {
+  return new Promise((t, r) => {
     const a = new Image();
     a.crossOrigin = "anonymous", a.src = e, a.onload = () => {
       try {
-        const r = document.createElement("canvas"), l = r.getContext("2d");
-        if (!l) return c(new Error("无法获取2D上下文"));
-        r.width = a.naturalWidth, r.height = a.naturalHeight, l.drawImage(a, 0, 0, r.width, r.height), t(r);
-      } catch (r) {
-        c(new Error("画布创建失败", { cause: r }));
+        const l = document.createElement("canvas"), c = l.getContext("2d");
+        if (!c) return r(new Error("无法获取2D上下文"));
+        l.width = a.naturalWidth, l.height = a.naturalHeight, c.drawImage(a, 0, 0, l.width, l.height), t(l);
+      } catch (l) {
+        r(new Error("画布创建失败", { cause: l }));
       }
     };
   });
 }
-const re = (e, t) => {
-  const c = document.createElement("canvas");
-  c.width = 80, c.height = 80;
-  const a = c.getContext("2d");
-  if (!a) return c;
-  let r = "#1E9EFA", l = "#167bca";
+const le = (e, t) => {
+  const r = document.createElement("canvas");
+  r.width = 80, r.height = 80;
+  const a = r.getContext("2d");
+  if (!a) return r;
+  let l = "#1E9EFA", c = "#167bca";
   switch (t) {
     case "primary":
-      r = "#1E9EFA", l = "#167bca";
+      l = "#1E9EFA", c = "#167bca";
       break;
     case "success":
-      r = "#67C23A", l = "#529a2e";
+      l = "#67C23A", c = "#529a2e";
       break;
     case "warning":
-      r = "#E6A23C", l = "#b87d2f";
+      l = "#E6A23C", c = "#b87d2f";
       break;
     case "danger":
-      r = "#E41F1F", l = "#C01A1A";
+      l = "#E41F1F", c = "#C01A1A";
       break;
   }
-  return a.beginPath(), a.arc(40, 40, 35, 0, Math.PI * 2, !0), a.fillStyle = r, a.fill(), a.lineWidth = 4, a.strokeStyle = l, a.stroke(), a.fillStyle = "white", a.font = "bold 32px Arial", a.textAlign = "center", a.textBaseline = "middle", a.fillText(e.toString(), 40, 40), c;
+  return a.beginPath(), a.arc(40, 40, 35, 0, Math.PI * 2, !0), a.fillStyle = l, a.fill(), a.lineWidth = 4, a.strokeStyle = c, a.stroke(), a.fillStyle = "white", a.font = "bold 32px Arial", a.textAlign = "center", a.textBaseline = "middle", a.fillText(e.toString(), 40, 40), r;
 };
-async function le(e, t, c) {
-  var a, r;
+async function ce(e, t, r) {
+  var a, l;
   if (t != null && t.billboard && t.properties) {
-    const l = R.now(), n = (a = t.properties) == null ? void 0 : a.getValue(l).changeState, i = n ? (e == null ? void 0 : e.iconType) ?? "primary" : (e == null ? void 0 : e.changeIconType) ?? "success", d = n ? (e == null ? void 0 : e.textIconType) ?? "primary_label" : (e == null ? void 0 : e.changeTextIconType) ?? "success_label";
-    let m = (r = t.billboard.image) == null ? void 0 : r.getValue();
-    m = typeof m == "string" ? await W(m) : m;
-    const g = m.getContext("2d"), h = await M(u[c ? i : d]);
-    g == null || g.clearRect(0, 0, m.width, m.height), g.drawImage(h, 0, 0, m.width, m.height), c || P(g), y({ info: e, valueKey: c, canvas: m, ctx: g, text: c ? e.value : e.text }), t.billboard.image = m.toDataURL("image/png"), t.properties.changeState = new U(() => !n, !1);
+    const c = M.now(), n = (a = t.properties) == null ? void 0 : a.getValue(c).changeState, i = n ? (e == null ? void 0 : e.iconType) ?? "primary" : (e == null ? void 0 : e.changeIconType) ?? "success", d = n ? (e == null ? void 0 : e.textIconType) ?? "primary_label" : (e == null ? void 0 : e.changeTextIconType) ?? "success_label";
+    let m = (l = t.billboard.image) == null ? void 0 : l.getValue();
+    m = typeof m == "string" ? await X(m) : m;
+    const g = m.getContext("2d"), h = await W(u[r ? i : d]);
+    g == null || g.clearRect(0, 0, m.width, m.height), g.drawImage(h, 0, 0, m.width, m.height), r || F(g), b({ info: e, valueKey: r, canvas: m, ctx: g, text: r ? e.value : e.text }), t.billboard.image = m.toDataURL("image/png"), t.properties.changeState = new U(() => !n, !1);
   }
 }
-const ce = async (e, t, c) => {
+const se = async (e, t, r) => {
   const a = {
     value: e == null ? void 0 : e.value,
     text: e == null ? void 0 : e.text,
     changeState: !1,
     type: (e == null ? void 0 : e.iconType) ?? "primary",
     position: [e.lng, e.lat],
-    name: c ? e.name : `${e.name}Label`
-  }, r = {
+    name: r ? e.name : `${e.name}Label`
+  }, l = {
     image: t,
-    disableDepthTestDistance: Number.POSITIVE_INFINITY,
-    pixelOffset: c ? new A(0, 0) : new A(t.width / 2.1, 4)
+    pixelOffset: r ? new A(0, 0) : new A(t.width / 2.1, t.height / 2),
+    disableDepthTestDistance: r ? void 0 : Number.POSITIVE_INFINITY,
+    verticalOrigin: r ? P.CENTER : P.BOTTOM
   };
   return {
-    position: Y.fromDegrees(e.lng, e.lat),
-    name: c ? e.name : `${e.name}Label`,
+    position: Y.fromDegrees(e.lng, e.lat, 10),
+    name: r ? e.name : `${e.name}Label`,
     properties: a,
-    billboard: r
+    billboard: l
   };
 };
 export {
-  re as createClusterBillboard,
-  ce as createEntityConfig,
-  ae as createInfoCanvas,
-  le as updateViewerEntityInfo
+  le as createClusterBillboard,
+  se as createEntityConfig,
+  re as createInfoCanvas,
+  ce as updateViewerEntityInfo
 };
