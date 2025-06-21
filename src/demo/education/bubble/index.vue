@@ -1,7 +1,7 @@
 <template>
     <div class="bubble-demo">
         <DemoHelpBox title="气泡图" description="基本用法" rswidth="1000px" rs-height="500px">
-            <LcBubble :data />
+            <LcBubble :data="newData" />
         </DemoHelpBox>
     </div>
 </template>
@@ -18,6 +18,22 @@ const data = [
     { label: "省级以上人文社科奖(项)", value: 70 },
     { label: "国家科学技术奖(项)", value: 70 },
 ];
+const option = {
+    startX: 200, // 起始x坐标
+    gapX: 250, // 每个节点x方向间隔
+    centerY: 250, // 居中y坐标
+    gapY: 80, // y方向偏移量
+};
+const newData = data.map((item, index) => {
+    const { startX, gapX, centerY, gapY } = option;
+    let x = startX + index * gapX;
+    let y = index ? centerY + (index % 2 === 1 ? gapY : -gapY) : centerY;
+    return {
+        ...item,
+        x,
+        y,
+    };
+});
 </script>
 
 <style lang="scss" scoped></style>

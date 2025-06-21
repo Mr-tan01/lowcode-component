@@ -1,93 +1,76 @@
-import { defineComponent as h, ref as c, computed as f, onMounted as y, onBeforeUnmount as z, openBlock as D, createElementBlock as X } from "vue";
+import { defineComponent as O, ref as l, computed as c, onMounted as h, onBeforeUnmount as y, openBlock as z, createElementBlock as D } from "vue";
 import b from "./images/default.png.js";
-import Y from "./images/hover_image.png.js";
-import { useResizeObserver as k } from "@vueuse/core";
-import { merge as B, debounce as C } from "lodash-es";
-import { baseOptions as I } from "./options.js";
-import { init as R } from "echarts";
-const U = /* @__PURE__ */ h({
+import k from "./images/hover_image.png.js";
+import { useResizeObserver as B } from "@vueuse/core";
+import { merge as C, debounce as I } from "lodash-es";
+import { baseOptions as R } from "./options.js";
+import { init as T } from "echarts";
+const U = /* @__PURE__ */ O({
   __name: "bubble",
   props: {
     data: { default: () => [] },
-    options: { default: () => ({
-      startX: 200,
-      // 起始x坐标
-      gapX: 250,
-      // 每个节点x方向间隔
-      centerY: 250,
-      // 居中y坐标
-      gapY: 80
-      // y方向偏移量
-    }) },
+    options: {},
     debounceTime: { default: 300 },
     chartOptions: {}
   },
-  setup(u) {
-    const l = c(), a = c(), i = f(() => {
-      const { startX: e, gapX: r, centerY: t, gapY: o } = u.options;
-      return u.data.map((m, n) => {
-        let s = e + n * r, O = n ? t + (n % 2 === 1 ? o : -o) : t;
-        return {
-          name: m.label,
-          value: m.value,
-          symbolSize: [180, 129],
-          draggable: !0,
-          symbol: `image://${b}`,
-          x: s,
-          y: O
-        };
-      });
-    }), d = f(() => B(
+  setup(a) {
+    const r = l(), t = l(), u = c(() => a.data.map((e) => ({
+      name: e.label,
+      symbolSize: [180, 129],
+      draggable: !0,
+      symbol: `image://${b}`,
+      ...e
+    }))), f = c(() => C(
       {},
-      I,
+      R,
       {
         series: [
           {
-            data: i.value
+            data: u.value
           }
         ]
       },
-      u.chartOptions
-    )), p = () => {
-      var e, r;
-      a.value = R(l.value), a.value.setOption(d.value, !0), (e = a.value) == null || e.on("mouseover", function(t) {
-        var o;
-        if (t.dataType === "node") {
-          const m = i.value.map((n) => {
+      a.chartOptions
+    )), d = () => {
+      var e, m;
+      t.value = T(r.value), t.value.setOption(f.value, !0), (e = t.value) == null || e.on("mouseover", function(o) {
+        var n;
+        if (o.dataType === "node") {
+          const g = u.value.map((i) => {
             var s;
             return {
-              ...n,
-              symbol: n.name === ((s = t == null ? void 0 : t.data) == null ? void 0 : s.name) ? `image://${Y}` : `image://${b}`,
-              symbolSize: n.name === t.data.name ? [200, 150] : [180, 129]
+              ...i,
+              symbol: i.name === ((s = o == null ? void 0 : o.data) == null ? void 0 : s.name) ? `image://${k}` : `image://${b}`,
+              symbolSize: i.name === o.data.name ? [200, 150] : [180, 129]
             };
           });
-          (o = a.value) == null || o.setOption({
+          (n = t.value) == null || n.setOption({
             series: [
               {
-                data: m
+                data: g
               }
             ]
           });
         }
-      }), (r = a.value) == null || r.on("mouseout", function(t) {
-        var o;
-        (o = a.value) == null || o.setOption({
+      }), (m = t.value) == null || m.on("mouseout", function(o) {
+        var n;
+        (n = t.value) == null || n.setOption({
           series: [
             {
-              data: i.value
+              data: u.value
             }
           ]
         });
       });
-    }, v = () => {
+    }, p = () => {
       var e;
-      (e = a.value) == null || e.resize();
-    }, { stop: g } = k(l, C(v, u.debounceTime));
-    return y(p), z(g), (e, r) => (D(), X(
+      (e = t.value) == null || e.resize();
+    }, { stop: v } = B(r, I(p, a.debounceTime));
+    return h(d), y(v), (e, m) => (z(), D(
       "div",
       {
         ref_key: "bubbleDomRef",
-        ref: l,
+        ref: r,
         class: "bubble"
       },
       null,
