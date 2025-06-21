@@ -6,7 +6,6 @@ const c = {
       type: "graph",
       layout: "none",
       animation: !1,
-      roam: !0,
       label: {
         normal: {
           formatter: function(i) {

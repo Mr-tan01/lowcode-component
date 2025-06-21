@@ -5,7 +5,6 @@ export declare const baseOptions: {
         type: string;
         layout: string;
         animation: boolean;
-        roam: boolean;
         label: {
             normal: {
                 formatter: (params: any) => string;

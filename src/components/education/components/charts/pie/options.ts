@@ -14,12 +14,12 @@ export const pieCommonOptions: EChartsOption = {
 };
 
 export function usePieCommonSeries(
-    series: EChartsOption['series'],
+    series: EChartsOption["series"],
     linearGradients: string[] | LinearGradient[],
-    colors: EChartsOption['color'],
-    layout: LayoutType,
-): EChartsOption['series'] {
-    const dynamicSeries = layout === 'innerLabel' ? innerLabelSeries1 : pieSeriesRecord;
+    colors: EChartsOption["color"],
+    layout: LayoutType
+): EChartsOption["series"] {
+    const dynamicSeries = layout === "innerLabel" ? innerLabelSeries1 : pieSeriesRecord;
     const newColors = Array.isArray(colors) ? colors : colors ? [colors] : [];
 
     if (Array.isArray(series)) {
@@ -38,21 +38,29 @@ function getInnerSeries(linearColors: string[] | LinearGradient[]) {
                 return linearColors[params.dataIndex % linearColors.length];
             },
         },
-    }
+    };
 }
 function usePieSeriesData(data: OptionDataValueNumeric[], newColors: ZRColor[]) {
-    return ((data ?? []) as OptionDataValueNumeric[]).map((item, ckey) => merge({
-        label: {
-            rich: {
-                prop: {
-                    color: newColors[ckey],
+    return ((data ?? []) as OptionDataValueNumeric[]).map((item, ckey) =>
+        merge(
+            {
+                label: {
+                    rich: {
+                        prop: {
+                            color: newColors[ckey],
+                        },
+                        unit: {
+                            color: newColors[ckey],
+                        },
+                        value: {
+                            color: newColors[ckey],
+                        },
+                    },
                 },
-                unit: {
-                    color: newColors[ckey],
-                }
-            }
-        },
-    }, item));
+            },
+            item
+        )
+    );
 }
 
 export function useCommonPieOptions(opts: EChartsCoreOption | EChartsOption) {

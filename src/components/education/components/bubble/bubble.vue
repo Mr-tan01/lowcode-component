@@ -13,12 +13,6 @@ import { type EChartsCoreOption, type EChartsOption, init } from "echarts";
 const {
     data = [],
     debounceTime = 300,
-    options = {
-        startX: 200, // 起始x坐标
-        gapX: 250, // 每个节点x方向间隔
-        centerY: 250, // 居中y坐标
-        gapY: 80, // y方向偏移量
-    },
     chartOptions,
 } = defineProps<{ data: { label: string; value: number }[]; options?: optionsType; debounceTime?: number; chartOptions?: EChartsCoreOption | EChartsOption }>();
 
@@ -26,18 +20,13 @@ const bubbleDomRef = ref();
 const chartInstance = ref();
 
 const fomartData = computed(() => {
-    const { startX, gapX, centerY, gapY } = options;
-    return data.map((item, index) => {
-        let x = startX + index * gapX;
-        let y = index ? centerY + (index % 2 === 1 ? gapY : -gapY) : centerY;
+    return data.map((item) => {
         return {
             name: item.label,
-            value: item.value,
             symbolSize: [180, 129],
             draggable: true,
             symbol: `image://${defaultImage}`,
-            x,
-            y,
+            ...item,
         };
     });
 });

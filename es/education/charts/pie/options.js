@@ -1,17 +1,17 @@
 import { deepMergeArrayOptions as l } from "@mmj-code-lib/lowcode/es/components";
-import { pieTitleOptions as d, pieTooltipOptions as f, pieLegend as y, pieColors as O, innerLabelSeries1 as S, pieSeriesRecord as g } from "./const.js";
+import { pieTitleOptions as d, pieTooltipOptions as f, pieLegend as O, pieColors as S, innerLabelSeries1 as g, pieSeriesRecord as y } from "./const.js";
 import o from "lodash-es/merge";
 const a = {
   title: d,
   tooltip: f,
-  legend: y,
-  color: O
+  legend: O,
+  color: S
 };
-function C(e, t, n, r) {
-  const p = r === "innerLabel" ? S : g, m = Array.isArray(n) ? n : n ? [n] : [];
-  return Array.isArray(e) ? e.map((i) => (i.data = c(i.data, m), o(u(t), p, i))) : (e.data = c(e.data, m), o(u(t), p, e));
+function L(e, t, r, n) {
+  const p = n === "innerLabel" ? g : y, u = Array.isArray(r) ? r : r ? [r] : [];
+  return Array.isArray(e) ? e.map((i) => (i.data = c(i.data, u), o(m(t), p, i))) : (e.data = c(e.data, u), o(m(t), p, e));
 }
-function u(e) {
+function m(e) {
   return {
     itemStyle: {
       color: function(t) {
@@ -21,24 +21,32 @@ function u(e) {
   };
 }
 function c(e, t) {
-  return (e ?? []).map((n, r) => o({
-    label: {
-      rich: {
-        prop: {
-          color: t[r]
-        },
-        unit: {
-          color: t[r]
+  return (e ?? []).map(
+    (r, n) => o(
+      {
+        label: {
+          rich: {
+            prop: {
+              color: t[n]
+            },
+            unit: {
+              color: t[n]
+            },
+            value: {
+              color: t[n]
+            }
+          }
         }
-      }
-    }
-  }, n));
+      },
+      r
+    )
+  );
 }
-function L(e) {
+function P(e) {
   return l(e, Object.keys(a), Object.values(a)), o({}, a, e);
 }
 export {
   a as pieCommonOptions,
-  L as useCommonPieOptions,
-  C as usePieCommonSeries
+  P as useCommonPieOptions,
+  L as usePieCommonSeries
 };

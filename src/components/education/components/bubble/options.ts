@@ -6,7 +6,6 @@ export const baseOptions = {
             type: "graph",
             layout: "none",
             animation: false,
-            roam: true,
             label: {
                 normal: {
                     formatter: function (params) {
