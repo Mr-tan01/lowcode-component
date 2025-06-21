@@ -5,7 +5,7 @@
  * @param labelType 文字键值
  * @returns Promise<{canvas: HTMLCanvasElement, cleanup: () => void}>
  */
-
+import { VerticalOrigin } from "cesium";
 import primary from "../image/primary.png";
 import success from "../image/success.png";
 import warning from "../image/warning.png";
@@ -331,6 +331,7 @@ export async function updateViewerEntityInfo(info: any, entity: Entity | undefin
  * @returns EntityConfig
  */
 export const createEntityConfig = async (point: pointType, valueInfo: HTMLCanvasElement, type?: string): Promise<EntityConfig> => {
+    // 没有type就是label
     const commonProperties: EntityProperties = {
         value: point?.value,
         text: point?.text,
@@ -342,12 +343,13 @@ export const createEntityConfig = async (point: pointType, valueInfo: HTMLCanvas
 
     const commonBillboard = {
         image: valueInfo,
-        disableDepthTestDistance: Number.POSITIVE_INFINITY,
-        pixelOffset: type ? new Cartesian2(0, 0) : new Cartesian2(valueInfo.width / 2.1, 4),
+        pixelOffset: type ? new Cartesian2(0, 0) : new Cartesian2(valueInfo.width / 2.1, valueInfo.height / 2),
+        disableDepthTestDistance: type ? undefined : Number.POSITIVE_INFINITY,
+        verticalOrigin: type ? VerticalOrigin.CENTER : VerticalOrigin.BOTTOM,
     };
 
     return {
-        position: Cartesian3.fromDegrees(point.lng, point.lat),
+        position: Cartesian3.fromDegrees(point.lng, point.lat, 10),
         name: type ? point.name : `${point.name}Label`,
         properties: commonProperties,
         billboard: commonBillboard,
