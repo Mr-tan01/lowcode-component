@@ -1,4 +1,5 @@
 import { Viewer, Entity } from 'cesium';
+import { CesiumHeatmap } from 'cesium-heatmap-es6';
 import { controlStatusType, optionType, pointType, changeModelParamType } from './type';
 export declare class cesiumService {
     containerId: string;
@@ -63,7 +64,11 @@ export declare class cesiumService {
     polygonClickHandler(name: string): void;
     setInitialView(option: changeModelParamType["setInitialView"]): void;
     setViewerLayer(imageryLayersUrl: string): void;
-    addHeatmap(): void;
+    buildHeatMap(points: {
+        x: number;
+        y: number;
+        value: number;
+    }[], gradient?: Record<string, string>): CesiumHeatmap | undefined;
     private isPointInShenzhen;
     private setupCameraLimits;
     private getCameraViewCenter;
