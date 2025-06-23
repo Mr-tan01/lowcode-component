@@ -23,11 +23,11 @@ interface fontStyle {
     color?: string;
     width?: number;
     weight?:
-        | number // 100-900
-        | "normal" // 400
-        | "bold" // 700
-        | "bolder"
-        | "lighter";
+    | number // 100-900
+    | "normal" // 400
+    | "bold" // 700
+    | "bolder"
+    | "lighter";
 }
 
 interface canvasOption {
@@ -368,3 +368,16 @@ export const convertCartographic = async (viewerData: any, cartesian: Cartesian3
     const latitude = cesiumMath.toDegrees(cartographic.latitude);
     return Cartesian3.fromDegrees(longitude, latitude, 30000);
 };
+
+/**
+ * 热力图渐变色配置
+ * 0.00 - 0.25 - 0.50 - 0.75 - 1.00
+ * 蓝色 - 青色 - 绿色 - 橙色 - 红色
+ */
+export const heatmapGradient = {
+    "0.00": "#0c29ce",
+    "0.25": "#09d3d0",
+    "0.50": "#91fa68",
+    "0.75": "#fca22c",
+    "1.00": "#fb0f0f",
+}

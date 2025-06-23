@@ -36,15 +36,15 @@ const u = {
     weight: "normal"
   }
 }, b = (e) => {
-  var g, h, w, o, y, x, S, I, T, C, E, O, p, v, _;
+  var g, h, w, o, y, x, S, I, T, C, E, p, O, v, _;
   const { info: t, valueKey: r, canvas: a, ctx: l, text: c } = e, n = `
     ${((g = t == null ? void 0 : t.fontStyle) == null ? void 0 : g.weight) ?? ((h = s == null ? void 0 : s.fontStyle) == null ? void 0 : h.weight)} 
     ${((w = t == null ? void 0 : t.fontStyle) == null ? void 0 : w.size) ?? ((o = s == null ? void 0 : s.fontStyle) == null ? void 0 : o.size)}
     ${((y = t == null ? void 0 : t.fontStyle) == null ? void 0 : y.family) ?? ((x = s == null ? void 0 : s.fontStyle) == null ? void 0 : x.family)}`, i = `
     ${((S = t == null ? void 0 : t.textStyle) == null ? void 0 : S.weight) ?? ((I = s == null ? void 0 : s.textStyle) == null ? void 0 : I.weight)} 
     ${((T = t == null ? void 0 : t.textStyle) == null ? void 0 : T.size) ?? ((C = s == null ? void 0 : s.textStyle) == null ? void 0 : C.size)}
-    ${((E = t == null ? void 0 : t.textStyle) == null ? void 0 : E.family) ?? ((O = s == null ? void 0 : s.textStyle) == null ? void 0 : O.family)}`;
-  l.font = r ? n : i, l.fillStyle = (r ? (p = t == null ? void 0 : t.fontStyle) == null ? void 0 : p.color : (v = t == null ? void 0 : t.textStyle) == null ? void 0 : v.color) ?? ((_ = s.fontStyle) == null ? void 0 : _.color), l.textBaseline = "middle", l.textAlign = "left";
+    ${((E = t == null ? void 0 : t.textStyle) == null ? void 0 : E.family) ?? ((p = s == null ? void 0 : s.textStyle) == null ? void 0 : p.family)}`;
+  l.font = r ? n : i, l.fillStyle = (r ? (O = t == null ? void 0 : t.fontStyle) == null ? void 0 : O.color : (v = t == null ? void 0 : t.textStyle) == null ? void 0 : v.color) ?? ((_ = s.fontStyle) == null ? void 0 : _.color), l.textBaseline = "middle", l.textAlign = "left";
   const d = r ? (t == null ? void 0 : t.textOffsetX) ?? 13 : 46, m = (t == null ? void 0 : t.textOffsetY) ?? a.height / 2 - (r ? 10 : 6);
   l.fillText(c, d, m);
 }, F = (e) => {
@@ -71,11 +71,11 @@ const u = {
     };
   } else
     b({ info: e, valueKey: t, canvas: c, ctx: n, text: h }), a({ canvas: c, cleanup: w });
-}), W = (e) => new Promise((t, r) => {
+}), f = (e) => new Promise((t, r) => {
   const a = new Image();
   a.crossOrigin = "Anonymous", a.onload = () => t(a), a.onerror = r, a.src = e;
 });
-async function X(e) {
+async function W(e) {
   return new Promise((t, r) => {
     const a = new Image();
     a.crossOrigin = "anonymous", a.src = e, a.onload = () => {
@@ -116,8 +116,8 @@ async function ce(e, t, r) {
   if (t != null && t.billboard && t.properties) {
     const c = M.now(), n = (a = t.properties) == null ? void 0 : a.getValue(c).changeState, i = n ? (e == null ? void 0 : e.iconType) ?? "primary" : (e == null ? void 0 : e.changeIconType) ?? "success", d = n ? (e == null ? void 0 : e.textIconType) ?? "primary_label" : (e == null ? void 0 : e.changeTextIconType) ?? "success_label";
     let m = (l = t.billboard.image) == null ? void 0 : l.getValue();
-    m = typeof m == "string" ? await X(m) : m;
-    const g = m.getContext("2d"), h = await W(u[r ? i : d]);
+    m = typeof m == "string" ? await W(m) : m;
+    const g = m.getContext("2d"), h = await f(u[r ? i : d]);
     g == null || g.clearRect(0, 0, m.width, m.height), g.drawImage(h, 0, 0, m.width, m.height), r || F(g), b({ info: e, valueKey: r, canvas: m, ctx: g, text: r ? e.value : e.text }), t.billboard.image = m.toDataURL("image/png"), t.properties.changeState = new U(() => !n, !1);
   }
 }
@@ -141,10 +141,17 @@ const se = async (e, t, r) => {
     properties: a,
     billboard: l
   };
+}, me = {
+  "0.00": "#0c29ce",
+  "0.25": "#09d3d0",
+  "0.50": "#91fa68",
+  "0.75": "#fca22c",
+  "1.00": "#fb0f0f"
 };
 export {
   le as createClusterBillboard,
   se as createEntityConfig,
   re as createInfoCanvas,
+  me as heatmapGradient,
   ce as updateViewerEntityInfo
 };

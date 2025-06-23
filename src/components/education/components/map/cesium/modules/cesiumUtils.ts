@@ -22,7 +22,7 @@ import {
 import localforage from "localforage";
 import { CesiumHeatmap } from "cesium-heatmap-es6";
 import { areaData, type controlStatusType, type optionType, type pointType, type changeModelParamType } from "./type";
-import { createInfoCanvas, createClusterBillboard, updateViewerEntityInfo, createEntityConfig } from "./tools";
+import { createInfoCanvas, createClusterBillboard, updateViewerEntityInfo, createEntityConfig, heatmapGradient } from "./tools";
 import { useMessage } from "naive-ui";
 class TileCacheHelper {
     private storeName = "WMTS_Tiles";
@@ -848,31 +848,21 @@ export class cesiumService {
     }
 
     // 热力图
-    addHeatmap(): void {
+    buildHeatMap(points: { x: number, y: number, value: number }[], gradient: Record<string, string> = heatmapGradient) {
         if (!this.viewer) return;
-
-        const points = areaData["宝安区"].position.geometry.coordinates.flat(2).map(([lng, lat]) => ({
-            x: lng,
-            y: lat,
-            value: Number((Math.random() * (2 - 0.1) + 0.1).toFixed(1)),
-        }));
-
-        new CesiumHeatmap(this.viewer, {
-            zoomToLayer: true,
+        const heatmap = new CesiumHeatmap(this.viewer, {
+            zoomToLayer: false,
             points,
             heatmapOptions: {
+                radius: 5,
                 maxOpacity: 0,
-                minOpacity: 1,
-                gradient: {
-                    "0.00": "#A3E76A",
-                    "0.25": "#E7D35E",
-                    "0.50": "#E2EE66",
-                    "0.75": "#DF684D",
-                    "1.00": "#EE5442",
-                },
+                minOpacity: .5,
+                gradient: gradient
             },
-        });
+        })
+        return heatmap;
     }
+
     // 检查是否在深圳边界内
     private isPointInShenzhen(longitude: number, latitude: number): boolean {
         return (
