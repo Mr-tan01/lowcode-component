@@ -1,5 +1,6 @@
 type __VLS_Props = {
     title?: string;
+    size?: string | number;
 };
 declare function __VLS_template(): {
     attrs: Partial<{}>;

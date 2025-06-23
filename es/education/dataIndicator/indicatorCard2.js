@@ -1,4 +1,4 @@
-import { defineComponent as y, mergeDefaults as C, useCssVars as N, computed as r, openBlock as l, createElementBlock as n, normalizeClass as S, createElementVNode as t, createVNode as s, unref as u, withCtx as b, createTextVNode as w, toDisplayString as o, createCommentVNode as m, renderSlot as f } from "vue";
+import { defineComponent as y, mergeDefaults as b, useCssVars as C, computed as r, openBlock as l, createElementBlock as n, normalizeClass as N, createElementVNode as t, createVNode as s, unref as u, withCtx as S, createTextVNode as w, toDisplayString as o, createCommentVNode as m, renderSlot as f } from "vue";
 import { NNumberAnimation as V } from "naive-ui/es/number-animation";
 import { bigNumber as c } from "lowcode-share/es/share";
 import k from "./tooltip/index.js";
@@ -10,7 +10,7 @@ const z = { class: "lc-indicator-card__wrapper" }, B = { class: "lc-indicator-ca
   class: "lc-indicator-card__wrapper--result--unit"
 }, T = { class: "lc-indicator-card__wrapper--text" }, U = /* @__PURE__ */ y({
   __name: "indicatorCard",
-  props: /* @__PURE__ */ C({
+  props: /* @__PURE__ */ b({
     value: {
       type: Number
     },
@@ -48,10 +48,10 @@ const z = { class: "lc-indicator-card__wrapper" }, B = { class: "lc-indicator-ca
     hintColor: "#F2F3F4"
   }),
   setup(e) {
-    N((i) => ({
-      a0eda02e: g.value,
-      "572f20fd": e.valueColor,
-      "210ceb31": e.hintColor
+    C((i) => ({
+      c6bbba0a: g.value,
+      "61d7978f": e.valueColor,
+      "51db4b42": e.hintColor
     }));
     const a = {
       small: "small",
@@ -71,7 +71,7 @@ const z = { class: "lc-indicator-card__wrapper" }, B = { class: "lc-indicator-ca
     return (i, d) => (l(), n(
       "div",
       {
-        class: S(["lc-indicator-card", {
+        class: N(["lc-indicator-card", {
           "lc-indicator-card--noborder": e.type === "noborder"
         }])
       },
@@ -80,7 +80,7 @@ const z = { class: "lc-indicator-card__wrapper" }, B = { class: "lc-indicator-ca
           t("div", B, [
             e.tip ? (l(), n("div", E, [
               s(u(k), null, {
-                default: b(() => [
+                default: S(() => [
                   w(
                     o(e.tip),
                     1

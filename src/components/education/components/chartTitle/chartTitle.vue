@@ -42,6 +42,7 @@ const formatedText = computed(() => {
     min-width: 148px;
     height: 32px;
     background-size: 100% 100%;
+    background-position: center center;
     display: flex;
     align-items: center;
     padding: 0 6px;

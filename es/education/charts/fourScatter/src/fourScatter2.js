@@ -41,11 +41,11 @@ const w = { class: "lc-fourscatter" }, D = /* @__PURE__ */ d({
           renderItem: function(t, o) {
             if (t.isRenderer) return;
             t.isRenderer = !0;
-            const s = o.getWidth(), i = o.getHeight() / 2 - 20;
+            const s = o.getWidth() - 100, i = o.getHeight() / 2 - 20;
             return {
               type: "line",
               shape: {
-                x1: 0,
+                x1: 100,
                 y1: i,
                 x2: s,
                 y2: i
@@ -66,12 +66,12 @@ const w = { class: "lc-fourscatter" }, D = /* @__PURE__ */ d({
           renderItem: function(t, o) {
             if (t.isRenderer) return;
             t.isRenderer = !0;
-            const s = o.getWidth(), c = o.getHeight(), i = s / 2;
+            const s = o.getWidth(), c = o.getHeight() - 70, i = s / 2;
             return {
               type: "line",
               shape: {
                 x1: i,
-                y1: 0,
+                y1: 30,
                 x2: i,
                 y2: c
               },

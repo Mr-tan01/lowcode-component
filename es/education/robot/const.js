@@ -1,12 +1,12 @@
 import e from "./images/s1.png.js";
 import l from "./images/s2.png.js";
 import a from "./images/s3.png.js";
-import n from "./images/s4.png.js";
+import b from "./images/s4.png.js";
 const s = {
   s1: e,
   s2: l,
   s3: a,
-  s4: n
+  s4: b
 }, i = {
   none: "none",
   focus: "focus"
@@ -18,7 +18,7 @@ const s = {
   {
     key: "001",
     domain: "event",
-    name: "person2",
+    name: "dataOverview",
     size: "88%",
     meta: [
       {
@@ -41,7 +41,7 @@ const s = {
   {
     key: "002",
     domain: "event",
-    name: "person2",
+    name: "team",
     size: "88%",
     meta: [
       {

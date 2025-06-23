@@ -59,6 +59,14 @@ export declare const innerImageDomain: {
         readonly mentor: "mentor";
         readonly person2: "person2";
         readonly reward: "reward";
+        readonly dataOverview: "dataOverview";
+        readonly base: "base";
+        readonly team: "team";
+        readonly five: "five";
+        readonly evaluation: "evaluation";
+        readonly planningBlueprint: "planningBlueprint";
+        readonly schoolSafety: "schoolSafety";
+        readonly schoolsGuarantee: "schoolsGuarantee";
     };
     readonly baseSupport: {
         readonly booth: "booth";
@@ -86,8 +94,10 @@ type ReadValue<T> = T[keyof T];
 export type Domains = keyof innerImageDomain;
 export type NameTypeFunc<D extends Domains> = ReadValue<innerImageDomain[D]>;
 export type NameTypes = NameTypeFunc<"event"> | NameTypeFunc<"func"> | NameTypeFunc<"menus"> | NameTypeFunc<"baseSupport">;
-export declare function useImage<D extends Domains>(domain: Ref<D>, name: Ref<NameTypeFunc<D>>, ext: Ref<string>): {
+export declare function useImage<D extends Domains>(domain: Ref<D>, name: Ref<NameTypeFunc<D>>, ext: Ref<string>, baseSrcName?: Ref<string | undefined>): {
     src: Ref<string, string>;
     selectedSrc: Ref<string, string>;
+    baseSrc: Ref<string, string>;
+    baseSelectedSrc: Ref<string, string>;
 };
 export {};

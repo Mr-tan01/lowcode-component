@@ -1,5 +1,5 @@
-import { ref as h, watch as b } from "vue";
-const $ = /* @__PURE__ */ Object.assign({
+import { ref as p, watch as $ } from "vue";
+const w = /* @__PURE__ */ Object.assign({
   "./images/func/acreage.png": () => import("./images/func/acreage.png.js").then((e) => e.default),
   "./images/func/add.png": () => import("./images/func/add.png.js").then((e) => e.default),
   "./images/func/blue-l-arrow.png": () => import("./images/func/blue-l-arrow.png.js").then((e) => e.default),
@@ -43,11 +43,19 @@ const $ = /* @__PURE__ */ Object.assign({
   "./images/func/student.png": () => import("./images/func/student.png.js").then((e) => e.default),
   "./images/func/teacher.png": () => import("./images/func/teacher.png.js").then((e) => e.default),
   "./images/func/time.png": () => import("./images/func/time.png.js").then((e) => e.default)
-}), w = /* @__PURE__ */ Object.assign({
+}), y = /* @__PURE__ */ Object.assign({
+  "./images/event/base/icon.png": () => import("./images/event/base/icon.png.js").then((e) => e.default),
+  "./images/event/base/selected-icon.png": () => import("./images/event/base/selected-icon.png.js").then((e) => e.default),
   "./images/event/building/icon.png": () => import("./images/event/building/icon.png.js").then((e) => e.default),
   "./images/event/building/selected-icon.png": () => import("./images/event/building/selected-icon.png.js").then((e) => e.default),
+  "./images/event/dataOverview/icon.png": () => import("./images/event/dataOverview/icon.png.js").then((e) => e.default),
+  "./images/event/dataOverview/selected-icon.png": () => import("./images/event/dataOverview/selected-icon.png.js").then((e) => e.default),
   "./images/event/domain/icon.png": () => import("./images/event/domain/icon.png.js").then((e) => e.default),
   "./images/event/domain/selected-icon.png": () => import("./images/event/domain/selected-icon.png.js").then((e) => e.default),
+  "./images/event/evaluation/icon.png": () => import("./images/event/evaluation/icon.png.js").then((e) => e.default),
+  "./images/event/evaluation/selected-icon.png": () => import("./images/event/evaluation/selected-icon.png.js").then((e) => e.default),
+  "./images/event/five/icon.png": () => import("./images/event/five/icon.png.js").then((e) => e.default),
+  "./images/event/five/selected-icon.png": () => import("./images/event/five/selected-icon.png.js").then((e) => e.default),
   "./images/event/gate/icon.png": () => import("./images/event/gate/icon.png.js").then((e) => e.default),
   "./images/event/gate/selected-icon.png": () => import("./images/event/gate/selected-icon.png.js").then((e) => e.default),
   "./images/event/mentor/icon.png": () => import("./images/event/mentor/icon.png.js").then((e) => e.default),
@@ -56,16 +64,24 @@ const $ = /* @__PURE__ */ Object.assign({
   "./images/event/person/selected-icon.png": () => import("./images/event/person/selected-icon.png.js").then((e) => e.default),
   "./images/event/person2/icon.png": () => import("./images/event/person2/icon.png.js").then((e) => e.default),
   "./images/event/person2/selected-icon.png": () => import("./images/event/person2/selected-icon.png.js").then((e) => e.default),
+  "./images/event/planningBlueprint/icon.png": () => import("./images/event/planningBlueprint/icon.png.js").then((e) => e.default),
+  "./images/event/planningBlueprint/selected-icon.png": () => import("./images/event/planningBlueprint/selected-icon.png.js").then((e) => e.default),
   "./images/event/reward/icon.png": () => import("./images/event/reward/icon.png.js").then((e) => e.default),
   "./images/event/reward/selected-icon.png": () => import("./images/event/reward/selected-icon.png.js").then((e) => e.default),
+  "./images/event/schoolSafety/icon.png": () => import("./images/event/schoolSafety/icon.png.js").then((e) => e.default),
+  "./images/event/schoolSafety/selected-icon.png": () => import("./images/event/schoolSafety/selected-icon.png.js").then((e) => e.default),
+  "./images/event/schoolsGuarantee/icon.png": () => import("./images/event/schoolsGuarantee/icon.png.js").then((e) => e.default),
+  "./images/event/schoolsGuarantee/selected-icon.png": () => import("./images/event/schoolsGuarantee/selected-icon.png.js").then((e) => e.default),
   "./images/event/style/icon.png": () => import("./images/event/style/icon.png.js").then((e) => e.default),
-  "./images/event/style/selected-icon.png": () => import("./images/event/style/selected-icon.png.js").then((e) => e.default)
-}), S = /* @__PURE__ */ Object.assign({
+  "./images/event/style/selected-icon.png": () => import("./images/event/style/selected-icon.png.js").then((e) => e.default),
+  "./images/event/team/icon.png": () => import("./images/event/team/icon.png.js").then((e) => e.default),
+  "./images/event/team/selected-icon.png": () => import("./images/event/team/selected-icon.png.js").then((e) => e.default)
+}), I = /* @__PURE__ */ Object.assign({
   "./images/baseSupport/booth/icon.png": () => import("./images/baseSupport/booth/icon.png.js").then((e) => e.default),
   "./images/baseSupport/booth/selected-icon.png": () => import("./images/baseSupport/booth/selected-icon.png.js").then((e) => e.default),
   "./images/baseSupport/pedestal/icon.png": () => import("./images/baseSupport/pedestal/icon.png.js").then((e) => e.default),
   "./images/baseSupport/pedestal/selected-icon.png": () => import("./images/baseSupport/pedestal/selected-icon.png.js").then((e) => e.default)
-}), y = /* @__PURE__ */ Object.assign({
+}), O = /* @__PURE__ */ Object.assign({
   "./images/menus/basic-education.png": () => import("./images/menus/basic-education.png.js").then((e) => e.default),
   "./images/menus/blue-print.png": () => import("./images/menus/blue-print.png.js").then((e) => e.default),
   "./images/menus/campus-security.png": () => import("./images/menus/campus-security.png.js").then((e) => e.default),
@@ -81,28 +97,30 @@ const $ = /* @__PURE__ */ Object.assign({
   "./images/menus/supervisory-evaluation.png": () => import("./images/menus/supervisory-evaluation.png.js").then((e) => e.default),
   "./images/menus/team-construction.png": () => import("./images/menus/team-construction.png.js").then((e) => e.default)
 }), v = {
-  func: $,
-  event: w,
-  menus: y,
-  baseSupport: S
+  func: w,
+  event: y,
+  menus: O,
+  baseSupport: I
 };
-function j(e, m, n) {
-  const s = h(""), g = h(""), r = (t) => {
-    var a, c, l, i, f, d;
-    let p = `${e.value}/${t}${n.value}`, u = "";
-    e.value === "event" || e.value === "baseSupport" ? (p = `${e.value}/${t}/icon${n.value}`, u = `${e.value}/${t}/selected-icon${n.value}`) : e.value === "menus" && (p = `${e.value}/${t}${n.value}`), (l = (c = (a = v[e.value]) == null ? void 0 : a[`./images/${p}`]) == null ? void 0 : c.call(a)) == null || l.then((o) => s.value = o), u && ((d = (f = (i = v[e.value]) == null ? void 0 : i[`./images/${u}`]) == null ? void 0 : f.call(i)) == null || d.then((o) => g.value = o));
+function B(e, u, n, j) {
+  const g = p(""), c = p(""), b = p(""), S = p(""), l = (t) => {
+    var a, r, f, i, d, h;
+    let o = `${e.value}/${t}${n.value}`, s = "";
+    e.value === "event" || e.value === "baseSupport" ? (o = `${e.value}/${t}/icon${n.value}`, s = `${e.value}/${t}/selected-icon${n.value}`) : e.value === "menus" && (o = `${e.value}/${t}${n.value}`), (f = (r = (a = v[e.value]) == null ? void 0 : a[`./images/${o}`]) == null ? void 0 : r.call(a)) == null || f.then((m) => g.value = m), s && ((h = (d = (i = v[e.value]) == null ? void 0 : i[`./images/${s}`]) == null ? void 0 : d.call(i)) == null || h.then((m) => c.value = m));
   };
-  return r(m.value), b(m, (t) => {
-    r(t);
+  return l(u.value), $(u, (t) => {
+    l(t);
   }), {
-    src: s,
-    selectedSrc: g
+    src: g,
+    selectedSrc: c,
+    baseSrc: b,
+    baseSelectedSrc: S
   };
 }
 export {
-  S as baseSupportdomainIcons,
-  w as eventdomainIcons,
-  $ as funcdomainIcons,
-  y as menustdomainIcons,
-  j as useImage
+  I as baseSupportdomainIcons,
+  y as eventdomainIcons,
+  w as funcdomainIcons,
+  O as menustdomainIcons,
+  B as useImage
 };

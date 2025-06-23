@@ -45,7 +45,7 @@ export const defStarData: StarType[] = [
     {
         key: "001",
         domain: "event",
-        name: "person2",
+        name: "dataOverview",
         size: "88%",
         meta: [
             {
@@ -68,7 +68,7 @@ export const defStarData: StarType[] = [
     {
         key: "002",
         domain: "event",
-        name: "person2",
+        name: "team",
         size: "88%",
         meta: [
             {

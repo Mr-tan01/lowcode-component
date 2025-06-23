@@ -31,10 +31,13 @@
                     @mouseenter="mouseenter"
                     @mouseleave="mouseleave"
                 >
-                    <LcIcon @click="starClick(item, key)" :domain="item.domain" :name="item.name" :size="item.size"></LcIcon>
+                    <div class="lc-main-robot-icon">
+                         <LcIcon class="lc-main-robot-icon-center" @click="starClick(item, key)" :domain="item.domain" :name="item.name" :size="item.size"></LcIcon>
+                    </div>
+                   
                     <div class="lc-main-robot__wrapper__star-wrap--star__meta">
                         <div
-                            class="lc-main-robot__wrapper__star-wrap--star__meta--item"
+                            class="lc-main-robot__wrapper__star-wrap--star__meta--item" 
                             v-for="(el, ckey) in item.meta"
                             :key="ckey"
                             :style="{ '--left-offset-number': ckey, '--left-reverse-offset-number': reverseIndex(item.meta.length, ckey) }"
@@ -73,6 +76,7 @@ import { defStarData, StarType, StarItemType } from "./const";
 import { useStarRotate } from "./main-robot-hook";
 import memoize from "lodash-es/memoize";
 import { useMessage } from "naive-ui";
+
 const message = useMessage();
 
 const {
@@ -130,6 +134,7 @@ const reverseIndex = memoize(
     },
     (len, index) => `${len}-${index}`
 );
+
 
 const renderStartData = computed(() => (stars?.length ? stars : defStarData));
 watchEffect(() => {
@@ -217,6 +222,19 @@ on("result", () => {
     flex-direction: column;
     width: 100%;
     height: 100%;
+    &-icon{
+        display: flex;
+        width: 84px;
+        height: 88px;
+        background: url('./images/base/base.png') no-repeat;
+        background-size: cover;
+        &-center{
+            display: flex !important;
+            justify-content: center;
+            align-items: flex-start !important;
+            padding-top: 15px;
+        }
+    }
 
     &__img {
         width: 100%;
@@ -255,11 +273,15 @@ on("result", () => {
                     z-index: calc(var(--z-index-number) + 1);
                     :deep(.lc-icon) {
                         .lc-icon__image {
-                            background-image: var(--img-selected-src);
+                            // background-image: var(--img-selected-src);
                         }
                     }
 
                     .lc-main-robot {
+                        &-icon{
+                            background: url('./images/base/selected-base.png') no-repeat;
+                            background-size: cover
+                        }
                         &__wrapper {
                             &__star-wrap--star {
                                 &__meta {
@@ -280,7 +302,7 @@ on("result", () => {
                 &__meta {
                     position: absolute;
                     left: 30%;
-                    bottom: 20%;
+                    bottom: 25%;
                     width: 202px;
                     display: flex;
                     flex-direction: column-reverse;

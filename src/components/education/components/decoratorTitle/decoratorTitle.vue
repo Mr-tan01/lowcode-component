@@ -74,7 +74,7 @@ const formatedText = computed(() => {
 
         &__text {
             font-family: AlimamaFangYuanTiVF-SemiBold, AlimamaFangYuanTiVF-SemiBold;
-            font-weight: normal;
+            font-weight: 600;
             font-size: 18px;
             color: #ffffff;
             line-height: 18px;

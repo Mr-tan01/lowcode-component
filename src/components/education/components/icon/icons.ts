@@ -84,6 +84,15 @@ export const innerImageDomain = {
         mentor: "mentor",
         person2: "person2",
         reward: "reward",
+        dataOverview: "dataOverview",
+        base: "base",
+        team: 'team',
+        five: 'five',
+        evaluation: 'evaluation',
+        planningBlueprint: 'planningBlueprint',
+        schoolSafety: 'schoolSafety',
+        schoolsGuarantee: 'schoolsGuarantee',
+
     },
     baseSupport: {
         booth: "booth",
@@ -112,11 +121,22 @@ type ReadValue<T> = T[keyof T];
 export type Domains = keyof innerImageDomain;
 export type NameTypeFunc<D extends Domains> = ReadValue<innerImageDomain[D]>;
 export type NameTypes = NameTypeFunc<"event"> | NameTypeFunc<"func"> | NameTypeFunc<"menus"> | NameTypeFunc<"baseSupport">;
-export function useImage<D extends Domains>(domain: Ref<D>, name: Ref<NameTypeFunc<D>>, ext: Ref<string>) {
+export function useImage<D extends Domains>(domain: Ref<D>, name: Ref<NameTypeFunc<D>>, ext: Ref<string>, baseSrcName?: Ref<string | undefined>) {
     const src = ref<string>("");
     const selectedSrc = ref<string>("");
+    const baseSrc = ref<string>("");
+    const baseSelectedSrc = ref<string>("");
     const updatePaths = (name: NameTypeFunc<D>) => {
         let iconPath = `${domain.value}/${name}${ext.value}`;
+        let baseIconPath = '';
+        let baseSelectedPath = "";
+        if (baseSrcName?.value){
+            baseIconPath =  `${domain.value}/${baseSrcName.value}/icon${ext.value}`;
+            baseSelectedPath = `${domain.value}/${baseSrcName.value}/selected-icon${ext.value}`
+            imageIconPromise[domain.value]?.[`./images/${baseIconPath}`]?.()?.then((val) => (baseSrc.value = val));
+            imageIconPromise[domain.value]?.[`./images/${baseSelectedPath}`]?.()?.then((val) => (baseSelectedSrc.value = val));
+            console.log(baseSrcName.value, baseSrc.value, 'baseSrc')
+        }
         let selectedPath = "";
         if (domain.value === "event" || domain.value === "baseSupport") {
             iconPath = `${domain.value}/${name}/icon${ext.value}`;
@@ -125,6 +145,7 @@ export function useImage<D extends Domains>(domain: Ref<D>, name: Ref<NameTypeFu
             iconPath = `${domain.value}/${name}${ext.value}`;
         }
         imageIconPromise[domain.value]?.[`./images/${iconPath}`]?.()?.then((val) => (src.value = val));
+        
         if (selectedPath) {
             imageIconPromise[domain.value]?.[`./images/${selectedPath}`]?.()?.then((val) => (selectedSrc.value = val));
         }
@@ -138,8 +159,11 @@ export function useImage<D extends Domains>(domain: Ref<D>, name: Ref<NameTypeFu
     watch(name, (newName) => {
         updatePaths(newName);
     });
+    
     return {
         src,
         selectedSrc,
+        baseSrc,
+        baseSelectedSrc
     };
 }
