@@ -8,7 +8,7 @@ const M = { class: "lc-szmap" }, L = /* @__PURE__ */ m({
     labelModel: () => f.DEFAULT
   }),
   setup(h) {
-    return (e, G) => (i(), n("div", M, [
+    return (e, w) => (i(), n("div", M, [
       l(o, a({
         class: "back-block-map level-map",
         "show-label": !1,
@@ -27,7 +27,7 @@ const M = { class: "lc-szmap" }, L = /* @__PURE__ */ m({
         "show-label": !0,
         levels: e.levels,
         values: e.values
-      }, e.$attrs), {
+      }, e.$attrs, { showBorder: !1 }), {
         mapLabel: b(({ blockList: s, labelClass: r, getVlaue: d, currentMapKey: t }) => [
           u(e.$slots, "mapLabel", {
             blockList: s,

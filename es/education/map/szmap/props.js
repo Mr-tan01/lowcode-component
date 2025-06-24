@@ -2,6 +2,9 @@ const e = {
   showLabel: {
     type: Boolean
   },
+  showBorder: {
+    type: Boolean
+  },
   fillModel: {
     type: String
   },

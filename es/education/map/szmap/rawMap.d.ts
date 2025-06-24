@@ -44,6 +44,9 @@ declare const __VLS_component: import('vue').DefineComponent<import('vue').Extra
     readonly showLabel: {
         readonly type: BooleanConstructor;
     };
+    readonly showBorder: {
+        readonly type: BooleanConstructor;
+    };
     readonly fillModel: {
         readonly type: import('vue').PropType<"hover" | "default">;
     };
@@ -73,6 +76,9 @@ declare const __VLS_component: import('vue').DefineComponent<import('vue').Extra
     readonly showLabel: {
         readonly type: BooleanConstructor;
     };
+    readonly showBorder: {
+        readonly type: BooleanConstructor;
+    };
     readonly fillModel: {
         readonly type: import('vue').PropType<"hover" | "default">;
     };
@@ -99,6 +105,7 @@ declare const __VLS_component: import('vue').DefineComponent<import('vue').Extra
     onMarkMouseover?: ((value: BlockName) => any) | undefined;
     onMarkMouseleave?: ((value: BlockName) => any) | undefined;
 }>, {
+    readonly showBorder: boolean;
     readonly showLabel: boolean;
     readonly disabledGradient: boolean;
 }, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, HTMLDivElement>;

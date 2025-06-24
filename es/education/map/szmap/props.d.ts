@@ -15,6 +15,9 @@ export declare const propsRaw: {
     readonly showLabel: {
         readonly type: BooleanConstructor;
     };
+    readonly showBorder: {
+        readonly type: BooleanConstructor;
+    };
     readonly fillModel: {
         readonly type: PropType<"hover" | "default">;
     };
