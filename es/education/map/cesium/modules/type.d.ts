@@ -1,4 +1,5 @@
 import { SceneMode, SkyAtmosphere, SkyBox, Color, Entity, Cartesian3, PolylineDashMaterialProperty, Cartesian2 } from 'cesium';
+import { CesiumHeatmap } from 'cesium-heatmap-es6';
 export declare const areaData: {
     深圳市: {
         lng: number;
@@ -279,7 +280,7 @@ export interface optionType {
     limitHeightHandler: (value: number) => void;
     loadTileLayerHandler: (status: boolean) => void;
 }
-export type changeModelType = "polygonClickHandler" | "setCameraHeight" | "setInitialView" | "setViewerLayer" | "ZoomIn" | "ZoomOut" | "clearEntity";
+export type changeModelType = "polygonClickHandler" | "setCameraHeight" | "setInitialView" | "setViewerLayer" | "ZoomIn" | "ZoomOut" | "clearEntity" | "removeHeatMap";
 export type changeModelParamType = {
     polygonClickHandler: string;
     setCameraHeight: string;
@@ -293,6 +294,9 @@ export type changeModelParamType = {
     clearEntity: {
         key: "pointEntities" | "polygonEntities";
         type: "dataSource" | "viewer";
+    };
+    removeHeatMap: {
+        heatmap: CesiumHeatmap | any;
     };
 };
 export declare const pointInfo: {

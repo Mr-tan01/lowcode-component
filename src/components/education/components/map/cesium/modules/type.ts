@@ -8,6 +8,7 @@ import {
     type PolylineDashMaterialProperty,
     Cartesian2,
 } from "cesium";
+import { type CesiumHeatmap } from "cesium-heatmap-es6";
 import shenZhen from "./深圳市（各区）.json";
 
 export const areaData = {
@@ -131,7 +132,7 @@ export interface optionType {
     loadTileLayerHandler: (status: boolean) => void;
 }
 
-export type changeModelType = "polygonClickHandler" | "setCameraHeight" | "setInitialView" | "setViewerLayer" | "ZoomIn" | "ZoomOut" | "clearEntity";
+export type changeModelType = "polygonClickHandler" | "setCameraHeight" | "setInitialView" | "setViewerLayer" | "ZoomIn" | "ZoomOut" | "clearEntity" | "removeHeatMap";
 
 export type changeModelParamType = {
     polygonClickHandler: string;
@@ -141,6 +142,10 @@ export type changeModelParamType = {
     ZoomIn: string;
     ZoomOut: string;
     clearEntity: { key: "pointEntities" | "polygonEntities"; type: "dataSource" | "viewer" };
+    removeHeatMap: {
+        heatmap: CesiumHeatmap | any
+    }
+
 };
 
 export const pointInfo = {
