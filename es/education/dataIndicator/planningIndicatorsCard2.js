@@ -4,7 +4,7 @@ import O from "lodash-es/memoize";
 import { bigNumber as T, overflowStr as J } from "lowcode-share/es/share";
 import './assets/headline/radiohead.css';import './assets/icon/iconCard.css';import './assets/icon/icon.css';import './assets/headline/headline.css';/* empty css               */
 import K from "./headline/subhead.js";
-/* empty css           */
+/* empty css            */
 /* empty css              */
 /* empty css                   */
 const M = { class: "lc-planning-indicators" }, P = { class: "lc-planning-indicators__header" }, Q = { class: "lc-planning-indicators__item" }, R = { class: "lc-planning-indicators__item__left" }, W = { class: "lc-planning-indicators__item__title" }, X = { class: "lc-planning-indicators__item__left--value" }, Y = { class: "lc-number-value" }, Z = { class: "lc-number-unit" }, tt = { class: "lc-planning-indicators__item__center" }, et = ["src"], it = { class: "lc-planning-indicators__item__right" }, nt = { class: "lc-planning-indicators__item__right" }, at = { class: "lc-planning-indicators__item__right--value" }, ct = { class: "lc-number-value" }, lt = { class: "lc-number-unit" }, _t = /* @__PURE__ */ q({

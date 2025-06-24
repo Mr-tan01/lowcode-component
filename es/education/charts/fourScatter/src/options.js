@@ -1,42 +1,44 @@
 import p from "lodash-es/merge";
 import { deepMergeArrayOptions as d } from "@mmj-code-lib/lowcode/es/components";
-import { tooltipOptions as u, legendOptions as f, gridOptions as y, xAxisOptions as O, yAxisOptions as g, scatterColors as m, commonScatterSeries as c } from "./const.js";
+import { tooltipOptions as u, legendOptions as f, gridOptions as g, xAxisOptions as y, yAxisOptions as O, scatterColors as n, commonScatterSeries as c } from "./const.js";
 import { setRgbaAlpha as A } from "lowcode-share/es/share";
-const n = {
+const a = {
   tooltip: u,
   legend: f,
-  grid: y,
-  xAxis: O,
-  yAxis: g,
-  color: m,
+  grid: g,
+  xAxis: y,
+  yAxis: O,
+  color: n,
   series: c
 };
-function h(o, r) {
-  return r && Reflect.deleteProperty(n, "tooltip"), d(o, Object.keys(n), Object.values(n)), p({}, n, o);
+function S(o, t) {
+  return t && Reflect.deleteProperty(a, "tooltip"), d(o, Object.keys(a), Object.values(a)), p({}, a, o);
 }
-function l(o, r) {
-  var a, i;
-  const t = m[r % m.length];
+function l(o, t) {
+  var m, i;
+  const r = n[t % n.length];
   return p(
     {},
     c,
     {
       itemStyle: {
-        color: A(t, 0.51),
-        borderColor: t
+        color: A(r, 0.51),
+        borderColor: r,
+        shadowBlur: 10,
+        shadowColor: "rgba(0,0,0,0.5)"
       },
       markPoint: {
         emphasis: {
           itemStyle: {
             // @ts-ignore
-            borderColor: ((a = o == null ? void 0 : o.itemStyle) == null ? void 0 : a.borderColor) ?? t
+            borderColor: ((m = o == null ? void 0 : o.itemStyle) == null ? void 0 : m.borderColor) ?? r
           }
         },
         data: ((i = o.data) == null ? void 0 : i.map((e, s) => ({
           name: e.name,
           coord: [s, e.value, e],
           meta: {
-            color: t,
+            color: r,
             ...e.meta ?? {}
           },
           item: e
@@ -47,10 +49,10 @@ function l(o, r) {
   );
 }
 function R(o) {
-  return Array.isArray(o) ? o.map((r, t) => l(r, t)) : l(o, 0);
+  return Array.isArray(o) ? o.map((t, r) => l(t, r)) : l(o, 0);
 }
 export {
-  n as commonScatterOptions,
-  h as useCommonScatterOptions,
+  a as commonScatterOptions,
+  S as useCommonScatterOptions,
   R as useCommonScatterSeries
 };

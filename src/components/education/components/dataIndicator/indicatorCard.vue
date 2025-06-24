@@ -10,7 +10,7 @@
                 <div class="lc-indicator-card__wrapper--result">
                     <span class="lc-indicator-card__wrapper--result--value" :title="value.toString()">
                         <slot name="value">
-                            <NNumberAnimation show-separator :from="0" :to="renderValue" active :precision="decimals" />
+                            <NNumberAnimation show-separator :from="0" :to="renderValue" active :precision="decimals"/>
                         </slot>
                     </span>
                     <span class="lc-indicator-card__wrapper--result--unit" v-if="fixed">

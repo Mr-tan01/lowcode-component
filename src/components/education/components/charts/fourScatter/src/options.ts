@@ -30,7 +30,9 @@ function mregeSeriesRecord(newSeries: SeriesOption, seriesIndex: number) {
         {
             itemStyle: {
                 color: setRgbaAlpha(color, 0.51),
-                borderColor: color,
+                borderColor: color, 
+                shadowBlur: 10,
+                shadowColor: 'rgba(0,0,0,0.5)',
             },
             markPoint: {
                 emphasis: {

@@ -35,7 +35,7 @@ type DirectionType = typeof direction;
 const {
     text = "",
     maxLength = 15,
-    fontSize = "16px",
+    fontSize = "18px",
     type = "left",
     hideRadioIcon = false,
 } = defineProps({
@@ -83,7 +83,7 @@ const formatedText = computed(() => {
     &__text {
         white-space: pre;
         font-family: AlimamaFangYuanTiVF-SemiBold, AlimamaFangYuanTiVF-SemiBold;
-        font-weight: normal;
+        font-weight: 600;
         font-size: v-bind(fontSize);
         color: #ffffff;
         line-height: v-bind(fontSize);

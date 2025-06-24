@@ -55,13 +55,13 @@ function appendSplitAxis(newOptions: EChartsCoreOption) {
                 renderItem: function (params, api) {
                     if (params.isRenderer) return;
                     params.isRenderer = true;
-                    const width = api.getWidth();
+                    const width = api.getWidth() - 100;
                     const height = api.getHeight();
                     const y = height / 2 - 20;
                     return {
                         type: "line",
                         shape: {
-                            x1: 0,
+                            x1: 100,
                             y1: y,
                             x2: width,
                             y2: y,
@@ -83,13 +83,13 @@ function appendSplitAxis(newOptions: EChartsCoreOption) {
                     if (params.isRenderer) return;
                     params.isRenderer = true;
                     const width = api.getWidth();
-                    const height = api.getHeight();
+                    const height = api.getHeight() - 70;
                     const x = width / 2;
                     return {
                         type: "line",
                         shape: {
                             x1: x,
-                            y1: 0,
+                            y1: 30,
                             x2: x,
                             y2: height,
                         },
@@ -97,7 +97,7 @@ function appendSplitAxis(newOptions: EChartsCoreOption) {
                             lineWidth: 0.5,
                             stroke: "rgba(255, 255, 255, 1)",
                         },
-                    };
+                    };  
                 },
                 data: [1],
             }

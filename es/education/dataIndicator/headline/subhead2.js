@@ -42,13 +42,13 @@ const b = { class: "lc-subhead" }, x = {
   }, {
     text: "",
     maxLength: 15,
-    fontSize: "16px",
+    fontSize: "18px",
     type: "left",
     hideRadioIcon: !1
   }),
   setup(t) {
     f((n) => ({
-      "7c8493e8": t.fontSize
+      "5f4dc6ac": t.fontSize
     }));
     const o = {
       right: "right",
