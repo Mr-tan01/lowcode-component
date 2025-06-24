@@ -92,6 +92,38 @@ export const innerGraphicColors: LinearGradient[] = [
         { offset: 0, color: "rgba(119, 73, 255, 0.20)" },
         { offset: 1, color: "rgba(119, 73, 255, 1)" },
     ]),
+    new graphic.LinearGradient(0, 0, 0, 1, [
+        { offset: 0, color: "rgba(15, 251, 248, 0.20)" },
+        { offset: 1, color: "rgba(15, 251, 248, 1)" },
+    ]),
+    new graphic.LinearGradient(0, 0, 0, 1, [
+        { offset: 0, color: "rgba(225, 188, 75, 0.20)" },
+        { offset: 1, color: "rgba(225, 188, 75, 1)" },
+    ]),
+    new graphic.LinearGradient(0, 0, 0, 1, [
+        { offset: 0, color: "rgba(238, 111, 124, 0.20)" },
+        { offset: 1, color: "rgba(238, 111, 124, 1)" },
+    ]),
+    new graphic.LinearGradient(0, 0, 0, 1, [
+        { offset: 0, color: "rgba(100, 214, 119, 0.20)" },
+        { offset: 1, color: "rgba(100, 214, 119, 1)" },
+    ]),
+    new graphic.LinearGradient(0, 0, 0, 1, [
+        { offset: 0, color: "rgba(142,86,221,0)" },
+        { offset: 1, color: "rgba(142,86,221,0.33)" },
+    ]),
+    new graphic.LinearGradient(0, 0, 0, 1, [
+        { offset: 0, color: "rgba(255, 196, 34, 1)" },
+        { offset: 1, color: "rgba(255, 121, 12, 1)" },
+    ]),
+    new graphic.LinearGradient(0, 0, 0, 1, [
+        { offset: 0, color: "rgba(222, 130, 57, 0.20)" },
+        { offset: 1, color: "rgba(222, 130, 57, 1)" },
+    ]),
+    new graphic.LinearGradient(0, 0, 0, 1, [
+        { offset: 0, color: "rgba(34, 118, 252, 0.20)" },
+        { offset: 1, color: "rgba(34, 118, 252, 1)" },
+    ]),
 ];
 
 export const pieSeriesRecord: EChartsOption["series"] = {

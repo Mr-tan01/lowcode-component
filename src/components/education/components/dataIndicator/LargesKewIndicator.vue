@@ -313,10 +313,10 @@ const prefixIcon = computed(() => {
             z-index: 1;
 
             &--icon {
-                width: 28px;
+                width: 32px;
                 object-fit: contain;
                 position: absolute;
-                left: 16.8%;
+                left: 16.3%;
                 top: 10%;
 
                 img,

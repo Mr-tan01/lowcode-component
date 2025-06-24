@@ -1,6 +1,6 @@
-import { graphic as t } from "echarts";
-import f from "lodash-es/merge";
-const b = ["#0FFBF8", "#E1BC4B", "#2276FC", "#A6CFFF", "#7749FF", "#64D677", "#EE6F7C"], h = {
+import { graphic as e } from "echarts";
+import l from "lodash-es/merge";
+const p = ["#0FFBF8", "#E1BC4B", "#2276FC", "#A6CFFF", "#7749FF", "#64D677", "#EE6F7C"], h = {
   text: "0",
   subtext: "总数",
   left: "center",
@@ -23,7 +23,7 @@ const b = ["#0FFBF8", "#E1BC4B", "#2276FC", "#A6CFFF", "#7749FF", "#64D677", "#E
     lineHeight: 16,
     overflow: "truncate"
   }
-}, m = {
+}, w = {
   appendTo: "body",
   trigger: "item",
   backgroundColor: "rgba(0, 32, 61, 1)",
@@ -33,9 +33,9 @@ const b = ["#0FFBF8", "#E1BC4B", "#2276FC", "#A6CFFF", "#7749FF", "#64D677", "#E
     fontSize: 14,
     lineHeight: 20
   },
-  formatter: function(o) {
-    var r, n, i;
-    const e = ((r = c[o.dataIndex]) == null ? void 0 : r.colorStops) ?? [], l = ((n = e == null ? void 0 : e[0]) == null ? void 0 : n.color) ?? "rgba(166, 207, 255, 0.20)", a = ((i = e == null ? void 0 : e[1]) == null ? void 0 : i.color) ?? "rgba(166, 207, 255, 1)";
+  formatter: function(r) {
+    var t, n, i;
+    const o = ((t = c[r.dataIndex]) == null ? void 0 : t.colorStops) ?? [], a = ((n = o == null ? void 0 : o[0]) == null ? void 0 : n.color) ?? "rgba(166, 207, 255, 0.20)", f = ((i = o == null ? void 0 : o[1]) == null ? void 0 : i.color) ?? "rgba(166, 207, 255, 1)";
     return `
         <div style="display: flex; align-items: center;">
           <span style="
@@ -43,14 +43,14 @@ const b = ["#0FFBF8", "#E1BC4B", "#2276FC", "#A6CFFF", "#7749FF", "#64D677", "#E
             width: 10px;
             height: 10px;
             border-radius: 50%;
-            background: linear-gradient(to bottom, ${l}, ${a});
+            background: linear-gradient(to bottom, ${a}, ${f});
             margin-right: 6px;
           "></span>
-          ${o.name}: ${o.value} (${o.percent}%)
+          ${r.name}: ${r.value} (${r.percent}%)
         </div>
       `;
   }
-}, u = {
+}, m = {
   show: !1,
   orient: "vertical",
   left: "left",
@@ -59,27 +59,59 @@ const b = ["#0FFBF8", "#E1BC4B", "#2276FC", "#A6CFFF", "#7749FF", "#64D677", "#E
     color: "#fff"
   }
 }, c = [
-  new t.LinearGradient(0, 0, 0, 1, [
+  new e.LinearGradient(0, 0, 0, 1, [
     { offset: 0, color: "rgba(15, 251, 248, 0.20)" },
     // 渐变色起始颜色
     { offset: 1, color: "#0FFBF8" }
     // 渐变色结束颜色
   ]),
-  new t.LinearGradient(0, 0, 0, 1, [
+  new e.LinearGradient(0, 0, 0, 1, [
     { offset: 0, color: "rgba(225, 188, 75, 0.20)" },
     { offset: 1, color: "rgba(225, 188, 75, 1)" }
   ]),
-  new t.LinearGradient(0, 0, 0, 1, [
+  new e.LinearGradient(0, 0, 0, 1, [
     { offset: 0, color: "rgba(0, 148, 255, 0.20)" },
     { offset: 1, color: "rgba(0, 148, 255, 1)" }
   ]),
-  new t.LinearGradient(0, 0, 0, 1, [
+  new e.LinearGradient(0, 0, 0, 1, [
     { offset: 0, color: "rgba(166, 207, 255, 0.20)" },
     { offset: 1, color: "rgba(166, 207, 255, 1)" }
   ]),
-  new t.LinearGradient(0, 0, 0, 1, [
+  new e.LinearGradient(0, 0, 0, 1, [
     { offset: 0, color: "rgba(119, 73, 255, 0.20)" },
     { offset: 1, color: "rgba(119, 73, 255, 1)" }
+  ]),
+  new e.LinearGradient(0, 0, 0, 1, [
+    { offset: 0, color: "rgba(15, 251, 248, 0.20)" },
+    { offset: 1, color: "rgba(15, 251, 248, 1)" }
+  ]),
+  new e.LinearGradient(0, 0, 0, 1, [
+    { offset: 0, color: "rgba(225, 188, 75, 0.20)" },
+    { offset: 1, color: "rgba(225, 188, 75, 1)" }
+  ]),
+  new e.LinearGradient(0, 0, 0, 1, [
+    { offset: 0, color: "rgba(238, 111, 124, 0.20)" },
+    { offset: 1, color: "rgba(238, 111, 124, 1)" }
+  ]),
+  new e.LinearGradient(0, 0, 0, 1, [
+    { offset: 0, color: "rgba(100, 214, 119, 0.20)" },
+    { offset: 1, color: "rgba(100, 214, 119, 1)" }
+  ]),
+  new e.LinearGradient(0, 0, 0, 1, [
+    { offset: 0, color: "rgba(142,86,221,0)" },
+    { offset: 1, color: "rgba(142,86,221,0.33)" }
+  ]),
+  new e.LinearGradient(0, 0, 0, 1, [
+    { offset: 0, color: "rgba(255, 196, 34, 1)" },
+    { offset: 1, color: "rgba(255, 121, 12, 1)" }
+  ]),
+  new e.LinearGradient(0, 0, 0, 1, [
+    { offset: 0, color: "rgba(222, 130, 57, 0.20)" },
+    { offset: 1, color: "rgba(222, 130, 57, 1)" }
+  ]),
+  new e.LinearGradient(0, 0, 0, 1, [
+    { offset: 0, color: "rgba(34, 118, 252, 0.20)" },
+    { offset: 1, color: "rgba(34, 118, 252, 1)" }
   ])
 ], g = {
   name: "pie",
@@ -124,13 +156,13 @@ const b = ["#0FFBF8", "#E1BC4B", "#2276FC", "#A6CFFF", "#7749FF", "#64D677", "#E
     length2: 0,
     maxSurfaceAngle: 0
   }
-}, F = f({}, g, s);
+}, L = l({}, g, s);
 export {
   c as innerGraphicColors,
-  F as innerLabelSeries1,
-  b as pieColors,
-  u as pieLegend,
+  L as innerLabelSeries1,
+  p as pieColors,
+  m as pieLegend,
   g as pieSeriesRecord,
   h as pieTitleOptions,
-  m as pieTooltipOptions
+  w as pieTooltipOptions
 };

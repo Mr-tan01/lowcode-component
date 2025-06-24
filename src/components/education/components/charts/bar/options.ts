@@ -61,6 +61,11 @@ export const horizontalBarOptions: EChartsOption = merge({}, commonBarOptions, d
 export const commonBarSeries: BarSeriesOption = {
     barWidth: 20,
     showBackground: true,
+    
+    itemStyle: {
+        shadowBlur: 0,
+        shadowColor: 'transparent'
+    },
     backgroundStyle: {
         borderWidth: 20,
         borderColor: 'rgba(0, 148, 255, 0.1)',
