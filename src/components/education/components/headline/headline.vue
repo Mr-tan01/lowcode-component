@@ -13,7 +13,7 @@
 <style lang="scss" scoped>
 .lc-headline {
     width: fit-content;
-    background: url(./images/headline.png) no-repeat;
+    background: url(./images/headline.png) center / 100% no-repeat !important;
     background-size: 100% 100%;
     padding: 5px 55px 5px 55px;
     box-sizing: border-box;
