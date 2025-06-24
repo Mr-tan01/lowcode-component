@@ -863,6 +863,12 @@ export class cesiumService {
         return heatmap;
     }
 
+    //删除
+    removeHeatMap(heatmap: CesiumHeatmap | any): void {
+        if (!this.viewer || !heatmap) return;
+        heatmap.remove();
+    }
+
     // 检查是否在深圳边界内
     private isPointInShenzhen(longitude: number, latitude: number): boolean {
         return (

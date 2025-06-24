@@ -481,6 +481,10 @@ class X {
       }
     }) : void 0;
   }
+  //删除
+  removeHeatMap(e) {
+    !this.viewer || !e || e.remove();
+  }
   // 检查是否在深圳边界内
   isPointInShenzhen(e, t) {
     return e >= u.toDegrees(this.shenzhenBounds.west) && e <= u.toDegrees(this.shenzhenBounds.east) && t >= u.toDegrees(this.shenzhenBounds.south) && t <= u.toDegrees(this.shenzhenBounds.north);
