@@ -16,6 +16,7 @@
                             :key="index"
                             :is
                             v-bind="getBlockProperties(key)"
+                            :showBorder="showBorder"
                             @mouseover="getHoverMapKey(key)"
                             @mouseleave="hidePopver($event, key)"
                             @click="markClick(key)"
@@ -63,6 +64,7 @@ import { EducationMarkProps } from "../../mark/props";
 const {
     labels,
     showLabel = true,
+    showBorder = true,
     levels = {},
     values = {},
     fillModel = "default",
@@ -126,8 +128,7 @@ const levelsList = computed<Array<[string, Levels]>>(() => {
 
 function getBlockProperties(key: BlockName) {
     const currentValueConf = values[key];
-
-    if (!currentValueConf || disabledGradient) return {};
+    if (!currentValueConf || disabledGradient) return 
     const currentLevelIndex = levelsList.value.findIndex(
         ([_, item]) => currentValueConf.value >= item?.range?.[0]! && currentValueConf.value <= item?.range?.[1]!
     );

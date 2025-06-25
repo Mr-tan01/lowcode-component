@@ -1,10 +1,10 @@
 import e from "lodash-es/merge";
 import { mergeLineRecord as c } from "../line/options.js";
-import { tooltipOptions as d, legendOptions as s, gridOptions as y, xAxisOptions as m, yAxisOptions as u, barColors as g } from "./const.js";
+import { tooltipOptions as s, legendOptions as d, gridOptions as y, xAxisOptions as m, yAxisOptions as u, barColors as g } from "./const.js";
 import { deepMergeArrayOptions as b } from "@mmj-code-lib/lowcode/es/components";
 const p = {
-  tooltip: d,
-  legend: s,
+  tooltip: s,
+  legend: d,
   grid: y,
   xAxis: m,
   yAxis: u,
@@ -49,9 +49,13 @@ const p = {
       }
     }
   }
-}, S = e({}, p, f), a = {
+}, h = e({}, p, f), a = {
   barWidth: 20,
   showBackground: !0,
+  itemStyle: {
+    shadowBlur: 0,
+    shadowColor: "transparent"
+  },
   backgroundStyle: {
     borderWidth: 20,
     borderColor: "rgba(0, 148, 255, 0.1)",
@@ -73,7 +77,7 @@ const p = {
   }
 });
 function A(o, t) {
-  const r = t.isHorizontal ? S : p;
+  const r = t.isHorizontal ? h : p;
   return b(o, Object.keys(r), Object.values(r)), e({}, r, o);
 }
 function l(o, t, r) {
@@ -85,7 +89,7 @@ function B(o, t) {
 export {
   p as commonBarOptions,
   a as commonBarSeries,
-  S as horizontalBarOptions,
+  h as horizontalBarOptions,
   i as smallBarSeries,
   A as useCommonBarOptions,
   B as useCommonBarSeries

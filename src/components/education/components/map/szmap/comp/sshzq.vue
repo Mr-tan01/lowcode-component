@@ -1,6 +1,6 @@
 <template>
     <g transform="translate(0, -35)">
-        <rect id="矩形" stroke="url(#linearGradient-2)" fill-opacity="0.6" fill="url(#linearGradient-1)" x="766.5" y="0.5"
+        <rect v-if="showBorder" id="矩形" stroke="url(#linearGradient-2)" fill-opacity="0.6" fill="url(#linearGradient-1)" x="766.5" y="0.5"
             width="145" height="177" rx="6"></rect>
         <g id="编组-18" transform="translate(779, 16)" fill-rule="nonzero">
             <g id="形状结合">
@@ -15,4 +15,12 @@
     </g>
 </template>
 <script lang="ts" setup>
+import { defineProps } from 'vue'
+const {
+   showBorder = true
+} = defineProps({
+    showBorder: {
+        type: Boolean,
+    }
+});
 </script>

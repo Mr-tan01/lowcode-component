@@ -25,6 +25,9 @@ export const propsRaw = {
     showLabel: {
         type: Boolean,
     },
+    showBorder: {
+        type: Boolean,
+    },
     fillModel: {
         type: String as PropType<"hover" | "default">,
     },

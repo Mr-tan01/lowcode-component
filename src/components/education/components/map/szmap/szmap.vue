@@ -1,7 +1,7 @@
 <template>
     <div class="lc-szmap">
         <RawMap class="back-block-map level-map" :show-label="false" :disabledGradient :rotateX :labelModel :levels :values v-bind="$attrs" />
-        <RawMap class="float-block-map level-map" fill-model="hover" :disabledGradient :rotateX :labelModel :show-label="true" :levels :values v-bind="$attrs">
+        <RawMap class="float-block-map level-map"  fill-model="hover" :disabledGradient :rotateX :labelModel :show-label="true" :levels :values v-bind="$attrs" :showBorder="false">
             <template #mapLabel="{ blockList, labelClass, getVlaue, currentMapKey }">
                 <slot name="mapLabel" :blockList="blockList" :labelClass="labelClass" :getVlaue="getVlaue" :currentMapKey="currentMapKey"> </slot>
             </template>
