@@ -18,6 +18,8 @@ import {
     Rectangle,
     Cartographic,
     PolygonHierarchy,
+    ImageryLayer,
+    Primitive,
 } from "cesium";
 import localforage from "localforage";
 import { CesiumHeatmap } from "cesium-heatmap-es6";
@@ -848,7 +850,7 @@ export class cesiumService {
     }
 
     // 热力图
-    buildHeatMap(points: { x: number, y: number, value: number }[], gradient: Record<string, string> = heatmapGradient) {
+    buildHeatMap(points: { x: number; y: number; value: number }[], gradient: Record<string, string> = heatmapGradient) {
         if (!this.viewer) return;
         const heatmap = new CesiumHeatmap(this.viewer, {
             zoomToLayer: false,
@@ -856,17 +858,32 @@ export class cesiumService {
             heatmapOptions: {
                 radius: 5,
                 maxOpacity: 0,
-                minOpacity: .5,
-                gradient: gradient
+                minOpacity: 0.5,
+                gradient: gradient,
             },
-        })
+        });
         return heatmap;
     }
 
     //删除
     removeHeatMap(heatmap: CesiumHeatmap | any): void {
         if (!this.viewer || !heatmap) return;
-        heatmap.remove();
+        if (heatmap.element) {
+            document.body.removeChild(heatmap.element);
+            heatmap.element = undefined;
+            if (heatmap.provider instanceof ImageryLayer) {
+                if (heatmap.provider) this.viewer.imageryLayers.remove(heatmap.provider);
+                heatmap.createSingleTileImageryLayer();
+            } else if (heatmap.provider instanceof Primitive) {
+                this.viewer.scene.primitives.remove(heatmap.provider);
+            } else if (heatmap.provider instanceof Entity) {
+                this.viewer.entities.remove(heatmap.provider);
+            }
+            if (heatmap.cameraMoveEnd) {
+                this.viewer.camera.moveEnd.removeEventListener(heatmap.cameraMoveEnd);
+                heatmap.cameraMoveEnd = undefined;
+            }
+        }
     }
 
     // 检查是否在深圳边界内

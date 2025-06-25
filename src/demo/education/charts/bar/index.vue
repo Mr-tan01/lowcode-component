@@ -3,6 +3,9 @@
         <DemoHelpBox title="图表" description="图表-柱状图分单类数据、多类数据、组合类数据、" rswidth="1360px" rs-height="auto">
 
             <NSpace>
+                 <DemoHelpBox title="多柱(差值类数据)" rswidth="390px" rs-height="265px" :code="barChartCodes.difference">
+                    <LcBarChart :options="test()" type="bar"></LcBarChart>
+                </DemoHelpBox>
                 <DemoHelpBox title="多柱(差值类数据)" rswidth="390px" rs-height="265px" :code="barChartCodes.difference">
                     <LcBarChart :options="differenceChartsBarOpts()" type="bar"></LcBarChart>
                 </DemoHelpBox>
@@ -75,6 +78,7 @@ import {
     orgImage,
     blueImage,
     differenceChartsBarOpts,
+    test
 } from '../options/bar-options';
 </script>
 <style lang="scss" scoped>

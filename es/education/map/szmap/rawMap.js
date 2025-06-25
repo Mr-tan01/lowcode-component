@@ -1,4 +1,4 @@
-import o from "./rawMap2.js";
+import o from "./rawMap4.js";
 import '../assets/szmap/rawMap2.css';import '../assets/szmap/rawMap.css';/* empty css        */
 /* empty css        */
 import a from "../_virtual/_plugin-vue_export-helper.js";

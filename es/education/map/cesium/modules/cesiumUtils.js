@@ -1,14 +1,14 @@
-var D = Object.defineProperty;
-var I = (p, e, t) => e in p ? D(p, e, { enumerable: !0, configurable: !0, writable: !0, value: t }) : p[e] = t;
-var o = (p, e, t) => I(p, typeof e != "symbol" ? e + "" : e, t);
+var T = Object.defineProperty;
+var D = (p, e, t) => e in p ? T(p, e, { enumerable: !0, configurable: !0, writable: !0, value: t }) : p[e] = t;
+var o = (p, e, t) => D(p, typeof e != "symbol" ? e + "" : e, t);
 import m from "localforage";
 import { CesiumHeatmap as x } from "cesium-heatmap-es6";
 import { areaData as g } from "./type.js";
-import { createClusterBillboard as k, createInfoCanvas as V, createEntityConfig as U, updateViewerEntityInfo as f, heatmapGradient as M } from "./tools.js";
+import { createClusterBillboard as k, createInfoCanvas as V, createEntityConfig as M, updateViewerEntityInfo as f, heatmapGradient as U } from "./tools.js";
 import { useMessage as A } from "naive-ui";
-import { Color as v, Rectangle as O, CustomDataSource as Z, JulianDate as w, VerticalOrigin as B, HorizontalOrigin as R, ScreenSpaceEventType as C, ScreenSpaceEventHandler as S, defined as P, ArcGisMapServerImageryProvider as H, PolylineDashMaterialProperty as N, PolygonHierarchy as z, Cartographic as E, Cartesian3 as y, Math as u, Cartesian2 as T } from "@cesium/engine";
-import { Viewer as W } from "@cesium/widgets";
-class _ {
+import { Color as v, Rectangle as O, CustomDataSource as Z, JulianDate as w, VerticalOrigin as B, HorizontalOrigin as R, ScreenSpaceEventType as C, ScreenSpaceEventHandler as S, defined as P, ArcGisMapServerImageryProvider as H, PolylineDashMaterialProperty as N, PolygonHierarchy as z, Cartographic as E, Cartesian3 as y, Math as u, ImageryLayer as W, Primitive as _, Entity as K, Cartesian2 as I } from "@cesium/engine";
+import { Viewer as $ } from "@cesium/widgets";
+class F {
   // 缓存有效期7天
   constructor() {
     o(this, "storeName", "WMTS_Tiles");
@@ -39,7 +39,7 @@ class _ {
     }
   }
 }
-class X {
+class te {
   constructor(e, t) {
     o(this, "viewer", null);
     o(this, "pointData", []);
@@ -85,7 +85,7 @@ class X {
       // 北边界 - 纬度
     ));
     o(this, "message", A());
-    o(this, "tileCache", new _());
+    o(this, "tileCache", new F());
     o(this, "doubleClickHandler", (e) => {
       e.preventDefault(), e.stopPropagation(), this.setCameraHeight("ZoomIn");
     });
@@ -132,7 +132,7 @@ class X {
     var t;
     this.viewer && this.destroy();
     try {
-      this.viewer = new W(this.containerId, e), this.viewer.cesiumWidget.creditContainer.style.display = "none";
+      this.viewer = new $(this.containerId, e), this.viewer.cesiumWidget.creditContainer.style.display = "none";
       const { scene: i } = this.viewer;
       return i.debugShowFramesPerSecond = !1, i.globe.depthTestAgainstTerrain = !0, i.screenSpaceCameraController.enableTranslate = !0, this.updateViewerAttribute(), this.viewer.cesiumWidget.screenSpaceEventHandler.removeInputAction(C.LEFT_DOUBLE_CLICK), this.viewer.scene.canvas.addEventListener("dblclick", this.doubleClickHandler, !1), this.setupClustering(), (((t = this.options.config) == null ? void 0 : t.cameraLimitsEnabled) ?? this.defaultConfig.cameraLimitsEnabled) && this.setupCameraLimits(), this.setupEventHandlers(), !0;
     } catch (i) {
@@ -253,9 +253,9 @@ class X {
               try {
                 const d = document.createElement("canvas");
                 d.width = l.width, d.height = l.height;
-                const b = d.getContext("2d");
-                b && (b.drawImage(l, 0, 0), d.toBlob(async (L) => {
-                  L && await this.tileCache.putTile(c, L);
+                const L = d.getContext("2d");
+                L && (L.drawImage(l, 0, 0), d.toBlob(async (b) => {
+                  b && await this.tileCache.putTile(c, b);
                 }));
               } catch (d) {
                 console.warn("异步缓存失败:", d);
@@ -290,7 +290,7 @@ class X {
   async addPoint(e, t, i) {
     var a;
     if (!this.viewer && !this.dataSource) return null;
-    const r = await V(e, t, i), n = await U(e, r.canvas, t), s = ((a = this[i === "Label" ? "viewer" : "dataSource"]) == null ? void 0 : a.entities.add(n)) ?? null;
+    const r = await V(e, t, i), n = await M(e, r.canvas, t), s = ((a = this[i === "Label" ? "viewer" : "dataSource"]) == null ? void 0 : a.entities.add(n)) ?? null;
     return this.pointEntities || (this.pointEntities = []), s && this.pointEntities.push(s), s;
   }
   // 清除指定entity
@@ -469,7 +469,7 @@ class X {
     this.viewer && (this.viewer.imageryLayers.removeAll(), this.loadTileLayer(e));
   }
   // 热力图
-  buildHeatMap(e, t = M) {
+  buildHeatMap(e, t = U) {
     return this.viewer ? new x(this.viewer, {
       zoomToLayer: !1,
       points: e,
@@ -483,7 +483,7 @@ class X {
   }
   //删除
   removeHeatMap(e) {
-    !this.viewer || !e || e.remove();
+    !this.viewer || !e || e.element && (document.body.removeChild(e.element), e.element = void 0, e.provider instanceof W ? (e.provider && this.viewer.imageryLayers.remove(e.provider), e.createSingleTileImageryLayer()) : e.provider instanceof _ ? this.viewer.scene.primitives.remove(e.provider) : e.provider instanceof K && this.viewer.entities.remove(e.provider), e.cameraMoveEnd && (this.viewer.camera.moveEnd.removeEventListener(e.cameraMoveEnd), e.cameraMoveEnd = void 0));
   }
   // 检查是否在深圳边界内
   isPointInShenzhen(e, t) {
@@ -497,7 +497,7 @@ class X {
       if (!(this.isCheckingBounds || !this.viewer))
         try {
           this.isCheckingBounds = !0;
-          const t = new T(Math.floor(this.viewer.canvas.clientWidth / 2), Math.floor(this.viewer.canvas.clientHeight / 2)), i = this.viewer.camera.getPickRay(t);
+          const t = new I(Math.floor(this.viewer.canvas.clientWidth / 2), Math.floor(this.viewer.canvas.clientHeight / 2)), i = this.viewer.camera.getPickRay(t);
           if (!i) return;
           const r = this.viewer.scene.globe.pick(i, this.viewer.scene);
           if (!r) {
@@ -518,7 +518,7 @@ class X {
   getCameraViewCenter() {
     if (this.viewer)
       try {
-        const e = new T(this.viewer.canvas.clientWidth / 2, this.viewer.canvas.clientHeight / 2), t = this.viewer.camera.getPickRay(e);
+        const e = new I(this.viewer.canvas.clientWidth / 2, this.viewer.canvas.clientHeight / 2), t = this.viewer.camera.getPickRay(e);
         if (!t) return;
         const i = this.viewer.scene.globe.pick(t, this.viewer.scene);
         return i ? E.fromCartesian(i) : this.viewer.camera.positionCartographic;
@@ -531,5 +531,5 @@ class X {
   }
 }
 export {
-  X as cesiumService
+  te as cesiumService
 };
