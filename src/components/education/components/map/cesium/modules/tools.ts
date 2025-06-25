@@ -349,7 +349,7 @@ export const createEntityConfig = async (point: pointType, valueInfo: HTMLCanvas
     };
 
     return {
-        position: Cartesian3.fromDegrees(point.lng, point.lat, 10),
+        position: Cartesian3.fromDegrees(point.lng, point.lat, 50),
         name: type ? point.name : `${point.name}Label`,
         properties: commonProperties,
         billboard: commonBillboard,
