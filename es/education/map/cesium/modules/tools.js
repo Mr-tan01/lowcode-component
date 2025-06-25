@@ -136,7 +136,7 @@ const se = async (e, t, r) => {
     verticalOrigin: r ? P.CENTER : P.BOTTOM
   };
   return {
-    position: Y.fromDegrees(e.lng, e.lat, 10),
+    position: Y.fromDegrees(e.lng, e.lat, 50),
     name: r ? e.name : `${e.name}Label`,
     properties: a,
     billboard: l

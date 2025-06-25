@@ -78,6 +78,7 @@ const cesiumUtils = new cesiumService("cesium-3d-viewer", {
     pointHandler: (data: Entity) => {
         const currentTime = JulianDate.now();
         const value0ption = data.properties?.getValue(currentTime);
+        if(!value0ption) return 
         emit("pointHandler", value0ption);
     },
     limitHeightHandler: (value: number) => {
