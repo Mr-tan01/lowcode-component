@@ -1,5 +1,6 @@
 <template>
     <div class="demo-headers mr-setting-w">
+        <button @click="add">添加热力图</button>
         <DemoHelpBox title="深圳地图" description="深圳教育项目-cesium" rswidth="1500px" rsHeight="740px">
             <div class="size-box">
                 <LcCesium
@@ -32,8 +33,23 @@ import { DemoHelpBox } from "@/components/common/DemoHelpBox";
 import type { ChangeEvent } from "@/components/education/components/carouseBox/types";
 import { pointType, basicConfigType, pointInfo } from "@/components/education/components/map/cesium/modules/type";
 import { Cartesian3 } from "cesium";
+import data from "./index.json";
 const basicConfig = ref<basicConfigType>({ clusteringEnabled: true, cameraLimitsEnabled: false });
 import { getToken } from "@/request";
+
+//热力图数据
+const heatMapDataHandle = (data: Array<any>) => {
+    if (!data || data.length === 0) return [];
+    //数据
+    const heatMapData = data
+        .filter((item) => Number(item.schoolLat) > 0 && Number(item.schoolLng) > 0)
+        .map((item) => ({
+            x: Number(item.schoolLng),
+            y: Number(item.schoolLat),
+            value: Number(item.value),
+        }));
+    return heatMapData;
+};
 const defSwitchTabList = [
     {
         label: "深圳市",
@@ -91,11 +107,12 @@ let accessToken = ref<string | null>(null);
 const tabValue = ref("宝安区");
 let cesiumMap = ref<CesiumInstanceType | null>(null);
 let optionInfo = ref<pointType[]>([]);
-
+let buildHeatMap = null;
 function changePolygon(value: ChangeEvent): void {
     if (value.label === "深圳市") {
         cesiumMap.value?.clearEntity();
     }
+    cesiumMap.value?.changeModel("removeHeatMap", buildHeatMap);
     cesiumMap.value?.loadedTileLayer(true);
     cesiumMap.value?.changeModel("polygonClickHandler", value.label);
     optionInfo.value = pointInfo[value.label];
@@ -113,10 +130,7 @@ function iconHandler(alt: string) {
         cesiumMap.value?.changeModel("setInitialView", { destination: Cartesian3.fromDegrees(114.187446, 22.674131, 130000), duration: 0.8 });
     } else {
         const state = alt === "Layer";
-        cesiumMap.value?.changeModel(
-            state ? "setViewerLayer" : "setCameraHeight",
-            state ? "https://services.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer" : alt
-        );
+        cesiumMap.value?.changeModel(state ? "setViewerLayer" : "setCameraHeight", state ? "https://services.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer" : alt);
     }
 }
 
@@ -127,7 +141,22 @@ function onPointHandler(data) {
 onMounted(async () => {
     await getToken;
     accessToken.value = localStorage.getItem("access_token");
+
+    // await cesiumMap.value?.changeModel("buildHeatMap", heatMapData);
+    // cesiumMap.value?.changeModel("updateHeatMapPoints", heatMapData);
+    // cesiumMap.value?.changeModel("updateHeatMapMaxMin", { max: max, min: min });
 });
+const add = () => {
+    const heatMapData = heatMapDataHandle(data.data);
+    //点位value
+    const valueArr = heatMapData.map((i) => i.value);
+    //点位最大值
+    const max = Math.max(...valueArr);
+    //点位最小值
+    const min = Math.min(...valueArr);
+    buildHeatMap = cesiumMap.value?.cesiumUtils.buildHeatMap(heatMapData);
+    cesiumMap.value?.changeModel("updateHeatMapMaxMin", { max: max, min: min });
+};
 </script>
 
 <style></style>

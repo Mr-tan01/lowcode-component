@@ -1,89 +1,119 @@
-import orgImage from '../images/org.svg';
-import blueImage from '../images/blue.svg';
-import { type YAXisOption } from 'echarts/types/src/coord/cartesian/AxisModel';
-import {
-    LcBarChartOptions,
-    useDifferenceSeries,
-} from '@/components/education/components/charts';
-import { type EChartsOption } from 'echarts';
-export {
-    orgImage,
-    blueImage,
-}
-export function chartsBarOpts(len: number): EChartsOption {
+import orgImage from "../images/org.svg";
+import blueImage from "../images/blue.svg";
+import { type YAXisOption } from "echarts/types/src/coord/cartesian/AxisModel";
+import { LcBarChartOptions, useDifferenceSeries } from "@/components/education/components/charts";
+import { type EChartsOption } from "echarts";
+export { orgImage, blueImage };
+export function test(): EChartsOption {
     return {
-        yAxis: {
-            name: '单位/人',
+        grid: {
+            right: 20,
         },
+        yAxis: [
+            {
+                type: "value",
+                name: "单位：人",
+                show: true,
+            },
+            {
+                type: "value",
+                name: "单位：%",
+                show: true,
+            },
+        ],
         xAxis: {
             data: Array.from(Array(5)).map((_, i) => `${i + 1}月`),
         },
         series: [
             {
-                name: '待审核',
+                name: "待审核",
+                yAxisIndex: 0,
                 data: Array.from(Array(5)).map((_, i) => Math.round(Math.random() * 100 + i)),
-                backgroundStyle: {
-
-                },
+                backgroundStyle: {},
             },
             {
-                name: '已通过',
+                name: "已通过",
+                yAxisIndex: 1,
                 data: Array.from(Array(5)).map((_, i) => Math.round(Math.random() * 100 + i)),
-                backgroundStyle: {
+                backgroundStyle: {},
+            },
+        ],
+    };
+}
 
-                },
+export function chartsBarOpts(len: number): EChartsOption {
+    return {
+        yAxis: [
+            {
+                type: "value",
+                name: "单位：人",
+                show: true,
             },
             {
-                name: '已通过2',
+                type: "value",
+                name: "单位：%",
+                show: true,
+            },
+        ],
+        xAxis: {
+            data: Array.from(Array(5)).map((_, i) => `${i + 1}月`),
+        },
+        series: [
+            {
+                name: "待审核",
+                yAxisIndex: 0,
                 data: Array.from(Array(5)).map((_, i) => Math.round(Math.random() * 100 + i)),
-                backgroundStyle: {
-
-                },
+                backgroundStyle: {},
             },
             {
-                name: '已通过3',
+                name: "已通过",
+                yAxisIndex: 1,
                 data: Array.from(Array(5)).map((_, i) => Math.round(Math.random() * 100 + i)),
-                backgroundStyle: {
-
-                },
+                backgroundStyle: {},
             },
             {
-                name: '已通过4',
+                name: "已通过2",
                 data: Array.from(Array(5)).map((_, i) => Math.round(Math.random() * 100 + i)),
-                backgroundStyle: {
-
-                },
+                backgroundStyle: {},
             },
             {
-                name: '已通过5',
+                name: "已通过3",
                 data: Array.from(Array(5)).map((_, i) => Math.round(Math.random() * 100 + i)),
-                backgroundStyle: {
-
-                },
+                backgroundStyle: {},
+            },
+            {
+                name: "已通过4",
+                data: Array.from(Array(5)).map((_, i) => Math.round(Math.random() * 100 + i)),
+                backgroundStyle: {},
+            },
+            {
+                name: "已通过5",
+                data: Array.from(Array(5)).map((_, i) => Math.round(Math.random() * 100 + i)),
+                backgroundStyle: {},
             },
         ].slice(0, len),
-    }
-};
+    };
+}
 export function chartsHorizontalBarOpts(len: number): EChartsOption {
     return {
         yAxis: {
             data: Array.from(Array(4)).map((_, i) => `类目${i + 1}`),
         },
         xAxis: {
-            name: '',
+            name: "",
         },
         series: [
             {
-                name: '待审核',
+                name: "待审核",
                 data: Array.from(Array(4)).map((_, i) => Math.round(Math.random() * 100 + i)),
             },
             {
-                name: '已通过',
+                name: "已通过",
                 data: Array.from(Array(4)).map((_, i) => Math.round(Math.random() * 100 + i)),
             },
         ].slice(0, len),
-    }
-};
+    };
+}
 
 export function chartNegativeBarOptions(): EChartsOption {
     return {
@@ -95,15 +125,15 @@ export function chartNegativeBarOptions(): EChartsOption {
         },
         series: [
             {
-                name: '待审核',
+                name: "待审核",
                 data: Array.from(Array(4)).map((_, i) => Math.round(Math.random() * -100 + i)),
             },
             {
-                name: '已通过',
+                name: "已通过",
                 data: Array.from(Array(4)).map((_, i) => Math.round(Math.random() * 100 + i)),
             },
         ],
-    }
+    };
 }
 
 export function evenYaixsChartsBarOpts(len: number): EChartsOption {
@@ -111,22 +141,19 @@ export function evenYaixsChartsBarOpts(len: number): EChartsOption {
         xAxis: {
             data: Array.from(Array(4)).map((_, i) => `类目${i + 1}`),
         },
-        yAxis: [
-            LcBarChartOptions.commonBarOptions.yAxis as YAXisOption,
-            LcBarChartOptions.commonBarOptions.yAxis as YAXisOption,
-        ],
+        yAxis: [LcBarChartOptions.commonBarOptions.yAxis as YAXisOption, LcBarChartOptions.commonBarOptions.yAxis as YAXisOption],
         series: [
             {
-                name: '待审核',
+                name: "待审核",
                 data: Array.from(Array(4)).map((_, i) => Math.round(Math.random() * 100 + i)),
             },
             {
-                name: '已通过',
+                name: "已通过",
                 yAxisIndex: 1,
                 data: Array.from(Array(4)).map((_, i) => Math.round(Math.random() * 100 + i)),
             },
         ].slice(0, len),
-    }
+    };
 }
 
 export function pictorialBarOpts(start, len): EChartsOption | { series: {}[] } {
@@ -134,65 +161,62 @@ export function pictorialBarOpts(start, len): EChartsOption | { series: {}[] } {
         xAxis: {
             data: Array.from(Array(4)).map((_, i) => `类目${i + 1}`),
         },
-        yAxis: {
-
-        },
+        yAxis: {},
         series: [
             {
-                name: '类型名称',
-                barWidth: 'auto',
-                type: 'pictorialBar',
+                name: "类型名称",
+                barWidth: "auto",
+                type: "pictorialBar",
                 barGap: 0,
-                symbol: 'path://M0,10 L10,10 C5.5,10 5.5,5 5,0 C4.5,5 4.5,10 0,10 z',
+                symbol: "path://M0,10 L10,10 C5.5,10 5.5,5 5,0 C4.5,5 4.5,10 0,10 z",
                 data: [123, 60, 25, 18],
             },
             {
-                name: '类型名称1',
-                barWidth: 'auto',
-                type: 'pictorialBar',
+                name: "类型名称1",
+                barWidth: "auto",
+                type: "pictorialBar",
                 barGap: 0,
-                symbol: 'path://M0,10 L10,10 C5.5,10 5.5,5 5,0 C4.5,5 4.5,10 0,10 z',
+                symbol: "path://M0,10 L10,10 C5.5,10 5.5,5 5,0 C4.5,5 4.5,10 0,10 z",
                 data: [123, 60, 25, 18],
             },
             {
-                name: '类型名称2',
-                barWidth: 'auto',
-                type: 'pictorialBar',
-                barGap: '-50%',
+                name: "类型名称2",
+                barWidth: "auto",
+                type: "pictorialBar",
+                barGap: "-50%",
                 symbol: `image://${blueImage}`,
                 itemStyle: {
-                    opacity: 0.9
+                    opacity: 0.9,
                 },
                 data: [23, 60, 125, 118],
             },
             {
-                name: '类型名称3',
-                barWidth: 'auto',
-                type: 'pictorialBar',
-                barGap: '-50%',
+                name: "类型名称3",
+                barWidth: "auto",
+                type: "pictorialBar",
+                barGap: "-50%",
                 symbol: `image://${orgImage}`,
                 itemStyle: {
-                    opacity: 0.9
+                    opacity: 0.9,
                 },
                 data: [23, 160, 45, 108],
             },
         ].slice(start, len),
-    }
+    };
 }
 
 export function differenceChartsBarOpts(): EChartsOption {
     return {
         legend: {
             data: [
-                '类型名称',
+                "类型名称",
                 {
-                    name: '标准差',
-                    icon: 'roundRect',
+                    name: "标准差",
+                    icon: "roundRect",
                     itemStyle: {
                         opacity: 1,
                     },
-
-                }
+                },
             ],
         },
         xAxis: {
@@ -200,20 +224,23 @@ export function differenceChartsBarOpts(): EChartsOption {
         },
         series: [
             {
-                name: '类型名称',
+                name: "类型名称",
                 barGap: 0,
                 data: [13, 60, 25, 18],
-                stack: 'stack',
+                stack: "stack",
             },
-            useDifferenceSeries([
-                [20, 50],
-                [70, 10],
-                [50, 80],
-                [30, 60],
-            ], {
-                name: '标准差',
-                stack: 'stack',
-            }),
+            useDifferenceSeries(
+                [
+                    [20, 50],
+                    [70, 10],
+                    [50, 80],
+                    [30, 60],
+                ],
+                {
+                    name: "标准差",
+                    stack: "stack",
+                }
+            ),
         ],
-    }
+    };
 }

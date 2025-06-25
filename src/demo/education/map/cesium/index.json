@@ -1,0 +1,6460 @@
+{
+    "code": 200,
+    "msg": "操作成功",
+    "data": [
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市光明区尚美小学",
+            "schoolLng": "113.928800",
+            "schoolLat": "22.720900",
+            "value": "8.4034"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市光明区实验学校同心小学",
+            "schoolLng": "113.930856",
+            "schoolLat": "22.733028",
+            "value": "9.0090"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市光明区宝滨小学",
+            "schoolLng": "113.901955",
+            "schoolLat": "22.784908",
+            "value": "6.5359"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳小学光明学校曙光校区",
+            "schoolLng": "113.939900",
+            "schoolLat": "22.764387",
+            "value": "9.6154"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市光明区龙豪小学",
+            "schoolLng": "113.912543",
+            "schoolLat": "22.769067",
+            "value": "8.3333"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市光明区修远小学",
+            "schoolLng": "114.076665",
+            "schoolLat": "22.576785",
+            "value": "6.6225"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "华南师范大学附属光明星河小学",
+            "schoolLng": "113.940000",
+            "schoolLat": "22.760000",
+            "value": "7.1429"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市光明区清一小学",
+            "schoolLng": "113.891592",
+            "schoolLat": "22.800475",
+            "value": "7.0423"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市教育科学研究院实验小学(光明)",
+            "schoolLng": "113.890000",
+            "schoolLat": "22.770000",
+            "value": "6.1350"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市光明区秋硕小学",
+            "schoolLng": "113.905446",
+            "schoolLat": "22.770047",
+            "value": "6.2112"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深汕特别合作区小漠镇中心小学",
+            "schoolLng": "115.043604",
+            "schoolLat": "22.778633",
+            "value": "0"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深汕特别合作区赤石镇中心小学",
+            "schoolLng": "115.081911",
+            "schoolLat": "22.881477",
+            "value": "0"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深汕特别合作区赤石镇圆墩小学",
+            "schoolLng": "115.065668",
+            "schoolLat": "22.843175",
+            "value": "0"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深汕特别合作区赤石镇大安小学",
+            "schoolLng": "115.107192",
+            "schoolLat": "22.936371",
+            "value": "0"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深汕特别合作区赤石镇新城小学",
+            "schoolLng": "115.090340",
+            "schoolLat": "22.880665",
+            "value": "0"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深汕特别合作区赤石镇新里小学",
+            "schoolLng": "115.074300",
+            "schoolLat": "22.871699",
+            "value": "0"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深汕特别合作区赤石镇明热小学",
+            "schoolLng": "115.020097",
+            "schoolLat": "22.911350",
+            "value": "0"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深汕特别合作区鲘门镇中心小学",
+            "schoolLng": "115.164989",
+            "schoolLat": "22.819753",
+            "value": "0"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深汕特别合作区鲘门镇红泉小学",
+            "schoolLng": "115.089496",
+            "schoolLat": "22.804818",
+            "value": "0"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深汕特别合作区鲘门镇红源小学",
+            "schoolLng": "115.137069",
+            "schoolLat": "22.819624",
+            "value": "0"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深汕特别合作区鹅埠镇上北镇小学",
+            "schoolLng": "114.990292",
+            "schoolLat": "22.858388",
+            "value": "0"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深汕特别合作区鹅埠镇中心小学",
+            "schoolLng": "115.010334",
+            "schoolLat": "22.830691",
+            "value": "0"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深汕特别合作区鹅埠镇西湖小学",
+            "schoolLng": "114.981472",
+            "schoolLat": "22.824954",
+            "value": "0"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市南山外国语学校(集团)深汕西中心学校",
+            "schoolLng": "114.992193",
+            "schoolLat": "22.830627",
+            "value": "0"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市深汕特别合作区松正学校",
+            "schoolLng": "115.009362",
+            "schoolLat": "22.839451",
+            "value": "0"
+        },
+        {
+            "schoolType": "初级中学",
+            "schoolName": "深汕特别合作区小漠中学",
+            "schoolLng": "115.043664",
+            "schoolLat": "22.780739",
+            "value": "0"
+        },
+        {
+            "schoolType": "初级中学",
+            "schoolName": "深汕特别合作区赤石中学",
+            "schoolLng": "115.079849",
+            "schoolLat": "22.883946",
+            "value": "0"
+        },
+        {
+            "schoolType": "初级中学",
+            "schoolName": "深汕特别合作区鲘门中学",
+            "schoolLng": "115.161618",
+            "schoolLat": "22.816892",
+            "value": "0"
+        },
+        {
+            "schoolType": "初级中学",
+            "schoolName": "深汕特别合作区鹅埠中学",
+            "schoolLng": "115.008880",
+            "schoolLat": "22.833009",
+            "value": "0"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳日本人学校",
+            "schoolLng": null,
+            "schoolLat": null,
+            "value": "0"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市南山区西丽湖学校",
+            "schoolLng": "113.953679",
+            "schoolLat": "22.588953",
+            "value": "0"
+        },
+        {
+            "schoolType": "初级中学",
+            "schoolName": "深圳中学(初中部)",
+            "schoolLng": "114.134001",
+            "schoolLat": "22.569478",
+            "value": "7.2993"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳实验学校(小学部)",
+            "schoolLng": "114.099163",
+            "schoolLat": "22.556009",
+            "value": "6.4935"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳实验学校(坂田部)",
+            "schoolLng": "114.091521",
+            "schoolLat": "22.637986",
+            "value": "6.2112"
+        },
+        {
+            "schoolType": "初级中学",
+            "schoolName": "深圳实验学校(初中部)",
+            "schoolLng": "114.095633",
+            "schoolLat": "22.555653",
+            "value": "8.0000"
+        },
+        {
+            "schoolType": "初级中学",
+            "schoolName": "深圳外国语学校(初中部)",
+            "schoolLng": "114.100342",
+            "schoolLat": "22.554381",
+            "value": "10.0000"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市高级中学(北校区)",
+            "schoolLng": "114.034151",
+            "schoolLat": "22.625510",
+            "value": "5.9880"
+        },
+        {
+            "schoolType": "初级中学",
+            "schoolName": "深圳市高级中学(南校区)",
+            "schoolLng": "114.024531",
+            "schoolLat": "22.544263",
+            "value": "8.6957"
+        },
+        {
+            "schoolType": "初级中学",
+            "schoolName": "深圳市第三高级中学(初中部)",
+            "schoolLng": "114.061167",
+            "schoolLat": "22.518129",
+            "value": "10.8696"
+        },
+        {
+            "schoolType": "初级中学",
+            "schoolName": "深圳大学附属中学(初中部)",
+            "schoolLng": "113.897107",
+            "schoolLat": "22.504295",
+            "value": "7.8125"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市云端学校",
+            "schoolLng": "114.186623",
+            "schoolLat": "22.633324",
+            "value": "0"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳小学",
+            "schoolLng": "114.126449",
+            "schoolLat": "22.556848",
+            "value": "5.7143"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳外国语小学",
+            "schoolLng": "114.033210",
+            "schoolLat": "22.545421",
+            "value": "6.5359"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市福田区红岭实验小学",
+            "schoolLng": "114.003233",
+            "schoolLat": "22.549864",
+            "value": "8.0000"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市福田区深圳中学梅香学校(小学部)",
+            "schoolLng": "114.045062",
+            "schoolLat": "22.574704",
+            "value": "6.2112"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市福田区荔园小学(荔园教育集团)(总校)",
+            "schoolLng": null,
+            "schoolLat": null,
+            "value": "0"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市福田区荔园小学(荔园教育集团)通新岭校区",
+            "schoolLng": "114.099783",
+            "schoolLat": "22.559266",
+            "value": "5.4348"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市福田区荔园小学(荔园教育集团)百花校区",
+            "schoolLng": "114.099710",
+            "schoolLat": "22.558490",
+            "value": "6.2500"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市福田区荔园小学(荔园教育集团)玮鹏校区",
+            "schoolLng": "114.100770",
+            "schoolLat": "22.549100",
+            "value": "5.8480"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市福田区荔园小学(荔园教育集团)众孚校区",
+            "schoolLng": "114.055110",
+            "schoolLat": "22.525970",
+            "value": "6.4103"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市福田区荔园小学(荔园教育集团)园岭校区",
+            "schoolLng": "114.103560",
+            "schoolLat": "22.558880",
+            "value": "5.9524"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市福田区荔园小学(荔园教育集团)八卦岭校区",
+            "schoolLng": "114.073710",
+            "schoolLat": "22.552264",
+            "value": "5.5866"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市福田区园岭教育集团园岭小学",
+            "schoolLng": "114.104758",
+            "schoolLat": "22.556459",
+            "value": "5.7471"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市福田区荔园外国语小学(香蜜湖)",
+            "schoolLng": "114.022670",
+            "schoolLat": "22.556470",
+            "value": "6.1728"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市福田区荔园外国语小学(天骄)",
+            "schoolLng": "114.049370",
+            "schoolLat": "22.557570",
+            "value": "5.6180"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市福田区荔园外国语小学(狮岭)",
+            "schoolLng": "114.048353",
+            "schoolLat": "22.555053",
+            "value": "6.0606"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市福田区荔园外国语小学(水围)",
+            "schoolLng": "114.070411",
+            "schoolLat": "22.526598",
+            "value": "5.8824"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市福田区荔园外国语小学(总校)",
+            "schoolLng": "114.044699",
+            "schoolLat": "22.551534",
+            "value": "0"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市福田区荔园外国语小学",
+            "schoolLng": "114.044699",
+            "schoolLat": "22.551534",
+            "value": "5.7143"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市福田区荔园外国语小学(深南校区)",
+            "schoolLng": "114.051110",
+            "schoolLat": "22.546450",
+            "value": "8.1301"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市福田区荔园外国语小学(景田)",
+            "schoolLng": "114.050270",
+            "schoolLat": "22.549190",
+            "value": "5.8824"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市福田区园岭教育集团园岭外国语小学",
+            "schoolLng": "114.096960",
+            "schoolLat": "22.558084",
+            "value": "6.1728"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市福田区园岭教育集团园岭实验小学",
+            "schoolLng": "114.108420",
+            "schoolLat": "22.559681",
+            "value": "6.5789"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市福田区园岭教育集团百花小学(总校)",
+            "schoolLng": "114.095751",
+            "schoolLat": "22.559237",
+            "value": "0"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市福田区园岭教育集团百花小学",
+            "schoolLng": "114.095751",
+            "schoolLat": "22.559237",
+            "value": "5.7471"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市福田区园岭教育集团百花小学(南校区)",
+            "schoolLng": "114.095660",
+            "schoolLat": "22.559080",
+            "value": "5.1282"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市福田区东海实验小学",
+            "schoolLng": "114.026294",
+            "schoolLat": "22.547667",
+            "value": "6.0606"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市福田区福华小学",
+            "schoolLng": "114.075976",
+            "schoolLat": "22.539080",
+            "value": "6.1350"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市福田区福民小学",
+            "schoolLng": "114.075643",
+            "schoolLat": "22.527591",
+            "value": "5.9524"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市福田区福南小学",
+            "schoolLng": "114.086543",
+            "schoolLat": "22.536634",
+            "value": "6.4516"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市福田区福强小学",
+            "schoolLng": "114.058660",
+            "schoolLat": "22.520510",
+            "value": "5.8140"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市福田区福田小学",
+            "schoolLng": "114.088995",
+            "schoolLat": "22.542685",
+            "value": "6.8027"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市福田区福新小学",
+            "schoolLng": "114.057263",
+            "schoolLat": "22.538379",
+            "value": "5.9524"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市福田区福苑小学",
+            "schoolLng": "114.056860",
+            "schoolLat": "22.514067",
+            "value": "5.4054"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市福田区文天祥小学(岗厦)",
+            "schoolLng": "114.075900",
+            "schoolLat": "22.542083",
+            "value": "6.1350"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市福田区华新小学",
+            "schoolLng": "114.088992",
+            "schoolLat": "22.565105",
+            "value": "5.9524"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市福田区皇岗小学",
+            "schoolLng": "114.065249",
+            "schoolLat": "22.533084",
+            "value": "6.1728"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市福田区景莲小学",
+            "schoolLng": "114.054805",
+            "schoolLat": "22.565233",
+            "value": "5.7471"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市福田区景龙小学",
+            "schoolLng": "114.052658",
+            "schoolLat": "22.558455",
+            "value": "5.6818"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市福田区景鹏小学",
+            "schoolLng": "114.053822",
+            "schoolLat": "22.548597",
+            "value": "6.0606"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市福田区外国语小学",
+            "schoolLng": "114.041305",
+            "schoolLat": "22.563351",
+            "value": "6.4103"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市福田区莲花小学",
+            "schoolLng": "114.074899",
+            "schoolLat": "22.553001",
+            "value": "5.9880"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市福田区绿洲小学",
+            "schoolLng": "114.046646",
+            "schoolLat": "22.529575",
+            "value": "6.0241"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市福田区梅华小学",
+            "schoolLng": "114.070381",
+            "schoolLat": "22.578079",
+            "value": "5.8824"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市福田区梅丽小学",
+            "schoolLng": "114.064480",
+            "schoolLat": "22.572382",
+            "value": "5.8480"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市福田区梅林小学",
+            "schoolLng": "114.050586",
+            "schoolLat": "22.570715",
+            "value": "5.7803"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市福田区梅山小学",
+            "schoolLng": "114.037002",
+            "schoolLat": "22.571280",
+            "value": "5.9172"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市福田区美莲小学",
+            "schoolLng": "114.077322",
+            "schoolLat": "22.557892",
+            "value": "5.5866"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市福田区南华小学",
+            "schoolLng": "114.096824",
+            "schoolLat": "22.539170",
+            "value": "5.6818"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市福田区南园小学(总校)",
+            "schoolLng": "114.100947",
+            "schoolLat": "22.542435",
+            "value": "0"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市福田区南园小学(东校区)",
+            "schoolLng": "114.100947",
+            "schoolLat": "22.542435",
+            "value": "5.5249"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市福田区南园小学(西校区)",
+            "schoolLng": "114.101520",
+            "schoolLat": "22.543090",
+            "value": "5.4945"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市福田区全海小学",
+            "schoolLng": "114.053588",
+            "schoolLat": "22.521153",
+            "value": "6.3694"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市福田区上步小学",
+            "schoolLng": "114.105266",
+            "schoolLat": "22.544225",
+            "value": "6.0241"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市福田区香港中文大学(深圳)附属天健小学",
+            "schoolLng": "114.071736",
+            "schoolLat": "22.552978",
+            "value": "6.6667"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市福田区文天祥小学",
+            "schoolLng": "114.073500",
+            "schoolLat": "22.543280",
+            "value": "5.6180"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市福田区下沙小学",
+            "schoolLng": "114.030109",
+            "schoolLat": "22.532071",
+            "value": "5.8140"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市福田区新莲小学",
+            "schoolLng": "114.058896",
+            "schoolLat": "22.565344",
+            "value": "5.6497"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市福田区新沙小学",
+            "schoolLng": "114.051297",
+            "schoolLat": "22.528697",
+            "value": "5.2632"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市福田区新洲小学",
+            "schoolLng": "114.055618",
+            "schoolLat": "22.530818",
+            "value": "5.2356"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市福田区益强小学",
+            "schoolLng": "114.051694",
+            "schoolLat": "22.550654",
+            "value": "6.1728"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市福田区益田小学",
+            "schoolLng": "114.059233",
+            "schoolLat": "22.517884",
+            "value": "6.2893"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市福田区福保小学",
+            "schoolLng": "114.059205",
+            "schoolLat": "22.517878",
+            "value": "0"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市福田区丽中小学",
+            "schoolLng": "114.073932",
+            "schoolLat": "22.531435",
+            "value": "9.5238"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市福田区东海实验小学(竹园)",
+            "schoolLng": "114.023176",
+            "schoolLat": "22.546379",
+            "value": "6.2500"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市福田区外国语小学(竹林)",
+            "schoolLng": "114.017486",
+            "schoolLat": "22.543019",
+            "value": "5.8824"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市福田区外国语小学(景秀)",
+            "schoolLng": "114.046455",
+            "schoolLat": "22.559511",
+            "value": "5.9172"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市福田区红岭实验小学(侨安)",
+            "schoolLng": "114.010890",
+            "schoolLat": "22.555700",
+            "value": "6.9930"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳明德实验学校(集团)福田五洲小学",
+            "schoolLng": null,
+            "schoolLat": null,
+            "value": "0"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市福田区红岭教育集团华富实验学校",
+            "schoolLng": "114.089293",
+            "schoolLat": "22.559295",
+            "value": "7.1429"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市福田区外国语学校(香蜜)",
+            "schoolLng": "114.029195",
+            "schoolLat": "22.562188",
+            "value": "6.7568"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市福田区外国语学校(福保)",
+            "schoolLng": "114.066367",
+            "schoolLat": "22.519512",
+            "value": "8.0000"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市福田区实验教育集团侨香校区",
+            "schoolLng": "114.023150",
+            "schoolLat": "22.561609",
+            "value": "10.2041"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳中学梅香学校",
+            "schoolLng": "114.048140",
+            "schoolLat": "22.573990",
+            "value": "6.8493"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市福田区石厦学校(总校)",
+            "schoolLng": "114.057596",
+            "schoolLat": "22.528627",
+            "value": "0"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市福田区石厦学校(小学部)",
+            "schoolLng": "114.059280",
+            "schoolLat": "22.530080",
+            "value": "7.2464"
+        },
+        {
+            "schoolType": "初级中学",
+            "schoolName": "深圳市福田区石厦学校(中学部)",
+            "schoolLng": "114.057575",
+            "schoolLat": "22.529566",
+            "value": "7.6336"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市福田区彩田学校",
+            "schoolLng": "114.070190",
+            "schoolLat": "22.567534",
+            "value": "8.1301"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市福田区实验教育集团翰林学校",
+            "schoolLng": "114.075317",
+            "schoolLat": "22.578989",
+            "value": "6.4103"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市福田区皇岗创新实验学校",
+            "schoolLng": "114.071659",
+            "schoolLat": "22.531633",
+            "value": "6.8027"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市福田区实验教育集团黄埔学校(总校)",
+            "schoolLng": "114.060054",
+            "schoolLat": "22.551892",
+            "value": "0"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市福田区实验教育集团黄埔学校(小学部)",
+            "schoolLng": "114.060260",
+            "schoolLat": "22.548700",
+            "value": "5.4645"
+        },
+        {
+            "schoolType": "初级中学",
+            "schoolName": "深圳市福田区实验教育集团黄埔学校(中学部)",
+            "schoolLng": "114.059972",
+            "schoolLat": "22.552933",
+            "value": "8.4034"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市福田区第二实验学校(总校)",
+            "schoolLng": "114.090992",
+            "schoolLat": "22.540690",
+            "value": "0"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市福田区第二实验学校(西校区)",
+            "schoolLng": "114.090870",
+            "schoolLat": "22.540630",
+            "value": "6.2112"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市福田区第二实验学校海田校区",
+            "schoolLng": "114.071820",
+            "schoolLat": "22.538930",
+            "value": "5.8480"
+        },
+        {
+            "schoolType": "初级中学",
+            "schoolName": "深圳市福田区第二实验学校(东校区)",
+            "schoolLng": "114.090992",
+            "schoolLat": "22.540690",
+            "value": "7.5758"
+        },
+        {
+            "schoolType": "初级中学",
+            "schoolName": "深圳市福田区第二实验学校(北校区)",
+            "schoolLng": "114.067820",
+            "schoolLat": "22.580620",
+            "value": "9.8039"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市福田区贝赛思学校",
+            "schoolLng": "114.054071",
+            "schoolLat": "22.535592",
+            "value": "9.7087"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市福田区城市绿洲学校(总校)",
+            "schoolLng": "114.081705",
+            "schoolLat": "22.547255",
+            "value": "0"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市福田区城市绿洲学校(小学部)",
+            "schoolLng": "114.081705",
+            "schoolLat": "22.547255",
+            "value": "10.8696"
+        },
+        {
+            "schoolType": "初级中学",
+            "schoolName": "深圳市福田区城市绿洲学校(初中部)",
+            "schoolLng": "114.068714",
+            "schoolLat": "22.523939",
+            "value": "9.1743"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市福田区方方乐趣中英文学校",
+            "schoolLng": "114.049623",
+            "schoolLat": "22.522908",
+            "value": "10.0000"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市福田区福港艺林学校",
+            "schoolLng": "114.030125",
+            "schoolLat": "22.533226",
+            "value": "18.8679"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市福田区美林学校",
+            "schoolLng": "114.052337",
+            "schoolLat": "22.574776",
+            "value": "6.1728"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市福田区益田花园学校",
+            "schoolLng": "114.064464",
+            "schoolLat": "22.519904",
+            "value": "6.2112"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市福田区红岭实验学校(上沙)(总校)",
+            "schoolLng": "114.035459",
+            "schoolLat": "22.527244",
+            "value": "0"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市福田区红岭实验学校(上沙)小学部",
+            "schoolLng": "114.051057",
+            "schoolLat": "22.717832",
+            "value": "6.3694"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市福田区红岭实验学校(上沙)东校区",
+            "schoolLng": "114.048516",
+            "schoolLat": "22.532775",
+            "value": "6.4103"
+        },
+        {
+            "schoolType": "初级中学",
+            "schoolName": "深圳市福田区红岭实验学校(上沙)中学部",
+            "schoolLng": "114.035713",
+            "schoolLat": "22.527426",
+            "value": "8.0000"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市福田区致远学校",
+            "schoolLng": "114.079892",
+            "schoolLat": "22.575564",
+            "value": "6.0976"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市福田区实验教育集团福龙学校",
+            "schoolLng": "114.022637",
+            "schoolLat": "22.568596",
+            "value": "6.8027"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市福田区第二实验学校(皇御苑)",
+            "schoolLng": "114.080890",
+            "schoolLat": "22.530100",
+            "value": "7.0423"
+        },
+        {
+            "schoolType": "初级中学",
+            "schoolName": "深圳市福田区外国语学校",
+            "schoolLng": "114.073972",
+            "schoolLat": "22.550114",
+            "value": "8.0645"
+        },
+        {
+            "schoolType": "初级中学",
+            "schoolName": "深圳市福田区莲花中学(总校)",
+            "schoolLng": "114.075325",
+            "schoolLat": "22.556728",
+            "value": "0"
+        },
+        {
+            "schoolType": "初级中学",
+            "schoolName": "深圳市福田区莲花中学北校区",
+            "schoolLng": "114.075335",
+            "schoolLat": "22.556724",
+            "value": "7.3529"
+        },
+        {
+            "schoolType": "初级中学",
+            "schoolName": "深圳市福田区莲花中学南校区",
+            "schoolLng": "114.071496",
+            "schoolLat": "22.535695",
+            "value": "8.3333"
+        },
+        {
+            "schoolType": "初级中学",
+            "schoolName": "深圳市福田区深大附中创新中学",
+            "schoolLng": "114.058913",
+            "schoolLat": "22.566812",
+            "value": "7.7519"
+        },
+        {
+            "schoolType": "初级中学",
+            "schoolName": "深圳市福田区红岭教育集团华富中学",
+            "schoolLng": "114.088446",
+            "schoolLat": "22.565092",
+            "value": "7.6336"
+        },
+        {
+            "schoolType": "初级中学",
+            "schoolName": "深圳市福田区梅山中学",
+            "schoolLng": "114.038177",
+            "schoolLat": "22.572031",
+            "value": "7.7519"
+        },
+        {
+            "schoolType": "初级中学",
+            "schoolName": "深圳市福田区西交利物浦大学基础教育集团外国语学校(上步)",
+            "schoolLng": "114.096847",
+            "schoolLat": "22.541807",
+            "value": "8.1301"
+        },
+        {
+            "schoolType": "初级中学",
+            "schoolName": "深圳市福田区红岭实验学校(新洲)",
+            "schoolLng": "114.046939",
+            "schoolLat": "22.531731",
+            "value": "7.2464"
+        },
+        {
+            "schoolType": "初级中学",
+            "schoolName": "深圳市福田区外国语学校(景秀)",
+            "schoolLng": "114.046903",
+            "schoolLat": "22.559254",
+            "value": "8.1967"
+        },
+        {
+            "schoolType": "初级中学",
+            "schoolName": "深圳市福田区外国语学校(竹林)",
+            "schoolLng": "114.012934",
+            "schoolLat": "22.542291",
+            "value": "9.0909"
+        },
+        {
+            "schoolType": "初级中学",
+            "schoolName": "深圳市福田区荔园教育集团笔架山学校",
+            "schoolLng": "114.101591",
+            "schoolLat": "22.569646",
+            "value": "0"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市福田区红岭中学(集团)深康部",
+            "schoolLng": "114.002770",
+            "schoolLat": "22.553120",
+            "value": "6.7568"
+        },
+        {
+            "schoolType": "初级中学",
+            "schoolName": "深圳市福田区红岭中学园岭初中部",
+            "schoolLng": "114.109650",
+            "schoolLat": "22.557870",
+            "value": "7.5188"
+        },
+        {
+            "schoolType": "初级中学",
+            "schoolName": "深圳市福田区红岭中学(集团)石厦部",
+            "schoolLng": "114.059258",
+            "schoolLat": "22.523510",
+            "value": "7.2993"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳明德实验学校碧海校区",
+            "schoolLng": "114.001120",
+            "schoolLat": "22.536410",
+            "value": "6.7568"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳明德实验学校香蜜校区",
+            "schoolLng": "114.032363",
+            "schoolLat": "22.553693",
+            "value": "7.1942"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市罗外教育集团罗湖外语小学",
+            "schoolLng": "114.059602",
+            "schoolLat": "22.625069",
+            "value": "8.7719"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市东晓小学",
+            "schoolLng": "114.138251",
+            "schoolLat": "22.580622",
+            "value": "5.2632"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市桂园小学",
+            "schoolLng": "114.117016",
+            "schoolLat": "22.552246",
+            "value": "5.7803"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市红岭小学",
+            "schoolLng": "114.115215",
+            "schoolLat": "22.560618",
+            "value": "6.1728"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市红桂小学",
+            "schoolLng": "114.119483",
+            "schoolLat": "22.559738",
+            "value": "6.2500"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市螺岭外国语实验学校",
+            "schoolLng": "114.138901",
+            "schoolLat": "22.556630",
+            "value": "6.3694"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市仙桐实验小学",
+            "schoolLng": "114.112860",
+            "schoolLat": "22.333604",
+            "value": "5.9172"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市罗湖区湖贝小学",
+            "schoolLng": "114.119102",
+            "schoolLat": "22.547930",
+            "value": "5.9880"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市怡景小学",
+            "schoolLng": "114.144161",
+            "schoolLat": "22.561292",
+            "value": "5.6497"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市景贝小学",
+            "schoolLng": "114.147655",
+            "schoolLat": "22.560516",
+            "value": "5.7803"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市靖轩小学",
+            "schoolLng": "114.148694",
+            "schoolLat": "22.556464",
+            "value": "6.0606"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市罗湖区桃园小学",
+            "schoolLng": "114.053428",
+            "schoolLat": "22.576736",
+            "value": "6.2112"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市翠竹外国语实验学校",
+            "schoolLng": "114.143577",
+            "schoolLat": "22.575500",
+            "value": "5.9524"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市滨河小学",
+            "schoolLng": "114.113243",
+            "schoolLat": "22.544929",
+            "value": "5.9880"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市洪湖小学",
+            "schoolLng": "114.126928",
+            "schoolLat": "22.567111",
+            "value": "5.8824"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市罗湖小学",
+            "schoolLng": "114.124324",
+            "schoolLat": "22.544661",
+            "value": "5.6497"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市梧桐小学",
+            "schoolLng": "114.199117",
+            "schoolLat": "22.598461",
+            "value": "6.2112"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市笋岗小学",
+            "schoolLng": "114.119626",
+            "schoolLat": "22.570554",
+            "value": "6.2112"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市翠北实验小学",
+            "schoolLng": "114.135337",
+            "schoolLat": "22.574241",
+            "value": "5.8140"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市水田小学",
+            "schoolLng": "114.131831",
+            "schoolLat": "22.573664",
+            "value": "6.0606"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市草埔小学",
+            "schoolLng": "114.119612",
+            "schoolLat": "22.591688",
+            "value": "5.9880"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市东昌小学",
+            "schoolLng": "114.133749",
+            "schoolLat": "22.582269",
+            "value": "5.9880"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市锦田小学",
+            "schoolLng": "114.133522",
+            "schoolLat": "22.567743",
+            "value": "5.9880"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市华丽小学",
+            "schoolLng": "114.125671",
+            "schoolLat": "22.595124",
+            "value": "6.2893"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市人民小学",
+            "schoolLng": "114.126916",
+            "schoolLat": "22.554786",
+            "value": "5.9172"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市翠茵学校",
+            "schoolLng": "114.126941",
+            "schoolLat": "22.590113",
+            "value": "5.7471"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市莲南小学",
+            "schoolLng": "114.175994",
+            "schoolLat": "22.565527",
+            "value": "5.7803"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市安芳小学",
+            "schoolLng": "114.155738",
+            "schoolLat": "22.560745",
+            "value": "6.1350"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市罗湖区莲塘小学",
+            "schoolLng": "114.176358",
+            "schoolLat": "22.568557",
+            "value": "6.8493"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市罗芳小学",
+            "schoolLng": "114.154603",
+            "schoolLat": "22.555440",
+            "value": "5.9524"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市新秀小学",
+            "schoolLng": "114.151765",
+            "schoolLat": "22.554088",
+            "value": "5.7471"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市凤光小学",
+            "schoolLng": "114.106265",
+            "schoolLat": "22.575999",
+            "value": "5.9172"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市水库小学",
+            "schoolLng": "114.146710",
+            "schoolLat": "22.576977",
+            "value": "5.5866"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市泰宁小学",
+            "schoolLng": "114.147124",
+            "schoolLat": "22.573483",
+            "value": "6.0976"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市布心小学",
+            "schoolLng": "114.147519",
+            "schoolLat": "22.583704",
+            "value": "6.1728"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市碧波小学",
+            "schoolLng": "114.148571",
+            "schoolLat": "22.565320",
+            "value": "5.7803"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市淘金山小学",
+            "schoolLng": "114.181447",
+            "schoolLat": "22.573802",
+            "value": "5.6818"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市北斗小学",
+            "schoolLng": "114.140254",
+            "schoolLat": "22.550355",
+            "value": "5.8140"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市南湖小学",
+            "schoolLng": "114.128677",
+            "schoolLat": "22.545237",
+            "value": "5.4945"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市向西小学",
+            "schoolLng": "114.134488",
+            "schoolLat": "22.547408",
+            "value": "5.9172"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市罗湖区银湖实验小学",
+            "schoolLng": "114.090960",
+            "schoolLat": "22.586414",
+            "value": "8.7719"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市罗湖区百仕达小学",
+            "schoolLng": "114.139634",
+            "schoolLat": "22.577899",
+            "value": "9.3458"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市罗湖区景园实验小学",
+            "schoolLng": "114.153579",
+            "schoolLat": "22.562269",
+            "value": "6.2893"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市罗湖区港人子弟学校",
+            "schoolLng": "114.145348",
+            "schoolLat": "22.564842",
+            "value": "6.7114"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳明珠中英文小学",
+            "schoolLng": "114.130908",
+            "schoolLat": "22.585218",
+            "value": "6.4935"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市罗湖区清秀小学",
+            "schoolLng": "114.121285",
+            "schoolLat": "22.589446",
+            "value": "5.4054"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市罗湖区松源小学",
+            "schoolLng": "114.124493",
+            "schoolLat": "22.590674",
+            "value": "5.2083"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市罗湖区翠园实验学校",
+            "schoolLng": "114.139403",
+            "schoolLat": "22.550870",
+            "value": "8.8496"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市大望学校",
+            "schoolLng": "114.181504",
+            "schoolLat": "22.607289",
+            "value": "6.4935"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市罗湖区翠园东晓创新学校",
+            "schoolLng": "114.288359",
+            "schoolLat": "22.785233",
+            "value": "6.4103"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市罗湖未来学校",
+            "schoolLng": "114.086677",
+            "schoolLat": "22.576839",
+            "value": "7.8740"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市罗湖实验学校",
+            "schoolLng": "114.110595",
+            "schoolLat": "22.577084",
+            "value": "7.0922"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市罗湖区梅园实验学校",
+            "schoolLng": "114.105136",
+            "schoolLat": "22.556236",
+            "value": "7.2464"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市罗湖教科院附属学校",
+            "schoolLng": "114.093000",
+            "schoolLat": "22.706000",
+            "value": "6.5789"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙园外语实验学校",
+            "schoolLng": "114.114603",
+            "schoolLat": "22.594344",
+            "value": "6.4935"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市罗湖区华英学校",
+            "schoolLng": "114.189625",
+            "schoolLat": "22.604148",
+            "value": "6.7568"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市罗湖区新华外国语学校",
+            "schoolLng": "114.115095",
+            "schoolLat": "22.590363",
+            "value": "7.1942"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市罗湖区文德学校",
+            "schoolLng": "114.140347",
+            "schoolLat": "22.590508",
+            "value": "6.8027"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市罗湖区莲城学校",
+            "schoolLng": "114.186574",
+            "schoolLat": "22.563659",
+            "value": "6.5359"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市罗湖区侨香实验学校",
+            "schoolLng": "114.103665",
+            "schoolLat": "22.574836",
+            "value": "7.2993"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市罗湖区致远实验学校",
+            "schoolLng": "114.147825",
+            "schoolLat": "22.568137",
+            "value": "5.3476"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市罗湖区银湖外国语实验学校",
+            "schoolLng": "114.110835",
+            "schoolLat": "22.576885",
+            "value": "0"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市罗湖区华美外国语学校",
+            "schoolLng": "114.202913",
+            "schoolLat": "22.598009",
+            "value": "19.6078"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市鹏兴实验学校",
+            "schoolLng": "114.173666",
+            "schoolLat": "22.569027",
+            "value": "8.1301"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市松泉中学",
+            "schoolLng": "114.129560",
+            "schoolLat": "22.585472",
+            "value": "7.0922"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市罗湖区螺岭湖贝学校",
+            "schoolLng": null,
+            "schoolLat": null,
+            "value": "0"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市罗湖区诺思外语实验学校",
+            "schoolLng": "114.192785",
+            "schoolLat": "22.600393",
+            "value": "9.6154"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市罗湖区香港中文大学(深圳)附属礼文学校",
+            "schoolLng": "114.143621",
+            "schoolLat": "22.591597",
+            "value": "7.5188"
+        },
+        {
+            "schoolType": "初级中学",
+            "schoolName": "深圳市罗湖区翠园初级中学",
+            "schoolLng": "114.149926",
+            "schoolLat": "22.562494",
+            "value": "7.3529"
+        },
+        {
+            "schoolType": "初级中学",
+            "schoolName": "深圳市翠园文锦中学",
+            "schoolLng": "114.137041",
+            "schoolLat": "22.548067",
+            "value": "7.6923"
+        },
+        {
+            "schoolType": "初级中学",
+            "schoolName": "深圳市东湖中学",
+            "schoolLng": "114.138341",
+            "schoolLat": "22.580379",
+            "value": "7.1942"
+        },
+        {
+            "schoolType": "初级中学",
+            "schoolName": "深圳市罗湖外语初中学校",
+            "schoolLng": "114.174016",
+            "schoolLat": "22.565082",
+            "value": "7.5758"
+        },
+        {
+            "schoolType": "初级中学",
+            "schoolName": "深圳市罗湖外语实验学校",
+            "schoolLng": "114.148490",
+            "schoolLat": "22.548720",
+            "value": "7.4074"
+        },
+        {
+            "schoolType": "初级中学",
+            "schoolName": "深圳市罗湖区翠园东晓中学",
+            "schoolLng": "114.135818",
+            "schoolLat": "22.582691",
+            "value": "7.8125"
+        },
+        {
+            "schoolType": "初级中学",
+            "schoolName": "深圳市布心中学",
+            "schoolLng": "114.148097",
+            "schoolLat": "22.586751",
+            "value": "6.5789"
+        },
+        {
+            "schoolType": "初级中学",
+            "schoolName": "深圳市桂园中学",
+            "schoolLng": "114.118271",
+            "schoolLat": "22.560981",
+            "value": "7.7519"
+        },
+        {
+            "schoolType": "初级中学",
+            "schoolName": "深圳市红桂中学",
+            "schoolLng": "114.120042",
+            "schoolLat": "22.554597",
+            "value": "8.0645"
+        },
+        {
+            "schoolType": "初级中学",
+            "schoolName": "深圳市罗湖中学",
+            "schoolLng": "114.122780",
+            "schoolLat": "22.536086",
+            "value": "7.6336"
+        },
+        {
+            "schoolType": "初级中学",
+            "schoolName": "深圳市罗湖区滨河实验中学",
+            "schoolLng": "114.112464",
+            "schoolLat": "22.535898",
+            "value": "7.2464"
+        },
+        {
+            "schoolType": "初级中学",
+            "schoolName": "深圳市罗湖区螺岭锦星学校",
+            "schoolLng": null,
+            "schoolLat": null,
+            "value": "0"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市南山实验教育集团荔湾小学",
+            "schoolLng": "113.900188",
+            "schoolLat": "22.504269",
+            "value": "5.5556"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市南山区白芒小学",
+            "schoolLng": "113.948790",
+            "schoolLat": "22.631329",
+            "value": "5.9880"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市南山实验教育集团深湾小学",
+            "schoolLng": "113.966040",
+            "schoolLat": "22.523800",
+            "value": "5.5249"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市南山外国语学校(集团)华侨城小学",
+            "schoolLng": "113.993350",
+            "schoolLat": "22.543029",
+            "value": "5.5249"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市南山外国语学校(集团)香山里小学",
+            "schoolLng": "113.980000",
+            "schoolLat": "22.559000",
+            "value": "6.2112"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市南山外国语学校(集团)沙河小学",
+            "schoolLng": "113.979834",
+            "schoolLat": "22.548217",
+            "value": "5.5556"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市南山区第二外国语学校(集团)学府一小",
+            "schoolLng": "113.939381",
+            "schoolLat": "22.528698",
+            "value": "5.1813"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市南山区大磡小学",
+            "schoolLng": "113.980420",
+            "schoolLat": "22.623963",
+            "value": "5.4348"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "南方科技大学教育集团(南山)实验一小",
+            "schoolLng": "113.990000",
+            "schoolLat": "22.590000",
+            "value": "5.9172"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "南方科技大学教育集团(南山)长源小学",
+            "schoolLng": "113.930440",
+            "schoolLat": "22.533345",
+            "value": "9.8039"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市南山区文理实验学校(集团)文理二小",
+            "schoolLng": "113.955976",
+            "schoolLat": "22.576329",
+            "value": "5.2910"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳大学附属教育集团实验小学",
+            "schoolLng": "114.001452",
+            "schoolLat": "22.597872",
+            "value": "5.9524"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳大学附属教育集团外国语小学",
+            "schoolLng": "113.899771",
+            "schoolLat": "22.509618",
+            "value": "5.7471"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳大学附属教育集团后海小学",
+            "schoolLng": "113.939015",
+            "schoolLat": "22.509614",
+            "value": "5.7471"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市南山区教育科学研究院附属学校教育集团松坪第二小学",
+            "schoolLng": "113.953259",
+            "schoolLat": "22.565248",
+            "value": "5.6180"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市南山区教育科学研究院附属学校教育集团大新小学",
+            "schoolLng": "113.922375",
+            "schoolLat": "22.542233",
+            "value": "5.5249"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市南山区前海创新教育集团月亮湾小学",
+            "schoolLng": "113.898306",
+            "schoolLat": "22.495410",
+            "value": "5.6497"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市南山区前海创新教育集团前海港湾小学",
+            "schoolLng": "113.530000",
+            "schoolLat": "22.310000",
+            "value": "5.7803"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市南山区海滨实验小学",
+            "schoolLng": "113.932047",
+            "schoolLat": "22.532848",
+            "value": "5.4348"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市南山区阳光小学",
+            "schoolLng": "113.919111",
+            "schoolLat": "22.529430",
+            "value": "5.7471"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市南山区向南小学",
+            "schoolLng": "113.930641",
+            "schoolLat": "22.526668",
+            "value": "5.4054"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市南山区南油小学",
+            "schoolLng": "113.933926",
+            "schoolLat": "22.513716",
+            "value": "5.3191"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市南山区西丽小学",
+            "schoolLng": "113.963185",
+            "schoolLat": "22.590935",
+            "value": "6.0241"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市南山区卓雅小学",
+            "schoolLng": "113.988491",
+            "schoolLat": "22.564179",
+            "value": "5.9880"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市南山区珠光小学",
+            "schoolLng": "113.970128",
+            "schoolLat": "22.571426",
+            "value": "5.8480"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市南山区南山小学",
+            "schoolLng": "113.923010",
+            "schoolLat": "22.527354",
+            "value": "5.4054"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市南山区桃源小学",
+            "schoolLng": "113.983643",
+            "schoolLat": "22.563778",
+            "value": "5.5249"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市南山区前海小学",
+            "schoolLng": "113.918723",
+            "schoolLat": "22.541434",
+            "value": "5.5866"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市南山区南海小学",
+            "schoolLng": "113.929377",
+            "schoolLat": "22.519793",
+            "value": "5.6180"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市南山区东湾小学",
+            "schoolLng": "113.936853",
+            "schoolLat": "22.499998",
+            "value": "5.7471"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市南山区粤海福林小学",
+            "schoolLng": "113.929235",
+            "schoolLat": "22.574317",
+            "value": "9.4340"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市南山区华府小学",
+            "schoolLng": "113.923898",
+            "schoolLat": "22.534640",
+            "value": "5.6497"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市南山外国语学校(集团)高新小学",
+            "schoolLng": null,
+            "schoolLat": null,
+            "value": "0"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市蛇口育才教育集团太子湾学校(总校)",
+            "schoolLng": "113.927268",
+            "schoolLat": "22.491587",
+            "value": "0"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市蛇口育才教育集团太子湾学校小学部",
+            "schoolLng": "113.927268",
+            "schoolLat": "22.491587",
+            "value": "5.7803"
+        },
+        {
+            "schoolType": "初级中学",
+            "schoolName": "深圳市蛇口育才教育集团太子湾学校初中部",
+            "schoolLng": "113.919693",
+            "schoolLat": "22.485571",
+            "value": "7.4074"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市南山区龙珠学校",
+            "schoolLng": "113.988822",
+            "schoolLat": "22.570026",
+            "value": "6.2112"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市蛇口育才教育集团育才实验学校",
+            "schoolLng": "113.979210",
+            "schoolLat": "22.536480",
+            "value": "9.9010"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市蛇口育才教育集团山海学校",
+            "schoolLng": "113.932037",
+            "schoolLat": "22.497801",
+            "value": "6.2500"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市南山实验教育集团(总校)",
+            "schoolLng": "113.933815",
+            "schoolLat": "22.541381",
+            "value": "0"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市南山实验教育集团南头小学",
+            "schoolLng": null,
+            "schoolLat": null,
+            "value": "5.4645"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市南山实验教育集团麒麟小学",
+            "schoolLng": "113.933815",
+            "schoolLat": "22.541381",
+            "value": "5.2356"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市南山实验教育集团鼎太小学",
+            "schoolLng": "113.919000",
+            "schoolLat": "22.528000",
+            "value": "5.7143"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市南山实验教育集团荔林小学",
+            "schoolLng": "113.904815",
+            "schoolLat": "22.509222",
+            "value": "5.4945"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市南山实验教育集团白石洲学校",
+            "schoolLng": "113.930410",
+            "schoolLat": "22.533320",
+            "value": "7.8740"
+        },
+        {
+            "schoolType": "初级中学",
+            "schoolName": "深圳市南山实验教育集团麒麟中学",
+            "schoolLng": "113.550000",
+            "schoolLat": "22.320000",
+            "value": "7.2464"
+        },
+        {
+            "schoolType": "初级中学",
+            "schoolName": "深圳市南山实验教育集团麒麟第二中学",
+            "schoolLng": null,
+            "schoolLat": null,
+            "value": "8.4746"
+        },
+        {
+            "schoolType": "初级中学",
+            "schoolName": "深圳市南山实验教育集团南海中学",
+            "schoolLng": "113.911443",
+            "schoolLat": "22.519166",
+            "value": "6.8966"
+        },
+        {
+            "schoolType": "初级中学",
+            "schoolName": "深圳市南山实验教育集团南海中学北校区",
+            "schoolLng": "113.920998",
+            "schoolLat": "22.525032",
+            "value": "8.2645"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市南山实验教育集团园丁学校",
+            "schoolLng": "113.970000",
+            "schoolLat": "22.502000",
+            "value": "6.1728"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市南山实验教育集团前海港湾学校",
+            "schoolLng": "113.904037",
+            "schoolLat": "22.523849",
+            "value": "6.4103"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市南山外国语学校(集团)科华学校",
+            "schoolLng": "113.570000",
+            "schoolLat": "22.540000",
+            "value": "6.5359"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市南山外国语学校(集团)第二实验学校",
+            "schoolLng": "113.981593",
+            "schoolLat": "22.556072",
+            "value": "6.9444"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市南山区第二外国语学校(集团)(总校)",
+            "schoolLng": "113.937969",
+            "schoolLat": "22.514238",
+            "value": "0"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市南山区第二外国语学校(集团)学府二小",
+            "schoolLng": "113.929740",
+            "schoolLat": "22.515850",
+            "value": "5.5249"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市南山区第二外国语学校(集团)海岸小学",
+            "schoolLng": "113.932359",
+            "schoolLat": "22.539393",
+            "value": "5.4054"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市南山区第二外国语学校(集团)海德学校",
+            "schoolLng": "113.946387",
+            "schoolLat": "22.526105",
+            "value": "6.7568"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市南山区平山学校",
+            "schoolLng": "113.970190",
+            "schoolLat": "22.592971",
+            "value": "6.1728"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市南山区赤湾学校",
+            "schoolLng": "113.893107",
+            "schoolLat": "22.488057",
+            "value": "6.8966"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "南方科技大学教育集团(南山)第二实验学校",
+            "schoolLng": "114.004605",
+            "schoolLat": "22.594249",
+            "value": "5.4645"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "南方科技大学教育集团(南山)附属实验学校",
+            "schoolLng": "113.988518",
+            "schoolLat": "22.594620",
+            "value": "7.1942"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市南山区文理实验学校(集团)(总校)",
+            "schoolLng": "113.955730",
+            "schoolLat": "22.575620",
+            "value": "0"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市南山区文理实验学校(集团)文理一小",
+            "schoolLng": "113.937500",
+            "schoolLat": "22.587860",
+            "value": "5.6497"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市南山区文理实验学校(集团)文理学校",
+            "schoolLng": "113.955730",
+            "schoolLat": "22.575620",
+            "value": "6.4935"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市南山区文理实验学校(集团)科创学校",
+            "schoolLng": "113.953650",
+            "schoolLat": "22.583238",
+            "value": "6.4516"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市南山区教育科学研究院附属学校教育集团同乐实验学校",
+            "schoolLng": "113.927116",
+            "schoolLat": "22.570065",
+            "value": "6.2893"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市南山区丽林维育学校",
+            "schoolLng": "113.916593",
+            "schoolLat": "22.516297",
+            "value": "32.2581"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市南山区教育科学研究院附属学校教育集团松坪学校(总校)",
+            "schoolLng": "113.953267",
+            "schoolLat": "22.565359",
+            "value": "0"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市南山区教育科学研究院附属学校教育集团松坪学校小学部",
+            "schoolLng": "113.953267",
+            "schoolLat": "22.565359",
+            "value": "5.8480"
+        },
+        {
+            "schoolType": "初级中学",
+            "schoolName": "深圳市南山区教育科学研究院附属学校教育集团松坪学校中学部",
+            "schoolLng": "113.957461",
+            "schoolLat": "22.565719",
+            "value": "7.6336"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市南山区教育科学研究院附属学校教育集团南头城学校",
+            "schoolLng": "113.928426",
+            "schoolLat": "22.550978",
+            "value": "6.4103"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市南山区教育科学研究院附属学校教育集团荔香学校",
+            "schoolLng": "113.927525",
+            "schoolLat": "22.542593",
+            "value": "6.2893"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市深中南山创新学校",
+            "schoolLng": "113.902000",
+            "schoolLat": "22.530000",
+            "value": "6.2500"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市南山区深圳湾学校(总校)",
+            "schoolLng": "113.949687",
+            "schoolLat": "22.500943",
+            "value": "0"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市南山区深圳湾学校望海小学校区",
+            "schoolLng": "113.930167",
+            "schoolLat": "22.491083",
+            "value": "6.1728"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市南山区深圳湾学校",
+            "schoolLng": "113.890000",
+            "schoolLat": "22.512000",
+            "value": "8.6957"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市南山区中国科学院深圳先进技术研究院实验学校",
+            "schoolLng": "113.597000",
+            "schoolLat": "22.334000",
+            "value": "6.3291"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市南山区蛇口学校(总校)",
+            "schoolLng": "113.932914",
+            "schoolLat": "22.490841",
+            "value": "0"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市南山区蛇口学校小学部",
+            "schoolLng": "113.932914",
+            "schoolLat": "22.490841",
+            "value": "5.5866"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "南方科技大学教育集团(南山)",
+            "schoolLng": null,
+            "schoolLat": null,
+            "value": "0"
+        },
+        {
+            "schoolType": "初级中学",
+            "schoolName": "深圳市南山区蛇口学校初中部",
+            "schoolLng": "113.931610",
+            "schoolLat": "22.488381",
+            "value": "7.6336"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市南山区前海学校(总校)",
+            "schoolLng": "113.921323",
+            "schoolLat": "22.529390",
+            "value": "0"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市南山区前海学校小学部",
+            "schoolLng": "113.921323",
+            "schoolLat": "22.529390",
+            "value": "5.4645"
+        },
+        {
+            "schoolType": "初级中学",
+            "schoolName": "深圳市南山区前海学校初中部",
+            "schoolLng": "113.911780",
+            "schoolLat": "22.529980",
+            "value": "7.6923"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市南山区哈尔滨工业大学(深圳)实验学校",
+            "schoolLng": "113.930628",
+            "schoolLat": "22.533950",
+            "value": "6.2500"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市南山区丽湖学校",
+            "schoolLng": "113.965685",
+            "schoolLat": "22.594759",
+            "value": "6.8966"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市南山区道新学校",
+            "schoolLng": "114.015451",
+            "schoolLat": "22.601725",
+            "value": "20.4082"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市南山中英文学校",
+            "schoolLng": "113.896254",
+            "schoolLat": "22.485402",
+            "value": "9.4340"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市南山区仁智实验学校",
+            "schoolLng": "113.943162",
+            "schoolLat": "22.631536",
+            "value": "23.8095"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市南山区百旺学校",
+            "schoolLng": "113.934899",
+            "schoolLat": "22.622192",
+            "value": "5.8824"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市南山区福华学校",
+            "schoolLng": "113.965682",
+            "schoolLat": "22.588966",
+            "value": "6.4103"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市南山区丽山学校",
+            "schoolLng": "113.969114",
+            "schoolLat": "22.595812",
+            "value": "6.6225"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市南山区荟同学校",
+            "schoolLng": "113.894197",
+            "schoolLat": "22.510526",
+            "value": "15.1515"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市南山区爱文学校",
+            "schoolLng": "113.989839",
+            "schoolLat": "22.594981",
+            "value": "7.0423"
+        },
+        {
+            "schoolType": "初级中学",
+            "schoolName": "深圳市南山区桃源中学",
+            "schoolLng": "113.984136",
+            "schoolLat": "22.566992",
+            "value": "7.4627"
+        },
+        {
+            "schoolType": "初级中学",
+            "schoolName": "深圳市南山外国语学校(集团)华侨城中学",
+            "schoolLng": "113.992588",
+            "schoolLat": "22.544394",
+            "value": "8.4034"
+        },
+        {
+            "schoolType": "初级中学",
+            "schoolName": "深圳市南山区第二外国语学校(集团)学府中学",
+            "schoolLng": "113.941575",
+            "schoolLat": "22.521673",
+            "value": "7.6923"
+        },
+        {
+            "schoolType": "初级中学",
+            "schoolName": "深圳大学附属教育集团外国语中学",
+            "schoolLng": "113.980000",
+            "schoolLat": "22.590000",
+            "value": "7.6923"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市南山外国语学校(集团)滨海小学",
+            "schoolLng": "113.931900",
+            "schoolLat": "22.482450",
+            "value": "5.6180"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市南山外国语学校(集团)科苑小学",
+            "schoolLng": "113.949011",
+            "schoolLat": "22.523537",
+            "value": "5.3763"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市南山外国语学校(集团)科技小学",
+            "schoolLng": "113.946693",
+            "schoolLat": "22.556410",
+            "value": "5.5249"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市南山外国语学校(集团)文华学校",
+            "schoolLng": "113.959078",
+            "schoolLat": "22.553903",
+            "value": "6.6225"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市南山外国语学校(集团)滨海学校",
+            "schoolLng": "113.932359",
+            "schoolLat": "22.539393",
+            "value": "7.3529"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市南山外国语学校(集团)大冲学校",
+            "schoolLng": "113.952046",
+            "schoolLat": "22.543058",
+            "value": "6.2500"
+        },
+        {
+            "schoolType": "初级中学",
+            "schoolName": "深圳市南山外国语学校(集团)高新中学",
+            "schoolLng": "113.951361",
+            "schoolLat": "22.523652",
+            "value": "7.7519"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "北京师范大学南山附属学校小学部",
+            "schoolLng": "113.930410",
+            "schoolLat": "22.533320",
+            "value": "5.4054"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市蛇口育才教育集团育才一小",
+            "schoolLng": "113.927043",
+            "schoolLat": "22.497604",
+            "value": "5.6180"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市蛇口育才教育集团育才二小",
+            "schoolLng": "113.937230",
+            "schoolLat": "22.503256",
+            "value": "5.2910"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市蛇口育才教育集团育才三小",
+            "schoolLng": "113.926410",
+            "schoolLat": "22.503945",
+            "value": "5.6180"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市蛇口育才教育集团第四小学",
+            "schoolLng": "113.943988",
+            "schoolLat": "22.500641",
+            "value": "5.4348"
+        },
+        {
+            "schoolType": "初级中学",
+            "schoolName": "深圳市蛇口育才教育集团育才二中",
+            "schoolLng": "113.935302",
+            "schoolLat": "22.502726",
+            "value": "7.2993"
+        },
+        {
+            "schoolType": "初级中学",
+            "schoolName": "深圳市蛇口育才教育集团育才三中",
+            "schoolLng": "113.941552",
+            "schoolLat": "22.502071",
+            "value": "7.6336"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市盐田区外国语小学",
+            "schoolLng": "114.248825",
+            "schoolLat": "22.561760",
+            "value": "5.7143"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市盐田区外国语小学东和分校",
+            "schoolLng": "114.241400",
+            "schoolLat": "22.551097",
+            "value": "6.4516"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市盐田区田心小学",
+            "schoolLng": "114.236854",
+            "schoolLat": "22.557820",
+            "value": "5.5556"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市盐田区外国语小学海涛分校",
+            "schoolLng": "114.242210",
+            "schoolLat": "22.554307",
+            "value": "5.4945"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市盐田区林园小学",
+            "schoolLng": "114.227917",
+            "schoolLat": "22.562709",
+            "value": "5.2910"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市盐田区教科院附属田东小学",
+            "schoolLng": "114.245165",
+            "schoolLat": "22.566911",
+            "value": "5.5556"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市盐田区乐群实验小学",
+            "schoolLng": "114.258298",
+            "schoolLat": "22.598164",
+            "value": "5.0761"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市盐田区庚子革命首义中山纪念学校",
+            "schoolLng": "114.267858",
+            "schoolLat": "22.594753",
+            "value": "5.0251"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市盐田区盐港小学",
+            "schoolLng": "114.275936",
+            "schoolLat": "22.594047",
+            "value": "5.3191"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市盐田区梅沙未来学校",
+            "schoolLng": "114.307746",
+            "schoolLat": "22.603277",
+            "value": "5.0000"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市盐田区教科院附属永安小学",
+            "schoolLng": "114.254971",
+            "schoolLat": "22.599116",
+            "value": "5.1020"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市高级中学盐田学校",
+            "schoolLng": "114.239678",
+            "schoolLat": "22.564808",
+            "value": "5.8480"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市盐田区云海学校",
+            "schoolLng": "114.239012",
+            "schoolLat": "22.607269",
+            "value": "5.6818"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市盐田区山海学校",
+            "schoolLng": "114.020010",
+            "schoolLat": "22.020010",
+            "value": "6.8027"
+        },
+        {
+            "schoolType": "初级中学",
+            "schoolName": "深圳市盐田区外国语学校",
+            "schoolLng": "114.307084",
+            "schoolLat": "22.603553",
+            "value": "7.9365"
+        },
+        {
+            "schoolType": "初级中学",
+            "schoolName": "深圳市田东中学",
+            "schoolLng": "114.240023",
+            "schoolLat": "22.564909",
+            "value": "8.4034"
+        },
+        {
+            "schoolType": "初级中学",
+            "schoolName": "深圳市盐田区实验学校",
+            "schoolLng": "114.258047",
+            "schoolLat": "22.599586",
+            "value": "7.2464"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市宝安区龙腾小学",
+            "schoolLng": "113.849990",
+            "schoolLat": "22.634700",
+            "value": "5.8824"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市宝安中学外国语学校(集团)宝城小学",
+            "schoolLng": "113.921345",
+            "schoolLat": "22.565766",
+            "value": "5.9880"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市宝安区新安湖小学",
+            "schoolLng": "113.913186",
+            "schoolLat": "22.569888",
+            "value": "6.1728"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市宝安区宝民小学",
+            "schoolLng": "113.917082",
+            "schoolLat": "22.571839",
+            "value": "6.0606"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市宝安区灵芝小学",
+            "schoolLng": "113.918348",
+            "schoolLat": "22.578760",
+            "value": "5.9172"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市宝安区海裕小学",
+            "schoolLng": "113.885570",
+            "schoolLat": "22.571070",
+            "value": "5.7143"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市宝安区宝安小学",
+            "schoolLng": "113.872375",
+            "schoolLat": "22.560884",
+            "value": "5.8480"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市宝安区上合小学",
+            "schoolLng": "113.899073",
+            "schoolLat": "22.581311",
+            "value": "6.3694"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市宝安区安乐小学",
+            "schoolLng": "113.901484",
+            "schoolLat": "22.566746",
+            "value": "5.6818"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市宝安区翻身小学",
+            "schoolLng": "113.889315",
+            "schoolLat": "22.566069",
+            "value": "5.8140"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市宝安区弘雅小学",
+            "schoolLng": "113.891889",
+            "schoolLat": "22.575731",
+            "value": "5.9172"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市宝安区建安小学",
+            "schoolLng": "113.896709",
+            "schoolLat": "22.571251",
+            "value": "5.9880"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市宝安区滨海小学",
+            "schoolLng": "113.888340",
+            "schoolLat": "22.556307",
+            "value": "5.7803"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市宝安区红树林外国语小学",
+            "schoolLng": "113.858202",
+            "schoolLat": "22.576999",
+            "value": "5.7143"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市宝安区径贝小学",
+            "schoolLng": "113.881809",
+            "schoolLat": "22.573715",
+            "value": "6.0241"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市宝安区海城小学",
+            "schoolLng": "113.880880",
+            "schoolLat": "22.578230",
+            "value": "5.7803"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳巿宝安区共乐小学",
+            "schoolLng": "113.877504",
+            "schoolLat": "22.584096",
+            "value": "6.4103"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市宝安区西乡小学",
+            "schoolLng": "113.882684",
+            "schoolLat": "22.581625",
+            "value": "5.9880"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市宝安区凤岗小学",
+            "schoolLng": "113.876455",
+            "schoolLat": "22.575712",
+            "value": "5.7803"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市宝安区坪洲小学",
+            "schoolLng": "113.873838",
+            "schoolLat": "22.570930",
+            "value": "5.8824"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市宝安区天骄小学",
+            "schoolLng": "113.893288",
+            "schoolLat": "22.583993",
+            "value": "5.7143"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市宝安区航盛小学",
+            "schoolLng": "113.851130",
+            "schoolLat": "22.626340",
+            "value": "7.0922"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市宝安区利锦小学",
+            "schoolLng": "113.849990",
+            "schoolLat": "22.634700",
+            "value": "6.1350"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市宝安区百灵小学",
+            "schoolLng": "113.877940",
+            "schoolLat": "22.661870",
+            "value": "13.3333"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市宝安区福桥小学",
+            "schoolLng": "113.809860",
+            "schoolLat": "22.699860",
+            "value": "5.0505"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市宝安区福新小学",
+            "schoolLng": "113.813349",
+            "schoolLat": "22.670826",
+            "value": "5.7803"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市宝安区下十围小学",
+            "schoolLng": "113.840491",
+            "schoolLat": "22.641861",
+            "value": "6.0241"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市宝安区福永小学",
+            "schoolLng": "113.823156",
+            "schoolLat": "22.675414",
+            "value": "6.3694"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市宝安区文昌小学",
+            "schoolLng": "113.853000",
+            "schoolLat": "22.689700",
+            "value": "6.2112"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市宝安区兴围小学",
+            "schoolLng": "113.829034",
+            "schoolLat": "22.638807",
+            "value": "6.1728"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市宝安区新桥小学",
+            "schoolLng": "113.841127",
+            "schoolLat": "22.739235",
+            "value": "5.8480"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市宝安区壆岗小学",
+            "schoolLng": "113.825090",
+            "schoolLat": "22.739387",
+            "value": "5.6497"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市宝安区拾悦小学",
+            "schoolLng": "113.828510",
+            "schoolLat": "22.731100",
+            "value": "5.9524"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市宝安区蚝业小学",
+            "schoolLng": "113.812876",
+            "schoolLat": "22.745482",
+            "value": "5.8824"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市宝安区万丰小学",
+            "schoolLng": "113.830742",
+            "schoolLat": "22.731384",
+            "value": "5.6497"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市宝安区黄埔小学",
+            "schoolLng": "113.853190",
+            "schoolLat": "22.719366",
+            "value": "6.1728"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市宝安区茭塘小学",
+            "schoolLng": "113.815000",
+            "schoolLat": "22.726367",
+            "value": "6.0976"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市宝安区松岗第二小学",
+            "schoolLng": "113.850406",
+            "schoolLat": "22.777380",
+            "value": "5.8140"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市宝安区松岗第一小学",
+            "schoolLng": "113.848735",
+            "schoolLat": "22.774181",
+            "value": "5.9880"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳宝安区红星小学",
+            "schoolLng": "113.845539",
+            "schoolLat": "22.771146",
+            "value": "5.8140"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市宝安区东方小学",
+            "schoolLng": "113.854114",
+            "schoolLat": "22.766455",
+            "value": "5.6180"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市宝安区潭头小学",
+            "schoolLng": "113.849425",
+            "schoolLat": "22.756158",
+            "value": "5.8824"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市宝安区文山小学",
+            "schoolLng": "113.858060",
+            "schoolLat": "22.765310",
+            "value": "6.3694"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市宝安区沙溪小学",
+            "schoolLng": "113.839322",
+            "schoolLat": "22.781836",
+            "value": "5.8824"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市宝安区艺展小学",
+            "schoolLng": "113.838580",
+            "schoolLat": "22.790860",
+            "value": "5.7143"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市宝安区罗田小学",
+            "schoolLng": "113.882158",
+            "schoolLat": "22.805565",
+            "value": "6.6667"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市宝安区湖东小学",
+            "schoolLng": "113.865730",
+            "schoolLat": "22.595170",
+            "value": "5.7471"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市宝安区罗租小学",
+            "schoolLng": "113.941390",
+            "schoolLat": "22.680807",
+            "value": "5.6818"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市宝安区上屋小学",
+            "schoolLng": "114.057800",
+            "schoolLat": "22.543000",
+            "value": "6.0241"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市宝安区阳台山小学",
+            "schoolLng": "113.938990",
+            "schoolLat": "22.687140",
+            "value": "6.4103"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市宝安外国语学校",
+            "schoolLng": "113.910572",
+            "schoolLat": "22.600310",
+            "value": "9.8039"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市宝安区陆兴小学",
+            "schoolLng": "113.900149",
+            "schoolLat": "22.594977",
+            "value": "5.1546"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市宝安区西乡康园小学",
+            "schoolLng": "113.854906",
+            "schoolLat": "22.599501",
+            "value": "4.4843"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市宝安区智园小学",
+            "schoolLng": "113.874391",
+            "schoolLat": "22.590938",
+            "value": "5.0000"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市宝安区西乡文康小学",
+            "schoolLng": "113.858477",
+            "schoolLat": "22.604584",
+            "value": "5.3476"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市宝安区新丰小学",
+            "schoolLng": "113.867067",
+            "schoolLat": "22.658498",
+            "value": "5.5249"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市宝安区厚德小学",
+            "schoolLng": "113.850722",
+            "schoolLat": "22.712298",
+            "value": "5.2083"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市宝安区欣欣小学",
+            "schoolLng": "113.845834",
+            "schoolLat": "22.737545",
+            "value": "5.2356"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市宝安区化雨中英文小学",
+            "schoolLng": "113.852475",
+            "schoolLat": "22.809675",
+            "value": "4.8077"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市宝安区为民小学",
+            "schoolLng": "113.942756",
+            "schoolLat": "22.691128",
+            "value": "4.4843"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市宝安区固戍小学",
+            "schoolLng": "113.852346",
+            "schoolLat": "22.596427",
+            "value": "5.6497"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市宝安区流塘小学",
+            "schoolLng": "113.876455",
+            "schoolLat": "22.575712",
+            "value": "6.2112"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市宝安区海港小学",
+            "schoolLng": "113.860438",
+            "schoolLat": "22.578142",
+            "value": "5.6818"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市宝安区碧海小学",
+            "schoolLng": "113.859908",
+            "schoolLat": "22.573459",
+            "value": "6.2112"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市宝安区西湾小学",
+            "schoolLng": "113.864266",
+            "schoolLat": "22.582684",
+            "value": "5.9880"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市宝安区钟屋小学",
+            "schoolLng": "113.841559",
+            "schoolLat": "22.625319",
+            "value": "5.6497"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市宝安区立新湖外国语学校",
+            "schoolLng": "113.818686",
+            "schoolLat": "22.682986",
+            "value": "6.2500"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市新安中学(集团)外国语学校",
+            "schoolLng": "113.897489",
+            "schoolLat": "22.608690",
+            "value": "6.1350"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "南方科技大学附属中学宝安学校",
+            "schoolLng": "113.893291",
+            "schoolLat": "22.615932",
+            "value": "6.8493"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市宝安区海韵学校",
+            "schoolLng": "113.878467",
+            "schoolLat": "22.559621",
+            "value": "6.1350"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市宝安区实验学校",
+            "schoolLng": "113.899907",
+            "schoolLat": "22.546314",
+            "value": "6.4103"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市宝安区海乐实验学校",
+            "schoolLng": "113.910030",
+            "schoolLat": "22.562420",
+            "value": "7.3529"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市宝安区文汇学校",
+            "schoolLng": "113.902230",
+            "schoolLat": "22.583311",
+            "value": "6.7568"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市宝安区海旺学校",
+            "schoolLng": "113.896907",
+            "schoolLat": "22.561280",
+            "value": "6.6225"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市宝安中学(集团)海天学校",
+            "schoolLng": "114.053779",
+            "schoolLat": "22.520641",
+            "value": "6.9444"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市宝安区孝德学校",
+            "schoolLng": "113.912836",
+            "schoolLat": "22.580043",
+            "value": "6.2500"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市宝安区西乡实验学校",
+            "schoolLng": "113.875710",
+            "schoolLat": "22.613970",
+            "value": "6.6225"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市宝安区黄麻布学校",
+            "schoolLng": "113.868895",
+            "schoolLat": "22.671947",
+            "value": "6.6667"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "华中师范大学宝安附属学校",
+            "schoolLng": "113.865730",
+            "schoolLat": "22.595170",
+            "value": "6.1350"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市宝安区塘尾万里学校",
+            "schoolLng": "113.819899",
+            "schoolLat": "22.708509",
+            "value": "6.2893"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市宝安区航星学校",
+            "schoolLng": "113.858896",
+            "schoolLat": "22.605734",
+            "value": "6.4516"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市宝安区凤凰学校",
+            "schoolLng": "113.844945",
+            "schoolLat": "22.702071",
+            "value": "6.4516"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市宝安区荣根学校",
+            "schoolLng": "113.818895",
+            "schoolLat": "22.743726",
+            "value": "6.0241"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市宝安区和一学校",
+            "schoolLng": "113.798036",
+            "schoolLat": "22.720911",
+            "value": "6.6225"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市宝安中学(集团)第二外国语学校",
+            "schoolLng": "113.841453",
+            "schoolLat": "22.729602",
+            "value": "6.8493"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市宝安区上星学校",
+            "schoolLng": "113.838460",
+            "schoolLat": "22.724720",
+            "value": "5.8480"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳外国语学校宝安学校",
+            "schoolLng": "113.922810",
+            "schoolLat": "22.578140",
+            "value": "6.7568"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市宝安区松岗实验学校",
+            "schoolLng": "113.830803",
+            "schoolLat": "22.774991",
+            "value": "6.2893"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市宝安区红星实验学校",
+            "schoolLng": "113.836960",
+            "schoolLat": "22.772260",
+            "value": "5.9172"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市宝安区燕山学校",
+            "schoolLng": "113.916108",
+            "schoolLat": "22.560495",
+            "value": "6.5359"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市宝安区燕川实验学校",
+            "schoolLng": "113.866737",
+            "schoolLat": "22.810462",
+            "value": "7.0423"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市宝安区官田学校",
+            "schoolLng": "113.948179",
+            "schoolLat": "22.688681",
+            "value": "6.0606"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市宝安区湖光学校",
+            "schoolLng": "114.064550",
+            "schoolLat": "22.548460",
+            "value": "6.3694"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市宝安区龙田学校",
+            "schoolLng": "113.883080",
+            "schoolLat": "22.553290",
+            "value": "5.1813"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市宝安中学(集团)塘头学校",
+            "schoolLng": "113.921008",
+            "schoolLat": "22.663585",
+            "value": "6.1728"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市宝安区石岩湖学校",
+            "schoolLng": "113.922495",
+            "schoolLat": "22.672491",
+            "value": "6.5359"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市宝安区裕安学校",
+            "schoolLng": "113.905492",
+            "schoolLat": "22.576265",
+            "value": "6.0976"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市宝安区鹏晖中英文学校",
+            "schoolLng": "113.812345",
+            "schoolLat": "22.673285",
+            "value": "5.1813"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市宝安区景山实验学校",
+            "schoolLng": "113.828872",
+            "schoolLat": "22.698573",
+            "value": "5.7143"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市宝安区福民学校",
+            "schoolLng": "113.836649",
+            "schoolLat": "22.678953",
+            "value": "5.2083"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市宝安区桥兴学校",
+            "schoolLng": "113.815216",
+            "schoolLat": "22.696171",
+            "value": "5.1282"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市宝安区和平中英文实验学校",
+            "schoolLng": "113.798278",
+            "schoolLat": "22.701019",
+            "value": "5.9880"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市宝安区才华学校",
+            "schoolLng": "113.819984",
+            "schoolLat": "22.762381",
+            "value": "4.8077"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市宝安区冠群实验学校",
+            "schoolLng": "113.802878",
+            "schoolLat": "22.746979",
+            "value": "4.7847"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市宝安区华南中英文学校",
+            "schoolLng": "113.811942",
+            "schoolLat": "22.715915",
+            "value": "6.9930"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市宝安区北亭实验学校",
+            "schoolLng": "113.831518",
+            "schoolLat": "22.771136",
+            "value": "4.8780"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市宝安区沙井东山书院",
+            "schoolLng": "113.832671",
+            "schoolLat": "22.754473",
+            "value": "5.3476"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市宝安区立才实验学校",
+            "schoolLng": "113.801221",
+            "schoolLat": "22.740042",
+            "value": "4.9505"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市宝安区为明双语实验学校",
+            "schoolLng": "113.824883",
+            "schoolLat": "22.746379",
+            "value": "8.3333"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市宝安区沙井上南学校",
+            "schoolLng": "113.850787",
+            "schoolLat": "22.728097",
+            "value": "5.1282"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市宝安区金源学校",
+            "schoolLng": "113.816686",
+            "schoolLat": "22.720633",
+            "value": "5.4645"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市宝安区陶园中英文实验学校",
+            "schoolLng": "113.859762",
+            "schoolLat": "22.782221",
+            "value": "6.2893"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市宝安区华源学校",
+            "schoolLng": "113.860415",
+            "schoolLat": "22.774707",
+            "value": "5.8824"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市宝安区标尚学校",
+            "schoolLng": "113.867060",
+            "schoolLat": "22.805656",
+            "value": "5.6180"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市宝安区崇文学校",
+            "schoolLng": "113.824956",
+            "schoolLat": "22.780606",
+            "value": "5.0000"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市宝安区东升实验学校",
+            "schoolLng": "113.868117",
+            "schoolLat": "22.773193",
+            "value": "5.6818"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市宝安区碧头文武学校",
+            "schoolLng": "113.816373",
+            "schoolLat": "22.783034",
+            "value": "5.7471"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市宝安区水田实验学校",
+            "schoolLng": "113.963306",
+            "schoolLat": "22.687255",
+            "value": "5.0000"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市宝安区宁远实验学校",
+            "schoolLng": "113.937209",
+            "schoolLat": "22.677986",
+            "value": "5.2356"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市宝安区育才学校",
+            "schoolLng": "113.933593",
+            "schoolLat": "22.653271",
+            "value": "5.5249"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市宝安区料坑学校",
+            "schoolLng": "113.901902",
+            "schoolLat": "22.676623",
+            "value": "5.3763"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市宝安区崛起诚信实验学校",
+            "schoolLng": "113.921953",
+            "schoolLat": "22.571151",
+            "value": "5.5249"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市宝安区东山书院",
+            "schoolLng": "113.892007",
+            "schoolLat": "22.574771",
+            "value": "5.0761"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市宝安区冠华育才学校(总校)",
+            "schoolLng": "113.912517",
+            "schoolLat": "22.580953",
+            "value": "0"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市宝安区冠华育才学校(本部)",
+            "schoolLng": "113.911970",
+            "schoolLat": "22.581180",
+            "value": "6.2500"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市宝安区冠华育才学校(银丰分部)",
+            "schoolLng": "113.890635",
+            "schoolLat": "22.574160",
+            "value": "5.2632"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市宝安区宝龙学校",
+            "schoolLng": "113.914361",
+            "schoolLat": "22.588068",
+            "value": "4.5872"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市宝安区永联学校",
+            "schoolLng": "113.905865",
+            "schoolLat": "22.582671",
+            "value": "5.0761"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市宝安区振华学校",
+            "schoolLng": "113.906495",
+            "schoolLat": "22.583084",
+            "value": "5.2356"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市宝安区振兴学校",
+            "schoolLng": "113.856055",
+            "schoolLat": "22.610047",
+            "value": "5.1813"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市宝安区龙山学校",
+            "schoolLng": "113.885057",
+            "schoolLat": "22.605411",
+            "value": "5.9880"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市宝安区金碧实验学校",
+            "schoolLng": "113.887235",
+            "schoolLat": "22.594417",
+            "value": "5.5556"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市宝安区华文学校",
+            "schoolLng": "113.848528",
+            "schoolLat": "22.629753",
+            "value": "5.4645"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市宝安区鹤洲学校",
+            "schoolLng": "113.868138",
+            "schoolLat": "22.634992",
+            "value": "5.4645"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市宝安区宝华学校",
+            "schoolLng": "113.819148",
+            "schoolLat": "22.728706",
+            "value": "5.4645"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市宝安中学外国语学校(集团)",
+            "schoolLng": "113.919960",
+            "schoolLat": "22.566716",
+            "value": "6.2893"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市宝安区会展城实验学校",
+            "schoolLng": null,
+            "schoolLat": null,
+            "value": "0"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市宝安区智造城实验学校",
+            "schoolLng": null,
+            "schoolLat": null,
+            "value": "0"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市宝安区桥头学校",
+            "schoolLng": "113.817511",
+            "schoolLat": "22.699288",
+            "value": "6.5789"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市宝安区清平实验学校",
+            "schoolLng": "113.836680",
+            "schoolLat": "22.749690",
+            "value": "6.2500"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市宝安区立新湖学校",
+            "schoolLng": null,
+            "schoolLat": null,
+            "value": "0"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市宝安区航城学校",
+            "schoolLng": "113.858891",
+            "schoolLat": "22.616949",
+            "value": "6.3291"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市宝安区黄田实验学校",
+            "schoolLng": "113.847454",
+            "schoolLat": "22.633686",
+            "value": "5.4645"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市新安中学(集团)第二外国语学校",
+            "schoolLng": "113.825140",
+            "schoolLat": "22.665980",
+            "value": "6.5359"
+        },
+        {
+            "schoolType": "初级中学",
+            "schoolName": "深圳市海滨中学",
+            "schoolLng": "113.904890",
+            "schoolLat": "22.564328",
+            "value": "7.6336"
+        },
+        {
+            "schoolType": "初级中学",
+            "schoolName": "深圳市海湾中学",
+            "schoolLng": "113.858000",
+            "schoolLat": "22.578000",
+            "value": "7.9365"
+        },
+        {
+            "schoolType": "初级中学",
+            "schoolName": "深圳市宝安区航瑞中学",
+            "schoolLng": "113.946890",
+            "schoolLat": "22.679530",
+            "value": "7.8740"
+        },
+        {
+            "schoolType": "初级中学",
+            "schoolName": "深圳市福永中学",
+            "schoolLng": "113.813995",
+            "schoolLat": "22.670922",
+            "value": "7.7519"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市宝安中学(集团)实验学校",
+            "schoolLng": "113.921800",
+            "schoolLat": "22.591230",
+            "value": "6.8966"
+        },
+        {
+            "schoolType": "初级中学",
+            "schoolName": "深圳市宝安中学(集团)初中部",
+            "schoolLng": "113.920321",
+            "schoolLat": "22.573804",
+            "value": "7.8125"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市新安中学(集团)第一实验学校",
+            "schoolLng": "113.882036",
+            "schoolLat": "22.561300",
+            "value": "7.4627"
+        },
+        {
+            "schoolType": "初级中学",
+            "schoolName": "深圳市新安中学(集团)初中部",
+            "schoolLng": "113.908823",
+            "schoolLat": "22.570005",
+            "value": "7.6923"
+        },
+        {
+            "schoolType": "初级中学",
+            "schoolName": "深圳市宝安第一外国语学校初中部",
+            "schoolLng": "113.861373",
+            "schoolLat": "22.562755",
+            "value": "7.6336"
+        },
+        {
+            "schoolType": "初级中学",
+            "schoolName": "深圳市西乡中学初中部",
+            "schoolLng": "113.885518",
+            "schoolLat": "22.584864",
+            "value": "7.3529"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市龙岗区深圳中学龙岗学校(小学部)",
+            "schoolLng": "114.242614",
+            "schoolLat": "22.712666",
+            "value": "0"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市龙岗区清林小学",
+            "schoolLng": "114.249936",
+            "schoolLat": "22.734880",
+            "value": "6.0606"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "龙岗区龙城小学",
+            "schoolLng": "114.250804",
+            "schoolLat": "22.730477",
+            "value": "5.7143"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市龙岗区深圳中学龙岗学校(集团)依山郡小学",
+            "schoolLng": "114.229520",
+            "schoolLat": "22.738369",
+            "value": "6.0976"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市龙岗区外国语学校(集团)爱联小学",
+            "schoolLng": "114.241441",
+            "schoolLat": "22.706768",
+            "value": "5.8480"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市龙岗区龙城街道盛平小学",
+            "schoolLng": "114.263285",
+            "schoolLat": "22.737403",
+            "value": "5.7143"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市龙岗区悦澜山实验小学",
+            "schoolLng": "114.250537",
+            "schoolLat": "22.736430",
+            "value": "5.5249"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市龙岗区布吉街道信义实验小学",
+            "schoolLng": "114.130714",
+            "schoolLat": "22.598940",
+            "value": "6.0241"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市龙岗区吉祥小学",
+            "schoolLng": "114.130488",
+            "schoolLat": "22.619581",
+            "value": "5.9524"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市龙岗区布吉文景小学",
+            "schoolLng": "114.127514",
+            "schoolLat": "22.613574",
+            "value": "5.6497"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市龙岗区龙园意境小学",
+            "schoolLng": "114.132486",
+            "schoolLat": "22.627975",
+            "value": "5.6818"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市龙岗区布吉街道德兴小学",
+            "schoolLng": "114.117307",
+            "schoolLat": "22.598749",
+            "value": "5.9524"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市龙岗区布吉街道中心小学",
+            "schoolLng": "114.122654",
+            "schoolLat": "22.605365",
+            "value": "6.0241"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市龙岗区布吉街道莲花小学",
+            "schoolLng": "114.115347",
+            "schoolLat": "22.604189",
+            "value": "6.2500"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市龙岗区布吉街道阳光小学",
+            "schoolLng": "114.341914",
+            "schoolLat": "22.700531",
+            "value": "5.4945"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市龙岗区布吉街道水径小学",
+            "schoolLng": "114.116273",
+            "schoolLat": "22.627265",
+            "value": "5.7143"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市龙岗区麓城外国语小学",
+            "schoolLng": "114.109403",
+            "schoolLat": "22.630564",
+            "value": "5.4348"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市龙岗区坂田街道花城小学",
+            "schoolLng": "114.067048",
+            "schoolLat": "22.631962",
+            "value": "5.2910"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳科学高中龙岗五园小学",
+            "schoolLng": "114.079037",
+            "schoolLat": "22.622504",
+            "value": "5.5556"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市龙岗区华南师范大学附属龙岗雅宝小学",
+            "schoolLng": "114.076417",
+            "schoolLat": "22.618584",
+            "value": "5.4945"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市龙岗区坂田街道坂田小学",
+            "schoolLng": "114.072762",
+            "schoolLat": "22.638543",
+            "value": "6.5359"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市龙岗区坂田街道雪象小学",
+            "schoolLng": "114.083861",
+            "schoolLat": "22.656852",
+            "value": "5.8140"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市龙岗区科技城外国语学校(集团)立雪小学",
+            "schoolLng": "114.055962",
+            "schoolLat": "22.639235",
+            "value": "8.1301"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市龙岗区坂田街道宝岗小学",
+            "schoolLng": "114.071725",
+            "schoolLat": "22.660614",
+            "value": "6.0976"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市龙岗区和美外国语小学",
+            "schoolLng": "114.063391",
+            "schoolLat": "22.629673",
+            "value": "6.1728"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市龙岗区南湾街道南岭小学",
+            "schoolLng": "114.153001",
+            "schoolLat": "22.615791",
+            "value": "5.7143"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市龙岗区南湾街道沙西小学",
+            "schoolLng": "114.159915",
+            "schoolLat": "22.619642",
+            "value": "5.5556"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市龙岗区南湾街道下李朗小学",
+            "schoolLng": "114.142903",
+            "schoolLat": "22.647451",
+            "value": "5.7143"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市龙岗区南湾街道沙湾小学",
+            "schoolLng": "114.168844",
+            "schoolLat": "22.614372",
+            "value": "5.7803"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市龙岗区南湾丹竹头小学",
+            "schoolLng": "114.160561",
+            "schoolLat": "22.629005",
+            "value": "5.5556"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市龙岗区南湾实验小学",
+            "schoolLng": "114.139436",
+            "schoolLat": "39.889096",
+            "value": "5.3476"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市龙岗区平湖街道鹅溪小学",
+            "schoolLng": "114.158686",
+            "schoolLat": "22.688734",
+            "value": "5.7803"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市龙岗区平湖凤凰山小学",
+            "schoolLng": "114.140225",
+            "schoolLat": "22.711426",
+            "value": "6.2500"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市龙岗区平湖街道辅城坳小学",
+            "schoolLng": "114.113996",
+            "schoolLat": "22.703711",
+            "value": "5.8140"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市龙岗区平湖街道白坭坑小学",
+            "schoolLng": "114.161513",
+            "schoolLat": "22.662260",
+            "value": "5.9880"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市龙岗区守真小学",
+            "schoolLng": "114.133431",
+            "schoolLat": "22.696913",
+            "value": "5.1546"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市龙岗区横岗街道四联小学",
+            "schoolLng": "114.205782",
+            "schoolLat": "22.657816",
+            "value": "6.1350"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市龙岗区横岗聚英小学",
+            "schoolLng": "114.190417",
+            "schoolLat": "22.638681",
+            "value": "6.2893"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市龙岗区横岗街道安良小学",
+            "schoolLng": "114.227934",
+            "schoolLat": "22.634959",
+            "value": "5.8140"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市龙岗区横岗街道西坑小学",
+            "schoolLng": "114.229897",
+            "schoolLat": "22.623025",
+            "value": "5.5556"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市龙岗区横岗街道大康小学",
+            "schoolLng": "114.238916",
+            "schoolLat": "22.653014",
+            "value": "5.9524"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市龙岗区园山街道厚德小学",
+            "schoolLng": "114.230113",
+            "schoolLat": "22.687716",
+            "value": "5.6818"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市龙岗区横岗水晶城小学",
+            "schoolLng": "114.232058",
+            "schoolLat": "22.677695",
+            "value": "5.7803"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市龙岗区华南师范大学附属龙岗乐城小学",
+            "schoolLng": "114.232666",
+            "schoolLat": "22.683708",
+            "value": "6.2893"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市龙岗区龙岗街道振新小学",
+            "schoolLng": "114.275363",
+            "schoolLat": "22.742278",
+            "value": "5.8140"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市龙岗区龙岗街道新生小学",
+            "schoolLng": "114.284403",
+            "schoolLat": "22.746514",
+            "value": "6.0976"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市龙岗区龙城街道龙西小学",
+            "schoolLng": "114.256825",
+            "schoolLat": "22.753559",
+            "value": "6.2893"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市龙岗区清林径实验小学",
+            "schoolLng": "114.230000",
+            "schoolLat": "22.750000",
+            "value": "4.8077"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市龙岗区龙城街道千林山小学",
+            "schoolLng": "114.220258",
+            "schoolLat": "22.714085",
+            "value": "5.6180"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市龙岗区龙岗街道育贤小学",
+            "schoolLng": "114.297545",
+            "schoolLat": "22.729421",
+            "value": "5.3763"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市龙岗区龙岗街道南约小学",
+            "schoolLng": "114.284030",
+            "schoolLat": "22.703642",
+            "value": "5.4054"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市龙岗区宝龙科技城实验学校(集团)碧新小学",
+            "schoolLng": "114.226654",
+            "schoolLat": "22.656729",
+            "value": "8.0645"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市龙岗区坪地街道中心小学",
+            "schoolLng": "114.310272",
+            "schoolLat": "22.772362",
+            "value": "5.3476"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市龙岗区坪地街道六联小学",
+            "schoolLng": "114.332839",
+            "schoolLat": "22.794105",
+            "value": "5.9172"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市龙岗区布吉街道启元学校",
+            "schoolLng": "114.118604",
+            "schoolLat": "22.618745",
+            "value": "5.0505"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市龙岗区百外春蕾小学",
+            "schoolLng": "114.128046",
+            "schoolLat": "22.600596",
+            "value": "4.9505"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市龙岗区中兴小学",
+            "schoolLng": "114.128356",
+            "schoolLat": "22.612927",
+            "value": "5.0251"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市龙岗区布吉街道东方半岛小学",
+            "schoolLng": "114.139302",
+            "schoolLat": "22.618029",
+            "value": "5.2356"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市龙岗区百外世纪小学",
+            "schoolLng": "114.133743",
+            "schoolLat": "22.601262",
+            "value": "5.2356"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市龙岗区吉华爱爱学校",
+            "schoolLng": "114.113749",
+            "schoolLat": "22.625784",
+            "value": "5.1282"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市龙岗区坂田街道爱爱学校",
+            "schoolLng": "114.071741",
+            "schoolLat": "22.640915",
+            "value": "4.9261"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市龙岗区育英小学",
+            "schoolLng": "114.069730",
+            "schoolLat": "22.623072",
+            "value": "4.6083"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市龙岗区南湾街道康桥外国语学校",
+            "schoolLng": "114.149283",
+            "schoolLat": "22.630863",
+            "value": "5.2356"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市龙岗区平湖街道新南小学",
+            "schoolLng": "114.129701",
+            "schoolLat": "22.709305",
+            "value": "5.3476"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市龙岗区平湖街道新木小学",
+            "schoolLng": "114.130805",
+            "schoolLat": "22.676333",
+            "value": "5.2083"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市龙岗区横岗街道康乐小学",
+            "schoolLng": "114.196568",
+            "schoolLat": "22.639146",
+            "value": "5.9172"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市龙岗区横岗街道金安小学",
+            "schoolLng": "114.219598",
+            "schoolLat": "22.677836",
+            "value": "5.4054"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市龙岗区横岗街道办龙鹏小学",
+            "schoolLng": "114.233860",
+            "schoolLat": "22.645376",
+            "value": "4.9505"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市龙岗区龙岗街道惠民小学",
+            "schoolLng": "114.278315",
+            "schoolLat": "22.742015",
+            "value": "5.7471"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市龙岗区龙岗街道建文小学",
+            "schoolLng": "114.292145",
+            "schoolLat": "22.736230",
+            "value": "4.9261"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市龙岗区龙岗街道才德小学",
+            "schoolLng": "114.291329",
+            "schoolLat": "22.729581",
+            "value": "5.1546"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市龙岗区龙城街道英才小学",
+            "schoolLng": "114.219575",
+            "schoolLat": "22.728226",
+            "value": "5.7471"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市龙岗区教育科学研究院附属第一小学",
+            "schoolLng": null,
+            "schoolLat": null,
+            "value": "0"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙岗区深圳中学龙岗学校",
+            "schoolLng": "114.236433",
+            "schoolLat": "22.739029",
+            "value": "6.8966"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙岗区龙城高级中学(教育集团)龙城创新学校",
+            "schoolLng": "114.223708",
+            "schoolLat": "22.739598",
+            "value": "6.2112"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙岗区实验学校",
+            "schoolLng": "114.238032",
+            "schoolLat": "22.732951",
+            "value": "6.4103"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙岗区香港中文大学(深圳)附属知新学校",
+            "schoolLng": "114.220724",
+            "schoolLat": "22.718518",
+            "value": "6.9930"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙岗区香港中文大学(深圳)附属道远学校",
+            "schoolLng": "114.210000",
+            "schoolLat": "22.710000",
+            "value": "6.2112"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙岗区外国语学校(集团)新亚洲学校",
+            "schoolLng": "114.241189",
+            "schoolLat": "22.725210",
+            "value": "6.8966"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙岗区平安里学校",
+            "schoolLng": "114.226727",
+            "schoolLat": "22.730728",
+            "value": "6.0241"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙岗区深圳中学龙岗学校(集团)兰著学校",
+            "schoolLng": "114.246776",
+            "schoolLat": "22.741944",
+            "value": "6.1350"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙岗区外国语学校",
+            "schoolLng": "114.227469",
+            "schoolLat": "22.705060",
+            "value": "6.7568"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙岗区外国语学校(集团)星河学校",
+            "schoolLng": "114.229461",
+            "schoolLat": "22.725357",
+            "value": "6.5359"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙岗区外国语学校(集团)致美学校",
+            "schoolLng": "114.229461",
+            "schoolLat": "22.725357",
+            "value": "5.7471"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙岗区上海外国语大学附属龙岗学校",
+            "schoolLng": "114.140000",
+            "schoolLat": "22.410000",
+            "value": "6.4935"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙岗区龙城街道天成学校",
+            "schoolLng": "114.263936",
+            "schoolLat": "22.733085",
+            "value": "6.5359"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙岗区天誉实验学校",
+            "schoolLng": "114.250653",
+            "schoolLat": "22.720868",
+            "value": "5.9172"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙岗区华南师范大学附属龙岗大运学校",
+            "schoolLng": "114.229342",
+            "schoolLat": "22.693432",
+            "value": "5.9524"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙岗区布吉贤义外国语学校",
+            "schoolLng": "114.134566",
+            "schoolLat": "22.597086",
+            "value": "6.2500"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙岗区布吉街道可园学校",
+            "schoolLng": "114.141272",
+            "schoolLat": "22.603486",
+            "value": "6.5789"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙岗区南湾沙塘布学校",
+            "schoolLng": "114.163404",
+            "schoolLat": "22.615732",
+            "value": "6.3291"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙岗区布吉街道木棉湾学校",
+            "schoolLng": "114.138583",
+            "schoolLat": "22.604299",
+            "value": "6.0976"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙岗区文理学校",
+            "schoolLng": "113.956284",
+            "schoolLat": "22.574551",
+            "value": "7.2464"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙岗区吉华街道怡翠实验学校",
+            "schoolLng": "114.116674",
+            "schoolLat": "22.632302",
+            "value": "5.8140"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙岗区甘李学校",
+            "schoolLng": "114.118069",
+            "schoolLat": "22.660666",
+            "value": "6.5789"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙岗区吉华实验学校",
+            "schoolLng": "114.107178",
+            "schoolLat": "22.619581",
+            "value": "7.7519"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙岗区南京师范大学附属龙岗学校",
+            "schoolLng": "114.120000",
+            "schoolLat": "22.620000",
+            "value": "6.2893"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙岗区外国语学校(集团)云和学校",
+            "schoolLng": "114.073561",
+            "schoolLat": "22.653282",
+            "value": "7.0922"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙岗区深圳大学附属坂田学校",
+            "schoolLng": "114.082159",
+            "schoolLat": "22.661957",
+            "value": "6.0241"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙岗区科技城外国语学校",
+            "schoolLng": "114.340000",
+            "schoolLat": "22.383100",
+            "value": "6.0976"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙岗区坂田实验学校",
+            "schoolLng": "114.100000",
+            "schoolLat": "22.600000",
+            "value": "5.5556"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳科学高中龙岗五和学校",
+            "schoolLng": "114.074146",
+            "schoolLat": "22.619494",
+            "value": "6.5359"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙岗区扬美实验学校",
+            "schoolLng": "114.078623",
+            "schoolLat": "22.637586",
+            "value": "6.4516"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙岗区南湾街道南湾学校",
+            "schoolLng": "114.146715",
+            "schoolLat": "22.634453",
+            "value": "6.2893"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙岗区石芽岭学校",
+            "schoolLng": "114.140171",
+            "schoolLat": "22.630579",
+            "value": "6.2893"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙岗区平湖中心学校",
+            "schoolLng": "114.138307",
+            "schoolLat": "22.697758",
+            "value": "6.1350"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙岗区平湖实验学校",
+            "schoolLng": "114.159622",
+            "schoolLat": "22.682004",
+            "value": "6.3694"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙岗区平湖信德学校",
+            "schoolLng": "114.128343",
+            "schoolLat": "22.697890",
+            "value": "6.0976"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙岗区平湖第二实验学校",
+            "schoolLng": "114.106326",
+            "schoolLat": "22.706116",
+            "value": "6.5789"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙岗区华南师范大学附属平湖学校",
+            "schoolLng": "114.118820",
+            "schoolLat": "22.705584",
+            "value": "5.9880"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙岗区横岗中学",
+            "schoolLng": "114.196038",
+            "schoolLat": "22.656097",
+            "value": "7.2993"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙岗区横岗六约学校",
+            "schoolLng": "114.195734",
+            "schoolLat": "22.646349",
+            "value": "6.0976"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙岗区横岗中心学校",
+            "schoolLng": "114.218026",
+            "schoolLat": "22.642475",
+            "value": "6.4103"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙岗区横岗街道梧桐学校",
+            "schoolLng": "114.187886",
+            "schoolLat": "22.645772",
+            "value": "6.4103"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙岗区横岗外国语学校",
+            "schoolLng": "114.187871",
+            "schoolLat": "22.652104",
+            "value": "5.9524"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳北理莫斯科大学附属龙岗园山学校",
+            "schoolLng": "114.222887",
+            "schoolLat": "22.666032",
+            "value": "6.0606"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙岗区龙岗街道南联学校",
+            "schoolLng": "114.274267",
+            "schoolLat": "22.715606",
+            "value": "6.1350"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙岗区龙岗街道新梓学校",
+            "schoolLng": "114.283664",
+            "schoolLat": "22.753839",
+            "value": "6.7114"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙岗区布吉街道爱义学校",
+            "schoolLng": "114.118706",
+            "schoolLat": "22.604485",
+            "value": "4.8077"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙岗区华中师范大学附属龙园学校",
+            "schoolLng": "114.273368",
+            "schoolLat": "22.746773",
+            "value": "5.7143"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙岗区仙田外国语学校",
+            "schoolLng": "114.270000",
+            "schoolLat": "22.750000",
+            "value": "6.5789"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙岗区宝龙科技城实验学校",
+            "schoolLng": "114.269819",
+            "schoolLat": "22.689749",
+            "value": "6.4103"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "龙岗区龙城高级中学(教育集团)宝龙外国语学校",
+            "schoolLng": "114.298321",
+            "schoolLat": "22.690128",
+            "value": "5.7471"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙岗区同心实验学校",
+            "schoolLng": "114.312645",
+            "schoolLat": "22.727304",
+            "value": "5.8140"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙岗区龙岗街道同乐主力学校",
+            "schoolLng": "114.321461",
+            "schoolLat": "22.723516",
+            "value": "6.0976"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙岗区龙岗中心学校",
+            "schoolLng": "114.285636",
+            "schoolLat": "22.733415",
+            "value": "5.9880"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市高级中学龙岗学校",
+            "schoolLng": "114.321941",
+            "schoolLat": "22.701155",
+            "value": "6.4935"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙岗区宝荷学校",
+            "schoolLng": "114.265818",
+            "schoolLat": "22.693066",
+            "value": "5.9880"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙岗区乐淮实验学校",
+            "schoolLng": "114.322663",
+            "schoolLat": "22.778572",
+            "value": "6.1350"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙岗区坪地兰陵学校",
+            "schoolLng": "114.310193",
+            "schoolLat": "22.777585",
+            "value": "6.8966"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "龙岗区龙城高级中学(教育集团)东兴外国语学校",
+            "schoolLng": "114.286310",
+            "schoolLat": "22.766773",
+            "value": "6.4103"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙岗区布吉街道龙岭学校",
+            "schoolLng": "114.118917",
+            "schoolLat": "22.611301",
+            "value": "5.5556"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙岗区布吉街道木棉湾实验学校",
+            "schoolLng": "114.139483",
+            "schoolLat": "22.606879",
+            "value": "5.4645"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙岗区智民实验学校",
+            "schoolLng": "114.146070",
+            "schoolLat": "22.616686",
+            "value": "5.5556"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙岗区三联储运学校",
+            "schoolLng": "114.119352",
+            "schoolLat": "22.634902",
+            "value": "4.6948"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙岗区布吉街道丽湖学校",
+            "schoolLng": "114.110820",
+            "schoolLat": "22.637023",
+            "value": "5.8824"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙岗区华龙学校",
+            "schoolLng": "114.120522",
+            "schoolLat": "22.624730",
+            "value": "5.4054"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙岗区时代学校",
+            "schoolLng": "114.114828",
+            "schoolLat": "22.628100",
+            "value": "5.8824"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙岗区布吉街道翠枫学校",
+            "schoolLng": "114.111243",
+            "schoolLat": "22.615933",
+            "value": "5.7803"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙岗区坂田街道宏扬学校",
+            "schoolLng": "114.091538",
+            "schoolLat": "22.633012",
+            "value": "5.2632"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙岗区坂田街道雪象学校",
+            "schoolLng": "114.080740",
+            "schoolLat": "22.652817",
+            "value": "5.2632"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙岗区沙湾实验学校",
+            "schoolLng": "114.172014",
+            "schoolLat": "22.619335",
+            "value": "5.5866"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙岗区南湾街道南芳学校",
+            "schoolLng": "114.154554",
+            "schoolLat": "22.623486",
+            "value": "5.6497"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙岗区平湖街道金稻田学校",
+            "schoolLng": "114.153622",
+            "schoolLat": "22.657999",
+            "value": "5.7143"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙岗区平湖街道南园学校",
+            "schoolLng": "114.132173",
+            "schoolLat": "22.703503",
+            "value": "5.2632"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙岗区爱文学校",
+            "schoolLng": "114.143076",
+            "schoolLat": "22.714862",
+            "value": "5.6180"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙岗区平湖街道启英学校",
+            "schoolLng": "114.107462",
+            "schoolLat": "22.697273",
+            "value": "5.9880"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙岗区兴文学校",
+            "schoolLng": "114.150221",
+            "schoolLat": "22.698285",
+            "value": "5.7471"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙岗区平湖街道平南学校",
+            "schoolLng": "114.128134",
+            "schoolLat": "22.691521",
+            "value": "5.7143"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙岗区平湖街道龙湖学校",
+            "schoolLng": "114.117546",
+            "schoolLat": "22.689146",
+            "value": "5.7803"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙岗区平湖街道华德学校",
+            "schoolLng": "114.117718",
+            "schoolLat": "22.703162",
+            "value": "5.2910"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙岗区横岗街道德龙学校",
+            "schoolLng": "114.214227",
+            "schoolLat": "22.647050",
+            "value": "5.8824"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙岗区横岗街道联邦学校",
+            "schoolLng": "114.193328",
+            "schoolLat": "22.638976",
+            "value": "5.6818"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙岗区横岗街道康乐学校",
+            "schoolLng": "114.221682",
+            "schoolLat": "22.651176",
+            "value": "5.3191"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙岗区横岗街道嘉联学校",
+            "schoolLng": "114.200468",
+            "schoolLat": "22.660198",
+            "value": "5.4945"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙岗区横岗街道南芳塘坑学校",
+            "schoolLng": "114.202493",
+            "schoolLat": "22.644549",
+            "value": "5.4645"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙岗区横岗街道安康学校",
+            "schoolLng": "114.213146",
+            "schoolLat": "22.660129",
+            "value": "5.6497"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙岗区横岗街道康艺学校",
+            "schoolLng": "114.221682",
+            "schoolLat": "22.651176",
+            "value": "5.1020"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙岗区横岗街道融美学校",
+            "schoolLng": "114.237758",
+            "schoolLat": "22.638692",
+            "value": "5.7471"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙岗区横岗街道简壹学校",
+            "schoolLng": "114.252566",
+            "schoolLat": "22.666008",
+            "value": "5.9172"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙岗区横岗街道弘文学校",
+            "schoolLng": "114.250539",
+            "schoolLat": "22.654791",
+            "value": "6.2893"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙岗区丰丽学校",
+            "schoolLng": "114.267085",
+            "schoolLat": "22.732065",
+            "value": "5.3476"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙岗区龙岗街道华升学校",
+            "schoolLng": "114.270185",
+            "schoolLat": "22.736721",
+            "value": "5.4054"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙岗区五联崇和学校",
+            "schoolLng": "114.245275",
+            "schoolLat": "22.757622",
+            "value": "5.3191"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙岗区龙岗街道凯瑞特学校",
+            "schoolLng": "114.323595",
+            "schoolLat": "22.727493",
+            "value": "7.5188"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙岗区龙岗街道鹏达学校",
+            "schoolLng": "114.273062",
+            "schoolLat": "22.723193",
+            "value": "5.5249"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙岗区龙岗街道龙洲学校",
+            "schoolLng": "114.293529",
+            "schoolLat": "22.726815",
+            "value": "5.7471"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙岗区龙岗街道东珠学校",
+            "schoolLng": "114.306691",
+            "schoolLat": "22.701597",
+            "value": "5.7803"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙岗区龙岗街道名星学校",
+            "schoolLng": "114.301365",
+            "schoolLat": "22.719605",
+            "value": "5.6818"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙岗区龙城街道龙联学校",
+            "schoolLng": "114.260182",
+            "schoolLat": "22.692783",
+            "value": "5.8140"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙岗区华城学校",
+            "schoolLng": "114.253166",
+            "schoolLat": "22.710375",
+            "value": "5.7471"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙岗区龙城街道爱华学校",
+            "schoolLng": "114.240464",
+            "schoolLat": "22.708135",
+            "value": "5.6818"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙岗区龙城街道文龙学校",
+            "schoolLng": "114.229604",
+            "schoolLat": "22.706980",
+            "value": "5.1020"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙岗区龙城街道龙盛学校",
+            "schoolLng": "114.262610",
+            "schoolLat": "22.740410",
+            "value": "5.8140"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙岗区龙城街道兴泰实验学校",
+            "schoolLng": "114.256113",
+            "schoolLat": "22.735904",
+            "value": "5.6818"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙岗区坪地街道同兴学校",
+            "schoolLng": "114.331770",
+            "schoolLat": "22.763907",
+            "value": "5.6180"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙岗区坪地街道坪东学校",
+            "schoolLng": "114.322569",
+            "schoolLat": "22.771250",
+            "value": "5.8824"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙岗区坪地街道惠华学校",
+            "schoolLng": "114.306729",
+            "schoolLat": "22.769557",
+            "value": "5.7143"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙岗区坪地街道坪西学校",
+            "schoolLng": "114.294122",
+            "schoolLat": "22.773166",
+            "value": "5.5249"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "华中师范大学龙岗附属中学(集团)崇真学校",
+            "schoolLng": "114.158806",
+            "schoolLat": "22.682108",
+            "value": "0"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳外国语学校(集团)龙岗学校",
+            "schoolLng": "114.108347",
+            "schoolLat": "22.709034",
+            "value": "0"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙岗区外国语学校(集团)行知学校",
+            "schoolLng": "114.244990",
+            "schoolLat": "22.707390",
+            "value": "0"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙岗区教育科学研究院附属实验学校",
+            "schoolLng": "114.245924",
+            "schoolLat": "22.750502",
+            "value": "0"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳未来双语学校(龙岗)",
+            "schoolLng": "114.264568",
+            "schoolLat": "22.727609",
+            "value": "0"
+        },
+        {
+            "schoolType": "初级中学",
+            "schoolName": "深圳市龙岗区龙城高级中学(教育集团〉龙城初级中学",
+            "schoolLng": "114.246086",
+            "schoolLat": "22.721626",
+            "value": "8.1967"
+        },
+        {
+            "schoolType": "初级中学",
+            "schoolName": "深圳市龙岗区布吉街道龙岭初级中学",
+            "schoolLng": "114.120055",
+            "schoolLat": "22.610899",
+            "value": "6.7114"
+        },
+        {
+            "schoolType": "初级中学",
+            "schoolName": "深圳市龙岗区南湾街道沙湾中学",
+            "schoolLng": "114.169463",
+            "schoolLat": "22.620223",
+            "value": "8.2645"
+        },
+        {
+            "schoolType": "初级中学",
+            "schoolName": "深圳市龙岗区园山实验学校",
+            "schoolLng": "114.230000",
+            "schoolLat": "22.670000",
+            "value": "7.9365"
+        },
+        {
+            "schoolType": "初级中学",
+            "schoolName": "深圳市龙岗区龙岗街道龙岗中学",
+            "schoolLng": "114.286838",
+            "schoolLat": "22.743348",
+            "value": "7.6923"
+        },
+        {
+            "schoolType": "初级中学",
+            "schoolName": "深圳市龙岗区坪地中学",
+            "schoolLng": "114.309256",
+            "schoolLat": "22.772183",
+            "value": "7.8125"
+        },
+        {
+            "schoolType": "初级中学",
+            "schoolName": "深圳市龙岗区百合外国语学校",
+            "schoolLng": "114.128575",
+            "schoolLat": "22.601650",
+            "value": "9.0090"
+        },
+        {
+            "schoolType": "初级中学",
+            "schoolName": "深圳市龙岗区百外世纪初级中学",
+            "schoolLng": "114.130565",
+            "schoolLat": "22.638036",
+            "value": "10.6383"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙华区宝文学校",
+            "schoolLng": "114.084657",
+            "schoolLat": "22.691711",
+            "value": "5.6497"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市龙华区教育科学研究院附属小学",
+            "schoolLng": "114.093347",
+            "schoolLat": "22.706092",
+            "value": "5.1813"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市龙华区鹭湖外国语小学",
+            "schoolLng": "114.061558",
+            "schoolLat": "22.692672",
+            "value": "6.0241"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市龙华区未来小学",
+            "schoolLng": "114.024467",
+            "schoolLat": "22.642431",
+            "value": "5.4945"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市龙华区行知小学",
+            "schoolLng": "114.036507",
+            "schoolLat": "22.641548",
+            "value": "5.6497"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市龙华区民治小学",
+            "schoolLng": "114.038229",
+            "schoolLat": "22.667535",
+            "value": "5.9172"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市龙华区行知实验小学",
+            "schoolLng": "114.052440",
+            "schoolLat": "22.597988",
+            "value": "5.4945"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市龙华区书香小学",
+            "schoolLng": "114.064520",
+            "schoolLat": "22.548663",
+            "value": "5.7803"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市龙华区龙飞小学",
+            "schoolLng": "114.046882",
+            "schoolLat": "22.606886",
+            "value": "6.0241"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市龙华区龙为小学",
+            "schoolLng": "114.038229",
+            "schoolLat": "22.667535",
+            "value": "5.8140"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市龙华区华育小学",
+            "schoolLng": "114.041470",
+            "schoolLat": "22.647530",
+            "value": "5.4054"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市龙华区龙华中心小学",
+            "schoolLng": "114.026915",
+            "schoolLat": "22.664189",
+            "value": "5.4645"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市龙华区松和小学",
+            "schoolLng": "114.047183",
+            "schoolLat": "22.648609",
+            "value": "5.1546"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市龙华区清湖小学",
+            "schoolLng": "114.050424",
+            "schoolLat": "22.676793",
+            "value": "5.3191"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市龙华区龙华第二小学",
+            "schoolLng": "114.017199",
+            "schoolLat": "22.660479",
+            "value": "5.6497"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市龙华区龙华第三小学",
+            "schoolLng": "114.030140",
+            "schoolLat": "22.393706",
+            "value": "5.4945"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市龙华区和平实验小学",
+            "schoolLng": "114.015662",
+            "schoolLat": "22.648812",
+            "value": "5.9524"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市龙华区观澜第二小学",
+            "schoolLng": "114.050663",
+            "schoolLat": "22.712114",
+            "value": "5.5866"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市龙华区碧澜外国语小学",
+            "schoolLng": "114.039378",
+            "schoolLat": "22.744125",
+            "value": "5.8824"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市龙华区广培小学",
+            "schoolLng": "114.093886",
+            "schoolLat": "22.730562",
+            "value": "6.0241"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市龙华区德风小学",
+            "schoolLng": "114.107751",
+            "schoolLat": "22.724122",
+            "value": "5.2083"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市龙华区桂花小学",
+            "schoolLng": "114.066785",
+            "schoolLat": "22.737870",
+            "value": "5.1020"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市龙华区文峰小学",
+            "schoolLng": "114.058989",
+            "schoolLat": "22.704611",
+            "value": "5.2910"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市龙华区墩背小学",
+            "schoolLng": "114.019562",
+            "schoolLat": "22.675941",
+            "value": "5.2632"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市龙华区育英小学",
+            "schoolLng": "114.012903",
+            "schoolLat": "22.662722",
+            "value": "5.3476"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市龙华区元芬小学",
+            "schoolLng": "114.009863",
+            "schoolLat": "22.659439",
+            "value": "4.9751"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙华区振能学校",
+            "schoolLng": "114.076649",
+            "schoolLat": "22.723089",
+            "value": "6.1728"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙华区外国语学校教育集团(总校)",
+            "schoolLng": "114.076910",
+            "schoolLat": "22.695843",
+            "value": "0"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙华区外国语学校教育集团(观湖校区)",
+            "schoolLng": "114.076681",
+            "schoolLat": "22.696788",
+            "value": "6.4103"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙华区外国语学校教育集团高新校区",
+            "schoolLng": "114.070415",
+            "schoolLat": "22.685614",
+            "value": "6.5359"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙华区外国语学校教育集团福城校区",
+            "schoolLng": "114.032566",
+            "schoolLat": "22.700369",
+            "value": "0"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙华区观湖实验学校",
+            "schoolLng": "114.071257",
+            "schoolLat": "22.685769",
+            "value": "5.3476"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙华区民治中学教育集团(总校)",
+            "schoolLng": "114.034290",
+            "schoolLat": "22.635290",
+            "value": "0"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市龙华区民治中学教育集团小学部",
+            "schoolLng": "114.027645",
+            "schoolLat": "22.631915",
+            "value": "5.6818"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙华区民治中学教育集团民新学校",
+            "schoolLng": "114.034743",
+            "schoolLat": "22.630857",
+            "value": "6.2112"
+        },
+        {
+            "schoolType": "初级中学",
+            "schoolName": "深圳市龙华区民治中学教育集团初中部",
+            "schoolLng": "114.034195",
+            "schoolLat": "22.635330",
+            "value": "7.8125"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙华区潜龙学校",
+            "schoolLng": "114.048198",
+            "schoolLat": "22.615337",
+            "value": "6.1350"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙华区玉龙学校",
+            "schoolLng": "114.036704",
+            "schoolLat": "22.609654",
+            "value": "6.2112"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳外国语学校龙华学校",
+            "schoolLng": "114.032395",
+            "schoolLat": "22.599980",
+            "value": "7.1429"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙华区华南实验学校",
+            "schoolLng": "114.057410",
+            "schoolLat": "22.625680",
+            "value": "6.3291"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙华区龙腾学校(总校)",
+            "schoolLng": "114.047767",
+            "schoolLat": "22.611567",
+            "value": "0"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市龙华区龙腾学校北辰校区",
+            "schoolLng": "114.038310",
+            "schoolLat": "22.606282",
+            "value": "5.2083"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙华区龙腾学校主校区",
+            "schoolLng": "114.044898",
+            "schoolLat": "22.609159",
+            "value": "6.3291"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙华区万安学校",
+            "schoolLng": "114.070650",
+            "schoolLat": "22.714022",
+            "value": "5.6497"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "华东师范大学附属深圳龙华学校",
+            "schoolLng": "114.021404",
+            "schoolLat": "22.646414",
+            "value": "6.7114"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙华区教育科学研究院附属实验学校",
+            "schoolLng": "113.997758",
+            "schoolLat": "22.698745",
+            "value": "5.8480"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙华区第二实验学校教育集团(总校)",
+            "schoolLng": "114.031271",
+            "schoolLat": "22.646563",
+            "value": "0"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙华区第二实验学校教育集团华仁校区",
+            "schoolLng": "114.039932",
+            "schoolLat": "22.652221",
+            "value": "5.7143"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙华区第二实验学校教育集团华美校区",
+            "schoolLng": "114.028751",
+            "schoolLat": "22.645861",
+            "value": "5.3763"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙华区创新实验学校",
+            "schoolLng": "114.042371",
+            "schoolLat": "22.662394",
+            "value": "5.9524"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙华区清泉外国语学校",
+            "schoolLng": "114.046240",
+            "schoolLat": "22.668910",
+            "value": "6.0606"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙华区高峰学校",
+            "schoolLng": "114.010234",
+            "schoolLat": "22.690875",
+            "value": "6.6667"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙华区同胜学校",
+            "schoolLng": "113.988250",
+            "schoolLat": "22.686120",
+            "value": "6.1728"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙华区博雅实验学校",
+            "schoolLng": "114.007826",
+            "schoolLat": "22.652436",
+            "value": "6.8027"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙华区大浪实验学校",
+            "schoolLng": "114.006049",
+            "schoolLat": "22.704331",
+            "value": "6.3694"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙华区第三实验学校(总校)",
+            "schoolLng": "114.004003",
+            "schoolLat": "22.705480",
+            "value": "0"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙华区第三实验学校主校区",
+            "schoolLng": "114.004003",
+            "schoolLat": "22.705480",
+            "value": "6.5359"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙华高级中学教育集团大浪校区",
+            "schoolLng": "113.997022",
+            "schoolLat": "22.665082",
+            "value": "6.5789"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙华区第二外国语学校",
+            "schoolLng": "114.010357",
+            "schoolLat": "22.684536",
+            "value": "6.3694"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙华区虔贞学校",
+            "schoolLng": "114.019190",
+            "schoolLat": "22.684830",
+            "value": "6.1350"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "龙华区华盛学校",
+            "schoolLng": "114.015656",
+            "schoolLat": "22.681015",
+            "value": "6.6225"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙华区龙胜实验学校",
+            "schoolLng": "114.070948",
+            "schoolLat": "22.623698",
+            "value": "6.5359"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙华区教育科学研究院附属学校",
+            "schoolLng": "114.034826",
+            "schoolLat": "22.727539",
+            "value": "6.0976"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙华区行知学校",
+            "schoolLng": "114.029383",
+            "schoolLat": "22.716592",
+            "value": "5.7803"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙华区第三外国语学校",
+            "schoolLng": "114.056350",
+            "schoolLat": "22.713420",
+            "value": "5.9880"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙华区福城实验学校",
+            "schoolLng": "114.033470",
+            "schoolLat": "22.715620",
+            "value": "6.0976"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙华区龙澜学校",
+            "schoolLng": "114.022928",
+            "schoolLat": "22.736866",
+            "value": "5.7471"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙华区行知外国语学校",
+            "schoolLng": "114.040271",
+            "schoolLat": "22.751472",
+            "value": "6.9444"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙华区教育科学研究院第二附属学校",
+            "schoolLng": "114.106996",
+            "schoolLat": "22.727580",
+            "value": "7.5188"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙华区观澜实验学校",
+            "schoolLng": "114.110275",
+            "schoolLat": "22.718360",
+            "value": "5.9880"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙华区观澜中心学校",
+            "schoolLng": "114.058818",
+            "schoolLat": "22.720196",
+            "value": "6.0606"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙华区万科双语学校",
+            "schoolLng": "114.063631",
+            "schoolLat": "22.622730",
+            "value": "12.3457"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙华区牛栏前学校",
+            "schoolLng": "114.040070",
+            "schoolLat": "22.639394",
+            "value": "5.7471"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙华区三联永恒学校",
+            "schoolLng": "114.030884",
+            "schoolLat": "22.669444",
+            "value": "5.6818"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙华区龙丰学校",
+            "schoolLng": "114.019016",
+            "schoolLat": "22.666469",
+            "value": "5.8824"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙华区六一学校",
+            "schoolLng": "114.026724",
+            "schoolLat": "22.678779",
+            "value": "5.8480"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙华区锦华实验学校",
+            "schoolLng": "114.013078",
+            "schoolLat": "22.653583",
+            "value": "5.6497"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙华区爱义学校",
+            "schoolLng": "114.010167",
+            "schoolLat": "22.691370",
+            "value": "5.6497"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙华区博文学校",
+            "schoolLng": "114.045205",
+            "schoolLat": "22.688644",
+            "value": "5.8824"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙华区新智学校",
+            "schoolLng": "114.023301",
+            "schoolLat": "22.744133",
+            "value": "5.2632"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙华区锦明学校",
+            "schoolLng": "114.055293",
+            "schoolLat": "22.721618",
+            "value": "5.6818"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙华区爱孚实验学校",
+            "schoolLng": "114.103559",
+            "schoolLat": "22.739536",
+            "value": "5.8140"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙华区博观外国语学校",
+            "schoolLng": "114.082724",
+            "schoolLat": "22.730108",
+            "value": "18.5185"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳中学龙华学校",
+            "schoolLng": "114.040666",
+            "schoolLat": "22.645727",
+            "value": "0"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市艺术高中附属学校",
+            "schoolLng": null,
+            "schoolLat": null,
+            "value": "7.3529"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙华区丹堤实验学校主校区",
+            "schoolLng": "114.061040",
+            "schoolLat": "22.602216",
+            "value": "5.9524"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙华区实验学校教育集团至真校区",
+            "schoolLng": "114.037539",
+            "schoolLat": "22.636777",
+            "value": "6.1728"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙华区教育科学研究院附属外国语学校主校区",
+            "schoolLng": "114.048730",
+            "schoolLat": "22.646310",
+            "value": "6.8966"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙华区科技学校",
+            "schoolLng": "114.070080",
+            "schoolLat": "22.738620",
+            "value": "7.2993"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙华区翰文实验学校",
+            "schoolLng": "114.091594",
+            "schoolLat": "22.714165",
+            "value": "5.9880"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙华区观湖外国语学校",
+            "schoolLng": "114.079652",
+            "schoolLat": "22.713526",
+            "value": "0"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙华区鹭湖实验学校",
+            "schoolLng": "114.081735",
+            "schoolLat": "22.690550",
+            "value": "0"
+        },
+        {
+            "schoolType": "初级中学",
+            "schoolName": "深圳市观澜第二中学",
+            "schoolLng": "114.054853",
+            "schoolLat": "22.712508",
+            "value": "7.6336"
+        },
+        {
+            "schoolType": "初级中学",
+            "schoolName": "深圳市龙华区和平中学",
+            "schoolLng": "114.011459",
+            "schoolLat": "22.639156",
+            "value": "9.1743"
+        },
+        {
+            "schoolType": "初级中学",
+            "schoolName": "深圳市龙华区新华中学教育集团主校区",
+            "schoolLng": "114.039642",
+            "schoolLat": "22.660563",
+            "value": "7.6923"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市格致中学民治校区",
+            "schoolLng": "114.044898",
+            "schoolLat": "22.609159",
+            "value": "7.7519"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市艺术高中民治学校",
+            "schoolLng": "114.027111",
+            "schoolLat": "22.642382",
+            "value": "6.7568"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市龙华中学弘毅校区",
+            "schoolLng": "114.015881",
+            "schoolLat": "22.648706",
+            "value": "5.7803"
+        },
+        {
+            "schoolType": "初级中学",
+            "schoolName": "深圳市龙华高级中学教育集团民治校区",
+            "schoolLng": "114.042026",
+            "schoolLat": "22.610360",
+            "value": "14.4928"
+        },
+        {
+            "schoolType": "初级中学",
+            "schoolName": "深圳市龙华高级中学教育集团观澜校区",
+            "schoolLng": "114.042543",
+            "schoolLat": "22.690469",
+            "value": "7.5758"
+        },
+        {
+            "schoolType": "初级中学",
+            "schoolName": "深圳市红山中学初中部",
+            "schoolLng": "114.013384",
+            "schoolLat": "22.632482",
+            "value": "8.8496"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市坪山区兴华小学",
+            "schoolLng": "114.306430",
+            "schoolLat": "22.679010",
+            "value": "5.0761"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市坪山区东纵小学",
+            "schoolLng": "114.360000",
+            "schoolLat": "22.680000",
+            "value": "6.4103"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市坪山区日新小学",
+            "schoolLng": "114.341466",
+            "schoolLat": "22.694181",
+            "value": "4.6083"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市坪山区科悦实验小学",
+            "schoolLng": "114.302700",
+            "schoolLat": "22.665190",
+            "value": "5.9524"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市坪山区坪山第二小学",
+            "schoolLng": "114.382503",
+            "schoolLat": "22.695504",
+            "value": "6.4935"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市坪山区东门小学",
+            "schoolLng": "114.356090",
+            "schoolLat": "22.693449",
+            "value": "5.8140"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市坪山区六联小学",
+            "schoolLng": "114.346511",
+            "schoolLat": "22.698133",
+            "value": "6.5789"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市坪山区金田小学",
+            "schoolLng": "114.408193",
+            "schoolLat": "22.757735",
+            "value": "5.7803"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市坪山区马峦小学",
+            "schoolLng": "114.359947",
+            "schoolLat": "22.672597",
+            "value": "6.2112"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市坪山区坑梓中心小学",
+            "schoolLng": "114.376183",
+            "schoolLat": "22.741860",
+            "value": "5.8480"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市坪山区龙背小学",
+            "schoolLng": "114.364703",
+            "schoolLat": "22.693918",
+            "value": "6.4516"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市坪山区龙田小学",
+            "schoolLng": "114.365334",
+            "schoolLat": "22.761467",
+            "value": "6.4516"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市坪山区坪山中心小学",
+            "schoolLng": "114.350862",
+            "schoolLat": "22.693336",
+            "value": "6.4516"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市坪山区中山小学",
+            "schoolLng": "114.333683",
+            "schoolLat": "22.679073",
+            "value": "5.8140"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市坪山区锦龙小学",
+            "schoolLng": "116.413486",
+            "schoolLat": "40.094730",
+            "value": "6.4935"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市坪山区坪环学校",
+            "schoolLng": "114.374266",
+            "schoolLat": "22.755331",
+            "value": "5.8480"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市坪山区正阳小学",
+            "schoolLng": "114.387315",
+            "schoolLat": "22.744010",
+            "value": "5.0000"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市坪山区景园外国语学校",
+            "schoolLng": "114.370466",
+            "schoolLat": "22.712359",
+            "value": "12.3457"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市坪山区碧岭实验学校",
+            "schoolLng": "114.295109",
+            "schoolLat": "22.671090",
+            "value": "6.7568"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市坪山区锦绣实验学校",
+            "schoolLng": "114.400000",
+            "schoolLat": "22.730000",
+            "value": "6.1728"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "南方科技大学附属坪山学校",
+            "schoolLng": "114.400000",
+            "schoolLat": "22.750000",
+            "value": "5.9524"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳中学坪山创新学校",
+            "schoolLng": "114.381543",
+            "schoolLat": "22.697747",
+            "value": "6.8966"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市坪山区星辉实验学校",
+            "schoolLng": "114.365376",
+            "schoolLat": "22.758396",
+            "value": "6.1728"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市坪山区秀新学校",
+            "schoolLng": "114.383294",
+            "schoolLat": "22.745000",
+            "value": "6.0976"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市坪山区新合实验学校",
+            "schoolLng": "114.337694",
+            "schoolLat": "22.676898",
+            "value": "6.2893"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市坪山区龙山学校",
+            "schoolLng": "114.336062",
+            "schoolLat": "22.705321",
+            "value": "5.5556"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市坪山区培英学校",
+            "schoolLng": "114.340875",
+            "schoolLat": "22.709728",
+            "value": "6.7114"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "东北师范大学深圳坪山实验学校",
+            "schoolLng": "114.343388",
+            "schoolLat": "22.697502",
+            "value": "6.8027"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市坪山区东部湾区实验学校",
+            "schoolLng": "114.359050",
+            "schoolLat": "22.726700",
+            "value": "6.2500"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市坪山区坪山实验学校",
+            "schoolLng": "114.347354",
+            "schoolLat": "22.713405",
+            "value": "6.6225"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市坪山区科源实验学校",
+            "schoolLng": "114.320733",
+            "schoolLat": "22.675889",
+            "value": "6.4516"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市坪山区同心外国语学校",
+            "schoolLng": "114.387261",
+            "schoolLat": "22.730195",
+            "value": "6.9930"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市坪山区外国语文源学校",
+            "schoolLng": "114.389400",
+            "schoolLat": "22.709000",
+            "value": "6.7568"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市坪山区第二外国语学校",
+            "schoolLng": "114.343700",
+            "schoolLat": "22.684700",
+            "value": "6.4516"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市坪山区博明学校",
+            "schoolLng": "114.369025",
+            "schoolLat": "22.695117",
+            "value": "7.1942"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市坪山区华明星学校",
+            "schoolLng": "114.387575",
+            "schoolLat": "22.751106",
+            "value": "7.1429"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市坪山区秋宝学校",
+            "schoolLng": "114.382450",
+            "schoolLat": "22.761725",
+            "value": "6.1728"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市坪山区精致实验学校",
+            "schoolLng": "114.364490",
+            "schoolLat": "22.740080",
+            "value": "6.2893"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市坪山区弘金地学校",
+            "schoolLng": "114.349302",
+            "schoolLat": "22.682473",
+            "value": "11.3636"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市坪山区树人实验学校",
+            "schoolLng": "114.353900",
+            "schoolLat": "22.679300",
+            "value": "6.9444"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳外国语学校坪山学校",
+            "schoolLng": null,
+            "schoolLat": null,
+            "value": "0"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳实验坪山学校",
+            "schoolLng": null,
+            "schoolLat": null,
+            "value": "0"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市坪山区未来学校",
+            "schoolLng": null,
+            "schoolLat": null,
+            "value": "0"
+        },
+        {
+            "schoolType": "初级中学",
+            "schoolName": "深圳市坪山区坪山中学",
+            "schoolLng": "114.355230",
+            "schoolLat": "22.691557",
+            "value": "8.5470"
+        },
+        {
+            "schoolType": "初级中学",
+            "schoolName": "深圳市坪山区光祖中学",
+            "schoolLng": "114.375918",
+            "schoolLat": "22.750591",
+            "value": "8.0645"
+        },
+        {
+            "schoolType": "初级中学",
+            "schoolName": "深圳市坪山区中山中学",
+            "schoolLng": "114.338611",
+            "schoolLat": "22.685234",
+            "value": "8.1301"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市光明区红花山小学",
+            "schoolLng": "113.891073",
+            "schoolLat": "22.785275",
+            "value": "6.7114"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市光明区东宝纪念小学",
+            "schoolLng": "113.893172",
+            "schoolLat": "22.795574",
+            "value": "6.4935"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市光明区光明小学",
+            "schoolLng": "113.953323",
+            "schoolLat": "22.762294",
+            "value": "6.7114"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市光明区楼村小学",
+            "schoolLng": "113.936423",
+            "schoolLat": "22.787343",
+            "value": "6.1350"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市光明区公明第二小学",
+            "schoolLng": "113.900075",
+            "schoolLat": "22.794848",
+            "value": "6.1350"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市光明区公明第一小学",
+            "schoolLng": "113.893262",
+            "schoolLat": "22.788347",
+            "value": "6.2500"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市光明区东周小学",
+            "schoolLng": "113.946481",
+            "schoolLat": "22.764089",
+            "value": "6.2893"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市光明区田寮小学",
+            "schoolLng": "113.907388",
+            "schoolLat": "22.734660",
+            "value": "6.1350"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市光明区马田小学",
+            "schoolLng": "113.884714",
+            "schoolLat": "22.787828",
+            "value": "6.3291"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市光明区明达小学",
+            "schoolLng": "113.905079",
+            "schoolLat": "22.786469",
+            "value": "0"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳外国语学校(集团)光明学校",
+            "schoolLng": "113.891845",
+            "schoolLat": "22.808733",
+            "value": "10.4167"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳中学光明科学城学校",
+            "schoolLng": "113.945419",
+            "schoolLat": "22.755775",
+            "value": "7.1429"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市光明区科育学校",
+            "schoolLng": "113.871540",
+            "schoolLat": "22.787540",
+            "value": "8.9286"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市光明区尔雅学校",
+            "schoolLng": "113.904613",
+            "schoolLat": "22.799704",
+            "value": "6.9444"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市光明区培英文武实验学校",
+            "schoolLng": "113.917037",
+            "schoolLat": "22.790812",
+            "value": "5.6497"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市光明区诚铭学校",
+            "schoolLng": "113.952287",
+            "schoolLat": "22.801554",
+            "value": "6.1350"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市光明区春蕾学校",
+            "schoolLng": "113.903253",
+            "schoolLat": "22.793339",
+            "value": "5.1546"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市光明区凤凰培英文武实验学校",
+            "schoolLng": "113.907455",
+            "schoolLat": "22.756571",
+            "value": "5.6180"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市光明区荔林学校",
+            "schoolLng": "113.896356",
+            "schoolLat": "22.743472",
+            "value": "6.8027"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市光明区英才学校",
+            "schoolLng": "113.884239",
+            "schoolLat": "22.773562",
+            "value": "5.2910"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市光明区民众学校",
+            "schoolLng": "113.920560",
+            "schoolLat": "22.774297",
+            "value": "5.7143"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市光明区博华学校",
+            "schoolLng": "113.901575",
+            "schoolLat": "22.751690",
+            "value": "5.6180"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市光明区精华学校",
+            "schoolLng": "113.906873",
+            "schoolLat": "22.742069",
+            "value": "5.5866"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市教育科学研究院实验学校(光明)",
+            "schoolLng": "113.928074",
+            "schoolLat": "22.785932",
+            "value": "6.8493"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳实验光明学校",
+            "schoolLng": "113.900000",
+            "schoolLat": "22.750000",
+            "value": "6.9444"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市光明区公明中英文学校",
+            "schoolLng": "113.915467",
+            "schoolLat": "22.784317",
+            "value": "7.8125"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市光明区外国语学校",
+            "schoolLng": "113.571121",
+            "schoolLat": "22.441130",
+            "value": "6.5789"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市光明区玉律学校",
+            "schoolLng": "113.901687",
+            "schoolLat": "22.725203",
+            "value": "6.5789"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市光明区实验学校",
+            "schoolLng": "113.916841",
+            "schoolLat": "22.761957",
+            "value": "6.5789"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "华中师范大学附属光明勤诚达学校",
+            "schoolLng": "113.910000",
+            "schoolLat": "22.720000",
+            "value": "6.7114"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市光明区凤凰城实验学校",
+            "schoolLng": "113.930000",
+            "schoolLat": "22.730000",
+            "value": "6.2500"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市光明区百花实验学校",
+            "schoolLng": "113.940000",
+            "schoolLat": "22.760000",
+            "value": "7.0922"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "南方科技大学附属光明凤凰学校",
+            "schoolLng": "113.953761",
+            "schoolLat": "22.745421",
+            "value": "6.8966"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市光明区理创实验学校",
+            "schoolLng": "113.521416",
+            "schoolLat": "22.470220",
+            "value": "6.2112"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市光明区李松蓢学校",
+            "schoolLng": "113.896792",
+            "schoolLat": "22.808335",
+            "value": "7.1942"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市光明区长圳学校",
+            "schoolLng": "113.925351",
+            "schoolLat": "22.724269",
+            "value": "6.6225"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "中山大学深圳附属学校",
+            "schoolLng": "113.945618",
+            "schoolLat": "22.790464",
+            "value": "6.8027"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "南方科技大学附属光明荔园学校",
+            "schoolLng": null,
+            "schoolLat": null,
+            "value": "0"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳大学附属光明学校",
+            "schoolLng": "113.931793",
+            "schoolLat": "22.729223",
+            "value": "0"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市光明区楼村第二学校",
+            "schoolLng": "113.929336",
+            "schoolLat": "22.775046",
+            "value": "0"
+        },
+        {
+            "schoolType": "初级中学",
+            "schoolName": "深圳市光明区长育学校",
+            "schoolLng": "113.925496",
+            "schoolLat": "22.728103",
+            "value": "7.8740"
+        },
+        {
+            "schoolType": "初级中学",
+            "schoolName": "深圳技术大学附属学校(光明)",
+            "schoolLng": "113.901687",
+            "schoolLat": "22.725203",
+            "value": "7.3529"
+        },
+        {
+            "schoolType": "初级中学",
+            "schoolName": "深圳市光明区华夏中学",
+            "schoolLng": "113.930000",
+            "schoolLat": "22.760000",
+            "value": "7.8740"
+        },
+        {
+            "schoolType": "初级中学",
+            "schoolName": "深圳市光明区公明中学",
+            "schoolLng": "113.905079",
+            "schoolLat": "22.786469",
+            "value": "7.9365"
+        },
+        {
+            "schoolType": "初级中学",
+            "schoolName": "深圳市光明区第二中学",
+            "schoolLng": "113.532989",
+            "schoolLat": "22.463863",
+            "value": "7.6923"
+        },
+        {
+            "schoolType": "初级中学",
+            "schoolName": "深圳小学光明学校(集团)中心校区",
+            "schoolLng": "113.945089",
+            "schoolLat": "22.769508",
+            "value": "0"
+        },
+        {
+            "schoolType": "初级中学",
+            "schoolName": "深圳市光明区合水口实验学校",
+            "schoolLng": "113.881649",
+            "schoolLat": "22.793119",
+            "value": "0"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市大鹏新区大鹏第二小学",
+            "schoolLng": "114.514928",
+            "schoolLat": "22.597680",
+            "value": "7.0423"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市大鹏新区溪涌小学",
+            "schoolLng": "114.368238",
+            "schoolLat": "22.617507",
+            "value": "15.8730"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "大鹏外国语小学",
+            "schoolLng": "114.438497",
+            "schoolLat": "22.634061",
+            "value": "5.9880"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市大鹏新区大鹏中心小学",
+            "schoolLng": "114.484719",
+            "schoolLat": "22.605120",
+            "value": "6.4516"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市大鹏新区葵涌第二小学",
+            "schoolLng": "114.422299",
+            "schoolLat": "22.637304",
+            "value": "6.5359"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市大鹏新区葵涌中心小学",
+            "schoolLng": "114.431919",
+            "schoolLat": "22.640248",
+            "value": "7.1942"
+        },
+        {
+            "schoolType": "小学",
+            "schoolName": "深圳市大鹏新区南澳中心小学",
+            "schoolLng": "114.502437",
+            "schoolLat": "22.541046",
+            "value": "8.1301"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳亚迪学校",
+            "schoolLng": "114.443345",
+            "schoolLat": "22.639717",
+            "value": "7.7519"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市大鹏新区布新学校",
+            "schoolLng": "114.493555",
+            "schoolLat": "22.582261",
+            "value": "6.4516"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳市大鹏新区星宇学校",
+            "schoolLng": "114.440822",
+            "schoolLat": "22.636293",
+            "value": "6.3694"
+        },
+        {
+            "schoolType": "九年一贯制学校",
+            "schoolName": "深圳中学大鹏学校",
+            "schoolLng": "114.481323",
+            "schoolLat": "22.603795",
+            "value": "8.5470"
+        },
+        {
+            "schoolType": "初级中学",
+            "schoolName": "深圳市大鹏新区葵涌中学",
+            "schoolLng": "114.428210",
+            "schoolLat": "22.631572",
+            "value": "7.8740"
+        },
+        {
+            "schoolType": "初级中学",
+            "schoolName": "深圳市大鹏新区南澳中学",
+            "schoolLng": "114.500671",
+            "schoolLat": "22.541701",
+            "value": "13.1579"
+        }
+    ]
+}
