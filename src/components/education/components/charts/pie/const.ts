@@ -15,6 +15,9 @@ export const pieColors = [
     "rgba(34, 118, 252, 1)",
     "rgba(234, 34, 252, 1)" ,
     "rgba(89, 149, 184, 1)" ,
+    "rgb(170, 192, 161)" ,
+    "rgba(181, 167, 212, 1)",
+    "rgba(207, 228, 92, 1)",
 ];
 export const pieTitleOptions: EChartsOption["title"] = {
     text: "0",
@@ -132,6 +135,18 @@ export const innerGraphicColors: LinearGradient[] = [
     new graphic.LinearGradient(0, 0, 0, 1, [
         { offset: 0, color: "rgba(34, 118, 252, 0.20)" },
         { offset: 1, color: "rgba(89, 149, 184, 1)" },
+    ]),
+    new graphic.LinearGradient(0, 0, 0, 1, [
+        { offset: 0, color: "rgba(34, 118, 252, 0.20)" },
+        { offset: 1, color: "rgba(170, 192, 161, 1)" },
+    ]),
+    new graphic.LinearGradient(0, 0, 0, 1, [
+        { offset: 0, color: "rgba(34, 118, 252, 0.20)" },
+        { offset: 1, color: "rgba(181, 167, 212, 1)" },
+    ]),
+    new graphic.LinearGradient(0, 0, 0, 1, [
+        { offset: 0, color: "rgba(34, 118, 252, 0.20)" },
+        { offset: 1, color: "rgba(207, 228, 92, 1)" },
     ]),
 ];
 
