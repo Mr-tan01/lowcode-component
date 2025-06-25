@@ -12,7 +12,10 @@ const p = [
   "rgba(222, 130, 57, 1)",
   "rgba(34, 118, 252, 1)",
   "rgba(234, 34, 252, 1)",
-  "rgba(89, 149, 184, 1)"
+  "rgba(89, 149, 184, 1)",
+  "rgb(170, 192, 161)",
+  "rgba(181, 167, 212, 1)",
+  "rgba(207, 228, 92, 1)"
 ], h = {
   text: "0",
   subtext: "总数",
@@ -63,7 +66,7 @@ const p = [
         </div>
       `;
   }
-}, m = {
+}, L = {
   show: !1,
   orient: "vertical",
   left: "left",
@@ -121,6 +124,18 @@ const p = [
   new e.LinearGradient(0, 0, 0, 1, [
     { offset: 0, color: "rgba(34, 118, 252, 0.20)" },
     { offset: 1, color: "rgba(89, 149, 184, 1)" }
+  ]),
+  new e.LinearGradient(0, 0, 0, 1, [
+    { offset: 0, color: "rgba(34, 118, 252, 0.20)" },
+    { offset: 1, color: "rgba(170, 192, 161, 1)" }
+  ]),
+  new e.LinearGradient(0, 0, 0, 1, [
+    { offset: 0, color: "rgba(34, 118, 252, 0.20)" },
+    { offset: 1, color: "rgba(181, 167, 212, 1)" }
+  ]),
+  new e.LinearGradient(0, 0, 0, 1, [
+    { offset: 0, color: "rgba(34, 118, 252, 0.20)" },
+    { offset: 1, color: "rgba(207, 228, 92, 1)" }
   ])
 ], c = {
   name: "pie",
@@ -165,12 +180,12 @@ const p = [
     length2: 0,
     maxSurfaceAngle: 0
   }
-}, u = l({}, c, s);
+}, m = l({}, c, s);
 export {
   g as innerGraphicColors,
-  u as innerLabelSeries1,
+  m as innerLabelSeries1,
   p as pieColors,
-  m as pieLegend,
+  L as pieLegend,
   c as pieSeriesRecord,
   h as pieTitleOptions,
   w as pieTooltipOptions
