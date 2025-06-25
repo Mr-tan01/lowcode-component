@@ -102,7 +102,7 @@ const p = [
     { offset: 1, color: "rgba(238, 111, 124, 1)" }
   ]),
   new e.LinearGradient(0, 0, 0, 1, [
-    { offset: 0, color: "rgba(255, 196, 34, 1)" },
+    { offset: 0, color: "rgba(255, 196, 34, 0.20)" },
     { offset: 1, color: "rgba(255, 121, 12, 1)" }
   ]),
   new e.LinearGradient(0, 0, 0, 1, [
