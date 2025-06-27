@@ -4,12 +4,12 @@
             <LcHeader v-model:index="hideArrorIndex" hideArrow :nav-datas="defNavData"></LcHeader>
         </DemoHelpBox>
         <DemoHelpBox rswidth="100%" :code="demoCodes.code2">
-            <LcHeader v-model:index="headerIndex" :nav-datas="defNavData"></LcHeader>
+            <LcHeader v-model:index="headerIndex" :nav-datas="defNavData" :highlightHandler="customHighlightHandler"></LcHeader>
         </DemoHelpBox>
     </div>
 </template>
 <script lang="ts" setup>
-import { LcHeader } from "@/components/education/components/header";
+import { LcHeader, type NavData } from "@/components/education/components/header";
 import { demoCodes } from "./demo-codes";
 import { ref } from "vue";
 import { DemoHelpBox } from "@/components/common/DemoHelpBox";
@@ -34,7 +34,7 @@ const defNavData = [
                 children: [
                     {
                         label: "数据概览",
-                        path: "",
+                        path: "a",
                     },
                 ],
             },
@@ -43,15 +43,11 @@ const defNavData = [
                 children: [
                     {
                         label: "基础教育教师队伍结构",
-                        path: "",
+                        path: "b",
                     },
                     {
                         label: "基础教育校长队伍",
-                        path: "",
-                    },
-                    {
-                        label: "基础教育交流轮岗",
-                        path: "",
+                        path: "c",
                     },
                     {
                         label: "基础教育交流轮岗",
@@ -91,6 +87,11 @@ const defNavData = [
         path: "/join",
     },
 ];
+
+// 自定义高亮
+function customHighlightHandler(item: NavData) {
+    return '基础教育教师队伍结构';
+}
 </script>
 
 <style lang="scss" scoped>

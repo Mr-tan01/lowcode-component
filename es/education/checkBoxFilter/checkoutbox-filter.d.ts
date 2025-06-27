@@ -2,6 +2,7 @@ import { PropType } from 'vue';
 export type FilterItem = {
     label: string;
     value: number | string;
+    disabled?: boolean;
 };
 export type FilterList = {
     label: string;

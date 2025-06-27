@@ -24,6 +24,7 @@ const dataList = [
             {
                 label: "全部",
                 value: "2",
+                disabled: true,
             },
             {
                 label: "已选",

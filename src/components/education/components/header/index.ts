@@ -6,3 +6,5 @@ export {
     LcHeader,
     type LcHeaderType,
 };
+
+export * from './header.vue';

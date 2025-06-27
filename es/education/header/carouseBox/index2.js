@@ -1,22 +1,23 @@
-import { defineComponent as ne, mergeModels as O, mergeDefaults as re, useCssVars as le, ref as x, useModel as N, computed as d, shallowRef as B, watch as X, nextTick as j, onMounted as G, openBlock as m, createElementBlock as b, createElementVNode as c, unref as p, createCommentVNode as R, normalizeClass as I, normalizeStyle as se, Fragment as ie, renderList as ue, renderSlot as J, mergeProps as fe, toDisplayString as ce } from "vue";
+import { defineComponent as oe, mergeModels as O, mergeDefaults as re, useCssVars as le, ref as x, useModel as N, computed as d, shallowRef as B, watch as X, nextTick as j, onMounted as G, openBlock as m, createElementBlock as b, createElementVNode as f, unref as C, createCommentVNode as R, normalizeClass as I, normalizeStyle as ue, Fragment as se, renderList as ie, renderSlot as J, mergeProps as ce, toDisplayString as fe } from "vue";
 import ve from "./images/lt-arrow.png.js";
 import de from "./images/rt-arrow.png.js";
 import me from "./images/top-arrow.png.js";
 import Q from "lodash-es/throttle";
 import be from "lodash-es/debounce";
-import { propsRaw as pe } from "./props.js";
-const _e = { class: "lc-carouse-box" }, we = { class: "lc-carouse-box__wrapper" }, ge = ["onClick"], Ce = ["title"], he = {
+import { propsRaw as Ce } from "./props.js";
+const pe = { class: "lc-carouse-box" }, we = { class: "lc-carouse-box__wrapper" }, ge = ["onClick"], he = ["title"], ke = {
   key: 0,
   class: "lc-carouse-box__track"
-}, We = /* @__PURE__ */ ne({
+}, We = /* @__PURE__ */ oe({
   __name: "carouseBox",
-  props: /* @__PURE__ */ O(/* @__PURE__ */ re(pe, {
+  props: /* @__PURE__ */ O(/* @__PURE__ */ re(Ce, {
     offsetAnimationTime: 250,
-    rowKey: (n) => n.value ?? Math.random(),
+    rowKey: (a) => a.value ?? Math.random(),
     __skip_rowKey: !0,
     showTrack: !0,
     gap: 10,
-    disabled: !1
+    disabled: !1,
+    backCenter: !0
   }), {
     index: { default: -1 },
     indexModifiers: {},
@@ -24,21 +25,21 @@ const _e = { class: "lc-carouse-box" }, we = { class: "lc-carouse-box__wrapper" 
     valueModifiers: {}
   }),
   emits: /* @__PURE__ */ O(["change"], ["update:index", "update:value"]),
-  setup(n, { emit: U }) {
+  setup(a, { emit: U }) {
     var P;
     le((t) => ({
-      "0b2dc919": t.gap,
-      "37e3e6e1": t.offsetAnimationTime
+      "0cbcbb43": t.gap,
+      "2d2d450b": t.offsetAnimationTime
     }));
-    const l = x(0), _ = x(!0), v = N(n, "index"), W = N(n, "value"), u = d(() => n.list ?? []), M = d(() => !n.disabled);
-    v.value === -1 && (v.value = ((P = u.value) == null ? void 0 : P.findIndex((t) => n.rowKey(t) === W.value)) ?? 0);
-    const Y = U, i = x({
+    const l = x(0), p = x(!0), v = N(a, "index"), W = N(a, "value"), i = d(() => a.list ?? []), M = d(() => !a.disabled);
+    v.value === -1 && (v.value = ((P = i.value) == null ? void 0 : P.findIndex((t) => a.rowKey(t) === W.value)) ?? 0);
+    const Y = U, s = x({
       before: [],
       after: [],
       appendCount: 0
     }), g = d(() => {
-      const t = u.value ?? [];
-      return [...i.value.before, ...t, ...i.value.after];
+      const t = i.value ?? [];
+      return [...s.value.before, ...t, ...s.value.after];
     }), E = d(() => l.value % 2 === 0);
     function D() {
       l.value = v.value;
@@ -47,14 +48,14 @@ const _e = { class: "lc-carouse-box" }, we = { class: "lc-carouse-box__wrapper" 
     function K(t) {
       return Q(() => {
         let e = l.value + t;
-        e < 0 ? e = g.value.length - 1 : e >= g.value.length && (e = 0), y(g.value[e], e);
-      }, n.offsetAnimationTime);
+        e < 0 ? e = g.value.length - 1 : e >= g.value.length && (e = 0), T(g.value[e], e);
+      }, a.offsetAnimationTime);
     }
-    const $ = K(-1), z = K(1), C = B([]), w = B(), k = B(), S = x(0);
+    const $ = K(-1), z = K(1), h = B([]), w = B(), _ = B(), S = x(0);
     X(
-      () => n.list,
+      () => a.list,
       () => {
-        F(), j(T);
+        F(), j(A);
       },
       {
         deep: 1
@@ -64,22 +65,22 @@ const _e = { class: "lc-carouse-box" }, we = { class: "lc-carouse-box__wrapper" 
       () => {
         H();
       }
-    ), G(T);
-    function T() {
-      if (!h.value) return;
-      const { maxAppendCount: t } = h.value, e = t;
+    ), G(A);
+    function A() {
+      if (!k.value) return;
+      const { maxAppendCount: t } = k.value, e = t;
       if (e === 0) return;
-      if (i.value.appendCount = e, D(), l.value += e, n.disabled) {
-        i.value.before = [], i.value.after = [];
+      if (s.value.appendCount = e, D(), l.value += e, a.disabled) {
+        s.value.before = [], s.value.after = [];
         return;
       }
-      const a = u.value ?? [];
-      i.value.before = a.slice(-e).map(V), i.value.after = a.slice(0, e).map(V);
+      const n = i.value ?? [];
+      s.value.before = n.slice(-e).map(V), s.value.after = n.slice(0, e).map(V);
     }
     function V(t, e) {
       return {
         ...t,
-        value: n.rowKey(t) + "_clone_" + e + "_" + Date.now()
+        value: a.rowKey(t) + "_clone_" + e + "_" + Date.now()
       };
     }
     function F() {
@@ -89,37 +90,37 @@ const _e = { class: "lc-carouse-box" }, we = { class: "lc-carouse-box__wrapper" 
       if (!window.ResizeObserver || !w.value) return;
       new ResizeObserver(
         be(() => {
-          F(), T();
-        }, n.offsetAnimationTime)
+          F(), A();
+        }, a.offsetAnimationTime)
       ).observe(w.value);
     }
     G(H);
-    const h = d(() => {
+    const k = d(() => {
       var q;
-      if (S.value++, !w.value || !C.value || !k.value) return;
+      if (S.value++, !w.value || !h.value || !_.value) return;
       const t = w.value.offsetWidth, e = {
         normal: 0,
         active: 0
       };
-      for (let A = 0; A <= C.value.length; A++) {
-        const f = C.value[A];
-        if ((q = f == null ? void 0 : f.classList) != null && q.contains("active") ? e.active = f.offsetWidth : e.normal = f == null ? void 0 : f.offsetWidth, e.active && e.normal)
+      for (let y = 0; y <= h.value.length; y++) {
+        const c = h.value[y];
+        if ((q = c == null ? void 0 : c.classList) != null && q.contains("active") ? e.active = c.offsetWidth : e.normal = c == null ? void 0 : c.offsetWidth, e.active && e.normal)
           break;
       }
-      const a = e.normal, o = e.active, r = t / a, s = r, ae = n.disabled ? 0 : Math.round(r), oe = k.value.offsetWidth;
+      const n = e.normal, o = e.active, r = t / n, u = r, ae = a.disabled ? 0 : Math.round(r), ne = _.value.offsetWidth;
       return {
-        normalButtonWidth: a,
-        maxButtonCount: s,
-        carouselWidth: oe,
-        maxAppendCount: ae,
-        offset: o / 2
+        normalButtonWidth: a.backCenter ? n : 0,
+        maxButtonCount: a.backCenter ? u : 0,
+        carouselWidth: a.backCenter ? ne : 0,
+        maxAppendCount: a.backCenter ? ae : 0,
+        offset: a.backCenter ? o / 2 : 0
         // 加上选中的按钮宽度一半, 让选中的按钮在中心点
       };
     }), Z = d(() => {
-      if (h.value) {
-        const { normalButtonWidth: t, maxButtonCount: e, offset: a, carouselWidth: o } = h.value, r = e / 2;
-        let s = (t * (l.value - r) + a) * -1;
-        return s >= 0 ? s = 0 : s <= -o + t * e && (s = -o + t * e), s;
+      if (k.value) {
+        const { normalButtonWidth: t, maxButtonCount: e, offset: n, carouselWidth: o } = k.value, r = e / 2;
+        let u = (t * (l.value - r) + n) * -1;
+        return u >= 0 ? u = 0 : u <= -o + t * e && (u = -o + t * e), u;
       }
       return 0;
     });
@@ -128,40 +129,40 @@ const _e = { class: "lc-carouse-box" }, we = { class: "lc-carouse-box__wrapper" 
     }
     function te(t, e = !0) {
       ee(() => {
-        e ? j(setTimeout.bind(null, t, n.offsetAnimationTime)) : setTimeout(t, n.offsetAnimationTime);
+        e ? j(setTimeout.bind(null, t, a.offsetAnimationTime)) : setTimeout(t, a.offsetAnimationTime);
       });
     }
     function L(t) {
       te(() => {
-        _.value = !1, l.value = t;
+        p.value = !1, l.value = t;
       }, !1);
     }
-    const y = Q((t, e) => {
-      if (n.disabled) return;
-      _.value || (_.value = !0);
-      const a = i.value.appendCount;
-      let o = e - a;
+    const T = Q((t, e) => {
+      if (a.disabled) return;
+      p.value || (p.value = !0);
+      const n = s.value.appendCount;
+      let o = e - n;
       if (v.value == o) return;
-      l.value = e, o < 0 ? (L(u.value.length + o + a), o = u.value.length - 1) : o >= u.value.length && (L(a), o = 0), v.value = o;
-      const r = u.value[o];
+      l.value = e, o < 0 ? (L(i.value.length + o + n), o = i.value.length - 1) : o >= i.value.length && (L(n), o = 0), v.value = o;
+      const r = i.value[o];
       W.value = r == null ? void 0 : r.value;
-      const s = {
+      const u = {
         index: o,
         label: r == null ? void 0 : r.label,
         value: r == null ? void 0 : r.value,
         data: r
       };
-      Y("change", s);
-    }, n.offsetAnimationTime);
-    return (t, e) => (m(), b("div", _e, [
-      c("div", we, [
+      Y("change", u);
+    }, a.offsetAnimationTime);
+    return (t, e) => (m(), b("div", pe, [
+      f("div", we, [
         M.value ? (m(), b("div", {
           key: 0,
           class: "lc-carouse-box__wrapper__arrow arrow--left",
           onClick: e[0] || (e[0] = //@ts-ignore
-          (...a) => p($) && p($)(...a))
+          (...n) => C($) && C($)(...n))
         }, e[2] || (e[2] = [
-          c(
+          f(
             "img",
             {
               class: "lc-carouse-box__wrapper__arrow--image",
@@ -174,7 +175,7 @@ const _e = { class: "lc-carouse-box" }, we = { class: "lc-carouse-box__wrapper" 
             /* HOISTED */
           )
         ]))) : R("v-if", !0),
-        c(
+        f(
           "div",
           {
             class: "lc-carouse-box__wrapper__tabs",
@@ -182,31 +183,31 @@ const _e = { class: "lc-carouse-box" }, we = { class: "lc-carouse-box__wrapper" 
             ref: w
           },
           [
-            c(
+            f(
               "div",
               {
-                class: I(["lc-carouse-box__wrapper__tabs--train", { "is-transition": _.value }]),
-                style: se({ "--carousel-offset": `translateX(${Z.value}px)` }),
+                class: I(["lc-carouse-box__wrapper__tabs--train", { "is-transition": p.value }]),
+                style: ue({ "--carousel-offset": `translateX(${Z.value}px)` }),
                 ref_key: "carouselTrainElRef",
-                ref: k
+                ref: _
               },
               [
                 (m(!0), b(
-                  ie,
+                  se,
                   null,
-                  ue(g.value, (a, o) => (m(), b("button", {
+                  ie(g.value, (n, o) => (m(), b("button", {
                     class: I(["lc-carouse-box__wrapper__tabs--train__button", { active: l.value === o, "is-even": E.value }]),
-                    key: t.rowKey(a),
-                    onClick: (r) => p(y)(a, o),
+                    key: t.rowKey(n),
+                    onClick: (r) => C(T)(n, o),
                     ref_for: !0,
                     ref_key: "tabButtonRef",
-                    ref: C
+                    ref: h
                   }, [
-                    J(t.$slots, "default", fe({ ref_for: !0 }, { record: a, isActive: l.value === o, isEven: E.value, isTransition: _.value, index: o, handleClick: p(y) }), () => [
-                      c("div", {
+                    J(t.$slots, "default", ce({ ref_for: !0 }, { record: n, isActive: l.value === o, isEven: E.value, isTransition: p.value, index: o, handleClick: C(T) }), () => [
+                      f("div", {
                         class: "lc-carouse-box__wrapper__tabs--train__button--text",
-                        title: a.label
-                      }, ce(a.label), 9, Ce)
+                        title: n.label
+                      }, fe(n.label), 9, he)
                     ], !0)
                   ], 10, ge))),
                   128
@@ -224,9 +225,9 @@ const _e = { class: "lc-carouse-box" }, we = { class: "lc-carouse-box__wrapper" 
           key: 1,
           class: "lc-carouse-box__wrapper__arrow arrow--right",
           onClick: e[1] || (e[1] = //@ts-ignore
-          (...a) => p(z) && p(z)(...a))
+          (...n) => C(z) && C(z)(...n))
         }, e[3] || (e[3] = [
-          c(
+          f(
             "img",
             {
               class: "lc-carouse-box__wrapper__arrow--image",
@@ -240,9 +241,9 @@ const _e = { class: "lc-carouse-box" }, we = { class: "lc-carouse-box__wrapper" 
           )
         ]))) : R("v-if", !0)
       ]),
-      t.showTrack ? (m(), b("div", he, [
+      t.showTrack ? (m(), b("div", ke, [
         J(t.$slots, "track", {}, () => [
-          e[4] || (e[4] = c(
+          e[4] || (e[4] = f(
             "img",
             {
               class: "lc-carouse-box__track__image--pointer",

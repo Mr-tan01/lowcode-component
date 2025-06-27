@@ -1,87 +1,93 @@
-import { defineComponent as j, mergeModels as h, useModel as A, computed as M, openBlock as t, createElementBlock as o, createElementVNode as e, renderSlot as f, createVNode as g, unref as w, withCtx as n, normalizeClass as S, toDisplayString as c, Fragment as x, renderList as b, createCommentVNode as V } from "vue";
-import E from "./images/right-arrow.png.js";
-import { NPopover as L } from "naive-ui/es/popover";
-import z from "./carouseBox/index.js";
-const F = { class: "lcc-header" }, I = { class: "lcc-header__prefix-slot" }, P = { class: "lcc-header__wrapper" }, U = { class: "lcc-header__wrapper__navs" }, q = ["onClick"], G = {
+import { defineComponent as S, mergeModels as f, ref as V, useModel as A, computed as E, onMounted as F, openBlock as o, createElementBlock as l, createElementVNode as e, renderSlot as w, createVNode as b, unref as x, withCtx as p, normalizeClass as C, toDisplayString as h, Fragment as k, renderList as y, createCommentVNode as H } from "vue";
+import L from "./images/right-arrow.png.js";
+import { NPopover as z } from "naive-ui/es/popover";
+import I from "./carouseBox/index.js";
+const P = { class: "lcc-header" }, U = { class: "lcc-header__prefix-slot" }, q = { class: "lcc-header__wrapper" }, G = { class: "lcc-header__wrapper__navs" }, J = ["onClick"], K = {
   key: 0,
   class: "lcc-header__wrapper__navs__drop"
-}, H = { class: "lcc-header__wrapper__navs__drop__group__label" }, J = ["title"], K = { class: "lcc-header__wrapper__navs__drop__group__item__group" }, O = ["onClick"], Q = { class: "lcc-header__suffix-slot" }, Z = /* @__PURE__ */ j({
+}, O = { class: "lcc-header__wrapper__navs__drop__group__label" }, Q = ["title"], R = { class: "lcc-header__wrapper__navs__drop__group__item__group" }, T = ["onClick"], W = { class: "lcc-header__suffix-slot" }, re = /* @__PURE__ */ S({
   __name: "header",
-  props: /* @__PURE__ */ h({
+  props: /* @__PURE__ */ f({
     navDatas: {},
-    hideArrow: { type: Boolean }
+    hideArrow: { type: Boolean },
+    highlightHandler: { type: Function }
   }, {
     index: { default: 0 },
     indexModifiers: {}
   }),
-  emits: /* @__PURE__ */ h(["jump", "scroll"], ["update:index"]),
-  setup(l, { emit: C }) {
-    const p = A(l, "index"), k = M(() => l.navDatas === void 0 ? [] : l.navDatas), u = C;
-    function v({ parent: _, item: a, index: s, handleClick: r }) {
-      _ && !l.hideArrow && (r == null || r(_, s)), u("jump", { parent: _, item: a, index: s });
+  emits: /* @__PURE__ */ f(["jump", "scroll"], ["update:index"]),
+  setup(t, { emit: $ }) {
+    const i = V(), v = A(t, "index"), B = E(() => t.navDatas === void 0 ? [] : t.navDatas);
+    F(() => {
+      i.value = window.location.hash.substring(1);
+    });
+    const m = $;
+    function g({ parent: a, item: r, index: s, handleClick: _ }) {
+      var n;
+      i.value = ((n = t.highlightHandler) == null ? void 0 : n.call(t, r)) ?? r.path, a && !t.hideArrow && (_ == null || _(a, s)), m("jump", { parent: a, item: r, index: s });
     }
-    function $(_) {
-      u("scroll", _);
+    function D(a) {
+      m("scroll", a);
     }
-    return (_, a) => (t(), o("div", F, [
-      e("div", I, [
-        f(_.$slots, "prefix", {}, void 0, !0)
+    return (a, r) => (o(), l("div", P, [
+      e("div", U, [
+        w(a.$slots, "prefix", {}, void 0, !0)
       ]),
-      e("div", P, [
-        e("div", U, [
-          g(w(z), {
-            disabled: _.hideArrow,
-            list: k.value,
+      e("div", q, [
+        e("div", G, [
+          b(x(I), {
+            disabled: a.hideArrow,
+            list: B.value,
             "show-track": !1,
-            index: p.value,
-            "onUpdate:index": a[0] || (a[0] = (s) => p.value = s),
-            onChange: $
+            index: v.value,
+            "onUpdate:index": r[0] || (r[0] = (s) => v.value = s),
+            onChange: D
           }, {
-            default: n(({ index: s, record: r, isActive: y, handleClick: B }) => [
+            default: p(({ index: s, record: _, isActive: n, handleClick: M }) => [
               e(
                 "div",
                 {
-                  class: S(["lcc-header__wrapper__navs__item", {
-                    active: y
+                  class: C(["lcc-header__wrapper__navs__item", {
+                    active: n
                   }])
                 },
                 [
-                  g(
-                    w(L),
+                  b(
+                    x(z),
                     {
                       trigger: "hover",
                       "arrow-class": "header-arrow-class",
                       class: "header-popover-class"
                     },
                     {
-                      trigger: n(() => [
+                      trigger: p(() => [
                         e("a", {
                           class: "lcc-header__wrapper__navs__item__link",
-                          onClick: (d) => v({
-                            item: r,
+                          onClick: (u) => g({
+                            item: _,
                             index: s
                           })
-                        }, c(r.label), 9, q)
+                        }, h(_.label), 9, J)
                       ]),
-                      default: n(() => {
-                        var d;
+                      default: p(() => {
+                        var u;
                         return [
-                          (d = r.list) != null && d.length ? (t(), o("div", G, [
-                            (t(!0), o(
-                              x,
+                          (u = _.list) != null && u.length ? (o(), l("div", K, [
+                            (o(!0), l(
+                              k,
                               null,
-                              b(r.list, (i, D) => (t(), o("div", {
+                              y(_.list, (d, N) => (o(), l("div", {
                                 class: "lcc-header__wrapper__navs__drop__group",
-                                key: D
+                                key: N
                               }, [
-                                e("div", H, [
-                                  a[1] || (a[1] = e(
+                                e("div", O, [
+                                  r[1] || (r[1] = e(
                                     "div",
                                     { class: "lcc-header__wrapper__navs__drop__group__label--icon" },
                                     [
                                       e("img", {
                                         class: "lcc-header__wrapper__navs__drop__group__label--icon--image",
-                                        src: E,
+                                        src: L,
                                         alt: ""
                                       })
                                     ],
@@ -90,18 +96,18 @@ const F = { class: "lcc-header" }, I = { class: "lcc-header__prefix-slot" }, P =
                                   )),
                                   e("div", {
                                     class: "lcc-header__wrapper__navs__drop__group__label--text",
-                                    title: i.label
-                                  }, c(i.label), 9, J)
+                                    title: d.label
+                                  }, h(d.label), 9, Q)
                                 ]),
-                                e("div", K, [
-                                  (t(!0), o(
-                                    x,
+                                e("div", R, [
+                                  (o(!0), l(
+                                    k,
                                     null,
-                                    b(i.children, (m, N) => (t(), o("div", {
-                                      class: "lcc-header__wrapper__navs__drop__group__item__group__nav",
-                                      key: N,
-                                      onClick: (R) => v({ parent: i, item: m, index: s, handleClick: B })
-                                    }, c(m.label), 9, O))),
+                                    y(d.children, (c, j) => (o(), l("div", {
+                                      class: C(["lcc-header__wrapper__navs__drop__group__item__group__nav", { highlight: n && i.value === c.path || i.value === c.label }]),
+                                      key: j,
+                                      onClick: (X) => g({ parent: d, item: c, index: s, handleClick: M })
+                                    }, h(c.label), 11, T))),
                                     128
                                     /* KEYED_FRAGMENT */
                                   ))
@@ -110,7 +116,7 @@ const F = { class: "lcc-header" }, I = { class: "lcc-header__prefix-slot" }, P =
                               128
                               /* KEYED_FRAGMENT */
                             ))
-                          ])) : V("v-if", !0)
+                          ])) : H("v-if", !0)
                         ];
                       }),
                       _: 2
@@ -129,12 +135,12 @@ const F = { class: "lcc-header" }, I = { class: "lcc-header__prefix-slot" }, P =
           }, 8, ["disabled", "list", "index"])
         ])
       ]),
-      e("div", Q, [
-        f(_.$slots, "suffix", {}, void 0, !0)
+      e("div", W, [
+        w(a.$slots, "suffix", {}, void 0, !0)
       ])
     ]));
   }
 });
 export {
-  Z as default
+  re as default
 };

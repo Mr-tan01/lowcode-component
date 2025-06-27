@@ -42,9 +42,10 @@
                                                 class="lcc-header__wrapper__navs__drop__group__item__group__nav"
                                                 v-for="(child, ckey) in el.children"
                                                 :key="ckey"
+                                                :class="{ highlight: isActive && onlight === child.path || onlight === child.label}"
                                                 @click="jump({ parent: el, item: child, index, handleClick })"
                                             >
-                                                {{ child.label }}
+                                                {{ child.label}}
                                             </div>
                                         </div>
                                     </div>
@@ -62,10 +63,9 @@
 </template>
 
 <script lang="ts" setup>
-import { computed } from "vue";
+import { computed, onMounted, ref } from "vue";
 import { NPopover } from "naive-ui/es/popover";
 import { LcCarouseBox, type LcCarouseBoxChangeEvent } from "@/components/education/components/carouseBox";
-
 type ListRaw = {
     label: string;
     children: NavData[];
@@ -82,25 +82,32 @@ export type jumpParams = {
     index: number;
     handleClick?: (item: ListRaw, index: number) => void;
 };
-const { navDatas, hideArrow } = defineProps<{
+const { navDatas, hideArrow, highlightHandler } = defineProps<{
     navDatas?: NavData[];
     hideArrow?: boolean;
+    highlightHandler?: (item: NavData) => string;
 }>();
 
+const onlight = ref()
 const modelIndex = defineModel<number>("index", { default: 0 });
 const listSource = computed(() => {
     return navDatas === void 0 ? [] : navDatas;
 });
 
+onMounted(() => {
+    onlight.value = window.location.hash.substring(1)
+})
 const $emit = defineEmits<{
     (e: "jump", jumpParams: jumpParams): void;
     (e: "scroll", data: LcCarouseBoxChangeEvent): void;
 }>();
 
 function jump({ parent, item, index, handleClick }: jumpParams) {
+    onlight.value = highlightHandler?.(item)?? item.path;
     parent && !hideArrow && handleClick?.(parent, index);
     $emit("jump", { parent, item, index });
 }
+
 function carouseChange(value: LcCarouseBoxChangeEvent) {
     $emit("scroll", value);
 }
@@ -313,5 +320,8 @@ function carouseChange(value: LcCarouseBoxChangeEvent) {
             }
         }
     }
+}
+.highlight {
+     color: rgba(15, 251, 248, 1);
 }
 </style>
