@@ -20,6 +20,7 @@ type __VLS_Props = {
     highlightHandler?: (item: NavData) => string;
 };
 type __VLS_PublicProps = {
+    "selectedKey"?: string;
     "index"?: number;
 } & __VLS_Props;
 declare function __VLS_template(): {
@@ -34,6 +35,7 @@ declare function __VLS_template(): {
 type __VLS_TemplateResult = ReturnType<typeof __VLS_template>;
 declare const __VLS_component: import('vue').DefineComponent<__VLS_PublicProps, {}, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {
     "update:index": (value: number) => any;
+    "update:selectedKey": (value: string) => any;
 } & {
     scroll: (data: LcCarouseBoxChangeEvent) => any;
     jump: (jumpParams: jumpParams) => any;
@@ -41,6 +43,7 @@ declare const __VLS_component: import('vue').DefineComponent<__VLS_PublicProps, 
     "onUpdate:index"?: ((value: number) => any) | undefined;
     onScroll?: ((data: LcCarouseBoxChangeEvent) => any) | undefined;
     onJump?: ((jumpParams: jumpParams) => any) | undefined;
+    "onUpdate:selectedKey"?: ((value: string) => any) | undefined;
 }>, {}, {}, {}, {}, string, import('vue').ComponentProvideOptions, false, {}, HTMLDivElement>;
 declare const _default: __VLS_WithTemplateSlots<typeof __VLS_component, __VLS_TemplateResult["slots"]>;
 export default _default;
