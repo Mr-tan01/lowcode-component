@@ -1,4 +1,3 @@
-
 const levelsCodeString = `
 const levels: Levels = {
     warning: {
@@ -33,7 +32,7 @@ const levels: Levels = {
             }
         ],
     },
-}`;
+}`
 const mapValuesCodeString = `
 const values: SZMapMarkProps = {
     mappings: {
@@ -116,7 +115,7 @@ const values: SZMapMarkProps = {
         }
     }
 }
-`;
+`
 export const demoCodes = {
     code1: `
 <template>
@@ -142,4 +141,4 @@ ${levelsCodeString}
 ${mapValuesCodeString}
 </script>
 `,
-};
+}

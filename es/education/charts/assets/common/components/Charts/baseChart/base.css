@@ -1,1 +1,9 @@
-.lc-common-chart[data-v-48da8276]{width:100%;height:100%;display:flex;flex-direction:column}.lc-common-chart__wrapper[data-v-48da8276]{flex:1}
+.lc-common-chart[data-v-48da8276] {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.lc-common-chart__wrapper[data-v-48da8276] {
+    flex: 1;
+}

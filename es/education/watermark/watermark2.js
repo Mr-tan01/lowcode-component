@@ -1,4 +1,2 @@
-import f from "./watermark.js";
-export {
-  f as default
-};
+import f from './watermark.js'
+export { f as default }

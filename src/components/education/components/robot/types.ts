@@ -1,5 +1,4 @@
-
 export type AiConfigProps = {
-    sayHello: string;
-    quick: { text: string; }[];
+    sayHello: string
+    quick: { text: string }[]
 }

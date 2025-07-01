@@ -1,4 +1,4 @@
-import { type EChartsOption } from "echarts"
+import { type EChartsOption } from 'echarts'
 
 export function useRadarOptions(
     shape: 'circle' | 'polygon' = 'polygon',
@@ -20,11 +20,11 @@ export function useRadarOptions(
                     { name: '类目三', max: 3000 },
                     { name: '类目四', max: 3800 },
                     { name: '类目五', max: 5200 },
-                    { name: '类目六', max: 2500 }
+                    { name: '类目六', max: 2500 },
                 ].slice(indicatorStart, indicatorLen),
                 axisName: {
                     formatter: axisNameJoinMax ? void 0 : '{value}',
-                }
+                },
             },
             legend: {
                 show: true,
@@ -39,15 +39,15 @@ export function useRadarOptions(
                         },
                         {
                             value: [500, 1400, 2800, 2600, 4200, 2100],
-                            name: '类型二'
+                            name: '类型二',
                         },
                         {
                             value: [200, 400, 2020, 602, 220, 102],
-                            name: '类型三'
-                        }
+                            name: '类型三',
+                        },
                     ].slice(start, len),
-                }
-            ]
-        }
+                },
+            ],
+        },
     }
 }

@@ -1,19 +1,34 @@
 <template>
-    <div class="lc-indicator-card" :class="{
-        'lc-indicator-card--noborder': type === 'noborder',
-    }">
+    <div
+        class="lc-indicator-card"
+        :class="{
+            'lc-indicator-card--noborder': type === 'noborder',
+        }"
+    >
         <div class="lc-indicator-card__wrapper">
             <div class="lc-indicator-card__wrapper--content">
-                <div class="lc-indicator-card__wrapper--tooltip" v-if="tip">
+                <div v-if="tip" class="lc-indicator-card__wrapper--tooltip">
                     <LcTooltip>{{ tip }}</LcTooltip>
                 </div>
                 <div class="lc-indicator-card__wrapper--result">
-                    <span class="lc-indicator-card__wrapper--result--value" :title="value.toString()">
+                    <span
+                        class="lc-indicator-card__wrapper--result--value"
+                        :title="value.toString()"
+                    >
                         <slot name="value">
-                            <NNumberAnimation show-separator :from="0" :to="renderValue" active :precision="decimals"/>
+                            <NNumberAnimation
+                                show-separator
+                                :from="0"
+                                :to="renderValue"
+                                active
+                                :precision="decimals"
+                            />
                         </slot>
                     </span>
-                    <span class="lc-indicator-card__wrapper--result--unit" v-if="fixed">
+                    <span
+                        v-if="fixed"
+                        class="lc-indicator-card__wrapper--result--unit"
+                    >
                         {{ unit }}
                     </span>
                 </div>
@@ -29,81 +44,64 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, PropType } from "vue";
-import { NNumberAnimation } from "naive-ui/es/number-animation";
-import { bigNumber } from "lowcode-share/es/share";
-import { LcTooltip } from "@/components/education/components/tooltip";
+import { computed } from 'vue'
+import { NNumberAnimation } from 'naive-ui/es/number-animation'
+import { bigNumber } from 'lowcode-share/es/share'
+import { LcTooltip } from '@/components/education/components/tooltip'
 
 const SIZE = {
-    small: "small",
-    medium: "medium",
-    large: "large",
-} as const;
-type Size = typeof SIZE;
+    small: 'small',
+    medium: 'medium',
+    large: 'large',
+} as const
+type Size = typeof SIZE
 const {
     value = 0,
-    hint = "",
-    size = "small",
+    hint = '',
+    size = 'small',
     fixed = false,
     decimal = 0,
-    valueColor = "#ffffff",
-    hintColor = "#F2F3F4",
-} = defineProps({
-    value: {
-        type: Number,
-    },
-    hint: {
-        type: String,
-    },
-    size: {
-        type: String as PropType<Size[keyof Size]>,
-    },
-    fixed: {
-        type: Boolean,
-    },
-    decimal: {
-        type: Number,
-    },
-    type: {
-        type: String as PropType<"border" | "noborder">,
-    },
-    tip: {
-        type: String,
-    },
-    valueColor: {
-        type: String,
-    },
-    hintColor: {
-        type: String,
-    },
-});
+    valueColor = '#ffffff',
+    hintColor = '#F2F3F4',
+} = defineProps<{
+    value?: number
+    hint?: string
+    size?: Size[keyof Size]
+    fixed?: boolean
+    decimal?: number
+    type: 'border' | 'noborder'
+    tip: string
+    valueColor?: string
+    hintColor?: string
+}>()
 
 const renderValue = computed(() => {
     if (fixed) {
-        return bigNumber(value, decimal).result;
+        return bigNumber(value, decimal).result
     }
-    return value;
-});
+    return value
+})
 const decimals = computed(() => {
-    const { unit: numUnit } = bigNumber(value);
+    const { unit: numUnit } = bigNumber(value)
     if (Number.isInteger(value) && !numUnit) {
-        return 0;
+        return 0
     }
-    return decimal;
-});
+    return decimal
+})
 const innerPad = {
-    [SIZE.small]: "22px 32px 0",
-    [SIZE.medium]: "22px 54px 0",
-    [SIZE.large]: "22px 116px 0",
-};
+    [SIZE.small]: '22px 32px 0',
+    [SIZE.medium]: '22px 54px 0',
+    [SIZE.large]: '22px 116px 0',
+}
 const padValue = computed(() => {
-    return innerPad[size];
-});
+    return innerPad[size]
+})
 const unit = computed(() => {
     if (fixed) {
-        return bigNumber(value, decimal).unit;
+        return bigNumber(value, decimal).unit
     }
-});
+    return ''
+})
 </script>
 
 <style lang="scss" scoped>
@@ -139,7 +137,7 @@ const unit = computed(() => {
     }
 
     &::after {
-        content: "";
+        content: '';
         position: absolute;
         width: 100%;
         height: 100%;
@@ -201,7 +199,8 @@ const unit = computed(() => {
         }
 
         &--text {
-            font-family: AlimamaFangYuanTiVF-SemiBold, AlimamaFangYuanTiVF-SemiBold;
+            font-family:
+                AlimamaFangYuanTiVF-SemiBold, AlimamaFangYuanTiVF-SemiBold;
             font-weight: normal;
             font-size: 18px;
             color: v-bind(hintColor);

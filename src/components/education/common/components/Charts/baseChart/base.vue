@@ -1,18 +1,24 @@
 <template>
     <div class="lc-common-chart">
-        <div class="lc-common-chart__wrapper"  ref="commonChart"></div>
+        <div ref="commonChart" class="lc-common-chart__wrapper"></div>
     </div>
 </template>
 
 <script lang="ts" setup>
-import { useResizeObserver } from '@vueuse/core';
-import { init, type EChartsType, type EChartsOption } from 'echarts';
-import { onMounted, PropType, shallowRef, useTemplateRef, watchEffect } from 'vue';
-import debounce from 'lodash-es/debounce';
+import { useResizeObserver } from '@vueuse/core'
+import { init, type EChartsType, type EChartsOption } from 'echarts'
+import {
+    onMounted,
+    PropType,
+    shallowRef,
+    useTemplateRef,
+    watchEffect,
+} from 'vue'
+import debounce from 'lodash-es/debounce'
 
-const commonChartRef = useTemplateRef("commonChart");
+const commonChartRef = useTemplateRef('commonChart')
 
-const chartInstance = shallowRef<EChartsType>();
+const chartInstance = shallowRef<EChartsType>()
 const {
     debounceTime = 300,
     options = {},
@@ -22,31 +28,41 @@ const {
     options: Object as PropType<EChartsOption>,
     notMerge: Boolean,
 })
-useResizeObserver(commonChartRef, debounce(() => {
-    chartInstance.value?.resize();
-}, debounceTime));
+useResizeObserver(
+    commonChartRef,
+    debounce(() => {
+        chartInstance.value?.resize()
+    }, debounceTime),
+)
 function initChartInstance() {
-    chartInstance.value = init(commonChartRef.value!, options);
+    chartInstance.value = init(commonChartRef.value!, options)
 }
 onMounted(() => {
-    initChartInstance();
-    setOptions(options, notMerge);
-});
+    initChartInstance()
+    setOptions(options, notMerge)
+})
 
-function setOptions(options: EChartsOption, deep: boolean, lazyUpdate?: boolean) {
-    chartInstance.value?.setOption(options, deep, lazyUpdate);
+function setOptions(
+    options: EChartsOption,
+    deep: boolean,
+    lazyUpdate?: boolean,
+) {
+    chartInstance.value?.setOption(options, deep, lazyUpdate)
 }
-watchEffect(() => {
-    setOptions(options, notMerge);
-}, {
-    flush: 'post',
-});
+watchEffect(
+    () => {
+        setOptions(options, notMerge)
+    },
+    {
+        flush: 'post',
+    },
+)
 defineExpose({
     get chartInstance() {
-        return chartInstance.value;
+        return chartInstance.value
     },
     setOptions,
-});
+})
 </script>
 
 <style lang="scss" scoped>

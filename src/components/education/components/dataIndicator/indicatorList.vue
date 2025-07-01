@@ -2,18 +2,30 @@
     <div class="lc-indicator-list">
         <div class="lc-indicator-list__wrapper">
             <div class="lc-indicator-list__wrapper__image">
-                <img class="lc-indicator-list__wrapper__image--img" :src="icon" alt="">
+                <img
+                    class="lc-indicator-list__wrapper__image--img"
+                    :src="icon"
+                    alt=""
+                />
             </div>
             <div class="lc-indicator-list__wrapper__info">
                 <div class="lc-indicator-list__wrapper__info--nickname">
                     {{ name }}
                 </div>
                 <div class="lc-indicator-list__wrapper__info--msg">
-                    <div class="lc-indicator-list__wrapper__info--msg__item" v-for="(item, key) in msg" :key>
-                        <div class="lc-indicator-list__wrapper__info--msg__item--label">
+                    <div
+                        v-for="(item, key) in msg"
+                        :key
+                        class="lc-indicator-list__wrapper__info--msg__item"
+                    >
+                        <div
+                            class="lc-indicator-list__wrapper__info--msg__item--label"
+                        >
                             {{ item.label }}
                         </div>
-                        <div class="lc-indicator-list__wrapper__info--msg__item--value">
+                        <div
+                            class="lc-indicator-list__wrapper__info--msg__item--value"
+                        >
                             {{ item.value }}
                         </div>
                     </div>
@@ -24,11 +36,11 @@
 </template>
 
 <script lang="ts" setup>
-import { PropType } from 'vue';
+import { PropType } from 'vue'
 
 type ListType = {
-    label: string;
-    value: string;
+    label: string
+    value: string
 }
 const {
     icon = '',
@@ -36,15 +48,15 @@ const {
     msg = [],
 } = defineProps({
     icon: {
-        type: String
+        type: String,
     },
     name: {
         type: String,
     },
     msg: {
         type: Array as PropType<ListType[]>,
-    }
-});
+    },
+})
 </script>
 
 <style lang="scss" scoped>
@@ -85,7 +97,7 @@ const {
             &--nickname {
                 font-family: HarmonyOS_Sans_SC_Bold;
                 font-size: 14px;
-                color: #FFFFFF;
+                color: #ffffff;
                 line-height: 20px;
                 text-align: left;
             }
@@ -94,9 +106,11 @@ const {
                 &__item {
                     display: flex;
                     align-items: center;
-                    font-family: PingFangSC, PingFang SC;
+                    font-family:
+                        PingFangSC,
+                        PingFang SC;
                     font-weight: 400;
-                    color: #F2F3F4;
+                    color: #f2f3f4;
                     line-height: 24px;
                     text-align: left;
 
@@ -110,7 +124,6 @@ const {
                         overflow: hidden;
                         text-overflow: ellipsis;
                         white-space: nowrap;
-
                     }
                 }
             }

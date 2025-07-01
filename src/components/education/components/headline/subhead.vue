@@ -1,9 +1,15 @@
 <template>
     <div class="lc-subhead">
-        <div v-if="type === direction.left && !hideRadioIcon" class="lc-subhead__imglft lc-subhead__img">
+        <div
+            v-if="type === direction.left && !hideRadioIcon"
+            class="lc-subhead__imglft lc-subhead__img"
+        >
             <img src="./images/subhead-lft.png" alt="" />
         </div>
-        <div v-if="type === direction.right || type === direction.center" class="lc-subhead__imglgt lc-subhead__img">
+        <div
+            v-if="type === direction.right || type === direction.center"
+            class="lc-subhead__imglgt lc-subhead__img"
+        >
             <img src="./images/subhead-rgt.png" alt="" />
         </div>
         <div v-if="$slots['icon-left']" class="lc-subhead__icon-left">
@@ -15,28 +21,34 @@
         <div v-if="$slots['icon-right']" class="lc-subhead__icon-right">
             <slot name="icon-right"></slot>
         </div>
-        <div v-if="type === direction.right && !hideRadioIcon" class="lc-subhead__imgrft lc-subhead__img">
+        <div
+            v-if="type === direction.right && !hideRadioIcon"
+            class="lc-subhead__imgrft lc-subhead__img"
+        >
             <img src="./images/subhead-lft.png" alt="" />
         </div>
-        <div v-if="type === direction.left || type === direction.center" class="lc-subhead__imgrgt lc-subhead__img">
+        <div
+            v-if="type === direction.left || type === direction.center"
+            class="lc-subhead__imgrgt lc-subhead__img"
+        >
             <img src="./images/subhead-lgt.png" alt="" />
         </div>
     </div>
 </template>
 <script lang="ts" setup>
-import { computed, PropType } from "vue";
-import { overflowStr } from "lowcode-share/es/share";
+import { computed, PropType } from 'vue'
+import { overflowStr } from 'lowcode-share/es/share'
 const direction = {
-    right: "right",
-    center: "center",
-    left: "left",
-} as const;
-type DirectionType = typeof direction;
+    right: 'right',
+    center: 'center',
+    left: 'left',
+} as const
+type DirectionType = typeof direction
 const {
-    text = "",
+    text = '',
     maxLength = 15,
-    fontSize = "18px",
-    type = "left",
+    fontSize = '18px',
+    type = 'left',
     hideRadioIcon = false,
 } = defineProps({
     text: {
@@ -54,10 +66,10 @@ const {
     hideRadioIcon: {
         type: Boolean,
     },
-});
+})
 const formatedText = computed(() => {
-    return overflowStr(text, maxLength);
-});
+    return overflowStr(text, maxLength)
+})
 </script>
 
 <style lang="scss" scoped>

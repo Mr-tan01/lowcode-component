@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts" setup>
-import { NRadioGroup } from 'naive-ui/es/radio';
+import { NRadioGroup } from 'naive-ui/es/radio'
 </script>
 
 <style lang="scss" scoped></style>

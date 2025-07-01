@@ -1,4 +1,3 @@
-
 export const code1 = `
 <template>
     <n-space>
@@ -9,7 +8,7 @@ export const code1 = `
         <LcRobot src="https://b0.bdstatic.com/a6a0f12117cd6488ec39bb46d308b498.jpg@h_1280"></LcRobot>
     </n-space>
 </template>
-`;
+`
 
 export const code2 = `
 <template>
@@ -25,7 +24,7 @@ export const code2 = `
             hid-dir="rt" showPopup></LcRobot>
     </NSpace>
 </template>
-`;
+`
 
 export const codeStr0 = `
 <template>
@@ -235,4 +234,4 @@ export const defStarData: StarType[] = [
     }
 ];
 </script>
-`;
+`

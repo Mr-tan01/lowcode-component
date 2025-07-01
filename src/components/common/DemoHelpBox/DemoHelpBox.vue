@@ -11,29 +11,26 @@
     </DemoBox>
 </template>
 <script lang="ts" setup>
-import { DemoBox } from 'lowcode-share/es/demo';
-import { NButton, } from 'naive-ui';
-import { useId } from 'vue';
-import { useRouter } from 'vue-router';
-const $router = useRouter();
+import { DemoBox } from 'lowcode-share/es/demo'
+import { NButton } from 'naive-ui'
+import { useId } from 'vue'
+import { useRouter } from 'vue-router'
+const $router = useRouter()
 
-const {
-    code = '',
-} = defineProps<{
-    code?: string;
-}>();
+const { code = '' } = defineProps<{
+    code?: string
+}>()
 
-const id = useId();
+const id = useId()
 function toReplPage() {
-    sessionStorage.setItem('__sessionStorage__monacoEditId__' + id, code);
+    sessionStorage.setItem('__sessionStorage__monacoEditId__' + id, code)
     $router.push({
         path: '/edit/monacoEdit',
         query: {
             id,
-        }
-    });
+        },
+    })
 }
-
 </script>
 
 <style lang="scss" scoped>

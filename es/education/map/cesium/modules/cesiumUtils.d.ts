@@ -1,77 +1,92 @@
-import { Viewer, Entity } from 'cesium';
-import { CesiumHeatmap } from 'cesium-heatmap-es6';
-import { controlStatusType, optionType, pointType, changeModelParamType } from './type';
+import { Viewer, Entity } from 'cesium'
+import { CesiumHeatmap } from 'cesium-heatmap-es6'
+import {
+    controlStatusType,
+    optionType,
+    pointType,
+    changeModelParamType,
+} from './type'
 export declare class cesiumService {
-    containerId: string;
-    options: optionType;
-    viewer: Viewer | null;
-    pointData: pointType[] | null;
-    pointEntities: Entity[] | null;
-    polygonEntities: Entity[] | null;
-    screenSpaceEventHandler: void | null;
-    screenMouseMoveHandler: void | null;
-    private imageLayerState;
-    private imageLayerUrl;
-    private tileLoadCallback;
-    private dataSource;
-    private centerPosition;
-    private defaultCenterKey;
-    private defaultConfig;
-    private lastValidCameraPosition;
-    private isCheckingBounds;
-    private removePreUpdateListener;
-    private lastHoveredEntity;
-    private lastThrottleTime;
-    private throttleDelay;
-    private rretryCount;
-    private openIndexDB;
-    private shenzhenBounds;
-    private message;
-    private tileCache;
-    constructor(containerId: string, options: optionType);
-    updateViewerAttribute(): void;
-    private setupClustering;
-    private doubleClickHandler;
-    initViewer(controlStatus: controlStatusType): Promise<boolean>;
-    private setupEventHandlers;
-    private handleLeftClick;
-    private handleMouseMove;
-    private handleTileLoadProgress;
-    loadTileLayer(url: string): Promise<void>;
-    private retryLoadProvider;
-    private cleanupTileLoadListener;
-    private updateLayerState;
-    private loadProviderWithFallback;
-    private addProviderToViewer;
-    private handleLoadError;
-    addPoint(point: pointType, type?: string, labelType?: string): Promise<Entity | null | void>;
-    clearEntity(key: "pointEntities" | "polygonEntities", type: "dataSource" | "viewer"): Promise<void>;
-    addPolygon(name: string): void;
-    addAllDistricts(): void;
-    private getClickPosition;
-    private getPositionCartographic;
-    setCameraHeight(type: string): void;
-    private getEntityNameInfo;
-    pointClickHandler(pickedObject: Entity): void;
-    private handleLabelsVisibility;
-    private pointHoverHandler;
-    private handleHoverLabelDisplay;
-    private applyHoverEffect;
-    private hideOtherLabels;
-    private pointHoverExitHandler;
-    private restoreEntityState;
-    private handleLabelVisibilityOnExit;
-    polygonClickHandler(name: string): void;
-    setInitialView(option: changeModelParamType["setInitialView"]): void;
-    setViewerLayer(imageryLayersUrl: string): void;
-    buildHeatMap(points: {
-        x: number;
-        y: number;
-        value: number;
-    }[], gradient?: Record<string, string>): CesiumHeatmap | undefined;
-    removeHeatMap(heatmap: CesiumHeatmap | any): void;
-    private isPointInShenzhen;
-    private setupCameraLimits;
-    private getCameraViewCenter;
-    destroy(): void;
+    containerId: string
+    options: optionType
+    viewer: Viewer | null
+    pointData: pointType[] | null
+    pointEntities: Entity[] | null
+    polygonEntities: Entity[] | null
+    screenSpaceEventHandler: void | null
+    screenMouseMoveHandler: void | null
+    private imageLayerState
+    private imageLayerUrl
+    private tileLoadCallback
+    private dataSource
+    private centerPosition
+    private defaultCenterKey
+    private defaultConfig
+    private lastValidCameraPosition
+    private isCheckingBounds
+    private removePreUpdateListener
+    private lastHoveredEntity
+    private lastThrottleTime
+    private throttleDelay
+    private rretryCount
+    private openIndexDB
+    private shenzhenBounds
+    private message
+    private tileCache
+    constructor(containerId: string, options: optionType)
+    updateViewerAttribute(): void
+    private setupClustering
+    private doubleClickHandler
+    initViewer(controlStatus: controlStatusType): Promise<boolean>
+    private setupEventHandlers
+    private handleLeftClick
+    private handleMouseMove
+    private handleTileLoadProgress
+    loadTileLayer(url: string): Promise<void>
+    private retryLoadProvider
+    private cleanupTileLoadListener
+    private updateLayerState
+    private loadProviderWithFallback
+    private addProviderToViewer
+    private handleLoadError
+    addPoint(
+        point: pointType,
+        type?: string,
+        labelType?: string,
+    ): Promise<Entity | null | void>
+    clearEntity(
+        key: 'pointEntities' | 'polygonEntities',
+        type: 'dataSource' | 'viewer',
+    ): Promise<void>
+    addPolygon(name: string): void
+    addAllDistricts(): void
+    private getClickPosition
+    private getPositionCartographic
+    setCameraHeight(type: string): void
+    private getEntityNameInfo
+    pointClickHandler(pickedObject: Entity): void
+    private handleLabelsVisibility
+    private pointHoverHandler
+    private handleHoverLabelDisplay
+    private applyHoverEffect
+    private hideOtherLabels
+    private pointHoverExitHandler
+    private restoreEntityState
+    private handleLabelVisibilityOnExit
+    polygonClickHandler(name: string): void
+    setInitialView(option: changeModelParamType['setInitialView']): void
+    setViewerLayer(imageryLayersUrl: string): void
+    buildHeatMap(
+        points: {
+            x: number
+            y: number
+            value: number
+        }[],
+        gradient?: Record<string, string>,
+    ): CesiumHeatmap | undefined
+    removeHeatMap(heatmap: CesiumHeatmap | any): void
+    private isPointInShenzhen
+    private setupCameraLimits
+    private getCameraViewCenter
+    destroy(): void
 }

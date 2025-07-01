@@ -1,1 +1,46 @@
-.lc-robot[data-v-1eb72328]:hover{cursor:pointer}.lc-robot--draggable[data-v-1eb72328]{position:var(--401aba4f);z-index:9999;left:100%;top:var(--6e8f5cd8);transition:.2s linear}.lc-robot--draggable.lc-robot--dir-lt[data-v-1eb72328]{left:0;transform:translateY(-100%)}.lc-robot--draggable.lc-robot--dir-rt[data-v-1eb72328]{left:100%;transform:translate(-100%,-100%)}.lc-robot--draggable[data-v-1eb72328]:hover{cursor:grab}.lc-robot--draging[data-v-1eb72328]:hover{opacity:.1}.lc-robot__wrapper[data-v-1eb72328]{overflow:hidden;display:flex;outline:none}.lc-robot__wrapper:focus .lc-robot__wrapper__image[data-v-1eb72328]{transform:unset;overflow:unset}.lc-robot__wrapper__image[data-v-1eb72328]{-webkit-user-select:none;user-select:none;width:var(--309fe340);height:var(--16fa7866);transition:transform linear .3s}.lc-robot__wrapper__image--status-lt[data-v-1eb72328]{transform:translate(-50%) rotate(30deg)}.lc-robot__wrapper__image--status-rt[data-v-1eb72328]{transform:translate(50%) rotate(-30deg)}
+.lc-robot[data-v-1eb72328]:hover {
+    cursor: pointer;
+}
+.lc-robot--draggable[data-v-1eb72328] {
+    position: var(--401aba4f);
+    z-index: 9999;
+    left: 100%;
+    top: var(--6e8f5cd8);
+    transition: 0.2s linear;
+}
+.lc-robot--draggable.lc-robot--dir-lt[data-v-1eb72328] {
+    left: 0;
+    transform: translateY(-100%);
+}
+.lc-robot--draggable.lc-robot--dir-rt[data-v-1eb72328] {
+    left: 100%;
+    transform: translate(-100%, -100%);
+}
+.lc-robot--draggable[data-v-1eb72328]:hover {
+    cursor: grab;
+}
+.lc-robot--draging[data-v-1eb72328]:hover {
+    opacity: 0.1;
+}
+.lc-robot__wrapper[data-v-1eb72328] {
+    overflow: hidden;
+    display: flex;
+    outline: none;
+}
+.lc-robot__wrapper:focus .lc-robot__wrapper__image[data-v-1eb72328] {
+    transform: unset;
+    overflow: unset;
+}
+.lc-robot__wrapper__image[data-v-1eb72328] {
+    -webkit-user-select: none;
+    user-select: none;
+    width: var(--309fe340);
+    height: var(--16fa7866);
+    transition: transform linear 0.3s;
+}
+.lc-robot__wrapper__image--status-lt[data-v-1eb72328] {
+    transform: translate(-50%) rotate(30deg);
+}
+.lc-robot__wrapper__image--status-rt[data-v-1eb72328] {
+    transform: translate(50%) rotate(-30deg);
+}

@@ -1,6 +1,4 @@
-import LcSwitchTabs from './switch-tabs.vue';
+import LcSwitchTabs from './switch-tabs.vue'
 
-export type LcSwitchTabsInstanceType = InstanceType<typeof LcSwitchTabs>;
-export {
-    LcSwitchTabs,
-}
+export type LcSwitchTabsInstanceType = InstanceType<typeof LcSwitchTabs>
+export { LcSwitchTabs }

@@ -1,3 +1,2 @@
-
-export * from './satterWordColud';
-export * from './bubbleWordCloud';
+export * from './satterWordColud'
+export * from './bubbleWordCloud'

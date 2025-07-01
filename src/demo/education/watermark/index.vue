@@ -12,7 +12,7 @@
                     <LcWatermark
                         text="示例数据"
                         mode="single"
-                        :fontSize="18"
+                        :font-size="18"
                         color="#fff"
                         :rotate="-30"
                         :opacity="0.15"
@@ -23,7 +23,7 @@
                     <LcWatermark
                         text="示例数据"
                         mode="multiple"
-                        :fontSize="18"
+                        :font-size="18"
                         color="#fff"
                         :rotate="-30"
                         :opacity="0.15"
@@ -36,10 +36,10 @@
 </template>
 
 <script lang="ts" setup>
-import { DemoHelpBox } from "@/components/common/DemoHelpBox";
-import { LcWatermark } from "@/components/education/components/watermark";
-import { NSpace } from "naive-ui";
-import { code } from "./demo-codes";
+import { DemoHelpBox } from '@/components/common/DemoHelpBox'
+import { LcWatermark } from '@/components/education/components/watermark'
+import { NSpace } from 'naive-ui'
+import { code } from './demo-codes'
 </script>
 
 <style lang="scss" scoped>

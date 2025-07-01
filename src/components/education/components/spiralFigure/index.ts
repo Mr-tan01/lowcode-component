@@ -1,6 +1,4 @@
-import LcSpiralFigure from './spiral-figure.vue';
+import LcSpiralFigure from './spiral-figure.vue'
 
-export type LcSpiralFigureInstanceType = InstanceType<typeof LcSpiralFigure>;
-export {
-  LcSpiralFigure,
-}
+export type LcSpiralFigureInstanceType = InstanceType<typeof LcSpiralFigure>
+export { LcSpiralFigure }

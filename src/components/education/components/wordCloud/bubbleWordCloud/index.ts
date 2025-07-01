@@ -1,7 +1,7 @@
-import LcBubbleWordColud from './bubbleWordCloud.vue';
+import LcBubbleWordColud from './bubbleWordCloud.vue'
 
-export type LcBubbleWordColudInstanceType = InstanceType<typeof LcBubbleWordColud>;
+export type LcBubbleWordColudInstanceType = InstanceType<
+    typeof LcBubbleWordColud
+>
 
-export {
-    LcBubbleWordColud,
-}
+export { LcBubbleWordColud }

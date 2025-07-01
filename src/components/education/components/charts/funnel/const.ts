@@ -1,4 +1,4 @@
-import { type FunnelSeriesOption, type EChartsOption, } from "echarts";
+import { type FunnelSeriesOption, type EChartsOption } from 'echarts'
 
 export const funnelColors = [
     'rgba(15, 251, 248, 1)',
@@ -6,7 +6,7 @@ export const funnelColors = [
     'rgba(34, 118, 252, 1)',
     'rgba(166, 207, 255, 1)',
     'rgba(119, 73, 255, 1)',
-];
+]
 export const yAxisOptions: EChartsOption['yAxis'] = {
     nameLocation: 'end',
     show: false,
@@ -20,7 +20,7 @@ export const yAxisOptions: EChartsOption['yAxis'] = {
         lineStyle: {
             color: 'rgba(255, 255, 255, 0.2)',
             type: 'dotted',
-        }
+        },
     },
     axisLabel: {
         color: '#fff',
@@ -28,13 +28,13 @@ export const yAxisOptions: EChartsOption['yAxis'] = {
         lineHeight: 20,
         margin: 13,
         formatter: (value) => {
-            return value;
+            return value
         },
     },
     axisLine: {
         lineStyle: {
             color: 'rgba(255, 255, 255, 0.2)',
-        }
+        },
     },
 }
 export const tooltipOptions: EChartsOption['tooltip'] = {
@@ -46,7 +46,7 @@ export const tooltipOptions: EChartsOption['tooltip'] = {
         lineHeight: 20,
     },
     trigger: 'item',
-    formatter: '{a} <br/>{b} : {c}%'
+    formatter: '{a} <br/>{b} : {c}%',
 }
 export const legendOptions: EChartsOption['legend'] = [
     {
@@ -71,14 +71,13 @@ export const legendOptions: EChartsOption['legend'] = [
         borderWidth: 0,
     },
     {
-       
         left: '67%',
         top: 'center',
-        orient:'vertical',
+        orient: 'vertical',
         icon: 'none',
         type: 'scroll',
         formatter(name) {
-            return name;
+            return name
         },
         padding: [0, 0, 0, 10],
         textStyle: {
@@ -87,8 +86,8 @@ export const legendOptions: EChartsOption['legend'] = [
             lineHeight: 20,
             padding: [0, 0, 0, 0],
         },
-    }
-];
+    },
+]
 
 export const gridOptions: EChartsOption['grid'] = {
     top: 50,
@@ -105,7 +104,7 @@ export const xAxisOptions: EChartsOption['xAxis'] = {
             color: 'rgba(255, 255, 255, 0.2)',
             type: 'dotted',
             width: 1,
-        }
+        },
     },
     axisTick: {
         show: false,
@@ -113,13 +112,13 @@ export const xAxisOptions: EChartsOption['xAxis'] = {
     axisLine: {
         lineStyle: {
             color: 'rgba(255, 255, 255, 0.2)',
-        }
+        },
     },
     axisLabel: {
         color: '#fff',
         fontSize: 14,
         lineHeight: 20,
-    }
+    },
 }
 
 export const commonScatterSeries: FunnelSeriesOption = {
@@ -141,22 +140,22 @@ export const commonScatterSeries: FunnelSeriesOption = {
         color: '#fff',
         fontSize: 12,
         lineHeight: 16,
-        formatter: '{c}%'
+        formatter: '{c}%',
     },
     labelLine: {
         length: 10,
         lineStyle: {
             width: 1,
-            type: 'solid'
-        }
+            type: 'solid',
+        },
     },
     itemStyle: {
         borderColor: 'transparent',
-        borderWidth: 1
+        borderWidth: 1,
     },
     emphasis: {
         label: {
-            fontSize: 20
-        }
+            fontSize: 20,
+        },
     },
 }

@@ -1,19 +1,52 @@
 <template>
     <div class="lc-szmap">
-        <RawMap class="back-block-map level-map" :show-label="false" :disabledGradient :rotateX :labelModel :levels :values v-bind="$attrs" />
-        <RawMap class="float-block-map level-map"  fill-model="hover" :disabledGradient :rotateX :labelModel :show-label="true" :levels :values v-bind="$attrs" :showBorder="false">
-            <template #mapLabel="{ blockList, labelClass, getVlaue, currentMapKey }">
-                <slot name="mapLabel" :blockList="blockList" :labelClass="labelClass" :getVlaue="getVlaue" :currentMapKey="currentMapKey"> </slot>
+        <RawMap
+            class="back-block-map level-map"
+            :show-label="false"
+            :disabled-gradient
+            :rotate-x
+            :label-model
+            :levels
+            :values
+            v-bind="$attrs"
+        />
+        <RawMap
+            class="float-block-map level-map"
+            fill-model="hover"
+            :disabled-gradient
+            :rotate-x
+            :label-model
+            :show-label="true"
+            :levels
+            :values
+            v-bind="$attrs"
+            :show-border="false"
+        >
+            <template
+                #mapLabel="{ blockList, labelClass, getVlaue, currentMapKey }"
+            >
+                <slot
+                    name="mapLabel"
+                    :block-list="blockList"
+                    :label-class="labelClass"
+                    :get-vlaue="getVlaue"
+                    :current-map-key="currentMapKey"
+                >
+                </slot>
             </template>
         </RawMap>
     </div>
 </template>
 
 <script lang="ts" setup>
-import { propsRaw } from "./props";
-import RawMap from "./rawMap.vue";
-import { LabelModelEnum } from "./const";
-const { levels, rotateX, labelModel = LabelModelEnum.DEFAULT } = defineProps(propsRaw);
+import { propsRaw } from './props'
+import RawMap from './rawMap.vue'
+import { LabelModelEnum } from './const'
+const {
+    levels,
+    rotateX,
+    labelModel = LabelModelEnum.DEFAULT,
+} = defineProps(propsRaw)
 </script>
 
 <style lang="scss" scoped>

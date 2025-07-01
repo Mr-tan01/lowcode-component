@@ -1,4 +1,3 @@
-
 export const code1 = `
 <template>
     <NSpace>
@@ -34,4 +33,4 @@ import { NSpace } from 'naive-ui';
 // import { LcButton } from 'lowcode-component/es/education/button';
 import { LcButton } from 'lowcode-component';
 </script>
-`;
+`

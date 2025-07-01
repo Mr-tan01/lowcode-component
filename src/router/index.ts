@@ -1,13 +1,21 @@
-import { createRouter, createWebHashHistory, RouteRecordRaw, Router } from 'vue-router';
-import { createMetaGlobRoutes } from 'lowcode-share/es/share';
-const base = import.meta.env.VITE_ROUTER_BASE;
-const routerRaws = import.meta.glob<RouteRecordRaw['component']>('../demo/**/index.vue', {
-    import: 'default',
-    eager: false,
-});
+import {
+    createRouter,
+    createWebHashHistory,
+    RouteRecordRaw,
+    Router,
+} from 'vue-router'
+import { createMetaGlobRoutes } from 'lowcode-share/es/share'
+const base = import.meta.env.VITE_ROUTER_BASE
+const routerRaws = import.meta.glob<RouteRecordRaw['component']>(
+    '../demo/**/index.vue',
+    {
+        import: 'default',
+        eager: false,
+    },
+)
 
-const routes = createMetaGlobRoutes(routerRaws, ['demo', 'education']);
-const routes2 = createMetaGlobRoutes(routerRaws, ['demo', 'edit']);
+const routes = createMetaGlobRoutes(routerRaws, ['demo', 'education'])
+const routes2 = createMetaGlobRoutes(routerRaws, ['demo', 'edit'])
 
 const router: Router = createRouter({
     history: createWebHashHistory(base),
@@ -22,7 +30,7 @@ const router: Router = createRouter({
         ...routes,
         ...routes2,
     ],
-});
+})
 
 export const deomMenu: RouteRecordRaw[] = [
     {
@@ -33,5 +41,5 @@ export const deomMenu: RouteRecordRaw[] = [
         },
         children: [...routes],
     },
-];
-export default router;
+]
+export default router

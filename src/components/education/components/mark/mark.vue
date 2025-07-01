@@ -1,15 +1,33 @@
 <template>
-    <div class="lc-mark" :class="[`lc-mark--${model}`, `lc-mark--${size}`, `lc-mark--icon-${iconName}`]" :tabindex="-1"
-        :style="customProperts" v-if="show">
+    <div
+        v-if="show"
+        class="lc-mark"
+        :class="[
+            `lc-mark--${model}`,
+            `lc-mark--${size}`,
+            `lc-mark--icon-${iconName}`,
+        ]"
+        :tabindex="-1"
+        :style="customProperts"
+    >
         <div class="lc-mark__wrapper" @click="clickMark">
             <div class="lc-mark__wrapper__image">
-                <img class="lc-mark__wrapper__image__img" :src="imageIconSrc" alt=" " draggable="false">
+                <img
+                    class="lc-mark__wrapper__image__img"
+                    :src="imageIconSrc"
+                    alt=" "
+                    draggable="false"
+                />
                 <span class="lc-mark__wrapper__image__label">{{ label }}</span>
             </div>
             <div class="lc-mark__wrapper__rect">
                 <slot>
                     <span class="lc-mark__wrapper__rect--value">
-                        <NNumberAnimation :from="0" :to="value" :precision="precision">
+                        <NNumberAnimation
+                            :from="0"
+                            :to="value"
+                            :precision="precision"
+                        >
                         </NNumberAnimation>
                     </span>
                     <span class="lc-mark__wrapper__rect--unit">
@@ -22,9 +40,9 @@
 </template>
 
 <script lang="ts" setup>
-import { NNumberAnimation } from 'naive-ui/es/number-animation';
-import { computed } from 'vue';
-import { EducationMarkProps } from './props';
+import { NNumberAnimation } from 'naive-ui/es/number-animation'
+import { computed } from 'vue'
+import { EducationMarkProps } from './props'
 
 const {
     value = 0,
@@ -37,24 +55,31 @@ const {
     label = '',
     show = true,
     precision = 0,
-} = defineProps<EducationMarkProps>();
-const icons = import.meta.glob<string>('./images/**.png', { import: 'default', eager: true });
+} = defineProps<EducationMarkProps>()
+const icons = import.meta.glob<string>('./images/**.png', {
+    import: 'default',
+    eager: true,
+})
 
-const $emit = defineEmits<{ (e: 'mark:click', v: { value: number | string; meta: any }): void }>();
+const $emit = defineEmits<{
+    (e: 'mark:click', v: { value: number | string; meta: any }): void
+}>()
 
-const imageIconSrc = computed<string>(() => iconSrc || icons[`./images/${iconName}.png`]);
+const imageIconSrc = computed<string>(
+    () => iconSrc || icons[`./images/${iconName}.png`],
+)
 const customProperts = computed(() => {
     return {
         '--mark-icon': `url(${icons[`./images/${iconName}.png`]})`,
         '--mark-icon-rect': `url(${icons[`./images/${iconName === 'normal' ? 'mark2' : iconName}-rect.png`]})`,
     }
-});
+})
 
 function clickMark() {
     $emit('mark:click', {
         value,
         meta,
-    });
+    })
 }
 </script>
 <style lang="scss" scoped>
@@ -128,7 +153,6 @@ function clickMark() {
     &--icon-normal {
         &:hover,
         &:focus {
-
             .lc-mark {
                 &__wrapper {
                     &__image {
@@ -140,7 +164,6 @@ function clickMark() {
                 }
             }
         }
-
     }
 
     &__wrapper {
@@ -150,7 +173,6 @@ function clickMark() {
         justify-content: center;
         align-items: center;
         position: relative;
-       
 
         &__image {
             position: relative;
@@ -170,7 +192,7 @@ function clickMark() {
 
                 font-family: HarmonyOS_Sans_SC_Black;
                 font-size: 24px;
-                color: #FFFFFF;
+                color: #ffffff;
                 line-height: 29px;
                 text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.5);
             }
@@ -189,7 +211,9 @@ function clickMark() {
         }
 
         &__rect {
-            transition: opacity,background 0.3s linear;
+            transition:
+                opacity,
+                background 0.3s linear;
             opacity: 0;
             pointer-events: none;
             position: absolute;
@@ -209,19 +233,18 @@ function clickMark() {
             &--value {
                 font-family: HarmonyOS_Sans_SC_Medium;
                 font-size: 27px;
-                color: #FFFFFF;
+                color: #ffffff;
                 line-height: 40px;
                 text-align: center;
                 font-style: normal;
                 text-transform: none;
-               
             }
 
             &--unit {
                 font-family: HarmonyOS_Sans_SC_Medium;
                 font-size: 21px;
                 line-height: 40px;
-                color: #FFFFFF;
+                color: #ffffff;
             }
         }
     }

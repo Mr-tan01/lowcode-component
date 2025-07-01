@@ -26,16 +26,16 @@
 </template>
 
 <script lang="ts" setup>
-import { NNumberAnimation } from "naive-ui/es/number-animation";
+import { NNumberAnimation } from 'naive-ui/es/number-animation'
 
-const { label = "已建成并投入运行设施(个)", value = 0 } = defineProps({
+const { label = '已建成并投入运行设施(个)', value = 0 } = defineProps({
     label: {
         type: String,
     },
     value: {
         type: Number,
     },
-});
+})
 </script>
 
 <style lang="scss" scoped>

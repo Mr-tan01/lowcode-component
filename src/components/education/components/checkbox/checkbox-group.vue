@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts" setup>
-import { NCheckboxGroup } from 'naive-ui/es/checkbox';
+import { NCheckboxGroup } from 'naive-ui/es/checkbox'
 </script>
 
 <style lang="scss" scoped></style>

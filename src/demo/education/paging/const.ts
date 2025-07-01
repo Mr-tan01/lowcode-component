@@ -9,4 +9,4 @@ import { ref } from 'vue';
 const page1 = ref(1);
 const page2 = ref(2);
 </script>
-`;
+`

@@ -10,27 +10,29 @@
     </div>
 </template>
 <script lang="ts" setup>
-import { LcIconCard } from "@/components/education/components/icon/index";
-import { computed, toRefs } from "vue";
-import { overflowStr } from "lowcode-share/es/share";
+import { LcIconCard } from '@/components/education/components/icon/index'
+import { computed, toRefs } from 'vue'
+import { overflowStr } from 'lowcode-share/es/share'
 const props = withDefaults(
     defineProps<{
-        text: string;
-        maxLength?: number;
-        fontSize?: number | string;
+        text?: string
+        maxLength?: number
+        fontSize?: number | string
     }>(),
     {
-        text: "",
+        text: '',
         maxLength: 15,
         fontSize: 16,
-    }
-);
-const { text, maxLength, fontSize } = toRefs(props);
+    },
+)
+const { text, maxLength, fontSize } = toRefs(props)
 
 const formatedText = computed(() => {
-    return overflowStr(text.value, maxLength.value);
-});
-const resultFontSize = computed(() => (typeof fontSize.value === "number" ? `${fontSize.value}px` : fontSize.value));
+    return overflowStr(text.value, maxLength.value)
+})
+const resultFontSize = computed(() =>
+    typeof fontSize.value === 'number' ? `${fontSize.value}px` : fontSize.value,
+)
 </script>
 <style lang="scss" scoped>
 .lc-radiohead {
@@ -46,7 +48,11 @@ const resultFontSize = computed(() => (typeof fontSize.value === "number" ? `${f
         text-align: left;
         font-style: normal;
         border-radius: 0 32px 32px 0;
-        background: linear-gradient(90deg, rgba(0, 96, 163, 0) 0%, #007fce 100%);
+        background: linear-gradient(
+            90deg,
+            rgba(0, 96, 163, 0) 0%,
+            #007fce 100%
+        );
         position: relative;
         bottom: 4px;
     }

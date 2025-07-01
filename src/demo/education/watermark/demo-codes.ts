@@ -1,4 +1,3 @@
-
 export const code = `
 <template>
     <div class="watermark">
@@ -16,4 +15,4 @@ export const code = `
     position: relative;
 }
 </style>
-`;
+`

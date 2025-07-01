@@ -28,15 +28,14 @@
 </template>
 
 <script lang="ts" setup>
-import { DemoHelpBox } from '@/components/common/DemoHelpBox';
-import { LcModal } from '@/components/education/components/modal';
-import { ref } from 'vue';
-import { code1, code2 } from './demo-codes';
-import { NButton } from 'naive-ui';
-const show = ref(false);
-const show2 = ref(false);
-const show3 = ref(false);
-
+import { DemoHelpBox } from '@/components/common/DemoHelpBox'
+import { LcModal } from '@/components/education/components/modal'
+import { ref } from 'vue'
+import { code1, code2 } from './demo-codes'
+import { NButton } from 'naive-ui'
+const show = ref(false)
+const show2 = ref(false)
+const show3 = ref(false)
 </script>
 <style lang="scss" scoped>
 .demo_dialog {

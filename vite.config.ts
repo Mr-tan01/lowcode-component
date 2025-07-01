@@ -1,54 +1,54 @@
-import { defineConfig, loadEnv } from "vite";
-import vue from "@vitejs/plugin-vue";
-import { pathResolve } from "lowcode-share/es/cli";
-import Cesium from "vite-plugin-cesium";
+import { defineConfig } from 'vite'
+import vue from '@vitejs/plugin-vue'
+import { pathResolve } from 'lowcode-share/es/cli'
+import Cesium from 'vite-plugin-cesium'
 // https://vite.dev/config/
 export default defineConfig({
-    base: "./",
+    base: './',
     plugins: [vue(), Cesium()],
     resolve: {
         alias: [
             {
-                find: "@",
-                replacement: pathResolve("src"),
+                find: '@',
+                replacement: pathResolve('src'),
             },
             {
-                find: "~",
-                replacement: pathResolve("."),
+                find: '~',
+                replacement: pathResolve('.'),
             },
         ],
     },
     css: {
         preprocessorOptions: {
             scss: {
-                implementation: "sass",
-                api: "modern-compiler",
+                implementation: 'sass',
+                api: 'modern-compiler',
             },
         },
     },
     server: {
-        host: "0.0.0.0",
+        host: '0.0.0.0',
         open: true,
         proxy: {
-            "/jysl": {
-                target: "https://jysl.sz.edu.cn:8314",
+            '/jysl': {
+                target: 'https://jysl.sz.edu.cn:8314',
                 changeOrigin: true,
-                rewrite: (path) => path.replace(/^\/jysl/, ""),
+                rewrite: (path) => path.replace(/^\/jysl/, ''),
                 secure: true,
             },
         },
     },
     optimizeDeps: {
-        exclude: ["@vue/repl"],
+        exclude: ['@vue/repl'],
     },
     build: {
-        outDir: "lowcode-docx",
+        outDir: 'lowcode-docx',
         rollupOptions: {
             output: {
                 assetFileNames() {
-                    return `[ext]/[name].[ext]`;
+                    return `[ext]/[name].[ext]`
                 },
             },
         },
     },
-});
+})

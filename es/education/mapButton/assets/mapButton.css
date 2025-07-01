@@ -1,1 +1,24 @@
-.lcmapbutton[data-v-d6076fc8]{width:74px;height:339px;display:flex;flex-direction:column}.lcmapbutton-upside[data-v-d6076fc8]{display:flex;flex-direction:column;align-items:center}.lcmapbutton-upside-icon[data-v-d6076fc8]{cursor:pointer;width:52px;height:52px}.lcmapbutton-upside-icon[data-v-d6076fc8]:nth-last-child(1),.lcmapbutton-upside-icon[data-v-d6076fc8]:nth-last-child(2),.lcmapbutton-upside-icon[data-v-d6076fc8]:nth-last-child(3){margin-top:8px}.lcmapbutton-underside[data-v-d6076fc8]{margin-top:33px}
+.lcmapbutton[data-v-d6076fc8] {
+    width: 74px;
+    height: 339px;
+    display: flex;
+    flex-direction: column;
+}
+.lcmapbutton-upside[data-v-d6076fc8] {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.lcmapbutton-upside-icon[data-v-d6076fc8] {
+    cursor: pointer;
+    width: 52px;
+    height: 52px;
+}
+.lcmapbutton-upside-icon[data-v-d6076fc8]:nth-last-child(1),
+.lcmapbutton-upside-icon[data-v-d6076fc8]:nth-last-child(2),
+.lcmapbutton-upside-icon[data-v-d6076fc8]:nth-last-child(3) {
+    margin-top: 8px;
+}
+.lcmapbutton-underside[data-v-d6076fc8] {
+    margin-top: 33px;
+}

@@ -1,7 +1,5 @@
-import LcSelect from './select.vue';
+import LcSelect from './select.vue'
 
-export type SelectInstanceType = InstanceType<typeof LcSelect>;
+export type SelectInstanceType = InstanceType<typeof LcSelect>
 
-export {
-    LcSelect,
-};
+export { LcSelect }

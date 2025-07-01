@@ -1,4 +1,3 @@
-
 export const demoCodes = {
     customLabel: `
 <template>

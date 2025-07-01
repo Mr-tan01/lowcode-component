@@ -1,11 +1,15 @@
-import { type SeriesOption, type EChartsOption } from "echarts";
-import { type ZRColor } from "echarts/types/src/util/types";
+import { type SeriesOption, type EChartsOption } from 'echarts'
+import { type ZRColor } from 'echarts/types/src/util/types'
 
 export const radarTitleOptions: EChartsOption['title'] = {
     show: false,
 }
 
-export const radarColors: ZRColor[] = ['rgba(15, 251, 248, 1)', 'rgba(225, 188, 75, 1)', 'rgba(0, 148, 255, 1)'];
+export const radarColors: ZRColor[] = [
+    'rgba(15, 251, 248, 1)',
+    'rgba(225, 188, 75, 1)',
+    'rgba(0, 148, 255, 1)',
+]
 export const radarTooltipOptions: EChartsOption['tooltip'] = {
     backgroundColor: 'rgba(0, 32, 61, 1)',
     borderColor: 'rgba(15, 251, 248, 1)',
@@ -38,26 +42,26 @@ export const radarGridOptions: EChartsOption['grid'] = {
 
 export const radarItemOptions: EChartsOption['radar'] = {
     splitArea: {
-        show: false
+        show: false,
     },
     center: ['50%', '50%'],
     radius: '50%',
     axisLine: {
         lineStyle: {
-            color: 'rgba(255, 255, 255, 0.4)'
-        }
+            color: 'rgba(255, 255, 255, 0.4)',
+        },
     },
     splitLine: {
         lineStyle: {
-            color: 'rgba(255, 255, 255, 0.5)'
-        }
+            color: 'rgba(255, 255, 255, 0.5)',
+        },
     },
     axisName: {
         color: '#fff',
         fontSize: 14,
         lineHeight: 20,
         formatter(name, indicatorOpt) {
-            return `{max|${indicatorOpt?.max}}\n{name|${name}}`;
+            return `{max|${indicatorOpt?.max}}\n{name|${name}}`
         },
         rich: {
             max: {
@@ -65,9 +69,9 @@ export const radarItemOptions: EChartsOption['radar'] = {
                 fontSize: 18,
                 padding: [2, 4],
                 align: 'center',
-                borderRadius: 4
-            }
-        }
+                borderRadius: 4,
+            },
+        },
     },
     indicator: [],
 }
@@ -77,7 +81,7 @@ export const radarSeriesOptions: EChartsOption['series'] = {
     itemStyle: {
         // @ts-ignore
         color(params) {
-            return radarColors[params.dataIndex % radarColors.length]!;
+            return radarColors[params.dataIndex % radarColors.length]!
         },
     },
     symbol: 'none',
@@ -90,11 +94,11 @@ export const radarSeriesOptions: EChartsOption['series'] = {
     },
 }
 
-export const radarSeriesDataRecordOptions: SeriesOption['data']  = {
+export const radarSeriesDataRecordOptions: SeriesOption['data'] = {
     label: {
         show: true,
         formatter: function (params) {
-            return params.value;
-        }
+            return params.value
+        },
     },
 }

@@ -3,10 +3,10 @@
         <LcElasticScrollbar>
             <div class="lc-ranking__wrapper">
                 <div
-                    class="lc-ranking__wrapper__item"
-                    :class="[`lc-ranking__wrapper__item--${type}`]"
                     v-for="(item, key) in renderList"
                     :key
+                    class="lc-ranking__wrapper__item"
+                    :class="[`lc-ranking__wrapper__item--${type}`]"
                     :style="{
                         '--proportion': getCurrentProportion(item.value),
                         '--ranking-num': key,
@@ -15,21 +15,38 @@
                 >
                     <div class="lc-ranking__wrapper__item__top">
                         <div class="lc-ranking__wrapper__item__top__start">
-                            <div class="lc-ranking__wrapper__item__top__start__index">{{ key + 1 }}</div>
-                            <div class="lc-ranking__wrapper__item__top__start__label">{{ item.label }}</div>
+                            <div
+                                class="lc-ranking__wrapper__item__top__start__index"
+                            >
+                                {{ key + 1 }}
+                            </div>
+                            <div
+                                class="lc-ranking__wrapper__item__top__start__label"
+                            >
+                                {{ item.label }}
+                            </div>
                         </div>
                         <div class="lc-ranking__wrapper__item__top__end">
-                            <div class="lc-ranking__wrapper__item__top__end__value">
+                            <div
+                                class="lc-ranking__wrapper__item__top__end__value"
+                            >
                                 {{ fromValue(item) }}
                             </div>
-                            <div class="lc-ranking__wrapper__item__top__end__unit">
+                            <div
+                                class="lc-ranking__wrapper__item__top__end__unit"
+                            >
                                 {{ item.unit }}
                             </div>
                         </div>
                     </div>
                     <div class="lc-ranking__wrapper__item__inner">
-                        <div class="lc-ranking__wrapper__item__inner__bar"></div>
-                        <div class="lc-ranking__wrapper__item__inner__ball" v-if="showBall"></div>
+                        <div
+                            class="lc-ranking__wrapper__item__inner__bar"
+                        ></div>
+                        <div
+                            v-if="showBall"
+                            class="lc-ranking__wrapper__item__inner__ball"
+                        ></div>
                     </div>
                 </div>
             </div>
@@ -38,69 +55,73 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, onMounted, ref } from "vue";
-import { LcElasticScrollbar } from "@/components/education/components/elasticScrollbar";
+import { computed, onMounted, ref } from 'vue'
+import { LcElasticScrollbar } from '@/components/education/components/elasticScrollbar'
 
 export type RankingRecord = {
-    label: string;
-    unit?: string | "{b}";
-    value: number;
-    formatter?: "{a}" | "{b}" | ((e: RankingRecord) => string | number);
-};
+    label: string
+    unit?: string | '{b}'
+    value: number
+    formatter?: '{a}' | '{b}' | ((e: RankingRecord) => string | number)
+}
 const {
-    list = [],
-    sort = "order",
+    list,
+    sort = 'order',
     animateIndex = 0,
-    type = "ranking",
+    type = 'ranking',
     showBall = true,
 } = defineProps<{
-    list: RankingRecord[];
-    sort?: "order" | "reverse" | "none";
-    animateIndex?: 0 | 1;
-    type?: "ranking" | "proprotion";
-    showBall?: boolean;
-}>();
+    list: RankingRecord[]
+    sort?: 'order' | 'reverse' | 'none'
+    animateIndex?: 0 | 1
+    type?: 'ranking' | 'proprotion'
+    showBall?: boolean
+}>()
 function complierTotal(data: RankingRecord[]) {
-    return data.reduce((pre: number, cur) => (pre += cur.value), 0);
+    return data.reduce((pre: number, cur) => (pre += cur.value), 0)
 }
-const total = computed(() => complierTotal(list));
-const isAnimate = ref(animateIndex);
-function getCurrentProportion(value?: RankingRecord["value"]) {
-    if (!value) return 0;
-    return (value / total.value) * 100 * isAnimate.value;
+const total = computed(() => complierTotal(list))
+const isAnimate = ref(animateIndex)
+function getCurrentProportion(value?: RankingRecord['value']) {
+    if (!value) return 0
+    return (value / total.value) * 100 * isAnimate.value
 }
 function getPreProportion(i: number) {
-    return (complierTotal(renderList.value.slice(0, i)) / total.value) * 100 * isAnimate.value;
+    return (
+        (complierTotal(renderList.value.slice(0, i)) / total.value) *
+        100 *
+        isAnimate.value
+    )
 }
 
 function fromValue(item: RankingRecord) {
-    if (typeof item.formatter === "function") {
-        return item.formatter(item);
+    if (typeof item.formatter === 'function') {
+        return item.formatter(item)
     }
     switch (item.formatter) {
-        case "{b}":
-            return ((item.value / total.value) * 100).toFixed(2);
-        case "{a}":
-            return item.value * total.value;
+        case '{b}':
+            return ((item.value / total.value) * 100).toFixed(2)
+        case '{a}':
+            return item.value * total.value
         default:
-            return item.value;
+            return item.value
     }
 }
 const renderList = computed(() => {
     switch (sort) {
-        case "none":
-            return list;
-        case "order":
-            return list.sort((a, b) => b.value - a.value);
-        case "reverse":
-            return list.sort((a, b) => a.value - b.value);
+        case 'none':
+            return list
+        case 'order':
+            return list.sort((a, b) => b.value - a.value)
+        case 'reverse':
+            return list.sort((a, b) => a.value - b.value)
         default:
-            return list;
+            return list
     }
-});
+})
 onMounted(() => {
-    isAnimate.value = 1;
-});
+    isAnimate.value = 1
+})
 </script>
 
 <style lang="scss" scoped>
@@ -220,7 +241,11 @@ onMounted(() => {
                     left: 0;
                     width: calc(var(--proportion) * 1%);
                     height: 100%;
-                    background: linear-gradient(50deg, rgba(15, 251, 248, 0) 0%, #0ffbf8 100%);
+                    background: linear-gradient(
+                        50deg,
+                        rgba(15, 251, 248, 0) 0%,
+                        #0ffbf8 100%
+                    );
                     transition: linear 0.3s;
                     transition-property: width, left;
                     @include transitionDelay;
@@ -251,7 +276,13 @@ onMounted(() => {
                             }
 
                             &__ball {
-                                left: calc(calc(var(--proportion) + var(--pre-proportion)) * 1%);
+                                left: calc(
+                                    calc(
+                                            var(--proportion) +
+                                                var(--pre-proportion)
+                                        ) *
+                                        1%
+                                );
                             }
                         }
                     }

@@ -1,1 +1,1 @@
-export * from './funnelTier';
+export * from './funnelTier'

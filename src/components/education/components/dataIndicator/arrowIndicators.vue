@@ -9,8 +9,16 @@
             </div>
             <div class="lc-arrow-indicators__center__value">
                 <slot name="value">
-                    <NNumberAnimation show-separator :from="0" :to="renderValue" active :precision="decimal" />
-                    <span class="lc-arrow-indicators__center__value__unit"> {{ renderUnit }} </span>
+                    <NNumberAnimation
+                        show-separator
+                        :from="0"
+                        :to="renderValue"
+                        active
+                        :precision="decimal"
+                    />
+                    <span class="lc-arrow-indicators__center__value__unit">
+                        {{ renderUnit }}
+                    </span>
                 </slot>
             </div>
         </div>
@@ -18,19 +26,19 @@
 </template>
 
 <script lang="ts" setup>
-import { LcIcon } from "@/components/education/components/icon";
-import { type NameTypes } from "../icon/icons";
-import { NNumberAnimation } from "naive-ui/es/number-animation";
-import { computed, PropType } from "vue";
-import { bigNumber } from "lowcode-share/es/share";
+import { LcIcon } from '@/components/education/components/icon'
+import { type NameTypes } from '../icon/icons'
+import { NNumberAnimation } from 'naive-ui/es/number-animation'
+import { computed, PropType } from 'vue'
+import { bigNumber } from 'lowcode-share/es/share'
 
 const {
-    label = "",
+    label = '',
     value = 0,
     fixed = true,
     decimal = 0,
-    icon = "person2",
-    unit = "",
+    icon = 'person2',
+    unit = '',
 } = defineProps({
     label: {
         type: String,
@@ -50,23 +58,23 @@ const {
     unit: {
         type: String,
     },
-});
+})
 
 const renderValue = computed(() => {
     if (fixed) {
-        const { result } = bigNumber(value, decimal);
-        return result;
+        const { result } = bigNumber(value, decimal)
+        return result
     }
-    return value;
-});
+    return value
+})
 
 const renderUnit = computed(() => {
     if (fixed) {
-        const { unit: numUnit } = bigNumber(value, decimal);
-        return `${numUnit}${unit}`;
+        const { unit: numUnit } = bigNumber(value, decimal)
+        return `${numUnit}${unit}`
     }
-    return unit;
-});
+    return unit
+})
 </script>
 
 <style lang="scss" scoped>
@@ -78,7 +86,7 @@ const renderUnit = computed(() => {
     padding: 0 56px 0 8px;
     box-sizing: border-box;
     gap: 5px;
-    background-image: url("./images/skew/arrow-bg.png");
+    background-image: url('./images/skew/arrow-bg.png');
     background-repeat: no-repeat;
     background-size: 100%;
     background-position: center;

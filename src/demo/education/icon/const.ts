@@ -40,4 +40,4 @@ const innerImageDomain = {
     }
 }
 </script>
-`;
+`

@@ -1,7 +1,5 @@
-import LcChartTitle from './chartTitle.vue';
+import LcChartTitle from './chartTitle.vue'
 
-export type LcChartTitleInstanceType = InstanceType<typeof LcChartTitle>;
+export type LcChartTitleInstanceType = InstanceType<typeof LcChartTitle>
 
-export {
-    LcChartTitle,
-};
+export { LcChartTitle }

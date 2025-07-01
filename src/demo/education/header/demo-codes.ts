@@ -1,4 +1,3 @@
-
 const defNavDataRawCodeString = `[{
      label: '高质量发展中心',
      path: '/home',
@@ -73,7 +72,7 @@ const defNavDataRawCodeString = `[{
      path: '/join',
 },
 ];
-`;
+`
 export const demoCodes = {
     code1: `
 <template>
@@ -87,7 +86,7 @@ const headerIndex = ref(2);
 const defNavData = ${defNavDataRawCodeString}
 </script>
 `,
-code2: `
+    code2: `
 <template>
     <LcHeader v-model:index="headerIndex" hideArrow :nav-datas="defNavData"></LcHeader>
 </template>
@@ -99,4 +98,4 @@ const headerIndex = ref(2);
 const defNavData = ${defNavDataRawCodeString}
 </script>
 `,
-};
+}

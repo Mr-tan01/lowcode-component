@@ -1,5 +1,3 @@
-import DemoHelpBox from "./DemoHelpBox.vue";
+import DemoHelpBox from './DemoHelpBox.vue'
 
-export {
-    DemoHelpBox,
-}
+export { DemoHelpBox }

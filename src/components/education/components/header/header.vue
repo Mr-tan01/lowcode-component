@@ -5,15 +5,27 @@
         </div>
         <div class="lcc-header__wrapper">
             <div class="lcc-header__wrapper__navs">
-                <LcCarouseBox :disabled="hideArrow" :list="listSource" :show-track="false" v-model:index="modelIndex" @change="carouseChange">
-                    <template #default="{ index, record, isActive, handleClick }">
+                <LcCarouseBox
+                    v-model:index="modelIndex"
+                    :disabled="hideArrow"
+                    :list="listSource"
+                    :show-track="false"
+                    @change="carouseChange"
+                >
+                    <template
+                        #default="{ index, record, isActive, handleClick }"
+                    >
                         <div
                             class="lcc-header__wrapper__navs__item"
                             :class="{
                                 active: isActive,
                             }"
                         >
-                            <n-popover trigger="hover" arrow-class="header-arrow-class" class="header-popover-class">
+                            <n-popover
+                                trigger="hover"
+                                arrow-class="header-arrow-class"
+                                class="header-popover-class"
+                            >
                                 <template #trigger>
                                     <a
                                         class="lcc-header__wrapper__navs__item__link"
@@ -27,25 +39,62 @@
                                         {{ record.label }}
                                     </a>
                                 </template>
-                                <div class="lcc-header__wrapper__navs__drop" v-if="record.list?.length">
-                                    <div class="lcc-header__wrapper__navs__drop__group" v-for="(el, key) in record.list" :key>
-                                        <div class="lcc-header__wrapper__navs__drop__group__label">
-                                            <div class="lcc-header__wrapper__navs__drop__group__label--icon">
-                                                <img class="lcc-header__wrapper__navs__drop__group__label--icon--image" src="./images/right-arrow.png" alt="" />
+                                <div
+                                    v-if="record.list?.length"
+                                    class="lcc-header__wrapper__navs__drop"
+                                >
+                                    <div
+                                        v-for="(el, key) in record.list"
+                                        :key
+                                        class="lcc-header__wrapper__navs__drop__group"
+                                    >
+                                        <div
+                                            class="lcc-header__wrapper__navs__drop__group__label"
+                                        >
+                                            <div
+                                                class="lcc-header__wrapper__navs__drop__group__label--icon"
+                                            >
+                                                <img
+                                                    class="lcc-header__wrapper__navs__drop__group__label--icon--image"
+                                                    src="./images/right-arrow.png"
+                                                    alt=""
+                                                />
                                             </div>
-                                            <div class="lcc-header__wrapper__navs__drop__group__label--text" :title="el.label">
+                                            <div
+                                                class="lcc-header__wrapper__navs__drop__group__label--text"
+                                                :title="el.label"
+                                            >
                                                 {{ el.label }}
                                             </div>
                                         </div>
-                                        <div class="lcc-header__wrapper__navs__drop__group__item__group">
+                                        <div
+                                            class="lcc-header__wrapper__navs__drop__group__item__group"
+                                        >
                                             <div
-                                                class="lcc-header__wrapper__navs__drop__group__item__group__nav"
-                                                v-for="(child, ckey) in el.children"
+                                                v-for="(
+                                                    child, ckey
+                                                ) in el.children"
                                                 :key="ckey"
-                                                :class="{ highlight: (isActive && selectedKey === child.path) || selectedKey === child.label }"
-                                                @click="jump({ parent: el, item: child, index, handleClick })"
+                                                class="lcc-header__wrapper__navs__drop__group__item__group__nav"
+                                                :class="{
+                                                    highlight:
+                                                        (isActive &&
+                                                            selectedKey ===
+                                                                child.path) ||
+                                                        selectedKey ===
+                                                            child.label,
+                                                }"
+                                                @click="
+                                                    jump({
+                                                        parent: el,
+                                                        item: child,
+                                                        index,
+                                                        handleClick,
+                                                    })
+                                                "
                                             >
-                                                {{ child.label }}{{ selectedKey }}
+                                                {{ child.label
+                                                }}{{ selectedKey }}
                                             </div>
                                         </div>
                                     </div>
@@ -63,49 +112,54 @@
 </template>
 
 <script lang="ts" setup>
-import { computed } from "vue";
-import { NPopover } from "naive-ui/es/popover";
-import { LcCarouseBox, type LcCarouseBoxChangeEvent } from "@/components/education/components/carouseBox";
+import { computed } from 'vue'
+import { NPopover } from 'naive-ui/es/popover'
+import {
+    LcCarouseBox,
+    type LcCarouseBoxChangeEvent,
+} from '@/components/education/components/carouseBox'
 type ListRaw = {
-    label: string;
-    children: NavData[];
-};
+    label: string
+    children: NavData[]
+}
 export type NavData = {
-    label: string;
-    path: string;
-    list?: ListRaw[];
-};
+    label: string
+    path: string
+    list?: ListRaw[]
+}
 
 export type jumpParams = {
-    parent?: ListRaw | null;
-    item: NavData;
-    index: number;
-    handleClick?: (item: ListRaw, index: number) => void;
-};
+    parent?: ListRaw | null
+    item: NavData
+    index: number
+    handleClick?: (item: ListRaw, index: number) => void
+}
 const { navDatas, hideArrow, highlightHandler } = defineProps<{
-    navDatas?: NavData[];
-    hideArrow?: boolean;
-    highlightHandler?: (item: NavData) => string;
-}>();
-const selectedKey = defineModel<string>("selectedKey", { default: "" });
-const modelIndex = defineModel<number>("index", { default: 0 });
+    navDatas: NavData[]
+    hideArrow?: boolean
+    highlightHandler: (item: NavData) => string
+}>()
+const selectedKey = defineModel<string>('selectedKey', { default: '' })
+const modelIndex = defineModel<number>('index', { default: 0 })
 const listSource = computed(() => {
-    return navDatas === void 0 ? [] : navDatas;
-});
+    return navDatas === void 0 ? [] : navDatas
+})
 
 const $emit = defineEmits<{
-    (e: "jump", jumpParams: jumpParams): void;
-    (e: "scroll", data: LcCarouseBoxChangeEvent): void;
-}>();
+    (e: 'jump', jumpParams: jumpParams): void
+    (e: 'scroll', data: LcCarouseBoxChangeEvent): void
+}>()
 
 function jump({ parent, item, index, handleClick }: jumpParams) {
-    selectedKey.value = highlightHandler?.(item) ?? item.path;
-    parent && !hideArrow && handleClick?.(parent, index);
-    $emit("jump", { parent, item, index });
+    selectedKey.value = highlightHandler?.(item) ?? item.path
+    if (parent && !hideArrow && handleClick) {
+        handleClick(parent, index)
+    }
+    $emit('jump', { parent, item, index })
 }
 
 function carouseChange(value: LcCarouseBoxChangeEvent) {
-    $emit("scroll", value);
+    $emit('scroll', value)
 }
 </script>
 
@@ -137,8 +191,8 @@ function carouseChange(value: LcCarouseBoxChangeEvent) {
     position: relative;
     min-width: var(--min-width);
     &::before {
-        content: "";
-        background: url("./images/focus-point-light.png") no-repeat;
+        content: '';
+        background: url('./images/focus-point-light.png') no-repeat;
         background-size: 100% 100%;
         filter: brightness(8);
         mix-blend-mode: screen;
@@ -236,7 +290,12 @@ function carouseChange(value: LcCarouseBoxChangeEvent) {
                 width: 100%;
                 display: flex;
                 gap: 40px;
-                background: linear-gradient(174deg, #123479 0%, #0b2952 66%, #10507d 100%);
+                background: linear-gradient(
+                    174deg,
+                    #123479 0%,
+                    #0b2952 66%,
+                    #10507d 100%
+                );
                 box-shadow: 0px 20px 20px -10px rgba(0, 0, 0, 0.31);
                 border-radius: 8px;
                 border: 1px solid #207097;
@@ -246,7 +305,7 @@ function carouseChange(value: LcCarouseBoxChangeEvent) {
                 cursor: pointer;
 
                 &::before {
-                    content: "";
+                    content: '';
                     position: absolute;
                     top: calc(var(--offsetY) * -1);
                     left: 0;

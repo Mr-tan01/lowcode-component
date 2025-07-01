@@ -1,4 +1,4 @@
-import { type EChartsOption } from "echarts";
+import { type EChartsOption } from 'echarts'
 
 export const commonTooltipOptions: EChartsOption['tooltip'] = {
     backgroundColor: 'rgba(0, 32, 61, 1)',
@@ -7,5 +7,5 @@ export const commonTooltipOptions: EChartsOption['tooltip'] = {
         color: '#fff',
         fontSize: 14,
         lineHeight: 20,
-    }
+    },
 }

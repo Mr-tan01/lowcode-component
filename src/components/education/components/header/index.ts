@@ -1,10 +1,7 @@
-import LcHeader, { NavData as LcHeaderType } from './header.vue';
+import LcHeader, { NavData as LcHeaderType } from './header.vue'
 
-export type HeaderInstanceType = InstanceType<typeof LcHeader>;
+export type HeaderInstanceType = InstanceType<typeof LcHeader>
 
-export {
-    LcHeader,
-    type LcHeaderType,
-};
+export { LcHeader, type LcHeaderType }
 
-export * from './header.vue';
+export * from './header.vue'

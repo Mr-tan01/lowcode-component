@@ -1,61 +1,94 @@
 <template>
     <div class="lc-main-robot">
         <div class="lc-main-robot__wrapper">
-            <img class="lc-main-robot__img" src="./images/main-robot.png" draggable="false" alt="" />
+            <img
+                class="lc-main-robot__img"
+                src="./images/main-robot.png"
+                draggable="false"
+                alt=""
+            />
             <div class="lc-main-robot__wrapper__inner-input">
                 <div class="lc-main-robot__wrapper__inner-input--content">
-                    <div class="lc-main-robot__wrapper__inner-input--help" v-show="output.helpText">
-                        <img class="lc-main-robot__wrapper__inner-input--help--voice" src="./images/voice.png" draggable="false" alt="" />
+                    <div
+                        v-show="output.helpText"
+                        class="lc-main-robot__wrapper__inner-input--help"
+                    >
+                        <img
+                            class="lc-main-robot__wrapper__inner-input--help--voice"
+                            src="./images/voice.png"
+                            draggable="false"
+                            alt=""
+                        />
                         {{ output.helpText }}
                     </div>
-                    <input type="text" :placeholder v-model="modelContext" :disabled="forbidden" class="lc-main-robot__wrapper__inner-input--content__input" />
-                    <div class="lc-main-robot__wrapper__inner-input--content__suffix">
+                    <input
+                        v-model="modelContext"
+                        type="text"
+                        :placeholder
+                        :disabled="forbidden"
+                        class="lc-main-robot__wrapper__inner-input--content__input"
+                    />
+                    <div
+                        class="lc-main-robot__wrapper__inner-input--content__suffix"
+                    >
                         <img
                             class="lc-main-robot__wrapper__inner-input--content__suffix--img"
                             src="./images/microphone.png"
                             draggable="false"
+                            alt=""
                             @mousedown="handleMouseDown"
                             @mouseup="handleMouseUp"
-                            alt=""
                         />
                     </div>
                 </div>
             </div>
-            <div class="lc-main-robot__wrapper__star-wrap" ref="starWrapperRef">
+            <div ref="starWrapperRef" class="lc-main-robot__wrapper__star-wrap">
                 <div
-                    class="lc-main-robot__wrapper__star-wrap--star"
                     v-for="(item, key) in renderStartData"
-                    :style="customRotateStyle(key)"
                     :key="item.key ?? key"
                     ref="starElRefs"
+                    class="lc-main-robot__wrapper__star-wrap--star"
+                    :style="customRotateStyle(key)"
                     @mouseenter="mouseenter"
                     @mouseleave="mouseleave"
                 >
                     <div class="lc-main-robot-icon">
-                         <LcIcon class="lc-main-robot-icon-center" @click="starClick(item, key)" :domain="item.domain" :name="item.name" :size="item.size"></LcIcon>
+                        <LcIcon
+                            class="lc-main-robot-icon-center"
+                            :domain="item.domain"
+                            :name="item.name"
+                            :size="item.size"
+                            @click="starClick(item, key)"
+                        ></LcIcon>
                     </div>
-                   
+
                     <div class="lc-main-robot__wrapper__star-wrap--star__meta">
                         <div
-                            class="lc-main-robot__wrapper__star-wrap--star__meta--item" 
                             v-for="(el, ckey) in item.meta"
                             :key="ckey"
-                            :style="{ '--left-offset-number': ckey, '--left-reverse-offset-number': reverseIndex(item.meta.length, ckey) }"
+                            class="lc-main-robot__wrapper__star-wrap--star__meta--item"
+                            :style="{
+                                '--left-offset-number': ckey,
+                                '--left-reverse-offset-number': reverseIndex(
+                                    item.meta.length,
+                                    ckey,
+                                ),
+                            }"
                         >
                             <div
+                                v-if="ckey === 0"
                                 class="lc-main-robot__wrapper__star-wrap--star__meta--item--text"
                                 :title="el.label"
                                 :style="getTextStyle(key)"
-                                v-if="ckey === 0"
                                 @click="starClick(item, key)"
                             >
                                 {{ el.label }}
                             </div>
                             <div
+                                v-else
                                 class="lc-main-robot__wrapper__star-wrap--star__meta--item--text"
                                 :title="el.label"
                                 :style="getTextStyle(key)"
-                                v-else
                                 @click="starItemClick(el, ckey)"
                             >
                                 {{ el.label }}
@@ -69,18 +102,18 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, PropType, ref, watchEffect } from "vue";
-import { useSpeech } from "./speech";
-import { LcIcon } from "@/components/education/components/icon";
-import { defStarData, StarType, StarItemType } from "./const";
-import { useStarRotate } from "./main-robot-hook";
-import memoize from "lodash-es/memoize";
-import { useMessage } from "naive-ui";
+import { computed, PropType, ref, watchEffect } from 'vue'
+import { useSpeech } from './speech'
+import { LcIcon } from '@/components/education/components/icon'
+import { defStarData, StarType, StarItemType } from './const'
+import { useStarRotate } from './main-robot-hook'
+import memoize from 'lodash-es/memoize'
+import { useMessage } from 'naive-ui'
 
-const message = useMessage();
+const message = useMessage()
 
 const {
-    placeholder = "AI 智能问数",
+    placeholder = 'AI 智能问数',
     stars = void 0,
     duration = 1000,
     animate = true,
@@ -97,20 +130,19 @@ const {
     maxShowCount: Number,
     fullAngle: Number,
     forbidden: Boolean,
-});
+})
 
-const { start, stop, output, on } = useSpeech();
+const { start, stop, output, on } = useSpeech()
 function handleMouseDown() {
     if (forbidden) {
-        message.warning("此功能敬请期待");
+        message.warning('此功能敬请期待')
     } else {
-        start();
+        start()
     }
 }
 function handleMouseUp() {
-    if (forbidden) {
-    } else {
-        stop();
+    if (!forbidden) {
+        stop()
     }
 }
 
@@ -126,94 +158,94 @@ const {
     starMaxShowCount,
     displayAlternately,
     fullAngle: circleFullAngle,
-} = useStarRotate();
+} = useStarRotate()
 
 const reverseIndex = memoize(
     (len, index) => {
-        return len - (index + 1);
+        return len - (index + 1)
     },
-    (len, index) => `${len}-${index}`
-);
+    (len, index) => `${len}-${index}`,
+)
 
-
-const renderStartData = computed(() => (stars?.length ? stars : defStarData));
+const renderStartData = computed(() => (stars?.length ? stars : defStarData))
 watchEffect(() => {
-    starLneght.value = renderStartData.value?.length || 0;
-    circleStartAngle.value = startAngle;
-    starMaxShowCount.value = maxShowCount;
-    circleFullAngle.value = fullAngle;
-    const yc = renderStartData.value.length - maxShowCount;
+    starLneght.value = renderStartData.value?.length || 0
+    circleStartAngle.value = startAngle
+    starMaxShowCount.value = maxShowCount
+    circleFullAngle.value = fullAngle
+    const yc = renderStartData.value.length - maxShowCount
+    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
     yc < 0
         ? []
         : defStarData.slice(yc * -1).forEach((_, index) => {
-              const newIndex = renderStartData.value.length - yc + index;
-              displayAlternately.value.push(newIndex);
-          });
-});
+              const newIndex = renderStartData.value.length - yc + index
+              displayAlternately.value.push(newIndex)
+          })
+})
 
-//360 执行的速度 1000ms 执行一次 每帧旋转的角度为360/1000 即每帧旋转0.36度
+// 360 执行的速度 1000ms 执行一次 每帧旋转的角度为360/1000 即每帧旋转0.36度
 // 时长 duration 旋转的总时长，计算速度
-const step = computed(() => 360 / duration);
-const time = computed(() => 1000 / duration);
-const isAnimate = ref(animate);
-let timer;
+const step = computed(() => 360 / duration)
+const time = computed(() => 1000 / duration)
+const isAnimate = ref(animate)
+let timer
 
 function _requestAnimationFrame(callback) {
     if (window.requestAnimationFrame) {
-        window.requestAnimationFrame.call(this, callback);
+        window.requestAnimationFrame.call(this, callback)
     } else {
-        callback();
+        callback()
     }
 }
 function autoRotate() {
-    if (!isAnimate.value) return;
+    if (!isAnimate.value) return
     setTimeout(() => {
-        if (!isAnimate.value) return;
+        if (!isAnimate.value) return
         _requestAnimationFrame(() => {
-            angleOffset.value += step.value;
+            angleOffset.value += step.value
             if (angleOffset.value >= 360) {
-                angleOffset.value = 0;
+                angleOffset.value = 0
             }
-            autoRotate();
-        });
-    }, time.value);
+            autoRotate()
+        })
+    }, time.value)
 }
 if (isAnimate.value) {
-    autoRotate();
+    autoRotate()
 }
 
 const $emit = defineEmits<{
-    (e: "click", item: StarType, index: number): void;
-    (e: "itemClick", item: StarItemType, index: number): void;
-}>();
+    (e: 'click', item: StarType, index: number): void
+    (e: 'itemClick', item: StarItemType, index: number): void
+}>()
 
 function starClick(item: StarType, index: number) {
-    angleOffset.value = averageAngle.value * index * -1;
-    $emit("click", item, index);
+    angleOffset.value = averageAngle.value * index * -1
+    $emit('click', item, index)
 }
 
 function starItemClick(item: StarItemType, index: number): void {
-    angleOffset.value = averageAngle.value * index * -1;
-    $emit("itemClick", item, index);
+    angleOffset.value = averageAngle.value * index * -1
+    $emit('itemClick', item, index)
 }
 
 function mouseenter() {
-    clearTimeout(timer);
-    isAnimate.value = false;
+    clearTimeout(timer)
+    isAnimate.value = false
 }
 function mouseleave() {
     timer = setTimeout(() => {
-        if (isAnimate.value) return;
-        isAnimate.value = animate;
-        autoRotate();
-    }, 2000);
+        if (isAnimate.value) return
+        isAnimate.value = animate
+        autoRotate()
+    }, 2000)
 }
 
-const modelContext = defineModel("value", { default: "" });
+const modelContext = defineModel<string>('value', { default: '' })
 
-on("result", () => {
-    modelContext.value = output.value?.textContent || "";
-});
+on('result', () => {
+    modelContext.value = output.value?.textContent || ''
+})
 </script>
 
 <style lang="scss" scoped>
@@ -222,13 +254,13 @@ on("result", () => {
     flex-direction: column;
     width: 100%;
     height: 100%;
-    &-icon{
+    &-icon {
         display: flex;
         width: 84px;
         height: 88px;
         background: url('./images/base/base.png') no-repeat;
         background-size: cover;
-        &-center{
+        &-center {
             display: flex !important;
             justify-content: center;
             align-items: flex-start !important;
@@ -263,7 +295,10 @@ on("result", () => {
                 z-index: var(--z-index-number);
 
                 @mixin mateItemShow() {
-                    transform: translate(calc(var(--left-offset-number) * -7px), 0);
+                    transform: translate(
+                        calc(var(--left-offset-number) * -7px),
+                        0
+                    );
                     opacity: 1;
                     pointer-events: auto;
                     z-index: 99;
@@ -271,23 +306,21 @@ on("result", () => {
 
                 &:hover {
                     z-index: calc(var(--z-index-number) + 1);
-                    :deep(.lc-icon) {
-                        .lc-icon__image {
-                            // background-image: var(--img-selected-src);
-                        }
-                    }
 
                     .lc-main-robot {
-                        &-icon{
-                            background: url('./images/base/selected-base.png') no-repeat;
-                            background-size: cover
+                        &-icon {
+                            background: url('./images/base/selected-base.png')
+                                no-repeat;
+                            background-size: cover;
                         }
                         &__wrapper {
                             &__star-wrap--star {
                                 &__meta {
                                     &--item {
                                         @include mateItemShow;
-                                        transition-delay: calc(var(--left-offset-number) * 0.1s);
+                                        transition-delay: calc(
+                                            var(--left-offset-number) * 0.1s
+                                        );
                                     }
                                 }
                             }
@@ -321,15 +354,20 @@ on("result", () => {
                         background-repeat: no-repeat;
                         background-size: 100% 100%;
                         transition: linear 0.2s;
-                        transform: translate(calc(var(--left-offset-number) * -18px), 0);
+                        transform: translate(
+                            calc(var(--left-offset-number) * -18px),
+                            0
+                        );
                         transition-property: opacity, transform;
-                        transition-delay: calc(var(--left-reverse-offset-number) * 0.1s);
+                        transition-delay: calc(
+                            var(--left-reverse-offset-number) * 0.1s
+                        );
                         opacity: 0;
                         will-change: transform, opacity;
                         position: relative;
                         transform: rotateY(180deg);
                         &::after {
-                            content: "";
+                            content: '';
                             z-index: -1;
                             position: absolute;
                             inset: 0;
@@ -348,7 +386,9 @@ on("result", () => {
                         }
 
                         &--text {
-                            font-family: AlimamaFangYuanTiVF-SemiBold, AlimamaFangYuanTiVF-SemiBold;
+                            font-family:
+                                AlimamaFangYuanTiVF-SemiBold,
+                                AlimamaFangYuanTiVF-SemiBold;
                             font-weight: normal;
                             font-size: 16px;
                             color: #ffffff;

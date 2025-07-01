@@ -13,35 +13,78 @@
                     {{ label }}
                 </div>
                 <div class="lc-skew-indicator__wrapper__info--result">
-                    <div class="lc-skew-indicator__wrapper__info--result--value">
-                        <NNumberAnimation show-separator :from="0" :to="renderValue" active :precision="decimals" />
+                    <div
+                        class="lc-skew-indicator__wrapper__info--result--value"
+                    >
+                        <NNumberAnimation
+                            show-separator
+                            :from="0"
+                            :to="renderValue"
+                            active
+                            :precision="decimals"
+                        />
                     </div>
-                    <div class="lc-skew-indicator__wrapper__info--result--unit" v-if="renderUnit">
+                    <div
+                        v-if="renderUnit"
+                        class="lc-skew-indicator__wrapper__info--result--unit"
+                    >
                         {{ renderUnit }}
                     </div>
-                    <div v-if="yearValue" class="lc-skew-indicator__wrapper__info--result--year" :class="{
-                        down: yearValue < 0,
-                        up: yearValue > 0,
-                    }">
-                        <div class="lc-skew-indicator__wrapper__info--result--year--label">
+                    <div
+                        v-if="yearValue"
+                        class="lc-skew-indicator__wrapper__info--result--year"
+                        :class="{
+                            down: yearValue < 0,
+                            up: yearValue > 0,
+                        }"
+                    >
+                        <div
+                            class="lc-skew-indicator__wrapper__info--result--year--label"
+                        >
                             {{ yearLabel }}
                         </div>
-                        <div class="lc-skew-indicator__wrapper__info--result--year--value">
-                            <NNumberAnimation show-separator :from="0" :to="yearValue" active :precision="decimal" />%
+                        <div
+                            class="lc-skew-indicator__wrapper__info--result--year--value"
+                        >
+                            <NNumberAnimation
+                                show-separator
+                                :from="0"
+                                :to="yearValue"
+                                active
+                                :precision="decimal"
+                            />%
                         </div>
-                        <div class="lc-skew-indicator__wrapper__info--result--year--up" v-if="yearValue">{{ prefixIcon
-                            }}</div>
+                        <div
+                            v-if="yearValue"
+                            class="lc-skew-indicator__wrapper__info--result--year--up"
+                        >
+                            {{ prefixIcon }}
+                        </div>
                     </div>
-                    <div class="lc-skew-indicator__wrapper__info--result--altericon" v-if="tip">
+                    <div
+                        v-if="tip"
+                        class="lc-skew-indicator__wrapper__info--result--altericon"
+                    >
                         <LcTooltip>{{ tip }}</LcTooltip>
                     </div>
                 </div>
-                <div class="lc-skew-indicator__wrapper__info--sub" v-if="subHead">
+                <div
+                    v-if="subHead"
+                    class="lc-skew-indicator__wrapper__info--sub"
+                >
                     <div class="lc-skew-indicator__wrapper__info--sub-wrapper">
-                        <div class="lc-skew-indicator__wrapper__info--sub-content">{{ subContent }}</div>
-                        <div v-if="subHead" class="lc-skew-indicator__wrapper__info--sub-head">{{ subHead }}</div>
+                        <div
+                            class="lc-skew-indicator__wrapper__info--sub-content"
+                        >
+                            {{ subContent }}
+                        </div>
+                        <div
+                            v-if="subHead"
+                            class="lc-skew-indicator__wrapper__info--sub-head"
+                        >
+                            {{ subHead }}
+                        </div>
                     </div>
-
                 </div>
             </div>
         </div>
@@ -49,26 +92,25 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, PropType } from "vue";
-import personIcon from "./images/skew/icon/person.png";
-import { bigNumber } from "lowcode-share/es/share";
-import { NNumberAnimation } from "naive-ui/es/number-animation";
-import { LcTooltip } from "@/components/education/components/tooltip";
+import { computed, PropType } from 'vue'
+import personIcon from './images/skew/icon/person.png'
+import { bigNumber } from 'lowcode-share/es/share'
+import { NNumberAnimation } from 'naive-ui/es/number-animation'
+import { LcTooltip } from '@/components/education/components/tooltip'
 
 const {
-    label = "",
+    label = '',
     value = 0,
-    unit,
-    yearLabel = "同比去年",
+    unit = '',
+    yearLabel = '同比去年',
     yearValue = 0,
     fixed = true,
     decimal = 0,
     icon = personIcon,
-    tip = "",
-    type = "skew",
-    subHead = "",
-    subContent = "",
-    subUnit = ""
+    tip = '',
+    type = 'skew',
+    subHead = '',
+    subContent = '',
 } = defineProps({
     label: {
         type: String,
@@ -98,7 +140,7 @@ const {
         type: String,
     },
     type: {
-        type: String as PropType<"tile" | "skew">,
+        type: String as PropType<'tile' | 'skew'>,
     },
     subHead: {
         type: String,
@@ -106,38 +148,35 @@ const {
     subContent: {
         type: String,
     },
-    subUnit: {
-        type: String
-    },
     isShowIcon: {
-        type: Boolean
-    }
-});
+        type: Boolean,
+    },
+})
 
 const decimals = computed(() => {
-    const { unit: numUnit } = bigNumber(value);
+    const { unit: numUnit } = bigNumber(value)
     if (Number.isInteger(value) && !numUnit) {
-        return 0;
+        return 0
     }
-    return decimal;
-});
+    return decimal
+})
 const renderValue = computed(() => {
     if (fixed) {
-        const { result } = bigNumber(value, decimal);
-        return result;
+        const { result } = bigNumber(value, decimal)
+        return result
     }
-    return value;
-});
+    return value
+})
 const renderUnit = computed(() => {
     if (fixed) {
-        const { unit: numUnit } = bigNumber(value, decimal);
-        return `${numUnit}${unit}`;
+        const { unit: numUnit } = bigNumber(value, decimal)
+        return `${numUnit}${unit}`
     }
-    return unit;
-});
+    return unit
+})
 const prefixIcon = computed(() => {
-    return yearValue > 0 ? "↑" : "↓";
-});
+    return yearValue > 0 ? '↑' : '↓'
+})
 </script>
 
 <style lang="scss" scoped>
@@ -249,7 +288,6 @@ const prefixIcon = computed(() => {
             }
 
             &--sub {
-
                 display: flex;
                 justify-content: center;
                 align-items: center;
@@ -262,7 +300,7 @@ const prefixIcon = computed(() => {
                 }
 
                 &-content {
-                    color: #0FD4FB;
+                    color: #0fd4fb;
                     font-size: 30px;
                 }
 
@@ -270,11 +308,10 @@ const prefixIcon = computed(() => {
                     color: #ffffff;
                     font-size: 16px;
                 }
-
             }
 
             &--sub::before {
-                content: "";
+                content: '';
                 display: inline-block;
                 width: 1px;
                 height: 31px;
@@ -293,7 +330,7 @@ const prefixIcon = computed(() => {
 
         &::before,
         &::after {
-            content: "";
+            content: '';
             position: absolute;
             opacity: 0;
             transition: linear 0.3s;

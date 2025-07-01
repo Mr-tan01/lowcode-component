@@ -1,4 +1,2 @@
-import { default as e } from "./chartTitle.js";
-export {
-  e as LcChartTitle
-};
+import { default as e } from './chartTitle.js'
+export { e as LcChartTitle }

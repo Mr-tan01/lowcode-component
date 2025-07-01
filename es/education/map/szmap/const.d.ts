@@ -1,35 +1,35 @@
-import { Levels } from './props';
+import { Levels } from './props'
 export declare const szBlockNames: {
-    readonly 光明: "guangming";
-    readonly 宝安: "baoan";
-    readonly 龙华: "longhua";
-    readonly 南山: "nanshan";
-    readonly 福田: "futian";
-    readonly 罗湖: "luohu";
-    readonly 盐田: "yantian";
-    readonly 坪山: "pingshan";
-    readonly 龙岗: "longgang";
-    readonly 大鹏新区: "dapeng";
-    readonly 深汕合作区: "shenshan";
-};
-export type SzBlockNames = typeof szBlockNames;
-export type BlockName = SzBlockNames[keyof SzBlockNames];
+    readonly 光明: 'guangming'
+    readonly 宝安: 'baoan'
+    readonly 龙华: 'longhua'
+    readonly 南山: 'nanshan'
+    readonly 福田: 'futian'
+    readonly 罗湖: 'luohu'
+    readonly 盐田: 'yantian'
+    readonly 坪山: 'pingshan'
+    readonly 龙岗: 'longgang'
+    readonly 大鹏新区: 'dapeng'
+    readonly 深汕合作区: 'shenshan'
+}
+export type SzBlockNames = typeof szBlockNames
+export type BlockName = SzBlockNames[keyof SzBlockNames]
 export declare enum LabelModelEnum {
-    HOVER = "hover",
-    DEFAULT = "default"
+    HOVER = 'hover',
+    DEFAULT = 'default',
 }
 export declare const defBlockLableMap: {
-    guangming: string;
-    baoan: string;
-    longhua: string;
-    nanshan: string;
-    futian: string;
-    luohu: string;
-    yantian: string;
-    pingshan: string;
-    longgang: string;
-    dapeng: string;
-    shenshan: string;
-};
-export type BlockLableMapType = Record<BlockName, string>;
-export declare const defFloatLevelConfig: Levels;
+    guangming: string
+    baoan: string
+    longhua: string
+    nanshan: string
+    futian: string
+    luohu: string
+    yantian: string
+    pingshan: string
+    longgang: string
+    dapeng: string
+    shenshan: string
+}
+export type BlockLableMapType = Record<BlockName, string>
+export declare const defFloatLevelConfig: Levels

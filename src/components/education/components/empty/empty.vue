@@ -8,10 +8,10 @@
     </div>
 </template>
 <script lang="ts" setup>
-import { NEmpty } from "naive-ui/es/empty";
-const { description = "暂无数据" } = defineProps<{
-    description?: string;
-}>();
+import { NEmpty } from 'naive-ui/es/empty'
+const { description = '暂无数据' } = defineProps<{
+    description?: string
+}>()
 </script>
 <style lang="scss" scoped>
 .lc-empty {

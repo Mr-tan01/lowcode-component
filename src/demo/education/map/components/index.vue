@@ -4,7 +4,8 @@
             <span>{{ label }}：</span>
             <span>
                 <span class="map-marker-label--value">
-                    <NNumberAnimation :from="0" :to="value" :precision="0"> </NNumberAnimation>
+                    <NNumberAnimation :from="0" :to="value" :precision="0">
+                    </NNumberAnimation>
                 </span>
                 <span class="map-marker-label--unit">
                     {{ unit }}
@@ -16,17 +17,17 @@
 </template>
 
 <script lang="ts" setup>
-import { NNumberAnimation } from "naive-ui/es/number-animation";
+import { NNumberAnimation } from 'naive-ui/es/number-animation'
 
 const {
     value = 0,
     unit,
     label,
 } = defineProps<{
-    value: number;
-    unit?: string;
-    label: string;
-}>();
+    value?: number
+    unit: string
+    label: string
+}>()
 </script>
 
 <style scoped lang="scss">

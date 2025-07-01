@@ -1,7 +1,5 @@
-import LcModal from './modal.vue';
+import LcModal from './modal.vue'
 
-export type LcModalInstanceType = InstanceType<typeof LcModal>;
+export type LcModalInstanceType = InstanceType<typeof LcModal>
 
-export {
-    LcModal,
-};
+export { LcModal }

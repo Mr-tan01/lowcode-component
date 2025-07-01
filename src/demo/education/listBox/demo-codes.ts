@@ -11,4 +11,4 @@ const dataRows = [
   { indicatorId: "4", indicatorName: '工龄', indicatorValue: '10年'},
 ]
 </script>
-`;
+`

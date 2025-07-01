@@ -1,1 +1,13 @@
-.lctime[data-v-2d42aa63]{display:flex;align-items:center;justify-content:center}.lctime .img[data-v-2d42aa63]{width:50px;height:50px}.lctime .n-time-class[data-v-2d42aa63]{color:var(--160b8000);font-size:var(--edb6219a)}
+.lctime[data-v-2d42aa63] {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.lctime .img[data-v-2d42aa63] {
+    width: 50px;
+    height: 50px;
+}
+.lctime .n-time-class[data-v-2d42aa63] {
+    color: var(--160b8000);
+    font-size: var(--edb6219a);
+}

@@ -1,19 +1,34 @@
 <template>
-    <div class="lc-toolbar-slot" :class="[{
-        'lc-toolbar-slot--float': float,
-        'lc-toolbar-slot--flex': flex,
-    }]">
+    <div
+        class="lc-toolbar-slot"
+        :class="[
+            {
+                'lc-toolbar-slot--float': float,
+                'lc-toolbar-slot--flex': flex,
+            },
+        ]"
+    >
         <div class="lc-toolbar-slot__toolbar">
             <div class="lc-toolbar-slot__toolbar__start">
                 <slot name="toolbarStart"></slot>
             </div>
             <div class="lc-toolbar-slot__toolbar__end">
                 <slot name="toolbarRefresh">
-                    <LcIcon name="refresh" class="lc-toolbar-slot__toolbar__refresh" @click="refresh"></LcIcon>
+                    <LcIcon
+                        name="refresh"
+                        class="lc-toolbar-slot__toolbar__refresh"
+                        @click="refresh"
+                    ></LcIcon>
                 </slot>
                 <slot name="toolbarTimePicker">
-                    <n-date-picker class="n-date-picker" v-model:value="formattedValue" placeholder="请选择日期"
-                        format="yyyy.MM.dd" type="date" @update:value="refresh">
+                    <n-date-picker
+                        v-model:value="formattedValue"
+                        class="n-date-picker"
+                        placeholder="请选择日期"
+                        format="yyyy.MM.dd"
+                        type="date"
+                        @update:value="refresh"
+                    >
                         <template #date-icon>
                             <span></span>
                         </template>
@@ -28,39 +43,40 @@
 </template>
 
 <script lang="ts" setup>
-import { NDatePicker } from 'naive-ui/es/date-picker';
-import { LcIcon } from '@/components/education/components/icon';
-const formattedValue = defineModel('formattedValue', { type: Number, default: Date.now() });
-const {
-    float = false,
-    flex = false,
-} = defineProps<{
-    float?: boolean;
-    flex?: boolean;
-}>();
+import { NDatePicker } from 'naive-ui/es/date-picker'
+import { LcIcon } from '@/components/education/components/icon'
+const formattedValue = defineModel('formattedValue', {
+    type: Number,
+    default: Date.now(),
+})
+const { float = false, flex = false } = defineProps<{
+    float?: boolean
+    flex?: boolean
+}>()
 const $emit = defineEmits<{
-    (e: 'refresh', data: {
-        value: number;
-        valueString: string;
-    }): void;
-}>();
+    (
+        e: 'refresh',
+        data: {
+            value: number
+            valueString: string
+        },
+    ): void
+}>()
 function refresh() {
     const emitValue = {
         value: formattedValue.value,
         valueString: new Date(formattedValue.value).toLocaleString(),
-    };
-    $emit('refresh', emitValue);
+    }
+    $emit('refresh', emitValue)
 }
 </script>
 
 <style lang="scss" scoped>
 .lc-toolbar-slot {
-
     &--float {
         position: relative;
 
         .lc-toolbar-slot {
-
             &__toolbar {
                 position: absolute;
                 z-index: 2;

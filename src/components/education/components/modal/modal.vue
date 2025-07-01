@@ -7,19 +7,33 @@
                 </slot>
             </div>
             <div class="lc-modal__wrapper">
-
-                <div class="lc-modal__wrapper__closeable" :class="{
-                    [sizeMode]: true,
-                }">
+                <div
+                    class="lc-modal__wrapper__closeable"
+                    :class="{
+                        [sizeMode]: true,
+                    }"
+                >
                     <slot name="closeable">
-                        <button class="lc-modal__wrapper__closeable__button" @click="close">
-                            <svg version="1.1" xmlns="http://www.w3.org/2000/svg"
-                                xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512"
-                                enable-background="new 0 0 512 512" xml:space="preserve">
+                        <button
+                            class="lc-modal__wrapper__closeable__button"
+                            @click="close"
+                        >
+                            <svg
+                                version="1.1"
+                                xmlns="http://www.w3.org/2000/svg"
+                                xmlns:xlink="http://www.w3.org/1999/xlink"
+                                x="0px"
+                                y="0px"
+                                viewBox="0 0 512 512"
+                                enable-background="new 0 0 512 512"
+                                xml:space="preserve"
+                            >
                                 <g>
                                     <g>
-                                        <polygon points="405,136.798 375.202,107 256,226.202 136.798,107 107,136.798 226.202,256 107,375.202 136.798,405 256,285.798 
-                                375.202,405 405,375.202 285.798,256"></polygon>
+                                        <polygon
+                                            points="405,136.798 375.202,107 256,226.202 136.798,107 107,136.798 226.202,256 107,375.202 136.798,405 256,285.798 
+                                375.202,405 405,375.202 285.798,256"
+                                        ></polygon>
                                     </g>
                                 </g>
                             </svg>
@@ -33,53 +47,45 @@
 </template>
 
 <script lang="ts" setup>
-import { NModal } from 'naive-ui/es/modal';
-import { computed, PropType } from 'vue';
-import { options, type Options } from './config';
-import { LcDecoratorTitle } from '@/components/education/components/decoratorTitle';
+import { NModal } from 'naive-ui/es/modal'
+import { computed } from 'vue'
+import { options, type Options } from './config'
+import { LcDecoratorTitle } from '@/components/education/components/decoratorTitle'
 
 const {
     width,
     height,
     sizeMode = 'large',
     title = '',
-} = defineProps({
-    width: {
-        type: String,
-    },
-    height: {
-        type: String,
-    },
-    sizeMode: {
-        type: String as PropType<Options['sizeMode']>,
-    },
-    title: {
-        type: String,
-    },
-});
+} = defineProps<{
+    width: string
+    height: string
+    sizeMode?: Options['sizeMode']
+    title?: string
+}>()
 const emit = defineEmits<{
-    (e: 'update:show', value: boolean): void;
-}>();
+    (e: 'update:show', value: boolean): void
+}>()
 
 function getModalSize(mode: Options['sizeMode']) {
     return computed(() => {
-        return options.size[mode];
-    });
+        return options.size[mode]
+    })
 }
 const backgroundImage = computed(() => {
-    return `url(${options.bgImgs[sizeMode]}) no-repeat`;
-});
+    return `url(${options.bgImgs[sizeMode]}) no-repeat`
+})
 const layoutStyle = computed(() => {
     return {
         '--modal-width': width || getModalSize(sizeMode).value.width,
         '--modal-height': height || getModalSize(sizeMode).value.height,
         '--modal-bg': backgroundImage.value,
         '--header-width': getModalSize(sizeMode).value.headerWidth,
-    };
-});
+    }
+})
 
 function close() {
-    emit('update:show', false);
+    emit('update:show', false)
 }
 </script>
 
@@ -141,7 +147,7 @@ function close() {
                     opacity: 0.8;
                 }
 
-                &>svg {
+                & > svg {
                     fill: #fff;
                     font-size: 30px;
                 }

@@ -1,18 +1,16 @@
-
-
 export type TierSeriesDataOptions = {
-    name: string;
-    value: number;
+    name: string
+    value: number
 }
 export type TierSeriesOptions = {
-    max: number;
-    label?: (d: TierSeriesDataOptions, serie: TierSeriesOptions) => string;
-    data: Array<TierSeriesDataOptions>;
+    max: number
+    label?: (d: TierSeriesDataOptions, serie: TierSeriesOptions) => string
+    data: Array<TierSeriesDataOptions>
 }
 export type TierOptions = {
-    color?: string[];
-    series: TierSeriesOptions[];
-};
+    color?: string[]
+    series: TierSeriesOptions[]
+}
 
 export const defaultFunnelTierOptions: TierOptions = {
     color: [
@@ -28,7 +26,7 @@ export const defaultFunnelTierOptions: TierOptions = {
 export const defaultFunnelTierSeriesOptions: TierOptions['series'][number] = {
     max: 100,
     label: function (d, serie): string {
-        return (d.value / serie.max * 100).toFixed(1) + '%'
+        return ((d.value / serie.max) * 100).toFixed(1) + '%'
     },
     data: [],
 }

@@ -1,1 +1,7 @@
-.lc-scatter-chart[data-v-2fcb6058]{width:100%;height:100%;display:flex;box-sizing:border-box;flex-direction:column}
+.lc-scatter-chart[data-v-2fcb6058] {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    box-sizing: border-box;
+    flex-direction: column;
+}

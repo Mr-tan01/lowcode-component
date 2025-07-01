@@ -1,1 +1,20 @@
-.dynamic-data-list[data-v-8ad060d5]{width:100%;height:100%;font-family:Arial,sans-serif}.dynamic-data-list[data-v-8ad060d5] .lc-elastic-scrollbar{height:100%}.dynamic-data-list .list-body[data-v-8ad060d5]{min-width:fit-content}.dynamic-data-list .list-body .list-row .key-cell[data-v-8ad060d5],.dynamic-data-list .list-body .list-row .value-cell[data-v-8ad060d5]{box-sizing:border-box;word-break:break-word;flex-shrink:0}.dynamic-data-list .list-body .list-row .key-cell[data-v-8ad060d5]{font-weight:700}
+.dynamic-data-list[data-v-8ad060d5] {
+    width: 100%;
+    height: 100%;
+    font-family: Arial, sans-serif;
+}
+.dynamic-data-list[data-v-8ad060d5] .lc-elastic-scrollbar {
+    height: 100%;
+}
+.dynamic-data-list .list-body[data-v-8ad060d5] {
+    min-width: fit-content;
+}
+.dynamic-data-list .list-body .list-row .key-cell[data-v-8ad060d5],
+.dynamic-data-list .list-body .list-row .value-cell[data-v-8ad060d5] {
+    box-sizing: border-box;
+    word-break: break-word;
+    flex-shrink: 0;
+}
+.dynamic-data-list .list-body .list-row .key-cell[data-v-8ad060d5] {
+    font-weight: 700;
+}

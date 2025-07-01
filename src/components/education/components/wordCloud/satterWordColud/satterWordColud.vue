@@ -1,13 +1,7 @@
 <template>
-    <div class="lc-word-cloud">
-        word cloud
-    </div>
+    <div class="lc-word-cloud">word cloud</div>
 </template>
 
-<script lang="ts" setup>
+<script lang="ts" setup></script>
 
-</script>
-
-<style lang="ts" scoped>
-
-</style>
+<style lang="ts" scoped></style>

@@ -1,27 +1,37 @@
 <template>
     <div class="demo-按钮">
-        <DemoHelpBox title="按钮" description="基本用法" rswidth="1000px" :code="code1">
+        <DemoHelpBox
+            title="按钮"
+            description="基本用法"
+            rswidth="1000px"
+            :code="code1"
+        >
             <NSpace>
-                <LcButton type="primary">
-                    重要按钮
-                </LcButton>
-                <LcButton type="normal">
-                    一般按钮
-                </LcButton>
+                <LcButton type="primary"> 重要按钮 </LcButton>
+                <LcButton type="normal"> 一般按钮 </LcButton>
                 <LcButton>
                     <template #icon>
-                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                            viewBox="0 0 512 512">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            xmlns:xlink="http://www.w3.org/1999/xlink"
+                            viewBox="0 0 512 512"
+                        >
                             <path
                                 d="M48 59.49v393a4.33 4.33 0 0 0 7.37 3.07L260 256L55.37 56.42A4.33 4.33 0 0 0 48 59.49z"
-                                fill="currentColor"></path>
-                            <path d="M345.8 174L89.22 32.64l-.16-.09c-4.42-2.4-8.62 3.58-5 7.06l201.13 192.32z"
-                                fill="currentColor"></path>
-                            <path d="M84.08 472.39c-3.64 3.48.56 9.46 5 7.06l.16-.09L345.8 338l-60.61-57.95z"
-                                fill="currentColor"></path>
+                                fill="currentColor"
+                            ></path>
+                            <path
+                                d="M345.8 174L89.22 32.64l-.16-.09c-4.42-2.4-8.62 3.58-5 7.06l201.13 192.32z"
+                                fill="currentColor"
+                            ></path>
+                            <path
+                                d="M84.08 472.39c-3.64 3.48.56 9.46 5 7.06l.16-.09L345.8 338l-60.61-57.95z"
+                                fill="currentColor"
+                            ></path>
                             <path
                                 d="M449.38 231l-71.65-39.46L310.36 256l67.37 64.43L449.38 281c19.49-10.77 19.49-39.23 0-50z"
-                                fill="currentColor"></path>
+                                fill="currentColor"
+                            ></path>
                         </svg>
                     </template>
                     图标按钮
@@ -32,10 +42,10 @@
 </template>
 
 <script lang="ts" setup>
-import { NSpace } from 'naive-ui';
-import { DemoHelpBox } from '@/components/common/DemoHelpBox';
-import { LcButton } from '@/components/education/components/button';
-import { code1 } from './demo-codes';
+import { NSpace } from 'naive-ui'
+import { DemoHelpBox } from '@/components/common/DemoHelpBox'
+import { LcButton } from '@/components/education/components/button'
+import { code1 } from './demo-codes'
 </script>
 
 <style lang="scss" scoped></style>

@@ -1,5 +1,4 @@
-import { type EChartsOption } from "echarts";
-
+import { type EChartsOption } from 'echarts'
 
 export const progressSeries: EChartsOption['series'] = {
     startAngle: -180,
@@ -8,16 +7,14 @@ export const progressSeries: EChartsOption['series'] = {
     max: 240,
     splitNumber: 10,
     clockwise: true,
-    itemStyle: {
-
-    },
+    itemStyle: {},
     progress: {
         show: true,
         roundCap: false,
         width: 18,
         itemStyle: {
             borderWidth: 0,
-        }
+        },
     },
     pointer: {
         show: true,
@@ -26,15 +23,15 @@ export const progressSeries: EChartsOption['series'] = {
         offsetCenter: [0, '0%'],
         itemStyle: {
             color: 'rgba(255, 255, 255, 1)',
-            borderColor: '#fff'
-        }
+            borderColor: '#fff',
+        },
     },
     axisLine: {
         show: true,
         roundCap: false,
         lineStyle: {
-            width: 18
-        }
+            width: 18,
+        },
     },
     axisTick: {
         show: false,
@@ -49,8 +46,8 @@ export const progressSeries: EChartsOption['series'] = {
         itemStyle: {
             color: '#fff',
             opacity: 0.4,
-            borderWidth: 0
-        }
+            borderWidth: 0,
+        },
     },
     axisLabel: {
         show: true,
@@ -58,7 +55,7 @@ export const progressSeries: EChartsOption['series'] = {
         color: '#fff',
         fontSize: 14,
         formatter: function (value) {
-            return value.toFixed(0);
+            return value.toFixed(0)
         },
     },
     title: {
@@ -69,13 +66,13 @@ export const progressSeries: EChartsOption['series'] = {
         offsetCenter: [0, '30%'],
         valueAnimation: true,
         formatter: function (value) {
-            return '{value|' + value.toFixed(0) + '}';
+            return '{value|' + value.toFixed(0) + '}'
         },
         rich: {
             value: {
                 fontSize: 40,
-                color: '#fff'
+                color: '#fff',
             },
-        }
+        },
     },
 }

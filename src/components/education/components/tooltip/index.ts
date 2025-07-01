@@ -1,10 +1,5 @@
-import LcTooltip from './tooltip.vue';
+import LcTooltip from './tooltip.vue'
 
-export type LcTooltipInstanceType = InstanceType<typeof LcTooltip>;
+export type LcTooltipInstanceType = InstanceType<typeof LcTooltip>
 
-export {
-    LcTooltip,
-}
-
-
-
+export { LcTooltip }

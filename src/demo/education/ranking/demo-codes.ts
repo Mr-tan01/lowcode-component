@@ -1,4 +1,3 @@
-
 const rankingListCodeString = `
 const rankingList: RankingRecord[] = [
     {
@@ -23,7 +22,7 @@ const rankingList: RankingRecord[] = [
         unit: '单位',
     }
 ];
-`;
+`
 export const demoCodes = {
     code1: `
 <template>
@@ -45,5 +44,4 @@ export const demoCodes = {
     ${rankingListCodeString}
 </script>
         `,
-
 }

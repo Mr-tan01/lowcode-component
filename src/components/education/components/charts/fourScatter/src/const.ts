@@ -1,12 +1,14 @@
-import { type EChartsOption, EffectScatterSeriesOption } from "echarts";
-import tooltipContentBg from './images/tooltip-content-bg.png';
-import tooltipContentBlueBg from './images/tooltip-content-blue-bg.png';
+import { type EChartsOption, EffectScatterSeriesOption } from 'echarts'
+import tooltipContentBg from './images/tooltip-content-bg.png'
+import tooltipContentBlueBg from './images/tooltip-content-blue-bg.png'
 
-export const scatterColors = ['rgba(15, 251, 248, 1)', 'rgba(225, 188, 75, 1)', 'rgba(34, 118, 252, 1)', 'rgba(222, 56, 4, 1)'];
-const tooltipContentImageList = [
-    tooltipContentBlueBg,
-    tooltipContentBg,
+export const scatterColors = [
+    'rgba(15, 251, 248, 1)',
+    'rgba(225, 188, 75, 1)',
+    'rgba(34, 118, 252, 1)',
+    'rgba(222, 56, 4, 1)',
 ]
+const tooltipContentImageList = [tooltipContentBlueBg, tooltipContentBg]
 const tooltipContentStyler = `
 width: 107px;
 height: 32px;
@@ -18,7 +20,7 @@ padding: 7px 14p;
 z-index: 100;
 backdrop-filter: blur(5px);
 transform: translate(-6px, 0px);
-`;
+`
 export const tooltipOptions: EChartsOption['tooltip'] = [
     {
         trigger: 'item',
@@ -29,23 +31,23 @@ export const tooltipOptions: EChartsOption['tooltip'] = [
         padding: 0,
         appendTo: 'body',
         formatter(params) {
-            const meta = params.data?.meta ?? {};
-            const bg = meta?.bg ?? tooltipContentImageList[params.seriesIndex];
+            const meta = params.data?.meta ?? {}
+            const bg = meta?.bg ?? tooltipContentImageList[params.seriesIndex]
             return `<div class="tooltip-content" style="${tooltipContentStyler}background: url(${bg}) no-repeat center center / 100% 100%;">
                 <div style="width: 100%;white-space: nowrap; overflow: hidden;  text-overflow: ellipsis; color: ${meta.color}; font-size: 16px;">${params.name}</div>
-            </div>`;
+            </div>`
         },
         axisPointer: {
             type: 'none',
             label: {
                 backgroundColor: '#6a7985',
                 formatter(params) {
-                    const value = Number(params.value)?.toFixed(2);
+                    const value = Number(params.value)?.toFixed(2)
                     if (params.axisDimension === 'y') {
                         return `${value}%`
                     }
-                    return value;
-                }
+                    return value
+                },
             },
         },
     },
@@ -94,8 +96,8 @@ export const yAxisOptions: EChartsOption['yAxis'] = [
                 return `${value}%`
             },
             color(_value, index) {
-                return index === 4 ? 'rgba(225, 75, 75, 1)' : '#ffffff';
-            }
+                return index === 4 ? 'rgba(225, 75, 75, 1)' : '#ffffff'
+            },
         },
 
         type: 'category',
@@ -112,7 +114,7 @@ export const yAxisOptions: EChartsOption['yAxis'] = [
             verticalAlign: 'middle',
             align: 'center',
         },
-    }
+    },
 ]
 export const xAxisOptions: EChartsOption['xAxis'] = [
     {
@@ -122,11 +124,21 @@ export const xAxisOptions: EChartsOption['xAxis'] = [
     {
         position: 'bottom',
         boundaryGap: false,
-        data: ['(0.05)', '0.00', '0.05', '0.10', '0.15', '0.20', '0.25', '0.30', '0.35'],
+        data: [
+            '(0.05)',
+            '0.00',
+            '0.05',
+            '0.10',
+            '0.15',
+            '0.20',
+            '0.25',
+            '0.30',
+            '0.35',
+        ],
         axisLabel: {
             color(_value, index) {
-                return index === 0 ? 'rgba(225, 75, 75, 1)' : '#ffffff';
-            }
+                return index === 0 ? 'rgba(225, 75, 75, 1)' : '#ffffff'
+            },
         },
         name: '标准差(均衡)',
         nameLocation: 'middle',
@@ -135,14 +147,14 @@ export const xAxisOptions: EChartsOption['xAxis'] = [
             color: '#ffffff',
             fontSize: 14,
             lineHeight: 20,
-        }
-    }
+        },
+    },
 ]
 
 export const commonScatterSeries: EffectScatterSeriesOption = {
     type: 'effectScatter',
     symbolSize: function (data) {
-        return Math.max(Math.sqrt(data), 25);
+        return Math.max(Math.sqrt(data), 25)
     },
     itemStyle: {
         color: (data) => scatterColors[data.componentIndex],
@@ -159,18 +171,18 @@ export const commonScatterSeries: EffectScatterSeriesOption = {
             borderWidth: 2,
             borderColor: 'transparent',
             opacity: 1,
-            color: 'transparent'
+            color: 'transparent',
         },
         tooltip: {
             show: true,
-            trigger: 'item'
+            trigger: 'item',
         },
         label: {
             show: false,
             silent: true,
             formatter(params) {
                 // @ts-ignore
-                return params.data?.coord?.[1].toFixed(2);
+                return params.data?.coord?.[1].toFixed(2)
             },
             color: '#ffffff',
             fontSize: 14,
@@ -185,8 +197,8 @@ export const commonScatterSeries: EffectScatterSeriesOption = {
         emphasis: {
             label: {
                 show: true,
-            }  
+            },
         },
-        data: []
+        data: [],
     },
 }

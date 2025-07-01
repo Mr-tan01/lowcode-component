@@ -1,10 +1,8 @@
-import LcBarChart from './bar.vue';
+import LcBarChart from './bar.vue'
 
-export type LcBarChartInstanceType = InstanceType<typeof LcBarChart>;
-export * as LcBarChartOptions from './options';
+export type LcBarChartInstanceType = InstanceType<typeof LcBarChart>
+export * as LcBarChartOptions from './options'
 
-export {
-    LcBarChart,
-};
+export { LcBarChart }
 
-export default LcBarChart;
+export default LcBarChart

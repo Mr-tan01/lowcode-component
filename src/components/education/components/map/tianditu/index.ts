@@ -1,8 +1,5 @@
+import LcTianditu from './tianditu.vue'
+export type TiandituInstanceType = InstanceType<typeof LcTianditu>
 
-import LcTianditu from  './tianditu.vue';
-export type TiandituInstanceType = InstanceType<typeof LcTianditu>;
-
-export default LcTianditu;
-export {
-    LcTianditu,
-}
+export default LcTianditu
+export { LcTianditu }

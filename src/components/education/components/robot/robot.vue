@@ -1,26 +1,65 @@
 <template>
-    <div class="lc-robot" :draggable :class="[{
-        'lc-robot--draggable': draggable,
-        'lc-robot--draging': isDraging,
-    }, `lc-robot--dir-${xAdsorptionDir}`]" @dragstart="startDrag" @dragend="stopDrag">
-        <div class="lc-robot__wrapper" tabindex="-1" @focus="isFocus = true" @blur="isFocus = false">
-            <robotChatPopup :max-height="popupContextMaxH" :aiConfig :isFocus :hidDir="robotHideDir"
-                v-if="useShowPopup(imageHideDir.rt)" v-bind="$attrs">
+    <div
+        class="lc-robot"
+        :draggable
+        :class="[
+            {
+                'lc-robot--draggable': draggable,
+                'lc-robot--draging': isDraging,
+            },
+            `lc-robot--dir-${xAdsorptionDir}`,
+        ]"
+        @dragstart="startDrag"
+        @dragend="stopDrag"
+    >
+        <div
+            class="lc-robot__wrapper"
+            tabindex="-1"
+            @focus="isFocus = true"
+            @blur="isFocus = false"
+        >
+            <robotChatPopup
+                v-if="useShowPopup(imageHideDir.rt)"
+                :max-height="popupContextMaxH"
+                :ai-config
+                :is-focus
+                :hid-dir="robotHideDir"
+                v-bind="$attrs"
+            >
             </robotChatPopup>
-            <img class="lc-robot__wrapper__image" :class="[imageLayoutClass]" :src="robotSrc" draggable="false" alt="">
-            <robotChatPopup :max-height="popupContextMaxH" :aiConfig :isFocus :hidDir="robotHideDir"
-                v-if="useShowPopup(imageHideDir.lt)" v-bind="$attrs">
+            <img
+                class="lc-robot__wrapper__image"
+                :class="[imageLayoutClass]"
+                :src="robotSrc"
+                draggable="false"
+                alt=""
+            />
+            <robotChatPopup
+                v-if="useShowPopup(imageHideDir.lt)"
+                :max-height="popupContextMaxH"
+                :ai-config
+                :is-focus
+                :hid-dir="robotHideDir"
+                v-bind="$attrs"
+            >
             </robotChatPopup>
         </div>
     </div>
 </template>
 
 <script lang="ts" setup>
-import { computed, PropType, ref, toRefs } from 'vue';
-import { robotBQMap, imageShowTrigger, imageHideDir, type RobotBQMapKeys, type ImageShowTrigger, type ImageHideDir } from './const';
-import robotChatPopup from './robot-chat-popup.vue';
-import { type AiConfigProps } from './types';
-import { useDragRobotPosition } from './drag';
+import { computed, toRefs } from 'vue'
+import {
+    robotBQMap,
+    imageShowTrigger,
+    imageHideDir,
+    type RobotBQMapKeys,
+    type ImageShowTrigger,
+    type ImageHideDir,
+} from './const'
+import robotChatPopup from './robot-chat-popup.vue'
+import { type AiConfigProps } from './types'
+import { useDragRobotPosition } from './drag'
 const {
     value = 's1',
     width = '219px',
@@ -48,67 +87,43 @@ const {
     },
     draggable = false,
     position = 'fixed',
-} = defineProps({
-    src: {
-        type: String,
-    },
-    value: {
-        type: String as PropType<RobotBQMapKeys>,
-    },
-    width: {
-        type: String,
-    },
-    height: {
-        type: String,
-    },
-    trigger: {
-        type: String as PropType<ImageShowTrigger>,
-    },
-    hidDir: {
-        type: String as PropType<ImageHideDir>,
-    },
-    showPopup: {
-        type: Boolean,
-    },
-    aiConfig: {
-        type: Object as PropType<AiConfigProps>,
-    },
-    popupContextMaxH: {
-        type: String,
-    },
-    draggable: {
-        type: Boolean,
-    },
-    position: {
-        type: String as PropType<'relative' | 'absolute' | 'fixed'>
-    }
-});
-const isFocus = defineModel('isShow', { default: false });
-const robotSrc = computed(() => src || robotBQMap[value]);
-const { isDraging, startDrag, stopDrag, robotOffset, xAdsorptionDir } = useDragRobotPosition();
+} = defineProps<{
+    src?: string
+    value?: RobotBQMapKeys
+    width?: string
+    height?: string
+    trigger?: ImageShowTrigger
+    hidDir?: ImageHideDir
+    showPopup?: boolean
+    aiConfig?: AiConfigProps
+    popupContextMaxH: string
+    draggable?: boolean
+    position?: 'relative' | 'absolute' | 'fixed'
+}>()
+const isFocus = defineModel<boolean>('isShow', { default: false })
+const robotSrc = computed(() => src || robotBQMap[value])
+const { isDraging, startDrag, stopDrag, robotOffset, xAdsorptionDir } =
+    useDragRobotPosition()
 
 const robotHideDir = computed(() => {
-    return !draggable ? hidDir : xAdsorptionDir.value;
-});
+    return !draggable ? hidDir : xAdsorptionDir.value
+})
 const imageLayoutClass = computed(() => {
-
     return {
-        [`lc-robot__wrapper__image--status-${robotHideDir.value}`]: trigger !== imageShowTrigger.none,
+        [`lc-robot__wrapper__image--status-${robotHideDir.value}`]:
+            trigger !== imageShowTrigger.none,
     }
-});
+})
 
 function useShowPopup(dir: ImageHideDir) {
-    return computed(() => showPopup && robotHideDir.value === dir).value;
+    return computed(() => showPopup && robotHideDir.value === dir).value
 }
 
-const {
-    y: robotPositionBottom,
-} = toRefs(robotOffset);
+const { y: robotPositionBottom } = toRefs(robotOffset)
 </script>
 
 <style lang="scss" scoped>
 .lc-robot {
-
     &:hover {
         cursor: pointer;
     }
@@ -119,7 +134,6 @@ const {
         left: 100%;
         top: v-bind(robotPositionBottom);
         transition: 0.2s linear;
-
 
         &.lc-robot {
             &--dir-lt {
@@ -172,7 +186,6 @@ const {
 
             &--status-rt {
                 transform: translateX(50%) rotate(-30deg);
-
             }
         }
     }

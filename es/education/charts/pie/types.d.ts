@@ -1,1 +1,1 @@
-export type LayoutType = 'default' | 'innerLabel';
+export type LayoutType = 'default' | 'innerLabel'

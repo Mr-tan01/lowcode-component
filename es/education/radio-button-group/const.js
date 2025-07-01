@@ -1,4 +1,2 @@
-const o = Symbol("radioButtonGroupInject");
-export {
-  o as radioButtonGroupProvideKey
-};
+const o = Symbol('radioButtonGroupInject')
+export { o as radioButtonGroupProvideKey }

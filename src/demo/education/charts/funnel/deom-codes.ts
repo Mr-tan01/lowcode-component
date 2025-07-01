@@ -1,4 +1,3 @@
-
 export const deomCodes = {
     code1: `
 <template>
@@ -24,7 +23,7 @@ const options = {
 }
 </script>
 `,
-code2: `
+    code2: `
 <template>
     <LcFunnelChart :options></LcFunnelChart>
 </template>

@@ -13,13 +13,28 @@
                     {{ label }}
                 </div>
                 <div class="lc-skew-indicator__wrapper__info--result">
-                    <div class="lc-skew-indicator__wrapper__info--result--value" :title="value.toString()">
-                        <NNumberAnimation show-separator :from="0" :to="renderValue" active :precision="decimals" />
+                    <div
+                        class="lc-skew-indicator__wrapper__info--result--value"
+                        :title="value.toString()"
+                    >
+                        <NNumberAnimation
+                            show-separator
+                            :from="0"
+                            :to="renderValue"
+                            active
+                            :precision="decimals"
+                        />
                     </div>
-                    <div class="lc-skew-indicator__wrapper__info--result--unit" v-if="renderUnit">
+                    <div
+                        v-if="renderUnit"
+                        class="lc-skew-indicator__wrapper__info--result--unit"
+                    >
                         {{ renderUnit }}
                     </div>
-                    <div class="lc-skew-indicator__wrapper__info--result--altericon" v-if="tip">
+                    <div
+                        v-if="tip"
+                        class="lc-skew-indicator__wrapper__info--result--altericon"
+                    >
                         <LcTooltip>{{ tip }}</LcTooltip>
                     </div>
                 </div>
@@ -29,71 +44,54 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, PropType } from "vue";
-import personIcon from "./images/skew/icon/person.png";
-import { bigNumber } from "lowcode-share/es/share";
-import { NNumberAnimation } from "naive-ui/es/number-animation";
-import { LcTooltip } from "@/components/education/components/tooltip";
+import { computed } from 'vue'
+import personIcon from './images/skew/icon/person.png'
+import { bigNumber } from 'lowcode-share/es/share'
+import { NNumberAnimation } from 'naive-ui/es/number-animation'
+import { LcTooltip } from '@/components/education/components/tooltip'
 
 const {
-    label = "",
+    label = '',
     value = 0,
     unit,
     fixed = true,
     decimal = 0,
     icon = personIcon,
-
-    tip = "",
-    type = "skew",
-} = defineProps({
-    label: {
-        type: String,
-    },
-    value: {
-        type: Number,
-    },
-    unit: {
-        type: String,
-    },
-    fixed: {
-        type: Boolean,
-    },
-    decimal: {
-        type: Number,
-    },
-    icon: {
-        type: String,
-    },
-    tip: {
-        type: String,
-    },
-    type: {
-        type: String as PropType<"tile" | "skew">,
-    },
-});
+    tip = '',
+    type = 'skew',
+} = defineProps<{
+    label?: string
+    value?: number
+    unit: string
+    fixed?: boolean
+    decimal?: number
+    icon?: string
+    tip?: string
+    type?: 'tile' | 'skew'
+}>()
 
 const decimals = computed(() => {
-    const { unit: numUnit } = bigNumber(value);
+    const { unit: numUnit } = bigNumber(value)
     if (Number.isInteger(value) && !numUnit) {
-        return 0;
+        return 0
     }
-    return decimal;
-});
+    return decimal
+})
 const renderValue = computed(() => {
     if (fixed) {
-        const { result } = bigNumber(value, decimal);
-        return result;
+        const { result } = bigNumber(value, decimal)
+        return result
     }
-    return value;
-});
+    return value
+})
 
 const renderUnit = computed(() => {
     if (fixed) {
-        const { unit: numUnit } = bigNumber(value, decimal);
-        return `${numUnit}${unit}`;
+        const { unit: numUnit } = bigNumber(value, decimal)
+        return `${numUnit}${unit}`
     }
-    return unit;
-});
+    return unit
+})
 </script>
 
 <style lang="scss" scoped>
@@ -193,7 +191,7 @@ const renderUnit = computed(() => {
 
         &::before,
         &::after {
-            content: "";
+            content: '';
             position: absolute;
             opacity: 0;
             transition: linear 0.3s;

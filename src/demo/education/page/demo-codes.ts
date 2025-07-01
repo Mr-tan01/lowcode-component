@@ -11,7 +11,7 @@ export const code1 = `
 <script lang="ts" setup>
 import { LcPageTitle, LcTextTitle } from 'lowcode-component/es/education/pageTitle';
 </script>
-`;
+`
 
 export const decoratorCode = `
 <template>
@@ -29,7 +29,7 @@ export const decoratorCode = `
 import { LcDecoratorTitle } from 'lowcode-component/es/education/decoratorTitle';
 import { LcIcon } from 'lowcode-component/es/education/icon';
 </script>
-`;
+`
 
 export const chartTitleCode = `
 <template>
@@ -37,7 +37,7 @@ export const chartTitleCode = `
     <LcChartTitle text="优质均衡园区" dir="rtl"></LcChartTitle>
     <LcChartTitle text="文字最多6个字符标题文字最多十二个字符标题文字最多十二个字符" ></LcChartTitle>
 </template>
-`;
+`
 
 export const HeadlineCode = `
 <template>
@@ -48,7 +48,7 @@ export const HeadlineCode = `
         基础教师队伍结构
     </LcHeadline>
 </template>
-`;
+`
 
 export const SubheadCode = `
 <template>
@@ -59,4 +59,4 @@ export const SubheadCode = `
     </LcSubhead>
     <LcRadiohead domain="event" name="person" :size="56" text="师生师生比师生比师生比师生比师生比师生比师生比师生比师生比师生比师生比师生比师生比师生比师生比师生比比"/>
 </template>
-`;
+`

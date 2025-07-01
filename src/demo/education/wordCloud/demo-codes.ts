@@ -1,4 +1,3 @@
-
 const dataCodeStr = `
 const wordCloudData = [
     { name: 'Java', value: 100 },
@@ -25,7 +24,7 @@ const wordCloudData = [
     { name: 'Fortran', value: 80 },
     { name: 'Clojure', value: 10 }
 ];
-`;
+`
 export const demoCodes = {
     code1: `
 <template>

@@ -8,4 +8,4 @@ export const code1 = `
         expand-on-click
         selectable
         />
-</template> `;
+</template> `

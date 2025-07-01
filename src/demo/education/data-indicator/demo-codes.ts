@@ -1,4 +1,3 @@
-
 export const code1 = `
 <template>
     <NSpace>
@@ -24,7 +23,7 @@ export const code1 = `
         <LcIndicatorCard :value="3457" fixed hint="教职工人(人)" type="noborder"></LcIndicatorCard>
     </NSpace>
 </template>
-`;
+`
 
 export const code2 = `
 <template>
@@ -52,7 +51,7 @@ export const code2 = `
         <LcBothwayCard label="深圳户籍" :data="[{ value:2311111, unit: '人'},{ value: 567, unit: '%'}]"></LcBothwayCard>
     </NSpace>
 </template>
-`;
+`
 
 export const code3 = `
 <template>
@@ -69,7 +68,7 @@ export const code3 = `
             ]"></LcIndicatorList>
     </NSpace>
 </template>
-`;
+`
 
 export const code4 = `
 <template>
@@ -93,4 +92,4 @@ export const code4 = `
             rig-unit="%"
         ></LcHumanShapeCard>
 </template>
-`;
+`

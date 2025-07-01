@@ -15,7 +15,12 @@
                 'lc-icon-card__image--enhover': !!bgSelectedSrc,
             }"
         >
-            <img class="lc-icon-card__img" :src="iconSrc" draggable="false" alt="" />
+            <img
+                class="lc-icon-card__img"
+                :src="iconSrc"
+                draggable="false"
+                alt=""
+            />
         </div>
         <span class="lc-icon-card__span">
             <slot></slot>
@@ -24,44 +29,59 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, Ref, toRefs, ref } from "vue";
-import { NameTypeFunc, useImage, type Domains, type NameTypes } from "./icons";
+import { computed, Ref, toRefs, ref } from 'vue'
+import { NameTypeFunc, useImage, type Domains, type NameTypes } from './icons'
 const props = withDefaults(
     defineProps<{
-        bagName?: "booth" | "pedestal";
-        domain?: Domains;
-        name?: NameTypes;
-        size?: number | string; // 整体大小
-        iconSize?: number | string; // 图标大小
-        gap?: number | string;
-        ext?: string;
-        selected?: boolean;
+        bagName?: 'booth' | 'pedestal'
+        domain?: Domains
+        name?: NameTypes
+        size?: number | string // 整体大小
+        iconSize?: number | string // 图标大小
+        gap?: number | string
+        ext?: string
+        selected?: boolean
     }>(),
     {
-        bagName: "pedestal",
-        domain: "func",
-        name: "add",
+        bagName: 'pedestal',
+        domain: 'func',
+        name: 'add',
         size: 74,
         iconSize: 46,
         gap: 16,
-        ext: ".png",
+        ext: '.png',
         selected: void 0,
-    }
-);
+    },
+)
 
-const { bagName, domain, name, size, iconSize, gap, ext } = toRefs(props);
-const bagImg = ref("baseSupport");
-const bgSrcData = useImage(bagImg as Ref<Domains>, bagName as Ref<NameTypeFunc<Domains>>, ext);
-const srcData = useImage(domain as Ref<Domains>, name as Ref<NameTypeFunc<Domains>>, ext);
-const { src: bgSrc, selectedSrc: bgSelectedSrc } = bgSrcData;
-const { src: iconSrc } = srcData;
+const { bagName, domain, name, size, iconSize, gap, ext } = toRefs(props)
+const bagImg = ref('baseSupport')
+const bgSrcData = useImage(
+    bagImg as Ref<Domains>,
+    bagName as Ref<NameTypeFunc<Domains>>,
+    ext,
+)
+const srcData = useImage(
+    domain as Ref<Domains>,
+    name as Ref<NameTypeFunc<Domains>>,
+    ext,
+)
+const { src: bgSrc, selectedSrc: bgSelectedSrc } = bgSrcData
+const { src: iconSrc } = srcData
 
-const imageWidth = computed(() => (typeof size.value === "number" ? `${size.value}px` : size.value));
-const iconWidth = computed(() => (typeof iconSize.value === "number" ? `${iconSize.value}%` : iconSize.value + "%"));
+const imageWidth = computed(() =>
+    typeof size.value === 'number' ? `${size.value}px` : size.value,
+)
+const iconWidth = computed(() =>
+    typeof iconSize.value === 'number'
+        ? `${iconSize.value}%`
+        : iconSize.value + '%',
+)
 const iconGap = computed(() => {
-    const baseGap = typeof gap.value === "number" ? gap.value : Number(gap.value);
-    return bagName.value === "booth" ? `${baseGap + 16}%` : `${baseGap}%`;
-});
+    const baseGap =
+        typeof gap.value === 'number' ? gap.value : Number(gap.value)
+    return bagName.value === 'booth' ? `${baseGap + 16}%` : `${baseGap}%`
+})
 </script>
 
 <style lang="scss" scoped>

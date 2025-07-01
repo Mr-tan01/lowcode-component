@@ -1,5 +1,5 @@
-import { EChartsOption, SeriesOption } from "echarts";
-import merge from "lodash-es/merge";
+import { EChartsOption, SeriesOption } from 'echarts'
+import merge from 'lodash-es/merge'
 
 const baseDifferenceSerie: EChartsOption['series'] = {
     type: 'bar',
@@ -9,13 +9,10 @@ const baseDifferenceSerie: EChartsOption['series'] = {
         symbol: 'none',
         label: {
             show: false,
-        }
+        },
     },
     markLine: {
-        symbol: [
-            'rect',
-            'rect',
-        ],
+        symbol: ['rect', 'rect'],
         symbolSize: [10, 1],
         lineStyle: {
             type: 'solid',
@@ -29,18 +26,26 @@ const baseDifferenceSerie: EChartsOption['series'] = {
         color: 'rgba(225, 188, 75, 1)',
     },
 }
-export function useDifferenceSeries(data: any[][], serie?: EChartsOption['series']): SeriesOption {
-    return merge({}, baseDifferenceSerie, {
-        markLine: {
-            data: data.map((item, index) => {
-                return item.map((el) => {
-                    return {
-                        coord: [index, el],
-                        name: index,
-                    }
-                })
-            }),
+export function useDifferenceSeries(
+    data: any[][],
+    serie?: EChartsOption['series'],
+): SeriesOption {
+    return merge(
+        {},
+        baseDifferenceSerie,
+        {
+            markLine: {
+                data: data.map((item, index) => {
+                    return item.map((el) => {
+                        return {
+                            coord: [index, el],
+                            name: index,
+                        }
+                    })
+                }),
+            },
+            data: data.map((item) => item[1]),
         },
-        data: data.map((item) => item[1]),
-    }, serie) as SeriesOption;
+        serie,
+    ) as SeriesOption
 }

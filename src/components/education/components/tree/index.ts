@@ -1,4 +1,4 @@
-import LcTree from "./tree.vue";
-export type TreeInstanceType = InstanceType<typeof LcTree>;
+import LcTree from './tree.vue'
+export type TreeInstanceType = InstanceType<typeof LcTree>
 
-export { LcTree };
+export { LcTree }

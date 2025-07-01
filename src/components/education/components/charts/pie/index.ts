@@ -1,9 +1,7 @@
-import LcPieChart from './pie.vue';
+import LcPieChart from './pie.vue'
 
-export type LcPieInstanceType = InstanceType<typeof LcPieChart>;
+export type LcPieInstanceType = InstanceType<typeof LcPieChart>
 
-export {
-    LcPieChart,
-}
+export { LcPieChart }
 
-export default LcPieChart;
+export default LcPieChart

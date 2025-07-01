@@ -5,29 +5,25 @@
 </template>
 
 <script lang="ts" setup>
-import {  BaseChart, useCommonChartExpose } from '@/components/education/common/components/Charts';
-import { computed, PropType } from 'vue';
-import { type EChartsCoreOption, type EChartsOption } from 'echarts';
 import {
-    useCommonScatterOptions,
-    useCommonScatterSeries,
-} from './options';
-import merge from 'lodash-es/merge';
-const {
-    options = {},
-} = defineProps({
+    BaseChart,
+    useCommonChartExpose,
+} from '@/components/education/common/components/Charts'
+import { computed, PropType } from 'vue'
+import { type EChartsCoreOption, type EChartsOption } from 'echarts'
+import { useCommonScatterOptions, useCommonScatterSeries } from './options'
+import merge from 'lodash-es/merge'
+const { options = {} } = defineProps({
     options: Object as PropType<EChartsCoreOption | EChartsOption>,
-});
+})
 
 const renderOptions = computed(() => {
-    options.series = useCommonScatterSeries(options.series || []);
-    const newOptions = useCommonScatterOptions(options);
-    return merge({}, newOptions);
-});
-const {
-    exposes,
-} = useCommonChartExpose("baseChart");
-defineExpose(exposes);
+    options.series = useCommonScatterSeries(options.series || [])
+    const newOptions = useCommonScatterOptions(options)
+    return merge({}, newOptions)
+})
+const { exposes } = useCommonChartExpose('baseChart')
+defineExpose(exposes)
 </script>
 
 <style lang="scss" scoped>

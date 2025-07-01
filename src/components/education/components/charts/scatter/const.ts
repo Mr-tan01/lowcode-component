@@ -1,4 +1,4 @@
-import { type ScatterSeriesOption, type EChartsOption } from "echarts";
+import { type ScatterSeriesOption, type EChartsOption } from 'echarts'
 
 export const scatterColors = [
     'rgba(15, 251, 248, 1)',
@@ -7,8 +7,7 @@ export const scatterColors = [
     'rgba(255, 132, 83, 1)',
     'rgba(173, 210, 255, 1)',
     'rgba(222, 56, 4, 1)',
-
-];
+]
 export const yAxisOptions: EChartsOption['yAxis'] = {
     nameLocation: 'end',
     nameTextStyle: {
@@ -21,7 +20,7 @@ export const yAxisOptions: EChartsOption['yAxis'] = {
         lineStyle: {
             color: 'rgba(255, 255, 255, 0.2)',
             type: 'dotted',
-        }
+        },
     },
     axisLabel: {
         color: '#fff',
@@ -29,13 +28,13 @@ export const yAxisOptions: EChartsOption['yAxis'] = {
         lineHeight: 20,
         margin: 13,
         formatter: (value) => {
-            return value;
+            return value
         },
     },
     axisLine: {
         lineStyle: {
             color: 'rgba(255, 255, 255, 0.2)',
-        }
+        },
     },
 }
 export const tooltipOptions: EChartsOption['tooltip'] = {
@@ -45,7 +44,7 @@ export const tooltipOptions: EChartsOption['tooltip'] = {
         color: '#fff',
         fontSize: 14,
         lineHeight: 20,
-    }
+    },
 }
 export const legendOptions: EChartsOption['legend'] = {
     show: false,
@@ -65,12 +64,12 @@ export const legendOptions: EChartsOption['legend'] = {
     pageTextStyle: {
         fontSize: 12,
         color: '#fff',
-    }
+    },
 }
 
 export const gridOptions: EChartsOption['grid'] = {
     top: 50,
-    bottom: 40
+    bottom: 40,
 }
 
 export const xAxisOptions: EChartsOption['xAxis'] = {
@@ -82,7 +81,7 @@ export const xAxisOptions: EChartsOption['xAxis'] = {
             color: 'rgba(255, 255, 255, 0.2)',
             type: 'dotted',
             width: 1,
-        }
+        },
     },
     axisTick: {
         show: false,
@@ -90,24 +89,24 @@ export const xAxisOptions: EChartsOption['xAxis'] = {
     axisLine: {
         lineStyle: {
             color: 'rgba(255, 255, 255, 0.2)',
-        }
+        },
     },
     axisLabel: {
         color: '#fff',
         fontSize: 14,
         lineHeight: 20,
-    }
+    },
 }
 
 export const commonScatterSeries: ScatterSeriesOption = {
     type: 'scatter',
     symbolSize: function (data) {
-        return Math.max(Math.sqrt(data), 10);
+        return Math.max(Math.sqrt(data), 10)
     },
     itemStyle: {
         color: (data) => scatterColors[data.componentIndex],
         borderColor: '#fff',
         borderWidth: 1.2,
         opacity: 1,
-    }
+    },
 }

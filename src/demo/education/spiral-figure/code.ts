@@ -21,7 +21,7 @@ export const code1 = `
     'ADAS摄像头'
   ])
 </script>
-`;
+`
 
 export const code2 = `
 <template>
@@ -46,4 +46,4 @@ export const code2 = `
     'ADAS摄像头'
   ])
 </script>
-`;
+`

@@ -1,5 +1,4 @@
-
 export type TabListRaw = {
-    label: string;
-    value: string | number;
+    label: string
+    value: string | number
 }
