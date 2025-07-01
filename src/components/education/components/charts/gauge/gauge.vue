@@ -2,21 +2,13 @@
     <div class="lc-gauge">
         <div class="lc-gauge__wrapper">
             <BaseChart ref="baseChart" :options="renderOptions"></BaseChart>
-            <CommonLegend
-                v-if="showCustomLegend"
-                disabled
-                :legend-label
-                :options="renderOptions"
-            ></CommonLegend>
+            <CommonLegend v-if="showCustomLegend" disabled :legend-label :options="renderOptions"></CommonLegend>
         </div>
     </div>
 </template>
 
 <script lang="ts" setup>
-import {
-    BaseChart,
-    useCommonChartExpose,
-} from '@/components/education/common/components/Charts'
+import { BaseChart, useCommonChartExpose } from '@/components/education/common/components/Charts'
 import { computed } from 'vue'
 import { type EChartsCoreOption, type EChartsOption } from 'echarts'
 import merge from 'lodash-es/merge'

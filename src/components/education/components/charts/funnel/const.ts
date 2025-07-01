@@ -27,7 +27,7 @@ export const yAxisOptions: EChartsOption['yAxis'] = {
         fontSize: 14,
         lineHeight: 20,
         margin: 13,
-        formatter: (value) => {
+        formatter: value => {
             return value
         },
     },

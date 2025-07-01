@@ -21,7 +21,7 @@ export const checkImageLoaded = (url: string): Promise<boolean> => {
  * 初始化Cesium地球视图
  * @param props 组件属性，包含是否开启旋转(openRotate)和旋转速度(rotateSpeed)等配置
  */
-export const useInitPlanet = (props) => {
+export const useInitPlanet = props => {
     const imageLoading = ref(false)
     const viewer: Ref<Viewer | null> = ref(null)
     let rotateHandler: Cesium.Event.RemoveCallback | null = null
@@ -30,10 +30,7 @@ export const useInitPlanet = (props) => {
     const startRotation = () => {
         if (viewer.value && !rotateHandler && props.defaultRotate) {
             rotateHandler = viewer.value.clock.onTick.addEventListener(() => {
-                viewer.value?.camera.rotate(
-                    Cesium.Cartesian3.UNIT_Z,
-                    Cesium.Math.toRadians(props.rotateSpeed),
-                )
+                viewer.value?.camera.rotate(Cesium.Cartesian3.UNIT_Z, Cesium.Math.toRadians(props.rotateSpeed))
             })
         }
     }
@@ -73,7 +70,7 @@ export const useInitPlanet = (props) => {
         const scene = viewer.value.scene
         handler = new Cesium.ScreenSpaceEventHandler(scene.canvas) // 修改：直接赋值给handler
 
-        handler.setInputAction((movement) => {
+        handler.setInputAction(movement => {
             const ray = viewer.value?.camera.getPickRay(movement.endPosition)
             const globe = viewer.value?.scene.globe
             let isOnGlobe = false
@@ -113,9 +110,7 @@ export const useInitPlanet = (props) => {
         // @ts-ignore
         viewer.value.cesiumWidget.creditContainer.style.display = 'none'
         // 移除双击事件
-        viewer.value.cesiumWidget.screenSpaceEventHandler.removeInputAction(
-            Cesium.ScreenSpaceEventType.LEFT_DOUBLE_CLICK,
-        )
+        viewer.value.cesiumWidget.screenSpaceEventHandler.removeInputAction(Cesium.ScreenSpaceEventType.LEFT_DOUBLE_CLICK)
         // 视角设置
         viewer.value.camera.flyTo({ destination: props.centerPosition })
         imageLoading.value = await checkImageLoaded(props.baseUrl)
@@ -187,11 +182,7 @@ class RegisterCoordinateSystem {
      * @returns 修正后的纬度值
      */
     fixLat(lat) {
-        return lat >= 90
-            ? 89.99999999999999
-            : lat <= -90
-              ? -89.99999999999999
-              : lat
+        return lat >= 90 ? 89.99999999999999 : lat <= -90 ? -89.99999999999999 : lat
     }
 
     /**
@@ -207,18 +198,9 @@ class RegisterCoordinateSystem {
         const coordinates = this._GLMap.cartesianToCanvasCoordinates(position)
         if (!coordinates) return lonlat
         if (this._GLMap.mode === Cesium.SceneMode.SCENE3D) {
-            if (
-                Cesium.Cartesian3.angleBetween(
-                    this._GLMap.camera.position,
-                    position,
-                ) > Cesium.Math.toRadians(75)
-            )
-                return []
+            if (Cesium.Cartesian3.angleBetween(this._GLMap.camera.position, position) > Cesium.Math.toRadians(75)) return []
         }
-        return [
-            coordinates.x - this._mapOffset[0],
-            coordinates.y - this._mapOffset[1],
-        ]
+        return [coordinates.x - this._mapOffset[0], coordinates.y - this._mapOffset[1]]
     }
     /**
      * 静态方法，创建并注册坐标系统
@@ -234,9 +216,7 @@ class RegisterCoordinateSystem {
             if (painter) {
                 const glMap = (window as any).glMap
                 registerCoordinateSystem = new RegisterCoordinateSystem(glMap)
-                registerCoordinateSystem.setMapOffset(
-                    seriesModel.__mapOffset || [0, 0],
-                )
+                registerCoordinateSystem.setMapOffset(seriesModel.__mapOffset || [0, 0])
                 seriesModel.coordinateSystem = registerCoordinateSystem
             }
         })
@@ -324,19 +304,13 @@ export class EchartsLayer {
                 type: 'GLMap',
                 init(_, e) {
                     this.api = e
-                    ;(window as any).glMap.postRender.addEventListener(
-                        this.moveHandler,
-                        this,
-                    )
+                    ;(window as any).glMap.postRender.addEventListener(this.moveHandler, this)
                 },
                 moveHandler() {
                     this.api.dispatchAction({ type: 'GLMapRoam' })
                 },
                 dispose() {
-                    ;(window as any).glMap.postRender.removeEventListener(
-                        this.moveHandler,
-                        this,
-                    )
+                    ;(window as any).glMap.postRender.removeEventListener(this.moveHandler, this)
                 },
             })
             this._isRegistered = true
@@ -364,10 +338,7 @@ export class EchartsLayer {
         ;(window as any).glMap = scene
         const chart = echarts.init(ele)
         const handler = new Cesium.ScreenSpaceEventHandler(scene.canvas)
-        handler.setInputAction(
-            () => mockClickChart(event, chart),
-            Cesium.ScreenSpaceEventType.LEFT_CLICK,
-        )
+        handler.setInputAction(() => mockClickChart(event, chart), Cesium.ScreenSpaceEventType.LEFT_CLICK)
         return chart
     }
 

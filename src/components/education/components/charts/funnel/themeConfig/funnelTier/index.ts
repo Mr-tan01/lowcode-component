@@ -13,13 +13,7 @@ export type TierOptions = {
 }
 
 export const defaultFunnelTierOptions: TierOptions = {
-    color: [
-        'rgba(119, 73, 255, 1)',
-        'rgba(166, 207, 255, 1)',
-        'rgba(0, 148, 255, 1)',
-        'rgba(225, 188, 75, 1)',
-        'rgba(15, 251, 248, 1)',
-    ],
+    color: ['rgba(119, 73, 255, 1)', 'rgba(166, 207, 255, 1)', 'rgba(0, 148, 255, 1)', 'rgba(225, 188, 75, 1)', 'rgba(15, 251, 248, 1)'],
     series: [],
 }
 

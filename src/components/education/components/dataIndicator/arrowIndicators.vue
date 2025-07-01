@@ -9,13 +9,7 @@
             </div>
             <div class="lc-arrow-indicators__center__value">
                 <slot name="value">
-                    <NNumberAnimation
-                        show-separator
-                        :from="0"
-                        :to="renderValue"
-                        active
-                        :precision="decimal"
-                    />
+                    <NNumberAnimation show-separator :from="0" :to="renderValue" active :precision="decimal" />
                     <span class="lc-arrow-indicators__center__value__unit">
                         {{ renderUnit }}
                     </span>

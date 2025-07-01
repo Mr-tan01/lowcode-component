@@ -1,11 +1,6 @@
 <template>
     <div class="lc-word-cloud" :class="[`lc-word-cloud--${type}`]">
-        <div
-            ref="wordCloudWrapper"
-            class="lc-word-cloud__wrapper"
-            @mousemove.capture="wrapperMosueMove"
-            @mouseleave.capture="wrapperMosueLeave"
-        >
+        <div ref="wordCloudWrapper" class="lc-word-cloud__wrapper" @mousemove.capture="wrapperMosueMove" @mouseleave.capture="wrapperMosueLeave">
             <div class="lc-word-cloud__wrapper__title">
                 {{ title }}
             </div>
@@ -44,10 +39,10 @@ const {
     data = [],
     ballSize = 30,
     word = {
-        formatter: (record) => record.name,
+        formatter: record => record.name,
     },
     tooltip = {
-        formatter: (record) => record.name + ' ' + record.value,
+        formatter: record => record.name + ' ' + record.value,
     },
     title = '中心词汇',
     enableAnimate = true,
@@ -89,8 +84,7 @@ function wordClick(record: WordCloudData, index: number) {
 }
 
 const wordCloudWrapperBounds = computed(() => {
-    const { width = 0, height = 0 } =
-        wordCloudWrapperRef.value?.getBoundingClientRect() ?? {}
+    const { width = 0, height = 0 } = wordCloudWrapperRef.value?.getBoundingClientRect() ?? {}
 
     return {
         width,
@@ -132,14 +126,8 @@ function customWordStyle(item: WordCloudData, index: number) {
     let angleA = Math.acos((2 * (index + 1) - 1) / dataLength.value - 1)
     let angleB = angleA * Math.sqrt(dataLength.value * Math.PI)
     z = radiusHeight * Math.cos(angleA)
-    y =
-        radiusHeight *
-        Math.sin(angleA - animateCount.value) *
-        Math.sin(angleB - animateCount.value)
-    x =
-        radiusHeight *
-        Math.sin(angleA - animateCount.value) *
-        Math.cos(angleB - animateCount.value)
+    y = radiusHeight * Math.sin(angleA - animateCount.value) * Math.sin(angleB - animateCount.value)
+    x = radiusHeight * Math.sin(angleA - animateCount.value) * Math.cos(angleB - animateCount.value)
 
     rotateX()
     rotateY()

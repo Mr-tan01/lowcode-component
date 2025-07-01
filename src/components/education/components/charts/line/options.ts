@@ -1,20 +1,7 @@
-import {
-    type EChartsCoreOption,
-    type SeriesOption,
-    type EChartsOption,
-    type LineSeriesOption,
-} from 'echarts'
+import { type EChartsCoreOption, type SeriesOption, type EChartsOption, type LineSeriesOption } from 'echarts'
 import merge from 'lodash-es/merge'
 import { deepMergeArrayOptions } from '@mmj-code-lib/lowcode/es/components'
-import {
-    defLinearGradients,
-    gridOptions,
-    legendOptions,
-    lineColors,
-    tooltipOptions,
-    xAxisOptions,
-    yAxisOptions,
-} from './const'
+import { defLinearGradients, gridOptions, legendOptions, lineColors, tooltipOptions, xAxisOptions, yAxisOptions } from './const'
 import lineSymbol from './images/symobl.png'
 import lineSymbol2 from './images/symobl2.png'
 import { useCommonBarSeries } from '@/components/education/components/charts/bar/options'
@@ -47,18 +34,11 @@ export const commonLineSeries: LineSeriesOption = {
 }
 
 export function useCommonLineOptions(opts: EChartsCoreOption | EChartsOption) {
-    deepMergeArrayOptions(
-        opts,
-        Object.keys(commonLineOptions),
-        Object.values(commonLineOptions),
-    )
+    deepMergeArrayOptions(opts, Object.keys(commonLineOptions), Object.values(commonLineOptions))
     return merge({}, commonLineOptions, opts)
 }
 
-export function mergeLineRecord(
-    index: number,
-    item: SeriesOption,
-): SeriesOption {
+export function mergeLineRecord(index: number, item: SeriesOption): SeriesOption {
     return merge(
         {},
         merge({}, commonLineSeries, {
@@ -75,9 +55,7 @@ export function mergeLineRecord(
     )
 }
 
-export function useCommonLineSeries(
-    series: EChartsOption['series'],
-): EChartsOption['series'] {
+export function useCommonLineSeries(series: EChartsOption['series']): EChartsOption['series'] {
     if (Array.isArray(series)) {
         return series.map((item, index) => {
             if (item.type === 'line' || !item.type) {
@@ -87,9 +65,7 @@ export function useCommonLineSeries(
                     merge(
                         {
                             itemStyle: {
-                                color:
-                                    defLinearGradients[index] ??
-                                    defLinearGradients[0],
+                                color: defLinearGradients[index] ?? defLinearGradients[0],
                             },
                             showBackground: false,
                         },

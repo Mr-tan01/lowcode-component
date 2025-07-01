@@ -13,28 +13,13 @@
                     {{ label }}
                 </div>
                 <div class="lc-skew-indicator__wrapper__info--result">
-                    <div
-                        class="lc-skew-indicator__wrapper__info--result--value"
-                        :title="value.toString()"
-                    >
-                        <NNumberAnimation
-                            show-separator
-                            :from="0"
-                            :to="renderValue"
-                            active
-                            :precision="decimals"
-                        />
+                    <div class="lc-skew-indicator__wrapper__info--result--value" :title="value.toString()">
+                        <NNumberAnimation show-separator :from="0" :to="renderValue" active :precision="decimals" />
                     </div>
-                    <div
-                        v-if="renderUnit"
-                        class="lc-skew-indicator__wrapper__info--result--unit"
-                    >
+                    <div v-if="renderUnit" class="lc-skew-indicator__wrapper__info--result--unit">
                         {{ renderUnit }}
                     </div>
-                    <div
-                        v-if="tip"
-                        class="lc-skew-indicator__wrapper__info--result--altericon"
-                    >
+                    <div v-if="tip" class="lc-skew-indicator__wrapper__info--result--altericon">
                         <LcTooltip>{{ tip }}</LcTooltip>
                     </div>
                 </div>

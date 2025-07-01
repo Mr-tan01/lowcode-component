@@ -1,19 +1,7 @@
-import {
-    type EChartsOption,
-    type BarSeriesOption,
-    type SeriesOption,
-    type EChartsCoreOption,
-} from 'echarts'
+import { type EChartsOption, type BarSeriesOption, type SeriesOption, type EChartsCoreOption } from 'echarts'
 import merge from 'lodash-es/merge'
 import { mergeLineRecord } from '@/components/education/components/charts/line/options'
-import {
-    barColors,
-    gridOptions,
-    legendOptions,
-    tooltipOptions,
-    xAxisOptions,
-    yAxisOptions,
-} from './const'
+import { barColors, gridOptions, legendOptions, tooltipOptions, xAxisOptions, yAxisOptions } from './const'
 import { deepMergeArrayOptions } from '@mmj-code-lib/lowcode/es/components'
 
 export const commonBarOptions: EChartsOption = {
@@ -67,11 +55,7 @@ const defHorizontalBarOptions: EChartsOption = {
     },
 }
 
-export const horizontalBarOptions: EChartsOption = merge(
-    {},
-    commonBarOptions,
-    defHorizontalBarOptions,
-)
+export const horizontalBarOptions: EChartsOption = merge({}, commonBarOptions, defHorizontalBarOptions)
 
 export const commonBarSeries: BarSeriesOption = {
     barWidth: 20,
@@ -104,26 +88,13 @@ export const smallBarSeries: BarSeriesOption = merge({}, commonBarSeries, {
     },
 })
 
-export function useCommonBarOptions(
-    opts: EChartsOption | EChartsCoreOption,
-    props: { isHorizontal: boolean },
-) {
-    const dynaicOptions = props.isHorizontal
-        ? horizontalBarOptions
-        : commonBarOptions
-    deepMergeArrayOptions(
-        opts,
-        Object.keys(dynaicOptions),
-        Object.values(dynaicOptions),
-    )
+export function useCommonBarOptions(opts: EChartsOption | EChartsCoreOption, props: { isHorizontal: boolean }) {
+    const dynaicOptions = props.isHorizontal ? horizontalBarOptions : commonBarOptions
+    deepMergeArrayOptions(opts, Object.keys(dynaicOptions), Object.values(dynaicOptions))
     return merge({}, dynaicOptions, opts)
 }
 
-function mergeSeriesRecord(
-    series1: SeriesOption,
-    series2: SeriesOption,
-    index: number,
-) {
+function mergeSeriesRecord(series1: SeriesOption, series2: SeriesOption, index: number) {
     if (series2.type === 'bar' || !series2.type) {
         return merge({}, series1, series2)
     } else if (series2.type === 'line') {
@@ -132,10 +103,7 @@ function mergeSeriesRecord(
     return series2
 }
 
-export function useCommonBarSeries(
-    series: EChartsOption['series'],
-    props: { stack: boolean },
-): EChartsOption['series'] {
+export function useCommonBarSeries(series: EChartsOption['series'], props: { stack: boolean }): EChartsOption['series'] {
     if (Array.isArray(series)) {
         if (series.length > 1) {
             // 两条以上数据时，使用小尺寸的柱状图
@@ -145,13 +113,9 @@ export function useCommonBarSeries(
             } else {
                 smallBarSeries.backgroundStyle!.opacity = 1
             }
-            return series.map((item, index) =>
-                mergeSeriesRecord(smallBarSeries, item, index),
-            )
+            return series.map((item, index) => mergeSeriesRecord(smallBarSeries, item, index))
         }
-        return series.map((item, index) =>
-            mergeSeriesRecord(commonBarSeries, item, index),
-        )
+        return series.map((item, index) => mergeSeriesRecord(commonBarSeries, item, index))
     }
     return merge({}, commonBarSeries, series)
 }

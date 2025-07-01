@@ -1,21 +1,8 @@
 <template>
     <div class="demo-map">
         <NSpace>
-            <DemoHelpBox
-                title="树"
-                rswidth="500px"
-                rs-height="500px"
-                description="基础用法"
-                :code="code1"
-            >
-                <LcTree
-                    :show-line="showLine"
-                    :default-expanded-keys="defaultExpandedKeys"
-                    :data="data"
-                    checkable
-                    expand-on-click
-                    selectable
-                />
+            <DemoHelpBox title="树" rswidth="500px" rs-height="500px" description="基础用法" :code="code1">
+                <LcTree :show-line="showLine" :default-expanded-keys="defaultExpandedKeys" :data="data" checkable expand-on-click selectable />
             </DemoHelpBox>
         </NSpace>
     </div>

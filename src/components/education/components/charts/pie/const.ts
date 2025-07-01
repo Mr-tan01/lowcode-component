@@ -56,8 +56,7 @@ export const pieTooltipOptions: EChartsOption['tooltip'] = {
     },
     formatter: function (params: any) {
         // 获取当前扇区的渐变颜色
-        const colorStops =
-            innerGraphicColors[params.dataIndex]?.colorStops ?? []
+        const colorStops = innerGraphicColors[params.dataIndex]?.colorStops ?? []
         const startColor = colorStops?.[0]?.color ?? 'rgba(166, 207, 255, 0.20)' // 渐变起始色
         const endColor = colorStops?.[1]?.color ?? 'rgba(166, 207, 255, 1)' // 渐变结束色
 
@@ -196,8 +195,4 @@ const innerLableOption: EChartsOption['series'] = {
         maxSurfaceAngle: 0,
     },
 }
-export const innerLabelSeries1: EChartsOption['series'] = merge(
-    {},
-    pieSeriesRecord,
-    innerLableOption,
-)
+export const innerLabelSeries1: EChartsOption['series'] = merge({}, pieSeriesRecord, innerLableOption)

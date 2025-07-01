@@ -5,14 +5,7 @@
     </NSpin>
 </template>
 <script lang="ts" setup>
-import {
-    onMounted,
-    ref,
-    watch,
-    onBeforeUnmount,
-    computed,
-    type PropType,
-} from 'vue'
+import { onMounted, ref, watch, onBeforeUnmount, computed, type PropType } from 'vue'
 import { useInitPlanet, EchartsLayer } from './hooks'
 import defaultEarth from './images/default.jpeg'
 import { Cartesian3, Viewer } from 'cesium'
@@ -57,17 +50,14 @@ const props = defineProps({
 })
 const loading = defineModel<boolean>('loading', { default: false })
 const echartsLayer = ref()
-const { initViewer, destroyViewer, viewer, startRotation } =
-    useInitPlanet(props)
+const { initViewer, destroyViewer, viewer, startRotation } = useInitPlanet(props)
 const initEcharts = () => {
     echartsLayer.value = new EchartsLayer(viewer.value!, props.echartsOptions)
-    echartsLayer.value?._overlay.on('click', (params) =>
-        emit('handle-click', params),
-    )
+    echartsLayer.value?._overlay.on('click', params => emit('handle-click', params))
 }
 watch(
     () => props.echartsOptions,
-    (val) => {
+    val => {
         if (val) {
             if (!echartsLayer.value) {
                 initEcharts()

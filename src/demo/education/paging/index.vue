@@ -3,12 +3,7 @@
         <DemoBox title="" description="基础用法" rswidth="500px" :code="code1">
             <NSpace :size="150">
                 <LcPaging v-model="page1" :total-pages="3"></LcPaging>
-                <LcPaging
-                    v-model="page2"
-                    :total-pages="3"
-                    :font-color="'blue'"
-                    :font-size="'20px'"
-                ></LcPaging>
+                <LcPaging v-model="page2" :total-pages="3" :font-color="'blue'" :font-size="'20px'"></LcPaging>
             </NSpace>
         </DemoBox>
     </div>

@@ -12,12 +12,7 @@
         @dragstart="startDrag"
         @dragend="stopDrag"
     >
-        <div
-            class="lc-robot__wrapper"
-            tabindex="-1"
-            @focus="isFocus = true"
-            @blur="isFocus = false"
-        >
+        <div class="lc-robot__wrapper" tabindex="-1" @focus="isFocus = true" @blur="isFocus = false">
             <robotChatPopup
                 v-if="useShowPopup(imageHideDir.rt)"
                 :max-height="popupContextMaxH"
@@ -27,13 +22,7 @@
                 v-bind="$attrs"
             >
             </robotChatPopup>
-            <img
-                class="lc-robot__wrapper__image"
-                :class="[imageLayoutClass]"
-                :src="robotSrc"
-                draggable="false"
-                alt=""
-            />
+            <img class="lc-robot__wrapper__image" :class="[imageLayoutClass]" :src="robotSrc" draggable="false" alt="" />
             <robotChatPopup
                 v-if="useShowPopup(imageHideDir.lt)"
                 :max-height="popupContextMaxH"
@@ -49,14 +38,7 @@
 
 <script lang="ts" setup>
 import { computed, toRefs } from 'vue'
-import {
-    robotBQMap,
-    imageShowTrigger,
-    imageHideDir,
-    type RobotBQMapKeys,
-    type ImageShowTrigger,
-    type ImageHideDir,
-} from './const'
+import { robotBQMap, imageShowTrigger, imageHideDir, type RobotBQMapKeys, type ImageShowTrigger, type ImageHideDir } from './const'
 import robotChatPopup from './robot-chat-popup.vue'
 import { type AiConfigProps } from './types'
 import { useDragRobotPosition } from './drag'
@@ -102,16 +84,14 @@ const {
 }>()
 const isFocus = defineModel<boolean>('isShow', { default: false })
 const robotSrc = computed(() => src || robotBQMap[value])
-const { isDraging, startDrag, stopDrag, robotOffset, xAdsorptionDir } =
-    useDragRobotPosition()
+const { isDraging, startDrag, stopDrag, robotOffset, xAdsorptionDir } = useDragRobotPosition()
 
 const robotHideDir = computed(() => {
     return !draggable ? hidDir : xAdsorptionDir.value
 })
 const imageLayoutClass = computed(() => {
     return {
-        [`lc-robot__wrapper__image--status-${robotHideDir.value}`]:
-            trigger !== imageShowTrigger.none,
+        [`lc-robot__wrapper__image--status-${robotHideDir.value}`]: trigger !== imageShowTrigger.none,
     }
 })
 

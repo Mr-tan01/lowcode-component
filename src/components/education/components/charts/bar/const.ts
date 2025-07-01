@@ -29,11 +29,7 @@ export const barBuiltInStyle: {
     symbols: [],
 }
 
-export const barColors = [
-    'rgba(54, 115, 245, 1)',
-    'rgba(1, 158, 43, 1)',
-    'rgba(222, 56, 4, 1)',
-]
+export const barColors = ['rgba(54, 115, 245, 1)', 'rgba(1, 158, 43, 1)', 'rgba(222, 56, 4, 1)']
 export const yAxisOptions: EChartsOption['yAxis'] = {
     nameLocation: 'end',
     nameTextStyle: {

@@ -2,66 +2,20 @@
     <div class="demo-wordcloud">
         <DemoHelpBox title="词云" description="基础用法" rswidth="100%">
             <NSpace>
-                <DemoHelpBox
-                    title="款词云-圆球"
-                    rswidth="450px"
-                    rs-height="450px"
-                    :code="demoCodes.code1"
-                >
-                    <LcBubbleWordColud :data="wordCloudData">
-                    </LcBubbleWordColud>
+                <DemoHelpBox title="款词云-圆球" rswidth="450px" rs-height="450px" :code="demoCodes.code1">
+                    <LcBubbleWordColud :data="wordCloudData"> </LcBubbleWordColud>
                 </DemoHelpBox>
-                <DemoHelpBox
-                    title="款词云-发光球"
-                    rswidth="450px"
-                    rs-height="450px"
-                    :code="demoCodes.code2"
-                >
-                    <LcBubbleWordColud
-                        type="shadow"
-                        :enable-animate="true"
-                        :data="wordCloudData"
-                    >
-                    </LcBubbleWordColud>
+                <DemoHelpBox title="款词云-发光球" rswidth="450px" rs-height="450px" :code="demoCodes.code2">
+                    <LcBubbleWordColud type="shadow" :enable-animate="true" :data="wordCloudData"> </LcBubbleWordColud>
                 </DemoHelpBox>
-                <DemoHelpBox
-                    title="款词云-文本"
-                    rswidth="450px"
-                    rs-height="450px"
-                    :code="demoCodes.code3"
-                >
-                    <LcBubbleWordColud
-                        type="text"
-                        :max-word="30"
-                        :data="wordCloudData"
-                    >
-                    </LcBubbleWordColud>
+                <DemoHelpBox title="款词云-文本" rswidth="450px" rs-height="450px" :code="demoCodes.code3">
+                    <LcBubbleWordColud type="text" :max-word="30" :data="wordCloudData"> </LcBubbleWordColud>
                 </DemoHelpBox>
-                <DemoHelpBox
-                    title="款词云-混合"
-                    rswidth="450px"
-                    rs-height="450px"
-                    :code="demoCodes.code4"
-                >
-                    <LcBubbleWordColud
-                        type="text-circle"
-                        :max-word="30"
-                        :data="wordCloudData"
-                    >
-                    </LcBubbleWordColud>
+                <DemoHelpBox title="款词云-混合" rswidth="450px" rs-height="450px" :code="demoCodes.code4">
+                    <LcBubbleWordColud type="text-circle" :max-word="30" :data="wordCloudData"> </LcBubbleWordColud>
                 </DemoHelpBox>
-                <DemoHelpBox
-                    title="款词云-禁止自动动画"
-                    rswidth="450px"
-                    rs-height="450px"
-                    :code="demoCodes.code5"
-                >
-                    <LcBubbleWordColud
-                        type="shadow"
-                        :enable-animate="false"
-                        :data="wordCloudData"
-                    >
-                    </LcBubbleWordColud>
+                <DemoHelpBox title="款词云-禁止自动动画" rswidth="450px" rs-height="450px" :code="demoCodes.code5">
+                    <LcBubbleWordColud type="shadow" :enable-animate="false" :data="wordCloudData"> </LcBubbleWordColud>
                 </DemoHelpBox>
             </NSpace>
         </DemoHelpBox>

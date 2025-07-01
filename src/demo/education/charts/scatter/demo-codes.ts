@@ -20,23 +20,17 @@ const options = {
         [
             {
                 name: '待审核',
-                data: Array.from(Array(5)).map((_, i) =>
-                    Math.round(Math.random() * 1200 + i),
-                ),
+                data: Array.from(Array(5)).map((_, i) => Math.round(Math.random() * 1200 + i)),
                 areaStyle: null,
             },
             {
                 name: '已通过',
-                data: Array.from(Array(5)).map((_, i) =>
-                    Math.round(Math.random() * 1020 + i),
-                ),
+                data: Array.from(Array(5)).map((_, i) => Math.round(Math.random() * 1020 + i)),
                 areaStyle: null,
             },
             {
                 name: '已通过3',
-                data: Array.from(Array(5)).map((_, i) =>
-                    Math.round(Math.random() * 1020 + i),
-                ),
+                data: Array.from(Array(5)).map((_, i) => Math.round(Math.random() * 1020 + i)),
                 areaStyle: null,
             },
         ].slice(0, len),

@@ -23,11 +23,7 @@ export default defineConfig({
                 declaration: true,
                 emitDeclarationOnly: true,
             },
-            include: [
-                `${dtsRoot}/**/*.ts`,
-                `${dtsRoot}/**/*d.ts`,
-                `${dtsRoot}/**/*.vue`,
-            ],
+            include: [`${dtsRoot}/**/*.ts`, `${dtsRoot}/**/*d.ts`, `${dtsRoot}/**/*.vue`],
         }),
     ],
     resolve: {

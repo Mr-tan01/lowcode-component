@@ -1,10 +1,6 @@
 import { graphic, type EChartsOption } from 'echarts'
 import { LinearGradient } from 'echarts/types/src/util/graphic'
-export const lineColors = [
-    'rgba(15, 250, 248, 1)',
-    'rgba(225, 188, 75, 1)',
-    'rgba(222, 56, 4, 1)',
-]
+export const lineColors = ['rgba(15, 250, 248, 1)', 'rgba(225, 188, 75, 1)', 'rgba(222, 56, 4, 1)']
 export const yAxisOptions: EChartsOption['yAxis'] = {
     nameLocation: 'end',
     nameTextStyle: {
@@ -24,7 +20,7 @@ export const yAxisOptions: EChartsOption['yAxis'] = {
         fontSize: 14,
         lineHeight: 20,
         margin: 13,
-        formatter: (value) => {
+        formatter: value => {
             return value
         },
     },

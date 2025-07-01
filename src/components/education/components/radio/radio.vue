@@ -11,19 +11,14 @@ import { NRadio } from 'naive-ui/es/radio'
 <style lang="scss" scoped>
 .lc-radio {
     --n-box-shadow-active: inset 0 0 0 1px #0ffbf8 !important;
-    --n-box-shadow-focus:
-        inset 0 0 0 1px #0ffbf8, 0 0 0 2px rgba(24, 160, 88, 0.2) !important;
+    --n-box-shadow-focus: inset 0 0 0 1px #0ffbf8, 0 0 0 2px rgba(24, 160, 88, 0.2) !important;
     --n-box-shadow-hover: inset 0 0 0 1px #0ffbf8 !important;
     --n-dot-color-active: #0ffbf8 !important;
     --n-color: #00203d !important;
     --n-box-shadow: inset 0 0 0 1px #005697 !important;
 
     &:hover {
-        --n-color: linear-gradient(
-            180deg,
-            rgba(15, 251, 248, 0) 0%,
-            #0ffbf7c1 100%
-        ) !important;
+        --n-color: linear-gradient(180deg, rgba(15, 251, 248, 0) 0%, #0ffbf7c1 100%) !important;
     }
 
     :deep(.n-radio__dot-wrapper) {

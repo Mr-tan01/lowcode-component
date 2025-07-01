@@ -5,11 +5,7 @@
                 <LcDatePicker type="date"></LcDatePicker>
             </div>
         </DemoHelpBox>
-        <DemoHelpBox
-            title="日期范围选择器"
-            description="基础用法"
-            :code="code2"
-        >
+        <DemoHelpBox title="日期范围选择器" description="基础用法" :code="code2">
             <div class="text-box">
                 <LcDatePicker></LcDatePicker>
             </div>

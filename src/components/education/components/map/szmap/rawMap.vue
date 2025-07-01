@@ -3,35 +3,13 @@
         <svg class="lc-szmap-raw__svg" viewBox="0 0 922 527" version="1.1">
             <Defines></Defines>
             <defs>
-                <linearGradient
-                    v-for="([type, item], key) in levelsList"
-                    :id="`linearGradient-float-${type}`"
-                    :key
-                >
-                    <stop
-                        v-for="(el, index) in item?.stop"
-                        v-bind="
-                            typeof el === 'object' && !Array.isArray(el)
-                                ? el
-                                : {}
-                        "
-                        :key="index"
-                    ></stop>
+                <linearGradient v-for="([type, item], key) in levelsList" :id="`linearGradient-float-${type}`" :key>
+                    <stop v-for="(el, index) in item?.stop" v-bind="typeof el === 'object' && !Array.isArray(el) ? el : {}" :key="index"></stop>
                 </linearGradient>
             </defs>
-            <g
-                id="页面-2"
-                stroke="none"
-                stroke-width="1"
-                fill="none"
-                fill-rule="evenodd"
-            >
+            <g id="页面-2" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                 <g id="编组-76" transform="translate(4, 0)">
-                    <g
-                        id="编组"
-                        transform="translate(0, 35)"
-                        fill-rule="nonzero"
-                    >
+                    <g id="编组" transform="translate(0, 35)" fill-rule="nonzero">
                         <component
                             :is
                             v-for="(is, key, index) in blockList"
@@ -49,13 +27,7 @@
             </g>
         </svg>
         <div v-if="showLabel" class="lc-szmap-raw__mark-group">
-            <slot
-                name="mapLabel"
-                :block-list="blockList"
-                :label-class="labelClass"
-                :get-vlaue="getMarkProp"
-                :current-map-key="currentMapKey"
-            >
+            <slot name="mapLabel" :block-list="blockList" :label-class="labelClass" :get-vlaue="getMarkProp" :current-map-key="currentMapKey">
                 <LcMark
                     v-for="(_, key) in blockList"
                     :key
@@ -85,13 +57,7 @@ import Labels from './comp/labels.vue'
 import { LcMark } from '@/components/education/components/mark'
 import { type Component, computed, onMounted, ref } from 'vue'
 import { type Levels, propsRaw } from './props'
-import {
-    defFloatLevelConfig,
-    LabelModelEnum,
-    type BlockName,
-    szBlockNames,
-    defBlockLableMap,
-} from './const'
+import { defFloatLevelConfig, LabelModelEnum, type BlockName, szBlockNames, defBlockLableMap } from './const'
 import merge from 'lodash-es/merge'
 import { EducationMarkProps } from '../../mark/props'
 
@@ -132,19 +98,14 @@ const currentMapKey = ref('')
 function getMarkProp(key: BlockName) {
     const markMate = values[key] ?? { value: 0 }
     const currentLevelIndex = levelsList.value.findIndex(
-        ([, item]) =>
-            item?.range &&
-            markMate.value >= item.range[0] &&
-            markMate.value <= item.range[1],
+        ([, item]) => item?.range && markMate.value >= item.range[0] && markMate.value <= item.range[1],
     )
     const [, currentLevelConf] = levelsList.value[currentLevelIndex] ?? []
     return {
         ...markMate,
         mapLabel: defBlockLableMap[key],
         style: {
-            '--level-scale': labelAnimateNum.value
-                ? (currentLevelConf?.scale ?? 1)
-                : labelAnimateNum.value,
+            '--level-scale': labelAnimateNum.value ? (currentLevelConf?.scale ?? 1) : labelAnimateNum.value,
         },
     }
 }
@@ -164,19 +125,14 @@ const blockClass = computed(() => {
 })
 
 const levelsList = computed<Array<[string, Levels]>>(() => {
-    return Object.entries(
-        merge({}, defFloatLevelConfig, levels),
-    ) as unknown as [string, Levels][]
+    return Object.entries(merge({}, defFloatLevelConfig, levels)) as unknown as [string, Levels][]
 })
 
 function getBlockProperties(key: BlockName) {
     const currentValueConf = values[key]
     if (!currentValueConf || disabledGradient) return
     const currentLevelIndex = levelsList.value.findIndex(
-        ([, item]) =>
-            item?.range &&
-            currentValueConf.value >= item.range[0] &&
-            currentValueConf.value <= item.range[1],
+        ([, item]) => item?.range && currentValueConf.value >= item.range[0] && currentValueConf.value <= item.range[1],
     )
     const [type, currentLevelConf] = levelsList.value[currentLevelIndex] ?? []
 
@@ -187,8 +143,7 @@ function getBlockProperties(key: BlockName) {
         if (typeof currentLevelConf.stop === 'string') {
             styles['--linear-gradient-fill'] = currentLevelConf.stop
         } else {
-            styles['--linear-gradient-fill'] =
-                `url(#linearGradient-float-${type})`
+            styles['--linear-gradient-fill'] = `url(#linearGradient-float-${type})`
         }
     }
     return {
@@ -198,7 +153,7 @@ function getBlockProperties(key: BlockName) {
 }
 const mapRotateX = computed(() => `rotateX(${rotateX}deg)`)
 const labelWrapInsetY = computed(() => Math.abs(rotateX))
-const labelClass = (key) => {
+const labelClass = key => {
     return ['lc-szmap-raw__mark-group--item', `mark-${key}`]
 }
 
@@ -285,8 +240,7 @@ const hidePopver = (event: MouseEvent, key: BlockName) => {
         position: absolute;
         top: 50%;
         left: 50%;
-        transform: translate(-50%, calc(-50% * var(--level-scale, 1)))
-            scale(var(--level-scale, 1));
+        transform: translate(-50%, calc(-50% * var(--level-scale, 1))) scale(var(--level-scale, 1));
         will-change: transform;
         pointer-events: auto;
         transition: transform 0.2s;

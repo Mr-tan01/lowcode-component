@@ -1,15 +1,9 @@
 <template>
     <div class="lc-subhead">
-        <div
-            v-if="type === direction.left && !hideRadioIcon"
-            class="lc-subhead__imglft lc-subhead__img"
-        >
+        <div v-if="type === direction.left && !hideRadioIcon" class="lc-subhead__imglft lc-subhead__img">
             <img src="./images/subhead-lft.png" alt="" />
         </div>
-        <div
-            v-if="type === direction.right || type === direction.center"
-            class="lc-subhead__imglgt lc-subhead__img"
-        >
+        <div v-if="type === direction.right || type === direction.center" class="lc-subhead__imglgt lc-subhead__img">
             <img src="./images/subhead-rgt.png" alt="" />
         </div>
         <div v-if="$slots['icon-left']" class="lc-subhead__icon-left">
@@ -21,16 +15,10 @@
         <div v-if="$slots['icon-right']" class="lc-subhead__icon-right">
             <slot name="icon-right"></slot>
         </div>
-        <div
-            v-if="type === direction.right && !hideRadioIcon"
-            class="lc-subhead__imgrft lc-subhead__img"
-        >
+        <div v-if="type === direction.right && !hideRadioIcon" class="lc-subhead__imgrft lc-subhead__img">
             <img src="./images/subhead-lft.png" alt="" />
         </div>
-        <div
-            v-if="type === direction.left || type === direction.center"
-            class="lc-subhead__imgrgt lc-subhead__img"
-        >
+        <div v-if="type === direction.left || type === direction.center" class="lc-subhead__imgrgt lc-subhead__img">
             <img src="./images/subhead-lgt.png" alt="" />
         </div>
     </div>

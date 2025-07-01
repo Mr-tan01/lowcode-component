@@ -1,12 +1,6 @@
 <template>
     <div class="demo-listBox">
-        <DemoHelpBox
-            title="listBox"
-            description="列表框"
-            rswidth="962px"
-            rs-height="600px"
-            :code="code1"
-        >
+        <DemoHelpBox title="listBox" description="列表框" rswidth="962px" rs-height="600px" :code="code1">
             <LclistBox :rows="dataRows" :bordered="true"></LclistBox>
         </DemoHelpBox>
     </div>

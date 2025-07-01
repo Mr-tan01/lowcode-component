@@ -101,9 +101,7 @@ const reloadText = (option: reloadTextOption): void => {
 
     // 绘制文本
     ctx.font = valueKey ? valueFont : textFont
-    ctx.fillStyle =
-        (valueKey ? info?.fontStyle?.color : info?.textStyle?.color) ??
-        options.fontStyle?.color
+    ctx.fillStyle = (valueKey ? info?.fontStyle?.color : info?.textStyle?.color) ?? options.fontStyle?.color
     ctx.textBaseline = 'middle'
     ctx.textAlign = 'left'
     const textX = valueKey ? (info?.textOffsetX ?? 13) : 46
@@ -133,11 +131,7 @@ const eraseOverlapImage = (ctx: CanvasRenderingContext2D): void => {
     ctx.restore()
 }
 
-export const createInfoCanvas = (
-    info: any,
-    valueKey?: string,
-    labelType?: string,
-): Promise<{ canvas: HTMLCanvasElement; cleanup: () => void }> => {
+export const createInfoCanvas = (info: any, valueKey?: string, labelType?: string): Promise<{ canvas: HTMLCanvasElement; cleanup: () => void }> => {
     return new Promise((resolve, reject) => {
         // 创建canvas元素
         const canvas = document.createElement('canvas')
@@ -153,14 +147,8 @@ export const createInfoCanvas = (
 
         const { iconType, textIconType } = info
         const icons = {
-            icon: iconType
-                ? imageUrlOption[iconType]
-                : imageUrlOption['primary'],
-            textIcon: textIconType
-                ? imageUrlOption[textIconType]
-                : imageUrlOption[
-                      (labelType ? 'success' : 'primary') + '_label'
-                  ],
+            icon: iconType ? imageUrlOption[iconType] : imageUrlOption['primary'],
+            textIcon: textIconType ? imageUrlOption[textIconType] : imageUrlOption[(labelType ? 'success' : 'primary') + '_label'],
         }
 
         // 绘制背景
@@ -196,23 +184,11 @@ export const createInfoCanvas = (
                     text: text,
                 })
 
-                canvas.width = valueKey
-                    ? (info?.width ?? image.width)
-                    : ctx.measureText(text).width + 80
+                canvas.width = valueKey ? (info?.width ?? image.width) : ctx.measureText(text).width + 80
                 canvas.height = info?.height ?? image.height
 
                 // 绘制图片到画布 宽高为获取后的值
-                ctx.drawImage(
-                    image,
-                    0,
-                    0,
-                    image.width,
-                    image.height,
-                    0,
-                    0,
-                    canvas.width,
-                    canvas.height,
-                )
+                ctx.drawImage(image, 0, 0, image.width, image.height, 0, 0, canvas.width, canvas.height)
 
                 if (!valueKey) {
                     eraseOverlapImage(ctx)
@@ -290,10 +266,7 @@ async function drawImageCanvas(imgSrc: string): Promise<HTMLCanvasElement> {
 }
 
 // 创建聚合点图标
-export const createClusterBillboard = (
-    count: number,
-    primaryType: string,
-): HTMLCanvasElement => {
+export const createClusterBillboard = (count: number, primaryType: string): HTMLCanvasElement => {
     const canvas = document.createElement('canvas')
     canvas.width = 80
     canvas.height = 80
@@ -345,14 +318,7 @@ export const createClusterBillboard = (
     return canvas
 }
 
-import {
-    type Entity,
-    JulianDate,
-    CallbackProperty,
-    Cartesian2,
-    Cartesian3,
-    Math as cesiumMath,
-} from 'cesium'
+import { type Entity, JulianDate, CallbackProperty, Cartesian2, Cartesian3, Math as cesiumMath } from 'cesium'
 import { EntityConfig, pointType } from './type'
 import { EntityProperties } from './type'
 
@@ -360,29 +326,16 @@ import { EntityProperties } from './type'
  * 修改entity信息
  */
 
-export async function updateViewerEntityInfo(
-    info: any,
-    entity: Entity | undefined,
-    type?: string,
-) {
+export async function updateViewerEntityInfo(info: any, entity: Entity | undefined, type?: string) {
     if (entity?.billboard && entity.properties) {
         const currentTime = JulianDate.now() // 获取当前时间戳
         const changeState = entity.properties?.getValue(currentTime).changeState // 直接访问属性
-        const valueIcon = changeState
-            ? (info?.iconType ?? 'primary')
-            : (info?.changeIconType ?? 'success')
-        const textIcon = changeState
-            ? (info?.textIconType ?? 'primary_label')
-            : (info?.changeTextIconType ?? 'success_label')
+        const valueIcon = changeState ? (info?.iconType ?? 'primary') : (info?.changeIconType ?? 'success')
+        const textIcon = changeState ? (info?.textIconType ?? 'primary_label') : (info?.changeTextIconType ?? 'success_label')
         let valueInfo = entity.billboard.image?.getValue()
-        valueInfo =
-            typeof valueInfo === 'string'
-                ? await drawImageCanvas(valueInfo)
-                : valueInfo
+        valueInfo = typeof valueInfo === 'string' ? await drawImageCanvas(valueInfo) : valueInfo
         const ctx = valueInfo.getContext('2d')
-        const image = await loadImage(
-            imageUrlOption[type ? valueIcon : textIcon],
-        )
+        const image = await loadImage(imageUrlOption[type ? valueIcon : textIcon])
         ctx?.clearRect(0, 0, valueInfo.width, valueInfo.height)
         ctx.drawImage(image, 0, 0, valueInfo.width, valueInfo.height)
         if (!type) {
@@ -407,11 +360,7 @@ export async function updateViewerEntityInfo(
  * 创建entity信息
  * @returns EntityConfig
  */
-export const createEntityConfig = async (
-    point: pointType,
-    valueInfo: HTMLCanvasElement,
-    type?: string,
-): Promise<EntityConfig> => {
+export const createEntityConfig = async (point: pointType, valueInfo: HTMLCanvasElement, type?: string): Promise<EntityConfig> => {
     // 没有type就是label
     const commonProperties: EntityProperties = {
         value: point?.value,
@@ -424,9 +373,7 @@ export const createEntityConfig = async (
 
     const commonBillboard = {
         image: valueInfo,
-        pixelOffset: type
-            ? new Cartesian2(0, 0)
-            : new Cartesian2(valueInfo.width / 2.1, valueInfo.height / 2),
+        pixelOffset: type ? new Cartesian2(0, 0) : new Cartesian2(valueInfo.width / 2.1, valueInfo.height / 2),
         disableDepthTestDistance: type ? undefined : Number.POSITIVE_INFINITY,
         verticalOrigin: type ? VerticalOrigin.CENTER : VerticalOrigin.BOTTOM,
     }
@@ -444,12 +391,8 @@ export const createEntityConfig = async (
  * @returns Cartesian3
  */
 
-export const convertCartographic = async (
-    viewerData: any,
-    cartesian: Cartesian3,
-): Promise<Cartesian3> => {
-    const cartographic =
-        viewerData?.scene.globe.ellipsoid.cartesianToCartographic(cartesian)
+export const convertCartographic = async (viewerData: any, cartesian: Cartesian3): Promise<Cartesian3> => {
+    const cartographic = viewerData?.scene.globe.ellipsoid.cartesianToCartographic(cartesian)
     if (!cartographic) return new Cartesian3()
     const longitude = cesiumMath.toDegrees(cartographic.longitude)
     const latitude = cesiumMath.toDegrees(cartographic.latitude)

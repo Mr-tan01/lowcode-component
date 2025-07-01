@@ -1,24 +1,14 @@
 <template>
     <div class="lc-fourscatter">
-        <LcScatterChart
-            ref="lcScatterChartCom"
-            :options="renderOptions"
-        ></LcScatterChart>
+        <LcScatterChart ref="lcScatterChartCom" :options="renderOptions"></LcScatterChart>
     </div>
 </template>
 
 <script lang="ts" setup>
-import {
-    LcScatterChart,
-    LcScatterChartInstanceType,
-} from '@/components/education/components/charts/scatter'
+import { LcScatterChart, LcScatterChartInstanceType } from '@/components/education/components/charts/scatter'
 import { useCommonScatterOptions, useCommonScatterSeries } from './options'
 import merge from 'lodash-es/merge'
-import {
-    type EChartsOption,
-    type EChartsCoreOption,
-    ECElementEvent,
-} from 'echarts'
+import { type EChartsOption, type EChartsCoreOption, ECElementEvent } from 'echarts'
 import { computed, useTemplateRef, watch } from 'vue'
 const {
     options = {},
@@ -29,8 +19,7 @@ const {
     isPushAxis?: boolean
     isDefaultTooltip?: boolean
 }>()
-const lcScatterChartComRef =
-    useTemplateRef<LcScatterChartInstanceType>('lcScatterChartCom')
+const lcScatterChartComRef = useTemplateRef<LcScatterChartInstanceType>('lcScatterChartCom')
 
 const renderOptions = computed(() => {
     options.series = useCommonScatterSeries(options.series || [])
@@ -43,7 +32,7 @@ const $emits = defineEmits<{
 }>()
 watch(
     () => lcScatterChartComRef.value?.instance,
-    (instance) => {
+    instance => {
         if (!instance?.chartInstance) return
 
         instance?.chartInstance.off('click')

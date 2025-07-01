@@ -9,11 +9,10 @@ import { useScriptTag } from '@vueuse/core'
 import { shallowRef, useTemplateRef } from 'vue'
 import normalMarker from '@/components/education/components/mark/images/normal.png'
 
-const { tk = '', apiSrc = 'http://api.tianditu.gov.cn/api?v=4.0&tk=' } =
-    defineProps<{
-        tk?: string
-        apiSrc?: string
-    }>()
+const { tk = '', apiSrc = 'http://api.tianditu.gov.cn/api?v=4.0&tk=' } = defineProps<{
+    tk?: string
+    apiSrc?: string
+}>()
 const tiandituApi = shallowRef()
 const tiandituInstance = shallowRef()
 const tiandituCanvasElRef = useTemplateRef('tiandituCanvasEl')
@@ -24,13 +23,8 @@ const { load } = useScriptTag(`${apiSrc}${tk}`, void 0, {
 })
 
 function initTianditu() {
-    tiandituInstance.value = new tiandituApi.value.Map(
-        tiandituCanvasElRef.value,
-    )
-    tiandituInstance.value.centerAndZoom(
-        new tiandituApi.value.LngLat(116.40769, 39.89945),
-        12,
-    )
+    tiandituInstance.value = new tiandituApi.value.Map(tiandituCanvasElRef.value)
+    tiandituInstance.value.centerAndZoom(new tiandituApi.value.LngLat(116.40769, 39.89945), 12)
 }
 
 function addMark() {

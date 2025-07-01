@@ -1,40 +1,12 @@
 <template>
     <div class="demo-data-indicator">
-        <DemoHelpBox
-            title="数据指标"
-            description="图表区指标"
-            rswidth="1000px"
-            :code="code1"
-        >
+        <DemoHelpBox title="数据指标" description="图表区指标" rswidth="1000px" :code="code1">
             <NSpace>
-                <LcSkewIndicator
-                    label="总教职工人"
-                    :value="3336"
-                    unit="人"
-                    tip="测试tip"
-                >
-                </LcSkewIndicator>
-                <LcSkewIndicator
-                    label="总教职工人"
-                    :value="3533336"
-                    unit="人"
-                ></LcSkewIndicator>
+                <LcSkewIndicator label="总教职工人" :value="3336" unit="人" tip="测试tip"> </LcSkewIndicator>
+                <LcSkewIndicator label="总教职工人" :value="3533336" unit="人"></LcSkewIndicator>
 
-                <LcLargesKewIndicator
-                    label="正增长"
-                    :value="100000"
-                    :fixed="true"
-                    :decimal="2"
-                    unit="人"
-                    :year-value="30"
-                >
-                </LcLargesKewIndicator>
-                <LcLargesKewIndicator
-                    label="负增长"
-                    :value="3336"
-                    unit="人"
-                    :year-value="-10"
-                ></LcLargesKewIndicator>
+                <LcLargesKewIndicator label="正增长" :value="100000" :fixed="true" :decimal="2" unit="人" :year-value="30"> </LcLargesKewIndicator>
+                <LcLargesKewIndicator label="负增长" :value="3336" unit="人" :year-value="-10"></LcLargesKewIndicator>
 
                 <LcLargesKewIndicator
                     label="专任教师本科以上学历比例"
@@ -44,11 +16,7 @@
                     :sub-content="'222'"
                 ></LcLargesKewIndicator>
 
-                <lcArrowIndicators
-                    label="心理教师总数"
-                    :value="2370"
-                    unit="人"
-                ></lcArrowIndicators>
+                <lcArrowIndicators label="心理教师总数" :value="2370" unit="人"></lcArrowIndicators>
                 <lcArrowIndicators label="心理教师总数" :icon="'reward'">
                     <template #value> 1:900 </template>
                 </lcArrowIndicators>
@@ -73,33 +41,13 @@
                 </LcSkewIndicator>
             </NSpace>
             <NSpace>
-                <LcSkewIndicator
-                    label="总教职工人"
-                    :value="3533336"
-                    unit="人"
-                    type="tile"
-                ></LcSkewIndicator>
-                <LcSkewIndicator
-                    label="总教职工人"
-                    :value="3533336"
-                    unit="人"
-                    type="tile"
-                ></LcSkewIndicator>
+                <LcSkewIndicator label="总教职工人" :value="3533336" unit="人" type="tile"></LcSkewIndicator>
+                <LcSkewIndicator label="总教职工人" :value="3533336" unit="人" type="tile"></LcSkewIndicator>
             </NSpace>
             <br />
             <NSpace>
-                <LcIndicatorCard
-                    :value="3457"
-                    fixed
-                    hint="教职工人(人)"
-                    type="noborder"
-                ></LcIndicatorCard>
-                <LcIndicatorCard
-                    :value="3457"
-                    fixed
-                    hint="教职工人(人)"
-                    type="noborder"
-                ></LcIndicatorCard>
+                <LcIndicatorCard :value="3457" fixed hint="教职工人(人)" type="noborder"></LcIndicatorCard>
+                <LcIndicatorCard :value="3457" fixed hint="教职工人(人)" type="noborder"></LcIndicatorCard>
             </NSpace>
             <br />
             <NSpace>
@@ -123,21 +71,10 @@
             </NSpace>
         </DemoHelpBox>
 
-        <DemoHelpBox
-            title="指标卡"
-            description="基本用法"
-            rswidth="1000px"
-            :code="code4"
-        >
+        <DemoHelpBox title="指标卡" description="基本用法" rswidth="1000px" :code="code4">
             <NSpace>
-                <LcIndicatorCardArrows
-                    label="已建成并投入运行设施(个)"
-                    :value="20"
-                ></LcIndicatorCardArrows>
-                <LcMinitypeCard
-                    label="已建成并投入运行设施(个)"
-                    :value="20"
-                ></LcMinitypeCard>
+                <LcIndicatorCardArrows label="已建成并投入运行设施(个)" :value="20"></LcIndicatorCardArrows>
+                <LcMinitypeCard label="已建成并投入运行设施(个)" :value="20"></LcMinitypeCard>
             </NSpace>
             <br />
             <NSpace>
@@ -159,28 +96,13 @@
                 ></LcHumanShapeCard>
             </NSpace>
         </DemoHelpBox>
-        <DemoHelpBox
-            title="指标卡"
-            description="基本用法"
-            rswidth="1000px"
-            :code="code2"
-        >
+        <DemoHelpBox title="指标卡" description="基本用法" rswidth="1000px" :code="code2">
             <NSpace>
-                <LcIndicatorCard :value="3457" fixed hint="教职工人(人)">
-                </LcIndicatorCard>
-                <LcIndicatorCard
-                    :value="3457"
-                    fixed
-                    hint="在编教职工(人)"
-                ></LcIndicatorCard>
+                <LcIndicatorCard :value="3457" fixed hint="教职工人(人)"> </LcIndicatorCard>
+                <LcIndicatorCard :value="3457" fixed hint="在编教职工(人)"></LcIndicatorCard>
             </NSpace>
             <NSpace>
-                <LcIndicatorCard
-                    :value="30"
-                    unit="万"
-                    hint="教职工人(人)"
-                    size="large"
-                ></LcIndicatorCard>
+                <LcIndicatorCard :value="30" unit="万" hint="教职工人(人)" size="large"></LcIndicatorCard>
                 <LcIndicatorCard
                     :value="23"
                     unit="万"
@@ -192,10 +114,7 @@
                 </LcIndicatorCard>
             </NSpace>
             <NSpace>
-                <LcBothwayCard
-                    label="深圳户籍"
-                    :data="[{ value: 2311111, unit: '人' }]"
-                ></LcBothwayCard>
+                <LcBothwayCard label="深圳户籍" :data="[{ value: 2311111, unit: '人' }]"></LcBothwayCard>
                 <LcBothwayCard
                     label="深圳户籍"
                     :data="[
@@ -205,12 +124,7 @@
                 ></LcBothwayCard>
             </NSpace>
         </DemoHelpBox>
-        <DemoHelpBox
-            title="指标卡列表"
-            description="基本用法"
-            rswidth="1000px"
-            :code="code3"
-        >
+        <DemoHelpBox title="指标卡列表" description="基本用法" rswidth="1000px" :code="code3">
             <NSpace>
                 <LcIndicatorList
                     icon="https://b0.bdstatic.com/2d43e63ca240bdf793814be0dbc9c3a5.jpg@h_1280"

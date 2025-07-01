@@ -6,14 +6,8 @@
         }"
     >
         <div class="lc-radio-button__wrapper">
-            <button
-                class="lc-radio-button__wrapper__button"
-                @click="clickButton"
-            >
-                <div
-                    v-if="$slots.suffix"
-                    class="lc-radio-button__wrapper__button--suffix"
-                >
+            <button class="lc-radio-button__wrapper__button" @click="clickButton">
+                <div v-if="$slots.suffix" class="lc-radio-button__wrapper__button--suffix">
                     <slot name="suffix"></slot>
                 </div>
                 <div class="lc-radio-button__wrapper__button--text">
@@ -56,11 +50,7 @@ function clickButton() {
     }
 
     &--focus {
-        background: linear-gradient(
-            180deg,
-            rgba(15, 251, 248, 0) 0%,
-            #0ffbf8 100%
-        );
+        background: linear-gradient(180deg, rgba(15, 251, 248, 0) 0%, #0ffbf8 100%);
         border: 1px solid #0ffbf8;
     }
 

@@ -3,20 +3,11 @@
         <div class="lc-range-indicator__wrapper">
             <div class="lc-range-indicator__wrapper__table--bg"></div>
             <div class="lc-range-indicator__wrapper__info-range">
-                <div
-                    v-for="(item, key) in data"
-                    :key
-                    class="lc-range-indicator__wrapper__info"
-                >
-                    <div
-                        class="lc-range-indicator__wrapper__info__decorator--bg"
-                    ></div>
+                <div v-for="(item, key) in data" :key class="lc-range-indicator__wrapper__info">
+                    <div class="lc-range-indicator__wrapper__info__decorator--bg"></div>
                     <div class="lc-range-indicator__wrapper__info--result">
                         <slot :name="item.customSlot" :item="item">
-                            <div
-                                class="lc-range-indicator__wrapper__info--result--value"
-                                :title="item.value?.toString()"
-                            >
+                            <div class="lc-range-indicator__wrapper__info--result--value" :title="item.value?.toString()">
                                 <NNumberAnimation
                                     show-separator
                                     :from="0"
@@ -25,10 +16,7 @@
                                     :precision="renderdecimals(item.value)"
                                 />
                             </div>
-                            <div
-                                v-if="renderUnit(item.value, item.unit)"
-                                class="lc-range-indicator__wrapper__info--result--unit"
-                            >
+                            <div v-if="renderUnit(item.value, item.unit)" class="lc-range-indicator__wrapper__info--result--unit">
                                 {{ renderUnit(item.value, item.unit) }}
                             </div>
                         </slot>
@@ -65,14 +53,14 @@ const {
     decimal?: number
 }>()
 
-const renderdecimals = memoize((value) => {
+const renderdecimals = memoize(value => {
     const { unit: numUnit } = bigNumber(value)
     if (Number.isInteger(value) && !numUnit) {
         return 0
     }
     return decimal
 })
-const renderValue = memoize((value) => {
+const renderValue = memoize(value => {
     if (fixed) {
         const { result } = bigNumber(value, decimal)
         return result

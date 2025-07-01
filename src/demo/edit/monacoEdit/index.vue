@@ -6,11 +6,7 @@ import { preveiwOptions, testCodeStr } from './const'
 import { useRoute } from 'vue-router'
 
 const $route = useRoute()
-const demoCodeStr =
-    sessionStorage.getItem(
-        '__sessionStorage__monacoEditId__' +
-            decodeURIComponent($route.query?.id?.toString() || ''),
-    ) || testCodeStr
+const demoCodeStr = sessionStorage.getItem('__sessionStorage__monacoEditId__' + decodeURIComponent($route.query?.id?.toString() || '')) || testCodeStr
 
 const { importMap: builtinImportMap, productionMode } = useVueImportMap({
     runtimeDev: '/cdn/runtime-dom.esm-browser.js',

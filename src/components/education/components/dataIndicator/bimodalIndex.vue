@@ -2,18 +2,10 @@
     <div class="bimodal-index">
         <div class="bimodal-index__indicator">
             <div class="bimodal-index__indicator__lable">
-                <span v-for="(item, index) in label" :key="index">
-                    {{ item }}</span
-                >
+                <span v-for="(item, index) in label" :key="index"> {{ item }}</span>
             </div>
             <div class="bimodal-index__indicator__value">
-                <span
-                    v-for="(item, index) in value"
-                    :key="index"
-                    :title="value.toString()"
-                >
-                    {{ item }}</span
-                >
+                <span v-for="(item, index) in value" :key="index" :title="value.toString()"> {{ item }}</span>
             </div>
         </div>
     </div>
@@ -38,10 +30,10 @@ const list = computed(() => {
     return data.slice(0, 2)
 })
 const label = computed(() => {
-    return list.value.map((item) => item.label)
+    return list.value.map(item => item.label)
 })
 const value = computed(() => {
-    return list.value.map((item) => item.value || empty)
+    return list.value.map(item => item.value || empty)
 })
 </script>
 

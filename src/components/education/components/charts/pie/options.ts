@@ -1,20 +1,10 @@
 import { deepMergeArrayOptions } from '@mmj-code-lib/lowcode/es/components'
-import {
-    innerLabelSeries1,
-    pieColors,
-    pieLegend,
-    pieSeriesRecord,
-    pieTitleOptions,
-    pieTooltipOptions,
-} from './const'
+import { innerLabelSeries1, pieColors, pieLegend, pieSeriesRecord, pieTitleOptions, pieTooltipOptions } from './const'
 import { type EChartsCoreOption, type EChartsOption } from 'echarts'
 import merge from 'lodash-es/merge'
 import { type LinearGradient } from 'echarts/types/src/util/graphic'
 import { type LayoutType } from './types'
-import type {
-    OptionDataValueNumeric,
-    ZRColor,
-} from 'echarts/types/src/util/types'
+import type { OptionDataValueNumeric, ZRColor } from 'echarts/types/src/util/types'
 
 export const pieCommonOptions: EChartsOption = {
     title: pieTitleOptions,
@@ -29,23 +19,16 @@ export function usePieCommonSeries(
     colors: EChartsOption['color'],
     layout: LayoutType,
 ): EChartsOption['series'] {
-    const dynamicSeries =
-        layout === 'innerLabel' ? innerLabelSeries1 : pieSeriesRecord
+    const dynamicSeries = layout === 'innerLabel' ? innerLabelSeries1 : pieSeriesRecord
     const newColors = Array.isArray(colors) ? colors : colors ? [colors] : []
 
     if (Array.isArray(series)) {
-        return series.map((serie) => {
-            serie.data = usePieSeriesData(
-                serie!.data as OptionDataValueNumeric[],
-                newColors,
-            )
+        return series.map(serie => {
+            serie.data = usePieSeriesData(serie!.data as OptionDataValueNumeric[], newColors)
             return merge(getInnerSeries(linearGradients), dynamicSeries, serie)
         })
     }
-    series!.data = usePieSeriesData(
-        series!.data as OptionDataValueNumeric[],
-        newColors,
-    )
+    series!.data = usePieSeriesData(series!.data as OptionDataValueNumeric[], newColors)
     return merge(getInnerSeries(linearGradients), dynamicSeries, series)
 }
 function getInnerSeries(linearColors: string[] | LinearGradient[]) {
@@ -57,10 +40,7 @@ function getInnerSeries(linearColors: string[] | LinearGradient[]) {
         },
     }
 }
-function usePieSeriesData(
-    data: OptionDataValueNumeric[],
-    newColors: ZRColor[],
-) {
+function usePieSeriesData(data: OptionDataValueNumeric[], newColors: ZRColor[]) {
     return ((data ?? []) as OptionDataValueNumeric[]).map((item, ckey) =>
         merge(
             {
@@ -84,10 +64,6 @@ function usePieSeriesData(
 }
 
 export function useCommonPieOptions(opts: EChartsCoreOption | EChartsOption) {
-    deepMergeArrayOptions(
-        opts,
-        Object.keys(pieCommonOptions),
-        Object.values(pieCommonOptions),
-    )
+    deepMergeArrayOptions(opts, Object.keys(pieCommonOptions), Object.values(pieCommonOptions))
     return merge({}, pieCommonOptions, opts)
 }

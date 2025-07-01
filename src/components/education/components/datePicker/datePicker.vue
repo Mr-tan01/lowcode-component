@@ -50,12 +50,7 @@ import ConfigProvider from '../../common/components/ConfigProvider/index.vue'
                     --n-color: rgba(26, 65, 114, 1) !important;
                     --n-panel-text-color: #fff !important;
                     --n-panel-color: rgba(26, 65, 114, 1) !important;
-                    --n-panel-action-divider-color: rgba(
-                        28,
-                        78,
-                        141,
-                        1
-                    ) !important;
+                    --n-panel-action-divider-color: rgba(28, 78, 141, 1) !important;
 
                     .n-date-panel-dates {
                         --n-item-cell-width: 40px;
@@ -87,8 +82,7 @@ import ConfigProvider from '../../common/components/ConfigProvider/index.vue'
                                 color: #fff;
 
                                 &::after {
-                                    background: url(./images/selected-bg.png)
-                                        no-repeat;
+                                    background: url(./images/selected-bg.png) no-repeat;
                                     background-size: cover;
                                 }
                             }
@@ -99,11 +93,7 @@ import ConfigProvider from '../../common/components/ConfigProvider/index.vue'
                         border-top: 0;
                         &__suffix {
                             .n-button {
-                                background: linear-gradient(
-                                    180deg,
-                                    rgba(15, 251, 248, 0) 0%,
-                                    #0ffbf8 100%
-                                );
+                                background: linear-gradient(180deg, rgba(15, 251, 248, 0) 0%, #0ffbf8 100%);
                                 border-radius: 2px;
                                 border: 1px solid #0ffbf8;
                                 backdrop-filter: blur(2.222222222222222px);

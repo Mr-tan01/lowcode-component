@@ -1,7 +1,7 @@
 {
     "name": "lowcode-component",
     "private": true,
-    "version": "0.1.0-alpha.3.0.3",
+    "version": "0.1.0-alpha.3.0.4",
     "type": "module",
     "main": "dist/index.prod.mjs",
     "types": "dist/types/index.d.ts",
@@ -14,7 +14,9 @@
         "preview": "vite preview",
         "prepare": "husky install",
         "lint": "eslint \"**/*.{ts,vue}\"",
-        "lint:fix": "eslint \"**/*.{ts,vue}\" --fix"
+        "lint:fix": "eslint \"**/*.{ts,vue}\" --fix",
+        "format": "prettier --write \"**/*.{js,ts,vue}\"",
+        "lint-staged": "lint-staged"
     },
     "files": [
         "es",
@@ -50,6 +52,7 @@
         "globals": "^16.2.0",
         "highlight.js": "^11.11.1",
         "husky": "8.0.0",
+        "lint-staged": "^16.1.2",
         "localforage": "^1.10.0",
         "lodash-es": "^4.17.21",
         "naive-ui": "^2.41.0",
@@ -67,5 +70,24 @@
         "vue-resizable": "^2.1.7",
         "vue-router": "^4.5.0",
         "vue-tsc": "^2.2.0"
+    },
+    "lint-staged": {
+        "*.{js,jsx,ts,tsx}": [
+            "eslint --fix",
+            "prettier --write"
+        ],
+        "{!(package)*.json,*.code-snippets,.!(browserslist)*rc}": [
+            "prettier --write--parser json"
+        ],
+        "package.json": [
+            "prettier --write"
+        ],
+        "*.vue": [
+            "eslint --fix",
+            "prettier --write"
+        ],
+        "*.{scss,less,styl,html,md}": [
+            "prettier --write"
+        ]
     }
 }

@@ -27,7 +27,7 @@ export const yAxisOptions: EChartsOption['yAxis'] = {
         fontSize: 14,
         lineHeight: 20,
         margin: 13,
-        formatter: (value) => {
+        formatter: value => {
             return value
         },
     },
@@ -104,7 +104,7 @@ export const commonScatterSeries: ScatterSeriesOption = {
         return Math.max(Math.sqrt(data), 10)
     },
     itemStyle: {
-        color: (data) => scatterColors[data.componentIndex],
+        color: data => scatterColors[data.componentIndex],
         borderColor: '#fff',
         borderWidth: 1.2,
         opacity: 1,

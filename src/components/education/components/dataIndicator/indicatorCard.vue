@@ -11,24 +11,12 @@
                     <LcTooltip>{{ tip }}</LcTooltip>
                 </div>
                 <div class="lc-indicator-card__wrapper--result">
-                    <span
-                        class="lc-indicator-card__wrapper--result--value"
-                        :title="value.toString()"
-                    >
+                    <span class="lc-indicator-card__wrapper--result--value" :title="value.toString()">
                         <slot name="value">
-                            <NNumberAnimation
-                                show-separator
-                                :from="0"
-                                :to="renderValue"
-                                active
-                                :precision="decimals"
-                            />
+                            <NNumberAnimation show-separator :from="0" :to="renderValue" active :precision="decimals" />
                         </slot>
                     </span>
-                    <span
-                        v-if="fixed"
-                        class="lc-indicator-card__wrapper--result--unit"
-                    >
+                    <span v-if="fixed" class="lc-indicator-card__wrapper--result--unit">
                         {{ unit }}
                     </span>
                 </div>
@@ -199,8 +187,7 @@ const unit = computed(() => {
         }
 
         &--text {
-            font-family:
-                AlimamaFangYuanTiVF-SemiBold, AlimamaFangYuanTiVF-SemiBold;
+            font-family: AlimamaFangYuanTiVF-SemiBold, AlimamaFangYuanTiVF-SemiBold;
             font-weight: normal;
             font-size: 18px;
             color: v-bind(hintColor);

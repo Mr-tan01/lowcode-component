@@ -40,14 +40,8 @@ const generateWatermark = () => {
     const textHeight = fontSize
 
     const rad = (rotate * Math.PI) / 180
-    const rotatedWidth =
-        Math.abs(textWidth * Math.cos(rad)) +
-        Math.abs(textHeight * Math.sin(rad)) +
-        gap
-    const rotatedHeight =
-        Math.abs(textWidth * Math.sin(rad)) +
-        Math.abs(textHeight * Math.cos(rad)) +
-        gap
+    const rotatedWidth = Math.abs(textWidth * Math.cos(rad)) + Math.abs(textHeight * Math.sin(rad)) + gap
+    const rotatedHeight = Math.abs(textWidth * Math.sin(rad)) + Math.abs(textHeight * Math.cos(rad)) + gap
 
     canvas.width = rotatedWidth
     canvas.height = rotatedHeight
@@ -65,20 +59,9 @@ const generateWatermark = () => {
     backgroundUrl.value = canvas.toDataURL('image/png')
 }
 
-const changeWatermark = watch(
-    [
-        () => text,
-        () => fontSize,
-        () => color,
-        () => rotate,
-        () => opacity,
-        () => gap,
-    ],
-    generateWatermark,
-    {
-        immediate: true,
-    },
-)
+const changeWatermark = watch([() => text, () => fontSize, () => color, () => rotate, () => opacity, () => gap], generateWatermark, {
+    immediate: true,
+})
 
 onUnmounted(changeWatermark)
 

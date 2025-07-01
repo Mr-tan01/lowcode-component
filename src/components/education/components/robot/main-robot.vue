@@ -1,24 +1,11 @@
 <template>
     <div class="lc-main-robot">
         <div class="lc-main-robot__wrapper">
-            <img
-                class="lc-main-robot__img"
-                src="./images/main-robot.png"
-                draggable="false"
-                alt=""
-            />
+            <img class="lc-main-robot__img" src="./images/main-robot.png" draggable="false" alt="" />
             <div class="lc-main-robot__wrapper__inner-input">
                 <div class="lc-main-robot__wrapper__inner-input--content">
-                    <div
-                        v-show="output.helpText"
-                        class="lc-main-robot__wrapper__inner-input--help"
-                    >
-                        <img
-                            class="lc-main-robot__wrapper__inner-input--help--voice"
-                            src="./images/voice.png"
-                            draggable="false"
-                            alt=""
-                        />
+                    <div v-show="output.helpText" class="lc-main-robot__wrapper__inner-input--help">
+                        <img class="lc-main-robot__wrapper__inner-input--help--voice" src="./images/voice.png" draggable="false" alt="" />
                         {{ output.helpText }}
                     </div>
                     <input
@@ -28,9 +15,7 @@
                         :disabled="forbidden"
                         class="lc-main-robot__wrapper__inner-input--content__input"
                     />
-                    <div
-                        class="lc-main-robot__wrapper__inner-input--content__suffix"
-                    >
+                    <div class="lc-main-robot__wrapper__inner-input--content__suffix">
                         <img
                             class="lc-main-robot__wrapper__inner-input--content__suffix--img"
                             src="./images/microphone.png"
@@ -69,10 +54,7 @@
                             class="lc-main-robot__wrapper__star-wrap--star__meta--item"
                             :style="{
                                 '--left-offset-number': ckey,
-                                '--left-reverse-offset-number': reverseIndex(
-                                    item.meta.length,
-                                    ckey,
-                                ),
+                                '--left-reverse-offset-number': reverseIndex(item.meta.length, ckey),
                             }"
                         >
                             <div
@@ -295,10 +277,7 @@ on('result', () => {
                 z-index: var(--z-index-number);
 
                 @mixin mateItemShow() {
-                    transform: translate(
-                        calc(var(--left-offset-number) * -7px),
-                        0
-                    );
+                    transform: translate(calc(var(--left-offset-number) * -7px), 0);
                     opacity: 1;
                     pointer-events: auto;
                     z-index: 99;
@@ -309,8 +288,7 @@ on('result', () => {
 
                     .lc-main-robot {
                         &-icon {
-                            background: url('./images/base/selected-base.png')
-                                no-repeat;
+                            background: url('./images/base/selected-base.png') no-repeat;
                             background-size: cover;
                         }
                         &__wrapper {
@@ -318,9 +296,7 @@ on('result', () => {
                                 &__meta {
                                     &--item {
                                         @include mateItemShow;
-                                        transition-delay: calc(
-                                            var(--left-offset-number) * 0.1s
-                                        );
+                                        transition-delay: calc(var(--left-offset-number) * 0.1s);
                                     }
                                 }
                             }
@@ -354,14 +330,9 @@ on('result', () => {
                         background-repeat: no-repeat;
                         background-size: 100% 100%;
                         transition: linear 0.2s;
-                        transform: translate(
-                            calc(var(--left-offset-number) * -18px),
-                            0
-                        );
+                        transform: translate(calc(var(--left-offset-number) * -18px), 0);
                         transition-property: opacity, transform;
-                        transition-delay: calc(
-                            var(--left-reverse-offset-number) * 0.1s
-                        );
+                        transition-delay: calc(var(--left-reverse-offset-number) * 0.1s);
                         opacity: 0;
                         will-change: transform, opacity;
                         position: relative;
@@ -386,9 +357,7 @@ on('result', () => {
                         }
 
                         &--text {
-                            font-family:
-                                AlimamaFangYuanTiVF-SemiBold,
-                                AlimamaFangYuanTiVF-SemiBold;
+                            font-family: AlimamaFangYuanTiVF-SemiBold, AlimamaFangYuanTiVF-SemiBold;
                             font-weight: normal;
                             font-size: 16px;
                             color: #ffffff;

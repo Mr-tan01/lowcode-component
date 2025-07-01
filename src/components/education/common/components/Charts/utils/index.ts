@@ -39,12 +39,7 @@ export function getMaxStringWidth(strings: string[]): number {
 export function alignString(str: string, maxLen: number): string {
     // 计算字符串的实际宽度（中文字符算 2，英文字符算 1）
     const getStrWidth = (s: string) => {
-        return s
-            .split('')
-            .reduce(
-                (width, char) => width + (char.charCodeAt(0) > 255 ? 2 : 1),
-                0,
-            )
+        return s.split('').reduce((width, char) => width + (char.charCodeAt(0) > 255 ? 2 : 1), 0)
     }
 
     const strWidth = getStrWidth(str)

@@ -4,8 +4,7 @@
             <span>{{ label }}：</span>
             <span>
                 <span class="map-marker-label--value">
-                    <NNumberAnimation :from="0" :to="value" :precision="0">
-                    </NNumberAnimation>
+                    <NNumberAnimation :from="0" :to="value" :precision="0"> </NNumberAnimation>
                 </span>
                 <span class="map-marker-label--unit">
                     {{ unit }}

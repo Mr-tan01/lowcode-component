@@ -1,10 +1,7 @@
 import orgImage from '../images/org.svg'
 import blueImage from '../images/blue.svg'
 import { type YAXisOption } from 'echarts/types/src/coord/cartesian/AxisModel'
-import {
-    LcBarChartOptions,
-    useDifferenceSeries,
-} from '@/components/education/components/charts'
+import { LcBarChartOptions, useDifferenceSeries } from '@/components/education/components/charts'
 import { type EChartsOption } from 'echarts'
 export { orgImage, blueImage }
 export function test(): EChartsOption {
@@ -31,17 +28,13 @@ export function test(): EChartsOption {
             {
                 name: '待审核',
                 yAxisIndex: 0,
-                data: Array.from(Array(5)).map((_, i) =>
-                    Math.round(Math.random() * 100 + i),
-                ),
+                data: Array.from(Array(5)).map((_, i) => Math.round(Math.random() * 100 + i)),
                 backgroundStyle: {},
             },
             {
                 name: '已通过',
                 yAxisIndex: 1,
-                data: Array.from(Array(5)).map((_, i) =>
-                    Math.round(Math.random() * 100 + i),
-                ),
+                data: Array.from(Array(5)).map((_, i) => Math.round(Math.random() * 100 + i)),
                 backgroundStyle: {},
             },
         ],
@@ -69,45 +62,33 @@ export function chartsBarOpts(len: number): EChartsOption {
             {
                 name: '待审核',
                 yAxisIndex: 0,
-                data: Array.from(Array(5)).map((_, i) =>
-                    Math.round(Math.random() * 100 + i),
-                ),
+                data: Array.from(Array(5)).map((_, i) => Math.round(Math.random() * 100 + i)),
                 backgroundStyle: {},
             },
             {
                 name: '已通过',
                 yAxisIndex: 1,
-                data: Array.from(Array(5)).map((_, i) =>
-                    Math.round(Math.random() * 100 + i),
-                ),
+                data: Array.from(Array(5)).map((_, i) => Math.round(Math.random() * 100 + i)),
                 backgroundStyle: {},
             },
             {
                 name: '已通过2',
-                data: Array.from(Array(5)).map((_, i) =>
-                    Math.round(Math.random() * 100 + i),
-                ),
+                data: Array.from(Array(5)).map((_, i) => Math.round(Math.random() * 100 + i)),
                 backgroundStyle: {},
             },
             {
                 name: '已通过3',
-                data: Array.from(Array(5)).map((_, i) =>
-                    Math.round(Math.random() * 100 + i),
-                ),
+                data: Array.from(Array(5)).map((_, i) => Math.round(Math.random() * 100 + i)),
                 backgroundStyle: {},
             },
             {
                 name: '已通过4',
-                data: Array.from(Array(5)).map((_, i) =>
-                    Math.round(Math.random() * 100 + i),
-                ),
+                data: Array.from(Array(5)).map((_, i) => Math.round(Math.random() * 100 + i)),
                 backgroundStyle: {},
             },
             {
                 name: '已通过5',
-                data: Array.from(Array(5)).map((_, i) =>
-                    Math.round(Math.random() * 100 + i),
-                ),
+                data: Array.from(Array(5)).map((_, i) => Math.round(Math.random() * 100 + i)),
                 backgroundStyle: {},
             },
         ].slice(0, len),
@@ -124,15 +105,11 @@ export function chartsHorizontalBarOpts(len: number): EChartsOption {
         series: [
             {
                 name: '待审核',
-                data: Array.from(Array(4)).map((_, i) =>
-                    Math.round(Math.random() * 100 + i),
-                ),
+                data: Array.from(Array(4)).map((_, i) => Math.round(Math.random() * 100 + i)),
             },
             {
                 name: '已通过',
-                data: Array.from(Array(4)).map((_, i) =>
-                    Math.round(Math.random() * 100 + i),
-                ),
+                data: Array.from(Array(4)).map((_, i) => Math.round(Math.random() * 100 + i)),
             },
         ].slice(0, len),
     }
@@ -149,15 +126,11 @@ export function chartNegativeBarOptions(): EChartsOption {
         series: [
             {
                 name: '待审核',
-                data: Array.from(Array(4)).map((_, i) =>
-                    Math.round(Math.random() * -100 + i),
-                ),
+                data: Array.from(Array(4)).map((_, i) => Math.round(Math.random() * -100 + i)),
             },
             {
                 name: '已通过',
-                data: Array.from(Array(4)).map((_, i) =>
-                    Math.round(Math.random() * 100 + i),
-                ),
+                data: Array.from(Array(4)).map((_, i) => Math.round(Math.random() * 100 + i)),
             },
         ],
     }
@@ -168,23 +141,16 @@ export function evenYaixsChartsBarOpts(len: number): EChartsOption {
         xAxis: {
             data: Array.from(Array(4)).map((_, i) => `类目${i + 1}`),
         },
-        yAxis: [
-            LcBarChartOptions.commonBarOptions.yAxis as YAXisOption,
-            LcBarChartOptions.commonBarOptions.yAxis as YAXisOption,
-        ],
+        yAxis: [LcBarChartOptions.commonBarOptions.yAxis as YAXisOption, LcBarChartOptions.commonBarOptions.yAxis as YAXisOption],
         series: [
             {
                 name: '待审核',
-                data: Array.from(Array(4)).map((_, i) =>
-                    Math.round(Math.random() * 100 + i),
-                ),
+                data: Array.from(Array(4)).map((_, i) => Math.round(Math.random() * 100 + i)),
             },
             {
                 name: '已通过',
                 yAxisIndex: 1,
-                data: Array.from(Array(4)).map((_, i) =>
-                    Math.round(Math.random() * 100 + i),
-                ),
+                data: Array.from(Array(4)).map((_, i) => Math.round(Math.random() * 100 + i)),
             },
         ].slice(0, len),
     }

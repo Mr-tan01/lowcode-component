@@ -21,14 +21,11 @@ interface ApiError {
  * @param params 请求参数
  * @returns Promise<ApiResponse>
  */
-export const getResponse = <T = any>(
-    url: string,
-    params?: Record<string, any>,
-): Promise<ApiResponse<T>> => {
+export const getResponse = <T = any>(url: string, params?: Record<string, any>): Promise<ApiResponse<T>> => {
     return new Promise((resolve, reject) => {
         request
             .get<T>(url, params)
-            .then((response) => {
+            .then(response => {
                 // 根据状态码处理
                 if (response.status >= 200 && response.status < 300) {
                     resolve({
@@ -43,7 +40,7 @@ export const getResponse = <T = any>(
                     })
                 }
             })
-            .catch((error) => {
+            .catch(error => {
                 const err: ApiError = {
                     status: error.response?.status || 500,
                     message: error.message || '网络错误',
@@ -60,14 +57,11 @@ export const getResponse = <T = any>(
  * @param data 请求体数据
  * @returns Promise<ApiResponse>
  */
-export const postResponse = <T = any>(
-    url: string,
-    data?: Record<string, any>,
-): Promise<ApiResponse<T>> => {
+export const postResponse = <T = any>(url: string, data?: Record<string, any>): Promise<ApiResponse<T>> => {
     return new Promise((resolve, reject) => {
         request
             .post<T>(url, data)
-            .then((response) => {
+            .then(response => {
                 if (response.status >= 200 && response.status < 300) {
                     resolve({
                         status: response.status,
@@ -81,7 +75,7 @@ export const postResponse = <T = any>(
                     })
                 }
             })
-            .catch((error) => {
+            .catch(error => {
                 const err: ApiError = {
                     status: error.response?.status || 500,
                     message: error.message || '网络错误',
@@ -104,13 +98,10 @@ export const setToken = (token: string): void => {
  * 获取认证Token
  * @param token 认证令牌
  */
-export const getToken = getResponse<{ id: string; secret: string }>(
-    '/jysl/oauth/token',
-    {
-        client_id: '74109f7095974ab1a5e930c8e998580d',
-        client_secret: 'JqvrFbO!',
-    },
-).then((res: any) => {
+export const getToken = getResponse<{ id: string; secret: string }>('/jysl/oauth/token', {
+    client_id: '74109f7095974ab1a5e930c8e998580d',
+    client_secret: 'JqvrFbO!',
+}).then((res: any) => {
     if (res.status === 200 && res.data.access_token) {
         localStorage.setItem('access_token', res.data.access_token)
     } else console.log('获取token失败, 请检查密钥信息')

@@ -1,18 +1,10 @@
 <template>
     <div class="pagination-container">
         <div class="pagination-left">
-            <button
-                :disabled="model === 1"
-                class="arrow-button left-arrow"
-                @click="prevPage"
-            ></button>
+            <button :disabled="model === 1" class="arrow-button left-arrow" @click="prevPage"></button>
             <span class="page-info">{{ model }}</span> /
             <span class="page-info">{{ totalPages }}</span>
-            <button
-                :disabled="model === totalPages"
-                class="arrow-button right-arrow"
-                @click="nextPage"
-            ></button>
+            <button :disabled="model === totalPages" class="arrow-button right-arrow" @click="nextPage"></button>
         </div>
         <div class="pagination-right total-pages">
             <span>共 {{ totalPages }} 页</span>
@@ -23,11 +15,7 @@
 <script lang="ts" setup>
 import { EducationPagingProps } from './props'
 
-const {
-    totalPages = 1,
-    fontSize = '16px',
-    fontColor = '#FFFFFF',
-} = defineProps<EducationPagingProps>()
+const { totalPages = 1, fontSize = '16px', fontColor = '#FFFFFF' } = defineProps<EducationPagingProps>()
 
 const model = defineModel<number>({ default: 1 })
 

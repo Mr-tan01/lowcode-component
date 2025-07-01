@@ -1,12 +1,7 @@
 <template>
     <div class="demo-headers mr-setting-w">
         <button @click="add">添加热力图</button>
-        <DemoHelpBox
-            title="深圳地图"
-            description="深圳教育项目-cesium"
-            rswidth="1500px"
-            rs-height="740px"
-        >
+        <DemoHelpBox title="深圳地图" description="深圳教育项目-cesium" rswidth="1500px" rs-height="740px">
             <div class="size-box">
                 <LcCesium
                     ref="cesiumMap"
@@ -24,12 +19,7 @@
         <div style="position: absolute; top: 30%; left: 70%">
             <LcMapButton @icon-clicked="iconHandler"></LcMapButton>
         </div>
-        <LcSwitchTabs
-            v-model:value="tabValue"
-            :list="defSwitchTabList"
-            style="margin-top: 20px"
-            @change="changePolygon"
-        ></LcSwitchTabs>
+        <LcSwitchTabs v-model:value="tabValue" :list="defSwitchTabList" style="margin-top: 20px" @change="changePolygon"></LcSwitchTabs>
     </div>
 </template>
 
@@ -37,18 +27,11 @@
 import { ref, onMounted } from 'vue'
 import { LcSwitchTabs } from '@/components/education'
 import LcMapButton from '@/components/education/components/mapButton/mapButton.vue'
-import {
-    LcCesium,
-    CesiumInstanceType,
-} from '@/components/education/components/map'
+import { LcCesium, CesiumInstanceType } from '@/components/education/components/map'
 // import { LcCesium, CesiumInstanceType } from "~/es/education/map/index"
 import { DemoHelpBox } from '@/components/common/DemoHelpBox'
 import type { ChangeEvent } from '@/components/education/components/carouseBox/types'
-import {
-    pointType,
-    basicConfigType,
-    pointInfo,
-} from '@/components/education/components/map/cesium/modules/type'
+import { pointType, basicConfigType, pointInfo } from '@/components/education/components/map/cesium/modules/type'
 import { Cartesian3 } from 'cesium'
 import data from './index.json'
 const basicConfig = ref<basicConfigType>({
@@ -62,10 +45,8 @@ const heatMapDataHandle = (data: Array<any>) => {
     if (!data || data.length === 0) return []
     // 数据
     const heatMapData = data
-        .filter(
-            (item) => Number(item.schoolLat) > 0 && Number(item.schoolLng) > 0,
-        )
-        .map((item) => ({
+        .filter(item => Number(item.schoolLat) > 0 && Number(item.schoolLng) > 0)
+        .map(item => ({
             x: Number(item.schoolLng),
             y: Number(item.schoolLat),
             value: Number(item.value),
@@ -157,9 +138,7 @@ function iconHandler(alt: string) {
         const state = alt === 'Layer'
         cesiumMap.value?.changeModel(
             state ? 'setViewerLayer' : 'setCameraHeight',
-            state
-                ? 'https://services.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer'
-                : alt,
+            state ? 'https://services.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer' : alt,
         )
     }
 }
@@ -179,7 +158,7 @@ onMounted(async () => {
 const add = () => {
     const heatMapData = heatMapDataHandle(data.data)
     // 点位value
-    const valueArr = heatMapData.map((i) => i.value)
+    const valueArr = heatMapData.map(i => i.value)
     // 点位最大值
     const max = Math.max(...valueArr)
     // 点位最小值

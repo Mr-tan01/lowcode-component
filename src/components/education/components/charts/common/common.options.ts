@@ -26,17 +26,14 @@ const baseDifferenceSerie: EChartsOption['series'] = {
         color: 'rgba(225, 188, 75, 1)',
     },
 }
-export function useDifferenceSeries(
-    data: any[][],
-    serie?: EChartsOption['series'],
-): SeriesOption {
+export function useDifferenceSeries(data: any[][], serie?: EChartsOption['series']): SeriesOption {
     return merge(
         {},
         baseDifferenceSerie,
         {
             markLine: {
                 data: data.map((item, index) => {
-                    return item.map((el) => {
+                    return item.map(el => {
                         return {
                             coord: [index, el],
                             name: index,
@@ -44,7 +41,7 @@ export function useDifferenceSeries(
                     })
                 }),
             },
-            data: data.map((item) => item[1]),
+            data: data.map(item => item[1]),
         },
         serie,
     ) as SeriesOption

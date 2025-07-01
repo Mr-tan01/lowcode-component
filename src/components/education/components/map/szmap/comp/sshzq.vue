@@ -14,23 +14,9 @@
         ></rect>
         <g id="编组-18" transform="translate(779, 16)" fill-rule="nonzero">
             <g id="形状结合">
-                <use
-                    fill="black"
-                    fill-opacity="1"
-                    filter="url(#filter-4)"
-                    xlink:href="#path-3"
-                ></use>
-                <use
-                    fill-opacity="0.8"
-                    fill="#13489F"
-                    xlink:href="#path-3"
-                ></use>
-                <use
-                    fill="black"
-                    fill-opacity="1"
-                    filter="url(#filter-5)"
-                    xlink:href="#path-3"
-                ></use>
+                <use fill="black" fill-opacity="1" filter="url(#filter-4)" xlink:href="#path-3"></use>
+                <use fill-opacity="0.8" fill="#13489F" xlink:href="#path-3"></use>
+                <use fill="black" fill-opacity="1" filter="url(#filter-5)" xlink:href="#path-3"></use>
                 <path
                     stroke="#69ECFF"
                     stroke-width="0.88914672"

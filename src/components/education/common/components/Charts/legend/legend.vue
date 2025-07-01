@@ -14,18 +14,11 @@
                     <n-tooltip :delay="800">
                         <template #trigger>
                             <div class="lc-common-legend__trigger">
-                                <div
-                                    class="lc-common-legend__wrapper__legend__item__icon"
-                                ></div>
-                                <div
-                                    class="lc-common-legend__wrapper__legend__item__label"
-                                    v-html="legendLabel(item.name, item.value)"
-                                ></div>
+                                <div class="lc-common-legend__wrapper__legend__item__icon"></div>
+                                <div class="lc-common-legend__wrapper__legend__item__label" v-html="legendLabel(item.name, item.value)"></div>
                             </div>
                         </template>
-                        <span
-                            v-html="legendLabel(item.name, item.value)"
-                        ></span>
+                        <span v-html="legendLabel(item.name, item.value)"></span>
                     </n-tooltip>
                 </slot>
             </div>
@@ -35,26 +28,19 @@
 <script lang="ts" setup>
 import { type EChartsCoreOption, type EChartsOption } from 'echarts'
 import { computed, ref, watch } from 'vue'
-import {
-    type LegendDataRecord,
-    type LegendDataSelectRecord,
-    type LegendActiveType,
-    type LegendSelectParams,
-} from './types'
+import { type LegendDataRecord, type LegendDataSelectRecord, type LegendActiveType, type LegendSelectParams } from './types'
 import { NTooltip } from 'naive-ui/es/tooltip'
 
 const {
     options = {},
-    legendLabel = (name) => name,
+    legendLabel = name => name,
     disabled = false,
 } = defineProps<{
     options?: EChartsOption | EChartsCoreOption
     legendLabel?: (name: string, value: number) => string
     disabled?: boolean
 }>()
-const legendSelectedMaps = ref(
-    new Map<string | number, LegendDataSelectRecord>(),
-)
+const legendSelectedMaps = ref(new Map<string | number, LegendDataSelectRecord>())
 
 watch(
     () => options.series,
@@ -62,7 +48,7 @@ watch(
         legendSelectedMaps.value.clear()
 
         if (!Array.isArray(options.series)) return
-        ;(options.series[0]?.data as LegendDataRecord[])?.forEach((item) => {
+        ;(options.series[0]?.data as LegendDataRecord[])?.forEach(item => {
             if (!item.name) {
                 return window.console.warn('item.name is required')
             }
@@ -82,10 +68,7 @@ const $emit = defineEmits<{
     (e: 'legend:toggleSelect', value: LegendSelectParams): void
 }>()
 
-function dispatchAction(
-    type: LegendActiveType,
-    name: LegendDataRecord['name'],
-) {
+function dispatchAction(type: LegendActiveType, name: LegendDataRecord['name']) {
     $emit('legend:toggleSelect', {
         type,
         name,
@@ -111,9 +94,7 @@ function getLegendStyle(index: number, record: LegendDataRecord) {
     const { color = [] } = options ?? {}
     return {
         '--item-color': color[index],
-        '--unselect-color': !legendSelectedMaps.value.get(record.name)?.selected
-            ? 0.5
-            : 1,
+        '--unselect-color': !legendSelectedMaps.value.get(record.name)?.selected ? 0.5 : 1,
     }
 }
 
@@ -175,21 +156,13 @@ const customLegendData = computed(() => {
                 align-items: center;
                 gap: 8px;
                 padding: 5px 12px;
-                background: linear-gradient(
-                    270deg,
-                    rgba(34, 118, 252, 0) 0%,
-                    #2276fc22 100%
-                );
+                background: linear-gradient(270deg, rgba(34, 118, 252, 0) 0%, #2276fc22 100%);
                 position: relative;
                 opacity: var(--unselect-color, 1);
 
                 &:hover {
                     cursor: pointer;
-                    background: linear-gradient(
-                        270deg,
-                        rgba(34, 118, 252, 0) 0%,
-                        #2276fc6d 100%
-                    );
+                    background: linear-gradient(270deg, rgba(34, 118, 252, 0) 0%, #2276fc6d 100%);
                 }
 
                 &::before {

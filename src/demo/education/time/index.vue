@@ -1,12 +1,6 @@
 <template>
     <div class="demo-time">
-        <DemoBox
-            title=""
-            time
-            description="基础用法"
-            rswidth="500px"
-            :code="code1"
-        >
+        <DemoBox title="" time description="基础用法" rswidth="500px" :code="code1">
             <NSpace :size="150">
                 <LcTime :icon="icon"></LcTime>
             </NSpace>

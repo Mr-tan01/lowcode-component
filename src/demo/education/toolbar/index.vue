@@ -2,36 +2,19 @@
     <div class="demo-toolbar">
         <h2>#LcToolbarSlot</h2>
         <NSpace>
-            <DemoHelpBox
-                title="工具栏"
-                rswidth="500px"
-                rs-height="200px"
-                description="基础用法"
-            >
+            <DemoHelpBox title="工具栏" rswidth="500px" rs-height="200px" description="基础用法">
                 <LcToolbarSlot>
-                    <div class="content">
-                        我是内容休息休息嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻
-                    </div>
+                    <div class="content">我是内容休息休息嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻</div>
                 </LcToolbarSlot>
             </DemoHelpBox>
-            <DemoHelpBox
-                title="工具栏-浮动"
-                rswidth="500px"
-                rs-height="200px"
-                description="基础用法"
-            >
+            <DemoHelpBox title="工具栏-浮动" rswidth="500px" rs-height="200px" description="基础用法">
                 <LcToolbarSlot float>
                     <div class="content float">
                         我要加内边距、我是内容休息休息嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻
                     </div>
                 </LcToolbarSlot>
             </DemoHelpBox>
-            <DemoHelpBox
-                title="工具栏-弹性"
-                rswidth="500px"
-                rs-height="200px"
-                description="基础用法"
-            >
+            <DemoHelpBox title="工具栏-弹性" rswidth="500px" rs-height="200px" description="基础用法">
                 <LcToolbarSlot flex>
                     <div class="content flex">
                         我要加内边距、我是内容休息休息嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻

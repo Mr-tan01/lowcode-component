@@ -73,8 +73,7 @@ const formatedText = computed(() => {
         align-items: center;
 
         &__text {
-            font-family:
-                AlimamaFangYuanTiVF-SemiBold, AlimamaFangYuanTiVF-SemiBold;
+            font-family: AlimamaFangYuanTiVF-SemiBold, AlimamaFangYuanTiVF-SemiBold;
             font-weight: 600;
             font-size: 18px;
             color: #ffffff;

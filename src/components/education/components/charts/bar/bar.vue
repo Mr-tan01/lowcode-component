@@ -1,13 +1,6 @@
 <template>
     <div class="lc-bar-chart">
-        <SChartsBar
-            v-bind="$attrs"
-            ref="chartBarRef"
-            :opts="renderOptions"
-            :linear-gradient-color
-            :stack
-            :fake3d
-        ></SChartsBar>
+        <SChartsBar v-bind="$attrs" ref="chartBarRef" :opts="renderOptions" :linear-gradient-color :stack :fake3d></SChartsBar>
     </div>
 </template>
 
@@ -15,11 +8,7 @@
 import { SChartsBar } from '@mmj-code-lib/lowcode/es/components'
 import { computed, onMounted, useTemplateRef } from 'vue'
 import { type EChartsOption, type EChartsCoreOption } from 'echarts'
-import {
-    commonBarOptions,
-    useCommonBarOptions,
-    useCommonBarSeries,
-} from './options'
+import { commonBarOptions, useCommonBarOptions, useCommonBarSeries } from './options'
 import merge from 'lodash-es/merge'
 import { graphic } from 'echarts'
 import { barBuiltInStyle } from './const'
@@ -60,10 +49,7 @@ onMounted(() => {
 
             // 根据系列显示状态控制y轴显示
             chart.setOption({
-                yAxis: [
-                    { show: selected[seriesData?.[0]?.name] !== false },
-                    { show: selected[seriesData?.[1]?.name] !== false },
-                ],
+                yAxis: [{ show: selected[seriesData?.[0]?.name] !== false }, { show: selected[seriesData?.[1]?.name] !== false }],
             })
         })
     }

@@ -17,23 +17,17 @@ export function useScatterOptions(
             series: [
                 {
                     name: '待审核',
-                    data: Array.from(Array(5)).map((_, i) =>
-                        Math.round(Math.random() * 1200 + i),
-                    ),
+                    data: Array.from(Array(5)).map((_, i) => Math.round(Math.random() * 1200 + i)),
                     areaStyle: null,
                 },
                 {
                     name: '已通过',
-                    data: Array.from(Array(5)).map((_, i) =>
-                        Math.round(Math.random() * 1020 + i),
-                    ),
+                    data: Array.from(Array(5)).map((_, i) => Math.round(Math.random() * 1020 + i)),
                     areaStyle: null,
                 },
                 {
                     name: '已通过3',
-                    data: Array.from(Array(5)).map((_, i) =>
-                        Math.round(Math.random() * 1020 + i),
-                    ),
+                    data: Array.from(Array(5)).map((_, i) => Math.round(Math.random() * 1020 + i)),
                     areaStyle: null,
                 },
             ].slice(start, len),
@@ -243,13 +237,10 @@ const data = [
 const startInter = Array.from(Array(50))
     .map((_, index) => ((index + 1) / 1000) * -1)
     .reverse()
-const endInter = [
-    0,
-    ...Array.from(Array(350)).map((_, index) => (index + 1) / 1000),
-]
+const endInter = [0, ...Array.from(Array(350)).map((_, index) => (index + 1) / 1000)]
 const interpolationXData = [...startInter, ...endInter]
 
-const dataMaps = data.map((item) => {
+const dataMaps = data.map(item => {
     return item.school.reduce((pre, cur) => {
         pre[cur.stdDev] = cur
         return pre
@@ -270,7 +261,7 @@ export function useFourScatterOptions(): {
             series: data.map((item, index) => {
                 return {
                     name: item.areaName,
-                    data: interpolationXData.map((num) => {
+                    data: interpolationXData.map(num => {
                         const record = dataMaps[index] ?? {}
                         const el = record[`${Number(num)}`] // 目前只支持3位小数
                         return el

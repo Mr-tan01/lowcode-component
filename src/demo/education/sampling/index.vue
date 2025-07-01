@@ -1,11 +1,6 @@
 <template>
     <div class="demo-time">
-        <DemoBox
-            title="sampling"
-            description="基础用法"
-            rswidth="500px"
-            :code="code1"
-        >
+        <DemoBox title="sampling" description="基础用法" rswidth="500px" :code="code1">
             <NSpace :size="150">
                 <LcSampling :list> </LcSampling>
             </NSpace>
@@ -15,10 +10,7 @@
 <script lang="ts" setup>
 import { DemoBox } from 'lowcode-share/es/demo'
 import { NSpace } from 'naive-ui'
-import {
-    LcSampling,
-    type LcSamplingRecords,
-} from '@/components/education/components/sampling'
+import { LcSampling, type LcSamplingRecords } from '@/components/education/components/sampling'
 import { code1 } from './const'
 
 const list: LcSamplingRecords[] = [

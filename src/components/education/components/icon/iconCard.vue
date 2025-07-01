@@ -15,12 +15,7 @@
                 'lc-icon-card__image--enhover': !!bgSelectedSrc,
             }"
         >
-            <img
-                class="lc-icon-card__img"
-                :src="iconSrc"
-                draggable="false"
-                alt=""
-            />
+            <img class="lc-icon-card__img" :src="iconSrc" draggable="false" alt="" />
         </div>
         <span class="lc-icon-card__span">
             <slot></slot>
@@ -56,30 +51,15 @@ const props = withDefaults(
 
 const { bagName, domain, name, size, iconSize, gap, ext } = toRefs(props)
 const bagImg = ref('baseSupport')
-const bgSrcData = useImage(
-    bagImg as Ref<Domains>,
-    bagName as Ref<NameTypeFunc<Domains>>,
-    ext,
-)
-const srcData = useImage(
-    domain as Ref<Domains>,
-    name as Ref<NameTypeFunc<Domains>>,
-    ext,
-)
+const bgSrcData = useImage(bagImg as Ref<Domains>, bagName as Ref<NameTypeFunc<Domains>>, ext)
+const srcData = useImage(domain as Ref<Domains>, name as Ref<NameTypeFunc<Domains>>, ext)
 const { src: bgSrc, selectedSrc: bgSelectedSrc } = bgSrcData
 const { src: iconSrc } = srcData
 
-const imageWidth = computed(() =>
-    typeof size.value === 'number' ? `${size.value}px` : size.value,
-)
-const iconWidth = computed(() =>
-    typeof iconSize.value === 'number'
-        ? `${iconSize.value}%`
-        : iconSize.value + '%',
-)
+const imageWidth = computed(() => (typeof size.value === 'number' ? `${size.value}px` : size.value))
+const iconWidth = computed(() => (typeof iconSize.value === 'number' ? `${iconSize.value}%` : iconSize.value + '%'))
 const iconGap = computed(() => {
-    const baseGap =
-        typeof gap.value === 'number' ? gap.value : Number(gap.value)
+    const baseGap = typeof gap.value === 'number' ? gap.value : Number(gap.value)
     return bagName.value === 'booth' ? `${baseGap + 16}%` : `${baseGap}%`
 })
 </script>

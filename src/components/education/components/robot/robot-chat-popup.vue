@@ -21,14 +21,8 @@
                             class="lc-robot-chat-popup__content--inner__quick__item"
                             @click="clickQuick(item)"
                         >
-                            <img
-                                class="lc-robot-chat-popup__content--inner__quick__item--img"
-                                src="./images/voice.png"
-                                alt=""
-                            />
-                            <div
-                                class="lc-robot-chat-popup__content--inner__quick__item--text"
-                            >
+                            <img class="lc-robot-chat-popup__content--inner__quick__item--img" src="./images/voice.png" alt="" />
+                            <div class="lc-robot-chat-popup__content--inner__quick__item--text">
                                 {{ item.text }}
                             </div>
                         </div>

@@ -1,12 +1,6 @@
 <template>
     <div class="demo-map">
-        <DemoHelpBox
-            title="选项按钮"
-            description="深圳教育项目-选项"
-            rswidth="1210px"
-            rs-height="auto"
-            :code="demoCodes.code1"
-        >
+        <DemoHelpBox title="选项按钮" description="深圳教育项目-选项" rswidth="1210px" rs-height="auto" :code="demoCodes.code1">
             <div class="size-box">
                 <n-space>
                     <LcRadioButtonGroup v-model="radioButtonValue1">
@@ -19,13 +13,7 @@
                 </n-space>
             </div>
         </DemoHelpBox>
-        <DemoHelpBox
-            title="单选"
-            description="深圳教育项目-单选"
-            rswidth="1210px"
-            rs-height="auto"
-            :code="demoCodes.code2"
-        >
+        <DemoHelpBox title="单选" description="深圳教育项目-单选" rswidth="1210px" rs-height="auto" :code="demoCodes.code2">
             value: {{ radioValue }}
             <div class="size-box">
                 <LcRadioGroup v-model:value="radioValue">

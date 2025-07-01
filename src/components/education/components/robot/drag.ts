@@ -9,8 +9,7 @@ export function useDragRobotPosition() {
         if (historyData) {
             const _history = JSON.parse(historyData)
             robotOffset.x = _history.x
-            robotOffset.y =
-                parseInt(_history.y) > innerHeight ? '80%' : _history.y
+            robotOffset.y = parseInt(_history.y) > innerHeight ? '80%' : _history.y
         }
     } catch {
         console.warn('获取拖拽历史数据失败，使用默认值')
@@ -35,8 +34,7 @@ export function useDragRobotPosition() {
         }
         // @ts-ignore
         const { height = 200 } = event.target?.getBoundingClientRect() ?? {}
-        robotOffset.y =
-            (event.clientY <= height ? height : event.clientY) + 'px'
+        robotOffset.y = (event.clientY <= height ? height : event.clientY) + 'px'
         localStorage.setItem(dragHistoryKey, JSON.stringify(robotOffset))
     }
 

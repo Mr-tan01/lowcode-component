@@ -1,10 +1,6 @@
 <template>
     <div class="lc-scatter-chart">
-        <BaseChart
-            v-bind="$attrs"
-            ref="baseChart"
-            :options="renderOptions"
-        ></BaseChart>
+        <BaseChart v-bind="$attrs" ref="baseChart" :options="renderOptions"></BaseChart>
     </div>
 </template>
 

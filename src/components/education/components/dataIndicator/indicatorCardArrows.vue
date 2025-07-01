@@ -1,21 +1,12 @@
 <template>
     <div class="indicator-card-vice">
         <img src="./images/card/spot-bg.png" alt="" class="spot-img spot-top" />
-        <img
-            src="./images/card/spot-bg.png"
-            alt=""
-            class="spot-img spot-down"
-        />
+        <img src="./images/card/spot-bg.png" alt="" class="spot-img spot-down" />
         <div class="indicator-card-vice__wrapper">
             <div class="indicator-card-vice__wrapper__label">{{ label }}</div>
             <div class="indicator-card-vice__wrapper__value">
                 <span class="indicator-card-vice__wrapper__value__num">
-                    <NNumberAnimation
-                        show-separator
-                        :from="0"
-                        :to="value"
-                        active
-                        :precision="0"
+                    <NNumberAnimation show-separator :from="0" :to="value" active :precision="0"
                 /></span>
             </div>
             <div class="indicator-card-vice__wrapper__img">

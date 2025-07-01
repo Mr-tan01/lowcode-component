@@ -14,10 +14,7 @@
                     }"
                 >
                     <slot name="closeable">
-                        <button
-                            class="lc-modal__wrapper__closeable__button"
-                            @click="close"
-                        >
+                        <button class="lc-modal__wrapper__closeable__button" @click="close">
                             <svg
                                 version="1.1"
                                 xmlns="http://www.w3.org/2000/svg"

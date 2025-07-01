@@ -1,18 +1,10 @@
 <template>
     <div class="deom-headers">
         <DemoHelpBox rswidth="1620px" :code="demoCodes.code1">
-            <LcHeader
-                v-model:index="hideArrorIndex"
-                hide-arrow
-                :nav-datas="defNavData"
-            ></LcHeader>
+            <LcHeader v-model:index="hideArrorIndex" hide-arrow :nav-datas="defNavData"></LcHeader>
         </DemoHelpBox>
         <DemoHelpBox rswidth="100%" :code="demoCodes.code2">
-            <LcHeader
-                v-model:index="headerIndex"
-                :nav-datas="defNavData"
-                :highlight-handler="customHighlightHandler"
-            ></LcHeader>
+            <LcHeader v-model:index="headerIndex" :nav-datas="defNavData" :highlight-handler="customHighlightHandler"></LcHeader>
         </DemoHelpBox>
     </div>
 </template>

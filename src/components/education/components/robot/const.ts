@@ -2,10 +2,7 @@ import s1Img from './images/s1.png'
 import s2Img from './images/s2.png'
 import s3Img from './images/s3.png'
 import s4Img from './images/s4.png'
-import {
-    type Domains,
-    type NameTypes,
-} from '@/components/education/components/icon'
+import { type Domains, type NameTypes } from '@/components/education/components/icon'
 
 export const robotBQMap = {
     s1: s1Img,

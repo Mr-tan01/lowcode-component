@@ -1,18 +1,8 @@
 <template>
     <g id="福田">
-        <use
-            fill="black"
-            fill-opacity="1"
-            filter="url(#filter-28)"
-            xlink:href="#path-27"
-        ></use>
+        <use fill="black" fill-opacity="1" filter="url(#filter-28)" xlink:href="#path-27"></use>
         <use fill-opacity="0.8" fill="#104FAD" xlink:href="#path-27"></use>
-        <use
-            fill="black"
-            fill-opacity="1"
-            filter="url(#filter-29)"
-            xlink:href="#path-27"
-        ></use>
+        <use fill="black" fill-opacity="1" filter="url(#filter-29)" xlink:href="#path-27"></use>
         <path
             stroke="url(#linearGradient-26)"
             stroke-width="2.87034576"

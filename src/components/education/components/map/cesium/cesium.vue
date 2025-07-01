@@ -1,11 +1,6 @@
 <template>
     <div class="lc-cesium">
-        <NSpin
-            :show="initImageryLayersStatus || initPointDataStatus"
-            :stroke="spinStroke"
-            :style="spinStyle"
-            size="large"
-        >
+        <NSpin :show="initImageryLayersStatus || initPointDataStatus" :stroke="spinStroke" :style="spinStyle" size="large">
             <div id="cesium-3d-viewer" class="lc-cesium_map"></div>
             <template #description> 地图加载中... </template>
         </NSpin>
@@ -16,11 +11,7 @@
 import { ref, onMounted, onBeforeUnmount, watch, computed } from 'vue'
 import { cesiumService } from './modules/cesiumUtils'
 import { cesiumProps } from './modules/props'
-import type {
-    changeModelType,
-    changeModelParamType,
-    EntityProperties,
-} from './modules/type'
+import type { changeModelType, changeModelParamType, EntityProperties } from './modules/type'
 import { Entity, Cartesian3, JulianDate } from 'cesium'
 import { NSpin } from 'naive-ui'
 
@@ -55,7 +46,7 @@ const {
 const reloadPointData = async (): Promise<void> => {
     clearEntity()
     cesiumUtils.pointData = pointData
-    pointData?.forEach((point) => {
+    pointData?.forEach(point => {
         cesiumUtils.addPoint(point, 'value')
         if (defaultShowState) {
             cesiumUtils.addPoint(point)
@@ -103,10 +94,7 @@ const clearEntity = () => {
     cesiumUtils.clearEntity('pointEntities', 'dataSource')
     cesiumUtils.clearEntity('pointEntities', 'viewer')
 }
-const changeModel = <T extends changeModelType>(
-    type: changeModelType,
-    value: changeModelParamType[T],
-): void => {
+const changeModel = <T extends changeModelType>(type: changeModelType, value: changeModelParamType[T]): void => {
     if (cesiumUtils[type]) {
         cesiumUtils[type](value)
     } else {
@@ -173,14 +161,11 @@ defineExpose({
     cesiumUtils,
 })
 
-const initCesiumDebouncedChange = watch(
-    [() => accessToken, () => imageryLayersUrl],
-    initCesiumDebounced,
-)
+const initCesiumDebouncedChange = watch([() => accessToken, () => imageryLayersUrl], initCesiumDebounced)
 
 const offsetStateChange = watch(
     () => offsetState,
-    (newValue) => {
+    newValue => {
         cesiumUtils.options = {
             ...cesiumUtils.options,
             offsetState: newValue,

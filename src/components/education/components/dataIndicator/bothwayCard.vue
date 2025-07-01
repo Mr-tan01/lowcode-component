@@ -2,22 +2,13 @@
     <div class="lc-bothway-card">
         <div class="lc-bothway-card__wrapper">
             <div class="lc-bothway-card__wrapper__info-range">
-                <div
-                    class="lc-bothway-card__wrapper__info-range__label flex-center"
-                >
+                <div class="lc-bothway-card__wrapper__info-range__label flex-center">
                     {{ label }}
                 </div>
                 <div class="lc-bothway-card__wrapper__info-range__wrapper">
-                    <div
-                        v-for="(item, key) in data"
-                        :key
-                        class="lc-bothway-card__wrapper__info-range__wrapper__info"
-                    >
+                    <div v-for="(item, key) in data" :key class="lc-bothway-card__wrapper__info-range__wrapper__info">
                         <slot :name="item.customSlot" :item="item">
-                            <div
-                                class="lc-bothway-card__wrapper__info-range__wrapper__info__value"
-                                :title="item.value?.toString()"
-                            >
+                            <div class="lc-bothway-card__wrapper__info-range__wrapper__info__value" :title="item.value?.toString()">
                                 <NNumberAnimation
                                     show-separator
                                     :from="0"
@@ -29,10 +20,7 @@
                             <div class="flex-end">
                                 {{ renderUnit(item.value, item.unit) }}
                             </div>
-                            <div
-                                v-if="key !== data.length - 1"
-                                class="lc-bothway-card__wrapper__info-range__wrapper__info__division flex-center"
-                            >
+                            <div v-if="key !== data.length - 1" class="lc-bothway-card__wrapper__info-range__wrapper__info__division flex-center">
                                 |
                             </div>
                         </slot>
@@ -68,14 +56,14 @@ const {
     decimal?: number
 }>()
 
-const renderdecimals = memoize((value) => {
+const renderdecimals = memoize(value => {
     const { unit: numUnit } = bigNumber(value)
     if (Number.isInteger(value) && !numUnit) {
         return 0
     }
     return decimal
 })
-const renderValue = memoize((value) => {
+const renderValue = memoize(value => {
     if (fixed) {
         const { result } = bigNumber(value, decimal)
         return result

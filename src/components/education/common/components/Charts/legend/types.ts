@@ -1,8 +1,4 @@
-export type LegendActiveType =
-    | 'highlight'
-    | 'downplay'
-    | 'legendUnSelect'
-    | 'legendSelect'
+export type LegendActiveType = 'highlight' | 'downplay' | 'legendUnSelect' | 'legendSelect'
 export type LegendDataRecord = {
     name: string | number
     value: number | number[]

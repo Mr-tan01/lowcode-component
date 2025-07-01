@@ -33,18 +33,10 @@ const formatedText = computed(() => {
     &__bg {
         position: absolute;
         inset: 0;
-        --gradient: linear-gradient(
-            to right,
-            rgba(0, 0, 0, 0.1) 0%,
-            rgba(0, 0, 0, 1)
-        );
+        --gradient: linear-gradient(to right, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 1));
         mask: var(--gradient);
         -webkit-mask: var(--gradient);
-        background: linear-gradient(
-            to right,
-            rgba(0, 96, 163, 0) 0%,
-            #007fce 100%
-        );
+        background: linear-gradient(to right, rgba(0, 96, 163, 0) 0%, #007fce 100%);
         border-radius: 2px;
         border: 1px solid rgba(15, 194, 251, 1);
         z-index: 0;

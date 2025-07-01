@@ -38,7 +38,7 @@ Initialization.prototype.init = function () {
 Initialization.prototype.rotateX = function () {
     const cos = Math.cos(angleX),
         sin = Math.sin(angleX)
-    this.newTags.forEach((tag) => {
+    this.newTags.forEach(tag => {
         const y = tag.y * cos - tag.z * sin,
             z = tag.z * cos + tag.y * sin
         tag.y = y
@@ -49,7 +49,7 @@ Initialization.prototype.rotateX = function () {
 Initialization.prototype.rotateY = function () {
     const cos = Math.cos(angleY),
         sin = Math.sin(angleY)
-    this.newTags.forEach((tag) => {
+    this.newTags.forEach(tag => {
         const x = tag.x * cos - tag.z * sin,
             z = tag.z * cos + tag.x * sin
         tag.x = x
@@ -61,7 +61,7 @@ Initialization.prototype.animate = function () {
     setInterval(function () {
         that.rotateX()
         that.rotateY()
-        that.newTags.forEach((tag) => {
+        that.newTags.forEach(tag => {
             tag.move()
         })
     }, 20)

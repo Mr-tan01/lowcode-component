@@ -2,14 +2,7 @@ import { type App } from 'vue'
 
 export * from './components'
 
-import {
-    LcBgCommon,
-    LcButton,
-    LcCarouseBox,
-    LcBarChart,
-    LcLineChart,
-    LcPieChart,
-} from './components'
+import { LcBgCommon, LcButton, LcCarouseBox, LcBarChart, LcLineChart, LcPieChart } from './components'
 
 export function install(app: App) {
     app.component('LcBgCommon', LcBgCommon)

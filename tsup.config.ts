@@ -15,14 +15,11 @@ export default defineConfig({
         {
             name: 'vue-loader',
             setup(build) {
-                build.onLoad({ filter: /\.vue$/ }, async (args) => {
+                build.onLoad({ filter: /\.vue$/ }, async args => {
                     const result =
                         // eslint-disable-next-line @typescript-eslint/no-require-imports
                         await require('@vue/compiler-sfc').compileTemplate({
-                            source: await fs.promises.readFile(
-                                args.path,
-                                'utf8',
-                            ),
+                            source: await fs.promises.readFile(args.path, 'utf8'),
                             filename: args.path,
                         })
                     return {

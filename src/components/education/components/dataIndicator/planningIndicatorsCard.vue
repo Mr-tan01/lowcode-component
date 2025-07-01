@@ -1,75 +1,38 @@
 <template>
     <div class="lc-planning-indicators">
         <div class="lc-planning-indicators__header">
-            <LcSubhead
-                :text="data?.header"
-                type="center"
-                font-size="12px"
-                :max-length="4"
-            />
+            <LcSubhead :text="data?.header" type="center" font-size="12px" :max-length="4" />
         </div>
         <div class="lc-planning-indicators__item">
             <div class="lc-planning-indicators__item__left">
-                <span class="lc-planning-indicators__item__title">{{
-                    formatedText(
-                        data?.leftItem?.title,
-                        data?.leftItem?.maxLength,
-                    )
-                }}</span>
+                <span class="lc-planning-indicators__item__title">{{ formatedText(data?.leftItem?.title, data?.leftItem?.maxLength) }}</span>
                 <span class="lc-planning-indicators__item__left--value">
                     <span class="lc-number-value">
                         <NNumberAnimation
                             show-separator
                             :from="0"
-                            :to="
-                                renderValue(
-                                    data?.leftItem.value,
-                                    data?.leftItem.decimal,
-                                )
-                            "
+                            :to="renderValue(data?.leftItem.value, data?.leftItem.decimal)"
                             active
                             :precision="data?.leftItem.decimal"
                     /></span>
-                    <span class="lc-number-unit">{{
-                        renderUnit(
-                            data?.leftItem.value,
-                            data?.leftItem.unit,
-                            data?.leftItem?.decimal,
-                        )
-                    }}</span>
+                    <span class="lc-number-unit">{{ renderUnit(data?.leftItem.value, data?.leftItem.unit, data?.leftItem?.decimal) }}</span>
                 </span>
             </div>
             <div class="lc-planning-indicators__item__center">
                 <img :src="data?.icon" alt="" />
             </div>
             <div class="lc-planning-indicators__item__right">
-                <span class="lc-planning-indicators__item__right">{{
-                    formatedText(
-                        data?.rightItem?.title,
-                        data?.rightItem?.maxLength,
-                    )
-                }}</span>
+                <span class="lc-planning-indicators__item__right">{{ formatedText(data?.rightItem?.title, data?.rightItem?.maxLength) }}</span>
                 <span class="lc-planning-indicators__item__right--value">
                     <span class="lc-number-value"
                         ><NNumberAnimation
                             show-separator
                             :from="0"
-                            :to="
-                                renderValue(
-                                    data?.rightItem.value,
-                                    data?.rightItem?.decimal,
-                                )
-                            "
+                            :to="renderValue(data?.rightItem.value, data?.rightItem?.decimal)"
                             active
                             :precision="data?.rightItem.decimal"
                     /></span>
-                    <span class="lc-number-unit">{{
-                        renderUnit(
-                            data?.rightItem?.value,
-                            data?.rightItem?.unit,
-                            data?.rightItem?.decimal,
-                        )
-                    }}</span>
+                    <span class="lc-number-unit">{{ renderUnit(data?.rightItem?.value, data?.rightItem?.unit, data?.rightItem?.decimal) }}</span>
                 </span>
             </div>
         </div>
@@ -107,15 +70,13 @@ const renderValue = memoize((value: number | undefined, decimal = 0) => {
     }
     return value
 })
-const renderUnit = memoize(
-    (value: number | undefined, unit: string | undefined, decimal = 0) => {
-        if (fixed) {
-            const { unit: numUnit } = bigNumber(value ?? 0, decimal)
-            return `${numUnit}${unit ?? ''}`
-        }
-        return unit ?? ''
-    },
-)
+const renderUnit = memoize((value: number | undefined, unit: string | undefined, decimal = 0) => {
+    if (fixed) {
+        const { unit: numUnit } = bigNumber(value ?? 0, decimal)
+        return `${numUnit}${unit ?? ''}`
+    }
+    return unit ?? ''
+})
 
 const formatedText = (text, maxLength) => {
     if (!text) return '-'

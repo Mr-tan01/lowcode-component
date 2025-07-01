@@ -32,9 +32,7 @@ export const cesiumProps = {
             homeButton: false,
             sceneModePicker: false,
             baseLayerPicker: false,
-            imageryProvider: ArcGisMapServerImageryProvider.fromUrl(
-                'https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer',
-            ), // 避免使用cesium ions资源
+            imageryProvider: ArcGisMapServerImageryProvider.fromUrl('https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer'), // 避免使用cesium ions资源
             navigationHelpButton: false,
             fullscreenButton: false,
             scene3DOnly: true,

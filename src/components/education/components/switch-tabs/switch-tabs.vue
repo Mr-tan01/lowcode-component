@@ -1,21 +1,9 @@
 <template>
     <div class="lc-switch-tabs">
-        <LcCarouseBox
-            :list="listSource"
-            :back-center="backCenter"
-            :offset-animation-time
-            :row-key
-            v-bind="$attrs"
-        >
+        <LcCarouseBox :list="listSource" :back-center="backCenter" :offset-animation-time :row-key v-bind="$attrs">
             <template #default="{ isActive, isEven, record: { label } }">
-                <button
-                    class="lc-switch-tabs__wrapper__tabs--train__button"
-                    :class="{ 'active': isActive, 'is-even': isEven }"
-                >
-                    <div
-                        class="lc-switch-tabs__wrapper__tabs--train__button--text"
-                        :title="label"
-                    >
+                <button class="lc-switch-tabs__wrapper__tabs--train__button" :class="{ 'active': isActive, 'is-even': isEven }">
+                    <div class="lc-switch-tabs__wrapper__tabs--train__button--text" :title="label">
                         {{ label }}
                     </div>
                 </button>
@@ -26,10 +14,7 @@
 
 <script lang="ts" setup>
 import { computed } from 'vue'
-import {
-    LcCarouseBox,
-    LcCarouseBoxProps,
-} from '@/components/education/components/carouseBox'
+import { LcCarouseBox, LcCarouseBoxProps } from '@/components/education/components/carouseBox'
 import { defSwitchTabList } from './const'
 
 const { list, backCenter = true } = defineProps(LcCarouseBoxProps)
@@ -55,8 +40,7 @@ const listSource = computed(() => {
                     border: 0;
                     padding-bottom: 10px;
                     box-sizing: border-box;
-                    background: url(./images/lt-first.png) no-repeat center
-                        center / 100% 100%;
+                    background: url(./images/lt-first.png) no-repeat center center / 100% 100%;
                     transition: background 0.3s linear;
 
                     &:nth-child(odd) {
@@ -97,9 +81,7 @@ const listSource = computed(() => {
                     }
 
                     &--text {
-                        font-family:
-                            AlimamaFangYuanTiVF-SemiBold,
-                            AlimamaFangYuanTiVF-SemiBold;
+                        font-family: AlimamaFangYuanTiVF-SemiBold, AlimamaFangYuanTiVF-SemiBold;
                         font-weight: normal;
                         font-size: 18px;
                         color: #ffffff;

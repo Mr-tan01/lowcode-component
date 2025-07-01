@@ -1,18 +1,6 @@
-import {
-    AxiosRequestConfig,
-    ResponseType,
-    AxiosInstance,
-    CancelTokenSource,
-} from 'axios'
+import { AxiosRequestConfig, ResponseType, AxiosInstance, CancelTokenSource } from 'axios'
 
-export type HttpMethod =
-    | 'get'
-    | 'post'
-    | 'put'
-    | 'delete'
-    | 'patch'
-    | 'head'
-    | 'options'
+export type HttpMethod = 'get' | 'post' | 'put' | 'delete' | 'patch' | 'head' | 'options'
 
 export interface RequestConfig extends AxiosRequestConfig {
     retry?: number // 重试次数
@@ -31,25 +19,10 @@ export interface ResponseData<T = any> {
 
 export interface RequestInstance {
     <T = any>(config: RequestConfig): Promise<ResponseData<T>>
-    get<T = any>(
-        url: string,
-        data?: any,
-        config?: RequestConfig,
-    ): Promise<ResponseData<T>>
-    post<T = any>(
-        url: string,
-        data?: any,
-        config?: RequestConfig,
-    ): Promise<ResponseData<T>>
-    put<T = any>(
-        url: string,
-        data?: any,
-        config?: RequestConfig,
-    ): Promise<ResponseData<T>>
-    delete<T = any>(
-        url: string,
-        config?: RequestConfig,
-    ): Promise<ResponseData<T>>
+    get<T = any>(url: string, data?: any, config?: RequestConfig): Promise<ResponseData<T>>
+    post<T = any>(url: string, data?: any, config?: RequestConfig): Promise<ResponseData<T>>
+    put<T = any>(url: string, data?: any, config?: RequestConfig): Promise<ResponseData<T>>
+    delete<T = any>(url: string, config?: RequestConfig): Promise<ResponseData<T>>
     cancelRequest: (source: CancelTokenSource) => void
     setToken: (token: string) => void
     clearToken: () => void

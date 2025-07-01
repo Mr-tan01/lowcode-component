@@ -3,13 +3,7 @@
         <div class="center-image-container">
             <img :src="centerImage" alt="Center image" class="center-image" />
         </div>
-        <div
-            v-for="(text, index) in displayedTexts"
-            :key="index"
-            class="text-item"
-            :class="getTextSide(index)"
-            :style="getTextPosition(index)"
-        >
+        <div v-for="(text, index) in displayedTexts" :key="index" class="text-item" :class="getTextSide(index)" :style="getTextPosition(index)">
             {{ text }}
         </div>
     </div>
@@ -20,12 +14,7 @@ import { computed } from 'vue'
 import spiralFigure from './images/spiral-figure.png'
 import { EducationSpiralFigureProps } from './props'
 
-const {
-    centerImage = spiralFigure,
-    texts = [],
-    radius = 150,
-    maxPerSide = 5,
-} = defineProps<EducationSpiralFigureProps>()
+const { centerImage = spiralFigure, texts = [], radius = 150, maxPerSide = 5 } = defineProps<EducationSpiralFigureProps>()
 
 const displayedTexts = computed(() => {
     const maxItems = maxPerSide * 2

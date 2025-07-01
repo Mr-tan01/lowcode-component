@@ -44,15 +44,9 @@ const props = withDefaults(
 )
 
 const { domain, name, size, ext, selected } = toRefs(props)
-const { src, selectedSrc } = useImage(
-    domain as Ref<Domains>,
-    name as Ref<NameTypeFunc<Domains>>,
-    ext,
-)
+const { src, selectedSrc } = useImage(domain as Ref<Domains>, name as Ref<NameTypeFunc<Domains>>, ext)
 
-const iconWidth = computed(() =>
-    typeof size.value === 'number' ? `${size.value}px` : size.value,
-)
+const iconWidth = computed(() => (typeof size.value === 'number' ? `${size.value}px` : size.value))
 </script>
 
 <style lang="scss" scoped>

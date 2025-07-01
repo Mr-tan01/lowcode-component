@@ -5,27 +5,15 @@
         </div>
         <div class="lcc-header__wrapper">
             <div class="lcc-header__wrapper__navs">
-                <LcCarouseBox
-                    v-model:index="modelIndex"
-                    :disabled="hideArrow"
-                    :list="listSource"
-                    :show-track="false"
-                    @change="carouseChange"
-                >
-                    <template
-                        #default="{ index, record, isActive, handleClick }"
-                    >
+                <LcCarouseBox v-model:index="modelIndex" :disabled="hideArrow" :list="listSource" :show-track="false" @change="carouseChange">
+                    <template #default="{ index, record, isActive, handleClick }">
                         <div
                             class="lcc-header__wrapper__navs__item"
                             :class="{
                                 active: isActive,
                             }"
                         >
-                            <n-popover
-                                trigger="hover"
-                                arrow-class="header-arrow-class"
-                                class="header-popover-class"
-                            >
+                            <n-popover trigger="hover" arrow-class="header-arrow-class" class="header-popover-class">
                                 <template #trigger>
                                     <a
                                         class="lcc-header__wrapper__navs__item__link"
@@ -39,50 +27,27 @@
                                         {{ record.label }}
                                     </a>
                                 </template>
-                                <div
-                                    v-if="record.list?.length"
-                                    class="lcc-header__wrapper__navs__drop"
-                                >
-                                    <div
-                                        v-for="(el, key) in record.list"
-                                        :key
-                                        class="lcc-header__wrapper__navs__drop__group"
-                                    >
-                                        <div
-                                            class="lcc-header__wrapper__navs__drop__group__label"
-                                        >
-                                            <div
-                                                class="lcc-header__wrapper__navs__drop__group__label--icon"
-                                            >
+                                <div v-if="record.list?.length" class="lcc-header__wrapper__navs__drop">
+                                    <div v-for="(el, key) in record.list" :key class="lcc-header__wrapper__navs__drop__group">
+                                        <div class="lcc-header__wrapper__navs__drop__group__label">
+                                            <div class="lcc-header__wrapper__navs__drop__group__label--icon">
                                                 <img
                                                     class="lcc-header__wrapper__navs__drop__group__label--icon--image"
                                                     src="./images/right-arrow.png"
                                                     alt=""
                                                 />
                                             </div>
-                                            <div
-                                                class="lcc-header__wrapper__navs__drop__group__label--text"
-                                                :title="el.label"
-                                            >
+                                            <div class="lcc-header__wrapper__navs__drop__group__label--text" :title="el.label">
                                                 {{ el.label }}
                                             </div>
                                         </div>
-                                        <div
-                                            class="lcc-header__wrapper__navs__drop__group__item__group"
-                                        >
+                                        <div class="lcc-header__wrapper__navs__drop__group__item__group">
                                             <div
-                                                v-for="(
-                                                    child, ckey
-                                                ) in el.children"
+                                                v-for="(child, ckey) in el.children"
                                                 :key="ckey"
                                                 class="lcc-header__wrapper__navs__drop__group__item__group__nav"
                                                 :class="{
-                                                    highlight:
-                                                        (isActive &&
-                                                            selectedKey ===
-                                                                child.path) ||
-                                                        selectedKey ===
-                                                            child.label,
+                                                    highlight: (isActive && selectedKey === child.path) || selectedKey === child.label,
                                                 }"
                                                 @click="
                                                     jump({
@@ -93,8 +58,7 @@
                                                     })
                                                 "
                                             >
-                                                {{ child.label
-                                                }}{{ selectedKey }}
+                                                {{ child.label }}{{ selectedKey }}
                                             </div>
                                         </div>
                                     </div>
@@ -114,10 +78,7 @@
 <script lang="ts" setup>
 import { computed } from 'vue'
 import { NPopover } from 'naive-ui/es/popover'
-import {
-    LcCarouseBox,
-    type LcCarouseBoxChangeEvent,
-} from '@/components/education/components/carouseBox'
+import { LcCarouseBox, type LcCarouseBoxChangeEvent } from '@/components/education/components/carouseBox'
 type ListRaw = {
     label: string
     children: NavData[]
@@ -290,12 +251,7 @@ function carouseChange(value: LcCarouseBoxChangeEvent) {
                 width: 100%;
                 display: flex;
                 gap: 40px;
-                background: linear-gradient(
-                    174deg,
-                    #123479 0%,
-                    #0b2952 66%,
-                    #10507d 100%
-                );
+                background: linear-gradient(174deg, #123479 0%, #0b2952 66%, #10507d 100%);
                 box-shadow: 0px 20px 20px -10px rgba(0, 0, 0, 0.31);
                 border-radius: 8px;
                 border: 1px solid #207097;

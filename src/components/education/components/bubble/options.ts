@@ -22,13 +22,7 @@ export const baseOptions = {
                             }
                             name = result + unit
                         }
-                        return (
-                            '{value|' +
-                            params.data.value +
-                            '}\n{name|' +
-                            name +
-                            '}'
-                        )
+                        return '{value|' + params.data.value + '}\n{name|' + name + '}'
                     },
                     show: true,
                     rich: {

@@ -1,20 +1,9 @@
 <template>
     <div class="demo-map">
-        <DemoHelpBox
-            title="复选框过滤"
-            description="深圳教育项目-复选框过滤"
-            rswidth="1210px"
-            rs-height="500px"
-            :code="demoCodes.code1"
-        >
+        <DemoHelpBox title="复选框过滤" description="深圳教育项目-复选框过滤" rswidth="1210px" rs-height="500px" :code="demoCodes.code1">
             value: {{ checkboxValue }}
             <div class="size-box">
-                <LcCheckboxFilter
-                    v-model:value="checkboxValue"
-                    :data-list
-                    @check="check"
-                >
-                </LcCheckboxFilter>
+                <LcCheckboxFilter v-model:value="checkboxValue" :data-list @check="check"> </LcCheckboxFilter>
             </div>
         </DemoHelpBox>
     </div>
@@ -25,7 +14,7 @@ import { LcCheckboxFilter } from '@/components/education/components/checkBoxFilt
 import { demoCodes } from './demo-codes'
 import { ref } from 'vue'
 const checkboxValue = ref([])
-const check = (item) => {
+const check = item => {
     console.log(item, '===>')
 }
 const dataList = [

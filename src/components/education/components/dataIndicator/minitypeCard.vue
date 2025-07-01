@@ -2,14 +2,7 @@
     <div class="minitype-card">
         <div class="minitype-card__label">{{ label }}</div>
         <div class="minitype-card__value">
-            <span class="minitype-card__value__num">
-                <NNumberAnimation
-                    show-separator
-                    :from="0"
-                    :to="value"
-                    active
-                    :precision="0"
-            /></span>
+            <span class="minitype-card__value__num"> <NNumberAnimation show-separator :from="0" :to="value" active :precision="0" /></span>
         </div>
         <div class="minitype-card__img">
             <img :src="bgIcon" alt="" />

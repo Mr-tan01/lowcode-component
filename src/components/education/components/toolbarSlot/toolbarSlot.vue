@@ -14,11 +14,7 @@
             </div>
             <div class="lc-toolbar-slot__toolbar__end">
                 <slot name="toolbarRefresh">
-                    <LcIcon
-                        name="refresh"
-                        class="lc-toolbar-slot__toolbar__refresh"
-                        @click="refresh"
-                    ></LcIcon>
+                    <LcIcon name="refresh" class="lc-toolbar-slot__toolbar__refresh" @click="refresh"></LcIcon>
                 </slot>
                 <slot name="toolbarTimePicker">
                     <n-date-picker

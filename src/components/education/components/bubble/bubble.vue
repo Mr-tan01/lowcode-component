@@ -23,7 +23,7 @@ const bubbleDomRef = ref()
 const chartInstance = ref()
 
 const fomartData = computed(() => {
-    return data.map((item) => {
+    return data.map(item => {
         return {
             name: item.label,
             symbolSize: [180, 129],
@@ -56,14 +56,10 @@ const initChart = () => {
     chartInstance.value?.on('mouseover', function (params) {
         // 处理鼠标悬浮事件
         if (params.dataType === 'node') {
-            const newData = fomartData.value.map((node) => ({
+            const newData = fomartData.value.map(node => ({
                 ...node,
-                symbol:
-                    node.name === params?.data?.name
-                        ? `image://${hoverImg}`
-                        : `image://${defaultImage}`,
-                symbolSize:
-                    node.name === params.data.name ? [200, 150] : [180, 129],
+                symbol: node.name === params?.data?.name ? `image://${hoverImg}` : `image://${defaultImage}`,
+                symbolSize: node.name === params.data.name ? [200, 150] : [180, 129],
             }))
             chartInstance.value?.setOption({
                 series: [
@@ -88,10 +84,7 @@ const resizeChart = () => {
     chartInstance.value?.resize()
 }
 
-const { stop } = useResizeObserver(
-    bubbleDomRef,
-    debounce(resizeChart, debounceTime),
-)
+const { stop } = useResizeObserver(bubbleDomRef, debounce(resizeChart, debounceTime))
 onMounted(initChart)
 onBeforeUnmount(stop)
 </script>

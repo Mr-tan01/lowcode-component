@@ -23,20 +23,8 @@ import {
 } from 'cesium'
 import localforage from 'localforage'
 import { CesiumHeatmap } from 'cesium-heatmap-es6'
-import {
-    areaData,
-    type controlStatusType,
-    type optionType,
-    type pointType,
-    type changeModelParamType,
-} from './type'
-import {
-    createInfoCanvas,
-    createClusterBillboard,
-    updateViewerEntityInfo,
-    createEntityConfig,
-    heatmapGradient,
-} from './tools'
+import { areaData, type controlStatusType, type optionType, type pointType, type changeModelParamType } from './type'
+import { createInfoCanvas, createClusterBillboard, updateViewerEntityInfo, createEntityConfig, heatmapGradient } from './tools'
 import { useMessage } from 'naive-ui'
 class TileCacheHelper {
     private storeName = 'WMTS_Tiles'
@@ -45,22 +33,13 @@ class TileCacheHelper {
     constructor() {
         // 配置localforage
         localforage.config({
-            driver: [
-                localforage.INDEXEDDB,
-                localforage.WEBSQL,
-                localforage.LOCALSTORAGE,
-            ],
+            driver: [localforage.INDEXEDDB, localforage.WEBSQL, localforage.LOCALSTORAGE],
             name: 'CesiumTileCache',
             storeName: this.storeName,
         })
     }
 
-    async getTile(key: {
-        url: string
-        level: number
-        x: number
-        y: number
-    }): Promise<Blob | null> {
+    async getTile(key: { url: string; level: number; x: number; y: number }): Promise<Blob | null> {
         try {
             const cacheKey = `${key.url}_${key.level}_${key.x}_${key.y}`
             const result = await localforage.getItem<{
@@ -80,10 +59,7 @@ class TileCacheHelper {
         }
     }
 
-    async putTile(
-        key: { url: string; level: number; x: number; y: number },
-        blob: Blob,
-    ): Promise<boolean> {
+    async putTile(key: { url: string; level: number; x: number; y: number }, blob: Blob): Promise<boolean> {
         try {
             const cacheKey = `${key.url}_${key.level}_${key.x}_${key.y}`
             await localforage.setItem(cacheKey, {
@@ -107,9 +83,7 @@ export class cesiumService {
     public screenMouseMoveHandler: void | null = null
     private imageLayerState: boolean | null = true
     private imageLayerUrl: string | null = null
-    private tileLoadCallback: OmitThisParameter<
-        (remaining: number) => void
-    > | null = null
+    private tileLoadCallback: OmitThisParameter<(remaining: number) => void> | null = null
 
     private dataSource: CustomDataSource | null = null
     private centerPosition: Cartesian3 | null = null
@@ -124,8 +98,7 @@ export class cesiumService {
         flyToHeight: 26000,
         cameraLimitsEnabled: true,
         hoverState: true,
-        defaultUrl:
-            'https://services.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer',
+        defaultUrl: 'https://services.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer',
     }
 
     private lastValidCameraPosition: Cartesian3 | null = null
@@ -169,12 +142,9 @@ export class cesiumService {
         const config = this.options.config
         const { scene } = this.viewer
 
-        scene.screenSpaceCameraController.minimumZoomDistance =
-            config?.minZoom ?? this.defaultConfig.minZoom
-        scene.screenSpaceCameraController.maximumZoomDistance =
-            config?.maxZoom ?? this.defaultConfig.maxZoom
-        scene.globe.baseColor =
-            config?.baseColor ?? this.defaultConfig.baseColor
+        scene.screenSpaceCameraController.minimumZoomDistance = config?.minZoom ?? this.defaultConfig.minZoom
+        scene.screenSpaceCameraController.maximumZoomDistance = config?.maxZoom ?? this.defaultConfig.maxZoom
+        scene.globe.baseColor = config?.baseColor ?? this.defaultConfig.baseColor
     }
 
     // 添加点聚合配置方法
@@ -187,61 +157,49 @@ export class cesiumService {
         const config = this.options.config
         const clustering = this.dataSource.clustering
 
-        clustering.enabled =
-            config?.clusteringEnabled ?? this.defaultConfig.clusteringEnabled
-        clustering.pixelRange =
-            config?.clusteringPixelRange ??
-            this.defaultConfig.clusteringPixelRange
-        clustering.minimumClusterSize =
-            config?.clusteringMinimumClusterSize ??
-            this.defaultConfig.clusteringMinimumClusterSize
+        clustering.enabled = config?.clusteringEnabled ?? this.defaultConfig.clusteringEnabled
+        clustering.pixelRange = config?.clusteringPixelRange ?? this.defaultConfig.clusteringPixelRange
+        clustering.minimumClusterSize = config?.clusteringMinimumClusterSize ?? this.defaultConfig.clusteringMinimumClusterSize
 
         if (!clustering.enabled) return
 
-        clustering.clusterEvent.addEventListener(
-            (clusteredEntities, cluster) => {
-                // 设置聚合点的基本样式
-                cluster.billboard.show = true
-                cluster.label.show = false
+        clustering.clusterEvent.addEventListener((clusteredEntities, cluster) => {
+            // 设置聚合点的基本样式
+            cluster.billboard.show = true
+            cluster.label.show = false
 
-                // 统计各类型点位数量
-                const typeCount = {}
-                let primaryType = ''
-                let maxCount = 0
+            // 统计各类型点位数量
+            const typeCount = {}
+            let primaryType = ''
+            let maxCount = 0
 
-                clusteredEntities.forEach((entity) => {
-                    if (!entity.properties) return
+            clusteredEntities.forEach(entity => {
+                if (!entity.properties) return
 
-                    const entityType = entity.properties.type?.getValue(
-                        JulianDate.now(),
-                    )
-                    if (!entityType) return
+                const entityType = entity.properties.type?.getValue(JulianDate.now())
+                if (!entityType) return
 
-                    typeCount[entityType] = (typeCount[entityType] || 0) + 1
+                typeCount[entityType] = (typeCount[entityType] || 0) + 1
 
-                    if (typeCount[entityType] > maxCount) {
-                        maxCount = typeCount[entityType]
-                        primaryType = entityType
-                    }
-                })
+                if (typeCount[entityType] > maxCount) {
+                    maxCount = typeCount[entityType]
+                    primaryType = entityType
+                }
+            })
 
-                // 创建自定义聚合点图标
-                const canvas = createClusterBillboard(
-                    clusteredEntities.length,
-                    primaryType || 'primary',
-                )
+            // 创建自定义聚合点图标
+            const canvas = createClusterBillboard(clusteredEntities.length, primaryType || 'primary')
 
-                Object.assign(cluster.billboard, {
-                    id: 'cluster',
-                    image: canvas.toDataURL(),
-                    width: 50,
-                    height: 50,
-                    verticalOrigin: VerticalOrigin.CENTER,
-                    horizontalOrigin: HorizontalOrigin.CENTER,
-                    disableDepthTestDistance: undefined,
-                })
-            },
-        )
+            Object.assign(cluster.billboard, {
+                id: 'cluster',
+                image: canvas.toDataURL(),
+                width: 50,
+                height: 50,
+                verticalOrigin: VerticalOrigin.CENTER,
+                horizontalOrigin: HorizontalOrigin.CENTER,
+                disableDepthTestDistance: undefined,
+            })
+        })
     }
 
     private doubleClickHandler = (event: MouseEvent): void => {
@@ -268,23 +226,14 @@ export class cesiumService {
             this.updateViewerAttribute()
 
             // 移除默认双击事件并添加自定义双击事件
-            this.viewer.cesiumWidget.screenSpaceEventHandler.removeInputAction(
-                ScreenSpaceEventType.LEFT_DOUBLE_CLICK,
-            )
-            this.viewer.scene.canvas.addEventListener(
-                'dblclick',
-                this.doubleClickHandler,
-                false,
-            )
+            this.viewer.cesiumWidget.screenSpaceEventHandler.removeInputAction(ScreenSpaceEventType.LEFT_DOUBLE_CLICK)
+            this.viewer.scene.canvas.addEventListener('dblclick', this.doubleClickHandler, false)
 
             // 设置聚类
             this.setupClustering()
 
             // 设置相机限制
-            if (
-                this.options.config?.cameraLimitsEnabled ??
-                this.defaultConfig.cameraLimitsEnabled
-            ) {
+            if (this.options.config?.cameraLimitsEnabled ?? this.defaultConfig.cameraLimitsEnabled) {
                 this.setupCameraLimits()
             }
 
@@ -304,17 +253,13 @@ export class cesiumService {
         const canvas = this.viewer.scene.canvas
 
         // 注册单击事件
-        this.screenSpaceEventHandler = new ScreenSpaceEventHandler(
-            canvas,
-        ).setInputAction(
+        this.screenSpaceEventHandler = new ScreenSpaceEventHandler(canvas).setInputAction(
             this.handleLeftClick.bind(this),
             ScreenSpaceEventType.LEFT_CLICK,
         )
 
         // 注册鼠标悬浮事件
-        this.screenMouseMoveHandler = new ScreenSpaceEventHandler(
-            canvas,
-        ).setInputAction(
+        this.screenMouseMoveHandler = new ScreenSpaceEventHandler(canvas).setInputAction(
             this.handleMouseMove.bind(this),
             ScreenSpaceEventType.MOUSE_MOVE,
         )
@@ -342,9 +287,7 @@ export class cesiumService {
                     })
                 }
             }
-            this.options.config.hoverState
-                ? this.pointClickHandler(pickedObject.id)
-                : this.options.pointHandler(pickedObject.id)
+            this.options.config.hoverState ? this.pointClickHandler(pickedObject.id) : this.options.pointHandler(pickedObject.id)
         }
     }
 
@@ -366,11 +309,7 @@ export class cesiumService {
         const pickedObject: any = this.viewer.scene.pick(movement.endPosition)
 
         // 如果鼠标移出了实体或悬浮在区域上
-        if (
-            !defined(pickedObject) ||
-            !pickedObject.id ||
-            pickedObject.id.name in areaData
-        ) {
+        if (!defined(pickedObject) || !pickedObject.id || pickedObject.id.name in areaData) {
             if (this.lastHoveredEntity) {
                 this.pointHoverExitHandler(this.lastHoveredEntity)
                 this.lastHoveredEntity = null
@@ -419,9 +358,7 @@ export class cesiumService {
             provider = await this.loadProviderWithFallback({
                 targetUrl: imageLayerUrl || url,
                 useZondy: imageLayerState,
-                fallbackUrl:
-                    this.options.config.defaultUrl ??
-                    this.defaultConfig.defaultUrl,
+                fallbackUrl: this.options.config.defaultUrl ?? this.defaultConfig.defaultUrl,
             })
 
             if (viewer && provider) {
@@ -434,20 +371,15 @@ export class cesiumService {
     }
 
     // 重试
-    private async retryLoadProvider(
-        url: string,
-        useZondy: boolean | null,
-    ): Promise<void> {
+    private async retryLoadProvider(url: string, useZondy: boolean | null): Promise<void> {
         let attempts = 0
         while (attempts < this.rretryCount) {
             try {
-                await new Promise((resolve) => setTimeout(resolve, 1000))
+                await new Promise(resolve => setTimeout(resolve, 1000))
                 const provider = await this.loadProviderWithFallback({
                     targetUrl: url,
                     useZondy,
-                    fallbackUrl:
-                        this.options.config.defaultUrl ??
-                        this.defaultConfig.defaultUrl,
+                    fallbackUrl: this.options.config.defaultUrl ?? this.defaultConfig.defaultUrl,
                 })
                 if (this.viewer && provider) {
                     await this.addProviderToViewer(this.viewer, provider)
@@ -462,9 +394,7 @@ export class cesiumService {
 
     private cleanupTileLoadListener(): void {
         if (this.tileLoadCallback && this.viewer?.scene?.globe) {
-            this.viewer.scene.globe.tileLoadProgressEvent.removeEventListener(
-                this.tileLoadCallback,
-            )
+            this.viewer.scene.globe.tileLoadProgressEvent.removeEventListener(this.tileLoadCallback)
         }
     }
 
@@ -479,24 +409,17 @@ export class cesiumService {
         targetUrl: string
         useZondy: boolean | null
         fallbackUrl: string
-    }): Promise<
-        WebMapTileServiceImageryProvider | ArcGisMapServerImageryProvider
-    > {
+    }): Promise<WebMapTileServiceImageryProvider | ArcGisMapServerImageryProvider> {
         try {
             let provider: any
             if (options.useZondy) {
                 // @ts-ignore
-                provider = await Zondy.WebMapTileServiceImageryProvider.fromUrl(
-                    options.targetUrl,
-                )
+                provider = await Zondy.WebMapTileServiceImageryProvider.fromUrl(options.targetUrl)
             } else {
-                provider = await ArcGisMapServerImageryProvider.fromUrl(
-                    options.targetUrl,
-                )
+                provider = await ArcGisMapServerImageryProvider.fromUrl(options.targetUrl)
             }
             if (this.openIndexDB) {
-                const originalRequestImage =
-                    provider.requestImage.bind(provider)
+                const originalRequestImage = provider.requestImage.bind(provider)
 
                 // 新增缓存检查方法
                 const getCachedImage = async (cacheKey: any) => {
@@ -512,11 +435,7 @@ export class cesiumService {
                     }
                 }
 
-                provider.requestImage = async (
-                    x: number,
-                    y: number,
-                    level: number,
-                ) => {
+                provider.requestImage = async (x: number, y: number, level: number) => {
                     const cacheKey = {
                         url: options.targetUrl,
                         x,
@@ -546,12 +465,9 @@ export class cesiumService {
                                 const ctx = canvas.getContext('2d')
                                 if (ctx) {
                                     ctx.drawImage(image, 0, 0)
-                                    canvas.toBlob(async (blob) => {
+                                    canvas.toBlob(async blob => {
                                         if (blob) {
-                                            await this.tileCache.putTile(
-                                                cacheKey,
-                                                blob,
-                                            )
+                                            await this.tileCache.putTile(cacheKey, blob)
                                         }
                                     })
                                 }
@@ -565,9 +481,7 @@ export class cesiumService {
                         console.warn('获取瓦片失败:', error)
                         // 4. 失败时再次尝试从缓存获取
                         const fallbackImage = await getCachedImage(cacheKey)
-                        return (
-                            fallbackImage || originalRequestImage(x, y, level)
-                        )
+                        return fallbackImage || originalRequestImage(x, y, level)
                     }
                 }
             }
@@ -575,9 +489,7 @@ export class cesiumService {
             return provider
         } catch {
             try {
-                return await ArcGisMapServerImageryProvider.fromUrl(
-                    options.fallbackUrl,
-                )
+                return await ArcGisMapServerImageryProvider.fromUrl(options.fallbackUrl)
             } catch (fallbackError) {
                 this.options.loadTileLayerHandler(false)
                 throw fallbackError
@@ -585,18 +497,11 @@ export class cesiumService {
         }
     }
 
-    private async addProviderToViewer(
-        viewer: Viewer,
-        provider:
-            | WebMapTileServiceImageryProvider
-            | ArcGisMapServerImageryProvider,
-    ): Promise<void> {
+    private async addProviderToViewer(viewer: Viewer, provider: WebMapTileServiceImageryProvider | ArcGisMapServerImageryProvider): Promise<void> {
         try {
             viewer.imageryLayers.addImageryProvider(provider)
             if (this.tileLoadCallback) {
-                viewer.scene?.globe?.tileLoadProgressEvent.addEventListener(
-                    this.tileLoadCallback,
-                )
+                viewer.scene?.globe?.tileLoadProgressEvent.addEventListener(this.tileLoadCallback)
             }
         } catch (error) {
             console.error('添加图层失败:', error)
@@ -609,22 +514,11 @@ export class cesiumService {
     }
 
     // 添加点标记
-    async addPoint(
-        point: pointType,
-        type?: string,
-        labelType?: string,
-    ): Promise<Entity | null | void> {
+    async addPoint(point: pointType, type?: string, labelType?: string): Promise<Entity | null | void> {
         if (!this.viewer && !this.dataSource) return null
         const valueInfo = await createInfoCanvas(point, type, labelType)
-        const entityConfig = await createEntityConfig(
-            point,
-            valueInfo.canvas,
-            type,
-        )
-        const entity: Entity | null =
-            this[labelType === 'Label' ? 'viewer' : 'dataSource']?.entities.add(
-                entityConfig,
-            ) ?? null
+        const entityConfig = await createEntityConfig(point, valueInfo.canvas, type)
+        const entity: Entity | null = this[labelType === 'Label' ? 'viewer' : 'dataSource']?.entities.add(entityConfig) ?? null
 
         if (!this.pointEntities) {
             this.pointEntities = []
@@ -638,10 +532,7 @@ export class cesiumService {
     }
 
     // 清除指定entity
-    async clearEntity(
-        key: 'pointEntities' | 'polygonEntities',
-        type: 'dataSource' | 'viewer',
-    ): Promise<void> {
+    async clearEntity(key: 'pointEntities' | 'polygonEntities', type: 'dataSource' | 'viewer'): Promise<void> {
         if (!this[type] || !this[key]) return
 
         for (const entity of this[key]) {
@@ -653,10 +544,7 @@ export class cesiumService {
     addPolygon(name: string): void {
         if (!this.viewer || !(name in areaData)) return
 
-        const getPositions = (data: any) =>
-            data.position.geometry.coordinates
-                .flat(2)
-                .map(([lng, lat]) => Cartesian3.fromDegrees(lng, lat))
+        const getPositions = (data: any) => data.position.geometry.coordinates.flat(2).map(([lng, lat]) => Cartesian3.fromDegrees(lng, lat))
         const positions = getPositions(areaData[name])
 
         const entity = this.viewer.entities.add({
@@ -683,9 +571,7 @@ export class cesiumService {
     // 深圳全市添加Polygon
     addAllDistricts() {
         this.clearEntity('polygonEntities', 'viewer')
-        ;(Object.keys(areaData) as Array<keyof typeof areaData>)
-            .filter((key) => key !== '深圳市')
-            .forEach(this.addPolygon.bind(this))
+        ;(Object.keys(areaData) as Array<keyof typeof areaData>).filter(key => key !== '深圳市').forEach(this.addPolygon.bind(this))
     }
 
     private getClickPosition(position: Cartesian2) {
@@ -696,15 +582,11 @@ export class cesiumService {
         if (cartesian && resultPosition) {
             const cartographic = Cartographic.fromCartesian(cartesian)
             cartographic.height = resultPosition[2] < 2000 ? 200 : 2000 // 设置目标高度
-            return Cartesian3.fromRadians(
-                cartographic.longitude,
-                cartographic.latitude,
-                cartographic.height,
-            )
+            return Cartesian3.fromRadians(cartographic.longitude, cartographic.latitude, cartographic.height)
         }
         ;(Object.keys(areaData) as Array<keyof typeof areaData>)
-            .filter((key) => key !== this.defaultCenterKey)
-            .forEach((districtName) => {
+            .filter(key => key !== this.defaultCenterKey)
+            .forEach(districtName => {
                 this.addPolygon(districtName)
             })
     }
@@ -727,89 +609,48 @@ export class cesiumService {
         const value = this.getPositionCartographic()
         if (!value || !this.viewer) return
 
-        const {
-            maxZoom = this.defaultConfig.maxZoom,
-            minZoom = this.defaultConfig.minZoom,
-        } = this.options.config ?? {}
+        const { maxZoom = this.defaultConfig.maxZoom, minZoom = this.defaultConfig.minZoom } = this.options.config ?? {}
 
         // 根据当前高度确定缩放步长
-        const heightLimit =
-            value[2] >= 30000
-                ? 20000
-                : value[2] >= 20000
-                  ? 10000
-                  : value[2] >= 10000
-                    ? 8000
-                    : 1000
+        const heightLimit = value[2] >= 30000 ? 20000 : value[2] >= 20000 ? 10000 : value[2] >= 10000 ? 8000 : 1000
 
-        const height =
-            value[2] - (type === 'ZoomIn' ? heightLimit : -heightLimit)
-        const heightResult =
-            height <= maxZoom && height >= minZoom
-                ? height
-                : type === 'ZoomIn'
-                  ? minZoom
-                  : maxZoom
+        const height = value[2] - (type === 'ZoomIn' ? heightLimit : -heightLimit)
+        const heightResult = height <= maxZoom && height >= minZoom ? height : type === 'ZoomIn' ? minZoom : maxZoom
 
         this.viewer.camera.flyTo({
-            destination: Cartesian3.fromDegrees(
-                value[0],
-                value[1],
-                heightResult,
-            ),
+            destination: Cartesian3.fromDegrees(value[0], value[1], heightResult),
             duration: 0.3,
         })
     }
 
     // 获取实体名称相关信息
     private getEntityNameInfo(name: string | undefined) {
-        const baseName = name?.endsWith('Label')
-            ? name?.replace('Label', '')
-            : name
+        const baseName = name?.endsWith('Label') ? name?.replace('Label', '') : name
         const labelName = `${baseName}Label`
 
         return {
             baseName,
             labelName,
-            dataIndex:
-                this.pointData?.findIndex((item) => item.name === baseName) ??
-                -1,
-            entityIndex:
-                this.pointEntities?.findIndex(
-                    (item) => item.name === baseName,
-                ) ?? -1,
-            labelEntityIndex:
-                this.pointEntities?.findIndex(
-                    (item) => item.name === labelName,
-                ) ?? -1,
+            dataIndex: this.pointData?.findIndex(item => item.name === baseName) ?? -1,
+            entityIndex: this.pointEntities?.findIndex(item => item.name === baseName) ?? -1,
+            labelEntityIndex: this.pointEntities?.findIndex(item => item.name === labelName) ?? -1,
         }
     }
 
     // 控制窗体
     pointClickHandler(pickedObject: Entity): void {
         const { name } = pickedObject
-        const { labelName, dataIndex, entityIndex, labelEntityIndex } =
-            this.getEntityNameInfo(name)
+        const { labelName, dataIndex, entityIndex, labelEntityIndex } = this.getEntityNameInfo(name)
 
         // 文字描述状态
-        const shouldAddPoint =
-            dataIndex !== -1 &&
-            labelEntityIndex === -1 &&
-            !this.options.defaultShowState
+        const shouldAddPoint = dataIndex !== -1 && labelEntityIndex === -1 && !this.options.defaultShowState
 
         // 更新图标状态
-        updateViewerEntityInfo(
-            this.pointData?.[dataIndex],
-            this.pointEntities?.[entityIndex],
-            'value',
-        )
+        updateViewerEntityInfo(this.pointData?.[dataIndex], this.pointEntities?.[entityIndex], 'value')
 
         // 更新标签状态
         if (labelEntityIndex !== -1 && this.options.defaultShowState) {
-            updateViewerEntityInfo(
-                this.pointData?.[dataIndex],
-                this.pointEntities?.[labelEntityIndex],
-            )
+            updateViewerEntityInfo(this.pointData?.[dataIndex], this.pointEntities?.[labelEntityIndex])
         }
 
         // 添加文字描述
@@ -830,26 +671,18 @@ export class cesiumService {
 
         const currentTime = JulianDate.now()
 
-        this.pointEntities.forEach((item) => {
+        this.pointEntities.forEach(item => {
             if (item.name?.endsWith('Label')) {
                 // 切换当前标签的显示状态，隐藏其他标签
                 item.show = item.name === currentLabelName && !item.show
             } else {
                 // 处理非标签实体的状态恢复
-                const changeState =
-                    item.properties?.getValue(currentTime).changeState
+                const changeState = item.properties?.getValue(currentTime).changeState
                 if (!changeState) return
 
-                const valueIndex =
-                    this.pointData?.findIndex(
-                        (option) => option.name === item.name,
-                    ) ?? -1
+                const valueIndex = this.pointData?.findIndex(option => option.name === item.name) ?? -1
                 if (valueIndex !== -1) {
-                    updateViewerEntityInfo(
-                        this.pointData?.[valueIndex],
-                        item,
-                        'value',
-                    )
+                    updateViewerEntityInfo(this.pointData?.[valueIndex], item, 'value')
                 }
             }
         })
@@ -862,8 +695,7 @@ export class cesiumService {
         // 如果悬浮的是Label元素，不做处理
         if (name?.includes('Label')) return
 
-        const { labelName, dataIndex, entityIndex, labelEntityIndex } =
-            this.getEntityNameInfo(name)
+        const { labelName, dataIndex, entityIndex, labelEntityIndex } = this.getEntityNameInfo(name)
 
         this.handleHoverLabelDisplay(dataIndex, labelName, labelEntityIndex)
         this.applyHoverEffect(dataIndex, entityIndex)
@@ -871,11 +703,7 @@ export class cesiumService {
     }
 
     // 处理悬浮时标签显示
-    private handleHoverLabelDisplay(
-        dataIndex: number,
-        labelName: string,
-        labelEntityIndex: number,
-    ): void {
+    private handleHoverLabelDisplay(dataIndex: number, labelName: string, labelEntityIndex: number): void {
         if (dataIndex === -1 || this.options.defaultShowState) return
 
         // 检查是否需要添加新标签
@@ -911,11 +739,8 @@ export class cesiumService {
     private hideOtherLabels(currentLabelName: string): void {
         if (this.options.defaultShowState || !this.pointEntities) return
 
-        this.pointEntities.forEach((item) => {
-            if (
-                item.name?.endsWith('Label') &&
-                item.name !== currentLabelName
-            ) {
+        this.pointEntities.forEach(item => {
+            if (item.name?.endsWith('Label') && item.name !== currentLabelName) {
                 item.show = false
             }
         })
@@ -928,8 +753,7 @@ export class cesiumService {
         // 如果离开的是Label元素，不做处理
         if (name?.includes('Label')) return
 
-        const { dataIndex, entityIndex, labelEntityIndex } =
-            this.getEntityNameInfo(name)
+        const { dataIndex, entityIndex, labelEntityIndex } = this.getEntityNameInfo(name)
 
         this.restoreEntityState(dataIndex, entityIndex)
         this.handleLabelVisibilityOnExit(dataIndex, labelEntityIndex)
@@ -961,9 +785,7 @@ export class cesiumService {
         // 根据当前状态恢复正确的图标
         if (properties.changeState) {
             // 变更状态图标
-            point.changeIconType
-                ? updateViewerEntityInfo(point, entity, 'change')
-                : updateViewerEntityInfo(point, entity, 'value')
+            point.changeIconType ? updateViewerEntityInfo(point, entity, 'change') : updateViewerEntityInfo(point, entity, 'value')
         } else {
             // 恢复原始图标
             updateViewerEntityInfo(point, entity, 'value')
@@ -971,18 +793,12 @@ export class cesiumService {
     }
 
     // 处理鼠标离开时标签可见性
-    private handleLabelVisibilityOnExit(
-        dataIndex: number,
-        labelEntityIndex: number,
-    ): void {
+    private handleLabelVisibilityOnExit(dataIndex: number, labelEntityIndex: number): void {
         if (labelEntityIndex === -1 || !this.pointEntities) return
 
         if (this.options.defaultShowState) {
             // 默认显示模式下，保持标签可见，恢复原始样式
-            updateViewerEntityInfo(
-                this.pointData?.[dataIndex],
-                this.pointEntities[labelEntityIndex],
-            )
+            updateViewerEntityInfo(this.pointData?.[dataIndex], this.pointEntities[labelEntityIndex])
         } else {
             // 非默认显示模式下，隐藏标签
             this.pointEntities[labelEntityIndex].show = false
@@ -1003,26 +819,20 @@ export class cesiumService {
         }
 
         // 确保多边形存在
-        const findValue = this.polygonEntities?.find(
-            (item) => item.name === name,
-        )
+        const findValue = this.polygonEntities?.find(item => item.name === name)
         if (!findValue) {
             this.addPolygon(name)
         }
 
         // 只显示当前多边形
-        this.polygonEntities?.forEach((item) => {
+        this.polygonEntities?.forEach(item => {
             item.show = item.name === name
         })
 
         // 飞行到目标位置
         const { lng, lat } = areaData[name]
         this.viewer?.camera.flyTo({
-            destination: Cartesian3.fromDegrees(
-                lng,
-                lat,
-                this.options?.flyToHeight ?? this.defaultConfig.flyToHeight,
-            ),
+            destination: Cartesian3.fromDegrees(lng, lat, this.options?.flyToHeight ?? this.defaultConfig.flyToHeight),
             duration: 1,
         })
     }
@@ -1049,10 +859,7 @@ export class cesiumService {
     }
 
     // 热力图
-    buildHeatMap(
-        points: { x: number; y: number; value: number }[],
-        gradient: Record<string, string> = heatmapGradient,
-    ) {
+    buildHeatMap(points: { x: number; y: number; value: number }[], gradient: Record<string, string> = heatmapGradient) {
         if (!this.viewer) return
         const heatmap = new CesiumHeatmap(this.viewer, {
             zoomToLayer: false,
@@ -1074,8 +881,7 @@ export class cesiumService {
             document.body.removeChild(heatmap.element)
             heatmap.element = undefined
             if (heatmap.provider instanceof ImageryLayer) {
-                if (heatmap.provider)
-                    this.viewer.imageryLayers.remove(heatmap.provider)
+                if (heatmap.provider) this.viewer.imageryLayers.remove(heatmap.provider)
                 heatmap.createSingleTileImageryLayer()
             } else if (heatmap.provider instanceof Primitive) {
                 this.viewer.scene.primitives.remove(heatmap.provider)
@@ -1083,9 +889,7 @@ export class cesiumService {
                 this.viewer.entities.remove(heatmap.provider)
             }
             if (heatmap.cameraMoveEnd) {
-                this.viewer.camera.moveEnd.removeEventListener(
-                    heatmap.cameraMoveEnd,
-                )
+                this.viewer.camera.moveEnd.removeEventListener(heatmap.cameraMoveEnd)
                 heatmap.cameraMoveEnd = undefined
             }
         }
@@ -1119,19 +923,13 @@ export class cesiumService {
                 this.isCheckingBounds = true
 
                 // 获取当前视口中心点
-                const centerPosition = new Cartesian2(
-                    Math.floor(this.viewer.canvas.clientWidth / 2),
-                    Math.floor(this.viewer.canvas.clientHeight / 2),
-                )
+                const centerPosition = new Cartesian2(Math.floor(this.viewer.canvas.clientWidth / 2), Math.floor(this.viewer.canvas.clientHeight / 2))
 
                 // 获取视口中心点的世界坐标
                 const pickRay = this.viewer.camera.getPickRay(centerPosition)
                 if (!pickRay) return
 
-                const worldPosition = this.viewer.scene.globe.pick(
-                    pickRay,
-                    this.viewer.scene,
-                )
+                const worldPosition = this.viewer.scene.globe.pick(pickRay, this.viewer.scene)
                 if (!worldPosition) {
                     // 直接获取
                     const viewCenter = this.getCameraViewCenter()
@@ -1143,13 +941,11 @@ export class cesiumService {
                     if (!this.isPointInShenzhen(centerLon, centerLat)) {
                         // 恢复到上一个有效位置
                         if (this.lastValidCameraPosition) {
-                            this.viewer.camera.position =
-                                this.lastValidCameraPosition.clone()
+                            this.viewer.camera.position = this.lastValidCameraPosition.clone()
                         }
                     } else {
                         // 更新有效位置
-                        this.lastValidCameraPosition =
-                            this.viewer.camera.position.clone()
+                        this.lastValidCameraPosition = this.viewer.camera.position.clone()
                     }
                     return
                 }
@@ -1163,15 +959,12 @@ export class cesiumService {
                 if (!this.isPointInShenzhen(longitude, latitude)) {
                     // 恢复到上一个有效位置
                     if (this.lastValidCameraPosition) {
-                        this.viewer.camera.position =
-                            this.lastValidCameraPosition.clone()
-                        this.viewer.camera.direction =
-                            this.viewer.scene.camera.direction.clone()
+                        this.viewer.camera.position = this.lastValidCameraPosition.clone()
+                        this.viewer.camera.direction = this.viewer.scene.camera.direction.clone()
                     }
                 } else {
                     // 更新有效位置
-                    this.lastValidCameraPosition =
-                        this.viewer.camera.position.clone()
+                    this.lastValidCameraPosition = this.viewer.camera.position.clone()
                 }
             } finally {
                 this.isCheckingBounds = false
@@ -1185,20 +978,14 @@ export class cesiumService {
 
         try {
             // 获取视口中心
-            const windowCenter = new Cartesian2(
-                this.viewer.canvas.clientWidth / 2,
-                this.viewer.canvas.clientHeight / 2,
-            )
+            const windowCenter = new Cartesian2(this.viewer.canvas.clientWidth / 2, this.viewer.canvas.clientHeight / 2)
 
             // 尝试拾取地球表面的点
             const ray = this.viewer.camera.getPickRay(windowCenter)
             if (!ray) return undefined
 
             // 尝试获取射线与地球表面的交点
-            const cartesian = this.viewer.scene.globe.pick(
-                ray,
-                this.viewer.scene,
-            )
+            const cartesian = this.viewer.scene.globe.pick(ray, this.viewer.scene)
             if (cartesian) {
                 // 如果有交点，转换为地理坐标
                 return Cartographic.fromCartesian(cartesian)
@@ -1214,11 +1001,7 @@ export class cesiumService {
 
     destroy(): void {
         if (this.viewer) {
-            this.viewer.scene.canvas.removeEventListener(
-                'dblclick',
-                this.doubleClickHandler,
-                false,
-            )
+            this.viewer.scene.canvas.removeEventListener('dblclick', this.doubleClickHandler, false)
             if (this.viewer.scene && this.viewer.scene.camera) {
                 // 移除边界限制监听器
                 if (this.removePreUpdateListener) {

@@ -1,45 +1,19 @@
 <template>
     <div class="demo-ranking">
-        <DemoHelpBox
-            title="排行占比图"
-            description="深圳教育项目-排行占比图"
-            rswidth="806px"
-            rs-height="300px"
-            :code="demoCodes.code2"
-        >
+        <DemoHelpBox title="排行占比图" description="深圳教育项目-排行占比图" rswidth="806px" rs-height="300px" :code="demoCodes.code2">
             <LcProgress :data-list="progressList"></LcProgress>
         </DemoHelpBox>
-        <DemoHelpBox
-            title="排行条形图"
-            description="深圳教育项目-排行条形图"
-            rswidth="806px"
-            rs-height="300px"
-            :code="demoCodes.code1"
-        >
+        <DemoHelpBox title="排行条形图" description="深圳教育项目-排行条形图" rswidth="806px" rs-height="300px" :code="demoCodes.code1">
             <LcRanking :list="rankingList"></LcRanking>
         </DemoHelpBox>
-        <DemoHelpBox
-            title="排行占比图"
-            description="深圳教育项目-排行占比图"
-            rswidth="806px"
-            rs-height="300px"
-            :code="demoCodes.code2"
-        >
-            <LcRanking
-                :list="rankingList"
-                type="proprotion"
-                :show-ball="false"
-            ></LcRanking>
+        <DemoHelpBox title="排行占比图" description="深圳教育项目-排行占比图" rswidth="806px" rs-height="300px" :code="demoCodes.code2">
+            <LcRanking :list="rankingList" type="proprotion" :show-ball="false"></LcRanking>
         </DemoHelpBox>
     </div>
 </template>
 <script lang="ts" setup>
 import { DemoHelpBox } from '@/components/common/DemoHelpBox'
-import {
-    LcRanking,
-    LcProgress,
-    type RankingRecord,
-} from '@/components/education/components/ranking'
+import { LcRanking, LcProgress, type RankingRecord } from '@/components/education/components/ranking'
 import { demoCodes } from './demo-codes'
 const progressList = [
     {

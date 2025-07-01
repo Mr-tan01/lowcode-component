@@ -1,15 +1,7 @@
 <template>
     <div class="lc-funnel-tier">
-        <div
-            v-for="(serie, key) in computedOptions?.series"
-            :key
-            class="lc-funnel-tier__serie"
-        >
-            <div
-                v-for="(item, index) in serie?.data"
-                :key="index"
-                class="lc-funnel-tier__serie__item"
-            >
+        <div v-for="(serie, key) in computedOptions?.series" :key class="lc-funnel-tier__serie">
+            <div v-for="(item, index) in serie?.data" :key="index" class="lc-funnel-tier__serie__item">
                 <div class="lc-funnel-tier__serie__item__label">
                     {{ item.name }}
                 </div>
@@ -26,9 +18,7 @@
                             '--inner-width': `${(item.value / serie.max) * 100}%`,
                         }"
                     >
-                        <div
-                            class="lc-funnel-tier__serie__item__bar__inner--text"
-                        >
+                        <div class="lc-funnel-tier__serie__item__bar__inner--text">
                             {{ serie?.label?.(item, serie) }}
                         </div>
                     </div>
@@ -44,11 +34,7 @@
 
 <script lang="ts" setup>
 import { computed } from 'vue'
-import {
-    defaultFunnelTierOptions,
-    defaultFunnelTierSeriesOptions,
-    type TierOptions,
-} from './themeConfig'
+import { defaultFunnelTierOptions, defaultFunnelTierSeriesOptions, type TierOptions } from './themeConfig'
 import merge from 'lodash-es/merge'
 
 const { options } = defineProps<{
@@ -57,7 +43,7 @@ const { options } = defineProps<{
 
 const computedOptions = computed(() => {
     const newOptions = merge({}, defaultFunnelTierOptions, options)
-    newOptions.series = newOptions.series.map((serie) => {
+    newOptions.series = newOptions.series.map(serie => {
         return merge({}, defaultFunnelTierSeriesOptions, serie)
     })
     return newOptions

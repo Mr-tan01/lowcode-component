@@ -1,6 +1,4 @@
-import LcDescTable, {
-    type Columns as LcDescTableColumns,
-} from './descTable.vue'
+import LcDescTable, { type Columns as LcDescTableColumns } from './descTable.vue'
 
 export type DescTableInstanceType = InstanceType<typeof LcDescTable>
 

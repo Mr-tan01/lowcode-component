@@ -1,18 +1,10 @@
 <template>
     <div class="lc-tooltip">
-        <n-tooltip
-            trigger="hover"
-            class="lc-n-tooltip"
-            arrow-class="lc-tooltip-arrow-class"
-            v-bind="$attrs"
-        >
+        <n-tooltip trigger="hover" class="lc-n-tooltip" arrow-class="lc-tooltip-arrow-class" v-bind="$attrs">
             <template #trigger>
                 <slot name="trigger">
                     <div class="lc-tooltip__trigger">
-                        <div
-                            class="lc-tooltip__trigger_icon"
-                            :style="{ width: `${size}px` }"
-                        >
+                        <div class="lc-tooltip__trigger_icon" :style="{ width: `${size}px` }">
                             <svg
                                 version="1.1"
                                 xmlns="http://www.w3.org/2000/svg"
@@ -29,9 +21,7 @@
 	s93.1,208,208,208s208-93.1,208-208S370.9,48,256,48L256,48z"
                                 ></path>
                                 <g>
-                                    <path
-                                        d="M277,360h-42V235h42V360z M277,194h-42v-42h42V194z"
-                                    ></path>
+                                    <path d="M277,360h-42V235h42V360z M277,194h-42v-42h42V194z"></path>
                                 </g>
                             </svg>
                         </div>

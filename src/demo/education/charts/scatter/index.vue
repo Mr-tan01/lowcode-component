@@ -1,39 +1,15 @@
 <template>
     <div class="demo-charts">
-        <DemoHelpBox
-            title="气泡图"
-            description="散点图主要包括单系列散点图、多系列散点图、"
-            rswidth="1360px"
-            rs-height="auto"
-        >
-            <DemoHelpBox
-                title="四象位图"
-                rswidth="850px"
-                rs-height="500px"
-                :code="demoCodes.fourScatter"
-            >
+        <DemoHelpBox title="气泡图" description="散点图主要包括单系列散点图、多系列散点图、" rswidth="1360px" rs-height="auto">
+            <DemoHelpBox title="四象位图" rswidth="850px" rs-height="500px" :code="demoCodes.fourScatter">
                 <LcFourScatter v-bind="useFourScatterOptions()"></LcFourScatter>
             </DemoHelpBox>
             <NSpace>
-                <DemoHelpBox
-                    title="单气泡图"
-                    rswidth="520px"
-                    rs-height="306px"
-                    :code="demoCodes.code1(1)"
-                >
-                    <LcScatterChart
-                        v-bind="useScatterOptions()"
-                    ></LcScatterChart>
+                <DemoHelpBox title="单气泡图" rswidth="520px" rs-height="306px" :code="demoCodes.code1(1)">
+                    <LcScatterChart v-bind="useScatterOptions()"></LcScatterChart>
                 </DemoHelpBox>
-                <DemoHelpBox
-                    title="多气泡图(≥2类数据)"
-                    rswidth="520px"
-                    rs-height="306px"
-                    :code="demoCodes.code1(3)"
-                >
-                    <LcScatterChart
-                        v-bind="useScatterOptions(3, 0)"
-                    ></LcScatterChart>
+                <DemoHelpBox title="多气泡图(≥2类数据)" rswidth="520px" rs-height="306px" :code="demoCodes.code1(3)">
+                    <LcScatterChart v-bind="useScatterOptions(3, 0)"></LcScatterChart>
                 </DemoHelpBox>
             </NSpace>
         </DemoHelpBox>
@@ -42,14 +18,8 @@
 <script lang="ts" setup>
 import { NSpace } from 'naive-ui'
 import { DemoHelpBox } from '@/components/common/DemoHelpBox'
-import {
-    LcScatterChart,
-    LcFourScatter,
-} from '@/components/education/components/charts'
-import {
-    useScatterOptions,
-    useFourScatterOptions,
-} from '../options/scatter-options'
+import { LcScatterChart, LcFourScatter } from '@/components/education/components/charts'
+import { useScatterOptions, useFourScatterOptions } from '../options/scatter-options'
 import { demoCodes } from './demo-codes'
 </script>
 <style lang="scss" scoped>

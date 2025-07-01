@@ -1,31 +1,16 @@
 <template>
     <div class="lc-desc-list">
         <div class="lc-desc-list__wrapper">
-            <div
-                class="lc-desc-list__head"
-                :style="{ paddingRight: hasScrollbar ? '6px' : '0' }"
-            >
-                <div
-                    v-for="(thRecord, thIndex) in columns"
-                    :key="thIndex"
-                    :style="customRecordStyle(thRecord)"
-                    class="lc-desc-list__head--item"
-                >
-                    <div
-                        class="lc-desc-list__head--item__cell"
-                        :title="getThCellNode(thRecord, thIndex)"
-                    >
+            <div class="lc-desc-list__head" :style="{ paddingRight: hasScrollbar ? '6px' : '0' }">
+                <div v-for="(thRecord, thIndex) in columns" :key="thIndex" :style="customRecordStyle(thRecord)" class="lc-desc-list__head--item">
+                    <div class="lc-desc-list__head--item__cell" :title="getThCellNode(thRecord, thIndex)">
                         {{ getThCellNode(thRecord, thIndex) }}
                     </div>
                 </div>
             </div>
             <LcElasticScrollbar v-show="data.length" ref="scrollbarRef">
                 <div class="lc-desc-list__tbody">
-                    <div
-                        v-for="(tdRecord, tdIndex) in data"
-                        :key="tdIndex"
-                        class="lc-desc-list__tbody__tr"
-                    >
+                    <div v-for="(tdRecord, tdIndex) in data" :key="tdIndex" class="lc-desc-list__tbody__tr">
                         <div
                             v-for="(thRecord, thIndex) in columns"
                             :key="thIndex"
@@ -38,27 +23,10 @@
                                 :index="tdIndex"
                                 :column="thRecord"
                                 :col-index="thIndex"
-                                :value="
-                                    getTdCellNode(tdRecord, thRecord, tdIndex)
-                                "
+                                :value="getTdCellNode(tdRecord, thRecord, tdIndex)"
                             >
-                                <span
-                                    class="lc-desc-list__tbody__tr__cell__span"
-                                    :title="
-                                        getTdCellNode(
-                                            tdRecord,
-                                            thRecord,
-                                            tdIndex,
-                                        )
-                                    "
-                                >
-                                    {{
-                                        getTdCellNode(
-                                            tdRecord,
-                                            thRecord,
-                                            tdIndex,
-                                        )
-                                    }}
+                                <span class="lc-desc-list__tbody__tr__cell__span" :title="getTdCellNode(tdRecord, thRecord, tdIndex)">
+                                    {{ getTdCellNode(tdRecord, thRecord, tdIndex) }}
                                 </span>
                             </slot>
                         </div>
@@ -114,9 +82,7 @@ const scrollbarRef = ref()
 
 function checkScrollbar() {
     if (scrollbarRef.value) {
-        hasScrollbar.value =
-            scrollbarRef.value.$el.scrollHeight >
-            scrollbarRef.value.$el.clientHeight
+        hasScrollbar.value = scrollbarRef.value.$el.scrollHeight > scrollbarRef.value.$el.clientHeight
     }
 }
 
@@ -134,32 +100,23 @@ watch(
     { deep: true },
 )
 
-const getThCellNode: (_record: Columns, _index: number) => string = memoize(
-    (_record: Columns) => {
-        return _record.title
-    },
-)
+const getThCellNode: (_record: Columns, _index: number) => string = memoize((_record: Columns) => {
+    return _record.title
+})
 
 function createTdCellNode(_tdRecord, _thRecord: Columns, _tdIndex: number) {
-    const renderHandler = _thRecord.type
-        ? tdCellTypeMap[_thRecord.type]
-        : tdCellTypeMap.default
+    const renderHandler = _thRecord.type ? tdCellTypeMap[_thRecord.type] : tdCellTypeMap.default
     return renderHandler(_tdRecord, _thRecord, _tdIndex)
 }
-const getTdCellNode: typeof createTdCellNode = memoize(
-    createTdCellNode,
-    createTdCellNode,
-)
+const getTdCellNode: typeof createTdCellNode = memoize(createTdCellNode, createTdCellNode)
 
-const customRecordStyle: (_record: Columns) => Record<string, any> = memoize(
-    (thRecord) => {
-        return {
-            '--text-align': thRecord.align ?? 'left',
-            '--cell-flex': thRecord.flex ?? 1,
-            '--cell-width': thRecord.width ?? 'auto',
-        }
-    },
-)
+const customRecordStyle: (_record: Columns) => Record<string, any> = memoize(thRecord => {
+    return {
+        '--text-align': thRecord.align ?? 'left',
+        '--cell-flex': thRecord.flex ?? 1,
+        '--cell-width': thRecord.width ?? 'auto',
+    }
+})
 
 function getTdCellSlotName(_thRecord) {
     return _thRecord.dataIndex ?? 'default'
@@ -195,18 +152,9 @@ function getTdCellSlotName(_thRecord) {
     }
     &__head {
         z-index: 9;
-        background: linear-gradient(
-            180deg,
-            rgba(0, 96, 163, 0.1) 0%,
-            rgba(0, 127, 206, 0.5) 100%
-        );
+        background: linear-gradient(180deg, rgba(0, 96, 163, 0.1) 0%, rgba(0, 127, 206, 0.5) 100%);
         border: 1px solid;
-        border-image: linear-gradient(
-                180deg,
-                rgba(49, 175, 255, 0.2),
-                rgba(15, 194, 251, 0.8)
-            )
-            1 1;
+        border-image: linear-gradient(180deg, rgba(49, 175, 255, 0.2), rgba(15, 194, 251, 0.8)) 1 1;
         backdrop-filter: blur(1.44px);
         display: flex;
         position: sticky;
@@ -267,18 +215,9 @@ function getTdCellSlotName(_thRecord) {
             }
 
             &:hover {
-                background: linear-gradient(
-                    90deg,
-                    rgba(15, 251, 248, 0) 0%,
-                    rgba(15, 251, 248, 0.35) 100%
-                );
+                background: linear-gradient(90deg, rgba(15, 251, 248, 0) 0%, rgba(15, 251, 248, 0.35) 100%);
                 border: 1px solid;
-                border-image: linear-gradient(
-                        90deg,
-                        rgba(34, 253, 252, 0),
-                        rgba(15, 251, 248, 1)
-                    )
-                    1 1;
+                border-image: linear-gradient(90deg, rgba(34, 253, 252, 0), rgba(15, 251, 248, 1)) 1 1;
                 &::before {
                     opacity: 1;
                 }

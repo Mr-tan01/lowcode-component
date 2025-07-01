@@ -5,10 +5,7 @@
 </template>
 
 <script lang="ts" setup>
-import {
-    BaseChart,
-    useCommonChartExpose,
-} from '@/components/education/common/components/Charts'
+import { BaseChart, useCommonChartExpose } from '@/components/education/common/components/Charts'
 import { computed, PropType } from 'vue'
 import { type EChartsCoreOption, type EChartsOption } from 'echarts'
 import { useCommonScatterOptions, useCommonScatterSeries } from './options'

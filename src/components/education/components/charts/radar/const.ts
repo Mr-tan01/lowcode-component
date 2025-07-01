@@ -5,11 +5,7 @@ export const radarTitleOptions: EChartsOption['title'] = {
     show: false,
 }
 
-export const radarColors: ZRColor[] = [
-    'rgba(15, 251, 248, 1)',
-    'rgba(225, 188, 75, 1)',
-    'rgba(0, 148, 255, 1)',
-]
+export const radarColors: ZRColor[] = ['rgba(15, 251, 248, 1)', 'rgba(225, 188, 75, 1)', 'rgba(0, 148, 255, 1)']
 export const radarTooltipOptions: EChartsOption['tooltip'] = {
     backgroundColor: 'rgba(0, 32, 61, 1)',
     borderColor: 'rgba(15, 251, 248, 1)',

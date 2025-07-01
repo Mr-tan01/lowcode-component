@@ -33,7 +33,7 @@ export default defineConfig({
             '/jysl': {
                 target: 'https://jysl.sz.edu.cn:8314',
                 changeOrigin: true,
-                rewrite: (path) => path.replace(/^\/jysl/, ''),
+                rewrite: path => path.replace(/^\/jysl/, ''),
                 secure: true,
             },
         },

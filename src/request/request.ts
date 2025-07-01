@@ -16,7 +16,7 @@ export function createRequest(baseConfig: RequestConfig = {}): RequestInstance {
 
     // 请求拦截器
     instance.interceptors.request.use(
-        (config) => {
+        config => {
             // 自动添加token
             if (token && (config as RequestConfig).withToken !== false) {
                 config.headers = config.headers || {}
@@ -24,17 +24,17 @@ export function createRequest(baseConfig: RequestConfig = {}): RequestInstance {
             }
             return config
         },
-        (error) => {
+        error => {
             return Promise.reject(error)
         },
     )
 
     // 响应拦截器
     instance.interceptors.response.use(
-        (response) => {
+        response => {
             return response
         },
-        async (error) => {
+        async error => {
             const config = error.config as RequestConfig
 
             // 请求取消错误不重试
@@ -48,7 +48,7 @@ export function createRequest(baseConfig: RequestConfig = {}): RequestInstance {
 
                 // 指数退避
                 const delay = Math.pow(2, config.retry || 0) * 1000
-                await new Promise((resolve) => setTimeout(resolve, delay))
+                await new Promise(resolve => setTimeout(resolve, delay))
 
                 return instance(config)
             }
@@ -58,9 +58,7 @@ export function createRequest(baseConfig: RequestConfig = {}): RequestInstance {
     )
 
     // 核心请求方法
-    async function request<T = any>(
-        config: RequestConfig,
-    ): Promise<ResponseData<T>> {
+    async function request<T = any>(config: RequestConfig): Promise<ResponseData<T>> {
         // 合并配置
         const mergedConfig: RequestConfig = {
             method: 'get',
@@ -115,10 +113,7 @@ export function createRequest(baseConfig: RequestConfig = {}): RequestInstance {
 
             // 缓存响应
             if (mergedConfig.cache) {
-                const expireTime =
-                    typeof mergedConfig.cache === 'number'
-                        ? Date.now() + mergedConfig.cache
-                        : Number.MAX_SAFE_INTEGER
+                const expireTime = typeof mergedConfig.cache === 'number' ? Date.now() + mergedConfig.cache : Number.MAX_SAFE_INTEGER
                 cacheStore.set(cacheKey, {
                     expire: expireTime,
                     data: responseData,
@@ -132,11 +127,7 @@ export function createRequest(baseConfig: RequestConfig = {}): RequestInstance {
     }
 
     // 添加快捷方法
-    request.get = function <T = any>(
-        url: string,
-        data?: any,
-        config?: RequestConfig,
-    ) {
+    request.get = function <T = any>(url: string, data?: any, config?: RequestConfig) {
         return request<T>({
             ...config,
             url,
@@ -146,19 +137,11 @@ export function createRequest(baseConfig: RequestConfig = {}): RequestInstance {
         })
     }
 
-    request.post = function <T = any>(
-        url: string,
-        data?: any,
-        config?: RequestConfig,
-    ) {
+    request.post = function <T = any>(url: string, data?: any, config?: RequestConfig) {
         return request<T>({ ...config, url, data, method: 'post' })
     }
 
-    request.put = function <T = any>(
-        url: string,
-        data?: any,
-        config?: RequestConfig,
-    ) {
+    request.put = function <T = any>(url: string, data?: any, config?: RequestConfig) {
         return request<T>({ ...config, url, data, method: 'put' })
     }
 

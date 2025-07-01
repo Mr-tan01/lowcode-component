@@ -43,10 +43,7 @@ export function useStarRotate() {
 
     // 平均角度
     const averageAngle = computed(() => {
-        const len =
-            starLneght.value >= starMaxShowCount.value
-                ? starMaxShowCount.value
-                : starLneght.value
+        const len = starLneght.value >= starMaxShowCount.value ? starMaxShowCount.value : starLneght.value
         return fullAngle.value / len
     })
 
@@ -54,18 +51,13 @@ export function useStarRotate() {
         return averageAngle.value * index + startAngle.value
     })
 
-    const updateDisplayAlternately = debounce((index) => {
+    const updateDisplayAlternately = debounce(index => {
         displayAlternately.value.pop()
         displayAlternately.value.unshift(index)
     }, 300)
 
     const offset = memoize(
-        (
-            _angleDeg: number,
-            radiusX: number,
-            radiusY: number,
-            appedYOffset: number,
-        ) => {
+        (_angleDeg: number, radiusX: number, radiusY: number, appedYOffset: number) => {
             const angleRad = _angleDeg * (Math.PI / 180) // 转换为弧度
 
             // 计算当前点的坐标
@@ -76,8 +68,7 @@ export function useStarRotate() {
                 y,
             }
         },
-        (_angleDeg, radiusX, radiusY, appedYOffset) =>
-            `${_angleDeg}-${radiusX}-${radiusY}-${appedYOffset}`,
+        (_angleDeg, radiusX, radiusY, appedYOffset) => `${_angleDeg}-${radiusX}-${radiusY}-${appedYOffset}`,
     )
 
     function decay(dir: number, y: number, yOffset: number, radiusY: number) {
@@ -136,12 +127,7 @@ export function useStarRotate() {
         }
 
         let isHideBlock = displayAlternately.value.includes(index)
-        if (
-            starLneght.value > starMaxShowCount.value &&
-            !isHideBlock &&
-            y <= endY &&
-            layoutIndex === 0
-        ) {
+        if (starLneght.value > starMaxShowCount.value && !isHideBlock && y <= endY && layoutIndex === 0) {
             updateDisplayAlternately(index)
             isHideBlock = displayAlternately.value.includes(index)
         }

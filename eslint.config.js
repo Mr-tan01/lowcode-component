@@ -7,14 +7,7 @@ import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended'
 
 export default tseslint.config(
     {
-        ignores: [
-            'node_modules',
-            'dist',
-            'public',
-            'lowcode-docx',
-            'scripts',
-            'es',
-        ],
+        ignores: ['node_modules', 'dist', 'public', 'lowcode-docx', 'scripts', 'es'],
     },
 
     /** js推荐配置 */
@@ -107,4 +100,16 @@ export default tseslint.config(
         },
     },
     eslintPluginPrettierRecommended,
+    {
+        files: ['**/*.{js,ts,vue}'],
+        ignores: [
+            'node_modules/**',
+            'dist/**',
+            'public/**',
+            'lowcode-docx/**',
+            'scripts/**',
+            'es/**',
+            // 在这里添加其他需要忽略的文件或目录
+        ],
+    },
 )

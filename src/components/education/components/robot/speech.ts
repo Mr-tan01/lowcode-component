@@ -55,13 +55,13 @@ export function useSpeech() {
             setTimeout(clearHelpText, timeoutTime)
         }
 
-        recognition.addEventListener('result', (event) => {
+        recognition.addEventListener('result', event => {
             const transcript = event.results[0][0].transcript
             output.value.textContent = transcript
-            events.forEach((value) => value(transcript))
+            events.forEach(value => value(transcript))
         })
 
-        recognition.addEventListener('error', (event) => {
+        recognition.addEventListener('error', event => {
             output.value.helpText = '发生错误: ' + event.error + '。'
             output.value.error = true
             output.value.starting = false

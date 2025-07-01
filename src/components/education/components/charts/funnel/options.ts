@@ -1,19 +1,7 @@
-import {
-    type SeriesOption,
-    type EChartsCoreOption,
-    type EChartsOption,
-} from 'echarts'
+import { type SeriesOption, type EChartsCoreOption, type EChartsOption } from 'echarts'
 import merge from 'lodash-es/merge'
 import { deepMergeArrayOptions } from '@mmj-code-lib/lowcode/es/components'
-import {
-    commonScatterSeries,
-    gridOptions,
-    legendOptions,
-    funnelColors,
-    tooltipOptions,
-    xAxisOptions,
-    yAxisOptions,
-} from './const'
+import { commonScatterSeries, gridOptions, legendOptions, funnelColors, tooltipOptions, xAxisOptions, yAxisOptions } from './const'
 
 export const commonScatterOptions: EChartsOption = {
     tooltip: tooltipOptions,
@@ -29,17 +17,11 @@ type SeriesDataItemType = {
     value: number
 }
 
-export function useCommonScatterOptions(
-    opts: EChartsCoreOption | EChartsOption,
-) {
-    deepMergeArrayOptions(
-        opts,
-        Object.keys(commonScatterOptions),
-        Object.values(commonScatterOptions),
-    )
+export function useCommonScatterOptions(opts: EChartsCoreOption | EChartsOption) {
+    deepMergeArrayOptions(opts, Object.keys(commonScatterOptions), Object.values(commonScatterOptions))
     const legendValues = {}
     // @ts-ignore
-    ;((opts?.series[0]?.data as SeriesDataItemType[]) ?? []).forEach((item) => {
+    ;((opts?.series[0]?.data as SeriesDataItemType[]) ?? []).forEach(item => {
         legendValues[item.name] = item.value
     })
     return merge(
@@ -63,11 +45,9 @@ function mregeSeriesRecord(newSeries: SeriesOption) {
     return merge({}, commonScatterSeries, newSeries)
 }
 
-export function useCommonScatterSeries(
-    series: EChartsOption['series'],
-): EChartsOption['series'] {
+export function useCommonScatterSeries(series: EChartsOption['series']): EChartsOption['series'] {
     if (Array.isArray(series)) {
-        return series.map((item) => {
+        return series.map(item => {
             return mregeSeriesRecord(item)
         })
     }

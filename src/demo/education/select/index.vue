@@ -6,8 +6,7 @@
                     <LcSelect v-model:value="value" :options> </LcSelect>
                 </div>
                 <div class="select-box">
-                    <LcSelect v-model:value="value" :options gradient>
-                    </LcSelect>
+                    <LcSelect v-model:value="value" :options gradient> </LcSelect>
                 </div>
             </n-space>
         </DemoHelpBox>

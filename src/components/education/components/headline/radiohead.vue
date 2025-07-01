@@ -30,9 +30,7 @@ const { text, maxLength, fontSize } = toRefs(props)
 const formatedText = computed(() => {
     return overflowStr(text.value, maxLength.value)
 })
-const resultFontSize = computed(() =>
-    typeof fontSize.value === 'number' ? `${fontSize.value}px` : fontSize.value,
-)
+const resultFontSize = computed(() => (typeof fontSize.value === 'number' ? `${fontSize.value}px` : fontSize.value))
 </script>
 <style lang="scss" scoped>
 .lc-radiohead {
@@ -48,11 +46,7 @@ const resultFontSize = computed(() =>
         text-align: left;
         font-style: normal;
         border-radius: 0 32px 32px 0;
-        background: linear-gradient(
-            90deg,
-            rgba(0, 96, 163, 0) 0%,
-            #007fce 100%
-        );
+        background: linear-gradient(90deg, rgba(0, 96, 163, 0) 0%, #007fce 100%);
         position: relative;
         bottom: 4px;
     }

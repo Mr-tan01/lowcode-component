@@ -1,11 +1,6 @@
 <template>
     <div class="bubble-demo">
-        <DemoHelpBox
-            title="气泡图"
-            description="基本用法"
-            rswidth="1000px"
-            rs-height="500px"
-        >
+        <DemoHelpBox title="气泡图" description="基本用法" rswidth="1000px" rs-height="500px">
             <LcBubble :data="newData" />
         </DemoHelpBox>
     </div>

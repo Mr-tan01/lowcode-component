@@ -2,33 +2,19 @@
     <div
         v-if="show"
         class="lc-mark"
-        :class="[
-            `lc-mark--${model}`,
-            `lc-mark--${size}`,
-            `lc-mark--icon-${iconName}`,
-        ]"
+        :class="[`lc-mark--${model}`, `lc-mark--${size}`, `lc-mark--icon-${iconName}`]"
         :tabindex="-1"
         :style="customProperts"
     >
         <div class="lc-mark__wrapper" @click="clickMark">
             <div class="lc-mark__wrapper__image">
-                <img
-                    class="lc-mark__wrapper__image__img"
-                    :src="imageIconSrc"
-                    alt=" "
-                    draggable="false"
-                />
+                <img class="lc-mark__wrapper__image__img" :src="imageIconSrc" alt=" " draggable="false" />
                 <span class="lc-mark__wrapper__image__label">{{ label }}</span>
             </div>
             <div class="lc-mark__wrapper__rect">
                 <slot>
                     <span class="lc-mark__wrapper__rect--value">
-                        <NNumberAnimation
-                            :from="0"
-                            :to="value"
-                            :precision="precision"
-                        >
-                        </NNumberAnimation>
+                        <NNumberAnimation :from="0" :to="value" :precision="precision"> </NNumberAnimation>
                     </span>
                     <span class="lc-mark__wrapper__rect--unit">
                         {{ unit }}
@@ -65,9 +51,7 @@ const $emit = defineEmits<{
     (e: 'mark:click', v: { value: number | string; meta: any }): void
 }>()
 
-const imageIconSrc = computed<string>(
-    () => iconSrc || icons[`./images/${iconName}.png`],
-)
+const imageIconSrc = computed<string>(() => iconSrc || icons[`./images/${iconName}.png`])
 const customProperts = computed(() => {
     return {
         '--mark-icon': `url(${icons[`./images/${iconName}.png`]})`,

@@ -15,38 +15,25 @@
                 >
                     <div class="lc-ranking__wrapper__item__top">
                         <div class="lc-ranking__wrapper__item__top__start">
-                            <div
-                                class="lc-ranking__wrapper__item__top__start__index"
-                            >
+                            <div class="lc-ranking__wrapper__item__top__start__index">
                                 {{ key + 1 }}
                             </div>
-                            <div
-                                class="lc-ranking__wrapper__item__top__start__label"
-                            >
+                            <div class="lc-ranking__wrapper__item__top__start__label">
                                 {{ item.label }}
                             </div>
                         </div>
                         <div class="lc-ranking__wrapper__item__top__end">
-                            <div
-                                class="lc-ranking__wrapper__item__top__end__value"
-                            >
+                            <div class="lc-ranking__wrapper__item__top__end__value">
                                 {{ fromValue(item) }}
                             </div>
-                            <div
-                                class="lc-ranking__wrapper__item__top__end__unit"
-                            >
+                            <div class="lc-ranking__wrapper__item__top__end__unit">
                                 {{ item.unit }}
                             </div>
                         </div>
                     </div>
                     <div class="lc-ranking__wrapper__item__inner">
-                        <div
-                            class="lc-ranking__wrapper__item__inner__bar"
-                        ></div>
-                        <div
-                            v-if="showBall"
-                            class="lc-ranking__wrapper__item__inner__ball"
-                        ></div>
+                        <div class="lc-ranking__wrapper__item__inner__bar"></div>
+                        <div v-if="showBall" class="lc-ranking__wrapper__item__inner__ball"></div>
                     </div>
                 </div>
             </div>
@@ -87,11 +74,7 @@ function getCurrentProportion(value?: RankingRecord['value']) {
     return (value / total.value) * 100 * isAnimate.value
 }
 function getPreProportion(i: number) {
-    return (
-        (complierTotal(renderList.value.slice(0, i)) / total.value) *
-        100 *
-        isAnimate.value
-    )
+    return (complierTotal(renderList.value.slice(0, i)) / total.value) * 100 * isAnimate.value
 }
 
 function fromValue(item: RankingRecord) {
@@ -241,11 +224,7 @@ onMounted(() => {
                     left: 0;
                     width: calc(var(--proportion) * 1%);
                     height: 100%;
-                    background: linear-gradient(
-                        50deg,
-                        rgba(15, 251, 248, 0) 0%,
-                        #0ffbf8 100%
-                    );
+                    background: linear-gradient(50deg, rgba(15, 251, 248, 0) 0%, #0ffbf8 100%);
                     transition: linear 0.3s;
                     transition-property: width, left;
                     @include transitionDelay;
@@ -276,13 +255,7 @@ onMounted(() => {
                             }
 
                             &__ball {
-                                left: calc(
-                                    calc(
-                                            var(--proportion) +
-                                                var(--pre-proportion)
-                                        ) *
-                                        1%
-                                );
+                                left: calc(calc(var(--proportion) + var(--pre-proportion)) * 1%);
                             }
                         }
                     }

@@ -19,11 +19,7 @@
                 <div
                     ref="chartDom"
                     class="lc-pie__wrapper__chart__inner"
-                    :class="[
-                        notHasTitle
-                            ? 'lc-pie__wrapper__chart__inner--not--title'
-                            : 'lc-pie__wrapper__chart__inner--title',
-                    ]"
+                    :class="[notHasTitle ? 'lc-pie__wrapper__chart__inner--not--title' : 'lc-pie__wrapper__chart__inner--title']"
                 ></div>
             </div>
         </div>
@@ -31,21 +27,8 @@
 </template>
 
 <script lang="ts" setup>
-import {
-    type EChartsCoreOption,
-    type EChartsOption,
-    init,
-    type ECharts,
-} from 'echarts'
-import {
-    computed,
-    onBeforeUnmount,
-    onMounted,
-    ref,
-    shallowRef,
-    watchPostEffect,
-    useTemplateRef,
-} from 'vue'
+import { type EChartsCoreOption, type EChartsOption, init, type ECharts } from 'echarts'
+import { computed, onBeforeUnmount, onMounted, ref, shallowRef, watchPostEffect, useTemplateRef } from 'vue'
 import { useCommonPieOptions, usePieCommonSeries } from './options'
 import merge from 'lodash-es/merge'
 import { useResizeObserver } from '@vueuse/core'
@@ -64,7 +47,7 @@ const {
     options,
     debounceTime = 300,
     graphicColors = innerGraphicColors,
-    legendLabel = (name) => name,
+    legendLabel = name => name,
     flexDirection = 'row',
     showCustomLegend = true,
     layout = 'default',
@@ -89,22 +72,14 @@ const chartDomRef = useTemplateRef('chartDom')
 const chartInstance = shallowRef<ECharts>()
 const renderOptions = computed(() => {
     const newOptions = useCommonPieOptions(options)
-    newOptions.series = usePieCommonSeries(
-        newOptions.series,
-        graphicColors,
-        newOptions.color,
-        layout,
-    )
+    newOptions.series = usePieCommonSeries(newOptions.series, graphicColors, newOptions.color, layout)
     if (newOptions.series && !Array.isArray(newOptions.series)) {
         newOptions.series = [newOptions.series]
     }
     return merge({}, newOptions)
 })
 
-function dispatchAction(
-    type: LegendActiveType,
-    name: LegendDataRecord['name'],
-) {
+function dispatchAction(type: LegendActiveType, name: LegendDataRecord['name']) {
     chartInstance.value?.dispatchAction({
         type,
         name,
@@ -133,7 +108,7 @@ watchPostEffect(() => {
 const notHasTitle = computed(() => {
     const { title } = renderOptions.value
     if (Array.isArray(title)) {
-        return title.every((item) => item?.show === false)
+        return title.every(item => item?.show === false)
     }
     return title?.show === false
 })
@@ -141,11 +116,7 @@ function initChart() {
     chartInstance.value = init(chartDomRef.value, renderOptions.value)
 }
 
-function setOptions(
-    option: EChartsCoreOption,
-    notMerge?: boolean,
-    lazyUpdate?: boolean,
-) {
+function setOptions(option: EChartsCoreOption, notMerge?: boolean, lazyUpdate?: boolean) {
     chartInstance.value?.setOption(option, notMerge, lazyUpdate)
 }
 const cssBlockSize = ref('100%')
@@ -155,14 +126,9 @@ function resizeChart(entries) {
     cssBlockSize.value = Math.min(width, height) + 'px'
     chartInstance.value?.resize()
 }
-const { stop } = useResizeObserver(
-    chartDomRef,
-    debounce(resizeChart, debounceTime),
-)
+const { stop } = useResizeObserver(chartDomRef, debounce(resizeChart, debounceTime))
 
-const wrapperPading = computed(() =>
-    legendPosition === 'absolute' ? `0 ${legendWidth}` : '0',
-)
+const wrapperPading = computed(() => (legendPosition === 'absolute' ? `0 ${legendWidth}` : '0'))
 onBeforeUnmount(stop)
 defineExpose({
     chartInstance,

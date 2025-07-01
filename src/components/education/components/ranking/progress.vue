@@ -2,11 +2,7 @@
     <div class="lc-progress">
         <LcElasticScrollbar>
             <div class="lc-progress__wrapper">
-                <div
-                    v-for="(item, key) in dataList"
-                    :key
-                    class="lc-progress__wrapper__item"
-                >
+                <div v-for="(item, key) in dataList" :key class="lc-progress__wrapper__item">
                     <div
                         class="lc-progress__wrapper__item__left"
                         :style="{
@@ -19,12 +15,7 @@
                             <span>{{ item.value }}%</span>
                         </span>
                     </div>
-                    <div
-                        ref="valueRef"
-                        class="lc-progress__wrapper__item__right"
-                        :style="{ width: maxWidth }"
-                        :title="item.tootal.toString()"
-                    >
+                    <div ref="valueRef" class="lc-progress__wrapper__item__right" :style="{ width: maxWidth }" :title="item.tootal.toString()">
                         <span>{{ renderValue(item.tootal) }}</span>
                         <span>{{ renderUnit(item.tootal, item.unit) }}</span>
                     </div>
@@ -65,15 +56,13 @@ const {
 const valueRefS = useTemplateRef('valueRef')
 const maxWidth = computed(() => {
     if (valueRefS.value && Array.isArray(valueRefS.value)) {
-        const widths = valueRefS.value.map((item) =>
-            Math.floor(item.offsetWidth),
-        )
+        const widths = valueRefS.value.map(item => Math.floor(item.offsetWidth))
         const maxWidthValue = Math.max(...widths)
         return `${maxWidthValue}px`
     }
     return '100%'
 })
-const renderValue = (tootal) => {
+const renderValue = tootal => {
     if (fixed) {
         const { result } = bigNumber(tootal, decimal)
         return result

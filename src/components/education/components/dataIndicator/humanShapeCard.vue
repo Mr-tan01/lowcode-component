@@ -1,18 +1,9 @@
 <template>
     <div class="lc-human-shapeCard">
         <div class="lc-human-shapeCard__wrapper">
-            <div
-                v-for="(item, key) in letData"
-                :key="key"
-                class="lc-human-shapeCard__wrapper__item"
-            >
-                <span
-                    class="lc-human-shapeCard__wrapper__item__title tiele-left"
-                    >{{ item.title }}</span
-                >
-                <div
-                    class="lc-human-shapeCard__wrapper__item__content content-left"
-                >
+            <div v-for="(item, key) in letData" :key="key" class="lc-human-shapeCard__wrapper__item">
+                <span class="lc-human-shapeCard__wrapper__item__title tiele-left">{{ item.title }}</span>
+                <div class="lc-human-shapeCard__wrapper__item__content content-left">
                     <div
                         class="lc-human-shapeCard__wrapper__item__content__val tooltip-container"
                         :data-tooltip="`${item.lefValue}${item.lefUnit || lefUnit}`"
@@ -26,11 +17,7 @@
                         />{{ renderLeftUnit(item.lefValue, item.lefUnit) }}
                     </div>
 
-                    <div
-                        class="lc-human-shapeCard__wrapper__item__content__val"
-                    >
-                        |
-                    </div>
+                    <div class="lc-human-shapeCard__wrapper__item__content__val">|</div>
                     <div
                         class="lc-human-shapeCard__wrapper__item__content__val tooltip-container"
                         :data-tooltip="`${item.rigValue}${item.rigUnit || rigUnit}`"
@@ -52,15 +39,8 @@
             </slot>
         </div>
         <div class="lc-human-shapeCard__wrapper">
-            <div
-                v-for="(item, key) in rigData"
-                :key="key"
-                class="lc-human-shapeCard__wrapper__item"
-            >
-                <span
-                    class="lc-human-shapeCard__wrapper__item__title tiele-right"
-                    >{{ item.title }}</span
-                >
+            <div v-for="(item, key) in rigData" :key="key" class="lc-human-shapeCard__wrapper__item">
+                <span class="lc-human-shapeCard__wrapper__item__title tiele-right">{{ item.title }}</span>
                 <div class="lc-human-shapeCard__wrapper__item__content">
                     <div
                         class="lc-human-shapeCard__wrapper__item__content__val tooltip-container"
@@ -75,11 +55,7 @@
                         />{{ renderLeftUnit(item.lefValue, item.lefUnit) }}
                     </div>
 
-                    <div
-                        class="lc-human-shapeCard__wrapper__item__content__val"
-                    >
-                        |
-                    </div>
+                    <div class="lc-human-shapeCard__wrapper__item__content__val">|</div>
                     <div
                         class="lc-human-shapeCard__wrapper__item__content__val tooltip-container"
                         :data-tooltip="`${item.rigValue}${item.rigUnit || rigUnit}`"
@@ -126,14 +102,14 @@ const {
     fixed?: boolean
 }>()
 
-const renderdecimals = memoize((value) => {
+const renderdecimals = memoize(value => {
     const { unit: numUnit } = bigNumber(value)
     if (Number.isInteger(value) && !numUnit) {
         return 0
     }
     return decimal
 })
-const renderValue = memoize((value) => {
+const renderValue = memoize(value => {
     if (fixed) {
         const { result } = bigNumber(value, decimal)
         return result
@@ -141,7 +117,7 @@ const renderValue = memoize((value) => {
     return value
 })
 
-const createUnitRenderer = (defaultUnit) =>
+const createUnitRenderer = defaultUnit =>
     memoize(
         (value, _unit) => {
             if (fixed) {

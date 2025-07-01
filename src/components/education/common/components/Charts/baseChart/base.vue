@@ -7,13 +7,7 @@
 <script lang="ts" setup>
 import { useResizeObserver } from '@vueuse/core'
 import { init, type EChartsType, type EChartsOption } from 'echarts'
-import {
-    onMounted,
-    PropType,
-    shallowRef,
-    useTemplateRef,
-    watchEffect,
-} from 'vue'
+import { onMounted, PropType, shallowRef, useTemplateRef, watchEffect } from 'vue'
 import debounce from 'lodash-es/debounce'
 
 const commonChartRef = useTemplateRef('commonChart')
@@ -42,11 +36,7 @@ onMounted(() => {
     setOptions(options, notMerge)
 })
 
-function setOptions(
-    options: EChartsOption,
-    deep: boolean,
-    lazyUpdate?: boolean,
-) {
+function setOptions(options: EChartsOption, deep: boolean, lazyUpdate?: boolean) {
     chartInstance.value?.setOption(options, deep, lazyUpdate)
 }
 watchEffect(

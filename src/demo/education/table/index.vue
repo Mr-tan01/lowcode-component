@@ -10,13 +10,7 @@
             >
                 <LcDescTable :columns :data> </LcDescTable>
             </DemoHelpBox>
-            <DemoHelpBox
-                title="描述列表"
-                description="描述列表-空数据"
-                rswidth="500px"
-                rs-height="500px"
-                :code="demoCodes.code1"
-            >
+            <DemoHelpBox title="描述列表" description="描述列表-空数据" rswidth="500px" rs-height="500px" :code="demoCodes.code1">
                 <LcDescTable :columns :data="[]"> </LcDescTable>
             </DemoHelpBox>
         </DemoHelpBox>
@@ -30,9 +24,7 @@
             >
                 <LcDescTable :columns="c" :data="a">
                     <template #d="{ value, record }">
-                        <div
-                            class="desctable__cell__content--hover-show display-none"
-                        >
+                        <div class="desctable__cell__content--hover-show display-none">
                             {{ record.tip }}
                         </div>
                         <div class="desctable__cell__content--hover-hide">
@@ -47,10 +39,7 @@
 
 <script lang="ts" setup>
 import { DemoHelpBox } from '@/components/common/DemoHelpBox'
-import {
-    LcDescTable,
-    type LcDescTableColumns,
-} from '@/components/education/components/table'
+import { LcDescTable, type LcDescTableColumns } from '@/components/education/components/table'
 import { demoCodes } from './demo-codes'
 import { ref } from 'vue'
 const columns: LcDescTableColumns[] = [

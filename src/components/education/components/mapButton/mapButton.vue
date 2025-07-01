@@ -11,12 +11,7 @@
             />
         </div>
         <div class="lcmapbutton-underside">
-            <img
-                class="lcmapbutton-underside-map"
-                src="./images/map.png"
-                alt="Map"
-                @click="handleClick('Map')"
-            />
+            <img class="lcmapbutton-underside-map" src="./images/map.png" alt="Map" @click="handleClick('Map')" />
         </div>
     </div>
 </template>

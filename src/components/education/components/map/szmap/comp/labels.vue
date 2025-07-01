@@ -68,11 +68,7 @@
 <script lang="ts" setup>
 import { computed } from 'vue'
 import merge from 'lodash-es/merge'
-import {
-    type BlockLableMapType,
-    defBlockLableMap,
-    szBlockNames,
-} from '../const'
+import { type BlockLableMapType, defBlockLableMap, szBlockNames } from '../const'
 
 const { labels = {} } = defineProps<{
     labels?: BlockLableMapType

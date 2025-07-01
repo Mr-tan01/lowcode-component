@@ -7,8 +7,8 @@ export default {
     semi: false,
     // 每行最大字符数
     printWidth: 150,
-    // 箭头函数参数始终加括号
-    arrowParens: 'always',
+    // 箭头函数单一参数省略括号
+    arrowParens: 'avoid',
     // 对markdown等文本进行自动换行
     proseWrap: 'always',
     // 使用LF作为换行符

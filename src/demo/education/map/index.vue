@@ -1,29 +1,14 @@
 <template>
     <div class="demo-map">
-        <DemoHelpBox
-            title="深圳地图"
-            description="深圳教育项目-深圳地图"
-            rswidth="962px"
-            rs-height="560px"
-        >
+        <DemoHelpBox title="深圳地图" description="深圳教育项目-深圳地图" rswidth="962px" rs-height="560px">
             <LcTianditu tk="a7a093036e0140d5a8dd309f33f1e382"></LcTianditu>
         </DemoHelpBox>
-        <DemoHelpBox
-            title="深圳地图"
-            description="深圳教育项目-深圳地图"
-            rswidth="962px"
-            :code="demoCodes.code1"
-        >
+        <DemoHelpBox title="深圳地图" description="深圳教育项目-深圳地图" rswidth="962px" :code="demoCodes.code1">
             <div class="size-box">
                 <Szmap :values :disabled-gradient="true"></Szmap>
             </div>
         </DemoHelpBox>
-        <DemoHelpBox
-            title="深圳地图"
-            description="深圳教育项目-深圳地图自定义"
-            rswidth="962px"
-            :code="demoCodes.code1"
-        >
+        <DemoHelpBox title="深圳地图" description="深圳教育项目-深圳地图自定义" rswidth="962px" :code="demoCodes.code1">
             <div class="size-box">
                 <Szmap :values :disabled-gradient="true">
                     <template #mapLabel="{ blockList, labelClass, getVlaue }">
@@ -39,33 +24,16 @@
                 </Szmap>
             </div>
         </DemoHelpBox>
-        <DemoHelpBox
-            title="深圳地图"
-            description="深圳教育项目-深圳地图悬浮"
-            rswidth="962px"
-            :code="demoCodes.code1"
-        >
+        <DemoHelpBox title="深圳地图" description="深圳教育项目-深圳地图悬浮" rswidth="962px" :code="demoCodes.code1">
             <div class="size-box">
-                <Szmap
-                    :levels
-                    :values
-                    :disabled-gradient="false"
-                    :label-model="LabelModelEnum.HOVER"
-                >
-                    <template
-                        #mapLabel="{ labelClass, getVlaue, currentMapKey }"
-                    >
+                <Szmap :levels :values :disabled-gradient="false" :label-model="LabelModelEnum.HOVER">
+                    <template #mapLabel="{ labelClass, getVlaue, currentMapKey }">
                         <span>
                             <MapMarker
                                 v-if="currentMapKey"
                                 :class="labelClass(currentMapKey)"
-                                :label="
-                                    getVlaue(currentMapKey as BlockName)
-                                        .mapLabel
-                                "
-                                :value="
-                                    getVlaue(currentMapKey as BlockName).value
-                                "
+                                :label="getVlaue(currentMapKey as BlockName).mapLabel"
+                                :value="getVlaue(currentMapKey as BlockName).value"
                                 unit="所"
                             ></MapMarker>
                         </span>
@@ -73,12 +41,7 @@
                 </Szmap>
             </div>
         </DemoHelpBox>
-        <DemoHelpBox
-            title="深圳地图"
-            description="深圳教育项目-深圳地图"
-            rswidth="962px"
-            :code="demoCodes.code2"
-        >
+        <DemoHelpBox title="深圳地图" description="深圳教育项目-深圳地图" rswidth="962px" :code="demoCodes.code2">
             <div class="size-box">
                 <Szmap :values :rotate-x="-30"></Szmap>
             </div>
@@ -87,14 +50,7 @@
 </template>
 <script lang="ts" setup>
 import { DemoHelpBox } from '@/components/common/DemoHelpBox'
-import {
-    Szmap,
-    LabelModelEnum,
-    type SZMapMarkProps,
-    LcTianditu,
-    BlockName,
-    Levels,
-} from '@/components/education/components/map'
+import { Szmap, LabelModelEnum, type SZMapMarkProps, LcTianditu, BlockName, Levels } from '@/components/education/components/map'
 import { demoCodes } from './demo-codes'
 import MapMarker from './components/index.vue'
 import { omit } from 'lodash-es'

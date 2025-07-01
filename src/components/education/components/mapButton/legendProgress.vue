@@ -2,13 +2,8 @@
     <div class="legend-progress">
         <div class="legend-progress__label">{{ label }}</div>
         <div class="legend-progress__center">
-            <div class="legend-progress__center__min-value sample-text">
-                {{ formattedMin }}%
-            </div>
-            <div
-                ref="progressBar"
-                class="legend-progress__center__progress-bar"
-            >
+            <div class="legend-progress__center__min-value sample-text">{{ formattedMin }}%</div>
+            <div ref="progressBar" class="legend-progress__center__progress-bar">
                 <div
                     v-for="(segment, index) in segments"
                     :key="index"
@@ -17,18 +12,12 @@
                     @mouseenter="showTooltip(segment.value, $event)"
                     @mouseleave="hideTooltip"
                 >
-                    <div
-                        v-show="activeTooltip.value === segment.value"
-                        class="segment-tooltip"
-                        :style="tooltipStyle"
-                    >
+                    <div v-show="activeTooltip.value === segment.value" class="segment-tooltip" :style="tooltipStyle">
                         {{ (segment.value * 100).toFixed(1) }}%
                     </div>
                 </div>
             </div>
-            <div class="legend-progress__center__max-value sample-text">
-                {{ formattedMax }}%
-            </div>
+            <div class="legend-progress__center__max-value sample-text">{{ formattedMax }}%</div>
         </div>
     </div>
 </template>
@@ -63,8 +52,7 @@ const props = defineProps({
     data: {
         type: Array as () => number[],
         required: true,
-        validator: (value: number[]) =>
-            value.every((item) => item >= 0 && item <= 1),
+        validator: (value: number[]) => value.every(item => item >= 0 && item <= 1),
     },
 })
 
@@ -75,10 +63,7 @@ const activeTooltip = ref<{ value: number | null; x: number }>({
     x: 0,
 })
 const tooltipStyle = computed(() => ({
-    left: `${Math.min(
-        Math.max(activeTooltip.value.x, 0),
-        progressBar.value?.clientWidth || 0,
-    )}px`,
+    left: `${Math.min(Math.max(activeTooltip.value.x, 0), progressBar.value?.clientWidth || 0)}px`,
 }))
 
 const showTooltip = (value: number, event: MouseEvent) => {
@@ -97,9 +82,7 @@ const hideTooltip = () => {
 // 数值格式化
 const roundMin = (value: number) => {
     const decimal = (value * 100) % 10
-    return decimal < 1
-        ? Math.floor(value * 1000) / 10
-        : Math.ceil(value * 1000) / 10
+    return decimal < 1 ? Math.floor(value * 1000) / 10 : Math.ceil(value * 1000) / 10
 }
 
 const roundMax = (value: number) => {
@@ -115,9 +98,7 @@ const displayMin = computed(() => {
     return processedData.value.length > 0 ? roundMin(processedData.value[0]) : 0
 })
 const displayMax = computed(() => {
-    return processedData.value.length > 0
-        ? roundMax(processedData.value[processedData.value.length - 1])
-        : 0
+    return processedData.value.length > 0 ? roundMax(processedData.value[processedData.value.length - 1]) : 0
 })
 
 const formattedMin = computed(() => displayMin.value.toFixed(1))
@@ -140,10 +121,9 @@ const generateColors = (count: number): string[] => {
         const hslToRgb = (h: number, s: number, l: number) => {
             s /= 100
             l /= 100
-            const k = (n) => (n + h / 30) % 12
+            const k = n => (n + h / 30) % 12
             const a = s * Math.min(l, 1 - l)
-            const f = (n) =>
-                l - a * Math.max(Math.min(k(n) - 3, 9 - k(n), 1), -1)
+            const f = n => l - a * Math.max(Math.min(k(n) - 3, 9 - k(n), 1), -1)
             const r = Math.round(f(0) * 255)
             const g = Math.round(f(8) * 255)
             const b = Math.round(f(4) * 255)
@@ -192,7 +172,7 @@ const outputStops = computed<ColorStop[]>(() => {
 
 watch(
     outputStops,
-    (val) => {
+    val => {
         emit('update-stops', val)
     },
     { immediate: true, deep: true },
@@ -275,8 +255,7 @@ const progressBar = ref<HTMLElement | null>(null)
                     transform: translateX(-50%);
                     border-width: 5px;
                     border-style: solid;
-                    border-color: rgba(0, 0, 0, 0.85) transparent transparent
-                        transparent;
+                    border-color: rgba(0, 0, 0, 0.85) transparent transparent transparent;
                 }
             }
         }

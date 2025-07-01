@@ -2,30 +2,18 @@
     <div class="lc-indicator-list">
         <div class="lc-indicator-list__wrapper">
             <div class="lc-indicator-list__wrapper__image">
-                <img
-                    class="lc-indicator-list__wrapper__image--img"
-                    :src="icon"
-                    alt=""
-                />
+                <img class="lc-indicator-list__wrapper__image--img" :src="icon" alt="" />
             </div>
             <div class="lc-indicator-list__wrapper__info">
                 <div class="lc-indicator-list__wrapper__info--nickname">
                     {{ name }}
                 </div>
                 <div class="lc-indicator-list__wrapper__info--msg">
-                    <div
-                        v-for="(item, key) in msg"
-                        :key
-                        class="lc-indicator-list__wrapper__info--msg__item"
-                    >
-                        <div
-                            class="lc-indicator-list__wrapper__info--msg__item--label"
-                        >
+                    <div v-for="(item, key) in msg" :key class="lc-indicator-list__wrapper__info--msg__item">
+                        <div class="lc-indicator-list__wrapper__info--msg__item--label">
                             {{ item.label }}
                         </div>
-                        <div
-                            class="lc-indicator-list__wrapper__info--msg__item--value"
-                        >
+                        <div class="lc-indicator-list__wrapper__info--msg__item--value">
                             {{ item.value }}
                         </div>
                     </div>

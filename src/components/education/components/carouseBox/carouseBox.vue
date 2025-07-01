@@ -1,22 +1,10 @@
 <template>
     <div class="lc-carouse-box">
         <div class="lc-carouse-box__wrapper">
-            <div
-                v-if="showArrow"
-                class="lc-carouse-box__wrapper__arrow arrow--left"
-                @click="leftHandler"
-            >
-                <img
-                    class="lc-carouse-box__wrapper__arrow--image"
-                    src="./images/lt-arrow.png"
-                    draggable="false"
-                    alt=""
-                />
+            <div v-if="showArrow" class="lc-carouse-box__wrapper__arrow arrow--left" @click="leftHandler">
+                <img class="lc-carouse-box__wrapper__arrow--image" src="./images/lt-arrow.png" draggable="false" alt="" />
             </div>
-            <div
-                ref="tabButtonParentElRef"
-                class="lc-carouse-box__wrapper__tabs"
-            >
+            <div ref="tabButtonParentElRef" class="lc-carouse-box__wrapper__tabs">
                 <div
                     ref="carouselTrainElRef"
                     class="lc-carouse-box__wrapper__tabs--train"
@@ -46,37 +34,20 @@
                                 handleClick,
                             }"
                         >
-                            <div
-                                class="lc-carouse-box__wrapper__tabs--train__button--text"
-                                :title="item.label"
-                            >
+                            <div class="lc-carouse-box__wrapper__tabs--train__button--text" :title="item.label">
                                 {{ item.label }}
                             </div>
                         </slot>
                     </button>
                 </div>
             </div>
-            <div
-                v-if="showArrow"
-                class="lc-carouse-box__wrapper__arrow arrow--right"
-                @click="rightHandler"
-            >
-                <img
-                    class="lc-carouse-box__wrapper__arrow--image"
-                    src="./images/rt-arrow.png"
-                    draggable="false"
-                    alt=""
-                />
+            <div v-if="showArrow" class="lc-carouse-box__wrapper__arrow arrow--right" @click="rightHandler">
+                <img class="lc-carouse-box__wrapper__arrow--image" src="./images/rt-arrow.png" draggable="false" alt="" />
             </div>
         </div>
         <div v-if="showTrack" class="lc-carouse-box__track">
             <slot name="track">
-                <img
-                    class="lc-carouse-box__track__image--pointer"
-                    src="./images/top-arrow.png"
-                    draggable="false"
-                    alt=""
-                />
+                <img class="lc-carouse-box__track__image--pointer" src="./images/top-arrow.png" draggable="false" alt="" />
             </slot>
         </div>
     </div>
@@ -115,10 +86,7 @@ const showArrow = computed(() => !disabled)
 
 // 如果modelIndex为-1，则以modelValue为准
 if (modelIndex.value === -1) {
-    modelIndex.value =
-        listSource.value?.findIndex(
-            (item) => rowKey(item) === modelValue.value,
-        ) ?? 0
+    modelIndex.value = listSource.value?.findIndex(item => rowKey(item) === modelValue.value) ?? 0
 }
 
 const $emit = defineEmits<{
@@ -138,11 +106,7 @@ const beforeAfterTempData = ref<{
 const renderList = computed(() => {
     // clone 一份放在结尾
     const listClone = listSource.value ?? []
-    return [
-        ...beforeAfterTempData.value.before,
-        ...listClone,
-        ...beforeAfterTempData.value.after,
-    ]
+    return [...beforeAfterTempData.value.before, ...listClone, ...beforeAfterTempData.value.after]
 })
 
 const isEven = computed(() => carouseIndex.value! % 2 === 0)
@@ -206,12 +170,8 @@ function appendBeforeAfterData() {
     }
     const listClone = listSource.value ?? []
 
-    beforeAfterTempData.value.before = listClone
-        .slice(-appendCount)
-        .map(uuCloneKey) // 把结尾的{maxAppendCount}个追加到前面
-    beforeAfterTempData.value.after = listClone
-        .slice(0, appendCount)
-        .map(uuCloneKey) // 把开始的{maxAppendCount}个追加到后面
+    beforeAfterTempData.value.before = listClone.slice(-appendCount).map(uuCloneKey) // 把结尾的{maxAppendCount}个追加到前面
+    beforeAfterTempData.value.after = listClone.slice(0, appendCount).map(uuCloneKey) // 把开始的{maxAppendCount}个追加到后面
 }
 
 function uuCloneKey(item: TabListRaw, index: number): TabListRaw {
@@ -241,12 +201,7 @@ onMounted(onParentElResize)
 // 让选中的在中心点，计算中心点
 const clientRect = computed(() => {
     forceCompile.value++ // 强制更新
-    if (
-        !tabButtonParentElRef.value ||
-        !tabButtonRef.value ||
-        !carouselTrainElRef.value
-    )
-        return
+    if (!tabButtonParentElRef.value || !tabButtonRef.value || !carouselTrainElRef.value) return
     // 获取到父元素的宽度
     const width = tabButtonParentElRef.value.offsetWidth
     // 获取到按钮的宽度
@@ -293,21 +248,14 @@ const clientRect = computed(() => {
 
 const carouselOffset = computed(() => {
     if (clientRect.value) {
-        const { normalButtonWidth, maxButtonCount, offset, carouselWidth } =
-            clientRect.value
+        const { normalButtonWidth, maxButtonCount, offset, carouselWidth } = clientRect.value
         const maxButtonCountHalf = maxButtonCount / 2
-        let offsetValue =
-            (normalButtonWidth * (carouseIndex.value - maxButtonCountHalf) +
-                offset) *
-            -1
+        let offsetValue = (normalButtonWidth * (carouseIndex.value - maxButtonCountHalf) + offset) * -1
 
         if (offsetValue >= 0) {
             // 如果偏移量大于0，则设置为0, 证明已经左边到头了
             offsetValue = 0
-        } else if (
-            offsetValue <=
-            -carouselWidth + normalButtonWidth * maxButtonCount
-        ) {
+        } else if (offsetValue <= -carouselWidth + normalButtonWidth * maxButtonCount) {
             // 证明已经到头了, 最起码需要展示全按钮在区域内容，区域不能空
             offsetValue = -carouselWidth + normalButtonWidth * maxButtonCount
         }
@@ -408,14 +356,7 @@ const handleClick = throttle((_item: TabListRaw, index: number) => {
 
         &__tabs {
             overflow: hidden;
-            --mask-image: linear-gradient(
-                to right,
-                transparent 0%,
-                rgba(0, 0, 0, 0.8) 10%,
-                black 50%,
-                rgba(0, 0, 0, 0.817) 90%,
-                transparent 100%
-            );
+            --mask-image: linear-gradient(to right, transparent 0%, rgba(0, 0, 0, 0.8) 10%, black 50%, rgba(0, 0, 0, 0.817) 90%, transparent 100%);
             mask: var(--mask-image);
             -webkit-mask: var(--mask-image);
 
@@ -428,8 +369,7 @@ const handleClick = throttle((_item: TabListRaw, index: number) => {
                 transform: var(--carousel-offset);
 
                 &.is-transition {
-                    transition: transform calc(var(--transition-time) * 1ms)
-                        linear;
+                    transition: transform calc(var(--transition-time) * 1ms) linear;
                 }
 
                 &__button {
@@ -443,9 +383,7 @@ const handleClick = throttle((_item: TabListRaw, index: number) => {
                     }
 
                     &--text {
-                        font-family:
-                            AlimamaFangYuanTiVF-SemiBold,
-                            AlimamaFangYuanTiVF-SemiBold;
+                        font-family: AlimamaFangYuanTiVF-SemiBold, AlimamaFangYuanTiVF-SemiBold;
                         font-weight: normal;
                         font-size: 18px;
                         color: #ffffff;

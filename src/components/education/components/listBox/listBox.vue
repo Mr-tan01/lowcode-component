@@ -2,24 +2,11 @@
     <div class="dynamic-data-list" :class="{ 'is-bordered': bordered }">
         <LcElasticScrollbar>
             <NGrid :x-gap="gap" :cols="cols">
-                <NGi
-                    v-for="(row, rowIndex) in rows"
-                    :key="`row-${rowIndex}`"
-                    class="list-row"
-                    :style="getRowStyle(rowIndex)"
-                >
-                    <div
-                        class="key-cell"
-                        :style="getKeyCellStyle(rowIndex)"
-                        :title="row.indicatorName"
-                    >
+                <NGi v-for="(row, rowIndex) in rows" :key="`row-${rowIndex}`" class="list-row" :style="getRowStyle(rowIndex)">
+                    <div class="key-cell" :style="getKeyCellStyle(rowIndex)" :title="row.indicatorName">
                         {{ row.indicatorName }}
                     </div>
-                    <div
-                        class="value-cell"
-                        :style="getValueCellStyle(rowIndex)"
-                        :title="row.indicatorValue"
-                    >
+                    <div class="value-cell" :style="getValueCellStyle(rowIndex)" :title="row.indicatorValue">
                         {{ row.indicatorValue }}
                     </div>
                 </NGi>

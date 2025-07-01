@@ -1,19 +1,7 @@
-import {
-    type SeriesOption,
-    type EChartsCoreOption,
-    type EChartsOption,
-} from 'echarts'
+import { type SeriesOption, type EChartsCoreOption, type EChartsOption } from 'echarts'
 import merge from 'lodash-es/merge'
 import { deepMergeArrayOptions } from '@mmj-code-lib/lowcode/es/components'
-import {
-    commonScatterSeries,
-    gridOptions,
-    legendOptions,
-    scatterColors,
-    tooltipOptions,
-    xAxisOptions,
-    yAxisOptions,
-} from './const'
+import { commonScatterSeries, gridOptions, legendOptions, scatterColors, tooltipOptions, xAxisOptions, yAxisOptions } from './const'
 import { setRgbaAlpha } from 'lowcode-share/es/share'
 
 export const commonScatterOptions: EChartsOption = {
@@ -26,18 +14,11 @@ export const commonScatterOptions: EChartsOption = {
     series: commonScatterSeries,
 }
 
-export function useCommonScatterOptions(
-    opts: EChartsCoreOption | EChartsOption,
-    isDefaultTooltip: boolean,
-) {
+export function useCommonScatterOptions(opts: EChartsCoreOption | EChartsOption, isDefaultTooltip: boolean) {
     if (isDefaultTooltip) {
         Reflect.deleteProperty(commonScatterOptions, 'tooltip')
     }
-    deepMergeArrayOptions(
-        opts,
-        Object.keys(commonScatterOptions),
-        Object.values(commonScatterOptions),
-    )
+    deepMergeArrayOptions(opts, Object.keys(commonScatterOptions), Object.values(commonScatterOptions))
     return merge({}, commonScatterOptions, opts)
 }
 
@@ -84,9 +65,7 @@ function mregeSeriesRecord(newSeries: SeriesOption, seriesIndex: number) {
     )
 }
 
-export function useCommonScatterSeries(
-    series: EChartsOption['series'],
-): EChartsOption['series'] {
+export function useCommonScatterSeries(series: EChartsOption['series']): EChartsOption['series'] {
     if (Array.isArray(series)) {
         return series.map((item, index) => {
             return mregeSeriesRecord(item, index)

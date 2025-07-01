@@ -2,12 +2,7 @@ import { type EChartsOption, EffectScatterSeriesOption } from 'echarts'
 import tooltipContentBg from './images/tooltip-content-bg.png'
 import tooltipContentBlueBg from './images/tooltip-content-blue-bg.png'
 
-export const scatterColors = [
-    'rgba(15, 251, 248, 1)',
-    'rgba(225, 188, 75, 1)',
-    'rgba(34, 118, 252, 1)',
-    'rgba(222, 56, 4, 1)',
-]
+export const scatterColors = ['rgba(15, 251, 248, 1)', 'rgba(225, 188, 75, 1)', 'rgba(34, 118, 252, 1)', 'rgba(222, 56, 4, 1)']
 const tooltipContentImageList = [tooltipContentBlueBg, tooltipContentBg]
 const tooltipContentStyler = `
 width: 107px;
@@ -124,17 +119,7 @@ export const xAxisOptions: EChartsOption['xAxis'] = [
     {
         position: 'bottom',
         boundaryGap: false,
-        data: [
-            '(0.05)',
-            '0.00',
-            '0.05',
-            '0.10',
-            '0.15',
-            '0.20',
-            '0.25',
-            '0.30',
-            '0.35',
-        ],
+        data: ['(0.05)', '0.00', '0.05', '0.10', '0.15', '0.20', '0.25', '0.30', '0.35'],
         axisLabel: {
             color(_value, index) {
                 return index === 0 ? 'rgba(225, 75, 75, 1)' : '#ffffff'
@@ -157,7 +142,7 @@ export const commonScatterSeries: EffectScatterSeriesOption = {
         return Math.max(Math.sqrt(data), 25)
     },
     itemStyle: {
-        color: (data) => scatterColors[data.componentIndex],
+        color: data => scatterColors[data.componentIndex],
         borderColor: '#fff',
         borderWidth: 2.5,
         opacity: 1,
