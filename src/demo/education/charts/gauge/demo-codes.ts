@@ -1,6 +1,5 @@
-
 export const deomCodes = {
-    code1: (value) => {
+    code1: value => {
         return `
 <template>
     <LcGaugeSvgChart :value="${value}"></LcGaugeSvgChart>

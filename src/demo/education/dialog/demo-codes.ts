@@ -11,7 +11,7 @@ export const code1 = `
     import { ref } from 'vue';
     const show = ref(false);
 </script>
-`;
+`
 
 export const code2 = `
 <template>
@@ -27,4 +27,4 @@ export const code2 = `
     import { ref } from 'vue';
     const show = ref(false);
 </script>
-`;
+`

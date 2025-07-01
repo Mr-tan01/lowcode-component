@@ -19,4 +19,4 @@ const list: LcSamplingRecords[] = [
   },
 ]
 </script>
-`;
+`

@@ -7,23 +7,20 @@
     </div>
 </template>
 <script lang="ts" setup>
-import { computed } from 'vue';
-import { overflowStr } from 'lowcode-share/es/share';
+import { computed } from 'vue'
+import { overflowStr } from 'lowcode-share/es/share'
 
-const {
-    text = '',
-    maxLength = 15,
-} = defineProps({
+const { text = '', maxLength = 15 } = defineProps({
     text: {
         type: String,
     },
     maxLength: {
         type: Number,
-    }
-});
+    },
+})
 const formatedText = computed(() => {
-    return overflowStr(text, maxLength);
-});
+    return overflowStr(text, maxLength)
+})
 </script>
 
 <style lang="scss" scoped>
@@ -39,7 +36,7 @@ const formatedText = computed(() => {
         --gradient: linear-gradient(to right, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 1));
         mask: var(--gradient);
         -webkit-mask: var(--gradient);
-        background: linear-gradient(to right, rgba(0, 96, 163, 0) 0%, #007FCE 100%);
+        background: linear-gradient(to right, rgba(0, 96, 163, 0) 0%, #007fce 100%);
         border-radius: 2px;
         border: 1px solid rgba(15, 194, 251, 1);
         z-index: 0;
@@ -51,13 +48,12 @@ const formatedText = computed(() => {
             inset: 0;
             z-index: -1;
         }
-
     }
 
     &__text {
         font-family: HarmonyOS_Sans_SC;
         font-size: 16px;
-        color: #FFFFFF;
+        color: #ffffff;
         line-height: 26px;
         text-align: left;
         font-style: normal;

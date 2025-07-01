@@ -1,30 +1,30 @@
 <template>
     <div class="lc-cesium">
         <NSpin :show="initImageryLayersStatus || initPointDataStatus" :stroke="spinStroke" :style="spinStyle" size="large">
-            <div class="lc-cesium_map" id="cesium-3d-viewer"></div>
+            <div id="cesium-3d-viewer" class="lc-cesium_map"></div>
             <template #description> 地图加载中... </template>
         </NSpin>
     </div>
 </template>
 
 <script lang="ts" setup>
-import { ref, onMounted, onBeforeUnmount, watch, computed } from "vue";
-import { cesiumService } from "./modules/cesiumUtils";
-import { cesiumProps } from "./modules/props";
-import type { changeModelType, changeModelParamType, EntityProperties } from "./modules/type";
-import { Entity, Cartesian3, JulianDate } from "cesium";
-import { NSpin } from "naive-ui";
+import { ref, onMounted, onBeforeUnmount, watch, computed } from 'vue'
+import { cesiumService } from './modules/cesiumUtils'
+import { cesiumProps } from './modules/props'
+import type { changeModelType, changeModelParamType, EntityProperties } from './modules/type'
+import { Entity, Cartesian3, JulianDate } from 'cesium'
+import { NSpin } from 'naive-ui'
 
-const initImageryLayersStatus = ref<boolean>(true);
-const initPointDataStatus = ref<boolean>(true);
+const initImageryLayersStatus = ref<boolean>(true)
+const initPointDataStatus = ref<boolean>(true)
 const emit = defineEmits<{
-    (e: "pointHandler", value: EntityProperties): void;
-    (e: "limitHeightHandler", value: number): void;
-    (e: "loadHandler", value: boolean): void;
-}>();
+    (e: 'pointHandler', value: EntityProperties): void
+    (e: 'limitHeightHandler', value: number): void
+    (e: 'loadHandler', value: boolean): void
+}>()
 
 const {
-    clientId = "74109f7095974ab1a5e930c8e998580d",
+    clientId = '74109f7095974ab1a5e930c8e998580d',
     accessToken,
     baseUrl,
     imageryLayersUrl,
@@ -35,39 +35,39 @@ const {
     spinStroke,
     spinContainerBg,
     spinDescriptionColor,
-    defaultCenterKey = "深圳市",
+    defaultCenterKey = '深圳市',
     centerPosition = Cartesian3.fromDegrees(114.187446, 22.674131, 130000),
     controlStatus,
     basicConfig,
     pointData = [],
     openIndexDB = false,
-} = defineProps(cesiumProps);
+} = defineProps(cesiumProps)
 
 const reloadPointData = async (): Promise<void> => {
-    clearEntity();
-    cesiumUtils.pointData = pointData;
-    pointData?.forEach((point) => {
-        cesiumUtils.addPoint(point, "value");
+    clearEntity()
+    cesiumUtils.pointData = pointData
+    pointData?.forEach(point => {
+        cesiumUtils.addPoint(point, 'value')
         if (defaultShowState) {
-            cesiumUtils.addPoint(point);
+            cesiumUtils.addPoint(point)
         }
-    });
-};
+    })
+}
 
 const loadedTileLayer = async (status: boolean): Promise<void> => {
-    initPointDataStatus.value = status;
-};
+    initPointDataStatus.value = status
+}
 
 const loadImageryLayers = async (status: boolean): Promise<void> => {
-    emit("loadHandler", !status);
-    initImageryLayersStatus.value = status;
+    emit('loadHandler', !status)
+    initImageryLayersStatus.value = status
     if (initPointDataStatus.value) {
-        initPointDataStatus.value = status;
+        initPointDataStatus.value = status
     }
-};
+}
 
 // 初始化 Cesium 服务
-const cesiumUtils = new cesiumService("cesium-3d-viewer", {
+const cesiumUtils = new cesiumService('cesium-3d-viewer', {
     config: basicConfig,
     defaultShowState: defaultShowState,
     flyToHeight: flyToHeight,
@@ -76,120 +76,120 @@ const cesiumUtils = new cesiumService("cesium-3d-viewer", {
     defaultCenterKey,
     openIndexDB,
     pointHandler: (data: Entity) => {
-        const currentTime = JulianDate.now();
-        const value0ption = data.properties?.getValue(currentTime);
-        if(!value0ption) return 
-        emit("pointHandler", value0ption);
+        const currentTime = JulianDate.now()
+        const value0ption = data.properties?.getValue(currentTime)
+        if (!value0ption) return
+        emit('pointHandler', value0ption)
     },
     limitHeightHandler: (value: number) => {
-        emit("limitHeightHandler", value);
+        emit('limitHeightHandler', value)
     },
     loadTileLayerHandler: (status: boolean) => {
-        loadImageryLayers(status);
+        loadImageryLayers(status)
     },
-});
+})
 
 // 清除选中图层
 const clearEntity = () => {
-    cesiumUtils.clearEntity("pointEntities", "dataSource");
-    cesiumUtils.clearEntity("pointEntities", "viewer");
-};
+    cesiumUtils.clearEntity('pointEntities', 'dataSource')
+    cesiumUtils.clearEntity('pointEntities', 'viewer')
+}
 const changeModel = <T extends changeModelType>(type: changeModelType, value: changeModelParamType[T]): void => {
     if (cesiumUtils[type]) {
-        cesiumUtils[type](value);
+        cesiumUtils[type](value)
     } else {
-        console.log("未匹配cesiumUtils的方法");
+        console.log('未匹配cesiumUtils的方法')
     }
-};
+}
 
 const initCesium = async (): Promise<{ status: boolean }> => {
     try {
         if (!accessToken) {
-            return { status: false };
+            return { status: false }
         }
         // 同步数据
-        cesiumUtils.pointData = pointData;
-        cesiumUtils.options.config = basicConfig;
-        cesiumUtils.options.defaultShowState = defaultShowState;
-        cesiumUtils.options.flyToHeight = flyToHeight;
-        cesiumUtils.options.offsetState = offsetState;
+        cesiumUtils.pointData = pointData
+        cesiumUtils.options.config = basicConfig
+        cesiumUtils.options.defaultShowState = defaultShowState
+        cesiumUtils.options.flyToHeight = flyToHeight
+        cesiumUtils.options.offsetState = offsetState
 
         // 初始化 Viewer
-        const viewerInitSuccess = await cesiumUtils.initViewer(controlStatus);
+        const viewerInitSuccess = await cesiumUtils.initViewer(controlStatus)
         if (!viewerInitSuccess) {
-            throw new Error("Viewer 初始化失败");
+            throw new Error('Viewer 初始化失败')
         }
 
         // 更新属性
-        cesiumUtils.updateViewerAttribute();
+        cesiumUtils.updateViewerAttribute()
 
         // 设置初始视角
-        cesiumUtils.setInitialView({ destination: centerPosition });
+        cesiumUtils.setInitialView({ destination: centerPosition })
 
         // 加载瓦片图层
         const titleUrl =
             imageryLayersUrl ??
-            `${baseUrl}/service/api/e99b765798d1412b9c2b458a1473396e/igs/rest/services/SZMAP/SZDZDT_2024_Yingji_T1_4490/WMTSServer?client_id=${clientId}&access_token=${accessToken}`;
+            `${baseUrl}/service/api/e99b765798d1412b9c2b458a1473396e/igs/rest/services/SZMAP/SZDZDT_2024_Yingji_T1_4490/WMTSServer?client_id=${clientId}&access_token=${accessToken}`
 
-        await cesiumUtils.loadTileLayer(titleUrl);
+        await cesiumUtils.loadTileLayer(titleUrl)
         if (areaName) {
-            cesiumUtils.polygonClickHandler(areaName);
+            cesiumUtils.polygonClickHandler(areaName)
         }
-        return { status: true };
-    } catch (err: any) {
-        loadedTileLayer(false);
-        return { status: false };
+        return { status: true }
+    } catch {
+        loadedTileLayer(false)
+        return { status: false }
     }
-};
+}
 
 const spinStyle = computed(() => {
     return {
-        "--spin-container-bg": spinContainerBg ?? "#6C7E93",
-        "--n-spin-description-color": spinDescriptionColor ?? "#046ab1",
-    };
-});
+        '--spin-container-bg': spinContainerBg ?? '#6C7E93',
+        '--n-spin-description-color': spinDescriptionColor ?? '#046ab1',
+    }
+})
 
 const initCesiumDebounced = () => {
-    cesiumUtils.destroy();
-    initCesium();
-};
+    cesiumUtils.destroy()
+    initCesium()
+}
 
 defineExpose({
     changeModel,
     loadedTileLayer,
     clearEntity,
     cesiumUtils,
-});
+})
 
-const initCesiumDebouncedChange = watch([() => accessToken, () => imageryLayersUrl], initCesiumDebounced);
+const initCesiumDebouncedChange = watch([() => accessToken, () => imageryLayersUrl], initCesiumDebounced)
 
 const offsetStateChange = watch(
     () => offsetState,
-    (newValue) => {
+    newValue => {
         cesiumUtils.options = {
             ...cesiumUtils.options,
             offsetState: newValue,
-        };
+        }
     },
-    { deep: true }
-);
+    { deep: true },
+)
 
 const initPointDataChange = watch([initPointDataStatus, pointData], () => {
     if (!initPointDataStatus.value) {
-        reloadPointData();
+        reloadPointData()
     }
-});
+})
 
 onMounted(async () => {
-    await initCesium();
-});
+    await initCesium()
+})
 
 onBeforeUnmount(() => {
-    initCesiumDebouncedChange();
-    offsetStateChange();
-    initPointDataChange();
-    cesiumUtils.destroy();
-});
+    initCesiumDebouncedChange()
+    offsetStateChange()
+    initPointDataChange()
+    cesiumUtils.destroy()
+})
 </script>
 
 <style lang="scss" scoped>

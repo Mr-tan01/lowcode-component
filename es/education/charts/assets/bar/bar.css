@@ -1,1 +1,7 @@
-.lc-bar-chart[data-v-a38bc9d4]{width:100%;height:100%;display:flex;box-sizing:border-box;flex-direction:column}
+.lc-bar-chart[data-v-a38bc9d4] {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    box-sizing: border-box;
+    flex-direction: column;
+}

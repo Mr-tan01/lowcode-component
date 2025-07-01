@@ -1,10 +1,13 @@
 <template>
-    <div class="lc-radio-button" :class="{
-        'lc-radio-button--focus': isFocus,
-    }">
+    <div
+        class="lc-radio-button"
+        :class="{
+            'lc-radio-button--focus': isFocus,
+        }"
+    >
         <div class="lc-radio-button__wrapper">
             <button class="lc-radio-button__wrapper__button" @click="clickButton">
-                <div class="lc-radio-button__wrapper__button--suffix" v-if="$slots.suffix">
+                <div v-if="$slots.suffix" class="lc-radio-button__wrapper__button--suffix">
                     <slot name="suffix"></slot>
                 </div>
                 <div class="lc-radio-button__wrapper__button--text">
@@ -16,32 +19,29 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, inject } from 'vue';
-import { radioButtonGroupProvideKey } from '@/components/education/components/radio-button-group/const';
+import { computed, inject } from 'vue'
+import { radioButtonGroupProvideKey } from '@/components/education/components/radio-button-group/const'
 
-const {
-    text = '',
-    value = '',
-} = defineProps({
+const { text = '', value = '' } = defineProps({
     text: {
         type: String,
     },
     value: {
         type: [String, Number],
-    }
-});
-const radioButtonGroupInject = inject(radioButtonGroupProvideKey);
-const isFocus = computed(() => radioButtonGroupInject?.value.value === value);
+    },
+})
+const radioButtonGroupInject = inject(radioButtonGroupProvideKey)
+const isFocus = computed(() => radioButtonGroupInject?.value.value === value)
 
 function clickButton() {
-    radioButtonGroupInject?.value?.change(value);
+    radioButtonGroupInject?.value?.change(value)
 }
 </script>
 
 <style lang="scss" scoped>
 .lc-radio-button {
-    background: #06385E;
-    border-right: 1px solid #159AFF;
+    background: #06385e;
+    border-right: 1px solid #159aff;
     backdrop-filter: blur(2.222222222222222px);
     box-sizing: border-box;
 
@@ -50,8 +50,8 @@ function clickButton() {
     }
 
     &--focus {
-        background: linear-gradient(180deg, rgba(15, 251, 248, 0) 0%, #0FFBF8 100%);
-        border: 1px solid #0FFBF8;
+        background: linear-gradient(180deg, rgba(15, 251, 248, 0) 0%, #0ffbf8 100%);
+        border: 1px solid #0ffbf8;
     }
 
     &__wrapper {
@@ -77,7 +77,7 @@ function clickButton() {
             &--text {
                 font-family: HarmonyOS_Sans_SC;
                 font-size: 16px;
-                color: #FFFFFF;
+                color: #ffffff;
                 line-height: 26px;
                 text-align: right;
                 font-style: normal;

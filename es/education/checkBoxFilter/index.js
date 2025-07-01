@@ -1,4 +1,2 @@
-import { default as r } from "./checkoutbox-filter.js";
-export {
-  r as LcCheckboxFilter
-};
+import { default as r } from './checkoutbox-filter.js'
+export { r as LcCheckboxFilter }

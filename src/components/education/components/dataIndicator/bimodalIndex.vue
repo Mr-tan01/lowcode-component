@@ -2,46 +2,46 @@
     <div class="bimodal-index">
         <div class="bimodal-index__indicator">
             <div class="bimodal-index__indicator__lable">
-                <span v-for="label in label"> {{ label }}</span>
+                <span v-for="(item, index) in label" :key="index"> {{ item }}</span>
             </div>
             <div class="bimodal-index__indicator__value">
-                <span v-for="value in value" :title="value.toString()"> {{ value }}</span>
+                <span v-for="(item, index) in value" :key="index" :title="value.toString()"> {{ item }}</span>
             </div>
         </div>
     </div>
 </template>
 
 <script setup lang="ts">
-import { PropType, computed } from "vue";
+import { PropType, computed } from 'vue'
 
 type Data = {
-    label?: string;
-    value?: number | string;
-};
-const { data = [], empty = "-" } = defineProps({
+    label?: string
+    value?: number | string
+}
+const { data = [], empty = '-' } = defineProps({
     data: {
         type: Array as PropType<Data[]>,
     },
     empty: {
         type: String,
     },
-});
+})
 const list = computed(() => {
-    return data.slice(0, 2);
-});
+    return data.slice(0, 2)
+})
 const label = computed(() => {
-    return list.value.map((item) => item.label);
-});
+    return list.value.map(item => item.label)
+})
 const value = computed(() => {
-    return list.value.map((item) => item.value || empty);
-});
+    return list.value.map(item => item.value || empty)
+})
 </script>
 
 <style scoped lang="scss">
 .bimodal-index {
     min-width: 390px;
     padding: 15px 30px 26px 30px;
-    background: url("./images/skew/tile-bg.png") no-repeat;
+    background: url('./images/skew/tile-bg.png') no-repeat;
     background-size: 100% 100%;
     display: flex;
     flex-direction: column;
@@ -88,7 +88,7 @@ const value = computed(() => {
     }
 
     &:hover {
-        background-image: url("./images/skew/tile-selected-bg.png");
+        background-image: url('./images/skew/tile-selected-bg.png');
     }
 }
 </style>

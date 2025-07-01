@@ -1,4 +1,2 @@
-import f from "./defines.js";
-export {
-  f as default
-};
+import f from './defines.js'
+export { f as default }

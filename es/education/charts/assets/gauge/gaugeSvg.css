@@ -1,1 +1,51 @@
-.lc-gauge-svg[data-v-cd61d1b3]{display:flex;justify-content:center;align-items:center;flex:1}.lc-gauge-svg>svg[data-v-cd61d1b3]{width:100%;aspect-ratio:1/1}.lc-gauge-svg>svg #process[data-v-cd61d1b3]{transform:scale(.875);transform-origin:42.3% 42.3%;fill:none;stroke:var(--071f14bc);stroke-width:14.5px;stroke-dasharray:800px,800px;stroke-dashoffset:var(--c4a28296)}@keyframes breath-light-cd61d1b3{0%{transform:translate(49.4693px,49.1938px) scale(1);opacity:1}50%{transform:translate(49.4693px,49.1938px) scale(1.05);opacity:.5}to{transform:translate(49.4693px,49.1938px) scale(1);opacity:1}}.lc-gauge-svg>svg #group-2[data-v-cd61d1b3]{animation:breath-light-cd61d1b3 2s linear infinite;transform-origin:30% 30%}.lc-gauge-svg>svg #group-2[data-v-cd61d1b3]:hover{opacity:.7}@keyframes breath-light2-cd61d1b3{0%{opacity:1}50%{opacity:.2}}.lc-gauge-svg>svg #group-10[data-v-cd61d1b3]{animation:breath-light2-cd61d1b3 linear infinite 1s}
+.lc-gauge-svg[data-v-cd61d1b3] {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+}
+.lc-gauge-svg > svg[data-v-cd61d1b3] {
+    width: 100%;
+    aspect-ratio: 1/1;
+}
+.lc-gauge-svg > svg #process[data-v-cd61d1b3] {
+    transform: scale(0.875);
+    transform-origin: 42.3% 42.3%;
+    fill: none;
+    stroke: var(--071f14bc);
+    stroke-width: 14.5px;
+    stroke-dasharray: 800px, 800px;
+    stroke-dashoffset: var(--c4a28296);
+}
+@keyframes breath-light-cd61d1b3 {
+    0% {
+        transform: translate(49.4693px, 49.1938px) scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: translate(49.4693px, 49.1938px) scale(1.05);
+        opacity: 0.5;
+    }
+    to {
+        transform: translate(49.4693px, 49.1938px) scale(1);
+        opacity: 1;
+    }
+}
+.lc-gauge-svg > svg #group-2[data-v-cd61d1b3] {
+    animation: breath-light-cd61d1b3 2s linear infinite;
+    transform-origin: 30% 30%;
+}
+.lc-gauge-svg > svg #group-2[data-v-cd61d1b3]:hover {
+    opacity: 0.7;
+}
+@keyframes breath-light2-cd61d1b3 {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.2;
+    }
+}
+.lc-gauge-svg > svg #group-10[data-v-cd61d1b3] {
+    animation: breath-light2-cd61d1b3 linear infinite 1s;
+}

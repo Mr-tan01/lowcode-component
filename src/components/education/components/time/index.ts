@@ -1,7 +1,5 @@
-import LcTime from './time.vue';
+import LcTime from './time.vue'
 
-export type LcTimeInstanceType = InstanceType<typeof LcTime>;
+export type LcTimeInstanceType = InstanceType<typeof LcTime>
 
-export {
-    LcTime
-}
+export { LcTime }

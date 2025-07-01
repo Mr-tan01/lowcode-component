@@ -2,7 +2,7 @@
     <div class="lc-progress">
         <LcElasticScrollbar>
             <div class="lc-progress__wrapper">
-                <div class="lc-progress__wrapper__item" v-for="(item, key) in dataList" :key>
+                <div v-for="(item, key) in dataList" :key class="lc-progress__wrapper__item">
                     <div
                         class="lc-progress__wrapper__item__left"
                         :style="{
@@ -15,7 +15,7 @@
                             <span>{{ item.value }}%</span>
                         </span>
                     </div>
-                    <div class="lc-progress__wrapper__item__right" :style="{ width: maxWidth }" ref="valueRef" :title="item.tootal.toString()">
+                    <div ref="valueRef" class="lc-progress__wrapper__item__right" :style="{ width: maxWidth }" :title="item.tootal.toString()">
                         <span>{{ renderValue(item.tootal) }}</span>
                         <span>{{ renderUnit(item.tootal, item.unit) }}</span>
                     </div>
@@ -25,18 +25,18 @@
     </div>
 </template>
 <script lang="ts" setup>
-import { LcElasticScrollbar } from "@/components/education/components/elasticScrollbar";
-import { bigNumber } from "lowcode-share/es/share";
-import { PropType, useTemplateRef, computed } from "vue";
-import memoize from "lodash-es/memoize";
+import { LcElasticScrollbar } from '@/components/education/components/elasticScrollbar'
+import { bigNumber } from 'lowcode-share/es/share'
+import { PropType, useTemplateRef, computed } from 'vue'
+import memoize from 'lodash-es/memoize'
 
 export type ProgereeDataList = {
-    label: string; // 类目名称
-    value: number; // 百分比值
-    unit: string; // 单位
-    color: string; // 颜色值
-    tootal: number; // 总量
-};
+    label: string // 类目名称
+    value: number // 百分比值
+    unit: string // 单位
+    color: string // 颜色值
+    tootal: number // 总量
+}
 const {
     fixed = true,
     decimal = 2,
@@ -51,33 +51,34 @@ const {
     dataList: {
         type: Array as PropType<ProgereeDataList[]>,
     },
-});
+})
 
-const valueRefS = useTemplateRef("valueRef");
+const valueRefS = useTemplateRef('valueRef')
 const maxWidth = computed(() => {
     if (valueRefS.value && Array.isArray(valueRefS.value)) {
-        const widths = valueRefS.value.map((item) => Math.floor(item.offsetWidth));
-        const maxWidthValue = Math.max(...widths);
-        return `${maxWidthValue}px`;
+        const widths = valueRefS.value.map(item => Math.floor(item.offsetWidth))
+        const maxWidthValue = Math.max(...widths)
+        return `${maxWidthValue}px`
     }
-});
-const renderValue = (tootal) => {
+    return '100%'
+})
+const renderValue = tootal => {
     if (fixed) {
-        const { result } = bigNumber(tootal, decimal);
-        return result;
+        const { result } = bigNumber(tootal, decimal)
+        return result
     }
-    return tootal;
-};
+    return tootal
+}
 const renderUnit = memoize(
     (value, _unit) => {
         if (fixed) {
-            const { unit: numUnit } = bigNumber(value, decimal);
-            return `${numUnit}${_unit}`;
+            const { unit: numUnit } = bigNumber(value, decimal)
+            return `${numUnit}${_unit}`
         }
-        return _unit;
+        return _unit
     },
-    (value, _unit) => `${value}_${_unit}`
-);
+    (value, _unit) => `${value}_${_unit}`,
+)
 </script>
 <style lang="scss" scoped>
 @keyframes progressAnimation {
@@ -116,7 +117,7 @@ const renderUnit = memoize(
                 position: relative;
                 &::before {
                     position: absolute;
-                    content: "";
+                    content: '';
                     top: 0;
                     left: 0;
                     width: calc(var(--progress) * 1%);

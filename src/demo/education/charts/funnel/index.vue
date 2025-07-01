@@ -13,14 +13,11 @@
     </div>
 </template>
 <script lang="ts" setup>
-import { NSpace } from 'naive-ui';
-import { DemoHelpBox } from '@/components/common/DemoHelpBox';
-import {
-    LcFunnelChart,
-    LcFunnelTierChart,
-} from '@/components/education/components/charts';
-import { useOptions, useTierOptions } from '../options/funnel-options';
-import { deomCodes } from './deom-codes';
+import { NSpace } from 'naive-ui'
+import { DemoHelpBox } from '@/components/common/DemoHelpBox'
+import { LcFunnelChart, LcFunnelTierChart } from '@/components/education/components/charts'
+import { useOptions, useTierOptions } from '../options/funnel-options'
+import { deomCodes } from './deom-codes'
 </script>
 <style lang="scss" scoped>
 .demo-charts {

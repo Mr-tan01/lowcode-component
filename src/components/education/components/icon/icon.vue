@@ -24,35 +24,29 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, Ref, toRefs } from "vue";
-import { NameTypeFunc, useImage, type Domains, type NameTypes } from "./icons";
+import { computed, Ref, toRefs } from 'vue'
+import { NameTypeFunc, useImage, type Domains, type NameTypes } from './icons'
 const props = withDefaults(
     defineProps<{
-        domain?: Domains;
-        name?: NameTypes;
-        size?: number | string;
-        ext?: string;
-        selected?: boolean;
+        domain?: Domains
+        name?: NameTypes
+        size?: number | string
+        ext?: string
+        selected?: boolean
     }>(),
     {
-        domain: "func",
-        name: "add",
+        domain: 'func',
+        name: 'add',
         size: 32,
-        ext: ".png",
+        ext: '.png',
         selected: void 0,
-    }
-);
+    },
+)
 
-const { domain, name, size, ext, selected } = toRefs(props);
-const { src, selectedSrc } = useImage(
-    domain as Ref<Domains>,
-    name as Ref<NameTypeFunc<Domains>>,
-    ext
-);
+const { domain, name, size, ext, selected } = toRefs(props)
+const { src, selectedSrc } = useImage(domain as Ref<Domains>, name as Ref<NameTypeFunc<Domains>>, ext)
 
-const iconWidth = computed(() =>
-    typeof size.value === "number" ? `${size.value}px` : size.value
-);
+const iconWidth = computed(() => (typeof size.value === 'number' ? `${size.value}px` : size.value))
 </script>
 
 <style lang="scss" scoped>

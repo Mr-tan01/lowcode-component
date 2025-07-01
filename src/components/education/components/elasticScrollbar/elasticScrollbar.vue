@@ -5,9 +5,7 @@
         </div>
     </div>
 </template>
-<script lang="ts" setup>
-
-</script>
+<script lang="ts" setup></script>
 
 <style lang="scss" scoped>
 .lc-elastic-scrollbar {
@@ -32,7 +30,6 @@
     &::-webkit-scrollbar-thumb:hover {
         background: rgba(0, 127, 206, 0.5);
     }
-
 
     &__wrapper {
         width: 100%;

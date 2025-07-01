@@ -18,28 +18,22 @@
             <div class="size-box">
                 <LcRadioGroup v-model:value="radioValue">
                     <n-space>
-                        <LcRadio value="1">
-                            Definitely Maybe
-                        </LcRadio>
-                        <LcRadio value="2">
-                            Definitely Maybe
-                        </LcRadio>
+                        <LcRadio value="1"> Definitely Maybe </LcRadio>
+                        <LcRadio value="2"> Definitely Maybe </LcRadio>
                     </n-space>
                 </LcRadioGroup>
-
             </div>
         </DemoHelpBox>
     </div>
 </template>
 <script lang="ts" setup>
-import { NSpace } from 'naive-ui';
-import { DemoHelpBox } from '@/components/common/DemoHelpBox';
-import { LcRadioButtonGroup } from '@/components/education/components/radio-button-group';
-import { LcRadioButton } from '@/components/education/components/radio-button';
-import { LcRadio, LcRadioGroup } from '@/components/education/components/radio';
-import { ref } from 'vue';
-import { demoCodes } from './demo-codes';
-const radioButtonValue1 = ref('1');
-const radioValue = ref('1');
-
+import { NSpace } from 'naive-ui'
+import { DemoHelpBox } from '@/components/common/DemoHelpBox'
+import { LcRadioButtonGroup } from '@/components/education/components/radio-button-group'
+import { LcRadioButton } from '@/components/education/components/radio-button'
+import { LcRadio, LcRadioGroup } from '@/components/education/components/radio'
+import { ref } from 'vue'
+import { demoCodes } from './demo-codes'
+const radioButtonValue1 = ref('1')
+const radioValue = ref('1')
 </script>

@@ -6,7 +6,7 @@
                     {{ formatedText }}
                 </div>
             </slot>
-            <div class="lc-decortator-title__slot" v-if="$slots.helper">
+            <div v-if="$slots.helper" class="lc-decortator-title__slot">
                 <slot name="helper"></slot>
             </div>
         </div>
@@ -14,12 +14,12 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, PropType } from "vue";
-import { overflowStr } from "lowcode-share/es/share";
+import { computed, PropType } from 'vue'
+import { overflowStr } from 'lowcode-share/es/share'
 const {
-    text = "",
+    text = '',
     maxLength = 12,
-    dir = "ltr",
+    dir = 'ltr',
 } = defineProps({
     text: {
         type: String,
@@ -28,12 +28,12 @@ const {
         type: Number,
     },
     dir: {
-        type: String as PropType<"ltr" | "rtl">,
+        type: String as PropType<'ltr' | 'rtl'>,
     },
-});
+})
 const formatedText = computed(() => {
-    return overflowStr(text, maxLength);
-});
+    return overflowStr(text, maxLength)
+})
 </script>
 
 <style lang="scss" scoped>

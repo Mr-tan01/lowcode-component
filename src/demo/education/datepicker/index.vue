@@ -14,9 +14,9 @@
 </template>
 
 <script lang="ts" setup>
-import { DemoHelpBox } from '@/components/common/DemoHelpBox';
-import { LcDatePicker } from '@/components/education/components/datePicker';
-import { code1, code2 } from './const';
+import { DemoHelpBox } from '@/components/common/DemoHelpBox'
+import { LcDatePicker } from '@/components/education/components/datePicker'
+import { code1, code2 } from './const'
 </script>
 
 <style lang="scss" scoped>

@@ -11,20 +11,16 @@
                 <DemoHelpBox title="多气泡图(≥2类数据)" rswidth="520px" rs-height="306px" :code="demoCodes.code1(3)">
                     <LcScatterChart v-bind="useScatterOptions(3, 0)"></LcScatterChart>
                 </DemoHelpBox>
-
             </NSpace>
         </DemoHelpBox>
     </div>
 </template>
 <script lang="ts" setup>
-import { NSpace } from 'naive-ui';
-import { DemoHelpBox } from '@/components/common/DemoHelpBox';
-import {
-    LcScatterChart,
-    LcFourScatter,
-} from '@/components/education/components/charts';
-import { useScatterOptions, useFourScatterOptions } from '../options/scatter-options';
-import { demoCodes } from './demo-codes';
+import { NSpace } from 'naive-ui'
+import { DemoHelpBox } from '@/components/common/DemoHelpBox'
+import { LcScatterChart, LcFourScatter } from '@/components/education/components/charts'
+import { useScatterOptions, useFourScatterOptions } from '../options/scatter-options'
+import { demoCodes } from './demo-codes'
 </script>
 <style lang="scss" scoped>
 .demo-charts {

@@ -1,7 +1,5 @@
-import LcRadioButton from './radio-button.vue';
+import LcRadioButton from './radio-button.vue'
 
-export type LcRadioButtonInstanceType = InstanceType<typeof LcRadioButton>;
+export type LcRadioButtonInstanceType = InstanceType<typeof LcRadioButton>
 
-export {
-    LcRadioButton,
-}
+export { LcRadioButton }

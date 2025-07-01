@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts" setup>
-import { Szmap } from './szmap';
+import { Szmap } from './szmap'
 </script>
 
 <style lang="scss" scoped>

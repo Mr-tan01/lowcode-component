@@ -1,4 +1,3 @@
-
 export const code1 = `
 <template>
     <LcSelect v-model:value="value" :options></LcSelect>
@@ -17,4 +16,4 @@ export const code1 = `
         },
     ];
 </script>
-`;
+`

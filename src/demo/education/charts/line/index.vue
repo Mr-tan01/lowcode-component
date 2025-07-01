@@ -1,7 +1,6 @@
 <template>
     <div class="demo-charts">
         <DemoHelpBox title="图表" description="图表-柱状图分单类数据、多类数据、组合类数据、" rswidth="1360px" rs-height="auto">
-
             <NSpace>
                 <DemoHelpBox title="单条折线图" rswidth="390px" rs-height="265px" :code="demoCodes.code1">
                     <LcLineChart :options="combinationOpts(1)"></LcLineChart>
@@ -32,15 +31,11 @@
     </div>
 </template>
 <script lang="ts" setup>
-import { NSpace } from 'naive-ui';
-import { DemoHelpBox } from '@/components/common/DemoHelpBox';
-import {
-    LcBarChart,
-    LcLineChart,
-} from '@/components/education/components/charts';
-import { combinationOpts } from '../options/line-options';
-import { demoCodes } from './demo-codes';
-
+import { NSpace } from 'naive-ui'
+import { DemoHelpBox } from '@/components/common/DemoHelpBox'
+import { LcBarChart, LcLineChart } from '@/components/education/components/charts'
+import { combinationOpts } from '../options/line-options'
+import { demoCodes } from './demo-codes'
 </script>
 <style lang="scss" scoped>
 .demo-charts {

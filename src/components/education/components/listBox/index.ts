@@ -1,7 +1,5 @@
-import LclistBox from './listBox.vue';
+import LclistBox from './listBox.vue'
 
-export type LclistBoxInstanceType = InstanceType<typeof LclistBox>;
+export type LclistBoxInstanceType = InstanceType<typeof LclistBox>
 
-export {
-    LclistBox
-}
+export { LclistBox }

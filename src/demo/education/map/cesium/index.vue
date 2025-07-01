@@ -1,7 +1,7 @@
 <template>
     <div class="demo-headers mr-setting-w">
         <button @click="add">添加热力图</button>
-        <DemoHelpBox title="深圳地图" description="深圳教育项目-cesium" rswidth="1500px" rsHeight="740px">
+        <DemoHelpBox title="深圳地图" description="深圳教育项目-cesium" rswidth="1500px" rs-height="740px">
             <div class="size-box">
                 <LcCesium
                     ref="cesiumMap"
@@ -11,152 +11,161 @@
                     base-url="https://jysl.sz.edu.cn:8314"
                     :default-show-state="false"
                     :area-name="'深圳市'"
-                    v-on:load-handler="loadHandler"
+                    @load-handler="loadHandler"
                     @point-handler="onPointHandler"
                 ></LcCesium>
             </div>
         </DemoHelpBox>
         <div style="position: absolute; top: 30%; left: 70%">
-            <LcMapButton @iconClicked="iconHandler"></LcMapButton>
+            <LcMapButton @icon-clicked="iconHandler"></LcMapButton>
         </div>
-        <LcSwitchTabs v-model:value="tabValue" :list="defSwitchTabList" @change="changePolygon" style="margin-top: 20px"></LcSwitchTabs>
+        <LcSwitchTabs v-model:value="tabValue" :list="defSwitchTabList" style="margin-top: 20px" @change="changePolygon"></LcSwitchTabs>
     </div>
 </template>
 
 <script lang="ts" setup>
-import { ref, onMounted } from "vue";
-import { LcSwitchTabs } from "@/components/education";
-import LcMapButton from "@/components/education/components/mapButton/mapButton.vue";
-import { LcCesium, CesiumInstanceType } from "@/components/education/components/map";
+import { ref, onMounted } from 'vue'
+import { LcSwitchTabs } from '@/components/education'
+import LcMapButton from '@/components/education/components/mapButton/mapButton.vue'
+import { LcCesium, CesiumInstanceType } from '@/components/education/components/map'
 // import { LcCesium, CesiumInstanceType } from "~/es/education/map/index"
-import { DemoHelpBox } from "@/components/common/DemoHelpBox";
-import type { ChangeEvent } from "@/components/education/components/carouseBox/types";
-import { pointType, basicConfigType, pointInfo } from "@/components/education/components/map/cesium/modules/type";
-import { Cartesian3 } from "cesium";
-import data from "./index.json";
-const basicConfig = ref<basicConfigType>({ clusteringEnabled: true, cameraLimitsEnabled: false });
-import { getToken } from "@/request";
+import { DemoHelpBox } from '@/components/common/DemoHelpBox'
+import type { ChangeEvent } from '@/components/education/components/carouseBox/types'
+import { pointType, basicConfigType, pointInfo } from '@/components/education/components/map/cesium/modules/type'
+import { Cartesian3 } from 'cesium'
+import data from './index.json'
+const basicConfig = ref<basicConfigType>({
+    clusteringEnabled: true,
+    cameraLimitsEnabled: false,
+})
+import { getToken } from '@/request'
 
-//热力图数据
+// 热力图数据
 const heatMapDataHandle = (data: Array<any>) => {
-    if (!data || data.length === 0) return [];
-    //数据
+    if (!data || data.length === 0) return []
+    // 数据
     const heatMapData = data
-        .filter((item) => Number(item.schoolLat) > 0 && Number(item.schoolLng) > 0)
-        .map((item) => ({
+        .filter(item => Number(item.schoolLat) > 0 && Number(item.schoolLng) > 0)
+        .map(item => ({
             x: Number(item.schoolLng),
             y: Number(item.schoolLat),
             value: Number(item.value),
-        }));
-    return heatMapData;
-};
+        }))
+    return heatMapData
+}
 const defSwitchTabList = [
     {
-        label: "深圳市",
-        value: "深圳市",
+        label: '深圳市',
+        value: '深圳市',
     },
     {
-        label: "龙华区",
-        value: "龙华区",
+        label: '龙华区',
+        value: '龙华区',
     },
     {
-        label: "南山区",
-        value: "南山区",
+        label: '南山区',
+        value: '南山区',
     },
     {
-        label: "宝安区",
-        value: "宝安区",
+        label: '宝安区',
+        value: '宝安区',
     },
     {
-        label: "福田区",
-        value: "福田区",
+        label: '福田区',
+        value: '福田区',
     },
     {
-        label: "罗湖区",
-        value: "罗湖区",
+        label: '罗湖区',
+        value: '罗湖区',
     },
     {
-        label: "盐田区",
-        value: "盐田区",
+        label: '盐田区',
+        value: '盐田区',
     },
     {
-        label: "龙岗区",
-        value: "龙岗区",
+        label: '龙岗区',
+        value: '龙岗区',
     },
     {
-        label: "坪山区",
-        value: "坪山区",
+        label: '坪山区',
+        value: '坪山区',
     },
     {
-        label: "光明区",
-        value: "光明区",
+        label: '光明区',
+        value: '光明区',
     },
     {
-        label: "大鹏新区",
-        value: "大鹏新区",
+        label: '大鹏新区',
+        value: '大鹏新区',
     },
     {
-        label: "深汕特别合作区",
-        value: "深汕特别合作区",
+        label: '深汕特别合作区',
+        value: '深汕特别合作区',
     },
-];
+]
 
-const show = ref<boolean>(false);
-let accessToken = ref<string | null>(null);
+const show = ref<boolean>(false)
+let accessToken = ref<string | null>(null)
 
-const tabValue = ref("宝安区");
-let cesiumMap = ref<CesiumInstanceType | null>(null);
-let optionInfo = ref<pointType[]>([]);
-let buildHeatMap = null;
+const tabValue = ref('宝安区')
+let cesiumMap = ref<CesiumInstanceType | null>(null)
+let optionInfo = ref<pointType[]>([])
+let buildHeatMap
 function changePolygon(value: ChangeEvent): void {
-    if (value.label === "深圳市") {
-        cesiumMap.value?.clearEntity();
+    if (value.label === '深圳市') {
+        cesiumMap.value?.clearEntity()
     }
-    cesiumMap.value?.changeModel("removeHeatMap", buildHeatMap);
-    cesiumMap.value?.loadedTileLayer(true);
-    cesiumMap.value?.changeModel("polygonClickHandler", value.label);
-    optionInfo.value = pointInfo[value.label];
+    cesiumMap.value?.changeModel('removeHeatMap', buildHeatMap)
+    cesiumMap.value?.loadedTileLayer(true)
+    cesiumMap.value?.changeModel('polygonClickHandler', value.label)
+    optionInfo.value = pointInfo[value.label]
     setTimeout(() => {
-        cesiumMap.value?.loadedTileLayer(false);
-    }, 1000);
+        cesiumMap.value?.loadedTileLayer(false)
+    }, 1000)
 }
 
 function loadHandler(state: boolean) {
-    show.value = state;
+    show.value = state
 }
 
 function iconHandler(alt: string) {
-    if (alt === "Map") {
-        cesiumMap.value?.changeModel("setInitialView", { destination: Cartesian3.fromDegrees(114.187446, 22.674131, 130000), duration: 0.8 });
+    if (alt === 'Map') {
+        cesiumMap.value?.changeModel('setInitialView', {
+            destination: Cartesian3.fromDegrees(114.187446, 22.674131, 130000),
+            duration: 0.8,
+        })
     } else {
-        const state = alt === "Layer";
-        cesiumMap.value?.changeModel(state ? "setViewerLayer" : "setCameraHeight", state ? "https://services.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer" : alt);
+        const state = alt === 'Layer'
+        cesiumMap.value?.changeModel(
+            state ? 'setViewerLayer' : 'setCameraHeight',
+            state ? 'https://services.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer' : alt,
+        )
     }
 }
 
 function onPointHandler(data) {
-    console.log(data);
+    console.log(data)
 }
 
 onMounted(async () => {
-    await getToken;
-    accessToken.value = localStorage.getItem("access_token");
+    await getToken
+    accessToken.value = localStorage.getItem('access_token')
 
     // await cesiumMap.value?.changeModel("buildHeatMap", heatMapData);
     // cesiumMap.value?.changeModel("updateHeatMapPoints", heatMapData);
     // cesiumMap.value?.changeModel("updateHeatMapMaxMin", { max: max, min: min });
-});
+})
 const add = () => {
-    const heatMapData = heatMapDataHandle(data.data);
-    //点位value
-    const valueArr = heatMapData.map((i) => i.value);
-    //点位最大值
-    const max = Math.max(...valueArr);
-    //点位最小值
-    const min = Math.min(...valueArr);
-    buildHeatMap = cesiumMap.value?.cesiumUtils.buildHeatMap(heatMapData);
-    cesiumMap.value?.changeModel("updateHeatMapMaxMin", { max: max, min: min });
-};
+    const heatMapData = heatMapDataHandle(data.data)
+    // 点位value
+    const valueArr = heatMapData.map(i => i.value)
+    // 点位最大值
+    const max = Math.max(...valueArr)
+    // 点位最小值
+    const min = Math.min(...valueArr)
+    buildHeatMap = cesiumMap.value?.cesiumUtils.buildHeatMap(heatMapData)
+    cesiumMap.value?.changeModel('updateHeatMapMaxMin', { max: max, min: min })
+}
 </script>
 
 <style></style>

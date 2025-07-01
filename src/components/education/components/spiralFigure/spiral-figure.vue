@@ -10,43 +10,42 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from "vue";
-import spiralFigure from "./images/spiral-figure.png";
-import { EducationSpiralFigureProps } from "./props";
+import { computed } from 'vue'
+import spiralFigure from './images/spiral-figure.png'
+import { EducationSpiralFigureProps } from './props'
 
-const { centerImage = spiralFigure, texts = [], radius = 150, maxPerSide = 5 } = defineProps<EducationSpiralFigureProps>();
+const { centerImage = spiralFigure, texts = [], radius = 150, maxPerSide = 5 } = defineProps<EducationSpiralFigureProps>()
 
 const displayedTexts = computed(() => {
-    const maxItems = maxPerSide * 2;
-    return texts.slice(0, maxItems);
-});
+    const maxItems = maxPerSide * 2
+    return texts.slice(0, maxItems)
+})
 
 const getTextSide = (index: number) => {
-    return index % 2 === 0 ? "right-side" : "left-side";
-};
+    return index % 2 === 0 ? 'right-side' : 'left-side'
+}
 
 const getTextPosition = (index: number) => {
-    const total = displayedTexts.value.length;
-    const isLeftSide = index % 2 === 0; // 偶数索引在左侧，奇数在右侧
-    const positionIndex = Math.floor(index / 2);
+    const isLeftSide = index % 2 === 0 // 偶数索引在左侧，奇数在右侧
+    const positionIndex = Math.floor(index / 2)
 
     // 计算角度 (从水平线开始上下均匀分布)
-    const angleRange = 120; // 控制文字分布范围 (120度)
-    const angleStep = angleRange / (maxPerSide - 1);
-    const angle = angleStep * positionIndex - angleRange / 2; // 从负到正对称分布
+    const angleRange = 120 // 控制文字分布范围 (120度)
+    const angleStep = angleRange / (maxPerSide - 1)
+    const angle = angleStep * positionIndex - angleRange / 2 // 从负到正对称分布
 
     // 转换为弧度并调整左右方向
-    const angleRad = ((isLeftSide ? 180 + angle : -angle) * Math.PI) / 180;
+    const angleRad = ((isLeftSide ? 180 + angle : -angle) * Math.PI) / 180
 
-    const x = radius * Math.cos(angleRad);
-    const y = radius * Math.sin(angleRad);
+    const x = radius * Math.cos(angleRad)
+    const y = radius * Math.sin(angleRad)
 
     return {
         left: `calc(50% + ${x}px)`,
         top: `calc(50% + ${y}px)`,
-        transform: "translate(-50%, -50%)",
-    };
-};
+        transform: 'translate(-50%, -50%)',
+    }
+}
 </script>
 
 <style scoped>
@@ -88,11 +87,11 @@ const getTextPosition = (index: number) => {
     transition: all 0.3s ease;
 }
 .left-side {
-    background-image: url("./images/ltr-bg.png");
+    background-image: url('./images/ltr-bg.png');
 }
 
 .right-side {
-    background-image: url("./images/rtl-bg.png");
+    background-image: url('./images/rtl-bg.png');
 }
 
 .text-item:hover {

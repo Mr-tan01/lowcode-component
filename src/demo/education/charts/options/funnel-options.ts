@@ -1,5 +1,5 @@
-import { EChartsOption } from "echarts";
-import { funnelThemeConfig } from "~/src/components/education/components/charts";
+import { EChartsOption } from 'echarts'
+import { funnelThemeConfig } from '~/src/components/education/components/charts'
 
 export function useOptions(): {
     options: EChartsOption
@@ -13,12 +13,12 @@ export function useOptions(): {
                         { value: 40, name: 'Inquiry' },
                         { value: 20, name: 'Order' },
                         { value: 80, name: 'Click' },
-                        { value: 100, name: 'Show' }
+                        { value: 100, name: 'Show' },
                     ].sort((a, b) => b.value - a.value),
-                }
+                },
             ],
-        }
-    };
+        },
+    }
 }
 
 const tierData = [
@@ -26,8 +26,8 @@ const tierData = [
     { value: 163, name: 'Inquiry' },
     { value: 103, name: 'Order' },
     { value: 230, name: 'Click' },
-    { value: 343, name: 'Show' }
-].sort((a, b) => a.value - b.value);
+    { value: 343, name: 'Show' },
+].sort((a, b) => a.value - b.value)
 export function useTierOptions(): {
     options: funnelThemeConfig.TierOptions
 } {
@@ -37,8 +37,8 @@ export function useTierOptions(): {
                 {
                     max: 350,
                     data: tierData,
-                }
+                },
             ],
-        }
+        },
     }
 }

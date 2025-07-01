@@ -1,34 +1,28 @@
 <template>
     <div class="lc-tree">
-        <n-tree
-            v-bind="$attrs"
-            :render-switcher-icon="renderSwitcherIconWithExpaned"
-        />
+        <n-tree v-bind="$attrs" :render-switcher-icon="renderSwitcherIconWithExpaned" />
     </div>
 </template>
 <script setup lang="ts">
-import { NTree } from "naive-ui/es/tree";
-import {
-    LcIcon,
-    type NameTypes,
-} from "@/components/education/components/icon/index";
-import { h, toRefs } from "vue";
+import { NTree } from 'naive-ui/es/tree'
+import { LcIcon, type NameTypes } from '@/components/education/components/icon/index'
+import { h, toRefs } from 'vue'
 const props = withDefaults(
     defineProps<{
-        expandedIcon?: NameTypes;
-        collapsedIcon?: NameTypes;
+        expandedIcon?: NameTypes
+        collapsedIcon?: NameTypes
     }>(),
     {
-        expandedIcon: "expand",
-        collapsedIcon: "retract",
-    }
-);
-const { expandedIcon, collapsedIcon } = toRefs(props);
+        expandedIcon: 'expand',
+        collapsedIcon: 'retract',
+    },
+)
+const { expandedIcon, collapsedIcon } = toRefs(props)
 const renderSwitcherIconWithExpaned = ({ expanded }: { expanded: boolean }) => {
     return h(LcIcon, {
         name: expanded ? collapsedIcon.value : expandedIcon.value,
-    });
-};
+    })
+}
 </script>
 <style lang="scss" scoped>
 .lc-tree {

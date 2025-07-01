@@ -1,5 +1,5 @@
-import { graphic, type EChartsOption } from "echarts";
-import { type LinearGradient } from "echarts/types/src/util/graphic";
+import { graphic, type EChartsOption } from 'echarts'
+import { type LinearGradient } from 'echarts/types/src/util/graphic'
 
 export const gaugeColors: EChartsOption['color'] = [
     'rgba(15, 251, 248, 1)',
@@ -8,31 +8,31 @@ export const gaugeColors: EChartsOption['color'] = [
     'rgba(166, 207, 255, 1)',
     'rgba(119, 73, 255, 1)',
     'rgba(100, 214, 119, 1)',
-];
+]
 
 // 为每个扇形设置不同的渐变颜色
 export const gaugeInnerGraphicColors: LinearGradient[] = [
     new graphic.LinearGradient(0, 0, 0, 1, [
         { offset: 0, color: 'rgba(15, 251, 248, 0.20)' }, // 渐变色起始颜色
-        { offset: 1, color: '#0FFBF8' }  // 渐变色结束颜色
+        { offset: 1, color: '#0FFBF8' }, // 渐变色结束颜色
     ]),
     new graphic.LinearGradient(0, 0, 0, 1, [
         { offset: 0, color: 'rgba(225, 188, 75, 0.20)' },
-        { offset: 1, color: 'rgba(225, 188, 75, 1)' }
+        { offset: 1, color: 'rgba(225, 188, 75, 1)' },
     ]),
     new graphic.LinearGradient(0, 0, 0, 1, [
         { offset: 0, color: 'rgba(0, 148, 255, 0.20)' },
-        { offset: 1, color: 'rgba(0, 148, 255, 1)' }
+        { offset: 1, color: 'rgba(0, 148, 255, 1)' },
     ]),
     new graphic.LinearGradient(0, 0, 0, 1, [
         { offset: 0, color: 'rgba(166, 207, 255, 0.20)' },
-        { offset: 1, color: 'rgba(166, 207, 255, 1)' }
+        { offset: 1, color: 'rgba(166, 207, 255, 1)' },
     ]),
     new graphic.LinearGradient(0, 0, 0, 1, [
         { offset: 0, color: 'rgba(119, 73, 255, 0.20)' },
-        { offset: 1, color: 'rgba(119, 73, 255, 1)' }
+        { offset: 1, color: 'rgba(119, 73, 255, 1)' },
     ]),
-];
+]
 
 export const gaugeTitleOptions: EChartsOption['title'] = {
     text: '0',
@@ -49,7 +49,6 @@ export const gaugeTitleOptions: EChartsOption['title'] = {
         lineHeight: 42,
         padding: 0,
         overflow: 'truncate',
-
     },
     subtextStyle: {
         color: '#F2F3F4',
@@ -57,14 +56,14 @@ export const gaugeTitleOptions: EChartsOption['title'] = {
         padding: 0,
         lineHeight: 16,
         overflow: 'truncate',
-    }
+    },
 }
 export const gaugeSeriesRecordOptions: EChartsOption['series'] = {
     type: 'gauge',
     startAngle: 90,
     endAngle: -270,
     pointer: {
-        show: false
+        show: false,
     },
     progress: {
         show: true,
@@ -74,7 +73,7 @@ export const gaugeSeriesRecordOptions: EChartsOption['series'] = {
         itemStyle: {
             borderColor: 'rgba(3, 29, 61, 1)',
             borderWidth: 5,
-        }
+        },
     },
     axisLine: {
         lineStyle: {
@@ -85,14 +84,14 @@ export const gaugeSeriesRecordOptions: EChartsOption['series'] = {
     splitLine: {
         show: false,
         distance: 0,
-        length: 10
+        length: 10,
     },
     axisTick: {
-        show: false
+        show: false,
     },
     axisLabel: {
         show: false,
-        distance: 50
+        distance: 50,
     },
     title: {
         fontSize: 14,
@@ -102,10 +101,8 @@ export const gaugeSeriesRecordOptions: EChartsOption['series'] = {
         show: false,
         height: 14,
         fontSize: 14,
-        formatter: '{value}%'
-    }
+        formatter: '{value}%',
+    },
 }
 
-export const gaugeSeriesDataItemOptions = {
-
-}
+export const gaugeSeriesDataItemOptions = {}

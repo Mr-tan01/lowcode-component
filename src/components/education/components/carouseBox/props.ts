@@ -1,5 +1,5 @@
-import { PropType } from "vue";
-import { TabListRaw } from "./types";
+import { PropType } from 'vue'
+import { TabListRaw } from './types'
 
 export const propsRaw = {
     list: {
@@ -28,4 +28,4 @@ export const propsRaw = {
         type: Boolean as PropType<boolean>,
         default: true,
     },
-};
+}

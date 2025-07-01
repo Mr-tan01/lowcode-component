@@ -1,49 +1,53 @@
 <template>
     <div class="lc-funnel-tier">
-        <div class="lc-funnel-tier__serie" v-for="(serie, key) in computedOptions?.series" :key>
+        <div v-for="(serie, key) in computedOptions?.series" :key class="lc-funnel-tier__serie">
             <div v-for="(item, index) in serie?.data" :key="index" class="lc-funnel-tier__serie__item">
-                <div class="lc-funnel-tier__serie__item__label">{{ item.name }}</div>
-                <div class="lc-funnel-tier__serie__item__bar" :style="{
-                    '--inner-color': computedOptions.color![index],
-                }">
+                <div class="lc-funnel-tier__serie__item__label">
+                    {{ item.name }}
+                </div>
+                <div
+                    class="lc-funnel-tier__serie__item__bar"
+                    :style="{
+                        '--inner-color': computedOptions.color![index],
+                    }"
+                >
                     <div class="lc-funnel-tier__serie__item__bar__line"></div>
-                    <div class="lc-funnel-tier__serie__item__bar__inner" :style="{
-                        '--inner-width': `${item.value / serie.max * 100}%`,
-                    }">
+                    <div
+                        class="lc-funnel-tier__serie__item__bar__inner"
+                        :style="{
+                            '--inner-width': `${(item.value / serie.max) * 100}%`,
+                        }"
+                    >
                         <div class="lc-funnel-tier__serie__item__bar__inner--text">
                             {{ serie?.label?.(item, serie) }}
                         </div>
                     </div>
                     <div class="lc-funnel-tier__serie__item__bar__line"></div>
                 </div>
-                <div class="lc-funnel-tier__serie__item__value">{{ item.value }}</div>
+                <div class="lc-funnel-tier__serie__item__value">
+                    {{ item.value }}
+                </div>
             </div>
         </div>
     </div>
 </template>
 
 <script lang="ts" setup>
-import { computed, PropType } from 'vue';
-import {
-    defaultFunnelTierOptions,
-    defaultFunnelTierSeriesOptions,
-    type TierOptions,
-} from './themeConfig';
-import merge from 'lodash-es/merge';
+import { computed } from 'vue'
+import { defaultFunnelTierOptions, defaultFunnelTierSeriesOptions, type TierOptions } from './themeConfig'
+import merge from 'lodash-es/merge'
 
-const {
-    options,
-} = defineProps({
-    options: Object as PropType<TierOptions>,
-});
+const { options } = defineProps<{
+    options: TierOptions
+}>()
 
 const computedOptions = computed(() => {
-    const newOptions = merge({}, defaultFunnelTierOptions, options);
-    newOptions.series = newOptions.series.map((serie) => {
-        return merge({}, defaultFunnelTierSeriesOptions, serie);
-    });
-    return newOptions;
-});
+    const newOptions = merge({}, defaultFunnelTierOptions, options)
+    newOptions.series = newOptions.series.map(serie => {
+        return merge({}, defaultFunnelTierSeriesOptions, serie)
+    })
+    return newOptions
+})
 </script>
 
 <style lang="scss" scoped>
@@ -67,7 +71,7 @@ const computedOptions = computed(() => {
             width: 100%;
             font-family: HarmonyOS_Sans_SC;
             font-size: 14px;
-            color: #FFFFFF;
+            color: #ffffff;
 
             &__label {
                 font-size: 14px;
@@ -106,7 +110,7 @@ const computedOptions = computed(() => {
 
                     &--text {
                         font-size: 14px;
-                        color: #FFFFFF;
+                        color: #ffffff;
                         line-height: 20px;
                         text-align: center;
                     }

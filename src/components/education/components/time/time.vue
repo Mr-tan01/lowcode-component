@@ -1,27 +1,27 @@
 <template>
     <div class="lctime">
-        <img class="img" :src="imageIconSrc" draggable="false" v-if="isShowIcon" />
+        <img v-if="isShowIcon" class="img" :src="imageIconSrc" draggable="false" />
         <n-time :time="currentTime" class="n-time-class"></n-time>
     </div>
 </template>
 
 <script lang="ts" setup>
-import { computed, ref } from "vue";
-import { EducationTimeProps } from "./props";
-import { NTime } from "naive-ui/es/time";
-import defaultImage from "./images/time.png";
+import { computed, ref } from 'vue'
+import { EducationTimeProps } from './props'
+import { NTime } from 'naive-ui/es/time'
+import defaultImage from './images/time.png'
 
-const { icon = "", color = "#fff", fontSize = "20px", isShowIcon = true } = defineProps<EducationTimeProps>();
+const { icon = '', color = '#fff', fontSize = '20px', isShowIcon = true } = defineProps<EducationTimeProps>()
 
-const imageIconSrc = computed<string>(() => icon || defaultImage);
+const imageIconSrc = computed<string>(() => icon || defaultImage)
 
-const currentTime = ref();
+const currentTime = ref()
 
 function readCurrentTime() {
-    currentTime.value = Date.now();
-    setTimeout(readCurrentTime, 1000);
+    currentTime.value = Date.now()
+    setTimeout(readCurrentTime, 1000)
 }
-readCurrentTime();
+readCurrentTime()
 </script>
 
 <style lang="scss" scoped>

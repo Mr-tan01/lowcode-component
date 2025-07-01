@@ -10,9 +10,8 @@
     </div>
 </template>
 <script lang="ts" setup>
-import { NDatePicker } from 'naive-ui/es/date-picker';
-import ConfigProvider from '../../common/components/ConfigProvider/index.vue';
-
+import { NDatePicker } from 'naive-ui/es/date-picker'
+import ConfigProvider from '../../common/components/ConfigProvider/index.vue'
 </script>
 
 <style lang="scss" scoped>
@@ -33,9 +32,7 @@ import ConfigProvider from '../../common/components/ConfigProvider/index.vue';
                 .n-input__input {
                     --n-text-color: #fff;
                     --n-placeholder-color: #fff;
-
                 }
-
             }
         }
 
@@ -96,9 +93,9 @@ import ConfigProvider from '../../common/components/ConfigProvider/index.vue';
                         border-top: 0;
                         &__suffix {
                             .n-button {
-                                background: linear-gradient(180deg, rgba(15, 251, 248, 0) 0%, #0FFBF8 100%);
+                                background: linear-gradient(180deg, rgba(15, 251, 248, 0) 0%, #0ffbf8 100%);
                                 border-radius: 2px;
-                                border: 1px solid #0FFBF8;
+                                border: 1px solid #0ffbf8;
                                 backdrop-filter: blur(2.222222222222222px);
                                 --n-height: auto !important;
                                 margin-bottom: 20px;
@@ -107,7 +104,7 @@ import ConfigProvider from '../../common/components/ConfigProvider/index.vue';
                                 &__content {
                                     font-family: HarmonyOS_Sans_SC_Bold;
                                     font-size: 16px;
-                                    color: #FFFFFF;
+                                    color: #ffffff;
                                     line-height: 27px;
                                     text-align: right;
                                     font-style: normal;

@@ -3,7 +3,7 @@
         <svg class="lc-szmap-raw__svg" viewBox="0 0 922 527" version="1.1">
             <Defines></Defines>
             <defs>
-                <linearGradient v-for="([type, item], key) in levelsList" :key :id="`linearGradient-float-${type}`">
+                <linearGradient v-for="([type, item], key) in levelsList" :id="`linearGradient-float-${type}`" :key>
                     <stop v-for="(el, index) in item?.stop" v-bind="typeof el === 'object' && !Array.isArray(el) ? el : {}" :key="index"></stop>
                 </linearGradient>
             </defs>
@@ -11,12 +11,12 @@
                 <g id="编组-76" transform="translate(4, 0)">
                     <g id="编组" transform="translate(0, 35)" fill-rule="nonzero">
                         <component
-                            :class="blockClass"
+                            :is
                             v-for="(is, key, index) in blockList"
                             :key="index"
-                            :is
+                            :class="blockClass"
                             v-bind="getBlockProperties(key)"
-                            :showBorder="showBorder"
+                            :show-border="showBorder"
                             @mouseover="getHoverMapKey(key)"
                             @mouseleave="hidePopver($event, key)"
                             @click="markClick(key)"
@@ -26,8 +26,8 @@
                 </g>
             </g>
         </svg>
-        <div class="lc-szmap-raw__mark-group" v-if="showLabel">
-            <slot name="mapLabel" :blockList="blockList" :labelClass="labelClass" :getVlaue="getMarkProp" :currentMapKey="currentMapKey">
+        <div v-if="showLabel" class="lc-szmap-raw__mark-group">
+            <slot name="mapLabel" :block-list="blockList" :label-class="labelClass" :get-vlaue="getMarkProp" :current-map-key="currentMapKey">
                 <LcMark
                     v-for="(_, key) in blockList"
                     :key
@@ -41,25 +41,25 @@
     </div>
 </template>
 <script lang="ts" setup>
-import Sshzq from "./comp/sshzq.vue";
-import Baoan from "./comp/baoan.vue";
-import Dapeng from "./comp/dapeng.vue";
-import Futian from "./comp/futian.vue";
-import Guangming from "./comp/guangming.vue";
-import Longgang from "./comp/longgang.vue";
-import Luohu from "./comp/luohu.vue";
-import Pingshan from "./comp/pingshan.vue";
-import Yantian from "./comp/yantian.vue";
-import Nanshan from "./comp/nanshan.vue";
-import Longhua from "./comp/longhua.vue";
-import Defines from "./comp/defines.vue";
-import Labels from "./comp/labels.vue";
-import { LcMark } from "@/components/education/components/mark";
-import { type Component, computed, onMounted, ref } from "vue";
-import { type Levels, propsRaw } from "./props";
-import { defFloatLevelConfig, LabelModelEnum, type BlockName, szBlockNames, defBlockLableMap } from "./const";
-import merge from "lodash-es/merge";
-import { EducationMarkProps } from "../../mark/props";
+import Sshzq from './comp/sshzq.vue'
+import Baoan from './comp/baoan.vue'
+import Dapeng from './comp/dapeng.vue'
+import Futian from './comp/futian.vue'
+import Guangming from './comp/guangming.vue'
+import Longgang from './comp/longgang.vue'
+import Luohu from './comp/luohu.vue'
+import Pingshan from './comp/pingshan.vue'
+import Yantian from './comp/yantian.vue'
+import Nanshan from './comp/nanshan.vue'
+import Longhua from './comp/longhua.vue'
+import Defines from './comp/defines.vue'
+import Labels from './comp/labels.vue'
+import { LcMark } from '@/components/education/components/mark'
+import { type Component, computed, onMounted, ref } from 'vue'
+import { type Levels, propsRaw } from './props'
+import { defFloatLevelConfig, LabelModelEnum, type BlockName, szBlockNames, defBlockLableMap } from './const'
+import merge from 'lodash-es/merge'
+import { EducationMarkProps } from '../../mark/props'
 
 const {
     labels,
@@ -67,108 +67,110 @@ const {
     showBorder = true,
     levels = {},
     values = {},
-    fillModel = "default",
+    fillModel = 'default',
     rotateX = 0,
     disabledGradient = false,
     labelModel = LabelModelEnum.DEFAULT,
-} = defineProps(propsRaw);
+} = defineProps(propsRaw)
 
 const blockList: Record<BlockName, Component> = {
-    [szBlockNames["光明"]]: Guangming,
-    [szBlockNames["宝安"]]: Baoan,
-    [szBlockNames["龙华"]]: Longhua,
-    [szBlockNames["南山"]]: Nanshan,
-    [szBlockNames["福田"]]: Futian,
-    [szBlockNames["罗湖"]]: Luohu,
-    [szBlockNames["盐田"]]: Yantian,
-    [szBlockNames["坪山"]]: Pingshan,
-    [szBlockNames["龙岗"]]: Longgang,
-    [szBlockNames["大鹏新区"]]: Dapeng,
-    [szBlockNames["深汕合作区"]]: Sshzq,
-};
+    [szBlockNames['光明']]: Guangming,
+    [szBlockNames['宝安']]: Baoan,
+    [szBlockNames['龙华']]: Longhua,
+    [szBlockNames['南山']]: Nanshan,
+    [szBlockNames['福田']]: Futian,
+    [szBlockNames['罗湖']]: Luohu,
+    [szBlockNames['盐田']]: Yantian,
+    [szBlockNames['坪山']]: Pingshan,
+    [szBlockNames['龙岗']]: Longgang,
+    [szBlockNames['大鹏新区']]: Dapeng,
+    [szBlockNames['深汕合作区']]: Sshzq,
+}
 
-const labelAnimateNum = ref(0);
+const labelAnimateNum = ref(0)
 const $emits = defineEmits<{
-    (e: "markClick", value: EducationMarkProps): void;
-    (e: "markMouseover", value: BlockName): void;
-    (e: "markMouseleave", value: BlockName): void;
-}>();
+    (e: 'markClick', value: EducationMarkProps): void
+    (e: 'markMouseover', value: BlockName): void
+    (e: 'markMouseleave', value: BlockName): void
+}>()
 
-const currentMapKey = ref("");
+const currentMapKey = ref('')
 function getMarkProp(key: BlockName) {
-    const markMate = values[key]! ?? { value: 0 };
-    const currentLevelIndex = levelsList.value.findIndex(([_, item]) => markMate.value >= item?.range?.[0]! && markMate.value <= item?.range?.[1]!);
-    const [_type, currentLevelConf] = levelsList.value[currentLevelIndex] ?? [];
+    const markMate = values[key] ?? { value: 0 }
+    const currentLevelIndex = levelsList.value.findIndex(
+        ([, item]) => item?.range && markMate.value >= item.range[0] && markMate.value <= item.range[1],
+    )
+    const [, currentLevelConf] = levelsList.value[currentLevelIndex] ?? []
     return {
         ...markMate,
         mapLabel: defBlockLableMap[key],
         style: {
-            "--level-scale": labelAnimateNum.value ? currentLevelConf?.scale ?? 1 : labelAnimateNum.value,
+            '--level-scale': labelAnimateNum.value ? (currentLevelConf?.scale ?? 1) : labelAnimateNum.value,
         },
-    };
+    }
 }
 function markClick(key: BlockName) {
     // 点击事件处理
-    $emits("markClick", getMarkProp(key));
+    $emits('markClick', getMarkProp(key))
 }
 onMounted(() => {
     // 显示动画
     setTimeout(() => {
-        labelAnimateNum.value = 1;
-    }, 300);
-});
+        labelAnimateNum.value = 1
+    }, 300)
+})
 
 const blockClass = computed(() => {
-    return ["lc-szmap-raw__block", `visible--${fillModel}`];
-});
+    return ['lc-szmap-raw__block', `visible--${fillModel}`]
+})
 
 const levelsList = computed<Array<[string, Levels]>>(() => {
-    return Object.entries(merge({}, defFloatLevelConfig, levels)) as unknown as [string, Levels][];
-});
+    return Object.entries(merge({}, defFloatLevelConfig, levels)) as unknown as [string, Levels][]
+})
 
 function getBlockProperties(key: BlockName) {
-    const currentValueConf = values[key];
-    if (!currentValueConf || disabledGradient) return 
+    const currentValueConf = values[key]
+    if (!currentValueConf || disabledGradient) return
     const currentLevelIndex = levelsList.value.findIndex(
-        ([_, item]) => currentValueConf.value >= item?.range?.[0]! && currentValueConf.value <= item?.range?.[1]!
-    );
-    const [type, currentLevelConf] = levelsList.value[currentLevelIndex] ?? [];
+        ([, item]) => item?.range && currentValueConf.value >= item.range[0] && currentValueConf.value <= item.range[1],
+    )
+    const [type, currentLevelConf] = levelsList.value[currentLevelIndex] ?? []
 
-    let className: string[] = [];
-    let styles = {};
+    let className: string[] = []
+    let styles = {}
     if (currentLevelConf && type) {
-        className.push("float-active");
-        if (typeof currentLevelConf.stop === "string") {
-            styles["--linear-gradient-fill"] = currentLevelConf.stop;
+        className.push('float-active')
+        if (typeof currentLevelConf.stop === 'string') {
+            styles['--linear-gradient-fill'] = currentLevelConf.stop
         } else {
-            styles["--linear-gradient-fill"] = `url(#linearGradient-float-${type})`;
+            styles['--linear-gradient-fill'] = `url(#linearGradient-float-${type})`
         }
     }
     return {
         class: className,
         style: styles,
-    };
+    }
 }
-const mapRotateX = computed(() => `rotateX(${rotateX}deg)`);
-const labelWrapInsetY = computed(() => Math.abs(rotateX));
-const labelClass = (key) => {
-    return ["lc-szmap-raw__mark-group--item", `mark-${key}`];
-};
+const mapRotateX = computed(() => `rotateX(${rotateX}deg)`)
+const labelWrapInsetY = computed(() => Math.abs(rotateX))
+const labelClass = key => {
+    return ['lc-szmap-raw__mark-group--item', `mark-${key}`]
+}
 
 function getHoverMapKey(key: BlockName) {
-    if (labelModel !== LabelModelEnum.HOVER) return;
-    currentMapKey.value = key;
-    $emits("markMouseover", key);
+    if (labelModel !== LabelModelEnum.HOVER) return
+    currentMapKey.value = key
+    $emits('markMouseover', key)
 }
 
 const hidePopver = (event: MouseEvent, key: BlockName) => {
-    const target = event.relatedTarget as HTMLElement | null;
-    if (target && target.closest(".lc-szmap-raw__mark-group")) {
-        return;
+    const target = event.relatedTarget as HTMLElement | null
+    if (target && target.closest('.lc-szmap-raw__mark-group')) {
+        return
     }
-    currentMapKey.value = "";
-    $emits("markMouseleave", key);
-};
+    currentMapKey.value = ''
+    $emits('markMouseleave', key)
+}
 </script>
 
 <style lang="scss" scoped>

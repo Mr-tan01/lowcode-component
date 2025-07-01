@@ -10,25 +10,30 @@
             </div>
             <LcElasticScrollbar v-show="data.length" ref="scrollbarRef">
                 <div class="lc-desc-list__tbody">
-                    <div class="lc-desc-list__tbody__tr" v-for="(tdRecord, tdIndex) in data" :key="tdIndex">
-                        <div class="lc-desc-list__tbody__tr__cell" v-for="(thRecord, thIndex) in columns" :key="thIndex" :style="customRecordStyle(thRecord)">
+                    <div v-for="(tdRecord, tdIndex) in data" :key="tdIndex" class="lc-desc-list__tbody__tr">
+                        <div
+                            v-for="(thRecord, thIndex) in columns"
+                            :key="thIndex"
+                            class="lc-desc-list__tbody__tr__cell"
+                            :style="customRecordStyle(thRecord)"
+                        >
                             <slot
                                 :name="getTdCellSlotName(thRecord)"
                                 :record="tdRecord"
                                 :index="tdIndex"
                                 :column="thRecord"
-                                :colIndex="thIndex"
-                                :value="getTdCellNode(tdRecord, thRecord, tdIndex, thIndex)"
+                                :col-index="thIndex"
+                                :value="getTdCellNode(tdRecord, thRecord, tdIndex)"
                             >
-                                <span class="lc-desc-list__tbody__tr__cell__span" :title="getTdCellNode(tdRecord, thRecord, tdIndex, thIndex)">
-                                    {{ getTdCellNode(tdRecord, thRecord, tdIndex, thIndex) }}
+                                <span class="lc-desc-list__tbody__tr__cell__span" :title="getTdCellNode(tdRecord, thRecord, tdIndex)">
+                                    {{ getTdCellNode(tdRecord, thRecord, tdIndex) }}
                                 </span>
                             </slot>
                         </div>
                     </div>
                 </div>
             </LcElasticScrollbar>
-            <div class="lc-desc-list--empty" v-show="!data.length">
+            <div v-show="!data.length" class="lc-desc-list--empty">
                 <slot name="empty">
                     <LcEmpty />
                 </slot>
@@ -38,18 +43,18 @@
 </template>
 
 <script lang="ts" setup>
-import { PropType, ref, onMounted, watch, nextTick } from "vue";
-import memoize from "lodash-es/memoize";
-import { LcElasticScrollbar } from "@/components/education/components/elasticScrollbar";
-import { LcEmpty } from "@/components/education/components/empty";
+import { PropType, ref, onMounted, watch, nextTick } from 'vue'
+import memoize from 'lodash-es/memoize'
+import { LcElasticScrollbar } from '@/components/education/components/elasticScrollbar'
+import { LcEmpty } from '@/components/education/components/empty'
 
 export interface Columns {
-    title: string;
-    type?: "index" | "default";
-    dataIndex?: string;
-    align?: string;
-    width?: string;
-    flex?: string | number;
+    title: string
+    type?: 'index' | 'default'
+    dataIndex?: string
+    align?: string
+    width?: string
+    flex?: string | number
 }
 const { data = [] } = defineProps({
     columns: {
@@ -60,61 +65,61 @@ const { data = [] } = defineProps({
         type: Array as PropType<Record<string, any>[]>,
         default: () => [],
     },
-});
+})
 
 const tdCellTypeMap = {
-    index: (_tdRecord, _thRecord, _tdIndex: number, _thIndex: number) => {
-        return _tdIndex + 1;
+    index: (_tdRecord, _thRecord, _tdIndex: number) => {
+        return _tdIndex + 1
     },
-    default: (_tdRecord, _thRecord, _tdIndex: number, _thIndex: number) => {
-        const val = _tdRecord[_thRecord.dataIndex];
-        return typeof val === "number" ? val : val || "-";
+    default: (_tdRecord, _thRecord) => {
+        const val = _tdRecord[_thRecord.dataIndex]
+        return typeof val === 'number' ? val : val || '-'
     },
-};
+}
 
-const hasScrollbar = ref(false);
-const scrollbarRef = ref();
+const hasScrollbar = ref(false)
+const scrollbarRef = ref()
 
 function checkScrollbar() {
     if (scrollbarRef.value) {
-        hasScrollbar.value = scrollbarRef.value.$el.scrollHeight > scrollbarRef.value.$el.clientHeight;
+        hasScrollbar.value = scrollbarRef.value.$el.scrollHeight > scrollbarRef.value.$el.clientHeight
     }
 }
 
 onMounted(() => {
-    checkScrollbar();
-});
+    checkScrollbar()
+})
 
 watch(
     () => data,
     () => {
         nextTick(() => {
-            checkScrollbar();
-        });
+            checkScrollbar()
+        })
     },
-    { deep: true }
-);
+    { deep: true },
+)
 
-const getThCellNode: (_record: Columns, _index: number) => string = memoize((_record: Columns, _index: number) => {
-    return _record.title;
-});
+const getThCellNode: (_record: Columns, _index: number) => string = memoize((_record: Columns) => {
+    return _record.title
+})
 
-function createTdCellNode(_tdRecord, _thRecord: Columns, _tdIndex: number, _thIndex: number) {
-    const renderHandler = _thRecord.type ? tdCellTypeMap[_thRecord.type] : tdCellTypeMap.default;
-    return renderHandler(_tdRecord, _thRecord, _tdIndex, _thIndex);
+function createTdCellNode(_tdRecord, _thRecord: Columns, _tdIndex: number) {
+    const renderHandler = _thRecord.type ? tdCellTypeMap[_thRecord.type] : tdCellTypeMap.default
+    return renderHandler(_tdRecord, _thRecord, _tdIndex)
 }
-const getTdCellNode: typeof createTdCellNode = memoize(createTdCellNode, createTdCellNode);
+const getTdCellNode: typeof createTdCellNode = memoize(createTdCellNode, createTdCellNode)
 
-const customRecordStyle: (_record: Columns) => Record<string, any> = memoize((thRecord) => {
+const customRecordStyle: (_record: Columns) => Record<string, any> = memoize(thRecord => {
     return {
-        "--text-align": thRecord.align ?? "left",
-        "--cell-flex": thRecord.flex ?? 1,
-        "--cell-width": thRecord.width ?? "auto",
-    };
-});
+        '--text-align': thRecord.align ?? 'left',
+        '--cell-flex': thRecord.flex ?? 1,
+        '--cell-width': thRecord.width ?? 'auto',
+    }
+})
 
 function getTdCellSlotName(_thRecord) {
-    return _thRecord.dataIndex ?? "default";
+    return _thRecord.dataIndex ?? 'default'
 }
 </script>
 
@@ -168,7 +173,7 @@ function getTdCellSlotName(_thRecord) {
                 line-height: 20px;
                 font-style: normal;
 
-                text-align: var(--text-align, "left");
+                text-align: var(--text-align, 'left');
             }
         }
     }
@@ -195,7 +200,7 @@ function getTdCellSlotName(_thRecord) {
             transition: background 0.3s linear;
 
             &::before {
-                content: "";
+                content: '';
                 width: 14px;
                 height: 20px;
                 background: url(./images/right-arrow.png) no-repeat;
@@ -227,7 +232,7 @@ function getTdCellSlotName(_thRecord) {
                 line-height: 26px;
                 font-style: normal;
                 padding: 11px;
-                text-align: var(--text-align, "center");
+                text-align: var(--text-align, 'center');
                 flex: var(--cell-flex, 1);
                 width: var(--cell-width, auto);
                 --line-clamp: 2;

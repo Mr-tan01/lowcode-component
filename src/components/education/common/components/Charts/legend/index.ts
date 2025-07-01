@@ -1,10 +1,6 @@
+export * from './types'
 
-export * from './types';
+import CommonLegend from './legend.vue'
 
-import CommonLegend from './legend.vue';
-
-export type CommonLegendInstanceType = InstanceType<typeof CommonLegend>;
-
-export {
-    CommonLegend,
-};
+export type CommonLegendInstanceType = InstanceType<typeof CommonLegend>
+export { CommonLegend }

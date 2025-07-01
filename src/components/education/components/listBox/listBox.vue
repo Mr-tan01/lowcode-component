@@ -16,90 +16,90 @@
 </template>
 
 <script setup lang="ts">
-import { CSSProperties } from "vue";
-import type { DataListProps, ColumnStyle } from "./props";
-import { NGrid, NGi } from "naive-ui";
-import { LcElasticScrollbar } from "@/components/education/components/elasticScrollbar";
+import { CSSProperties } from 'vue'
+import type { DataListProps, ColumnStyle } from './props'
+import { NGrid, NGi } from 'naive-ui'
+import { LcElasticScrollbar } from '@/components/education/components/elasticScrollbar'
 const {
     rows = [],
     rowStyle = {},
     bordered = false,
     keyStyle = {
-        whiteSpace: "nowrap",
-        overflow: "hidden",
-        textOverflow: "ellipsis",
+        whiteSpace: 'nowrap',
+        overflow: 'hidden',
+        textOverflow: 'ellipsis',
     },
     valueStyle = {
-        whiteSpace: "nowrap",
-        overflow: "hidden",
-        textOverflow: "ellipsis",
+        whiteSpace: 'nowrap',
+        overflow: 'hidden',
+        textOverflow: 'ellipsis',
     },
-    cellPadding = "12px 15px",
+    cellPadding = '12px 15px',
     gap = 0,
     cols = 2,
-} = defineProps<DataListProps>();
+} = defineProps<DataListProps>()
 
 // 获取键单元格样式
 const getKeyCellStyle = (index: number): ColumnStyle => {
     const style: ColumnStyle = {
-        whiteSpace: "pre",
-        flex: "4 1 0%",
-        backgroundColor: "#063B6B",
+        whiteSpace: 'pre',
+        flex: '4 1 0%',
+        backgroundColor: '#063B6B',
         ...keyStyle,
-        padding: cellPadding || "12px 15px",
-        textAlign: keyStyle.textAlign || "left",
+        padding: cellPadding || '12px 15px',
+        textAlign: keyStyle.textAlign || 'left',
         ...(rows[index]?.keyStyle || {}),
-    };
+    }
 
     if (bordered) {
-        style.borderLeft = "1px solid #07467a";
-        style.borderTop = "1px solid #07467a";
-        style.borderBottom = "1px solid #07467a";
+        style.borderLeft = '1px solid #07467a'
+        style.borderTop = '1px solid #07467a'
+        style.borderBottom = '1px solid #07467a'
         if (index === rows.length - 1) {
-            style.borderRight = "1px solid #07467a";
+            style.borderRight = '1px solid #07467a'
         }
     }
 
-    return style;
-};
+    return style
+}
 
 // 获取值单元格样式
 const getValueCellStyle = (index: number): ColumnStyle => {
     const style: ColumnStyle = {
-        whiteSpace: "pre",
-        flex: "6 1 0%",
-        backgroundColor: "#063661",
+        whiteSpace: 'pre',
+        flex: '6 1 0%',
+        backgroundColor: '#063661',
         ...valueStyle,
-        padding: cellPadding || "12px 15px",
-        textAlign: valueStyle.textAlign || "left",
+        padding: cellPadding || '12px 15px',
+        textAlign: valueStyle.textAlign || 'left',
         ...(rows[index]?.valueStyle || {}),
-    };
-
-    if (bordered) {
-        style.borderTop = "1px solid #07467A";
-        style.borderBottom = "1px solid #07467A";
-        style.borderRight = "1px solid #07467A";
-        style.borderLeft = "1px solid #07467A";
     }
 
-    return style;
-};
+    if (bordered) {
+        style.borderTop = '1px solid #07467A'
+        style.borderBottom = '1px solid #07467A'
+        style.borderRight = '1px solid #07467A'
+        style.borderLeft = '1px solid #07467A'
+    }
+
+    return style
+}
 
 // 获取行样式
 const getRowStyle = (index: number): CSSProperties => {
     const style: CSSProperties = {
-        display: "flex",
-        width: "100%",
-    };
-
-    if (index % 2 === 0 && rowStyle.even) {
-        Object.assign(style, rowStyle.even);
-    } else if (index % 2 !== 0 && rowStyle.odd) {
-        Object.assign(style, rowStyle.odd);
+        display: 'flex',
+        width: '100%',
     }
 
-    return style;
-};
+    if (index % 2 === 0 && rowStyle.even) {
+        Object.assign(style, rowStyle.even)
+    } else if (index % 2 !== 0 && rowStyle.odd) {
+        Object.assign(style, rowStyle.odd)
+    }
+
+    return style
+}
 </script>
 
 <style lang="scss" scoped>

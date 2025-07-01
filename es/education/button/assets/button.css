@@ -1,1 +1,55 @@
-.lc-button[data-v-d290fdfb]{margin:0;padding:0;box-sizing:border-box;border-radius:2px;-webkit-backdrop-filter:blur(2.22px);backdrop-filter:blur(2.22px)}.lc-button--primary[data-v-d290fdfb]{background:linear-gradient(to top,#0a758d,#0ffbf8);border:1px solid #0FFBF8}.lc-button--primary[data-v-d290fdfb]:hover{background:linear-gradient(to top,#137e96,#0ffbf8)}.lc-button--normal[data-v-d290fdfb]{background:#06385e;border:1px solid rgb(21,154,255)}.lc-button--normal[data-v-d290fdfb]:hover{background:#084e84}.lc-button[data-v-d290fdfb]:hover{cursor:pointer}.lc-button[data-v-d290fdfb]:active{opacity:.8}.lc-button__wrapper[data-v-d290fdfb]{display:flex;align-items:center;justify-content:center;padding:7px 20px;gap:10px}.lc-button__wrapper--icon[data-v-d290fdfb]{display:flex;align-items:center;height:27px;color:#fff;fill:#fff}.lc-button__wrapper--icon[data-v-d290fdfb] svg{height:16px;margin-bottom:-2px}.lc-button__wrapper--content[data-v-d290fdfb]{font-family:HarmonyOS_Sans_SC_Bold;font-size:16px;color:#fff;line-height:27px;text-align:right;font-style:normal;text-transform:none}
+.lc-button[data-v-d290fdfb] {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    border-radius: 2px;
+    -webkit-backdrop-filter: blur(2.22px);
+    backdrop-filter: blur(2.22px);
+}
+.lc-button--primary[data-v-d290fdfb] {
+    background: linear-gradient(to top, #0a758d, #0ffbf8);
+    border: 1px solid #0ffbf8;
+}
+.lc-button--primary[data-v-d290fdfb]:hover {
+    background: linear-gradient(to top, #137e96, #0ffbf8);
+}
+.lc-button--normal[data-v-d290fdfb] {
+    background: #06385e;
+    border: 1px solid rgb(21, 154, 255);
+}
+.lc-button--normal[data-v-d290fdfb]:hover {
+    background: #084e84;
+}
+.lc-button[data-v-d290fdfb]:hover {
+    cursor: pointer;
+}
+.lc-button[data-v-d290fdfb]:active {
+    opacity: 0.8;
+}
+.lc-button__wrapper[data-v-d290fdfb] {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 7px 20px;
+    gap: 10px;
+}
+.lc-button__wrapper--icon[data-v-d290fdfb] {
+    display: flex;
+    align-items: center;
+    height: 27px;
+    color: #fff;
+    fill: #fff;
+}
+.lc-button__wrapper--icon[data-v-d290fdfb] svg {
+    height: 16px;
+    margin-bottom: -2px;
+}
+.lc-button__wrapper--content[data-v-d290fdfb] {
+    font-family: HarmonyOS_Sans_SC_Bold;
+    font-size: 16px;
+    color: #fff;
+    line-height: 27px;
+    text-align: right;
+    font-style: normal;
+    text-transform: none;
+}

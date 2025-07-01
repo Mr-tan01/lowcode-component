@@ -1,4 +1,4 @@
-import LcEmpty from "./empty.vue";
+import LcEmpty from './empty.vue'
 
-export type LcEmptyInstance = InstanceType<typeof LcEmpty>;
-export { LcEmpty };
+export type LcEmptyInstance = InstanceType<typeof LcEmpty>
+export { LcEmpty }

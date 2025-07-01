@@ -1,37 +1,35 @@
-import { graphic,  type EChartsOption, } from "echarts"; 
+import { graphic, type EChartsOption } from 'echarts'
 
 export const barBuiltInStyle: {
-    color: graphic.LinearGradient[];
-    symbols: [];
+    color: graphic.LinearGradient[]
+    symbols: []
 } = {
     color: [
         new graphic.LinearGradient(1, 0, 0, 1, [
             { offset: 0, color: 'rgba(15, 249, 246, 1)' },
-            { offset: 1, color: 'rgba(4, 91, 111, 1)' }
+            { offset: 1, color: 'rgba(4, 91, 111, 1)' },
         ]),
         new graphic.LinearGradient(1, 0, 0, 1, [
             { offset: 0, color: 'rgba(225, 188, 75, 1)' },
-            { offset: 1, color: 'rgba(53, 69, 64, 1)' }
+            { offset: 1, color: 'rgba(53, 69, 64, 1)' },
         ]),
         new graphic.LinearGradient(1, 0, 0, 1, [
             { offset: 0, color: 'rgba(0, 146, 251, 1)' },
-            { offset: 1, color: 'rgba(0, 125, 216, 1)' }
+            { offset: 1, color: 'rgba(0, 125, 216, 1)' },
         ]),
         new graphic.LinearGradient(1, 0, 0, 1, [
             { offset: 1, color: 'rgba(166, 207, 255, 0)' },
-            { offset: 0, color: 'rgba(166, 207, 255, 1)' }
+            { offset: 0, color: 'rgba(166, 207, 255, 1)' },
         ]),
         new graphic.LinearGradient(1, 0, 0, 1, [
             { offset: 1, color: 'rgba(119, 73, 255, 0)' },
-            { offset: 0, color: 'rgba(119, 73, 255, 1)' }
-        ])
+            { offset: 0, color: 'rgba(119, 73, 255, 1)' },
+        ]),
     ],
-    symbols: [
-
-    ]
+    symbols: [],
 }
 
-export const barColors = ['rgba(54, 115, 245, 1)', 'rgba(1, 158, 43, 1)', 'rgba(222, 56, 4, 1)'];
+export const barColors = ['rgba(54, 115, 245, 1)', 'rgba(1, 158, 43, 1)', 'rgba(222, 56, 4, 1)']
 export const yAxisOptions: EChartsOption['yAxis'] = {
     nameLocation: 'end',
     nameTextStyle: {
@@ -43,8 +41,7 @@ export const yAxisOptions: EChartsOption['yAxis'] = {
     splitLine: {
         lineStyle: {
             color: 'rgba(255, 255, 255, 0.2)',
-
-        }
+        },
     },
     axisLabel: {
         color: '#fff',
@@ -61,7 +58,7 @@ export const tooltipOptions: EChartsOption['tooltip'] = {
         color: '#fff',
         fontSize: 14,
         lineHeight: 20,
-    }
+    },
 }
 
 export const legendOptions: EChartsOption['legend'] = {
@@ -83,12 +80,12 @@ export const legendOptions: EChartsOption['legend'] = {
     pageTextStyle: {
         fontSize: 12,
         color: '#fff',
-    }
+    },
 }
 
 export const gridOptions: EChartsOption['grid'] = {
     top: 50,
-    bottom: 40
+    bottom: 40,
 }
 
 export const xAxisOptions: EChartsOption['xAxis'] = {
@@ -103,11 +100,11 @@ export const xAxisOptions: EChartsOption['xAxis'] = {
     axisLine: {
         lineStyle: {
             color: 'rgba(255, 255, 255, 0.2)',
-        }
+        },
     },
     axisLabel: {
         color: '#fff',
         fontSize: 14,
         lineHeight: 20,
-    }
+    },
 }

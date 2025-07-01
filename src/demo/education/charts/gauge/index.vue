@@ -11,10 +11,10 @@
                 <DemoHelpBox title="仪表盘" rswidth="420px" rs-height="auto" :code="deomCodes.code1(60)">
                     <LcGaugeSvgChart :value="60"></LcGaugeSvgChart>
                 </DemoHelpBox>
-                <DemoHelpBox title="得分图" rswidth="520px" rs-height="420px"  :code="deomCodes.code2">
+                <DemoHelpBox title="得分图" rswidth="520px" rs-height="420px" :code="deomCodes.code2">
                     <LcGaugeChart v-bind="useCommonGaugeOptions()"></LcGaugeChart>
                 </DemoHelpBox>
-                <DemoHelpBox title="仪表盘" rswidth="420px" rs-height="420px"  :code="deomCodes.code3">
+                <DemoHelpBox title="仪表盘" rswidth="420px" rs-height="420px" :code="deomCodes.code3">
                     <LcGaugeChart v-bind="useGaugeOptions()"></LcGaugeChart>
                 </DemoHelpBox>
             </NSpace>
@@ -22,14 +22,11 @@
     </div>
 </template>
 <script lang="ts" setup>
-import { NSpace } from 'naive-ui';
-import { DemoHelpBox } from '@/components/common/DemoHelpBox';
-import {
-    LcGaugeChart,
-    LcGaugeSvgChart
-} from '@/components/education/components/charts';
-import { deomCodes } from './demo-codes';
-import { useCommonGaugeOptions, useGaugeOptions, useGaugeSvgOptions } from '../options/gauge-options';
+import { NSpace } from 'naive-ui'
+import { DemoHelpBox } from '@/components/common/DemoHelpBox'
+import { LcGaugeChart, LcGaugeSvgChart } from '@/components/education/components/charts'
+import { deomCodes } from './demo-codes'
+import { useCommonGaugeOptions, useGaugeOptions, useGaugeSvgOptions } from '../options/gauge-options'
 </script>
 <style lang="scss" scoped>
 .demo-charts {

@@ -12,16 +12,16 @@
 </template>
 
 <script lang="ts" setup>
-import { DemoHelpBox } from "@/components/common/DemoHelpBox";
-import { LcSwitchTabs } from "@/components/education/components/switch-tabs";
-import { ref } from "vue";
-import { demoCodes } from "./demo-codes";
+import { DemoHelpBox } from '@/components/common/DemoHelpBox'
+import { LcSwitchTabs } from '@/components/education/components/switch-tabs'
+import { ref } from 'vue'
+import { demoCodes } from './demo-codes'
 
-const tabValue = ref("龙岗区");
-const tabValue2 = ref(0);
-const handleChange = (value) => {
-    console.log("选项卡切换", value);
-};
+const tabValue = ref('龙岗区')
+const tabValue2 = ref(0)
+const handleChange = value => {
+    console.log('选项卡切换', value)
+}
 </script>
 
 <style lang="scss" scoped></style>

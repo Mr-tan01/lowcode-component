@@ -2,18 +2,13 @@
     <div class="lc-bothway-card">
         <div class="lc-bothway-card__wrapper">
             <div class="lc-bothway-card__wrapper__info-range">
-                <div
-                    class="lc-bothway-card__wrapper__info-range__label flex-center"
-                >
+                <div class="lc-bothway-card__wrapper__info-range__label flex-center">
                     {{ label }}
                 </div>
                 <div class="lc-bothway-card__wrapper__info-range__wrapper">
-                    <div class="lc-bothway-card__wrapper__info-range__wrapper__info" v-for="(item, key) in data" :key>
+                    <div v-for="(item, key) in data" :key class="lc-bothway-card__wrapper__info-range__wrapper__info">
                         <slot :name="item.customSlot" :item="item">
-                            <div
-                                class="lc-bothway-card__wrapper__info-range__wrapper__info__value"
-                                :title="item.value?.toString()"
-                            >
+                            <div class="lc-bothway-card__wrapper__info-range__wrapper__info__value" :title="item.value?.toString()">
                                 <NNumberAnimation
                                     show-separator
                                     :from="0"
@@ -25,10 +20,7 @@
                             <div class="flex-end">
                                 {{ renderUnit(item.value, item.unit) }}
                             </div>
-                            <div
-                                class="lc-bothway-card__wrapper__info-range__wrapper__info__division flex-center"
-                                v-if="key !== data.length - 1"
-                            >
+                            <div v-if="key !== data.length - 1" class="lc-bothway-card__wrapper__info-range__wrapper__info__division flex-center">
                                 |
                             </div>
                         </slot>
@@ -41,65 +33,54 @@
 </template>
 
 <script lang="ts" setup>
-import { PropType } from "vue";
-import { bigNumber } from "lowcode-share/es/share";
-import { NNumberAnimation } from "naive-ui/es/number-animation";
-import memoize from "lodash-es/memoize";
+import { bigNumber } from 'lowcode-share/es/share'
+import { NNumberAnimation } from 'naive-ui/es/number-animation'
+import memoize from 'lodash-es/memoize'
 type Data = {
-    value?: number;
-    unit?: string;
-    customSlot?: string;
-    customValue?: string | number;
-};
+    value?: number
+    unit?: string
+    customSlot?: string
+    customValue?: string | number
+}
 const {
-    label = "",
+    label = '',
     data = [],
     fixed = true,
     decimal = 0,
-    unit = "",
-} = defineProps({
-    label: {
-        type: String,
-    },
-    data: {
-        type: Object as PropType<Data[]>,
-    },
-    unit: {
-        type: String,
-    },
-    fixed: {
-        type: Boolean,
-    },
-    decimal: {
-        type: Number,
-    },
-});
+    unit = '',
+} = defineProps<{
+    label?: string
+    data?: Data[]
+    unit?: string
+    fixed?: boolean
+    decimal?: number
+}>()
 
-const renderdecimals = memoize((value) => {
-    const { unit: numUnit } = bigNumber(value);
+const renderdecimals = memoize(value => {
+    const { unit: numUnit } = bigNumber(value)
     if (Number.isInteger(value) && !numUnit) {
-        return 0;
+        return 0
     }
-    return decimal;
-});
-const renderValue = memoize((value) => {
+    return decimal
+})
+const renderValue = memoize(value => {
     if (fixed) {
-        const { result } = bigNumber(value, decimal);
-        return result;
+        const { result } = bigNumber(value, decimal)
+        return result
     }
-    return value;
-});
+    return value
+})
 
 const renderUnit = memoize(
     (value, _unit) => {
         if (fixed) {
-            const { unit: numUnit } = bigNumber(value, decimal);
-            return `${numUnit}${_unit || unit}`;
+            const { unit: numUnit } = bigNumber(value, decimal)
+            return `${numUnit}${_unit || unit}`
         }
-        return _unit || unit;
+        return _unit || unit
     },
-    (value, _unit) => `${value}_${_unit || unit}`
-);
+    (value, _unit) => `${value}_${_unit || unit}`,
+)
 </script>
 
 <style lang="scss" scoped>
@@ -137,21 +118,21 @@ const renderUnit = memoize(
                     gap: 10px;
                     color: #0fd4fb;
 
-                &__value {
-                    font-family: HarmonyOS_Sans_SC_Medium;
-                    font-size: 30px;
-                    line-height: 37px;
-                    text-shadow: 0px 0px 20px rgba(0, 129, 255, 0.4);
-                    text-align: center;
-                    font-style: normal;
-                    text-transform: none;
-                }
+                    &__value {
+                        font-family: HarmonyOS_Sans_SC_Medium;
+                        font-size: 30px;
+                        line-height: 37px;
+                        text-shadow: 0px 0px 20px rgba(0, 129, 255, 0.4);
+                        text-align: center;
+                        font-style: normal;
+                        text-transform: none;
+                    }
 
-                &__division {
-                    font-size: 18px;
-                    color: rgba(15, 212, 251, 0.29);
+                    &__division {
+                        font-size: 18px;
+                        color: rgba(15, 212, 251, 0.29);
+                    }
                 }
-            }
             }
         }
 

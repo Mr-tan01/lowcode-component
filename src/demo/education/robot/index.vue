@@ -16,22 +16,27 @@
         </DemoHelpBox>
         <DemoHelpBox title="机器人图标" description="深圳教育项目-机器人图标" rswidth="1210px" rs-height="auto" :code="code2">
             <NSpace>
-                <LcRobot width="auto" height="147px" value="s4" trigger="focus" showPopup draggable></LcRobot>
-                <LcRobot width="auto" height="147px" value="s4" trigger="focus" showPopup draggable position="absolute"></LcRobot>
-                <LcRobot width="auto" height="147px" value="s4" trigger="focus" showPopup></LcRobot>
-                <LcRobot width="auto" height="147px" value="s4" trigger="focus" hid-dir="rt" showPopup></LcRobot>
-                <LcRobot width="auto" height="147px"
-                    src="https://b0.bdstatic.com/2d43e63ca240bdf793814be0dbc9c3a5.jpg@h_1280" trigger="focus"
-                    hid-dir="rt" showPopup></LcRobot>
+                <LcRobot width="auto" height="147px" value="s4" trigger="focus" show-popup draggable></LcRobot>
+                <LcRobot width="auto" height="147px" value="s4" trigger="focus" show-popup draggable position="absolute"></LcRobot>
+                <LcRobot width="auto" height="147px" value="s4" trigger="focus" show-popup></LcRobot>
+                <LcRobot width="auto" height="147px" value="s4" trigger="focus" hid-dir="rt" show-popup></LcRobot>
+                <LcRobot
+                    width="auto"
+                    height="147px"
+                    src="https://b0.bdstatic.com/2d43e63ca240bdf793814be0dbc9c3a5.jpg@h_1280"
+                    trigger="focus"
+                    hid-dir="rt"
+                    show-popup
+                ></LcRobot>
             </NSpace>
         </DemoHelpBox>
     </div>
 </template>
 <script lang="ts" setup>
-import { NSpace } from 'naive-ui';
-import { DemoHelpBox } from '@/components/common/DemoHelpBox';
-import { LcRobot, LcMainRobot } from '@/components/education/components/robot';
-import { code1, code2, codeStr0 } from './demo-codes';
+import { NSpace } from 'naive-ui'
+import { DemoHelpBox } from '@/components/common/DemoHelpBox'
+import { LcRobot, LcMainRobot } from '@/components/education/components/robot'
+import { code1, code2, codeStr0 } from './demo-codes'
 </script>
 
 <style lang="scss" scoped>

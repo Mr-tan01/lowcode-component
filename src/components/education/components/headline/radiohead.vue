@@ -10,27 +10,27 @@
     </div>
 </template>
 <script lang="ts" setup>
-import { LcIconCard } from "@/components/education/components/icon/index";
-import { computed, toRefs } from "vue";
-import { overflowStr } from "lowcode-share/es/share";
+import { LcIconCard } from '@/components/education/components/icon/index'
+import { computed, toRefs } from 'vue'
+import { overflowStr } from 'lowcode-share/es/share'
 const props = withDefaults(
     defineProps<{
-        text: string;
-        maxLength?: number;
-        fontSize?: number | string;
+        text?: string
+        maxLength?: number
+        fontSize?: number | string
     }>(),
     {
-        text: "",
+        text: '',
         maxLength: 15,
         fontSize: 16,
-    }
-);
-const { text, maxLength, fontSize } = toRefs(props);
+    },
+)
+const { text, maxLength, fontSize } = toRefs(props)
 
 const formatedText = computed(() => {
-    return overflowStr(text.value, maxLength.value);
-});
-const resultFontSize = computed(() => (typeof fontSize.value === "number" ? `${fontSize.value}px` : fontSize.value));
+    return overflowStr(text.value, maxLength.value)
+})
+const resultFontSize = computed(() => (typeof fontSize.value === 'number' ? `${fontSize.value}px` : fontSize.value))
 </script>
 <style lang="scss" scoped>
 .lc-radiohead {

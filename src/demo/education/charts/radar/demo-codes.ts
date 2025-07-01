@@ -1,4 +1,3 @@
-
 export const demoCodes = {
     code1: `
 <template>
@@ -160,7 +159,7 @@ const options =  {
 }
 </script>
 `,
-code5: `
+    code5: `
 <template>
     <LcRadarChart :options></LcRadarChart>
 </template>
@@ -209,7 +208,7 @@ const options =  {
 }
 </script>
 `,
-code6: `
+    code6: `
 <template>
     <LcRadarChart :options></LcRadarChart>
 </template>
@@ -257,7 +256,7 @@ const options =  {
 }
 </script>
 `,
-code7: `
+    code7: `
 <template>
     <LcRadarChart :options></LcRadarChart>
 </template>

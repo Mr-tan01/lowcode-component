@@ -1,6 +1,6 @@
-import { graphic, type EChartsOption } from "echarts";
-import { LinearGradient } from "echarts/types/src/util/graphic";
-export const lineColors = ['rgba(15, 250, 248, 1)', 'rgba(225, 188, 75, 1)', 'rgba(222, 56, 4, 1)'];
+import { graphic, type EChartsOption } from 'echarts'
+import { LinearGradient } from 'echarts/types/src/util/graphic'
+export const lineColors = ['rgba(15, 250, 248, 1)', 'rgba(225, 188, 75, 1)', 'rgba(222, 56, 4, 1)']
 export const yAxisOptions: EChartsOption['yAxis'] = {
     nameLocation: 'end',
     nameTextStyle: {
@@ -13,21 +13,21 @@ export const yAxisOptions: EChartsOption['yAxis'] = {
         lineStyle: {
             color: 'rgba(255, 255, 255, 0.2)',
             type: 'dotted',
-        }
+        },
     },
     axisLabel: {
         color: '#fff',
         fontSize: 14,
         lineHeight: 20,
         margin: 13,
-        formatter: (value) => {
-            return value;
+        formatter: value => {
+            return value
         },
     },
     axisLine: {
         lineStyle: {
             color: 'rgba(255, 255, 255, 0.2)',
-        }
+        },
     },
 }
 export const tooltipOptions: EChartsOption['tooltip'] = {
@@ -37,7 +37,7 @@ export const tooltipOptions: EChartsOption['tooltip'] = {
         color: '#fff',
         fontSize: 14,
         lineHeight: 20,
-    }
+    },
 }
 export const legendOptions: EChartsOption['legend'] = {
     show: true,
@@ -57,12 +57,12 @@ export const legendOptions: EChartsOption['legend'] = {
     pageTextStyle: {
         fontSize: 12,
         color: '#fff',
-    }
+    },
 }
 
 export const gridOptions: EChartsOption['grid'] = {
     top: 50,
-    bottom: 40
+    bottom: 40,
 }
 
 export const xAxisOptions: EChartsOption['xAxis'] = {
@@ -74,7 +74,7 @@ export const xAxisOptions: EChartsOption['xAxis'] = {
             color: 'rgba(255, 255, 255, 0.2)',
             type: 'dotted',
             width: 1,
-        }
+        },
     },
     axisTick: {
         show: false,
@@ -82,34 +82,34 @@ export const xAxisOptions: EChartsOption['xAxis'] = {
     axisLine: {
         lineStyle: {
             color: 'rgba(255, 255, 255, 0.2)',
-        }
+        },
     },
     axisLabel: {
         color: '#fff',
         fontSize: 14,
         lineHeight: 20,
-    }
+    },
 }
 
 export const defLinearGradients: LinearGradient[] = [
     new graphic.LinearGradient(0, 0, 0, 1, [
         {
             offset: 0,
-            color: 'rgba(15, 251, 248, 1)'
+            color: 'rgba(15, 251, 248, 1)',
         },
         {
             offset: 1,
-            color: 'rgba(15, 251, 248, 0.05)'
-        }
+            color: 'rgba(15, 251, 248, 0.05)',
+        },
     ]),
     new graphic.LinearGradient(0, 0, 0, 1, [
         {
             offset: 0,
-            color: 'rgba(255, 175, 103, 1)'
+            color: 'rgba(255, 175, 103, 1)',
         },
         {
             offset: 1,
-            color: 'rgba(225, 188, 75, 0)'
-        }
+            color: 'rgba(225, 188, 75, 0)',
+        },
     ]),
 ]

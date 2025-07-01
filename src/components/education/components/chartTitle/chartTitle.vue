@@ -1,5 +1,5 @@
 <template>
-    <div class="lc-chart-title " :class="[`lc-chart-title--${dir}`]">
+    <div class="lc-chart-title" :class="[`lc-chart-title--${dir}`]">
         <div class="lc-chart-title__wrapper">
             <div class="lc-chart-title__wrapper__text" :title="text">
                 {{ formatedText }}
@@ -12,8 +12,8 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, PropType } from 'vue';
-import { overflowStr } from 'lowcode-share/es/share';
+import { computed, PropType } from 'vue'
+import { overflowStr } from 'lowcode-share/es/share'
 const {
     text = '',
     maxLength = 6,
@@ -27,11 +27,11 @@ const {
     },
     dir: {
         type: String as PropType<'ltr' | 'rtl'>,
-    }
-});
+    },
+})
 const formatedText = computed(() => {
-    return overflowStr(text, maxLength);
-});
+    return overflowStr(text, maxLength)
+})
 </script>
 
 <style lang="scss" scoped>
@@ -72,7 +72,7 @@ const formatedText = computed(() => {
         &__text {
             font-family: HarmonyOS_Sans_SC;
             font-size: 16px;
-            color: #FFFFFF;
+            color: #ffffff;
             line-height: 18px;
         }
 
@@ -86,6 +86,5 @@ const formatedText = computed(() => {
             }
         }
     }
-
 }
 </style>

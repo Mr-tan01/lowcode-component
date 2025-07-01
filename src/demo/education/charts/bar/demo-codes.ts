@@ -1,4 +1,3 @@
-
 export const barChartCodes = {
     code0: `
 <template>
@@ -59,7 +58,7 @@ const data =  {
 }
 </script>
 `,
-code2: `
+    code2: `
 <template>
     <LcBarChart :options="data" type="bar"></LcBarChart>
 </template>
@@ -91,7 +90,7 @@ const data =  {
 </script>
 `,
 
-code3: `
+    code3: `
 <template>
     <LcBarChart :options="data" type="bar" stack></LcBarChart>
 </template>
@@ -123,7 +122,7 @@ const data =  {
 </script>
 `,
 
-code4: `
+    code4: `
 <template>
     <LcBarChart :options="data" is-horizontal :fake3d="false" type="bar"></LcBarChart>
 </template>
@@ -144,7 +143,7 @@ const data =  {
     }
 </script>
 `,
-code5: `
+    code5: `
 <template>
     <LcBarChart :options="data" is-horizontal :fake3d="false" type="bar"></LcBarChart>
 </template>
@@ -169,7 +168,7 @@ const data =  {
     }
 </script>
 `,
-code6: `
+    code6: `
 <template>
    <LcBarChart :options="chartNegativeBarOptions()" is-horizontal stack :fake3d="false" type="bar"></LcBarChart>
 </template>
@@ -194,7 +193,7 @@ const data =  {
     }
 </script>
 `,
-code7: `
+    code7: `
 <template>
    <LcBarChart :options="data" type="bar"></LcBarChart>
 </template>
@@ -224,7 +223,7 @@ const data =  {
     }
 </script>
 `,
-code8: `
+    code8: `
 <template>
    <LcBarChart :options="data" is-horizontal stack :fake3d="false" type="bar"></LcBarChart>
 </template>
@@ -283,7 +282,7 @@ const data =  {
     }
 </script>
 `,
-code9: `
+    code9: `
 <template>
    <LcBarChart :options="data" stack :fake3d="false" type="bar"></LcBarChart>
 </template>
@@ -342,7 +341,7 @@ const data =  {
     }
 </script>
 `,
-code10: `
+    code10: `
 <template>
    <LcBarChart :options="data" type="bar" :fake3d="false"></LcBarChart>
 </template>
@@ -385,7 +384,7 @@ const data =  {
     }
 </script>
 `,
-code11: `
+    code11: `
 <template>
    <LcBarChart :options="data" type="bar" :fake3d="false"></LcBarChart>
 </template>
@@ -418,7 +417,7 @@ const data =  {
     }
 </script>
 `,
-difference: `
+    difference: `
 <template>
     <LcBarChart :options="data" type="bar"></LcBarChart>
 </template>
@@ -463,5 +462,5 @@ const data = {
         ],
     }
 </script>
-`
+`,
 }

@@ -1,7 +1,5 @@
-import LcPaging from './paging.vue';
+import LcPaging from './paging.vue'
 
-export type LcPagingInstanceType = InstanceType<typeof LcPaging>;
+export type LcPagingInstanceType = InstanceType<typeof LcPaging>
 
-export {
-    LcPaging
-}
+export { LcPaging }

@@ -24,19 +24,19 @@
     </div>
 </template>
 <script lang="ts" setup>
-import { computed, PropType } from "vue";
-import { overflowStr } from "lowcode-share/es/share";
+import { computed, PropType } from 'vue'
+import { overflowStr } from 'lowcode-share/es/share'
 const direction = {
-    right: "right",
-    center: "center",
-    left: "left",
-} as const;
-type DirectionType = typeof direction;
+    right: 'right',
+    center: 'center',
+    left: 'left',
+} as const
+type DirectionType = typeof direction
 const {
-    text = "",
+    text = '',
     maxLength = 15,
-    fontSize = "18px",
-    type = "left",
+    fontSize = '18px',
+    type = 'left',
     hideRadioIcon = false,
 } = defineProps({
     text: {
@@ -54,10 +54,10 @@ const {
     hideRadioIcon: {
         type: Boolean,
     },
-});
+})
 const formatedText = computed(() => {
-    return overflowStr(text, maxLength);
-});
+    return overflowStr(text, maxLength)
+})
 </script>
 
 <style lang="scss" scoped>

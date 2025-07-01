@@ -1,9 +1,8 @@
-import { type EChartsOption, type BarSeriesOption, type SeriesOption, type EChartsCoreOption } from "echarts";
-import merge from 'lodash-es/merge';
-import { mergeLineRecord } from "@/components/education/components/charts/line/options";
-import { barColors, gridOptions, legendOptions, tooltipOptions, xAxisOptions, yAxisOptions } from "./const";
-import { deepMergeArrayOptions } from "@mmj-code-lib/lowcode/es/components";
-
+import { type EChartsOption, type BarSeriesOption, type SeriesOption, type EChartsCoreOption } from 'echarts'
+import merge from 'lodash-es/merge'
+import { mergeLineRecord } from '@/components/education/components/charts/line/options'
+import { barColors, gridOptions, legendOptions, tooltipOptions, xAxisOptions, yAxisOptions } from './const'
+import { deepMergeArrayOptions } from '@mmj-code-lib/lowcode/es/components'
 
 export const commonBarOptions: EChartsOption = {
     tooltip: tooltipOptions,
@@ -12,7 +11,7 @@ export const commonBarOptions: EChartsOption = {
     xAxis: xAxisOptions,
     yAxis: yAxisOptions,
     color: barColors,
-};
+}
 
 const defHorizontalBarOptions: EChartsOption = {
     grid: {
@@ -36,7 +35,7 @@ const defHorizontalBarOptions: EChartsOption = {
             lineStyle: {
                 color: 'rgba(255, 255, 255, 0.2)',
                 type: 'dotted',
-            }
+            },
         },
     },
     yAxis: {
@@ -51,20 +50,20 @@ const defHorizontalBarOptions: EChartsOption = {
         axisLine: {
             lineStyle: {
                 color: 'rgba(255, 255, 255, 0.2)',
-            }
+            },
         },
-    }
+    },
 }
 
-export const horizontalBarOptions: EChartsOption = merge({}, commonBarOptions, defHorizontalBarOptions);
+export const horizontalBarOptions: EChartsOption = merge({}, commonBarOptions, defHorizontalBarOptions)
 
 export const commonBarSeries: BarSeriesOption = {
     barWidth: 20,
     showBackground: true,
-    
+
     itemStyle: {
         shadowBlur: 0,
-        shadowColor: 'transparent'
+        shadowColor: 'transparent',
     },
     backgroundStyle: {
         borderWidth: 20,
@@ -87,37 +86,36 @@ export const smallBarSeries: BarSeriesOption = merge({}, commonBarSeries, {
     markPoint: {
         symbolSize: [12, 6],
     },
-});
+})
 
-export function useCommonBarOptions(opts: EChartsOption | EChartsCoreOption, props: { isHorizontal: Boolean }) {
-    const dynaicOptions = props.isHorizontal ? horizontalBarOptions : commonBarOptions;
-    deepMergeArrayOptions(opts, Object.keys(dynaicOptions), Object.values(dynaicOptions));
-    return merge({}, dynaicOptions, opts);
+export function useCommonBarOptions(opts: EChartsOption | EChartsCoreOption, props: { isHorizontal: boolean }) {
+    const dynaicOptions = props.isHorizontal ? horizontalBarOptions : commonBarOptions
+    deepMergeArrayOptions(opts, Object.keys(dynaicOptions), Object.values(dynaicOptions))
+    return merge({}, dynaicOptions, opts)
 }
 
 function mergeSeriesRecord(series1: SeriesOption, series2: SeriesOption, index: number) {
     if (series2.type === 'bar' || !series2.type) {
-        return merge({}, series1, series2);
+        return merge({}, series1, series2)
     } else if (series2.type === 'line') {
-        return mergeLineRecord(index, series2);
+        return mergeLineRecord(index, series2)
     }
-    return series2;
+    return series2
 }
 
-export function useCommonBarSeries(series: EChartsOption['series'], props: { stack: Boolean }): EChartsOption['series'] {
-
+export function useCommonBarSeries(series: EChartsOption['series'], props: { stack: boolean }): EChartsOption['series'] {
     if (Array.isArray(series)) {
         if (series.length > 1) {
             // 两条以上数据时，使用小尺寸的柱状图
             if (props.stack) {
                 // 堆叠柱状图，背景透明度为1/n，防止堆叠时背景颜色太重影响视觉效果
-                smallBarSeries.backgroundStyle!.opacity = 1 / series.length;
+                smallBarSeries.backgroundStyle!.opacity = 1 / series.length
             } else {
-                smallBarSeries.backgroundStyle!.opacity = 1;
+                smallBarSeries.backgroundStyle!.opacity = 1
             }
-            return series.map((item, index) => mergeSeriesRecord(smallBarSeries, item, index));
+            return series.map((item, index) => mergeSeriesRecord(smallBarSeries, item, index))
         }
-        return series.map((item, index) => mergeSeriesRecord(commonBarSeries, item, index));
+        return series.map((item, index) => mergeSeriesRecord(commonBarSeries, item, index))
     }
-    return merge({}, commonBarSeries, series);
+    return merge({}, commonBarSeries, series)
 }

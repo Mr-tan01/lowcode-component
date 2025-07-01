@@ -5,15 +5,16 @@
         </DemoHelpBox>
         <DemoHelpBox title="深圳地图" description="深圳教育项目-深圳地图" rswidth="962px" :code="demoCodes.code1">
             <div class="size-box">
-                <Szmap :values :disabledGradient="true"></Szmap>
+                <Szmap :values :disabled-gradient="true"></Szmap>
             </div>
         </DemoHelpBox>
         <DemoHelpBox title="深圳地图" description="深圳教育项目-深圳地图自定义" rswidth="962px" :code="demoCodes.code1">
             <div class="size-box">
-                <Szmap :values :disabledGradient="true">
-                    <template #mapLabel="{ blockList, labelClass, getVlaue, currentMapKey }">
+                <Szmap :values :disabled-gradient="true">
+                    <template #mapLabel="{ blockList, labelClass, getVlaue }">
                         <MapMarker
-                            v-for="(item, index) in getBlockList(blockList)"
+                            v-for="(_, index) in getBlockList(blockList)"
+                            :key="index"
                             :class="labelClass(index)"
                             :label="getVlaue(index).mapLabel"
                             :value="getVlaue(index).value"
@@ -25,7 +26,7 @@
         </DemoHelpBox>
         <DemoHelpBox title="深圳地图" description="深圳教育项目-深圳地图悬浮" rswidth="962px" :code="demoCodes.code1">
             <div class="size-box">
-                <Szmap :levels :values :disabledGradient='false' :labelModel="LabelModelEnum.HOVER">
+                <Szmap :levels :values :disabled-gradient="false" :label-model="LabelModelEnum.HOVER">
                     <template #mapLabel="{ labelClass, getVlaue, currentMapKey }">
                         <span>
                             <MapMarker
@@ -48,28 +49,28 @@
     </div>
 </template>
 <script lang="ts" setup>
-import { DemoHelpBox } from "@/components/common/DemoHelpBox";
-import { Szmap, LabelModelEnum, type SZMapMarkProps, LcTianditu, BlockName, Levels } from "@/components/education/components/map";
-import { demoCodes } from "./demo-codes";
-import MapMarker from "./components/index.vue";
-import { omit } from "lodash-es";
+import { DemoHelpBox } from '@/components/common/DemoHelpBox'
+import { Szmap, LabelModelEnum, type SZMapMarkProps, LcTianditu, BlockName, Levels } from '@/components/education/components/map'
+import { demoCodes } from './demo-codes'
+import MapMarker from './components/index.vue'
+import { omit } from 'lodash-es'
 
-type FilteredBlockName = Exclude<BlockName, "shenshan">;
+type FilteredBlockName = Exclude<BlockName, 'shenshan'>
 
 const getBlockList = (list): Record<FilteredBlockName, string> => {
-    return omit(list, ["shenshan"]) as Record<FilteredBlockName, string>;
-};
+    return omit(list, ['shenshan']) as Record<FilteredBlockName, string>
+}
 
 const values: SZMapMarkProps = {
     guangming: {
         value: 1,
-        unit: "人",
+        unit: '人',
     },
     longgang: {
         value: 10000,
-        unit: "人",
+        unit: '人',
     },
-};
+}
 
 const levels: Levels = {
     warning: {
@@ -79,13 +80,13 @@ const levels: Levels = {
             {
                 'stop-color': 'rgba(225, 188, 75, 1)',
                 'stop-opacity': 1,
-                offset: '0%',
+                'offset': '0%',
             },
             {
                 'stop-color': 'rgba(225, 188, 75, 0)',
                 'stop-opacity': 1,
-                offset: '100%',
-            }
+                'offset': '100%',
+            },
         ],
     },
     series: {
@@ -95,13 +96,13 @@ const levels: Levels = {
             {
                 'stop-color': 'rgba(238, 111, 124, 1)',
                 'stop-opacity': 1,
-                offset: '0%',
+                'offset': '0%',
             },
             {
                 'stop-color': 'rgba(238, 111, 124, 0)',
                 'stop-opacity': 1,
-                offset: '100%',
-            }
+                'offset': '100%',
+            },
         ],
     },
 }

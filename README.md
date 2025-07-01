@@ -1,10 +1,8 @@
 # lowcode-component
 
-https://lanhuapp.com/link/#/invite?sid=lx0pJFFg
-分享人: developer
-团队名称: 项目「1+2+3」区的团队
-相关项目: BI大屏
-链接有效期: 20250110~20250124
+https://lanhuapp.com/link/#/invite?sid=lx0pJFFg 分享人:
+developer团队名称: 项目「1+2+3」区的团队相关项目: BI大屏链接有效期:
+20250110~20250124
 
 ## install
 
@@ -16,8 +14,6 @@ pnpm add git+http://code.siteshun.com:800/front-component/lowcode-sview/lowcode-
 
 https://lanhuapp.com/web/#/item/project/stage?tid=472f2b7d-baee-4638-bf74-622b55757b3e&pid=b0a98c64-2b3f-4315-a9f7-19a429bfa9a8
 
-
-
 # 前端运行
 
 ```bash
@@ -25,7 +21,7 @@ https://lanhuapp.com/web/#/item/project/stage?tid=472f2b7d-baee-4638-bf74-622b55
 git clone xxx
 
 # 安装依赖
-pnpm i 
+pnpm i
 
 # 启动
 pnpm dev
@@ -33,7 +29,6 @@ pnpm dev
 ```
 
 # 前端打包
-
 
 ```bash
 

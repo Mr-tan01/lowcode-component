@@ -1,0 +1,11 @@
+# 忽略目录
+node_modules/
+dist/
+public/
+lowcode-docx/
+scripts/
+es/
+
+# 忽略特定文件类型
+*.log
+*.md

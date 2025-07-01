@@ -3,24 +3,19 @@
         <DemoHelpBox title="词云" description="基础用法" rswidth="100%">
             <NSpace>
                 <DemoHelpBox title="款词云-圆球" rswidth="450px" rs-height="450px" :code="demoCodes.code1">
-                    <LcBubbleWordColud :data="wordCloudData">
-                    </LcBubbleWordColud>
+                    <LcBubbleWordColud :data="wordCloudData"> </LcBubbleWordColud>
                 </DemoHelpBox>
                 <DemoHelpBox title="款词云-发光球" rswidth="450px" rs-height="450px" :code="demoCodes.code2">
-                    <LcBubbleWordColud type="shadow" :enable-animate="true" :data="wordCloudData">
-                    </LcBubbleWordColud>
+                    <LcBubbleWordColud type="shadow" :enable-animate="true" :data="wordCloudData"> </LcBubbleWordColud>
                 </DemoHelpBox>
                 <DemoHelpBox title="款词云-文本" rswidth="450px" rs-height="450px" :code="demoCodes.code3">
-                    <LcBubbleWordColud type="text" :maxWord="30" :data="wordCloudData">
-                    </LcBubbleWordColud>
+                    <LcBubbleWordColud type="text" :max-word="30" :data="wordCloudData"> </LcBubbleWordColud>
                 </DemoHelpBox>
                 <DemoHelpBox title="款词云-混合" rswidth="450px" rs-height="450px" :code="demoCodes.code4">
-                    <LcBubbleWordColud type="text-circle" :maxWord="30" :data="wordCloudData">
-                    </LcBubbleWordColud>
+                    <LcBubbleWordColud type="text-circle" :max-word="30" :data="wordCloudData"> </LcBubbleWordColud>
                 </DemoHelpBox>
                 <DemoHelpBox title="款词云-禁止自动动画" rswidth="450px" rs-height="450px" :code="demoCodes.code5">
-                    <LcBubbleWordColud type="shadow" :enable-animate="false" :data="wordCloudData">
-                    </LcBubbleWordColud>
+                    <LcBubbleWordColud type="shadow" :enable-animate="false" :data="wordCloudData"> </LcBubbleWordColud>
                 </DemoHelpBox>
             </NSpace>
         </DemoHelpBox>
@@ -28,10 +23,10 @@
 </template>
 
 <script lang="ts" setup>
-import { DemoHelpBox } from '@/components/common/DemoHelpBox';
-import { LcBubbleWordColud } from '@/components/education/components/wordCloud';
-import { NSpace } from 'naive-ui';
-import { demoCodes } from './demo-codes';
+import { DemoHelpBox } from '@/components/common/DemoHelpBox'
+import { LcBubbleWordColud } from '@/components/education/components/wordCloud'
+import { NSpace } from 'naive-ui'
+import { demoCodes } from './demo-codes'
 
 const wordCloudData = [
     { name: 'Java', value: 100 },
@@ -56,8 +51,8 @@ const wordCloudData = [
     { name: 'MATLAB', value: 50 },
     { name: 'Perl', value: 20 },
     { name: 'Fortran', value: 80 },
-    { name: 'Clojure', value: 10 }
-];
+    { name: 'Clojure', value: 10 },
+]
 </script>
 
 <style lang="scss" scoped>

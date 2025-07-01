@@ -14,16 +14,12 @@
             <n-space>
                 <VueResizable width="390px" height="35px">
                     <LcDecoratorTitle>
-                        <template #title>
-                            111
-                        </template>
+                        <template #title> 111 </template>
                     </LcDecoratorTitle>
                 </VueResizable>
                 <VueResizable width="390px" height="35px">
-                    <LcDecoratorTitle  dir="rtl">
-                          <template #title>
-                            标题文字最多十二个字符
-                        </template>
+                    <LcDecoratorTitle dir="rtl">
+                        <template #title> 标题文字最多十二个字符 </template>
                     </LcDecoratorTitle>
                 </VueResizable>
                 <VueResizable width="390px" height="35px">
@@ -77,16 +73,16 @@
 </template>
 
 <script lang="ts" setup>
-import { DemoHelpBox } from "@/components/common/DemoHelpBox";
-import { NSpace } from "naive-ui";
-import { LcPageTitle, LcTextTitle } from "@/components/education/components/pageTitle";
-import { LcDecoratorTitle } from "@/components/education/components/decoratorTitle";
-import * as pageTitle from "./demo-codes";
-import VueResizable from "vue-resizable";
-import { LcChartTitle } from "@/components/education/components/chartTitle";
-import { LcHeadline, LcSubhead } from "@/components/education/components/headline";
-import { LcIcon } from "@/components/education/components/icon";
-import { LcRadiohead } from "@/components/education/components/headline";
+import { DemoHelpBox } from '@/components/common/DemoHelpBox'
+import { NSpace } from 'naive-ui'
+import { LcPageTitle, LcTextTitle } from '@/components/education/components/pageTitle'
+import { LcDecoratorTitle } from '@/components/education/components/decoratorTitle'
+import * as pageTitle from './demo-codes'
+import VueResizable from 'vue-resizable'
+import { LcChartTitle } from '@/components/education/components/chartTitle'
+import { LcHeadline, LcSubhead } from '@/components/education/components/headline'
+import { LcIcon } from '@/components/education/components/icon'
+import { LcRadiohead } from '@/components/education/components/headline'
 </script>
 
 <style lang="scss" scoped></style>

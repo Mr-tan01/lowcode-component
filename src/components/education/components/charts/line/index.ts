@@ -1,10 +1,8 @@
-import LcLineChart from './line.vue';
+import LcLineChart from './line.vue'
 
-export type LcLineChartInstanceType = InstanceType<typeof LcLineChart>;
-export * as LcLineOptions from './options';
+export type LcLineChartInstanceType = InstanceType<typeof LcLineChart>
+export * as LcLineOptions from './options'
 
-export {
-    LcLineChart,
-};
+export { LcLineChart }
 
-export default LcLineChart;
+export default LcLineChart

@@ -7,13 +7,18 @@
         }"
     >
         <div class="lc-pie__wrapper">
-            <div class="lc-pie__wrapper__legend" v-if="showCustomLegend">
-                <CommonLegend :legend-label :options="renderOptions" @legend:click="legendClick" @legend:toggle-select="legendToggleSelect"></CommonLegend>
+            <div v-if="showCustomLegend" class="lc-pie__wrapper__legend">
+                <CommonLegend
+                    :legend-label
+                    :options="renderOptions"
+                    @legend:click="legendClick"
+                    @legend:toggle-select="legendToggleSelect"
+                ></CommonLegend>
             </div>
             <div class="lc-pie__wrapper__chart">
                 <div
-                    class="lc-pie__wrapper__chart__inner"
                     ref="chartDom"
+                    class="lc-pie__wrapper__chart__inner"
                     :class="[notHasTitle ? 'lc-pie__wrapper__chart__inner--not--title' : 'lc-pie__wrapper__chart__inner--title']"
                 ></div>
             </div>
@@ -22,110 +27,115 @@
 </template>
 
 <script lang="ts" setup>
-import { type EChartsCoreOption, type EChartsOption, init, type ECharts } from "echarts";
-import { computed, onBeforeUnmount, onMounted, ref, shallowRef, watchPostEffect, useTemplateRef } from "vue";
-import { useCommonPieOptions, usePieCommonSeries } from "./options";
-import merge from "lodash-es/merge";
-import { useResizeObserver } from "@vueuse/core";
-import { debounce } from "lodash-es";
-import { graphic } from "echarts";
-import { innerGraphicColors } from "./const";
-import { type LayoutType } from "./types";
-import { CommonLegend, type LegendActiveType, type LegendDataRecord, type LegendSelectParams } from "@/components/education/common/components/Charts/legend";
+import { type EChartsCoreOption, type EChartsOption, init, type ECharts } from 'echarts'
+import { computed, onBeforeUnmount, onMounted, ref, shallowRef, watchPostEffect, useTemplateRef } from 'vue'
+import { useCommonPieOptions, usePieCommonSeries } from './options'
+import merge from 'lodash-es/merge'
+import { useResizeObserver } from '@vueuse/core'
+import { debounce } from 'lodash-es'
+import { graphic } from 'echarts'
+import { innerGraphicColors } from './const'
+import { type LayoutType } from './types'
+import {
+    CommonLegend,
+    type LegendActiveType,
+    type LegendDataRecord,
+    type LegendSelectParams,
+} from '@/components/education/common/components/Charts/legend'
 
 const {
     options,
     debounceTime = 300,
     graphicColors = innerGraphicColors,
-    legendLabel = (name) => name,
-    flexDirection = "row",
+    legendLabel = name => name,
+    flexDirection = 'row',
     showCustomLegend = true,
-    layout = "default",
-    legendLeft = "20%",
-    legendTop = "50%",
-    legendPosition = "relative",
-    legendWidth = "128px",
+    layout = 'default',
+    legendLeft = '20%',
+    legendTop = '50%',
+    legendPosition = 'relative',
+    legendWidth = '128px',
 } = defineProps<{
-    options: EChartsOption | EChartsCoreOption;
-    debounceTime?: number;
-    legendLabel?: (name: string, value: number) => string;
-    graphicColors?: graphic.LinearGradient[];
-    flexDirection?: "row" | "column" | "row-reverse" | "column-reverse";
-    showCustomLegend?: boolean;
-    layout?: LayoutType;
-    legendLeft?: string;
-    legendTop?: string;
-    legendPosition?: "relative" | "absolute";
-    legendWidth?: string;
-}>();
-const chartDomRef = useTemplateRef("chartDom");
-const chartInstance = shallowRef<ECharts>();
+    options: EChartsOption | EChartsCoreOption
+    debounceTime?: number
+    legendLabel?: (name: string, value: number) => string
+    graphicColors?: graphic.LinearGradient[]
+    flexDirection?: 'row' | 'column' | 'row-reverse' | 'column-reverse'
+    showCustomLegend?: boolean
+    layout?: LayoutType
+    legendLeft?: string
+    legendTop?: string
+    legendPosition?: 'relative' | 'absolute'
+    legendWidth?: string
+}>()
+const chartDomRef = useTemplateRef('chartDom')
+const chartInstance = shallowRef<ECharts>()
 const renderOptions = computed(() => {
-    const newOptions = useCommonPieOptions(options);
-    newOptions.series = usePieCommonSeries(newOptions.series, graphicColors, newOptions.color, layout);
+    const newOptions = useCommonPieOptions(options)
+    newOptions.series = usePieCommonSeries(newOptions.series, graphicColors, newOptions.color, layout)
     if (newOptions.series && !Array.isArray(newOptions.series)) {
-        newOptions.series = [newOptions.series];
+        newOptions.series = [newOptions.series]
     }
-    return merge({}, newOptions);
-});
+    return merge({}, newOptions)
+})
 
-function dispatchAction(type: LegendActiveType, name: LegendDataRecord["name"]) {
+function dispatchAction(type: LegendActiveType, name: LegendDataRecord['name']) {
     chartInstance.value?.dispatchAction({
         type,
         name,
-    });
+    })
 }
 
 const $emit = defineEmits<{
-    (e: "legend:click", d: LegendDataRecord): void;
-    (e: "legend:toggleSelect", value: LegendSelectParams): void;
-}>();
+    (e: 'legend:click', d: LegendDataRecord): void
+    (e: 'legend:toggleSelect', value: LegendSelectParams): void
+}>()
 
 function legendClick(record: LegendDataRecord) {
-    $emit("legend:click", record);
+    $emit('legend:click', record)
 }
 
 function legendToggleSelect(record: LegendSelectParams) {
-    dispatchAction(record.type, record.name);
-    $emit("legend:toggleSelect", record);
+    dispatchAction(record.type, record.name)
+    $emit('legend:toggleSelect', record)
 }
 
-onMounted(initChart);
+onMounted(initChart)
 watchPostEffect(() => {
-    setOptions(renderOptions.value, true);
-});
+    setOptions(renderOptions.value, true)
+})
 
 const notHasTitle = computed(() => {
-    const { title } = renderOptions.value;
+    const { title } = renderOptions.value
     if (Array.isArray(title)) {
-        return title.every((item) => item?.show === false);
+        return title.every(item => item?.show === false)
     }
-    return title?.show === false;
-});
+    return title?.show === false
+})
 function initChart() {
-    chartInstance.value = init(chartDomRef.value, renderOptions.value);
+    chartInstance.value = init(chartDomRef.value, renderOptions.value)
 }
 
 function setOptions(option: EChartsCoreOption, notMerge?: boolean, lazyUpdate?: boolean) {
-    chartInstance.value?.setOption(option, notMerge, lazyUpdate);
+    chartInstance.value?.setOption(option, notMerge, lazyUpdate)
 }
-const cssBlockSize = ref("100%");
+const cssBlockSize = ref('100%')
 function resizeChart(entries) {
-    const entry = entries[0];
-    const { width, height } = entry.contentRect;
-    cssBlockSize.value = Math.min(width, height) + "px";
-    chartInstance.value?.resize();
+    const entry = entries[0]
+    const { width, height } = entry.contentRect
+    cssBlockSize.value = Math.min(width, height) + 'px'
+    chartInstance.value?.resize()
 }
-const { stop } = useResizeObserver(chartDomRef, debounce(resizeChart, debounceTime));
+const { stop } = useResizeObserver(chartDomRef, debounce(resizeChart, debounceTime))
 
-const wrapperPading = computed(() => (legendPosition === "absolute" ? `0 ${legendWidth}` : "0"));
-onBeforeUnmount(stop);
+const wrapperPading = computed(() => (legendPosition === 'absolute' ? `0 ${legendWidth}` : '0'))
+onBeforeUnmount(stop)
 defineExpose({
     chartInstance,
     stop,
     setOptions,
     dispatchAction,
-});
+})
 </script>
 
 <style lang="scss" scoped>
@@ -185,7 +195,7 @@ defineExpose({
                 height: 100%;
                 aspect-ratio: 1/1;
                 @mixin innerCircleDecorator() {
-                    content: "";
+                    content: '';
                     position: absolute;
                     border-radius: 50%;
                     width: v-bind(cssBlockSize);

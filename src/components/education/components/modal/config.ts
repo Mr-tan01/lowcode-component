@@ -1,36 +1,35 @@
-import largeBgImg from './images/large-bg.png';
-import a169BgImg from './images/16x9.png';
+import largeBgImg from './images/large-bg.png'
+import a169BgImg from './images/16x9.png'
 
 export const sizeModeEnum = {
     large: 'large',
     medium: 'medium',
     custom: 'custom',
     a169: 'a169',
-} as const;
+} as const
 
-type SizeModeValue<T> = T[keyof T];
-type SizeMode = SizeModeValue<typeof sizeModeEnum>;
+type SizeModeValue<T> = T[keyof T]
+type SizeMode = SizeModeValue<typeof sizeModeEnum>
 export type Options = {
-    sizeMode: SizeMode;
+    sizeMode: SizeMode
     size: {
         [sizeModeEnum.large]: {
-            width: string;
-            height: string;
-            headerWidth: string;
-
-        };
+            width: string
+            height: string
+            headerWidth: string
+        }
         [sizeModeEnum.medium]: {
-            width: string;
-            height: string;
-            headerWidth: string;
-        };
+            width: string
+            height: string
+            headerWidth: string
+        }
         [sizeModeEnum.a169]: {
-            width: string;
-            height: string;
-            headerWidth: string;
-        };
-    };
-    bgImgs: Record<SizeMode, string>;
+            width: string
+            height: string
+            headerWidth: string
+        }
+    }
+    bgImgs: Record<SizeMode, string>
 }
 
 export const options: Options = {
@@ -49,7 +48,7 @@ export const options: Options = {
             width: '1520px',
             height: '683px',
             headerWidth: '450px',
-        }
+        },
     },
     sizeMode: sizeModeEnum.custom,
     bgImgs: {
@@ -57,5 +56,5 @@ export const options: Options = {
         [sizeModeEnum.medium]: largeBgImg,
         [sizeModeEnum.a169]: a169BgImg,
         custom: largeBgImg,
-    }
+    },
 }

@@ -1,7 +1,7 @@
-import { ComputedRef, InjectionKey } from "vue";
+import { ComputedRef, InjectionKey } from 'vue'
 
 export type InjectionKeyType = ComputedRef<{
-    value: string | number;
-    change(value: string | number): void;
-}>;
-export const radioButtonGroupProvideKey: InjectionKey<InjectionKeyType> = Symbol("radioButtonGroupInject");
+    value: string | number
+    change(value: string | number): void
+}>
+export const radioButtonGroupProvideKey: InjectionKey<InjectionKeyType> = Symbol('radioButtonGroupInject')

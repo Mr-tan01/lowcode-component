@@ -1,7 +1,4 @@
-import LcButton from './button.vue';
+import LcButton from './button.vue'
 
-export type LcButtonInstanceType = InstanceType<typeof LcButton>;
-export {
-    LcButton
-};
-
+export type LcButtonInstanceType = InstanceType<typeof LcButton>
+export { LcButton }

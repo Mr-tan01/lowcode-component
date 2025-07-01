@@ -1,4 +1,2 @@
-import { default as a } from "./button.js";
-export {
-  a as LcButton
-};
+import { default as a } from './button.js'
+export { a as LcButton }

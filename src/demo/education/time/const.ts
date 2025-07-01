@@ -5,4 +5,4 @@ export const code1 = `
 <script setup>
     const icon = ref('')
 </script>
-`;
+`

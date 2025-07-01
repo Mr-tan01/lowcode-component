@@ -1,8 +1,8 @@
 <template>
     <div class="lc-switch-tabs">
-        <LcCarouseBox :list="listSource" :back-center="backCenter" :offsetAnimationTime :rowKey v-bind="$attrs">
+        <LcCarouseBox :list="listSource" :back-center="backCenter" :offset-animation-time :row-key v-bind="$attrs">
             <template #default="{ isActive, isEven, record: { label } }">
-                <button class="lc-switch-tabs__wrapper__tabs--train__button" :class="{ active: isActive, 'is-even': isEven }">
+                <button class="lc-switch-tabs__wrapper__tabs--train__button" :class="{ 'active': isActive, 'is-even': isEven }">
                     <div class="lc-switch-tabs__wrapper__tabs--train__button--text" :title="label">
                         {{ label }}
                     </div>
@@ -13,16 +13,15 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, PropType } from "vue";
-import { LcCarouseBox, LcCarouseBoxProps } from "@/components/education/components/carouseBox";
-import { type TabListRaw } from "./types";
-import { defSwitchTabList } from "./const";
+import { computed } from 'vue'
+import { LcCarouseBox, LcCarouseBoxProps } from '@/components/education/components/carouseBox'
+import { defSwitchTabList } from './const'
 
-const { list, backCenter = true } = defineProps(LcCarouseBoxProps);
+const { list, backCenter = true } = defineProps(LcCarouseBoxProps)
 
 const listSource = computed(() => {
-    return list ?? defSwitchTabList;
-});
+    return list ?? defSwitchTabList
+})
 </script>
 
 <style lang="scss" scoped>

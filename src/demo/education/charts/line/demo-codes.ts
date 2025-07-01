@@ -1,4 +1,3 @@
-
 export const demoCodes = {
     code1: `
 <template>
@@ -35,7 +34,7 @@ const options = {
     }
 </script>
 `,
-code2: `
+    code2: `
 <template>
      <LcLineChart :options></LcLineChart>
 </template>
@@ -77,7 +76,7 @@ const options = {
     }
 </script>
 `,
-code3: `
+    code3: `
 <template>
      <LcLineChart :options></LcLineChart>
 </template>
@@ -118,7 +117,7 @@ const options = {
     }
 </script>
 `,
-code4: `
+    code4: `
 <template>
      <LcBarChart :options></LcBarChart>
 </template>
@@ -160,7 +159,7 @@ const options = {
     }
 </script>
 `,
-code5: `
+    code5: `
 <template>
      <LcLineChart :options></LcLineChart>
 </template>
@@ -195,7 +194,7 @@ const options = {
     }
 </script>
 `,
-code6: `
+    code6: `
 <template>
      <LcLineChart :options></LcLineChart>
 </template>
@@ -242,7 +241,7 @@ const options = {
     }
 </script>
 `,
-code7: `
+    code7: `
 <template>
      <LcLineChart :options></LcLineChart>
 </template>
@@ -276,7 +275,7 @@ const options = {
     }
 </script>
 `,
-code8: `
+    code8: `
 <template>
      <LcLineChart :options></LcLineChart>
 </template>

@@ -17,8 +17,8 @@
     </div>
 </template>
 <script lang="ts" setup>
-import { DemoHelpBox } from '@/components/common/DemoHelpBox';
-import { NSpace } from 'naive-ui';
-import { LcMark } from '@/components/education/components/mark';
-import { demoCodes } from './demo-codes';
+import { DemoHelpBox } from '@/components/common/DemoHelpBox'
+import { NSpace } from 'naive-ui'
+import { LcMark } from '@/components/education/components/mark'
+import { demoCodes } from './demo-codes'
 </script>

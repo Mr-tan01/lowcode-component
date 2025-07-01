@@ -11,10 +11,10 @@
 </template>
 
 <script lang="ts" setup>
-import { NNumberAnimation } from "naive-ui/es/number-animation";
-import defaultImage from "./images/card/small-substrate-bg.png";
+import { NNumberAnimation } from 'naive-ui/es/number-animation'
+import defaultImage from './images/card/small-substrate-bg.png'
 const {
-    label = "已建成并投入运行设施(个)",
+    label = '已建成并投入运行设施(个)',
     value = 0,
     bgIcon = defaultImage,
 } = defineProps({
@@ -27,7 +27,7 @@ const {
     bgIcon: {
         type: String,
     },
-});
+})
 </script>
 
 <style lang="scss" scoped>

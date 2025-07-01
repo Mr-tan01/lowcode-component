@@ -1,5 +1,5 @@
-import { EChartsCoreOption, EChartsOption, graphic } from "echarts";
-import { LcLineOptions } from '@/components/education/components/charts';
+import { EChartsCoreOption, EChartsOption, graphic } from 'echarts'
+import { LcLineOptions } from '@/components/education/components/charts'
 
 export function combinationOpts(len = 2, start = 0): EChartsCoreOption | EChartsOption {
     return {
@@ -17,7 +17,6 @@ export function combinationOpts(len = 2, start = 0): EChartsCoreOption | ECharts
         },
         series: [
             {
-
                 name: '待审核',
                 data: Array.from(Array(5)).map((_, i) => Math.round(Math.random() * 100 + i)),
                 areaStyle: null,
@@ -33,7 +32,6 @@ export function combinationOpts(len = 2, start = 0): EChartsCoreOption | ECharts
                 name: '已通过2',
                 data: Array.from(Array(5)).map((_, i) => Math.round(Math.random() * 100 + i)),
                 areaStyle: null,
-               
             },
             {
                 name: '已通过3',
@@ -47,7 +45,7 @@ export function combinationOpts(len = 2, start = 0): EChartsCoreOption | ECharts
                 itemStyle: {
                     color: new graphic.LinearGradient(0, 1, 0, 0, [
                         { offset: 0, color: 'rgba(87, 151, 238, 1)' },
-                        { offset: 1, color: 'rgba(45, 109, 245, 1)' }
+                        { offset: 1, color: 'rgba(45, 109, 245, 1)' },
                     ]),
                 },
                 areaStyle: null,

@@ -3,7 +3,7 @@
         <DemoHelpBox title="功能图标" description="基础用法" rswidth="1000px" :code="code1">
             <div class="text-box">
                 <n-space>
-                    <LcIcon v-for="(item, key) in innerImageDomain.func" :size="18" :key :name="item">{{ item }}</LcIcon>
+                    <LcIcon v-for="(item, key) in innerImageDomain.func" :key :size="18" :name="item">{{ item }}</LcIcon>
                 </n-space>
                 <n-space>
                     <LcIcon v-for="(item, key) in innerImageDomain.menus" :key domain="menus" :name="item">{{ item }}</LcIcon>
@@ -24,10 +24,10 @@
 </template>
 
 <script lang="ts" setup>
-import { DemoHelpBox } from "@/components/common/DemoHelpBox";
-import { NSpace } from "naive-ui";
-import { LcIcon, innerImageDomain, LcIconCard } from "@/components/education/components/icon";
-import { code1 } from "./const";
+import { DemoHelpBox } from '@/components/common/DemoHelpBox'
+import { NSpace } from 'naive-ui'
+import { LcIcon, innerImageDomain, LcIconCard } from '@/components/education/components/icon'
+import { code1 } from './const'
 </script>
 
 <style lang="scss" scoped>

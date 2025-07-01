@@ -1,1 +1,50 @@
-.pagination-container[data-v-013cc4cf]{display:flex;justify-content:space-between;align-items:center}.pagination-container .pagination-left[data-v-013cc4cf],.pagination-container .pagination-right[data-v-013cc4cf]{display:flex;align-items:center}.pagination-container .pagination-left button[data-v-013cc4cf]{cursor:pointer;padding:0;border:none;background:none;margin:0 5px;width:0;height:0;border-style:solid}.pagination-container .pagination-left button.arrow-button.left-arrow[data-v-013cc4cf]{border-width:6px 8px 6px 0;border-color:transparent #0FFBF8 transparent transparent}.pagination-container .pagination-left button.arrow-button.right-arrow[data-v-013cc4cf]{border-width:6px 0 6px 8px;border-color:transparent transparent transparent #0FFBF8}.pagination-container .pagination-left button[data-v-013cc4cf]:disabled{cursor:not-allowed;opacity:.3}.pagination-container .page-info[data-v-013cc4cf],.pagination-container .total-pages[data-v-013cc4cf]{font-family:HarmonyOS_Sans_SC;font-size:var(--023c5c0b);color:var(--44703499);line-height:26px;font-style:normal;text-transform:none;display:flex;align-items:center}.pagination-container .pagination-right[data-v-013cc4cf]{margin-left:15px}
+.pagination-container[data-v-013cc4cf] {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.pagination-container .pagination-left[data-v-013cc4cf],
+.pagination-container .pagination-right[data-v-013cc4cf] {
+    display: flex;
+    align-items: center;
+}
+.pagination-container .pagination-left button[data-v-013cc4cf] {
+    cursor: pointer;
+    padding: 0;
+    border: none;
+    background: none;
+    margin: 0 5px;
+    width: 0;
+    height: 0;
+    border-style: solid;
+}
+.pagination-container
+    .pagination-left
+    button.arrow-button.left-arrow[data-v-013cc4cf] {
+    border-width: 6px 8px 6px 0;
+    border-color: transparent #0ffbf8 transparent transparent;
+}
+.pagination-container
+    .pagination-left
+    button.arrow-button.right-arrow[data-v-013cc4cf] {
+    border-width: 6px 0 6px 8px;
+    border-color: transparent transparent transparent #0ffbf8;
+}
+.pagination-container .pagination-left button[data-v-013cc4cf]:disabled {
+    cursor: not-allowed;
+    opacity: 0.3;
+}
+.pagination-container .page-info[data-v-013cc4cf],
+.pagination-container .total-pages[data-v-013cc4cf] {
+    font-family: HarmonyOS_Sans_SC;
+    font-size: var(--023c5c0b);
+    color: var(--44703499);
+    line-height: 26px;
+    font-style: normal;
+    text-transform: none;
+    display: flex;
+    align-items: center;
+}
+.pagination-container .pagination-right[data-v-013cc4cf] {
+    margin-left: 15px;
+}

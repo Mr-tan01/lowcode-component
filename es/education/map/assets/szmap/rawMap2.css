@@ -1,1 +1,57 @@
-.lc-szmap-raw .lc-szmap-raw__mark-group--item{position:absolute;top:50%;left:50%;transform:translate(-50%,calc(-50% * var(--level-scale, 1))) scale(var(--level-scale, 1));will-change:transform;pointer-events:auto;transition:transform .2s}.lc-szmap-raw .lc-szmap-raw__mark-group--item:hover{cursor:pointer}.lc-szmap-raw .lc-szmap-raw__mark-group--item.mark-guangming{left:20%;top:22%}.lc-szmap-raw .lc-szmap-raw__mark-group--item.mark-baoan{left:13%;top:48%}.lc-szmap-raw .lc-szmap-raw__mark-group--item.mark-longhua{left:32%;top:39%}.lc-szmap-raw .lc-szmap-raw__mark-group--item.mark-nanshan{left:24%;top:62%}.lc-szmap-raw .lc-szmap-raw__mark-group--item.mark-futian{left:34%;top:70%}.lc-szmap-raw .lc-szmap-raw__mark-group--item.mark-luohu{left:47%;top:61%}.lc-szmap-raw .lc-szmap-raw__mark-group--item.mark-yantian{left:59%;top:56%}.lc-szmap-raw .lc-szmap-raw__mark-group--item.mark-pingshan{left:70%;top:41%}.lc-szmap-raw .lc-szmap-raw__mark-group--item.mark-longgang{left:59%;top:32%}.lc-szmap-raw .lc-szmap-raw__mark-group--item.mark-dapeng{left:81%;top:53%}.lc-szmap-raw .lc-szmap-raw__mark-group--item.mark-shenshan{left:90%;top:10%}
+.lc-szmap-raw .lc-szmap-raw__mark-group--item {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, calc(-50% * var(--level-scale, 1)))
+        scale(var(--level-scale, 1));
+    will-change: transform;
+    pointer-events: auto;
+    transition: transform 0.2s;
+}
+.lc-szmap-raw .lc-szmap-raw__mark-group--item:hover {
+    cursor: pointer;
+}
+.lc-szmap-raw .lc-szmap-raw__mark-group--item.mark-guangming {
+    left: 20%;
+    top: 22%;
+}
+.lc-szmap-raw .lc-szmap-raw__mark-group--item.mark-baoan {
+    left: 13%;
+    top: 48%;
+}
+.lc-szmap-raw .lc-szmap-raw__mark-group--item.mark-longhua {
+    left: 32%;
+    top: 39%;
+}
+.lc-szmap-raw .lc-szmap-raw__mark-group--item.mark-nanshan {
+    left: 24%;
+    top: 62%;
+}
+.lc-szmap-raw .lc-szmap-raw__mark-group--item.mark-futian {
+    left: 34%;
+    top: 70%;
+}
+.lc-szmap-raw .lc-szmap-raw__mark-group--item.mark-luohu {
+    left: 47%;
+    top: 61%;
+}
+.lc-szmap-raw .lc-szmap-raw__mark-group--item.mark-yantian {
+    left: 59%;
+    top: 56%;
+}
+.lc-szmap-raw .lc-szmap-raw__mark-group--item.mark-pingshan {
+    left: 70%;
+    top: 41%;
+}
+.lc-szmap-raw .lc-szmap-raw__mark-group--item.mark-longgang {
+    left: 59%;
+    top: 32%;
+}
+.lc-szmap-raw .lc-szmap-raw__mark-group--item.mark-dapeng {
+    left: 81%;
+    top: 53%;
+}
+.lc-szmap-raw .lc-szmap-raw__mark-group--item.mark-shenshan {
+    left: 90%;
+    top: 10%;
+}

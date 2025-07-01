@@ -25,12 +25,18 @@
     </div>
 </template>
 <script lang="ts" setup>
-import { NSpace } from "naive-ui";
-import { DemoHelpBox } from "@/components/common/DemoHelpBox";
-import { LcPieChart } from "@/components/education/components/charts";
-import { usePieOptions, usePieNotTileOptions, useLabelPieOptions, useProperctionPieOptions, useFlorenceNightingaleRoseChartPieOption } from "../options/pie-options";
-import { demoCodes } from "./demo-codes";
-const legendLabel = (name, value) => `${name} <span style="margin-left: 20px;color: yellow;">${value}</span>`;
+import { NSpace } from 'naive-ui'
+import { DemoHelpBox } from '@/components/common/DemoHelpBox'
+import { LcPieChart } from '@/components/education/components/charts'
+import {
+    usePieOptions,
+    usePieNotTileOptions,
+    useLabelPieOptions,
+    useProperctionPieOptions,
+    useFlorenceNightingaleRoseChartPieOption,
+} from '../options/pie-options'
+import { demoCodes } from './demo-codes'
+const legendLabel = (name, value) => `${name} <span style="margin-left: 20px;color: yellow;">${value}</span>`
 </script>
 <style lang="scss" scoped>
 .demo-charts {

@@ -1,7 +1,13 @@
 <template>
-    <div class="lc-robot-chat-popup" :class="[{
-        'lc-robot-chat-popup--focus': isFocus,
-    }, `lc-robot-chat-popup__hide--${hidDir}`]">
+    <div
+        class="lc-robot-chat-popup"
+        :class="[
+            {
+                'lc-robot-chat-popup--focus': isFocus,
+            },
+            `lc-robot-chat-popup__hide--${hidDir}`,
+        ]"
+    >
         <div class="lc-robot-chat-popup__content">
             <div class="lc-robot-chat-popup__content--inner">
                 <div class="lc-robot-chat-popup__content--inner__sayhello">
@@ -9,10 +15,13 @@
                 </div>
                 <div class="lc-robot-chat-popup__content--inner__quick">
                     <n-scrollbar :style="{ maxHeight }">
-                        <div class="lc-robot-chat-popup__content--inner__quick__item"
-                            v-for="(item, index) in aiConfig.quick" :key="index" @click="clickQuick(item)">
-                            <img class="lc-robot-chat-popup__content--inner__quick__item--img" src="./images/voice.png"
-                                alt="">
+                        <div
+                            v-for="(item, index) in aiConfig.quick"
+                            :key="index"
+                            class="lc-robot-chat-popup__content--inner__quick__item"
+                            @click="clickQuick(item)"
+                        >
+                            <img class="lc-robot-chat-popup__content--inner__quick__item--img" src="./images/voice.png" alt="" />
                             <div class="lc-robot-chat-popup__content--inner__quick__item--text">
                                 {{ item.text }}
                             </div>
@@ -25,21 +34,21 @@
 </template>
 
 <script lang="ts" setup>
-import { PropType } from 'vue';
-import { type AiConfigProps } from './types';
-import { NScrollbar } from 'naive-ui/es/scrollbar';
-import { type ImageHideDir } from './const';
+import { PropType } from 'vue'
+import { type AiConfigProps } from './types'
+import { NScrollbar } from 'naive-ui/es/scrollbar'
+import { type ImageHideDir } from './const'
 const {
     isFocus = false,
     hidDir = 'rt',
     aiConfig = {
         sayHello: '您好，我是智能客服机器人，请问您需要什么帮助？',
-        quick: []
+        quick: [],
     },
-    maxHeight = "75px"
+    maxHeight = '75px',
 } = defineProps({
     isFocus: {
-        type: Boolean
+        type: Boolean,
     },
     hidDir: {
         type: String as PropType<ImageHideDir>,
@@ -50,16 +59,15 @@ const {
     maxHeight: {
         type: String,
     },
-});
+})
 
 const emit = defineEmits<{
-    (e: 'clickQuick', item: AiConfigProps['quick'][number]): void;
-}>();
+    (e: 'clickQuick', item: AiConfigProps['quick'][number]): void
+}>()
 
 function clickQuick(item: AiConfigProps['quick'][number]) {
-    emit('clickQuick', item);
+    emit('clickQuick', item)
 }
-
 </script>
 
 <style lang="scss" scoped>
@@ -85,10 +93,12 @@ function clickQuick(item: AiConfigProps['quick'][number]) {
             height: 100%;
 
             &__sayhello {
-                font-family: PingFangSC, PingFang SC;
+                font-family:
+                    PingFangSC,
+                    PingFang SC;
                 font-weight: 500;
                 font-size: 14px;
-                color: #0FFBF8;
+                color: #0ffbf8;
                 line-height: 24px;
                 text-align: left;
                 margin-bottom: 8px;
@@ -97,16 +107,17 @@ function clickQuick(item: AiConfigProps['quick'][number]) {
             &__quick {
                 height: 100%;
 
-
                 &__item {
                     display: flex;
                     align-items: center;
                     gap: 15px;
 
-                    font-family: PingFangSC, PingFang SC;
+                    font-family:
+                        PingFangSC,
+                        PingFang SC;
                     font-weight: 400;
                     font-size: 14px;
-                    color: #FFFFFF;
+                    color: #ffffff;
                     line-height: 24px;
                     text-align: left;
 

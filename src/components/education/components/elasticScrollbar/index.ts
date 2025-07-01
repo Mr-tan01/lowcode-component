@@ -1,7 +1,5 @@
-import LcElasticScrollbar from './elasticScrollbar.vue';
+import LcElasticScrollbar from './elasticScrollbar.vue'
 
-export type LcElasticScrollbarInstanceType = InstanceType<typeof LcElasticScrollbar>;
+export type LcElasticScrollbarInstanceType = InstanceType<typeof LcElasticScrollbar>
 
-export {
-    LcElasticScrollbar,
-};
+export { LcElasticScrollbar }

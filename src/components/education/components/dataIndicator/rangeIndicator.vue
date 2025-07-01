@@ -3,14 +3,20 @@
         <div class="lc-range-indicator__wrapper">
             <div class="lc-range-indicator__wrapper__table--bg"></div>
             <div class="lc-range-indicator__wrapper__info-range">
-                <div class="lc-range-indicator__wrapper__info" v-for="(item, key) in data" :key>
+                <div v-for="(item, key) in data" :key class="lc-range-indicator__wrapper__info">
                     <div class="lc-range-indicator__wrapper__info__decorator--bg"></div>
                     <div class="lc-range-indicator__wrapper__info--result">
                         <slot :name="item.customSlot" :item="item">
                             <div class="lc-range-indicator__wrapper__info--result--value" :title="item.value?.toString()">
-                                <NNumberAnimation show-separator :from="0" :to="renderValue(item.value)" active :precision="renderdecimals(item.value)" />
+                                <NNumberAnimation
+                                    show-separator
+                                    :from="0"
+                                    :to="renderValue(item.value)"
+                                    active
+                                    :precision="renderdecimals(item.value)"
+                                />
                             </div>
-                            <div class="lc-range-indicator__wrapper__info--result--unit" v-if="renderUnit(item.value, item.unit)">
+                            <div v-if="renderUnit(item.value, item.unit)" class="lc-range-indicator__wrapper__info--result--unit">
                                 {{ renderUnit(item.value, item.unit) }}
                             </div>
                         </slot>
@@ -25,62 +31,53 @@
 </template>
 
 <script lang="ts" setup>
-import { PropType } from "vue";
-import { bigNumber } from "lowcode-share/es/share";
-import { NNumberAnimation } from "naive-ui/es/number-animation";
-import memoize from "lodash-es/memoize";
+import { bigNumber } from 'lowcode-share/es/share'
+import { NNumberAnimation } from 'naive-ui/es/number-animation'
+import memoize from 'lodash-es/memoize'
 type Data = {
-    label?: string;
-    value?: number;
-    unit?: string;
-    customSlot?: string;
-    customValue?: string | number;
-};
+    label?: string
+    value?: number
+    unit?: string
+    customSlot?: string
+    customValue?: string | number
+}
 const {
     data = [],
     fixed = true,
     decimal = 0,
-    unit = "",
-} = defineProps({
-    data: {
-        type: Object as PropType<Data[]>,
-    },
-    unit: {
-        type: String,
-    },
-    fixed: {
-        type: Boolean,
-    },
-    decimal: {
-        type: Number,
-    },
-});
+    unit = '',
+} = defineProps<{
+    data?: Data[]
+    unit?: string
+    fixed?: boolean
+    decimal?: number
+}>()
 
-const renderdecimals = memoize((value) => {
-    const { unit: numUnit } = bigNumber(value);
+const renderdecimals = memoize(value => {
+    const { unit: numUnit } = bigNumber(value)
     if (Number.isInteger(value) && !numUnit) {
-        return 0;
+        return 0
     }
-    return decimal;
-});
-const renderValue = memoize((value) => {
+    return decimal
+})
+const renderValue = memoize(value => {
     if (fixed) {
-        const { result } = bigNumber(value, decimal);
-        return result;
+        const { result } = bigNumber(value, decimal)
+        return result
     }
-    return value;
-});
+    return value
+})
 
 const renderUnit = memoize(
     (value, _unit) => {
         if (fixed) {
-            const { unit: numUnit } = bigNumber(value, decimal);
-            return `${numUnit}${_unit || unit}`;
+            const { unit: numUnit } = bigNumber(value, decimal)
+            return `${numUnit}${_unit || unit}`
         }
-        return _unit || unit;
+        return _unit || unit
     },
-    (value, _unit) => `${value}_${_unit || unit}`
-);
+    (value, _unit) => `${value}_${_unit || unit}`,
+)
 </script>
 
 <style lang="scss" scoped>
@@ -145,7 +142,7 @@ const renderUnit = memoize(
                 transition: linear 0.3s;
 
                 &::before {
-                    content: "";
+                    content: '';
                     position: absolute;
                     width: 100%;
                     height: 100%;
@@ -192,7 +189,7 @@ const renderUnit = memoize(
 
             &::before,
             &::after {
-                content: "";
+                content: '';
                 position: absolute;
                 opacity: 0;
                 transition: linear 0.3s;
