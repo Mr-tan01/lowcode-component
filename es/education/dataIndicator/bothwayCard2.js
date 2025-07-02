@@ -1,212 +1,99 @@
-import {
-    defineComponent as w,
-    mergeDefaults as b,
-    openBlock as i,
-    createElementBlock as o,
-    createElementVNode as n,
-    toDisplayString as u,
-    Fragment as h,
-    renderList as g,
-    renderSlot as v,
-    createVNode as y,
-    unref as l,
-    createCommentVNode as x,
-} from 'vue'
-import { bigNumber as c } from 'lowcode-share/es/share'
-import { NNumberAnimation as N } from 'naive-ui/es/number-animation'
-import d from 'lodash-es/memoize'
-const S = { class: 'lc-bothway-card' },
-    $ = { class: 'lc-bothway-card__wrapper' },
-    V = { class: 'lc-bothway-card__wrapper__info-range' },
-    B = { class: 'lc-bothway-card__wrapper__info-range__label flex-center' },
-    C = { class: 'lc-bothway-card__wrapper__info-range__wrapper' },
-    U = ['title'],
-    k = { class: 'flex-end' },
-    D = {
-        key: 0,
-        class: 'lc-bothway-card__wrapper__info-range__wrapper__info__division flex-center',
-    },
-    F = /* @__PURE__ */ w({
-        __name: 'bothwayCard',
-        props: /* @__PURE__ */ b(
-            {
-                label: {
-                    type: String,
-                },
-                data: {
-                    type: Object,
-                },
-                unit: {
-                    type: String,
-                },
-                fixed: {
-                    type: Boolean,
-                },
-                decimal: {
-                    type: Number,
-                },
-            },
-            {
-                label: '',
-                data: () => [],
-                fixed: !0,
-                decimal: 0,
-                unit: '',
-            },
-        ),
-        setup(e) {
-            const f = d((t) => {
-                    const { unit: r } = c(t)
-                    return Number.isInteger(t) && !r ? 0 : e.decimal
-                }),
-                m = d((t) => {
-                    if (e.fixed) {
-                        const { result: r } = c(t, e.decimal)
-                        return r
-                    }
-                    return t
-                }),
-                p = d(
-                    (t, r) => {
-                        if (e.fixed) {
-                            const { unit: a } = c(t, e.decimal)
-                            return `${a}${r || e.unit}`
-                        }
-                        return r || e.unit
-                    },
-                    (t, r) => `${t}_${r || e.unit}`,
-                )
-            return (t, r) => (
-                i(),
-                o('div', S, [
-                    n('div', $, [
-                        n('div', V, [
-                            n(
-                                'div',
-                                B,
-                                u(e.label),
-                                1,
-                                /* TEXT */
-                            ),
-                            n('div', C, [
-                                (i(!0),
-                                o(
-                                    h,
-                                    null,
-                                    g(
-                                        e.data,
-                                        (a, s) => (
-                                            i(),
-                                            o(
-                                                'div',
-                                                {
-                                                    class: 'lc-bothway-card__wrapper__info-range__wrapper__info',
-                                                    key: s,
-                                                },
-                                                [
-                                                    v(
-                                                        t.$slots,
-                                                        a.customSlot,
-                                                        { item: a },
-                                                        () => {
-                                                            var _
-                                                            return [
-                                                                n(
-                                                                    'div',
-                                                                    {
-                                                                        class: 'lc-bothway-card__wrapper__info-range__wrapper__info__value',
-                                                                        title:
-                                                                            (_ =
-                                                                                a.value) ==
-                                                                            null
-                                                                                ? void 0
-                                                                                : _.toString(),
-                                                                    },
-                                                                    [
-                                                                        y(
-                                                                            l(
-                                                                                N,
-                                                                            ),
-                                                                            {
-                                                                                'show-separator':
-                                                                                    '',
-                                                                                'from': 0,
-                                                                                'to': l(
-                                                                                    m,
-                                                                                )(
-                                                                                    a.value,
-                                                                                ),
-                                                                                'active':
-                                                                                    '',
-                                                                                'precision':
-                                                                                    l(
-                                                                                        f,
-                                                                                    )(
-                                                                                        a.value,
-                                                                                    ),
-                                                                            },
-                                                                            null,
-                                                                            8,
-                                                                            [
-                                                                                'to',
-                                                                                'precision',
-                                                                            ],
-                                                                        ),
-                                                                    ],
-                                                                    8,
-                                                                    U,
-                                                                ),
-                                                                n(
-                                                                    'div',
-                                                                    k,
-                                                                    u(
-                                                                        l(p)(
-                                                                            a.value,
-                                                                            a.unit,
-                                                                        ),
-                                                                    ),
-                                                                    1,
-                                                                    /* TEXT */
-                                                                ),
-                                                                s !==
-                                                                e.data.length -
-                                                                    1
-                                                                    ? (i(),
-                                                                      o(
-                                                                          'div',
-                                                                          D,
-                                                                          ' | ',
-                                                                      ))
-                                                                    : x(
-                                                                          'v-if',
-                                                                          !0,
-                                                                      ),
-                                                            ]
-                                                        },
-                                                        !0,
-                                                    ),
-                                                ],
-                                            )
-                                        ),
-                                    ),
-                                    128,
-                                    /* KEYED_FRAGMENT */
-                                )),
-                            ]),
-                        ]),
-                        r[0] ||
-                            (r[0] = n(
-                                'div',
-                                {
-                                    class: 'lc-bothway-card__wrapper__table--bg',
-                                },
-                                null,
-                                -1,
-                                /* HOISTED */
-                            )),
-                    ]),
-                ])
-            )
-        },
-    })
-export { F as default }
+import { defineComponent as w, openBlock as o, createElementBlock as i, createElementVNode as n, toDisplayString as u, Fragment as b, renderList as h, renderSlot as v, createVNode as g, unref as l, createCommentVNode as y } from "vue";
+import { bigNumber as c } from "lowcode-share/es/share";
+import { NNumberAnimation as N } from "naive-ui/es/number-animation";
+import d from "lodash-es/memoize";
+const $ = { class: "lc-bothway-card" }, x = { class: "lc-bothway-card__wrapper" }, S = { class: "lc-bothway-card__wrapper__info-range" }, V = { class: "lc-bothway-card__wrapper__info-range__label flex-center" }, B = { class: "lc-bothway-card__wrapper__info-range__wrapper" }, C = ["title"], U = { class: "flex-end" }, k = {
+  key: 0,
+  class: "lc-bothway-card__wrapper__info-range__wrapper__info__division flex-center"
+}, F = /* @__PURE__ */ w({
+  __name: "bothwayCard",
+  props: {
+    label: { default: "" },
+    data: { default: () => [] },
+    unit: { default: "" },
+    fixed: { type: Boolean, default: !0 },
+    decimal: { default: 0 }
+  },
+  setup(a) {
+    const f = d((e) => {
+      const { unit: r } = c(e);
+      return Number.isInteger(e) && !r ? 0 : a.decimal;
+    }), m = d((e) => {
+      if (a.fixed) {
+        const { result: r } = c(e, a.decimal);
+        return r;
+      }
+      return e;
+    }), p = d(
+      (e, r) => {
+        if (a.fixed) {
+          const { unit: t } = c(e, a.decimal);
+          return `${t}${r || a.unit}`;
+        }
+        return r || a.unit;
+      },
+      (e, r) => `${e}_${r || a.unit}`
+    );
+    return (e, r) => (o(), i("div", $, [
+      n("div", x, [
+        n("div", S, [
+          n(
+            "div",
+            V,
+            u(e.label),
+            1
+            /* TEXT */
+          ),
+          n("div", B, [
+            (o(!0), i(
+              b,
+              null,
+              h(e.data, (t, s) => (o(), i("div", {
+                key: s,
+                class: "lc-bothway-card__wrapper__info-range__wrapper__info"
+              }, [
+                v(e.$slots, t.customSlot, { item: t }, () => {
+                  var _;
+                  return [
+                    n("div", {
+                      class: "lc-bothway-card__wrapper__info-range__wrapper__info__value",
+                      title: (_ = t.value) == null ? void 0 : _.toString()
+                    }, [
+                      g(l(N), {
+                        "show-separator": "",
+                        from: 0,
+                        to: l(m)(t.value),
+                        active: "",
+                        precision: l(f)(t.value)
+                      }, null, 8, ["to", "precision"])
+                    ], 8, C),
+                    n(
+                      "div",
+                      U,
+                      u(l(p)(t.value, t.unit)),
+                      1
+                      /* TEXT */
+                    ),
+                    s !== e.data.length - 1 ? (o(), i("div", k, " | ")) : y("v-if", !0)
+                  ];
+                }, !0)
+              ]))),
+              128
+              /* KEYED_FRAGMENT */
+            ))
+          ])
+        ]),
+        r[0] || (r[0] = n(
+          "div",
+          { class: "lc-bothway-card__wrapper__table--bg" },
+          null,
+          -1
+          /* HOISTED */
+        ))
+      ])
+    ]));
+  }
+});
+export {
+  F as default
+};

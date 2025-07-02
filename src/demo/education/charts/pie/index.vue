@@ -17,7 +17,7 @@
                 <DemoHelpBox title="圆环图" rswidth="447px" rs-height="306px" :code="demoCodes.code3">
                     <LcPieChart v-bind="useProperctionPieOptions()"></LcPieChart>
                 </DemoHelpBox>
-                <DemoHelpBox title="南丁格尔玫瑰图" rswidth="447px" rs-height="306px" :code="demoCodes.code3">
+                <DemoHelpBox title="南丁格尔玫瑰图" rswidth="447px" rs-height="306px" :code="demoCodes.code4">
                     <LcPieChart v-bind="useFlorenceNightingaleRoseChartPieOption()" class="florence-nightingale-rose"></LcPieChart>
                 </DemoHelpBox>
             </NSpace>

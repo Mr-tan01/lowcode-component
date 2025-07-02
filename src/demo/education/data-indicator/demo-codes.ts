@@ -25,34 +25,6 @@ export const code1 = `
 </template>
 `
 
-export const code2 = `
-<template>
-    <NSpace>
-        <LcIndicatorCard :value="3457" fixed hint="教职工人(人)"></LcIndicatorCard>
-        <LcIndicatorCard :value="3457" fixed hint="在编教职工(人)"></LcIndicatorCard>
-        <LcIndicatorCard :value="102020.22" fixed :decimal="2" hint="公办教师(人)"></LcIndicatorCard>
-        <LcIndicatorCard :value="50000" fixed hint="民办教师(人)"></LcIndicatorCard>
-    </NSpace>
-    <br>
-    <NSpace>
-        <LcIndicatorCard :value="3457" hint="教职工人(人)" size="medium"></LcIndicatorCard>
-        <LcIndicatorCard :value="3457" hint="在编教职工(人)" size="medium"></LcIndicatorCard>
-        <LcIndicatorCard :value="3457" hint="公办教师(人)" size="medium"></LcIndicatorCard>
-    </NSpace>
-    <br>
-    <NSpace>
-        <LcIndicatorCard :value="30" unit="万" hint="教职工人(人)" size="large"></LcIndicatorCard>
-        <LcIndicatorCard :value="23" unit="万" hint="在编教职工(人)" size="large"></LcIndicatorCard>
-        <LcIndicatorCard :value="23" unit="万" hint="在编教职工(人)"  size="large" value-color="rgba(15, 251, 248, 1)" hint-color="rgba(15, 251, 248, 1)"> </LcIndicatorCard>
-        <LcIndicatorCard :value="23" unit="万" hint="在编教职工(人)" size="large" value-color="rgba(15, 251, 248, 1)" hint-color="rgba(15, 251, 248, 1)"></LcIndicatorCard>
-    </NSpace>
-    <NSpace>
-        <LcBothwayCard label="深圳户籍" :data="[{ value:2311111, unit: '人'}]"></LcBothwayCard>
-        <LcBothwayCard label="深圳户籍" :data="[{ value:2311111, unit: '人'},{ value: 567, unit: '%'}]"></LcBothwayCard>
-    </NSpace>
-</template>
-`
-
 export const code3 = `
 <template>
     <NSpace>
@@ -91,5 +63,30 @@ export const code4 = `
             lef-unit="人"
             rig-unit="%"
         ></LcHumanShapeCard>
+</template>
+`
+
+export const code5 = `
+<template>
+    <LcIndicatorCard :value="3457555" fixed hint="教职工人(人)"> </LcIndicatorCard>
+    <LcIndicatorCard :value="65" :fixed="true" unit="%" hint="在编教职工(人)"></LcIndicatorCard>
+    <LcIndicatorCard :value="123265" :fixed="false" unit="人" hint="在编教职工(人)"></LcIndicatorCard>
+    <LcIndicatorCard
+        :value="23"
+        unit="万"
+        hint="在编教职工(人)"
+        size="large"
+        value-color="rgba(15, 251, 248, 1)"
+        hint-color="rgba(15, 251, 248, 1)"
+    >
+    </LcIndicatorCard>
+    <LcBothwayCard label="深圳户籍" :data="[{ value: 2311111, unit: '人' }]"></LcBothwayCard>
+    <LcBothwayCard
+        label="深圳户籍"
+        :data="[
+            { value: 2311111, unit: '人' },
+            { value: 567, unit: '%' },
+        ]"
+    ></LcBothwayCard>
 </template>
 `

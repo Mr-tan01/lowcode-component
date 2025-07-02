@@ -118,4 +118,48 @@ const options = {
     }
 </script>
 `,
+    code4: `
+<template>
+    <LcPieChart :options :showCustomLegend="false" layout="innerLabel"></LcPieChart>
+</template>
+
+<script lang="ts" setup>
+import {
+    LcPieChart,
+} from 'lowcode-component/es/education/charts';
+const options = {
+        legend: {
+            top: 'bottom',
+        },
+        title: {
+            show: false,
+        },
+        series: [
+            {
+                radius: ['0%', '100%'],
+                name: '测试',
+                type: 'pie',
+                roseType: 'area',
+                data: [
+                    { value: 40, name: 'rose 1' },
+                    { value: 38, name: 'rose 2' },
+                    { value: 32, name: 'rose 3' },
+                    { value: 30, name: 'rose 4' },
+                    { value: 28, name: 'rose 5' },
+                    { value: 26, name: 'rose 6' },
+                    { value: 22, name: 'rose 7' },
+                    { value: 18, name: 'rose 8' },
+                    { value: 18, name: 'rose 9' },
+                    { value: 58, name: 'rose 10' },
+                    { value: 78, name: 'rose 11' },
+                    { value: 12, name: 'rose 12' },
+                    { value: 13, name: 'rose 13' },
+                    { value: 8, name: 'rose 14' },
+                    { value: 58, name: 'rose 15' },
+                ],
+            },
+        ],
+    },
+</script>
+`,
 }

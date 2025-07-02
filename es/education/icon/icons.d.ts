@@ -1,115 +1,106 @@
-import { Ref } from 'vue'
-export declare const funcdomainIcons: Record<string, () => Promise<string>>
-export declare const eventdomainIcons: Record<string, () => Promise<string>>
-export declare const baseSupportdomainIcons: Record<
-    string,
-    () => Promise<string>
->
-export declare const menustdomainIcons: Record<string, () => Promise<string>>
-export type backgroundImg = 'booth' | 'pedestal'
+import { Ref } from 'vue';
+export declare const funcdomainIcons: Record<string, () => Promise<string>>;
+export declare const eventdomainIcons: Record<string, () => Promise<string>>;
+export declare const baseSupportdomainIcons: Record<string, () => Promise<string>>;
+export declare const menustdomainIcons: Record<string, () => Promise<string>>;
+export type backgroundImg = 'booth' | 'pedestal';
 export declare const innerImageDomain: {
     readonly func: {
-        readonly add: 'add'
-        readonly caretDown: 'caret-down'
-        readonly caretSort: 'caret-sort'
-        readonly caretUp: 'caret-up'
-        readonly chevronDown: 'chevron-down'
-        readonly chevronUp: 'chevron-up'
-        readonly helpCircle: 'help-circle'
-        readonly infoCircle: 'info-circle'
-        readonly internet: 'internet'
-        readonly laptop: 'laptop'
-        readonly layers: 'layers'
-        readonly location: 'location'
-        readonly refresh: 'refresh'
-        readonly remove: 'remove'
-        readonly search: 'search'
-        readonly time: 'time'
-        readonly blueLArrow: 'blue-l-arrow'
-        readonly blueRArrow: 'blue-r-arrow'
-        readonly pause: 'pause'
-        readonly expand: 'expand'
-        readonly retract: 'retract'
-        readonly parallel: 'parallel'
-        readonly student: 'student'
-        readonly teacher: 'teacher'
-        readonly international: 'international'
-        readonly doctor: 'doctor'
-        readonly acreage: 'acreage'
-        readonly flipbook: 'flipbook'
-        readonly expenditure: 'expenditure'
-        readonly pieChart: 'pie-chart'
-        readonly reat: 'reat'
-        readonly privateSchool: 'private-school'
-        readonly publicSchool: 'public-school'
-        readonly campusSchool: 'campus-school'
-        readonly highSchool: 'high-school'
-        readonly specialistSchool: 'specialist-school'
-        readonly professionalHighSchool: 'professional-high-school'
-        readonly instrument: 'instrument'
-        readonly safety: 'safety'
-        readonly occupation: 'occupation'
-        readonly construction: 'construction'
-        readonly person: 'person'
-        readonly creditRecognitionRate: 'credit-recognition-rate'
-    }
+        readonly add: "add";
+        readonly caretDown: "caret-down";
+        readonly caretSort: "caret-sort";
+        readonly caretUp: "caret-up";
+        readonly chevronDown: "chevron-down";
+        readonly chevronUp: "chevron-up";
+        readonly helpCircle: "help-circle";
+        readonly infoCircle: "info-circle";
+        readonly internet: "internet";
+        readonly laptop: "laptop";
+        readonly layers: "layers";
+        readonly location: "location";
+        readonly refresh: "refresh";
+        readonly remove: "remove";
+        readonly search: "search";
+        readonly time: "time";
+        readonly blueLArrow: "blue-l-arrow";
+        readonly blueRArrow: "blue-r-arrow";
+        readonly pause: "pause";
+        readonly expand: "expand";
+        readonly retract: "retract";
+        readonly parallel: "parallel";
+        readonly student: "student";
+        readonly teacher: "teacher";
+        readonly international: "international";
+        readonly doctor: "doctor";
+        readonly acreage: "acreage";
+        readonly flipbook: "flipbook";
+        readonly expenditure: "expenditure";
+        readonly pieChart: "pie-chart";
+        readonly reat: "reat";
+        readonly privateSchool: "private-school";
+        readonly publicSchool: "public-school";
+        readonly campusSchool: "campus-school";
+        readonly highSchool: "high-school";
+        readonly specialistSchool: "specialist-school";
+        readonly professionalHighSchool: "professional-high-school";
+        readonly instrument: "instrument";
+        readonly safety: "safety";
+        readonly occupation: "occupation";
+        readonly construction: "construction";
+        readonly person: "person";
+        readonly creditRecognitionRate: "credit-recognition-rate";
+        readonly primarySchool: "primary-school";
+        readonly middleSchool: "middle-school";
+        readonly university: "university";
+    };
     readonly event: {
-        readonly domain: 'domain'
-        readonly style: 'style'
-        readonly person: 'person'
-        readonly gate: 'gate'
-        readonly building: 'building'
-        readonly mentor: 'mentor'
-        readonly person2: 'person2'
-        readonly reward: 'reward'
-        readonly dataOverview: 'dataOverview'
-        readonly base: 'base'
-        readonly team: 'team'
-        readonly five: 'five'
-        readonly evaluation: 'evaluation'
-        readonly planningBlueprint: 'planningBlueprint'
-        readonly schoolSafety: 'schoolSafety'
-        readonly schoolsGuarantee: 'schoolsGuarantee'
-    }
+        readonly domain: "domain";
+        readonly style: "style";
+        readonly person: "person";
+        readonly gate: "gate";
+        readonly building: "building";
+        readonly mentor: "mentor";
+        readonly person2: "person2";
+        readonly reward: "reward";
+        readonly dataOverview: "dataOverview";
+        readonly base: "base";
+        readonly team: "team";
+        readonly five: "five";
+        readonly evaluation: "evaluation";
+        readonly planningBlueprint: "planningBlueprint";
+        readonly schoolSafety: "schoolSafety";
+        readonly schoolsGuarantee: "schoolsGuarantee";
+    };
     readonly baseSupport: {
-        readonly booth: 'booth'
-        readonly pedestal: 'pedestal'
-    }
+        readonly booth: "booth";
+        readonly pedestal: "pedestal";
+    };
     readonly menus: {
-        readonly basicEducation: 'basic-education'
-        readonly bluePrint: 'blue-print'
-        readonly campusSecurity: 'campus-security'
-        readonly careerDevelopment: 'career-development'
-        readonly conditionsGuarantees: 'conditions-guarantees'
-        readonly dataOverview: 'data-overview'
-        readonly degreeResources: 'degree-resources'
-        readonly developSimultaneously: 'develop-simultaneously'
-        readonly digitization: 'digitization'
-        readonly educationalFund: 'educational-fund'
-        readonly exchangeCooperation: 'exchange-cooperation'
-        readonly highereducation: 'higher-education'
-        readonly supervisoryEvaluation: 'supervisory-evaluation'
-        readonly teamConstruction: 'team-construction'
-    }
-}
-type innerImageDomain = typeof innerImageDomain
-type ReadValue<T> = T[keyof T]
-export type Domains = keyof innerImageDomain
-export type NameTypeFunc<D extends Domains> = ReadValue<innerImageDomain[D]>
-export type NameTypes =
-    | NameTypeFunc<'event'>
-    | NameTypeFunc<'func'>
-    | NameTypeFunc<'menus'>
-    | NameTypeFunc<'baseSupport'>
-export declare function useImage<D extends Domains>(
-    domain: Ref<D>,
-    name: Ref<NameTypeFunc<D>>,
-    ext: Ref<string>,
-    baseSrcName?: Ref<string | undefined>,
-): {
-    src: Ref<string, string>
-    selectedSrc: Ref<string, string>
-    baseSrc: Ref<string, string>
-    baseSelectedSrc: Ref<string, string>
-}
-export {}
+        readonly basicEducation: "basic-education";
+        readonly bluePrint: "blue-print";
+        readonly campusSecurity: "campus-security";
+        readonly careerDevelopment: "career-development";
+        readonly conditionsGuarantees: "conditions-guarantees";
+        readonly dataOverview: "data-overview";
+        readonly degreeResources: "degree-resources";
+        readonly developSimultaneously: "develop-simultaneously";
+        readonly digitization: "digitization";
+        readonly educationalFund: "educational-fund";
+        readonly exchangeCooperation: "exchange-cooperation";
+        readonly highereducation: "higher-education";
+        readonly supervisoryEvaluation: "supervisory-evaluation";
+        readonly teamConstruction: "team-construction";
+    };
+};
+type innerImageDomain = typeof innerImageDomain;
+type ReadValue<T> = T[keyof T];
+export type Domains = keyof innerImageDomain;
+export type NameTypeFunc<D extends Domains> = ReadValue<innerImageDomain[D]>;
+export type NameTypes = NameTypeFunc<'event'> | NameTypeFunc<'func'> | NameTypeFunc<'menus'> | NameTypeFunc<'baseSupport'>;
+export declare function useImage<D extends Domains>(domain: Ref<D>, name: Ref<NameTypeFunc<D>>, ext: Ref<string>, baseSrcName?: Ref<string | undefined>): {
+    src: Ref<string, string>;
+    selectedSrc: Ref<string, string>;
+    baseSrc: Ref<string, string>;
+    baseSelectedSrc: Ref<string, string>;
+};
+export {};

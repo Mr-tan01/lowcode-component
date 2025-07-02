@@ -1,92 +1,52 @@
-import {
-    defineComponent as m,
-    mergeDefaults as p,
-    computed as l,
-    openBlock as e,
-    createElementBlock as t,
-    createElementVNode as i,
-    Fragment as s,
-    renderList as d,
-    toDisplayString as c,
-} from 'vue'
-const v = { class: 'bimodal-index' },
-    b = { class: 'bimodal-index__indicator' },
-    x = { class: 'bimodal-index__indicator__lable' },
-    y = { class: 'bimodal-index__indicator__value' },
-    h = ['title'],
-    S = /* @__PURE__ */ m({
-        __name: 'bimodalIndex',
-        props: /* @__PURE__ */ p(
-            {
-                data: {
-                    type: Array,
-                },
-                empty: {
-                    type: String,
-                },
-            },
-            {
-                data: () => [],
-                empty: '-',
-            },
-        ),
-        setup(o) {
-            const r = l(() => o.data.slice(0, 2)),
-                _ = l(() => r.value.map((a) => a.label)),
-                u = l(() => r.value.map((a) => a.value || o.empty))
-            return (a, f) => (
-                e(),
-                t('div', v, [
-                    i('div', b, [
-                        i('div', x, [
-                            (e(!0),
-                            t(
-                                s,
-                                null,
-                                d(
-                                    _.value,
-                                    (n) => (
-                                        e(),
-                                        t(
-                                            'span',
-                                            null,
-                                            c(n),
-                                            1,
-                                            /* TEXT */
-                                        )
-                                    ),
-                                ),
-                                256,
-                                /* UNKEYED_FRAGMENT */
-                            )),
-                        ]),
-                        i('div', y, [
-                            (e(!0),
-                            t(
-                                s,
-                                null,
-                                d(
-                                    u.value,
-                                    (n) => (
-                                        e(),
-                                        t(
-                                            'span',
-                                            {
-                                                title: n.toString(),
-                                            },
-                                            c(n),
-                                            9,
-                                            h,
-                                        )
-                                    ),
-                                ),
-                                256,
-                                /* UNKEYED_FRAGMENT */
-                            )),
-                        ]),
-                    ]),
-                ])
-            )
-        },
-    })
-export { S as default }
+import { defineComponent as p, mergeDefaults as v, computed as i, openBlock as e, createElementBlock as t, createElementVNode as o, Fragment as c, renderList as _, toDisplayString as u } from "vue";
+const y = { class: "bimodal-index" }, b = { class: "bimodal-index__indicator" }, x = { class: "bimodal-index__indicator__lable" }, h = { class: "bimodal-index__indicator__value" }, f = ["title"], S = /* @__PURE__ */ p({
+  __name: "bimodalIndex",
+  props: /* @__PURE__ */ v({
+    data: {
+      type: Array
+    },
+    empty: {
+      type: String
+    }
+  }, {
+    data: () => [],
+    empty: "-"
+  }),
+  setup(r) {
+    const s = i(() => r.data.slice(0, 2)), m = i(() => s.value.map((a) => a.label)), d = i(() => s.value.map((a) => a.value || r.empty));
+    return (a, g) => (e(), t("div", y, [
+      o("div", b, [
+        o("div", x, [
+          (e(!0), t(
+            c,
+            null,
+            _(m.value, (n, l) => (e(), t(
+              "span",
+              { key: l },
+              u(n),
+              1
+              /* TEXT */
+            ))),
+            128
+            /* KEYED_FRAGMENT */
+          ))
+        ]),
+        o("div", h, [
+          (e(!0), t(
+            c,
+            null,
+            _(d.value, (n, l) => (e(), t("span", {
+              key: l,
+              title: d.value.toString()
+            }, u(n), 9, f))),
+            128
+            /* KEYED_FRAGMENT */
+          ))
+        ])
+      ])
+    ]));
+  }
+});
+export {
+  S as default
+};

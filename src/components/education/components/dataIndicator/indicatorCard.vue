@@ -16,9 +16,7 @@
                             <NNumberAnimation show-separator :from="0" :to="renderValue" active :precision="decimals" />
                         </slot>
                     </span>
-                    <span v-if="fixed" class="lc-indicator-card__wrapper--result--unit">
-                        {{ unit }}
-                    </span>
+                    <span class="lc-indicator-card__wrapper--result--unit"> {{ unitValue }} </span>
                 </div>
                 <div class="lc-indicator-card__wrapper--text">
                     {{ hint }}
@@ -46,19 +44,23 @@ type Size = typeof SIZE
 const {
     value = 0,
     hint = '',
+    unit = '',
     size = 'small',
     fixed = false,
     decimal = 0,
     valueColor = '#ffffff',
     hintColor = '#F2F3F4',
+    type = 'border',
+    tip = '',
 } = defineProps<{
     value?: number
     hint?: string
+    unit?: string
     size?: Size[keyof Size]
     fixed?: boolean
     decimal?: number
-    type: 'border' | 'noborder'
-    tip: string
+    type?: 'border' | 'noborder'
+    tip?: string
     valueColor?: string
     hintColor?: string
 }>()
@@ -84,11 +86,11 @@ const innerPad = {
 const padValue = computed(() => {
     return innerPad[size]
 })
-const unit = computed(() => {
+const unitValue = computed(() => {
     if (fixed) {
-        return bigNumber(value, decimal).unit
+        return `${bigNumber(value, decimal).unit}${unit}`
     }
-    return ''
+    return unit
 })
 </script>
 
