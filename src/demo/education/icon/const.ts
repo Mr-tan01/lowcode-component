@@ -6,6 +6,13 @@ export const code1 = `
     <n-space>
         <LcIcon v-for="(item, key) in innerImageDomain.event" :key domain="event" :name="item" :size="70">{{ item }}</LcIcon>
     </n-space>
+    <n-space>
+        <LcIconCard domain="menus" name="data-overview"></LcIconCard>
+        <LcIconCard domain="func" name="occupation"></LcIconCard>
+        <LcIconCard domain="func" name="safety"></LcIconCard>
+        <LcIconCard domain="func" name="instrument"></LcIconCard>
+        <LcIconCard bag-name="booth" domain="menus" name="data-overview"></LcIconCard>
+    </n-space>
 </template>
 <script setup>
 const innerImageDomain = {

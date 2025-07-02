@@ -58,7 +58,7 @@ export type Data = {
     rightItem: Item
 }
 const { fixed = true } = defineProps<{
-    unit: string
+    unit?: string
     fixed?: boolean
     data: Data
 }>()

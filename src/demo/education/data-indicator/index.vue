@@ -96,10 +96,11 @@
                 ></LcHumanShapeCard>
             </NSpace>
         </DemoHelpBox>
-        <DemoHelpBox title="指标卡" description="基本用法" rswidth="1000px" :code="code2">
+        <DemoHelpBox title="指标卡" description="基本用法" rswidth="1000px" :code="code5">
             <NSpace>
-                <LcIndicatorCard :value="3457" fixed hint="教职工人(人)"> </LcIndicatorCard>
-                <LcIndicatorCard :value="3457" fixed hint="在编教职工(人)"></LcIndicatorCard>
+                <LcIndicatorCard :value="3457555" fixed hint="教职工人(人)"> </LcIndicatorCard>
+                <LcIndicatorCard :value="65" :fixed="true" unit="%" hint="在编教职工(人)"></LcIndicatorCard>
+                <LcIndicatorCard :value="123265" :fixed="false" unit="人" hint="在编教职工(人)"></LcIndicatorCard>
             </NSpace>
             <NSpace>
                 <LcIndicatorCard :value="30" unit="万" hint="教职工人(人)" size="large"></LcIndicatorCard>
@@ -170,7 +171,7 @@ import {
     LcHumanShapeCard,
     LcBothwayCard,
 } from '@/components/education/components/dataIndicator'
-import { code1, code2, code3, code4 } from './demo-codes'
+import { code1, code3, code4, code5 } from './demo-codes'
 import Icon from './image/test.png'
 const data = {
     header: '学校建设',
