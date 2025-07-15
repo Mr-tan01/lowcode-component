@@ -5,7 +5,7 @@
             'lc-select--gradient': gradient,
         }"
     >
-        <n-select placeholder="下拉选择" :options="options" clearable :to="false" v-bind="$attrs">
+        <n-select :placeholder="placeholder" :options="options" clearable :to="false" v-bind="$attrs">
             <template #arrow>
                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512">
                     <path
@@ -21,7 +21,11 @@
 import { NSelect } from 'naive-ui/es/select'
 import { PropType } from 'vue'
 
-const { options = [], gradient = false } = defineProps({
+const {
+    options = [],
+    gradient = false,
+    placeholder = '请选择',
+} = defineProps({
     options: {
         type: Array as PropType<
             {
@@ -32,6 +36,9 @@ const { options = [], gradient = false } = defineProps({
     },
     gradient: {
         type: Boolean,
+    },
+    placeholder: {
+        type: String,
     },
 })
 </script>
