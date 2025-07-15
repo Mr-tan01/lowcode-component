@@ -3,7 +3,7 @@
         <DemoHelpBox title="Select" description="基础用法/渐变" :code="code1">
             <n-space>
                 <div class="select-box">
-                    <LcSelect v-model:value="value" :options> </LcSelect>
+                    <LcSelect v-model:value="value" placeholder="选择数据" :options> </LcSelect>
                 </div>
                 <div class="select-box">
                     <LcSelect v-model:value="value" :options gradient> </LcSelect>
