@@ -1,10 +1,10 @@
-import { SeriesOption, EChartsOption } from 'echarts'
-import { ZRColor } from 'echarts/types/src/util/types'
-export declare const radarTitleOptions: EChartsOption['title']
-export declare const radarColors: ZRColor[]
-export declare const radarTooltipOptions: EChartsOption['tooltip']
-export declare const radarLegendOptions: EChartsOption['legend']
-export declare const radarGridOptions: EChartsOption['grid']
-export declare const radarItemOptions: EChartsOption['radar']
-export declare const radarSeriesOptions: EChartsOption['series']
-export declare const radarSeriesDataRecordOptions: SeriesOption['data']
+import { SeriesOption, EChartsOption } from 'echarts';
+import { ZRColor } from 'echarts/types/src/util/types';
+export declare const radarTitleOptions: EChartsOption['title'];
+export declare const radarColors: ZRColor[];
+export declare const radarTooltipOptions: EChartsOption['tooltip'];
+export declare const radarLegendOptions: EChartsOption['legend'];
+export declare const radarGridOptions: EChartsOption['grid'];
+export declare const radarItemOptions: EChartsOption['radar'];
+export declare const radarSeriesOptions: EChartsOption['series'];
+export declare const radarSeriesDataRecordOptions: SeriesOption['data'];

@@ -1,2 +1,2 @@
-import { EChartsOption } from 'echarts'
-export declare const progressSeries: EChartsOption['series']
+import { EChartsOption } from 'echarts';
+export declare const progressSeries: EChartsOption['series'];
