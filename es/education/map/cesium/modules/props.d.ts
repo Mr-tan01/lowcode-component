@@ -1,93 +1,103 @@
-import { PropType } from 'vue'
-import { controlStatusType, pointType, basicConfigType } from './type'
-import { Color, Cartesian3, ArcGisMapServerImageryProvider } from 'cesium'
+import { PropType } from 'vue';
+import { controlStatusType, pointType, basicConfigType } from './type';
+import { Color, Cartesian3, ArcGisMapServerImageryProvider } from 'cesium';
 export declare const cesiumProps: {
     clientId: {
-        type: PropType<string>
-    }
+        type: PropType<string>;
+    };
     accessToken: {
-        type: PropType<string | null>
-    }
+        type: PropType<string | null>;
+    };
     baseUrl: {
-        type: PropType<string | null>
-        default: string
-    }
+        type: PropType<string | null>;
+        default: string;
+    };
     imageryLayersUrl: {
-        type: PropType<string>
-    }
+        type: PropType<string>;
+    };
     areaName: {
-        type: PropType<string>
-    }
+        type: PropType<string>;
+    };
     defaultShowState: {
-        type: PropType<boolean>
-        default: boolean
-    }
+        type: PropType<boolean>;
+        default: boolean;
+    };
     flyToHeight: {
-        type: PropType<number>
-        default: number
-    }
+        type: PropType<number>;
+        default: number;
+    };
     offsetState: {
-        type: PropType<boolean>
-        default: boolean
-    }
+        type: PropType<boolean>;
+        default: boolean;
+    };
     spinStroke: {
-        type: PropType<string>
-        default: string
-    }
+        type: PropType<string>;
+        default: string;
+    };
     spinContainerBg: {
-        type: PropType<string>
-        default: string
-    }
+        type: PropType<string>;
+        default: string;
+    };
     spinDescriptionColor: {
-        type: PropType<string>
-        default: string
-    }
+        type: PropType<string>;
+        default: string;
+    };
     centerPosition: {
-        type: PropType<Cartesian3>
-    }
+        type: PropType<Cartesian3>;
+    };
     defaultCenterKey: {
-        type: StringConstructor
-    }
+        type: StringConstructor;
+    };
     controlStatus: {
-        type: PropType<controlStatusType>
+        type: PropType<controlStatusType>;
         default: {
-            timeline: boolean
-            animation: boolean
-            geocoder: boolean
-            homeButton: boolean
-            sceneModePicker: boolean
-            baseLayerPicker: boolean
-            imageryProvider: Promise<ArcGisMapServerImageryProvider>
-            navigationHelpButton: boolean
-            fullscreenButton: boolean
-            scene3DOnly: boolean
-            orderIndependentTranslucency: boolean
-            selectionIndicator: boolean
+            timeline: boolean;
+            animation: boolean;
+            geocoder: boolean;
+            homeButton: boolean;
+            sceneModePicker: boolean;
+            baseLayerPicker: boolean;
+            imageryProvider: Promise<ArcGisMapServerImageryProvider>;
+            navigationHelpButton: boolean;
+            fullscreenButton: boolean;
+            scene3DOnly: boolean;
+            orderIndependentTranslucency: boolean;
+            selectionIndicator: boolean;
             contextOptions: {
-                allowTextureFilterAnisotropic: boolean
+                allowTextureFilterAnisotropic: boolean;
                 webgl: {
-                    alpha: boolean
-                    antialias: boolean
-                    preserveDrawingBuffer: boolean
-                }
-            }
-        }
-    }
+                    alpha: boolean;
+                    antialias: boolean;
+                    preserveDrawingBuffer: boolean;
+                };
+            };
+        };
+    };
     basicConfig: {
-        type: PropType<basicConfigType>
+        type: PropType<basicConfigType>;
         default: {
-            minZoom: number
-            maxZoom: number
-            baseColor: Color
-            clusteringEnabled: boolean
-            clusteringPixelRange: number
-            clusteringMinimumClusterSize: number
-        }
-    }
+            minZoom: number;
+            maxZoom: number;
+            baseColor: Color;
+            clusteringEnabled: boolean;
+            clusteringPixelRange: number;
+            clusteringMinimumClusterSize: number;
+        };
+    };
     pointData: {
-        type: PropType<pointType[]>
-    }
+        type: PropType<pointType[]>;
+    };
     openIndexDB: {
-        type: BooleanConstructor
-    }
-}
+        type: BooleanConstructor;
+    };
+    openOffset: {
+        type: PropType<{
+            flag: boolean;
+            offset: number;
+        }>;
+        default: {
+            flag: boolean;
+            offset: number;
+        };
+    };
+};

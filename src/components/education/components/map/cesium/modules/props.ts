@@ -65,4 +65,8 @@ export const cesiumProps = {
     openIndexDB: {
         type: Boolean,
     },
+    openOffset: {
+        type: Object as PropType<{ flag: boolean; offset: number }>,
+        default: { flag: false, offset: 0 },
+    },
 }

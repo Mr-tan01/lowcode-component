@@ -41,12 +41,20 @@ const {
     basicConfig,
     pointData = [],
     openIndexDB = false,
+    openOffset = { flag: false, offset: 0 },
 } = defineProps(cesiumProps)
 
 const reloadPointData = async (): Promise<void> => {
     clearEntity()
-    cesiumUtils.pointData = pointData
-    pointData?.forEach(point => {
+    const offsetPointData = cesiumUtils.offsetDuplicateCoordinates(pointData, 'lng', 'lat', openOffset.offset)
+    // 开启相同点位偏移
+    if (openOffset.flag) {
+        cesiumUtils.pointData = offsetPointData
+    } else {
+        cesiumUtils.pointData = pointData
+    }
+
+    cesiumUtils.pointData?.forEach(point => {
         cesiumUtils.addPoint(point, 'value')
         if (defaultShowState) {
             cesiumUtils.addPoint(point)

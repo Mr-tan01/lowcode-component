@@ -135,6 +135,46 @@ export class cesiumService {
         this.tileLoadCallback = this.handleTileLoadProgress.bind(this)
     }
 
+    /**
+     * 对经纬度完全相同的数据点进行均匀环形偏移
+     * @param list      原始数据数组
+     * @param lngKey    经度字段名
+     * @param latKey    纬度字段名
+     * @param distance  偏移距离（米），默认 200
+     * @returns         已做偏移的新数组
+     */
+    public offsetDuplicateCoordinates<T extends Record<string, any>>(list: T[], lngKey: keyof T, latKey: keyof T, distance = 200): T[] {
+        const EARTH_RADIUS = 6_371_000 // 地球半径（米）
+
+        // 1. 按经纬度分组
+        const map = new Map<string, T[]>()
+        list.forEach(item => {
+            const key = `${item[lngKey]},${item[latKey]}`
+            if (!map.has(key)) map.set(key, [])
+            map.get(key)!.push(item)
+        })
+
+        // 2. 对每个重合簇做环形偏移
+        return Array.from(map.values()).flatMap(group => {
+            if (group.length === 1) return group
+            return group.map((item, idx) => {
+                const angle = (idx * 2 * Math.PI) / group.length
+                const lng = Number(item[lngKey])
+                const lat = Number(item[latKey])
+
+                // 经纬度偏移量（弧度）
+                const deltaLng = (distance * Math.cos(angle)) / (EARTH_RADIUS * Math.cos(lat * (Math.PI / 180)))
+                const deltaLat = (distance * Math.sin(angle)) / EARTH_RADIUS
+                const r = {
+                    ...item,
+                    [lngKey]: Number((lng + deltaLng * (180 / Math.PI)).toFixed(6)),
+                    [latKey]: Number((lat + deltaLat * (180 / Math.PI)).toFixed(6)),
+                } as T
+                return r
+            })
+        })
+    }
+
     // Cesium属性更新
     updateViewerAttribute(): void {
         if (!this.viewer) return
@@ -191,7 +231,11 @@ export class cesiumService {
             const canvas = createClusterBillboard(clusteredEntities.length, primaryType || 'primary')
 
             Object.assign(cluster.billboard, {
-                id: 'cluster',
+                id: {
+                    type: 'cluster',
+                    entities: clusteredEntities, // 关键：保存所有被聚合的实体
+                    count: clusteredEntities.length, // 关键：存数量
+                },
                 image: canvas.toDataURL(),
                 width: 50,
                 height: 50,
@@ -278,14 +322,33 @@ export class cesiumService {
         }
         const pickedObject: any = this.viewer.scene.pick(click.position)
         if (defined(pickedObject) && pickedObject.id) {
-            if (pickedObject.id === 'cluster') {
-                const resultPosition = this.getClickPosition(click.position)
-                if (resultPosition) {
-                    this.viewer.camera.flyTo({
-                        destination: resultPosition,
-                        duration: 0.3,
-                    })
-                }
+            if (pickedObject.id.type === 'cluster') {
+                const entities = pickedObject.id.entities
+                const count = pickedObject.id.count
+
+                // 取第一个实体位置
+                const position = entities[0].position?.getValue(JulianDate.now())
+                if (!position) return
+
+                const cartographic = Cartographic.fromCartesian(position)
+                const lng = cesiumMath.toDegrees(cartographic.longitude)
+                const lat = cesiumMath.toDegrees(cartographic.latitude)
+
+                // 分段高度（可改）
+                let targetHeight: number
+                if (count <= 2) targetHeight = 200
+                else if (count <= 5)
+                    targetHeight = 300 // 很稀疏
+                else if (count <= 20)
+                    targetHeight = 800 // 中等
+                else if (count <= 50)
+                    targetHeight = 1500 // 较密
+                else targetHeight = 3000 // 很密
+
+                this.viewer.camera.flyTo({
+                    destination: Cartesian3.fromDegrees(lng, lat, targetHeight),
+                    duration: 0.5,
+                })
             }
             this.options.config.hoverState ? this.pointClickHandler(pickedObject.id) : this.options.pointHandler(pickedObject.id)
         }
@@ -691,7 +754,6 @@ export class cesiumService {
     // 鼠标悬浮处理
     private pointHoverHandler(pickedObject: Entity): void {
         const { name } = pickedObject
-
         // 如果悬浮的是Label元素，不做处理
         if (name?.includes('Label')) return
 
