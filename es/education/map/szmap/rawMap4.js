@@ -1,363 +1,196 @@
-import {
-    defineComponent as K,
-    mergeDefaults as R,
-    useCssVars as T,
-    ref as N,
-    onMounted as j,
-    computed as d,
-    openBlock as u,
-    createElementBlock as c,
-    createVNode as w,
-    createElementVNode as v,
-    Fragment as p,
-    renderList as g,
-    mergeProps as C,
-    resolveDynamicComponent as x,
-    createBlock as H,
-    createCommentVNode as V,
-    renderSlot as O,
-    unref as Y,
-} from 'vue'
-import S from './comp/sshzq.js'
-import U from './comp/baoan.js'
-import W from './comp/dapeng.js'
-import q from './comp/futian.js'
-import J from './comp/guangming.js'
-import Q from './comp/longgang.js'
-import Z from './comp/luohu.js'
-import ee from './comp/pingshan.js'
-import re from './comp/yantian.js'
-import ae from './comp/nanshan.js'
-import oe from './comp/longhua.js'
-import le from './comp/defines.js'
-import te from './comp/labels2.js'
-import ne from '../mark/index2.js'
-import { propsRaw as se } from './props.js'
-import {
-    LabelModelEnum as G,
-    defFloatLevelConfig as ue,
-    szBlockNames as n,
-    defBlockLableMap as ie,
-} from './const.js'
-import ce from 'lodash-es/merge'
-const fe = { class: 'lc-szmap-raw' },
-    me = {
-        class: 'lc-szmap-raw__svg',
-        viewBox: '0 0 922 527',
-        version: '1.1',
-    },
-    de = ['id'],
-    ve = {
-        'id': '页面-2',
-        'stroke': 'none',
-        'stroke-width': '1',
-        'fill': 'none',
-        'fill-rule': 'evenodd',
-    },
-    pe = {
-        id: '编组-76',
-        transform: 'translate(4, 0)',
-    },
-    ge = {
-        'id': '编组',
-        'transform': 'translate(0, 35)',
-        'fill-rule': 'nonzero',
-    },
-    ke = {
-        key: 0,
-        class: 'lc-szmap-raw__mark-group',
-    },
-    Ae = /* @__PURE__ */ K({
-        __name: 'rawMap',
-        props: /* @__PURE__ */ R(se, {
-            showLabel: !0,
-            showBorder: !0,
-            levels: () => ({}),
-            values: () => ({}),
-            fillModel: 'default',
-            rotateX: 0,
-            disabledGradient: !1,
-            labelModel: () => G.DEFAULT,
-        }),
-        emits: ['markClick', 'markMouseover', 'markMouseleave'],
-        setup(f, { emit: E }) {
-            T((e) => ({
-                '4b88f950': X.value,
-                'e9918b7a': A.value,
-            }))
-            const k = {
-                    [n.光明]: J,
-                    [n.宝安]: U,
-                    [n.龙华]: oe,
-                    [n.南山]: ae,
-                    [n.福田]: q,
-                    [n.罗湖]: Z,
-                    [n.盐田]: re,
-                    [n.坪山]: ee,
-                    [n.龙岗]: Q,
-                    [n.大鹏新区]: W,
-                    [n.深汕合作区]: S,
-                },
-                b = N(0),
-                h = E,
-                M = N('')
-            function _(e) {
-                const s = f.values[e] ?? { value: 0 },
-                    l = m.value.findIndex(([t, o]) => {
-                        var L, i
-                        return (
-                            s.value >=
-                                ((L = o == null ? void 0 : o.range) == null
-                                    ? void 0
-                                    : L[0]) &&
-                            s.value <=
-                                ((i = o == null ? void 0 : o.range) == null
-                                    ? void 0
-                                    : i[1])
-                        )
-                    }),
-                    [r, a] = m.value[l] ?? []
-                return {
-                    ...s,
-                    mapLabel: ie[e],
-                    style: {
-                        '--level-scale': b.value
-                            ? ((a == null ? void 0 : a.scale) ?? 1)
-                            : b.value,
-                    },
-                }
-            }
-            function B(e) {
-                h('markClick', _(e))
-            }
-            j(() => {
-                setTimeout(() => {
-                    b.value = 1
-                }, 300)
-            })
-            const I = d(() => [
-                    'lc-szmap-raw__block',
-                    `visible--${f.fillModel}`,
-                ]),
-                m = d(() => Object.entries(ce({}, ue, f.levels)))
-            function P(e) {
-                const s = f.values[e]
-                if (!s || f.disabledGradient) return
-                const l = m.value.findIndex(([L, i]) => {
-                        var y, z
-                        return (
-                            s.value >=
-                                ((y = i == null ? void 0 : i.range) == null
-                                    ? void 0
-                                    : y[0]) &&
-                            s.value <=
-                                ((z = i == null ? void 0 : i.range) == null
-                                    ? void 0
-                                    : z[1])
-                        )
-                    }),
-                    [r, a] = m.value[l] ?? []
-                let t = [],
-                    o = {}
-                return (
-                    a &&
-                        r &&
-                        (t.push('float-active'),
-                        typeof a.stop == 'string'
-                            ? (o['--linear-gradient-fill'] = a.stop)
-                            : (o['--linear-gradient-fill'] =
-                                  `url(#linearGradient-float-${r})`)),
-                    {
-                        class: t,
-                        style: o,
-                    }
-                )
-            }
-            const X = d(() => `rotateX(${f.rotateX}deg)`),
-                A = d(() => Math.abs(f.rotateX)),
-                $ = (e) => ['lc-szmap-raw__mark-group--item', `mark-${e}`]
-            function D(e) {
-                f.labelModel === G.HOVER &&
-                    ((M.value = e), h('markMouseover', e))
-            }
-            const F = (e, s) => {
-                const l = e.relatedTarget
-                ;(l && l.closest('.lc-szmap-raw__mark-group')) ||
-                    ((M.value = ''), h('markMouseleave', s))
-            }
-            return (e, s) => (
-                u(),
-                c('div', fe, [
-                    (u(),
-                    c('svg', me, [
-                        w(le),
-                        v('defs', null, [
-                            (u(!0),
-                            c(
-                                p,
-                                null,
-                                g(
-                                    m.value,
-                                    ([l, r], a) => (
-                                        u(),
-                                        c(
-                                            'linearGradient',
-                                            {
-                                                key: a,
-                                                id: `linearGradient-float-${l}`,
-                                            },
-                                            [
-                                                (u(!0),
-                                                c(
-                                                    p,
-                                                    null,
-                                                    g(
-                                                        r == null
-                                                            ? void 0
-                                                            : r.stop,
-                                                        (t, o) => (
-                                                            u(),
-                                                            c(
-                                                                'stop',
-                                                                C(
-                                                                    {
-                                                                        ref_for:
-                                                                            !0,
-                                                                    },
-                                                                    typeof t ==
-                                                                        'object' &&
-                                                                        !Array.isArray(
-                                                                            t,
-                                                                        )
-                                                                        ? t
-                                                                        : {},
-                                                                    { key: o },
-                                                                ),
-                                                                null,
-                                                                16,
-                                                                /* FULL_PROPS */
-                                                            )
-                                                        ),
-                                                    ),
-                                                    128,
-                                                    /* KEYED_FRAGMENT */
-                                                )),
-                                            ],
-                                            8,
-                                            de,
-                                        )
-                                    ),
-                                ),
-                                128,
-                                /* KEYED_FRAGMENT */
-                            )),
-                        ]),
-                        v('g', ve, [
-                            v('g', pe, [
-                                v('g', ge, [
-                                    (u(),
-                                    c(
-                                        p,
-                                        null,
-                                        g(k, (l, r, a) =>
-                                            w(
-                                                x(l),
-                                                C(
-                                                    {
-                                                        class: I.value,
-                                                        key: a,
-                                                        ref_for: !0,
-                                                    },
-                                                    P(r),
-                                                    {
-                                                        showBorder:
-                                                            e.showBorder,
-                                                        onMouseover: (t) =>
-                                                            D(r),
-                                                        onMouseleave: (t) =>
-                                                            F(t, r),
-                                                        onClick: (t) => B(r),
-                                                    },
-                                                ),
-                                                null,
-                                                16,
-                                                [
-                                                    'class',
-                                                    'showBorder',
-                                                    'onMouseover',
-                                                    'onMouseleave',
-                                                    'onClick',
-                                                ],
-                                            ),
-                                        ),
-                                        64,
-                                        /* STABLE_FRAGMENT */
-                                    )),
-                                    e.showLabel
-                                        ? (u(),
-                                          H(
-                                              te,
-                                              {
-                                                  key: 0,
-                                                  labels: e.labels,
-                                                  values: e.values,
-                                              },
-                                              null,
-                                              8,
-                                              ['labels', 'values'],
-                                          ))
-                                        : V('v-if', !0),
-                                ]),
-                            ]),
-                        ]),
-                    ])),
-                    e.showLabel
-                        ? (u(),
-                          c('div', ke, [
-                              O(
-                                  e.$slots,
-                                  'mapLabel',
-                                  {
-                                      blockList: k,
-                                      labelClass: $,
-                                      getVlaue: _,
-                                      currentMapKey: M.value,
-                                  },
-                                  () => [
-                                      (u(),
-                                      c(
-                                          p,
-                                          null,
-                                          g(k, (l, r) =>
-                                              w(
-                                                  Y(ne),
-                                                  C(
-                                                      {
-                                                          key: r,
-                                                          class: $(r),
-                                                          ref_for: !0,
-                                                      },
-                                                      _(r),
-                                                      {
-                                                          size: 'small',
-                                                          onClick: (a) => B(r),
-                                                      },
-                                                  ),
-                                                  null,
-                                                  16,
-                                                  ['class', 'onClick'],
-                                              ),
-                                          ),
-                                          64,
-                                          /* STABLE_FRAGMENT */
-                                      )),
-                                  ],
-                                  !0,
-                              ),
-                          ]))
-                        : V('v-if', !0),
-                ])
-            )
-        },
-    })
-export { Ae as default }
+import { defineComponent as A, mergeDefaults as D, useCssVars as F, ref as B, onMounted as K, computed as d, openBlock as s, createElementBlock as u, createVNode as _, createElementVNode as v, Fragment as p, renderList as g, mergeProps as w, resolveDynamicComponent as R, createBlock as T, createCommentVNode as z, renderSlot as j, unref as x } from "vue";
+import H from "./comp/sshzq.js";
+import O from "./comp/baoan.js";
+import Y from "./comp/dapeng.js";
+import S from "./comp/futian.js";
+import U from "./comp/guangming.js";
+import W from "./comp/longgang.js";
+import q from "./comp/luohu.js";
+import J from "./comp/pingshan.js";
+import Q from "./comp/yantian.js";
+import Z from "./comp/nanshan.js";
+import ee from "./comp/longhua.js";
+import re from "./comp/defines.js";
+import ae from "./comp/labels2.js";
+import oe from "../mark/index2.js";
+import { propsRaw as le } from "./props.js";
+import { LabelModelEnum as y, defFloatLevelConfig as te, szBlockNames as l, defBlockLableMap as ne } from "./const.js";
+import se from "lodash-es/merge";
+const ue = { class: "lc-szmap-raw" }, ie = {
+  class: "lc-szmap-raw__svg",
+  viewBox: "0 0 922 527",
+  version: "1.1"
+}, ce = ["id"], me = {
+  id: "页面-2",
+  stroke: "none",
+  "stroke-width": "1",
+  fill: "none",
+  "fill-rule": "evenodd"
+}, fe = {
+  id: "编组-76",
+  transform: "translate(4, 0)"
+}, de = {
+  id: "编组",
+  transform: "translate(0, 35)",
+  "fill-rule": "nonzero"
+}, ve = {
+  key: 0,
+  class: "lc-szmap-raw__mark-group"
+}, Ie = /* @__PURE__ */ A({
+  __name: "rawMap",
+  props: /* @__PURE__ */ D(le, {
+    showLabel: !0,
+    showBorder: !0,
+    levels: () => ({}),
+    values: () => ({}),
+    fillModel: "default",
+    rotateX: 0,
+    disabledGradient: !1,
+    labelModel: () => y.DEFAULT
+  }),
+  emits: ["markClick", "markMouseover", "markMouseleave"],
+  setup(i, { emit: N }) {
+    F((e) => ({
+      "09cd0749": E.value,
+      d740f61c: I.value
+    }));
+    const k = {
+      [l.光明]: U,
+      [l.宝安]: O,
+      [l.龙华]: ee,
+      [l.南山]: Z,
+      [l.福田]: S,
+      [l.罗湖]: q,
+      [l.盐田]: Q,
+      [l.坪山]: J,
+      [l.龙岗]: W,
+      [l.大鹏新区]: Y,
+      [l.深汕合作区]: H
+    }, b = B(0), h = N, M = B("");
+    function L(e) {
+      const t = i.values[e] ?? { value: 0 }, o = c.value.findIndex(
+        ([, a]) => (a == null ? void 0 : a.range) && t.value >= a.range[0] && t.value <= a.range[1]
+      ), [, r] = c.value[o] ?? [];
+      return {
+        ...t,
+        mapLabel: ne[e],
+        style: {
+          "--level-scale": b.value ? (r == null ? void 0 : r.scale) ?? 1 : b.value
+        }
+      };
+    }
+    function C(e) {
+      h("markClick", L(e));
+    }
+    K(() => {
+      setTimeout(() => {
+        b.value = 1;
+      }, 300);
+    });
+    const V = d(() => ["lc-szmap-raw__block", `visible--${i.fillModel}`]), c = d(() => Object.entries(se({}, te, i.levels)));
+    function G(e) {
+      const t = i.values[e];
+      if (!t || i.disabledGradient) return;
+      const o = c.value.findIndex(
+        ([, f]) => (f == null ? void 0 : f.range) && t.value >= f.range[0] && t.value <= f.range[1]
+      ), [r, a] = c.value[o] ?? [];
+      let n = [], m = {};
+      return a && r && (n.push("float-active"), typeof a.stop == "string" ? m["--linear-gradient-fill"] = a.stop : m["--linear-gradient-fill"] = `url(#linearGradient-float-${r})`), {
+        class: n,
+        style: m
+      };
+    }
+    const E = d(() => `rotateX(${i.rotateX}deg)`), I = d(() => Math.abs(i.rotateX)), $ = (e) => ["lc-szmap-raw__mark-group--item", `mark-${e}`];
+    function P(e) {
+      i.labelModel === y.HOVER && (M.value = e, h("markMouseover", e));
+    }
+    const X = (e, t) => {
+      const o = e.relatedTarget;
+      o && o.closest(".lc-szmap-raw__mark-group") || (M.value = "", h("markMouseleave", t));
+    };
+    return (e, t) => (s(), u("div", ue, [
+      (s(), u("svg", ie, [
+        _(re),
+        v("defs", null, [
+          (s(!0), u(
+            p,
+            null,
+            g(c.value, ([o, r], a) => (s(), u("linearGradient", {
+              id: `linearGradient-float-${o}`,
+              key: a
+            }, [
+              (s(!0), u(
+                p,
+                null,
+                g(r == null ? void 0 : r.stop, (n, m) => (s(), u(
+                  "stop",
+                  w({ ref_for: !0 }, typeof n == "object" && !Array.isArray(n) ? n : {}, { key: m }),
+                  null,
+                  16
+                  /* FULL_PROPS */
+                ))),
+                128
+                /* KEYED_FRAGMENT */
+              ))
+            ], 8, ce))),
+            128
+            /* KEYED_FRAGMENT */
+          ))
+        ]),
+        v("g", me, [
+          v("g", fe, [
+            v("g", de, [
+              (s(), u(
+                p,
+                null,
+                g(k, (o, r, a) => _(R(o), w({
+                  key: a,
+                  class: V.value,
+                  ref_for: !0
+                }, G(r), {
+                  "show-border": e.showBorder,
+                  onMouseover: (n) => P(r),
+                  onMouseleave: (n) => X(n, r),
+                  onClick: (n) => C(r)
+                }), null, 16, ["class", "show-border", "onMouseover", "onMouseleave", "onClick"])),
+                64
+                /* STABLE_FRAGMENT */
+              )),
+              e.showLabel ? (s(), T(ae, {
+                key: 0,
+                labels: e.labels,
+                values: e.values
+              }, null, 8, ["labels", "values"])) : z("v-if", !0)
+            ])
+          ])
+        ])
+      ])),
+      e.showLabel ? (s(), u("div", ve, [
+        j(e.$slots, "mapLabel", {
+          blockList: k,
+          labelClass: $,
+          getVlaue: L,
+          currentMapKey: M.value
+        }, () => [
+          (s(), u(
+            p,
+            null,
+            g(k, (o, r) => _(x(oe), w({
+              key: r,
+              class: $(r),
+              ref_for: !0
+            }, L(r), {
+              size: "small",
+              onClick: (a) => C(r)
+            }), null, 16, ["class", "onClick"])),
+            64
+            /* STABLE_FRAGMENT */
+          ))
+        ], !0)
+      ])) : z("v-if", !0)
+    ]));
+  }
+});
+export {
+  Ie as default
+};

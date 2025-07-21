@@ -1,2 +1,4 @@
-import f from './sshzq.js'
-export { f as default }
+import f from "./sshzq.js";
+export {
+  f as default
+};
