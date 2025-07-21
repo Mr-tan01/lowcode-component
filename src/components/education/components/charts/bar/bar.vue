@@ -6,7 +6,7 @@
 
 <script lang="ts" setup>
 import { SChartsBar } from '@mmj-code-lib/lowcode/es/components'
-import { computed, onMounted, useTemplateRef } from 'vue'
+import { computed, onMounted, Ref, useTemplateRef } from 'vue'
 import { type EChartsOption, type EChartsCoreOption } from 'echarts'
 import { commonBarOptions, useCommonBarOptions, useCommonBarSeries } from './options'
 import merge from 'lodash-es/merge'
@@ -19,12 +19,16 @@ const {
     isHorizontal = false,
     stack = false,
     fake3d = true,
+    events = {},
 } = defineProps<{
     options?: EChartsCoreOption | EChartsOption
     linearGradientColor?: graphic.LinearGradient[]
     isHorizontal?: boolean
     stack?: boolean
     fake3d?: boolean
+    events?: {
+        [eventName: string]: (chartBar: Ref) => (...args: any) => void
+    }
 }>()
 const chartBar = useTemplateRef('chartBarRef')
 
@@ -36,22 +40,29 @@ const renderOptions = computed(() => {
 
 onMounted(() => {
     if (chartBar.value && chartBar.value.chartInstance) {
-        chartBar.value?.chartInstance?.on('legendselectchanged', function () {
-            const chart = chartBar.value?.chartInstance
-            if (!chart) return
-            // 获取当前所有图例状态和系列数据
-            const option = chart.getOption()
-            const legend = option.legend?.[0]
-            const selected = legend.selected || {}
-            const seriesData = option.series
-            const yAxis = option.yAxis
-            if (!Array.isArray(yAxis) || yAxis.length <= 1) return
-
-            // 根据系列显示状态控制y轴显示
-            chart.setOption({
-                yAxis: [{ show: selected[seriesData?.[0]?.name] !== false }, { show: selected[seriesData?.[1]?.name] !== false }],
-            })
+        // 绑定事件
+        Object.entries(events).forEach(([eventName, eventHandler]) => {
+            if (typeof eventHandler !== 'function') return
+            chartBar.value?.chartInstance?.on(eventName, eventHandler(chartBar))
         })
+        // 如未传入legendselectchanged事件则绑定legendselectchanged事件
+        if (typeof events.legendselectchanged !== 'function' && events.legendselectchanged !== null)
+            chartBar.value?.chartInstance?.on('legendselectchanged', function () {
+                const chart = chartBar.value?.chartInstance
+                if (!chart) return
+                // 获取当前所有图例状态和系列数据
+                const option = chart.getOption()
+                const legend = option.legend?.[0]
+                const selected = legend.selected || {}
+                const seriesData = option.series
+                const yAxis = option.yAxis
+                if (!Array.isArray(yAxis) || yAxis.length <= 1) return
+
+                // 根据系列显示状态控制y轴显示
+                chart.setOption({
+                    yAxis: [{ show: selected[seriesData?.[0]?.name] !== false }, { show: selected[seriesData?.[1]?.name] !== false }],
+                })
+            })
     }
 })
 </script>
