@@ -8,7 +8,9 @@
         <div class="lc-indicator-card__wrapper">
             <div class="lc-indicator-card__wrapper--content">
                 <div v-if="tip" class="lc-indicator-card__wrapper--tooltip">
-                    <LcTooltip>{{ tip }}</LcTooltip>
+                    <slot name="tooltip">
+                        <LcTooltip>{{ tip }}</LcTooltip>
+                    </slot>
                 </div>
                 <div class="lc-indicator-card__wrapper--result">
                     <span class="lc-indicator-card__wrapper--result--value" :title="value.toString()">
