@@ -19,6 +19,7 @@ type __VLS_Props = {
 declare function __VLS_template(): {
     attrs: Partial<{}>;
     slots: {
+        tooltip?(_: {}): any;
         value?(_: {}): any;
         footer?(_: {}): any;
     };
