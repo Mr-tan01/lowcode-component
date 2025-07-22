@@ -105,7 +105,7 @@ const reloadText = (option: reloadTextOption): void => {
     ctx.textBaseline = 'middle'
     ctx.textAlign = 'left'
     const textX = valueKey ? (info?.textOffsetX ?? 13) : 46
-    const textY = info?.textOffsetY ?? canvas.height / 2 - (valueKey ? 10 : 6)
+    const textY = info?.textOffsetY ?? canvas.height / 2 - (valueKey ? 10 : 0)
     ctx.fillText(text, textX, textY)
 }
 
@@ -119,9 +119,9 @@ const eraseOverlapImage = (ctx: CanvasRenderingContext2D): void => {
     ctx.save()
     ctx.beginPath()
     ctx.moveTo(0, 0)
-    ctx.lineTo(28, 0)
-    ctx.quadraticCurveTo(30, 20, 20, 26)
-    ctx.lineTo(0, 56)
+    ctx.lineTo(22, 0)
+    ctx.quadraticCurveTo(30, 15, 20, 26)
+    ctx.lineTo(0, 45)
     ctx.closePath()
 
     // 擦除区域
@@ -373,7 +373,7 @@ export const createEntityConfig = async (point: pointType, valueInfo: HTMLCanvas
 
     const commonBillboard = {
         image: valueInfo,
-        pixelOffset: type ? new Cartesian2(0, 0) : new Cartesian2(valueInfo.width / 2.1, valueInfo.height / 2),
+        pixelOffset: type ? new Cartesian2(0, 0) : new Cartesian2(valueInfo.width / 2, valueInfo.height / 2 - 3),
         disableDepthTestDistance: type ? undefined : Number.POSITIVE_INFINITY,
         verticalOrigin: type ? VerticalOrigin.CENTER : VerticalOrigin.BOTTOM,
     }

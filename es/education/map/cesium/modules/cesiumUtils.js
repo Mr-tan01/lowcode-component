@@ -68,6 +68,7 @@ class re {
     l(this, "lastValidCameraPosition", null);
     l(this, "isCheckingBounds", !1);
     l(this, "removePreUpdateListener", null);
+    // 修改为函数类型
     l(this, "lastHoveredEntity", null);
     l(this, "lastThrottleTime", 0);
     l(this, "throttleDelay", 100);
@@ -431,7 +432,7 @@ class re {
   }
   // 处理悬浮时标签显示
   handleHoverLabelDisplay(e, t, i) {
-    e === -1 || this.options.defaultShowState || (i === -1 && this.pointData ? this.addPoint(this.pointData[e], void 0, "Label") : i !== -1 && this.pointEntities && (this.pointEntities[i].show = !0));
+    console.log(e === -1 || this.options.defaultShowState, "dataIndex === -1 || this.options.defaultShowState"), !(e === -1 || this.options.defaultShowState) && (i === -1 && this.pointData ? this.addPoint(this.pointData[e], void 0, "Label") : i !== -1 && this.pointEntities && (this.pointEntities[i].show = !0));
   }
   // 应用悬浮效果
   applyHoverEffect(e, t) {
