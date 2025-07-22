@@ -103,7 +103,7 @@ export class cesiumService {
 
     private lastValidCameraPosition: Cartesian3 | null = null
     private isCheckingBounds = false
-    private removePreUpdateListener: Event | null = null
+    private removePreUpdateListener: (() => void) | null = null // 修改为函数类型
     private lastHoveredEntity: Entity | null = null
     private lastThrottleTime: number = 0
     private throttleDelay: number = 100
@@ -766,6 +766,7 @@ export class cesiumService {
 
     // 处理悬浮时标签显示
     private handleHoverLabelDisplay(dataIndex: number, labelName: string, labelEntityIndex: number): void {
+        console.log(dataIndex === -1 || this.options.defaultShowState, 'dataIndex === -1 || this.options.defaultShowState')
         if (dataIndex === -1 || this.options.defaultShowState) return
 
         // 检查是否需要添加新标签

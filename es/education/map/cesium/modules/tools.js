@@ -45,10 +45,10 @@ const u = {
     ${((T = t == null ? void 0 : t.textStyle) == null ? void 0 : T.size) ?? ((C = s == null ? void 0 : s.textStyle) == null ? void 0 : C.size)}
     ${((E = t == null ? void 0 : t.textStyle) == null ? void 0 : E.family) ?? ((p = s == null ? void 0 : s.textStyle) == null ? void 0 : p.family)}`;
   l.font = r ? n : i, l.fillStyle = (r ? (O = t == null ? void 0 : t.fontStyle) == null ? void 0 : O.color : (v = t == null ? void 0 : t.textStyle) == null ? void 0 : v.color) ?? ((_ = s.fontStyle) == null ? void 0 : _.color), l.textBaseline = "middle", l.textAlign = "left";
-  const d = r ? (t == null ? void 0 : t.textOffsetX) ?? 13 : 46, m = (t == null ? void 0 : t.textOffsetY) ?? a.height / 2 - (r ? 10 : 6);
+  const d = r ? (t == null ? void 0 : t.textOffsetX) ?? 13 : 46, m = (t == null ? void 0 : t.textOffsetY) ?? a.height / 2 - (r ? 10 : 0);
   l.fillText(c, d, m);
 }, F = (e) => {
-  e.save(), e.beginPath(), e.moveTo(0, 0), e.lineTo(28, 0), e.quadraticCurveTo(30, 20, 20, 26), e.lineTo(0, 56), e.closePath(), e.globalCompositeOperation = "destination-out", e.fillStyle = "rgba(0,0,0,1)", e.fill(), e.restore();
+  e.save(), e.beginPath(), e.moveTo(0, 0), e.lineTo(22, 0), e.quadraticCurveTo(30, 15, 20, 26), e.lineTo(0, 45), e.closePath(), e.globalCompositeOperation = "destination-out", e.fillStyle = "rgba(0,0,0,1)", e.fill(), e.restore();
 }, re = (e, t, r) => new Promise((a, l) => {
   const c = document.createElement("canvas"), n = c.getContext("2d");
   if (!n) {
@@ -161,7 +161,7 @@ const se = async (e, t, r) => {
     name: r ? e.name : `${e.name}Label`
   }, l = {
     image: t,
-    pixelOffset: r ? new A(0, 0) : new A(t.width / 2.1, t.height / 2),
+    pixelOffset: r ? new A(0, 0) : new A(t.width / 2, t.height / 2 - 3),
     disableDepthTestDistance: r ? void 0 : Number.POSITIVE_INFINITY,
     verticalOrigin: r ? P.CENTER : P.BOTTOM
   };
