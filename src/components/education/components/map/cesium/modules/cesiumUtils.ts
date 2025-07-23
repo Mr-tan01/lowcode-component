@@ -20,6 +20,7 @@ import {
     PolygonHierarchy,
     ImageryLayer,
     Primitive,
+    BoundingSphere,
 } from 'cesium'
 import localforage from 'localforage'
 import { CesiumHeatmap } from 'cesium-heatmap-es6'
@@ -309,6 +310,44 @@ export class cesiumService {
         )
     }
 
+    /**
+     * 根据点位集合计算最佳飞行高度
+     * @param entities 聚合实体数组
+     * @param scale 视野系数（>1 留边）
+     */
+    private calcHeightByExtent(entities: any[], scale = 2.8) {
+        const positions = entities.map(e => e.position?.getValue(JulianDate.now())).filter(p => p)
+
+        if (positions.length < 2) return { longitude: 0, latitude: 0, height: 500 }
+
+        // 2 个点：用实际水平距离
+        if (positions.length === 2) {
+            const [p1, p2] = positions
+            const c1 = Cartographic.fromCartesian(p1)
+            const c2 = Cartographic.fromCartesian(p2)
+            const dist = Cartesian3.distance(
+                Cartesian3.fromDegrees(cesiumMath.toDegrees(c1.longitude), cesiumMath.toDegrees(c1.latitude)),
+                Cartesian3.fromDegrees(cesiumMath.toDegrees(c2.longitude), cesiumMath.toDegrees(c2.latitude)),
+            )
+            const center = BoundingSphere.fromPoints(positions).center
+            const cart = Cartographic.fromCartesian(center)
+            return {
+                longitude: cesiumMath.toDegrees(cart.longitude),
+                latitude: cesiumMath.toDegrees(cart.latitude),
+                height: dist * scale, // 距离越近高度越低
+            }
+        }
+
+        // 多点：沿用包围球半径
+        const sphere = BoundingSphere.fromPoints(positions)
+        const cart = Cartographic.fromCartesian(sphere.center)
+        return {
+            longitude: cesiumMath.toDegrees(cart.longitude),
+            latitude: cesiumMath.toDegrees(cart.latitude),
+            height: sphere.radius * scale,
+        }
+    }
+
     // 处理左键点击
     private handleLeftClick(click: { position: Cartesian2 }): void {
         if (!this.viewer) return
@@ -324,29 +363,9 @@ export class cesiumService {
         if (defined(pickedObject) && pickedObject.id) {
             if (pickedObject.id.type === 'cluster') {
                 const entities = pickedObject.id.entities
-                const count = pickedObject.id.count
-
-                // 取第一个实体位置
-                const position = entities[0].position?.getValue(JulianDate.now())
-                if (!position) return
-
-                const cartographic = Cartographic.fromCartesian(position)
-                const lng = cesiumMath.toDegrees(cartographic.longitude)
-                const lat = cesiumMath.toDegrees(cartographic.latitude)
-
-                // 分段高度（可改）
-                let targetHeight: number
-                if (count <= 2) targetHeight = 200
-                else if (count <= 5)
-                    targetHeight = 300 // 很稀疏
-                else if (count <= 20)
-                    targetHeight = 800 // 中等
-                else if (count <= 50)
-                    targetHeight = 1500 // 较密
-                else targetHeight = 3000 // 很密
-
+                const { longitude, latitude, height } = this.calcHeightByExtent(entities, 4)
                 this.viewer.camera.flyTo({
-                    destination: Cartesian3.fromDegrees(lng, lat, targetHeight),
+                    destination: Cartesian3.fromDegrees(longitude, latitude, height),
                     duration: 0.5,
                 })
             }
@@ -766,7 +785,7 @@ export class cesiumService {
 
     // 处理悬浮时标签显示
     private handleHoverLabelDisplay(dataIndex: number, labelName: string, labelEntityIndex: number): void {
-        console.log(dataIndex === -1 || this.options.defaultShowState, 'dataIndex === -1 || this.options.defaultShowState')
+        // console.log(dataIndex === -1 || this.options.defaultShowState, 'dataIndex === -1 || this.options.defaultShowState')
         if (dataIndex === -1 || this.options.defaultShowState) return
 
         // 检查是否需要添加新标签

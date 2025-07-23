@@ -43,6 +43,12 @@ export declare class cesiumService {
     private doubleClickHandler;
     initViewer(controlStatus: controlStatusType): Promise<boolean>;
     private setupEventHandlers;
+    /**
+     * 根据点位集合计算最佳飞行高度
+     * @param entities 聚合实体数组
+     * @param scale 视野系数（>1 留边）
+     */
+    private calcHeightByExtent;
     private handleLeftClick;
     private handleMouseMove;
     private handleTileLoadProgress;
