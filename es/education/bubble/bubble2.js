@@ -1,5 +1,5 @@
 import { defineComponent as O, ref as l, computed as c, onMounted as h, onBeforeUnmount as y, openBlock as z, createElementBlock as D } from "vue";
-import b from "./images/default.png.js";
+import f from "./images/default.png.js";
 import k from "./images/hover_image.png.js";
 import { useResizeObserver as B } from "@vueuse/core";
 import { merge as C, debounce as I } from "lodash-es";
@@ -10,16 +10,16 @@ const U = /* @__PURE__ */ O({
   props: {
     data: { default: () => [] },
     debounceTime: { default: 300 },
-    chartOptions: {}
+    chartOptions: { default: () => ({}) }
   },
   setup(n) {
     const a = l(), o = l(), r = c(() => n.data.map((e) => ({
       name: e.label,
       symbolSize: [180, 129],
       draggable: !0,
-      symbol: `image://${b}`,
+      symbol: `image://${f}`,
       ...e
-    }))), f = c(() => C(
+    }))), b = c(() => C(
       {},
       R,
       {
@@ -32,14 +32,14 @@ const U = /* @__PURE__ */ O({
       n.chartOptions
     )), d = () => {
       var e, u;
-      o.value = T(a.value), o.value.setOption(f.value, !0), (e = o.value) == null || e.on("mouseover", function(t) {
+      o.value = T(a.value), o.value.setOption(b.value, !0), (e = o.value) == null || e.on("mouseover", function(t) {
         var i;
         if (t.dataType === "node") {
           const g = r.value.map((m) => {
             var s;
             return {
               ...m,
-              symbol: m.name === ((s = t == null ? void 0 : t.data) == null ? void 0 : s.name) ? `image://${k}` : `image://${b}`,
+              symbol: m.name === ((s = t == null ? void 0 : t.data) == null ? void 0 : s.name) ? `image://${k}` : `image://${f}`,
               symbolSize: m.name === t.data.name ? [200, 150] : [180, 129]
             };
           });

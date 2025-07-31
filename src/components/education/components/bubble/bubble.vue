@@ -12,11 +12,11 @@ import { type EChartsCoreOption, type EChartsOption, init } from 'echarts'
 const {
     data = [],
     debounceTime = 300,
-    chartOptions,
+    chartOptions = {},
 } = defineProps<{
     data?: { label: string; value: number }[]
     debounceTime?: number
-    chartOptions: EChartsCoreOption | EChartsOption
+    chartOptions?: EChartsCoreOption | EChartsOption
 }>()
 
 const bubbleDomRef = ref()
