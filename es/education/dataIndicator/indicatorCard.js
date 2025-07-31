@@ -1,7 +1,7 @@
 import o from "./indicatorCard2.js";
 import './assets/indicatorCard.css';/* empty css               */
-import a from "./_virtual/_plugin-vue_export-helper.js";
-const i = /* @__PURE__ */ a(o, [["__scopeId", "data-v-4f87a1a0"]]);
+import r from "./_virtual/_plugin-vue_export-helper.js";
+const m = /* @__PURE__ */ r(o, [["__scopeId", "data-v-e6a10949"]]);
 export {
-  i as default
+  m as default
 };

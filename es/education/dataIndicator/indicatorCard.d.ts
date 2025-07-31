@@ -15,6 +15,7 @@ type __VLS_Props = {
     tip?: string;
     valueColor?: string;
     hintColor?: string;
+    notCheckInteger?: boolean;
 };
 declare function __VLS_template(): {
     attrs: Partial<{}>;

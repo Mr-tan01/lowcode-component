@@ -54,6 +54,7 @@ const {
     hintColor = '#F2F3F4',
     type = 'border',
     tip = '',
+    notCheckInteger = false, // 默认查整数
 } = defineProps<{
     value?: number
     hint?: string
@@ -65,6 +66,7 @@ const {
     tip?: string
     valueColor?: string
     hintColor?: string
+    notCheckInteger?: boolean
 }>()
 
 const renderValue = computed(() => {
@@ -75,7 +77,7 @@ const renderValue = computed(() => {
 })
 const decimals = computed(() => {
     const { unit: numUnit } = bigNumber(value)
-    if (Number.isInteger(value) && !numUnit) {
+    if (Number.isInteger(value) && !numUnit && !notCheckInteger) {
         return 0
     }
     return decimal
