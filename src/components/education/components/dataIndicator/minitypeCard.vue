@@ -2,7 +2,7 @@
     <div class="minitype-card">
         <div class="minitype-card__label">{{ label }}</div>
         <div class="minitype-card__value">
-            <span class="minitype-card__value__num"> <NNumberAnimation show-separator :from="0" :to="value" active :precision="0" /></span>
+            <span class="minitype-card__value__num"> <NNumberAnimation show-separator :from="0" :to="value" active :precision="decimal" /></span>
         </div>
         <div class="minitype-card__img">
             <img :src="bgIcon" alt="" />
@@ -17,6 +17,7 @@ const {
     label = '已建成并投入运行设施(个)',
     value = 0,
     bgIcon = defaultImage,
+    decimal = 0,
 } = defineProps({
     label: {
         type: String,
@@ -26,6 +27,9 @@ const {
     },
     bgIcon: {
         type: String,
+    },
+    decimal: {
+        type: Number,
     },
 })
 </script>
