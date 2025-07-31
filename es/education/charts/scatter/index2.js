@@ -1,5 +1,6 @@
 import { defineComponent, mergeDefaults, useTemplateRef, computed, openBlock, createElementBlock, createVNode, unref, mergeProps } from "vue";
 import BaseChart from "../common/components/Charts/baseChart/base.js";
+import "mmjs-core/utils/scale";
 import { useCommonScatterSeries, useCommonScatterOptions } from "./options.js";
 import merge from "lodash-es/merge";
 import { scatterColors } from "./const.js";

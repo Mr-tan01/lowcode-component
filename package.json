@@ -23,8 +23,9 @@
         "dist"
     ],
     "dependencies": {
-        "@mmj-code-lib/lowcode": "git+http://liangweizhu@siteshun:8f7LGw5uYhcbz-z8vo14@code.siteshun.com:800/front-component/STS/mmj-code-lib.git#lowcode-0.1.0",
-        "lowcode-share": "git+http://code.siteshun.com:800/front-component/lowcode-sview/lowcode-share.git#develop"
+        "@mmj-code-lib/lowcode": "git+http://liangweizhu@siteshun:8f7LGw5uYhcbz-z8vo14@code.siteshun.com:800/front-component/STS/mmj-code-lib.git#lowcode-0.1.2",
+        "lowcode-share": "git+http://code.siteshun.com:800/front-component/lowcode-sview/lowcode-share.git#develop",
+        "mmjs-core": "^0.13.4"
     },
     "devDependencies": {
         "@cesium/engine": "^16.0.0",

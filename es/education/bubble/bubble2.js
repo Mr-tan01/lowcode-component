@@ -5,6 +5,7 @@ import { useResizeObserver } from "@vueuse/core";
 import { merge, debounce } from "lodash-es";
 import { baseOptions } from "./options.js";
 import { init } from "echarts";
+import { scale } from "mmjs-core/utils/scale";
 const _sfc_main = /* @__PURE__ */ defineComponent({
   __name: "bubble",
   props: {
@@ -15,11 +16,11 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
   setup(__props) {
     const bubbleDomRef = ref();
     const chartInstance = ref();
-    const fomartData = computed(() => {
+    const formatData = computed(() => {
       return __props.data.map((item) => {
         return {
           name: item.label,
-          symbolSize: [180, 129],
+          symbolSize: [scale(180), scale(129)],
           draggable: true,
           symbol: `image://${defaultImage}`,
           ...item
@@ -33,7 +34,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
         {
           series: [
             {
-              data: fomartData.value
+              data: formatData.value
             }
           ]
         },
@@ -48,12 +49,12 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       (_a = chartInstance.value) == null ? void 0 : _a.on("mouseover", function(params) {
         var _a2;
         if (params.dataType === "node") {
-          const newData = fomartData.value.map((node) => {
+          const newData = formatData.value.map((node) => {
             var _a3;
             return {
               ...node,
               symbol: node.name === ((_a3 = params == null ? void 0 : params.data) == null ? void 0 : _a3.name) ? `image://${hoverImg}` : `image://${defaultImage}`,
-              symbolSize: node.name === params.data.name ? [200, 150] : [180, 129]
+              symbolSize: node.name === params.data.name ? [scale(200), scale(150)] : [scale(180), scale(129)]
             };
           });
           (_a2 = chartInstance.value) == null ? void 0 : _a2.setOption({
@@ -70,7 +71,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
         (_a2 = chartInstance.value) == null ? void 0 : _a2.setOption({
           series: [
             {
-              data: fomartData.value
+              data: formatData.value
             }
           ]
         });

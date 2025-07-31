@@ -33,12 +33,12 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       }
       return "100%";
     });
-    const renderValue = (tootal) => {
+    const renderValue = (total) => {
       if (__props.fixed) {
-        const { result } = bigNumber(tootal, __props.decimal);
+        const { result } = bigNumber(total, __props.decimal);
         return result;
       }
-      return tootal;
+      return total;
     };
     const renderUnit = memoize(
       (value, _unit) => {
@@ -98,19 +98,19 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                       ref: "valueRef",
                       class: "lc-progress__wrapper__item__right",
                       style: normalizeStyle({ width: maxWidth.value }),
-                      title: item.tootal.toString()
+                      title: item.total.toString()
                     }, [
                       createElementVNode(
                         "span",
                         null,
-                        toDisplayString(renderValue(item.tootal)),
+                        toDisplayString(renderValue(item.total)),
                         1
                         /* TEXT */
                       ),
                       createElementVNode(
                         "span",
                         null,
-                        toDisplayString(unref(renderUnit)(item.tootal, item.unit)),
+                        toDisplayString(unref(renderUnit)(item.total, item.unit)),
                         1
                         /* TEXT */
                       )

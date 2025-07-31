@@ -1,3 +1,4 @@
+import { scale } from "mmjs-core/utils/scale";
 const baseOptions = {
   backgroundColor: "transparent",
   animationEasingUpdate: "bounceIn",
@@ -27,14 +28,14 @@ const baseOptions = {
           show: true,
           rich: {
             value: {
-              fontSize: 40,
-              lineHeight: 42,
+              fontSize: scale(40),
+              lineHeight: scale(42),
               align: "center",
               color: "rgb(9, 238, 241)"
             },
             name: {
-              fontSize: 14,
-              lineHeight: 14,
+              fontSize: scale(12),
+              lineHeight: scale(11),
               align: "center",
               color: "rgb(9, 238, 241)"
             }

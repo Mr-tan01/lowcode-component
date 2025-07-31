@@ -2,6 +2,7 @@ import { defineComponent, useCssVars, computed, openBlock, createElementBlock, n
 import { NNumberAnimation } from "naive-ui/es/number-animation";
 import { bigNumber } from "lowcode-share/es/share";
 import LcTooltip from "./tooltip/index.js";
+import { scale } from "mmjs-core";
 const _hoisted_1 = { class: "lc-indicator-card__wrapper" };
 const _hoisted_2 = { class: "lc-indicator-card__wrapper--content" };
 const _hoisted_3 = {
@@ -29,9 +30,9 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
   },
   setup(__props) {
     useCssVars((_ctx) => ({
-      "050f4b83": padValue.value,
-      "639cbe17": _ctx.valueColor,
-      "7c4a42d7": _ctx.hintColor
+      "711e7860": padValue.value,
+      "13815724": _ctx.valueColor,
+      "0617d42a": _ctx.hintColor
     }));
     const SIZE = {
       small: "small",
@@ -52,9 +53,9 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       return __props.decimal;
     });
     const innerPad = {
-      [SIZE.small]: "22px 32px 0",
-      [SIZE.medium]: "22px 54px 0",
-      [SIZE.large]: "22px 116px 0"
+      [SIZE.small]: `${scale("22px")} ${scale("32px")} 0`,
+      [SIZE.medium]: `${scale("22px")} ${scale("54px")} 0`,
+      [SIZE.large]: `${scale("22px")} ${scale("116px")} 0`
     };
     const padValue = computed(() => {
       return innerPad[__props.size];

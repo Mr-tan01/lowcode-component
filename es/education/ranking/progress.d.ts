@@ -4,7 +4,7 @@ export type ProgereeDataList = {
     value: number;
     unit: string;
     color: string;
-    tootal: number;
+    total: number;
 };
 declare const _default: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
     fixed: {

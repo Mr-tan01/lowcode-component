@@ -1,11 +1,13 @@
-import { defineComponent, useCssVars, useTemplateRef, shallowRef, computed, onMounted, watchPostEffect, ref, onBeforeUnmount, openBlock, createElementBlock, normalizeClass, normalizeStyle, createElementVNode, createVNode, unref, createCommentVNode } from "vue";
+import { defineComponent, useCssVars, useTemplateRef, shallowRef, ref, computed, onMounted, watchPostEffect, onBeforeUnmount, openBlock, createElementBlock, normalizeClass, normalizeStyle, createElementVNode, createVNode, unref, createCommentVNode } from "vue";
 import { init } from "echarts";
 import { useCommonPieOptions, usePieCommonSeries } from "./options.js";
 import merge from "lodash-es/merge";
 import { useResizeObserver } from "@vueuse/core";
-import { debounce } from "lodash-es";
+import { cloneDeep, debounce } from "lodash-es";
 import { innerGraphicColors } from "./const.js";
 import CommonLegend from "../common/components/Charts/legend/index.js";
+import { transformEChartsConfig } from "@mmj-code-lib/lowcode/es/shared";
+import { scale } from "mmjs-core";
 const _hoisted_1 = { class: "lc-pie__wrapper" };
 const _hoisted_2 = {
   key: 0,
@@ -25,20 +27,21 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     legendLeft: { default: "20%" },
     legendTop: { default: "50%" },
     legendPosition: { default: "relative" },
-    legendWidth: { default: "128px" }
+    legendWidth: { default: () => scale("128px") }
   },
   emits: ["legend:click", "legend:toggleSelect"],
   setup(__props, { expose: __expose, emit: __emit }) {
     useCssVars((_ctx) => ({
-      "3a5169d4": _ctx.flexDirection,
-      "01958b30": wrapperPading.value,
-      "666793c8": _ctx.legendPosition,
-      "01b3c226": _ctx.legendLeft,
-      "18d45f56": _ctx.legendTop,
-      "0ed25f5d": cssBlockSize.value
+      "7a666bda": _ctx.flexDirection,
+      "41aa8d36": wrapperPading.value,
+      "28f2d282": _ctx.legendPosition,
+      "54612440": _ctx.legendLeft,
+      "65d15748": _ctx.legendTop,
+      "4ab20497": cssBlockSize.value
     }));
     const chartDomRef = useTemplateRef("chartDom");
     const chartInstance = shallowRef();
+    const cloneDeepOptions = ref();
     const renderOptions = computed(() => {
       const newOptions = useCommonPieOptions(__props.options);
       newOptions.series = usePieCommonSeries(newOptions.series, __props.graphicColors, newOptions.color, __props.layout);
@@ -74,22 +77,28 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       return (title == null ? void 0 : title.show) === false;
     });
     function initChart() {
+      var _a, _b, _c;
       chartInstance.value = init(chartDomRef.value, renderOptions.value);
+      (_a = chartInstance.value) == null ? void 0 : _a.setOption(renderOptions.value);
+      cloneDeepOptions.value = cloneDeep(merge((_b = chartInstance.value) == null ? void 0 : _b.getOption(), renderOptions.value));
+      const adaptOptions = transformEChartsConfig(cloneDeepOptions.value);
+      (_c = chartInstance.value) == null ? void 0 : _c.setOption(adaptOptions);
     }
     function setOptions(option, notMerge, lazyUpdate) {
       var _a;
-      (_a = chartInstance.value) == null ? void 0 : _a.setOption(option, notMerge, lazyUpdate);
+      const adaptOptions = transformEChartsConfig(merge(cloneDeepOptions.value, option));
+      (_a = chartInstance.value) == null ? void 0 : _a.setOption(adaptOptions, notMerge, lazyUpdate);
     }
     const cssBlockSize = ref("100%");
     function resizeChart(entries) {
       var _a;
       const entry = entries[0];
       const { width, height } = entry.contentRect;
-      cssBlockSize.value = Math.min(width, height) + "px";
+      cssBlockSize.value = scale(Math.min(width, height)) + "px";
       (_a = chartInstance.value) == null ? void 0 : _a.resize();
     }
     const { stop } = useResizeObserver(chartDomRef, debounce(resizeChart, __props.debounceTime));
-    const wrapperPading = computed(() => __props.legendPosition === "absolute" ? `0 ${__props.legendWidth}` : "0");
+    const wrapperPading = computed(() => __props.legendPosition === "absolute" ? `0 ${scale(__props.legendWidth)}` : "0");
     onBeforeUnmount(stop);
     __expose({
       chartInstance,

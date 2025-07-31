@@ -1,7 +1,8 @@
-import { defineComponent, mergeDefaults, useTemplateRef, shallowRef, onMounted, watchEffect, openBlock, createElementBlock, createElementVNode } from "vue";
+import { defineComponent, mergeDefaults, useTemplateRef, ref, shallowRef, onMounted, watchEffect, openBlock, createElementBlock, createElementVNode } from "vue";
 import { useResizeObserver } from "@vueuse/core";
 import { init } from "echarts";
-import debounce from "lodash-es/debounce";
+import { debounce, cloneDeep, merge } from "lodash-es";
+import { transformEChartsConfig } from "@mmj-code-lib/lowcode/es/shared";
 const _hoisted_1 = { class: "lc-common-chart" };
 const _hoisted_2 = {
   ref: "commonChart",
@@ -20,6 +21,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
   }),
   setup(__props, { expose: __expose }) {
     const commonChartRef = useTemplateRef("commonChart");
+    const cloneDeepOptions = ref();
     const chartInstance = shallowRef();
     useResizeObserver(
       commonChartRef,
@@ -36,8 +38,11 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       setOptions(__props.options, __props.notMerge);
     });
     function setOptions(options, deep, lazyUpdate) {
-      var _a;
+      var _a, _b, _c;
       (_a = chartInstance.value) == null ? void 0 : _a.setOption(options, deep, lazyUpdate);
+      cloneDeepOptions.value = cloneDeep(merge((_b = chartInstance.value) == null ? void 0 : _b.getOption(), options));
+      const adaptOptions = transformEChartsConfig(cloneDeepOptions.value, ["x1", "x2", "y1", "y2"]);
+      (_c = chartInstance.value) == null ? void 0 : _c.setOption(adaptOptions, deep, lazyUpdate);
     }
     watchEffect(
       () => {

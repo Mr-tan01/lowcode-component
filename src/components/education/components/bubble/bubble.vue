@@ -9,6 +9,8 @@ import { useResizeObserver } from '@vueuse/core'
 import { debounce, merge } from 'lodash-es'
 import { baseOptions } from './options' // 基础配置
 import { type EChartsCoreOption, type EChartsOption, init } from 'echarts'
+// @ts-expect-error
+import { scale } from 'mmjs-core/utils/scale'
 const {
     data = [],
     debounceTime = 300,
@@ -22,11 +24,11 @@ const {
 const bubbleDomRef = ref()
 const chartInstance = ref()
 
-const fomartData = computed(() => {
+const formatData = computed(() => {
     return data.map(item => {
         return {
             name: item.label,
-            symbolSize: [180, 129],
+            symbolSize: [scale(180), scale(129)],
             draggable: true,
             symbol: `image://${defaultImage}`,
             ...item,
@@ -41,7 +43,7 @@ const renderOptions = computed(() => {
         {
             series: [
                 {
-                    data: fomartData.value,
+                    data: formatData.value,
                 },
             ],
         },
@@ -56,10 +58,10 @@ const initChart = () => {
     chartInstance.value?.on('mouseover', function (params) {
         // 处理鼠标悬浮事件
         if (params.dataType === 'node') {
-            const newData = fomartData.value.map(node => ({
+            const newData = formatData.value.map(node => ({
                 ...node,
                 symbol: node.name === params?.data?.name ? `image://${hoverImg}` : `image://${defaultImage}`,
-                symbolSize: node.name === params.data.name ? [200, 150] : [180, 129],
+                symbolSize: node.name === params.data.name ? [scale(200), scale(150)] : [scale(180), scale(129)],
             }))
             chartInstance.value?.setOption({
                 series: [
@@ -74,7 +76,7 @@ const initChart = () => {
         chartInstance.value?.setOption({
             series: [
                 {
-                    data: fomartData.value,
+                    data: formatData.value,
                 },
             ],
         })

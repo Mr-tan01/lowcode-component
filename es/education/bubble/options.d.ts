@@ -11,14 +11,14 @@ export declare const baseOptions: {
                 show: boolean;
                 rich: {
                     value: {
-                        fontSize: number;
-                        lineHeight: number;
+                        fontSize: any;
+                        lineHeight: any;
                         align: string;
                         color: string;
                     };
                     name: {
-                        fontSize: number;
-                        lineHeight: number;
+                        fontSize: any;
+                        lineHeight: any;
                         align: string;
                         color: string;
                     };

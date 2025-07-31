@@ -64,7 +64,6 @@ export const tooltipOptions: EChartsOption['tooltip'] = {
 export const legendOptions: EChartsOption['legend'] = {
     show: true,
     top: 'bottom',
-    left: 'center',
     icon: 'roundRect',
     textStyle: {
         fontSize: 14,

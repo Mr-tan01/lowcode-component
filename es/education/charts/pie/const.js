@@ -1,5 +1,6 @@
 import { graphic } from "echarts";
 import merge from "lodash-es/merge";
+import { scale } from "mmjs-core/utils/scale";
 const pieColors = [
   "#0FFBF8",
   "rgba(225, 188, 75, 1)",
@@ -60,11 +61,11 @@ const pieTooltipOptions = {
         <div style="display: flex; align-items: center;">
           <span style="
             display: inline-block;
-            width: 10px;
-            height: 10px;
+            width: ${scale(10)}px;
+            height: ${scale(10)}px;
             border-radius: 50%;
             background: linear-gradient(to bottom, ${startColor}, ${endColor});
-            margin-right: 6px;
+            margin-right: ${scale(6)}px;
           "></span>
           ${params.name}: ${params.value} (${params.percent}%)
         </div>

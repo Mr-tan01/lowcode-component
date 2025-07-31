@@ -62,20 +62,20 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                 active: "",
                 precision: 0
               }, null, 8, ["to"])
-            ])
-          ]),
-          _cache[0] || (_cache[0] = createElementVNode(
-            "div",
-            { class: "indicator-card-vice__wrapper__img" },
-            [
-              createElementVNode("img", {
-                src: _imports_1,
-                alt: ""
-              })
-            ],
-            -1
-            /* HOISTED */
-          ))
+            ]),
+            _cache[0] || (_cache[0] = createElementVNode(
+              "div",
+              { class: "indicator-card-vice__wrapper__img" },
+              [
+                createElementVNode("img", {
+                  src: _imports_1,
+                  alt: ""
+                })
+              ],
+              -1
+              /* HOISTED */
+            ))
+          ])
         ])
       ]);
     };
