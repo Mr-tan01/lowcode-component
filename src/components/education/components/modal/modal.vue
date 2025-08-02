@@ -3,7 +3,7 @@
         <div class="lc-modal" :style="layoutStyle">
             <div class="lc-modal__header">
                 <slot name="header">
-                    <LcDecoratorTitle :text="title"></LcDecoratorTitle>
+                    <LcDecoratorTitle :max-length="maxLength" :text="title"></LcDecoratorTitle>
                 </slot>
             </div>
             <div class="lc-modal__wrapper">
@@ -54,11 +54,13 @@ const {
     height,
     sizeMode = 'large',
     title = '',
+    maxLength = 12,
 } = defineProps<{
     width: string
     height: string
     sizeMode?: Options['sizeMode']
     title?: string
+    maxLength?: number
 }>()
 const emit = defineEmits<{
     (e: 'update:show', value: boolean): void
