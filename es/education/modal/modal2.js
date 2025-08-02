@@ -5,8 +5,8 @@ import y from "./decoratorTitle/index.js";
 const _ = { class: "lc-modal__header" }, $ = { class: "lc-modal__wrapper" }, N = /* @__PURE__ */ g({
   __name: "modal",
   props: {
-    width: {},
-    height: {},
+    width: { default: "1500px" },
+    height: { default: "685px" },
     sizeMode: { default: "large" },
     title: { default: "" },
     maxLength: { default: 12 }

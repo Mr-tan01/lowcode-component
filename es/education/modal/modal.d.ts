@@ -1,7 +1,7 @@
 import { Options } from './config';
 type __VLS_Props = {
-    width: string;
-    height: string;
+    width?: string;
+    height?: string;
     sizeMode?: Options['sizeMode'];
     title?: string;
     maxLength?: number;
