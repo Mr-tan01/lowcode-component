@@ -50,14 +50,14 @@ import { options, type Options } from './config'
 import { LcDecoratorTitle } from '@/components/education/components/decoratorTitle'
 
 const {
-    width,
-    height,
+    width = '1500px',
+    height = '685px',
     sizeMode = 'large',
     title = '',
     maxLength = 12,
 } = defineProps<{
-    width: string
-    height: string
+    width?: string
+    height?: string
     sizeMode?: Options['sizeMode']
     title?: string
     maxLength?: number
