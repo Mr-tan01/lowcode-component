@@ -16,14 +16,16 @@
                         class="lc-main-robot__wrapper__inner-input--content__input"
                     />
                     <div class="lc-main-robot__wrapper__inner-input--content__suffix">
-                        <img
-                            class="lc-main-robot__wrapper__inner-input--content__suffix--img"
-                            src="./images/microphone.png"
-                            draggable="false"
-                            alt=""
-                            @mousedown="handleMouseDown"
-                            @mouseup="handleMouseUp"
-                        />
+                        <slot name="input-suffix">
+                            <img
+                                class="lc-main-robot__wrapper__inner-input--content__suffix--img"
+                                src="./images/microphone.png"
+                                draggable="false"
+                                alt=""
+                                @mousedown="handleMouseDown"
+                                @mouseup="handleMouseUp"
+                            />
+                        </slot>
                     </div>
                 </div>
             </div>

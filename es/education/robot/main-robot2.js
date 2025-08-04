@@ -1,15 +1,15 @@
-import { defineComponent as Z, mergeModels as M, mergeDefaults as ee, computed as b, watchEffect as te, ref as ae, useModel as ne, openBlock as i, createElementBlock as s, createElementVNode as n, withDirectives as k, createTextVNode as re, toDisplayString as w, unref as u, vShow as le, vModelText as oe, Fragment as y, renderList as T, normalizeStyle as _, createVNode as ie } from "vue";
-import se from "./images/main-robot.png.js";
-import ue from "./images/voice.png.js";
-import ce from "./images/microphone.png.js";
-import { useSpeech as me } from "./speech.js";
-import de from "./icon/index.js";
+import { defineComponent as Z, mergeModels as M, mergeDefaults as ee, computed as b, watchEffect as te, ref as ae, useModel as ne, openBlock as i, createElementBlock as s, createElementVNode as n, withDirectives as k, createTextVNode as re, toDisplayString as w, unref as u, vShow as le, vModelText as oe, renderSlot as ie, Fragment as y, renderList as T, normalizeStyle as _, createVNode as se } from "vue";
+import ue from "./images/main-robot.png.js";
+import ce from "./images/voice.png.js";
+import me from "./images/microphone.png.js";
+import { useSpeech as de } from "./speech.js";
+import fe from "./icon/index.js";
 import './assets/icon/iconCard.css';/* empty css              */
 import { defStarData as N } from "./const.js";
-import { useStarRotate as fe } from "./main-robot-hook.js";
-import _e from "lodash-es/memoize";
-import { useMessage as pe } from "naive-ui";
-const ve = { class: "lc-main-robot" }, ge = { class: "lc-main-robot__wrapper" }, be = { class: "lc-main-robot__wrapper__inner-input" }, we = { class: "lc-main-robot__wrapper__inner-input--content" }, he = { class: "lc-main-robot__wrapper__inner-input--help" }, xe = ["placeholder", "disabled"], Ae = { class: "lc-main-robot__wrapper__inner-input--content__suffix" }, Ce = { class: "lc-main-robot-icon" }, Se = { class: "lc-main-robot__wrapper__star-wrap--star__meta" }, Me = ["title", "onClick"], ke = ["title", "onClick"], Ve = /* @__PURE__ */ Z({
+import { useStarRotate as _e } from "./main-robot-hook.js";
+import pe from "lodash-es/memoize";
+import { useMessage as ve } from "naive-ui";
+const ge = { class: "lc-main-robot" }, be = { class: "lc-main-robot__wrapper" }, we = { class: "lc-main-robot__wrapper__inner-input" }, he = { class: "lc-main-robot__wrapper__inner-input--content" }, xe = { class: "lc-main-robot__wrapper__inner-input--help" }, Ae = ["placeholder", "disabled"], Ce = { class: "lc-main-robot__wrapper__inner-input--content__suffix" }, Se = { class: "lc-main-robot-icon" }, Me = { class: "lc-main-robot__wrapper__star-wrap--star__meta" }, ke = ["title", "onClick"], ye = ["title", "onClick"], qe = /* @__PURE__ */ Z({
   __name: "main-robot",
   props: /* @__PURE__ */ M(/* @__PURE__ */ ee({
     placeholder: String,
@@ -36,12 +36,12 @@ const ve = { class: "lc-main-robot" }, ge = { class: "lc-main-robot__wrapper" },
   }),
   emits: /* @__PURE__ */ M(["click", "itemClick"], ["update:value"]),
   setup(a, { emit: R }) {
-    const D = pe(), { start: E, stop: $, output: p, on: z } = me();
+    const $ = ve(), { start: D, stop: E, output: p, on: z } = de();
     function F() {
-      a.forbidden ? D.warning("此功能敬请期待") : E();
+      a.forbidden ? $.warning("此功能敬请期待") : D();
     }
     function I() {
-      a.forbidden || $();
+      a.forbidden || E();
     }
     const {
       starWrapperRef: B,
@@ -55,7 +55,7 @@ const ve = { class: "lc-main-robot" }, ge = { class: "lc-main-robot__wrapper" },
       starMaxShowCount: W,
       displayAlternately: O,
       fullAngle: j
-    } = fe(), G = _e(
+    } = _e(), G = pe(
       (e, t) => e - (t + 1),
       (e, t) => `${e}-${t}`
     ), f = b(() => {
@@ -103,13 +103,13 @@ const ve = { class: "lc-main-robot" }, ge = { class: "lc-main-robot__wrapper" },
     return z("result", () => {
       var e;
       g.value = ((e = p.value) == null ? void 0 : e.textContent) || "";
-    }), (e, t) => (i(), s("div", ve, [
-      n("div", ge, [
+    }), (e, t) => (i(), s("div", ge, [
+      n("div", be, [
         t[2] || (t[2] = n(
           "img",
           {
             class: "lc-main-robot__img",
-            src: se,
+            src: ue,
             draggable: "false",
             alt: ""
           },
@@ -117,17 +117,17 @@ const ve = { class: "lc-main-robot" }, ge = { class: "lc-main-robot__wrapper" },
           -1
           /* HOISTED */
         )),
-        n("div", be, [
-          n("div", we, [
+        n("div", we, [
+          n("div", he, [
             k(n(
               "div",
-              he,
+              xe,
               [
                 t[1] || (t[1] = n(
                   "img",
                   {
                     class: "lc-main-robot__wrapper__inner-input--help--voice",
-                    src: ue,
+                    src: ce,
                     draggable: "false",
                     alt: ""
                   },
@@ -152,24 +152,26 @@ const ve = { class: "lc-main-robot" }, ge = { class: "lc-main-robot__wrapper" },
               placeholder: a.placeholder,
               disabled: a.forbidden,
               class: "lc-main-robot__wrapper__inner-input--content__input"
-            }, null, 8, xe), [
+            }, null, 8, Ae), [
               [oe, g.value]
             ]),
-            n("div", Ae, [
-              n(
-                "img",
-                {
-                  class: "lc-main-robot__wrapper__inner-input--content__suffix--img",
-                  src: ce,
-                  draggable: "false",
-                  alt: "",
-                  onMousedown: F,
-                  onMouseup: I
-                },
-                null,
-                32
-                /* NEED_HYDRATION */
-              )
+            n("div", Ce, [
+              ie(e.$slots, "input-suffix", {}, () => [
+                n(
+                  "img",
+                  {
+                    class: "lc-main-robot__wrapper__inner-input--content__suffix--img",
+                    src: me,
+                    draggable: "false",
+                    alt: "",
+                    onMousedown: F,
+                    onMouseup: I
+                  },
+                  null,
+                  32
+                  /* NEED_HYDRATION */
+                )
+              ], !0)
             ])
           ])
         ]),
@@ -197,8 +199,8 @@ const ve = { class: "lc-main-robot" }, ge = { class: "lc-main-robot__wrapper" },
                   onMouseleave: X
                 },
                 [
-                  n("div", Ce, [
-                    ie(u(de), {
+                  n("div", Se, [
+                    se(u(fe), {
                       class: "lc-main-robot-icon-center",
                       domain: r.domain,
                       name: r.name,
@@ -206,7 +208,7 @@ const ve = { class: "lc-main-robot" }, ge = { class: "lc-main-robot__wrapper" },
                       onClick: (o) => S(r, l)
                     }, null, 8, ["domain", "name", "size", "onClick"])
                   ]),
-                  n("div", Se, [
+                  n("div", Me, [
                     (i(!0), s(
                       y,
                       null,
@@ -227,13 +229,13 @@ const ve = { class: "lc-main-robot" }, ge = { class: "lc-main-robot__wrapper" },
                             title: o.label,
                             style: _(u(h)(l)),
                             onClick: (Y) => S(r, l)
-                          }, w(o.label), 13, Me)) : (i(), s("div", {
+                          }, w(o.label), 13, ke)) : (i(), s("div", {
                             key: 1,
                             class: "lc-main-robot__wrapper__star-wrap--star__meta--item--text",
                             title: o.label,
                             style: _(u(h)(l)),
                             onClick: (Y) => P(o, d)
-                          }, w(o.label), 13, ke))
+                          }, w(o.label), 13, ye))
                         ],
                         4
                         /* STYLE */
@@ -258,5 +260,5 @@ const ve = { class: "lc-main-robot" }, ge = { class: "lc-main-robot__wrapper" },
   }
 });
 export {
-  Ve as default
+  qe as default
 };
