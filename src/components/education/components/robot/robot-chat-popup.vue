@@ -23,7 +23,10 @@
                         >
                             <img class="lc-robot-chat-popup__content--inner__quick__item--img" src="./images/voice.png" alt="" />
                             <div class="lc-robot-chat-popup__content--inner__quick__item--text">
-                                {{ item.text }}
+                                <n-marquee v-if="item.text.length > 10" :speed="25" :gradient="false">
+                                    {{ item.text }}&nbsp;&nbsp;&nbsp;&nbsp;{{ item.text }}
+                                </n-marquee>
+                                <div v-else>{{ item.text }}</div>
                             </div>
                         </div>
                     </n-scrollbar>
@@ -36,7 +39,7 @@
 <script lang="ts" setup>
 import { PropType } from 'vue'
 import { type AiConfigProps } from './types'
-import { NScrollbar } from 'naive-ui/es/scrollbar'
+import { NScrollbar, NMarquee } from 'naive-ui/es'
 import { type ImageHideDir } from './const'
 const {
     isFocus = false,
@@ -125,6 +128,10 @@ function clickQuick(item: AiConfigProps['quick'][number]) {
                         text-decoration: underline;
                         cursor: pointer;
                     }
+                }
+
+                &__item--text {
+                    width: 75%;
                 }
             }
         }
