@@ -16,7 +16,7 @@
                     :sub-content="'222'"
                 ></LcLargesKewIndicator>
 
-                <lcArrowIndicators label="心理教师总数" :value="2370" unit="人"></lcArrowIndicators>
+                <lcArrowIndicators label="心理教师总数" :value="2370" unit="人" :decimal="2"></lcArrowIndicators>
                 <lcArrowIndicators label="心理教师总数" :icon="'reward'">
                     <template #value> 1:900 </template>
                 </lcArrowIndicators>
@@ -120,8 +120,10 @@
                     label="深圳户籍"
                     :data="[
                         { value: 2311111, unit: '人' },
-                        { value: 567, unit: '%' },
+                        { value: 567.0, unit: '%' },
                     ]"
+                    :decimal="2"
+                    :not-check-integer="true"
                 ></LcBothwayCard>
             </NSpace>
         </DemoHelpBox>

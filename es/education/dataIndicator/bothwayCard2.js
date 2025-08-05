@@ -1,80 +1,81 @@
-import { defineComponent as w, openBlock as o, createElementBlock as i, createElementVNode as n, toDisplayString as u, Fragment as b, renderList as h, renderSlot as v, createVNode as g, unref as l, createCommentVNode as y } from "vue";
+import { defineComponent as w, openBlock as o, createElementBlock as i, createElementVNode as n, toDisplayString as u, Fragment as h, renderList as b, renderSlot as v, createVNode as g, unref as l, createCommentVNode as y } from "vue";
 import { bigNumber as c } from "lowcode-share/es/share";
 import { NNumberAnimation as N } from "naive-ui/es/number-animation";
 import d from "lodash-es/memoize";
-const $ = { class: "lc-bothway-card" }, x = { class: "lc-bothway-card__wrapper" }, S = { class: "lc-bothway-card__wrapper__info-range" }, V = { class: "lc-bothway-card__wrapper__info-range__label flex-center" }, B = { class: "lc-bothway-card__wrapper__info-range__wrapper" }, C = ["title"], U = { class: "flex-end" }, k = {
+const C = { class: "lc-bothway-card" }, $ = { class: "lc-bothway-card__wrapper" }, k = { class: "lc-bothway-card__wrapper__info-range" }, x = { class: "lc-bothway-card__wrapper__info-range__label flex-center" }, B = { class: "lc-bothway-card__wrapper__info-range__wrapper" }, S = ["title"], V = { class: "flex-end" }, I = {
   key: 0,
   class: "lc-bothway-card__wrapper__info-range__wrapper__info__division flex-center"
-}, F = /* @__PURE__ */ w({
+}, D = /* @__PURE__ */ w({
   __name: "bothwayCard",
   props: {
     label: { default: "" },
     data: { default: () => [] },
     unit: { default: "" },
     fixed: { type: Boolean, default: !0 },
-    decimal: { default: 0 }
+    decimal: { default: 0 },
+    notCheckInteger: { type: Boolean, default: !1 }
   },
-  setup(a) {
+  setup(r) {
     const f = d((e) => {
-      const { unit: r } = c(e);
-      return Number.isInteger(e) && !r ? 0 : a.decimal;
+      const { unit: t } = c(e);
+      return Number.isInteger(e) && !t && !r.notCheckInteger ? 0 : r.decimal;
     }), m = d((e) => {
-      if (a.fixed) {
-        const { result: r } = c(e, a.decimal);
-        return r;
+      if (r.fixed) {
+        const { result: t } = c(e, r.decimal);
+        return t;
       }
       return e;
     }), p = d(
-      (e, r) => {
-        if (a.fixed) {
-          const { unit: t } = c(e, a.decimal);
-          return `${t}${r || a.unit}`;
+      (e, t) => {
+        if (r.fixed) {
+          const { unit: a } = c(e, r.decimal);
+          return `${a}${t || r.unit}`;
         }
-        return r || a.unit;
+        return t || r.unit;
       },
-      (e, r) => `${e}_${r || a.unit}`
+      (e, t) => `${e}_${t || r.unit}`
     );
-    return (e, r) => (o(), i("div", $, [
-      n("div", x, [
-        n("div", S, [
+    return (e, t) => (o(), i("div", C, [
+      n("div", $, [
+        n("div", k, [
           n(
             "div",
-            V,
+            x,
             u(e.label),
             1
             /* TEXT */
           ),
           n("div", B, [
             (o(!0), i(
-              b,
+              h,
               null,
-              h(e.data, (t, s) => (o(), i("div", {
+              b(e.data, (a, s) => (o(), i("div", {
                 key: s,
                 class: "lc-bothway-card__wrapper__info-range__wrapper__info"
               }, [
-                v(e.$slots, t.customSlot, { item: t }, () => {
+                v(e.$slots, a.customSlot, { item: a }, () => {
                   var _;
                   return [
                     n("div", {
                       class: "lc-bothway-card__wrapper__info-range__wrapper__info__value",
-                      title: (_ = t.value) == null ? void 0 : _.toString()
+                      title: (_ = a.value) == null ? void 0 : _.toString()
                     }, [
                       g(l(N), {
                         "show-separator": "",
                         from: 0,
-                        to: l(m)(t.value),
+                        to: l(m)(a.value),
                         active: "",
-                        precision: l(f)(t.value)
+                        precision: l(f)(a.value)
                       }, null, 8, ["to", "precision"])
-                    ], 8, C),
+                    ], 8, S),
                     n(
                       "div",
-                      U,
-                      u(l(p)(t.value, t.unit)),
+                      V,
+                      u(l(p)(a.value, a.unit)),
                       1
                       /* TEXT */
                     ),
-                    s !== e.data.length - 1 ? (o(), i("div", k, " | ")) : y("v-if", !0)
+                    s !== e.data.length - 1 ? (o(), i("div", I, " | ")) : y("v-if", !0)
                   ];
                 }, !0)
               ]))),
@@ -83,7 +84,7 @@ const $ = { class: "lc-bothway-card" }, x = { class: "lc-bothway-card__wrapper" 
             ))
           ])
         ]),
-        r[0] || (r[0] = n(
+        t[0] || (t[0] = n(
           "div",
           { class: "lc-bothway-card__wrapper__table--bg" },
           null,
@@ -95,5 +96,5 @@ const $ = { class: "lc-bothway-card" }, x = { class: "lc-bothway-card__wrapper" 
   }
 });
 export {
-  F as default
+  D as default
 };
