@@ -9,7 +9,7 @@ type __VLS_Props = {
     hidDir?: ImageHideDir;
     showPopup?: boolean;
     aiConfig?: AiConfigProps;
-    popupContextMaxH: string;
+    popupContextMaxH?: string;
     draggable?: boolean;
     position?: 'relative' | 'absolute' | 'fixed';
 };

@@ -29,7 +29,8 @@ const N = ["draggable"], R = ["src"], O = /* @__PURE__ */ H({
         }
       ]
     }) },
-    popupContextMaxH: {},
+    popupContextMaxH: { default: () => {
+    } },
     draggable: { type: Boolean, default: !1 },
     position: { default: "fixed" }
   }, {
@@ -39,10 +40,10 @@ const N = ["draggable"], R = ["src"], O = /* @__PURE__ */ H({
   emits: ["update:isShow"],
   setup(a) {
     P((e) => ({
-      "7e50c6b2": e.position,
-      "4d3bd900": o(y),
-      "5cae0b08": e.width,
-      "1f445c25": e.height
+      "533baf34": e.position,
+      "0825eb3e": o(y),
+      "224a2fa9": e.width,
+      "0d2ccba4": e.height
     }));
     const r = S(a, "isShow"), C = s(() => a.src || V[a.value]), { isDraging: x, startDrag: n, stopDrag: d, robotOffset: D, xAdsorptionDir: g } = F(), l = s(() => a.draggable ? g.value : a.hidDir), B = s(() => ({
       [`lc-robot__wrapper__image--status-${l.value}`]: a.trigger !== E.none
