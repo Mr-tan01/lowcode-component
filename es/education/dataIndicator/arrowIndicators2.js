@@ -1,5 +1,5 @@
 import { defineComponent as u, mergeDefaults as d, computed as i, openBlock as m, createElementBlock as v, createElementVNode as n, createVNode as r, unref as a, toDisplayString as o, renderSlot as f } from "vue";
-import _ from "./icon/index.js";
+import _ from "./icon/index2.js";
 import './assets/icon/iconCard.css';/* empty css              */
 import { NNumberAnimation as b } from "naive-ui/es/number-animation";
 import { bigNumber as c } from "lowcode-share/es/share";

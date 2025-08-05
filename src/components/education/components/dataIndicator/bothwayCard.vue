@@ -48,17 +48,19 @@ const {
     fixed = true,
     decimal = 0,
     unit = '',
+    notCheckInteger = false,
 } = defineProps<{
     label?: string
     data?: Data[]
     unit?: string
     fixed?: boolean
     decimal?: number
+    notCheckInteger?: boolean
 }>()
 
 const renderdecimals = memoize(value => {
     const { unit: numUnit } = bigNumber(value)
-    if (Number.isInteger(value) && !numUnit) {
+    if (Number.isInteger(value) && !numUnit && !notCheckInteger) {
         return 0
     }
     return decimal

@@ -7,6 +7,7 @@ type __VLS_Props = {
     icon?: string;
     tip?: string;
     type?: 'tile' | 'skew';
+    notCheckInteger?: boolean;
 };
 declare function __VLS_template(): {
     attrs: Partial<{}>;

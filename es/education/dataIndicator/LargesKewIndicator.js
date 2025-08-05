@@ -1,7 +1,7 @@
 import o from "./LargesKewIndicator2.js";
 import './assets/LargesKewIndicator.css';/* empty css                    */
 import r from "./_virtual/_plugin-vue_export-helper.js";
-const f = /* @__PURE__ */ r(o, [["__scopeId", "data-v-f809e081"]]);
+const m = /* @__PURE__ */ r(o, [["__scopeId", "data-v-a18394de"]]);
 export {
-  f as default
+  m as default
 };

@@ -69,6 +69,7 @@ const {
     },
     draggable = false,
     position = 'fixed',
+    popupContextMaxH = undefined,
 } = defineProps<{
     src?: string
     value?: RobotBQMapKeys
@@ -78,7 +79,7 @@ const {
     hidDir?: ImageHideDir
     showPopup?: boolean
     aiConfig?: AiConfigProps
-    popupContextMaxH: string
+    popupContextMaxH?: string
     draggable?: boolean
     position?: 'relative' | 'absolute' | 'fixed'
 }>()

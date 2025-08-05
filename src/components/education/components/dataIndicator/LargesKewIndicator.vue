@@ -76,6 +76,7 @@ const {
     type = 'skew',
     subHead = '',
     subContent = '',
+    notCheckInteger = false,
 } = defineProps({
     label: {
         type: String,
@@ -116,11 +117,14 @@ const {
     isShowIcon: {
         type: Boolean,
     },
+    notCheckInteger: {
+        type: Boolean,
+    },
 })
 
 const decimals = computed(() => {
     const { unit: numUnit } = bigNumber(value)
-    if (Number.isInteger(value) && !numUnit) {
+    if (Number.isInteger(value) && !numUnit && !notCheckInteger) {
         return 0
     }
     return decimal

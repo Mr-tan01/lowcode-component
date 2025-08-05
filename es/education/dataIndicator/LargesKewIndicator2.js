@@ -1,9 +1,9 @@
-import { defineComponent as k, mergeDefaults as p, computed as s, openBlock as a, createElementBlock as r, normalizeClass as w, createElementVNode as t, renderSlot as h, toDisplayString as n, createVNode as c, unref as o, createCommentVNode as l, createTextVNode as f, withCtx as g } from "vue";
+import { defineComponent as b, mergeDefaults as h, computed as c, openBlock as a, createElementBlock as n, normalizeClass as w, createElementVNode as t, renderSlot as p, toDisplayString as r, createVNode as s, unref as o, createCommentVNode as l, createTextVNode as f, withCtx as g } from "vue";
 import V from "./images/skew/icon/person.png.js";
 import { bigNumber as u } from "lowcode-share/es/share";
 import { NNumberAnimation as v } from "naive-ui/es/number-animation";
 import N from "./tooltip/index.js";
-const S = { class: "lc-skew-indicator__wrapper" }, x = { class: "lc-skew-indicator__wrapper__table--bg" }, C = { class: "lc-skew-indicator__wrapper__table--bg--icon" }, H = ["src"], I = { class: "lc-skew-indicator__wrapper__info" }, L = { class: "lc-skew-indicator__wrapper__info--label" }, B = { class: "lc-skew-indicator__wrapper__info--result" }, $ = { class: "lc-skew-indicator__wrapper__info--result--value" }, U = {
+const S = { class: "lc-skew-indicator__wrapper" }, C = { class: "lc-skew-indicator__wrapper__table--bg" }, x = { class: "lc-skew-indicator__wrapper__table--bg--icon" }, I = ["src"], B = { class: "lc-skew-indicator__wrapper__info" }, H = { class: "lc-skew-indicator__wrapper__info--label" }, L = { class: "lc-skew-indicator__wrapper__info--result" }, $ = { class: "lc-skew-indicator__wrapper__info--result--value" }, U = {
   key: 0,
   class: "lc-skew-indicator__wrapper__info--result--unit"
 }, D = { class: "lc-skew-indicator__wrapper__info--result--year--label" }, E = { class: "lc-skew-indicator__wrapper__info--result--year--value" }, T = {
@@ -18,9 +18,9 @@ const S = { class: "lc-skew-indicator__wrapper" }, x = { class: "lc-skew-indicat
 }, K = { class: "lc-skew-indicator__wrapper__info--sub-wrapper" }, j = { class: "lc-skew-indicator__wrapper__info--sub-content" }, q = {
   key: 0,
   class: "lc-skew-indicator__wrapper__info--sub-head"
-}, P = /* @__PURE__ */ k({
+}, P = /* @__PURE__ */ b({
   __name: "LargesKewIndicator",
-  props: /* @__PURE__ */ p({
+  props: /* @__PURE__ */ h({
     label: {
       type: String
     },
@@ -59,6 +59,9 @@ const S = { class: "lc-skew-indicator__wrapper" }, x = { class: "lc-skew-indicat
     },
     isShowIcon: {
       type: Boolean
+    },
+    notCheckInteger: {
+      type: Boolean
     }
   }, {
     label: "",
@@ -73,53 +76,54 @@ const S = { class: "lc-skew-indicator__wrapper" }, x = { class: "lc-skew-indicat
     tip: "",
     type: "skew",
     subHead: "",
-    subContent: ""
+    subContent: "",
+    notCheckInteger: !1
   }),
   setup(e) {
-    const m = s(() => {
+    const m = c(() => {
       const { unit: i } = u(e.value);
-      return Number.isInteger(e.value) && !i ? 0 : e.decimal;
-    }), y = s(() => {
+      return Number.isInteger(e.value) && !i && !e.notCheckInteger ? 0 : e.decimal;
+    }), y = c(() => {
       if (e.fixed) {
         const { result: i } = u(e.value, e.decimal);
         return i;
       }
       return e.value;
-    }), d = s(() => {
+    }), d = c(() => {
       if (e.fixed) {
         const { unit: i } = u(e.value, e.decimal);
         return `${i}${e.unit}`;
       }
       return e.unit;
-    }), b = s(() => e.yearValue > 0 ? "↑" : "↓");
-    return (i, _) => (a(), r(
+    }), k = c(() => e.yearValue > 0 ? "↑" : "↓");
+    return (i, _) => (a(), n(
       "div",
       {
         class: w(["lc-skew-indicator", [`lc-skew-indicator--${e.type}`]])
       },
       [
         t("div", S, [
-          t("div", x, [
-            t("div", C, [
-              h(i.$slots, "default", {}, () => [
+          t("div", C, [
+            t("div", x, [
+              p(i.$slots, "default", {}, () => [
                 t("img", {
                   src: e.icon,
                   alt: ""
-                }, null, 8, H)
+                }, null, 8, I)
               ], !0)
             ])
           ]),
-          t("div", I, [
+          t("div", B, [
             t(
               "div",
-              L,
-              n(e.label),
+              H,
+              r(e.label),
               1
               /* TEXT */
             ),
-            t("div", B, [
+            t("div", L, [
               t("div", $, [
-                c(o(v), {
+                s(o(v), {
                   "show-separator": "",
                   from: 0,
                   to: y.value,
@@ -127,14 +131,14 @@ const S = { class: "lc-skew-indicator__wrapper" }, x = { class: "lc-skew-indicat
                   precision: m.value
                 }, null, 8, ["to", "precision"])
               ]),
-              d.value ? (a(), r(
+              d.value ? (a(), n(
                 "div",
                 U,
-                n(d.value),
+                r(d.value),
                 1
                 /* TEXT */
               )) : l("v-if", !0),
-              e.yearValue ? (a(), r(
+              e.yearValue ? (a(), n(
                 "div",
                 {
                   key: 1,
@@ -147,12 +151,12 @@ const S = { class: "lc-skew-indicator__wrapper" }, x = { class: "lc-skew-indicat
                   t(
                     "div",
                     D,
-                    n(e.yearLabel),
+                    r(e.yearLabel),
                     1
                     /* TEXT */
                   ),
                   t("div", E, [
-                    c(o(v), {
+                    s(o(v), {
                       "show-separator": "",
                       from: 0,
                       to: e.yearValue,
@@ -161,10 +165,10 @@ const S = { class: "lc-skew-indicator__wrapper" }, x = { class: "lc-skew-indicat
                     }, null, 8, ["to", "precision"]),
                     _[0] || (_[0] = f("% "))
                   ]),
-                  e.yearValue ? (a(), r(
+                  e.yearValue ? (a(), n(
                     "div",
                     T,
-                    n(b.value),
+                    r(k.value),
                     1
                     /* TEXT */
                   )) : l("v-if", !0)
@@ -172,11 +176,11 @@ const S = { class: "lc-skew-indicator__wrapper" }, x = { class: "lc-skew-indicat
                 2
                 /* CLASS */
               )) : l("v-if", !0),
-              e.tip ? (a(), r("div", z, [
-                c(o(N), null, {
+              e.tip ? (a(), n("div", z, [
+                s(o(N), null, {
                   default: g(() => [
                     f(
-                      n(e.tip),
+                      r(e.tip),
                       1
                       /* TEXT */
                     )
@@ -186,19 +190,19 @@ const S = { class: "lc-skew-indicator__wrapper" }, x = { class: "lc-skew-indicat
                 })
               ])) : l("v-if", !0)
             ]),
-            e.subHead ? (a(), r("div", A, [
+            e.subHead ? (a(), n("div", A, [
               t("div", K, [
                 t(
                   "div",
                   j,
-                  n(e.subContent),
+                  r(e.subContent),
                   1
                   /* TEXT */
                 ),
-                e.subHead ? (a(), r(
+                e.subHead ? (a(), n(
                   "div",
                   q,
-                  n(e.subHead),
+                  r(e.subHead),
                   1
                   /* TEXT */
                 )) : l("v-if", !0)

@@ -44,6 +44,7 @@ const {
     icon = personIcon,
     tip = '',
     type = 'skew',
+    notCheckInteger = false,
 } = defineProps<{
     label?: string
     value?: number
@@ -53,11 +54,12 @@ const {
     icon?: string
     tip?: string
     type?: 'tile' | 'skew'
+    notCheckInteger?: boolean
 }>()
 
 const decimals = computed(() => {
     const { unit: numUnit } = bigNumber(value)
-    if (Number.isInteger(value) && !numUnit) {
+    if (Number.isInteger(value) && !numUnit && !notCheckInteger) {
         return 0
     }
     return decimal

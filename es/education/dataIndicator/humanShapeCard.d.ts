@@ -12,6 +12,7 @@ type __VLS_Props = {
     rigUnit?: string;
     decimal?: number;
     fixed?: boolean;
+    notCheckInteger?: boolean;
 };
 declare function __VLS_template(): {
     attrs: Partial<{}>;
