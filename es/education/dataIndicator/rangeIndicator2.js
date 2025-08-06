@@ -1,11 +1,14 @@
-import { defineComponent as p, openBlock as o, createElementBlock as l, createElementVNode as i, Fragment as v, renderList as w, renderSlot as b, createVNode as h, unref as a, toDisplayString as _, createCommentVNode as N } from "vue";
-import { bigNumber as c } from "lowcode-share/es/share";
-import { NNumberAnimation as k } from "naive-ui/es/number-animation";
-import d from "lodash-es/memoize";
-const $ = { class: "lc-range-indicator" }, y = { class: "lc-range-indicator__wrapper" }, B = { class: "lc-range-indicator__wrapper__info-range" }, C = { class: "lc-range-indicator__wrapper__info--result" }, I = ["title"], S = {
+import { defineComponent as b, openBlock as a, createElementBlock as o, createElementVNode as i, Fragment as w, renderList as h, renderSlot as _, createVNode as N, unref as l, toDisplayString as f, createCommentVNode as m } from "vue";
+import { bigNumber as s } from "lowcode-share/es/share";
+import { NNumberAnimation as $ } from "naive-ui/es/number-animation";
+import c from "lodash-es/memoize";
+const k = { class: "lc-range-indicator" }, y = { class: "lc-range-indicator__wrapper" }, B = { class: "lc-range-indicator__wrapper__info-range" }, C = { class: "lc-range-indicator__wrapper__info--result" }, I = ["title"], S = {
   key: 0,
   class: "lc-range-indicator__wrapper__info--result--unit"
-}, V = { class: "lc-range-indicator__wrapper__info--label" }, A = /* @__PURE__ */ p({
+}, V = { class: "lc-range-indicator__wrapper__info--label" }, U = {
+  key: 0,
+  class: "lc-range-indicator__wrapper__info--label-bottom"
+}, D = /* @__PURE__ */ b({
   __name: "rangeIndicator",
   props: {
     data: { default: () => [] },
@@ -15,28 +18,28 @@ const $ = { class: "lc-range-indicator" }, y = { class: "lc-range-indicator__wra
     notCheckInteger: { type: Boolean, default: !1 }
   },
   setup(n) {
-    const f = d((r) => {
-      const { unit: e } = c(r);
-      return Number.isInteger(r) && !e && !n.notCheckInteger ? 0 : n.decimal;
-    }), m = d((r) => {
+    const g = c((e) => {
+      const { unit: t } = s(e);
+      return Number.isInteger(e) && !t && !n.notCheckInteger ? 0 : n.decimal;
+    }), p = c((e) => {
       if (n.fixed) {
-        const { result: e } = c(r, n.decimal);
-        return e;
+        const { result: t } = s(e, n.decimal);
+        return t;
       }
-      return r;
-    }), s = d(
-      (r, e) => {
+      return e;
+    }), d = c(
+      (e, t) => {
         if (n.fixed) {
-          const { unit: t } = c(r, n.decimal);
-          return `${t}${e || n.unit}`;
+          const { unit: r } = s(e, n.decimal);
+          return `${r}${t || n.unit}`;
         }
-        return e || n.unit;
+        return t || n.unit;
       },
-      (r, e) => `${r}_${e || n.unit}`
+      (e, t) => `${e}_${t || n.unit}`
     );
-    return (r, e) => (o(), l("div", $, [
+    return (e, t) => (a(), o("div", k, [
       i("div", y, [
-        e[1] || (e[1] = i(
+        t[1] || (t[1] = i(
           "div",
           { class: "lc-range-indicator__wrapper__table--bg" },
           null,
@@ -44,14 +47,14 @@ const $ = { class: "lc-range-indicator" }, y = { class: "lc-range-indicator__wra
           /* HOISTED */
         )),
         i("div", B, [
-          (o(!0), l(
-            v,
+          (a(!0), o(
+            w,
             null,
-            w(r.data, (t, g) => (o(), l("div", {
-              key: g,
+            h(e.data, (r, v) => (a(), o("div", {
+              key: v,
               class: "lc-range-indicator__wrapper__info"
             }, [
-              e[0] || (e[0] = i(
+              t[0] || (t[0] = i(
                 "div",
                 { class: "lc-range-indicator__wrapper__info__decorator--bg" },
                 null,
@@ -59,38 +62,41 @@ const $ = { class: "lc-range-indicator" }, y = { class: "lc-range-indicator__wra
                 /* HOISTED */
               )),
               i("div", C, [
-                b(r.$slots, t.customSlot, { item: t }, () => {
+                _(e.$slots, r.customSlot, { item: r }, () => {
                   var u;
                   return [
                     i("div", {
                       class: "lc-range-indicator__wrapper__info--result--value",
-                      title: (u = t.value) == null ? void 0 : u.toString()
+                      title: (u = r.value) == null ? void 0 : u.toString()
                     }, [
-                      h(a(k), {
+                      N(l($), {
                         "show-separator": "",
                         from: 0,
-                        to: a(m)(t.value),
+                        to: l(p)(r.value),
                         active: "",
-                        precision: a(f)(t.value)
+                        precision: l(g)(r.value)
                       }, null, 8, ["to", "precision"])
                     ], 8, I),
-                    a(s)(t.value, t.unit) ? (o(), l(
+                    l(d)(r.value, r.unit) ? (a(), o(
                       "div",
                       S,
-                      _(a(s)(t.value, t.unit)),
+                      f(l(d)(r.value, r.unit)),
                       1
                       /* TEXT */
-                    )) : N("v-if", !0)
+                    )) : m("v-if", !0)
                   ];
                 }, !0)
               ]),
               i(
                 "div",
                 V,
-                _(t.label),
+                f(r.label),
                 1
                 /* TEXT */
-              )
+              ),
+              e.$slots["label-bottom"] ? (a(), o("div", U, [
+                _(e.$slots, "label-bottom", { item: r }, void 0, !0)
+              ])) : m("v-if", !0)
             ]))),
             128
             /* KEYED_FRAGMENT */
@@ -101,5 +107,5 @@ const $ = { class: "lc-range-indicator" }, y = { class: "lc-range-indicator__wra
   }
 });
 export {
-  A as default
+  D as default
 };
