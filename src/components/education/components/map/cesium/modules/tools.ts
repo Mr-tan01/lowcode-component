@@ -266,54 +266,67 @@ async function drawImageCanvas(imgSrc: string): Promise<HTMLCanvasElement> {
 }
 
 // 创建聚合点图标
-export const createClusterBillboard = (count: number, primaryType: string): HTMLCanvasElement => {
+export function createClusterBillboard(
+    count: number,
+    primaryType: string,
+    typeCount: Record<string, number> = {},
+    typeColors: Record<string, string> = {},
+): HTMLCanvasElement {
     const canvas = document.createElement('canvas')
-    canvas.width = 80
-    canvas.height = 80
     const ctx = canvas.getContext('2d')
-
     if (!ctx) return canvas
 
-    // 设置背景颜色
-    let colorFill = '#1E9EFA'
-    let colorStroke = '#167bca'
+    // 画布大小
+    canvas.width = 50
+    canvas.height = 50
 
-    switch (primaryType) {
-        case 'primary':
-            colorFill = '#1E9EFA'
-            colorStroke = '#167bca'
-            break
-        case 'success':
-            colorFill = '#67C23A'
-            colorStroke = '#529a2e'
-            break
-        case 'warning':
-            colorFill = '#E6A23C'
-            colorStroke = '#b87d2f'
-            break
-        case 'danger':
-            colorFill = '#E41F1F'
-            colorStroke = '#C01A1A'
-            break
+    // 绘制背景
+    if (typeCount && Object.keys(typeCount).length > 1) {
+        ctx.fillStyle = 'rgba(40, 40, 40, 0.7)'
+        ctx.beginPath()
+        ctx.roundRect(0, 0, canvas.width, canvas.height, 15)
+        ctx.fill()
     }
 
-    // 绘制圆形背景
-    ctx.beginPath()
-    ctx.arc(40, 40, 35, 0, Math.PI * 2, true)
-    ctx.fillStyle = colorFill
-    ctx.fill()
+    // 如果有多个类型，绘制复合图标
+    if (typeCount && Object.keys(typeCount).length > 1) {
+        const types = Object.keys(typeCount)
+        const angleStep = (Math.PI * 2) / types.length
 
-    // 绘制边框
-    ctx.lineWidth = 4
-    ctx.strokeStyle = colorStroke
-    ctx.stroke()
+        types.forEach((type, index) => {
+            const angle = index * angleStep
+            const radius = 15
+            const x = canvas.width / 2 + Math.cos(angle) * radius
+            const y = canvas.height / 2 + Math.sin(angle) * radius
 
-    // 绘制文本
-    ctx.fillStyle = 'white'
-    ctx.font = 'bold 32px Arial'
-    ctx.textAlign = 'center'
-    ctx.textBaseline = 'middle'
-    ctx.fillText(count.toString(), 40, 40)
+            ctx.fillStyle = typeColors[type] || '#1E9EFA'
+            ctx.beginPath()
+            ctx.arc(x, y, 8, 0, Math.PI * 2)
+            ctx.fill()
+
+            ctx.fillStyle = 'white'
+            ctx.font = 'bold 10px Arial'
+            ctx.textAlign = 'center'
+            ctx.textBaseline = 'middle'
+            ctx.fillText(typeCount[type].toString(), x, y)
+        })
+
+        ctx.fillStyle = 'white'
+        ctx.font = 'bold 14px Arial'
+        ctx.fillText(count.toString(), canvas.width / 2, canvas.height / 2)
+    } else {
+        // 单一类型显示
+        ctx.fillStyle = typeColors[primaryType] || '#1E9EFA'
+        ctx.beginPath()
+        ctx.arc(canvas.width / 2, canvas.height / 2, 20, 0, Math.PI * 2)
+        ctx.fill()
+
+        ctx.fillStyle = 'white'
+        ctx.font = 'bold 16px Arial'
+        ctx.textAlign = 'center'
+        ctx.textBaseline = 'middle'
+        ctx.fillText(count.toString(), canvas.width / 2, canvas.height / 2)
+    }
 
     return canvas
 }
