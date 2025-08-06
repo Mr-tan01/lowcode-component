@@ -22,7 +22,7 @@
                             @click="clickQuick(item)"
                         >
                             <img class="lc-robot-chat-popup__content--inner__quick__item--img" src="./images/voice.png" alt="" />
-                            <div class="lc-robot-chat-popup__content--inner__quick__item--text">
+                            <div class="lc-robot-chat-popup__content--inner__quick__item--text" :title="item.text">
                                 <n-marquee v-if="item.text.length > 10" :speed="25" :gradient="false">
                                     {{ item.text }}&nbsp;&nbsp;&nbsp;&nbsp;{{ item.text }}
                                 </n-marquee>
