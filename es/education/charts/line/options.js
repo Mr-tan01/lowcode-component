@@ -15,6 +15,8 @@ const l = [S, b], t = {
   symbol: `image://${l[0]}`,
   symbolSize: 23,
   type: "line",
+  z: 99,
+  // 混合情况确保在柱状图之上
   lineStyle: {
     width: 1,
     type: "solid",
@@ -46,7 +48,7 @@ function O(o, e) {
     e
   );
 }
-function h(o) {
+function z(o) {
   return Array.isArray(o) ? o.map((e, s) => e.type === "line" || !e.type ? O(s, e) : e.type === "bar" ? g(
     r(
       {
@@ -65,5 +67,5 @@ export {
   m as commonLineSeries,
   O as mergeLineRecord,
   C as useCommonLineOptions,
-  h as useCommonLineSeries
+  z as useCommonLineSeries
 };

@@ -52,6 +52,8 @@ const p = {
 }, h = e({}, p, f), a = {
   barWidth: 20,
   showBackground: !0,
+  z: 1,
+  // 混合情况在折线图下方
   itemStyle: {
     shadowBlur: 0,
     shadowColor: "transparent"
@@ -74,7 +76,8 @@ const p = {
   },
   markPoint: {
     symbolSize: [12, 6]
-  }
+  },
+  z: 1
 });
 function A(o, t) {
   const r = t.isHorizontal ? h : p;
