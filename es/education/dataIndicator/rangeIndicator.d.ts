@@ -16,7 +16,11 @@ declare function __VLS_template(): {
     attrs: Partial<{}>;
     slots: Partial<Record<string, (_: {
         item: Data;
-    }) => any>>;
+    }) => any>> & {
+        'label-bottom'?(_: {
+            item: Data;
+        }): any;
+    };
     refs: {};
     rootEl: HTMLDivElement;
 };

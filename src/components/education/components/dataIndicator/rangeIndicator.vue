@@ -24,6 +24,9 @@
                     <div class="lc-range-indicator__wrapper__info--label">
                         {{ item.label }}
                     </div>
+                    <div v-if="$slots['label-bottom']" class="lc-range-indicator__wrapper__info--label-bottom">
+                        <slot name="label-bottom" :item="item"></slot>
+                    </div>
                 </div>
             </div>
         </div>
