@@ -60,7 +60,7 @@ export const horizontalBarOptions: EChartsOption = merge({}, commonBarOptions, d
 export const commonBarSeries: BarSeriesOption = {
     barWidth: 20,
     showBackground: true,
-
+    z: 1, // 混合情况在折线图下方
     itemStyle: {
         shadowBlur: 0,
         shadowColor: 'transparent',
@@ -86,6 +86,7 @@ export const smallBarSeries: BarSeriesOption = merge({}, commonBarSeries, {
     markPoint: {
         symbolSize: [12, 6],
     },
+    z: 1,
 })
 
 export function useCommonBarOptions(opts: EChartsOption | EChartsCoreOption, props: { isHorizontal: boolean }) {

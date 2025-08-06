@@ -1,7 +1,7 @@
-import { defineComponent as h, mergeDefaults as m, openBlock as c, createElementBlock as i, normalizeClass as k, createElementVNode as t, toDisplayString as n, createVNode as f, unref as a, normalizeStyle as g, withCtx as r, Fragment as x, renderList as y, createBlock as b, createTextVNode as v } from "vue";
+import { defineComponent as h, mergeDefaults as m, openBlock as c, createElementBlock as i, normalizeClass as k, createElementVNode as e, toDisplayString as n, createVNode as f, unref as a, normalizeStyle as g, withCtx as r, Fragment as x, renderList as y, createBlock as b, createTextVNode as v } from "vue";
 import C from "./images/voice.png.js";
 import { NScrollbar as q, NMarquee as H } from "naive-ui/es";
-const D = { class: "lc-robot-chat-popup__content" }, N = { class: "lc-robot-chat-popup__content--inner" }, S = { class: "lc-robot-chat-popup__content--inner__sayhello" }, B = { class: "lc-robot-chat-popup__content--inner__quick" }, F = ["onClick"], Q = { class: "lc-robot-chat-popup__content--inner__quick__item--text" }, V = { key: 1 }, w = /* @__PURE__ */ h({
+const D = { class: "lc-robot-chat-popup__content" }, N = { class: "lc-robot-chat-popup__content--inner" }, S = { class: "lc-robot-chat-popup__content--inner__sayhello" }, B = { class: "lc-robot-chat-popup__content--inner__quick" }, F = ["onClick"], Q = ["title"], V = { key: 1 }, w = /* @__PURE__ */ h({
   __name: "robot-chat-popup",
   props: /* @__PURE__ */ m({
     isFocus: {
@@ -26,7 +26,7 @@ const D = { class: "lc-robot-chat-popup__content" }, N = { class: "lc-robot-chat
     maxHeight: "75px"
   }),
   emits: ["clickQuick"],
-  setup(e, { emit: _ }) {
+  setup(o, { emit: _ }) {
     const p = _;
     function u(l) {
       p("clickQuick", l);
@@ -36,35 +36,35 @@ const D = { class: "lc-robot-chat-popup__content" }, N = { class: "lc-robot-chat
       {
         class: k(["lc-robot-chat-popup", [
           {
-            "lc-robot-chat-popup--focus": e.isFocus
+            "lc-robot-chat-popup--focus": o.isFocus
           },
-          `lc-robot-chat-popup__hide--${e.hidDir}`
+          `lc-robot-chat-popup__hide--${o.hidDir}`
         ]])
       },
       [
-        t("div", D, [
-          t("div", N, [
-            t(
+        e("div", D, [
+          e("div", N, [
+            e(
               "div",
               S,
-              n(e.aiConfig.sayHello),
+              n(o.aiConfig.sayHello),
               1
               /* TEXT */
             ),
-            t("div", B, [
+            e("div", B, [
               f(a(q), {
-                style: g({ maxHeight: e.maxHeight })
+                style: g({ maxHeight: o.maxHeight })
               }, {
                 default: r(() => [
                   (c(!0), i(
                     x,
                     null,
-                    y(e.aiConfig.quick, (o, d) => (c(), i("div", {
+                    y(o.aiConfig.quick, (t, d) => (c(), i("div", {
                       key: d,
                       class: "lc-robot-chat-popup__content--inner__quick__item",
-                      onClick: (z) => u(o)
+                      onClick: (z) => u(t)
                     }, [
-                      s[0] || (s[0] = t(
+                      s[0] || (s[0] = e(
                         "img",
                         {
                           class: "lc-robot-chat-popup__content--inner__quick__item--img",
@@ -75,8 +75,11 @@ const D = { class: "lc-robot-chat-popup__content" }, N = { class: "lc-robot-chat
                         -1
                         /* HOISTED */
                       )),
-                      t("div", Q, [
-                        o.text.length > 10 ? (c(), b(
+                      e("div", {
+                        class: "lc-robot-chat-popup__content--inner__quick__item--text",
+                        title: t.text
+                      }, [
+                        t.text.length > 10 ? (c(), b(
                           a(H),
                           {
                             key: 0,
@@ -86,7 +89,7 @@ const D = { class: "lc-robot-chat-popup__content" }, N = { class: "lc-robot-chat
                           {
                             default: r(() => [
                               v(
-                                n(o.text) + "    " + n(o.text),
+                                n(t.text) + "    " + n(t.text),
                                 1
                                 /* TEXT */
                               )
@@ -99,11 +102,11 @@ const D = { class: "lc-robot-chat-popup__content" }, N = { class: "lc-robot-chat
                         )) : (c(), i(
                           "div",
                           V,
-                          n(o.text),
+                          n(t.text),
                           1
                           /* TEXT */
                         ))
-                      ])
+                      ], 8, Q)
                     ], 8, F))),
                     128
                     /* KEYED_FRAGMENT */

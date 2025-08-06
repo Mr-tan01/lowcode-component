@@ -19,6 +19,7 @@ export const commonLineSeries: LineSeriesOption = {
     symbol: `image://${symbolList[0]}`,
     symbolSize: 23,
     type: 'line',
+    z: 99, // 混合情况确保在柱状图之上
     lineStyle: {
         width: 1,
         type: 'solid',
