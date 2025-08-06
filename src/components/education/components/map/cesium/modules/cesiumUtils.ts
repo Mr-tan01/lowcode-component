@@ -189,6 +189,17 @@ export class cesiumService {
     }
 
     // 添加点聚合配置方法
+    private getTypeColor(type: string): string {
+        const colorMap: Record<string, string> = {
+            primary: '#1E9EFA',
+            success: '#67C23A',
+            warning: '#E6A23C',
+            danger: '#E41F1F',
+            default: '#1E9EFA',
+        }
+        return colorMap[type] || colorMap.default
+    }
+
     private setupClustering(): void {
         if (!this.viewer) return
 
@@ -209,8 +220,9 @@ export class cesiumService {
             cluster.billboard.show = true
             cluster.label.show = false
 
-            // 统计各类型点位数量
+            // 各类型点位数量和颜色
             const typeCount = {}
+            const typeColors = {}
             let primaryType = ''
             let maxCount = 0
 
@@ -220,7 +232,11 @@ export class cesiumService {
                 const entityType = entity.properties.type?.getValue(JulianDate.now())
                 if (!entityType) return
 
+                // 获取该类型的颜色
+                const color = this.getTypeColor(entityType)
+
                 typeCount[entityType] = (typeCount[entityType] || 0) + 1
+                typeColors[entityType] = color
 
                 if (typeCount[entityType] > maxCount) {
                     maxCount = typeCount[entityType]
@@ -228,14 +244,16 @@ export class cesiumService {
                 }
             })
 
-            // 创建自定义聚合点图标
-            const canvas = createClusterBillboard(clusteredEntities.length, primaryType || 'primary')
+            // 创建自定义聚合点图标，传入所有类型信息
+            const canvas = createClusterBillboard(clusteredEntities.length, primaryType || 'primary', typeCount, typeColors)
 
             Object.assign(cluster.billboard, {
                 id: {
                     type: 'cluster',
-                    entities: clusteredEntities, // 关键：保存所有被聚合的实体
-                    count: clusteredEntities.length, // 关键：存数量
+                    entities: clusteredEntities, // 保存所有被聚合的实体
+                    count: clusteredEntities.length, // 存数量
+                    types: typeCount, // 保存类型统计信息
+                    colors: typeColors, // 保存类型颜色信息
                 },
                 image: canvas.toDataURL(),
                 width: 50,
@@ -253,7 +271,6 @@ export class cesiumService {
         this.setCameraHeight('ZoomIn')
     }
 
-    // 初始化Cesium Viewer
     async initViewer(controlStatus: controlStatusType): Promise<boolean> {
         if (this.viewer) this.destroy()
 

@@ -39,6 +39,7 @@ export declare class cesiumService {
      */
     offsetDuplicateCoordinates<T extends Record<string, any>>(list: T[], lngKey: keyof T, latKey: keyof T, distance?: number): T[];
     updateViewerAttribute(): void;
+    private getTypeColor;
     private setupClustering;
     private doubleClickHandler;
     initViewer(controlStatus: controlStatusType): Promise<boolean>;

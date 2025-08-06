@@ -1,28 +1,28 @@
 var x = Object.defineProperty;
 var M = (m, e, t) => e in m ? x(m, e, { enumerable: !0, configurable: !0, writable: !0, value: t }) : m[e] = t;
 var l = (m, e, t) => M(m, typeof e != "symbol" ? e + "" : e, t);
-import v from "localforage";
+import w from "localforage";
 import { CesiumHeatmap as k } from "cesium-heatmap-es6";
-import { areaData as w } from "./type.js";
-import { createClusterBillboard as V, createInfoCanvas as U, createEntityConfig as A, updateViewerEntityInfo as g, heatmapGradient as R } from "./tools.js";
+import { areaData as y } from "./type.js";
+import { createClusterBillboard as V, createInfoCanvas as U, createEntityConfig as A, updateViewerEntityInfo as p, heatmapGradient as R } from "./tools.js";
 import { useMessage as B } from "naive-ui";
-import { Color as b, Rectangle as N, CustomDataSource as O, JulianDate as C, VerticalOrigin as Z, HorizontalOrigin as z, ScreenSpaceEventType as L, ScreenSpaceEventHandler as S, Cartographic as y, Cartesian3 as p, Math as d, BoundingSphere as P, defined as D, ArcGisMapServerImageryProvider as H, PolylineDashMaterialProperty as _, PolygonHierarchy as W, ImageryLayer as $, Primitive as F, Entity as K, Cartesian2 as I } from "@cesium/engine";
+import { Color as b, Rectangle as N, CustomDataSource as O, JulianDate as E, VerticalOrigin as Z, HorizontalOrigin as z, ScreenSpaceEventType as L, ScreenSpaceEventHandler as S, Cartographic as C, Cartesian3 as g, Math as u, BoundingSphere as P, defined as D, ArcGisMapServerImageryProvider as H, PolylineDashMaterialProperty as F, PolygonHierarchy as _, ImageryLayer as W, Primitive as $, Entity as K, Cartesian2 as I } from "@cesium/engine";
 import { Viewer as j } from "@cesium/widgets";
 class q {
   // 缓存有效期7天
   constructor() {
     l(this, "storeName", "WMTS_Tiles");
     l(this, "maxAge", 7 * 24 * 60 * 60 * 1e3);
-    v.config({
-      driver: [v.INDEXEDDB, v.WEBSQL, v.LOCALSTORAGE],
+    w.config({
+      driver: [w.INDEXEDDB, w.WEBSQL, w.LOCALSTORAGE],
       name: "CesiumTileCache",
       storeName: this.storeName
     });
   }
   async getTile(e) {
     try {
-      const t = `${e.url}_${e.level}_${e.x}_${e.y}`, i = await v.getItem(t);
-      return i && Date.now() - i.timestamp < this.maxAge ? i.data : (i && await v.removeItem(t), null);
+      const t = `${e.url}_${e.level}_${e.x}_${e.y}`, i = await w.getItem(t);
+      return i && Date.now() - i.timestamp < this.maxAge ? i.data : (i && await w.removeItem(t), null);
     } catch (t) {
       return console.error("读取缓存失败:", t), null;
     }
@@ -30,7 +30,7 @@ class q {
   async putTile(e, t) {
     try {
       const i = `${e.url}_${e.level}_${e.x}_${e.y}`;
-      return await v.setItem(i, {
+      return await w.setItem(i, {
         data: t,
         timestamp: Date.now()
       }), !0;
@@ -106,13 +106,13 @@ class ne {
   offsetDuplicateCoordinates(e, t, i, r = 200) {
     const n = /* @__PURE__ */ new Map();
     return e.forEach((a) => {
-      const h = `${a[t]},${a[i]}`;
-      n.has(h) || n.set(h, []), n.get(h).push(a);
-    }), Array.from(n.values()).flatMap((a) => a.length === 1 ? a : a.map((h, c) => {
-      const o = c * 2 * Math.PI / a.length, u = Number(h[t]), f = Number(h[i]), E = r * Math.cos(o) / (6371e3 * Math.cos(f * (Math.PI / 180))), T = r * Math.sin(o) / 6371e3;
+      const o = `${a[t]},${a[i]}`;
+      n.has(o) || n.set(o, []), n.get(o).push(a);
+    }), Array.from(n.values()).flatMap((a) => a.length === 1 ? a : a.map((o, d) => {
+      const h = d * 2 * Math.PI / a.length, c = Number(o[t]), f = Number(o[i]), v = r * Math.cos(h) / (6371e3 * Math.cos(f * (Math.PI / 180))), T = r * Math.sin(h) / 6371e3;
       return {
-        ...h,
-        [t]: Number((u + E * (180 / Math.PI)).toFixed(6)),
+        ...o,
+        [t]: Number((c + v * (180 / Math.PI)).toFixed(6)),
         [i]: Number((f + T * (180 / Math.PI)).toFixed(6))
       };
     }));
@@ -124,30 +124,46 @@ class ne {
     t.screenSpaceCameraController.minimumZoomDistance = (e == null ? void 0 : e.minZoom) ?? this.defaultConfig.minZoom, t.screenSpaceCameraController.maximumZoomDistance = (e == null ? void 0 : e.maxZoom) ?? this.defaultConfig.maxZoom, t.globe.baseColor = (e == null ? void 0 : e.baseColor) ?? this.defaultConfig.baseColor;
   }
   // 添加点聚合配置方法
+  getTypeColor(e) {
+    const t = {
+      primary: "#1E9EFA",
+      success: "#67C23A",
+      warning: "#E6A23C",
+      danger: "#E41F1F",
+      default: "#1E9EFA"
+    };
+    return t[e] || t.default;
+  }
   setupClustering() {
     if (!this.viewer) return;
     this.dataSource = new O("clusterSource"), this.viewer.dataSources.add(this.dataSource);
     const e = this.options.config, t = this.dataSource.clustering;
     t.enabled = (e == null ? void 0 : e.clusteringEnabled) ?? this.defaultConfig.clusteringEnabled, t.pixelRange = (e == null ? void 0 : e.clusteringPixelRange) ?? this.defaultConfig.clusteringPixelRange, t.minimumClusterSize = (e == null ? void 0 : e.clusteringMinimumClusterSize) ?? this.defaultConfig.clusteringMinimumClusterSize, t.enabled && t.clusterEvent.addEventListener((i, r) => {
       r.billboard.show = !0, r.label.show = !1;
-      const s = {};
-      let n = "", a = 0;
-      i.forEach((c) => {
-        var u;
-        if (!c.properties) return;
-        const o = (u = c.properties.type) == null ? void 0 : u.getValue(C.now());
-        o && (s[o] = (s[o] || 0) + 1, s[o] > a && (a = s[o], n = o));
+      const s = {}, n = {};
+      let a = "", o = 0;
+      i.forEach((h) => {
+        var v;
+        if (!h.properties) return;
+        const c = (v = h.properties.type) == null ? void 0 : v.getValue(E.now());
+        if (!c) return;
+        const f = this.getTypeColor(c);
+        s[c] = (s[c] || 0) + 1, n[c] = f, s[c] > o && (o = s[c], a = c);
       });
-      const h = V(i.length, n || "primary");
+      const d = V(i.length, a || "primary", s, n);
       Object.assign(r.billboard, {
         id: {
           type: "cluster",
           entities: i,
-          // 关键：保存所有被聚合的实体
-          count: i.length
-          // 关键：存数量
+          // 保存所有被聚合的实体
+          count: i.length,
+          // 存数量
+          types: s,
+          // 保存类型统计信息
+          colors: n
+          // 保存类型颜色信息
         },
-        image: h.toDataURL(),
+        image: d.toDataURL(),
         width: 50,
         height: 50,
         verticalOrigin: Z.CENTER,
@@ -188,25 +204,25 @@ class ne {
   calcHeightByExtent(e, t = 2.8) {
     const i = e.map((n) => {
       var a;
-      return (a = n.position) == null ? void 0 : a.getValue(C.now());
+      return (a = n.position) == null ? void 0 : a.getValue(E.now());
     }).filter((n) => n);
     if (i.length < 2) return { longitude: 0, latitude: 0, height: 500 };
     if (i.length === 2) {
-      const [n, a] = i, h = y.fromCartesian(n), c = y.fromCartesian(a), o = p.distance(
-        p.fromDegrees(d.toDegrees(h.longitude), d.toDegrees(h.latitude)),
-        p.fromDegrees(d.toDegrees(c.longitude), d.toDegrees(c.latitude))
-      ), u = P.fromPoints(i).center, f = y.fromCartesian(u);
+      const [n, a] = i, o = C.fromCartesian(n), d = C.fromCartesian(a), h = g.distance(
+        g.fromDegrees(u.toDegrees(o.longitude), u.toDegrees(o.latitude)),
+        g.fromDegrees(u.toDegrees(d.longitude), u.toDegrees(d.latitude))
+      ), c = P.fromPoints(i).center, f = C.fromCartesian(c);
       return {
-        longitude: d.toDegrees(f.longitude),
-        latitude: d.toDegrees(f.latitude),
-        height: o * t
+        longitude: u.toDegrees(f.longitude),
+        latitude: u.toDegrees(f.latitude),
+        height: h * t
         // 距离越近高度越低
       };
     }
-    const r = P.fromPoints(i), s = y.fromCartesian(r.center);
+    const r = P.fromPoints(i), s = C.fromCartesian(r.center);
     return {
-      longitude: d.toDegrees(s.longitude),
-      latitude: d.toDegrees(s.latitude),
+      longitude: u.toDegrees(s.longitude),
+      latitude: u.toDegrees(s.latitude),
       height: r.radius * t
     };
   }
@@ -220,7 +236,7 @@ class ne {
       if (t.id.type === "cluster") {
         const r = t.id.entities, { longitude: s, latitude: n, height: a } = this.calcHeightByExtent(r, 4);
         this.viewer.camera.flyTo({
-          destination: p.fromDegrees(s, n, a),
+          destination: g.fromDegrees(s, n, a),
           duration: 0.5
         });
       }
@@ -235,7 +251,7 @@ class ne {
     if (t - this.lastThrottleTime < this.throttleDelay) return;
     this.lastThrottleTime = t, (r = this.options) != null && r.offsetState && (e.endPosition.x *= 1.18, e.endPosition.y *= 1.18);
     const i = this.viewer.scene.pick(e.endPosition);
-    if (!D(i) || !i.id || i.id.name in w) {
+    if (!D(i) || !i.id || i.id.name in y) {
       this.lastHoveredEntity && (this.pointHoverExitHandler(this.lastHoveredEntity), this.lastHoveredEntity = null);
       return;
     }
@@ -300,32 +316,32 @@ class ne {
           }
         };
         t.requestImage = async (s, n, a) => {
-          const h = {
+          const o = {
             url: e.targetUrl,
             x: s,
             y: n,
             level: a
-          }, c = await r(h);
-          if (c)
-            return c;
+          }, d = await r(o);
+          if (d)
+            return d;
           try {
-            const o = await i(s, n, a);
-            if (!o || o.width === 0 || o.height === 0)
+            const h = await i(s, n, a);
+            if (!h || h.width === 0 || h.height === 0)
               throw new Error("Invalid image dimensions");
             return setTimeout(async () => {
               try {
-                const u = document.createElement("canvas");
-                u.width = o.width, u.height = o.height;
-                const f = u.getContext("2d");
-                f && (f.drawImage(o, 0, 0), u.toBlob(async (E) => {
-                  E && await this.tileCache.putTile(h, E);
+                const c = document.createElement("canvas");
+                c.width = h.width, c.height = h.height;
+                const f = c.getContext("2d");
+                f && (f.drawImage(h, 0, 0), c.toBlob(async (v) => {
+                  v && await this.tileCache.putTile(o, v);
                 }));
-              } catch (u) {
-                console.warn("异步缓存失败:", u);
+              } catch (c) {
+                console.warn("异步缓存失败:", c);
               }
-            }, 0), o;
-          } catch (o) {
-            return console.warn("获取瓦片失败:", o), await r(h) || i(s, n, a);
+            }, 0), h;
+          } catch (h) {
+            return console.warn("获取瓦片失败:", h), await r(o) || i(s, n, a);
           }
         };
       }
@@ -366,18 +382,18 @@ class ne {
     }
   }
   addPolygon(e) {
-    if (!this.viewer || !(e in w)) return;
-    const i = ((s) => s.position.geometry.coordinates.flat(2).map(([n, a]) => p.fromDegrees(n, a)))(w[e]), r = this.viewer.entities.add({
+    if (!this.viewer || !(e in y)) return;
+    const i = ((s) => s.position.geometry.coordinates.flat(2).map(([n, a]) => g.fromDegrees(n, a)))(y[e]), r = this.viewer.entities.add({
       name: e,
       polyline: {
         positions: i,
-        material: new _({
+        material: new F({
           color: b.fromCssColorString("#1E9EFA").withAlpha(0.7)
         }),
         width: 2
       },
       polygon: {
-        hierarchy: new W(i),
+        hierarchy: new _(i),
         material: b.fromCssColorString("#A2D8FF").withAlpha(0.3),
         outline: !0,
         outlineColor: b.fromCssColorString("#4694CD")
@@ -387,23 +403,23 @@ class ne {
   }
   // 深圳全市添加Polygon
   addAllDistricts() {
-    this.clearEntity("polygonEntities", "viewer"), Object.keys(w).filter((e) => e !== "深圳市").forEach(this.addPolygon.bind(this));
+    this.clearEntity("polygonEntities", "viewer"), Object.keys(y).filter((e) => e !== "深圳市").forEach(this.addPolygon.bind(this));
   }
   getClickPosition(e) {
     if (!this.viewer) return;
     const t = this.viewer.scene.pickPosition(e), i = this.getPositionCartographic();
     if (t && i) {
-      const r = y.fromCartesian(t);
-      return r.height = i[2] < 2e3 ? 200 : 2e3, p.fromRadians(r.longitude, r.latitude, r.height);
+      const r = C.fromCartesian(t);
+      return r.height = i[2] < 2e3 ? 200 : 2e3, g.fromRadians(r.longitude, r.latitude, r.height);
     }
-    Object.keys(w).filter((r) => r !== this.defaultCenterKey).forEach((r) => {
+    Object.keys(y).filter((r) => r !== this.defaultCenterKey).forEach((r) => {
       this.addPolygon(r);
     });
   }
   // 获取当前地图经纬度、高度
   getPositionCartographic() {
     if (!this.viewer) return;
-    const e = this.viewer.camera.positionCartographic, t = d.toDegrees(e.longitude), i = d.toDegrees(e.latitude);
+    const e = this.viewer.camera.positionCartographic, t = u.toDegrees(e.longitude), i = u.toDegrees(e.latitude);
     return [t, i, e.height];
   }
   // 设置地图高度
@@ -413,7 +429,7 @@ class ne {
     if (!t || !this.viewer) return;
     const { maxZoom: i = this.defaultConfig.maxZoom, minZoom: r = this.defaultConfig.minZoom } = this.options.config ?? {}, s = t[2] >= 3e4 ? 2e4 : t[2] >= 2e4 ? 1e4 : t[2] >= 1e4 ? 8e3 : 1e3, n = t[2] - (e === "ZoomIn" ? s : -s), a = n <= i && n >= r ? n : e === "ZoomIn" ? r : i;
     this.viewer.camera.flyTo({
-      destination: p.fromDegrees(t[0], t[1], a),
+      destination: g.fromDegrees(t[0], t[1], a),
       duration: 0.3
     });
   }
@@ -431,22 +447,22 @@ class ne {
   }
   // 控制窗体
   pointClickHandler(e) {
-    var h, c, o, u;
+    var o, d, h, c;
     const { name: t } = e, { labelName: i, dataIndex: r, entityIndex: s, labelEntityIndex: n } = this.getEntityNameInfo(t), a = r !== -1 && n === -1 && !this.options.defaultShowState;
-    g((h = this.pointData) == null ? void 0 : h[r], (c = this.pointEntities) == null ? void 0 : c[s], "value"), n !== -1 && this.options.defaultShowState && g((o = this.pointData) == null ? void 0 : o[r], (u = this.pointEntities) == null ? void 0 : u[n]), a && this.pointData && this.addPoint(this.pointData[r], void 0, "Label"), this.handleLabelsVisibility(i), this.options.pointHandler(e);
+    p((o = this.pointData) == null ? void 0 : o[r], (d = this.pointEntities) == null ? void 0 : d[s], "value"), n !== -1 && this.options.defaultShowState && p((h = this.pointData) == null ? void 0 : h[r], (c = this.pointEntities) == null ? void 0 : c[n]), a && this.pointData && this.addPoint(this.pointData[r], void 0, "Label"), this.handleLabelsVisibility(i), this.options.pointHandler(e);
   }
   // 处理标签显示/隐藏
   handleLabelsVisibility(e) {
     if (this.options.defaultShowState || !this.pointEntities) return;
-    const t = C.now();
+    const t = E.now();
     this.pointEntities.forEach((i) => {
       var r, s, n, a;
       if ((r = i.name) != null && r.endsWith("Label"))
         i.show = i.name === e && !i.show;
       else {
         if (!((s = i.properties) == null ? void 0 : s.getValue(t).changeState)) return;
-        const c = ((n = this.pointData) == null ? void 0 : n.findIndex((o) => o.name === i.name)) ?? -1;
-        c !== -1 && g((a = this.pointData) == null ? void 0 : a[c], i, "value");
+        const d = ((n = this.pointData) == null ? void 0 : n.findIndex((h) => h.name === i.name)) ?? -1;
+        d !== -1 && p((a = this.pointData) == null ? void 0 : a[d], i, "value");
       }
     });
   }
@@ -467,8 +483,8 @@ class ne {
     if (t === -1 || !this.pointEntities) return;
     const i = this.pointEntities[t];
     if (!i || !i.properties) return;
-    const r = C.now();
-    i.properties.getValue(r).hoverState || i.properties.addProperty("hoverState", !0), g((n = this.pointData) == null ? void 0 : n[e], i, "value");
+    const r = E.now();
+    i.properties.getValue(r).hoverState || i.properties.addProperty("hoverState", !0), p((n = this.pointData) == null ? void 0 : n[e], i, "value");
   }
   // 隐藏其他标签
   hideOtherLabels(e) {
@@ -490,33 +506,33 @@ class ne {
     if (t === -1 || !this.pointEntities) return;
     const i = this.pointEntities[t];
     if (!i || !i.properties) return;
-    const r = C.now(), s = i.properties.getValue(r);
+    const r = E.now(), s = i.properties.getValue(r);
     s.hoverState && i.properties.removeProperty("hoverState");
     const n = (a = this.pointData) == null ? void 0 : a[e];
-    n && (s.changeState ? n.changeIconType ? g(n, i, "change") : g(n, i, "value") : g(n, i, "value"));
+    n && (s.changeState ? n.changeIconType ? p(n, i, "change") : p(n, i, "value") : p(n, i, "value"));
   }
   // 处理鼠标离开时标签可见性
   handleLabelVisibilityOnExit(e, t) {
     var i;
-    t === -1 || !this.pointEntities || (this.options.defaultShowState ? g((i = this.pointData) == null ? void 0 : i[e], this.pointEntities[t]) : this.pointEntities[t].show = !1);
+    t === -1 || !this.pointEntities || (this.options.defaultShowState ? p((i = this.pointData) == null ? void 0 : i[e], this.pointEntities[t]) : this.pointEntities[t].show = !1);
   }
   // 控制多边形
   polygonClickHandler(e) {
-    var s, n, a, h;
+    var s, n, a, o;
     if (e === this.defaultCenterKey && this.centerPosition) {
       this.addAllDistricts(), this.setInitialView({ destination: this.centerPosition });
       return;
     }
-    if (!(e in w)) {
+    if (!(e in y)) {
       console.log("未找到匹配的数据");
       return;
     }
-    ((s = this.polygonEntities) == null ? void 0 : s.find((c) => c.name === e)) || this.addPolygon(e), (n = this.polygonEntities) == null || n.forEach((c) => {
-      c.show = c.name === e;
+    ((s = this.polygonEntities) == null ? void 0 : s.find((d) => d.name === e)) || this.addPolygon(e), (n = this.polygonEntities) == null || n.forEach((d) => {
+      d.show = d.name === e;
     });
-    const { lng: i, lat: r } = w[e];
-    (h = this.viewer) == null || h.camera.flyTo({
-      destination: p.fromDegrees(i, r, ((a = this.options) == null ? void 0 : a.flyToHeight) ?? this.defaultConfig.flyToHeight),
+    const { lng: i, lat: r } = y[e];
+    (o = this.viewer) == null || o.camera.flyTo({
+      destination: g.fromDegrees(i, r, ((a = this.options) == null ? void 0 : a.flyToHeight) ?? this.defaultConfig.flyToHeight),
       duration: 1
     });
   }
@@ -546,11 +562,11 @@ class ne {
   }
   // 删除
   removeHeatMap(e) {
-    !this.viewer || !e || e.element && (document.body.removeChild(e.element), e.element = void 0, e.provider instanceof $ ? (e.provider && this.viewer.imageryLayers.remove(e.provider), e.createSingleTileImageryLayer()) : e.provider instanceof F ? this.viewer.scene.primitives.remove(e.provider) : e.provider instanceof K && this.viewer.entities.remove(e.provider), e.cameraMoveEnd && (this.viewer.camera.moveEnd.removeEventListener(e.cameraMoveEnd), e.cameraMoveEnd = void 0));
+    !this.viewer || !e || e.element && (document.body.removeChild(e.element), e.element = void 0, e.provider instanceof W ? (e.provider && this.viewer.imageryLayers.remove(e.provider), e.createSingleTileImageryLayer()) : e.provider instanceof $ ? this.viewer.scene.primitives.remove(e.provider) : e.provider instanceof K && this.viewer.entities.remove(e.provider), e.cameraMoveEnd && (this.viewer.camera.moveEnd.removeEventListener(e.cameraMoveEnd), e.cameraMoveEnd = void 0));
   }
   // 检查是否在深圳边界内
   isPointInShenzhen(e, t) {
-    return e >= d.toDegrees(this.shenzhenBounds.west) && e <= d.toDegrees(this.shenzhenBounds.east) && t >= d.toDegrees(this.shenzhenBounds.south) && t <= d.toDegrees(this.shenzhenBounds.north);
+    return e >= u.toDegrees(this.shenzhenBounds.west) && e <= u.toDegrees(this.shenzhenBounds.east) && t >= u.toDegrees(this.shenzhenBounds.south) && t <= u.toDegrees(this.shenzhenBounds.north);
   }
   // 设置视角移动限制
   setupCameraLimits() {
@@ -564,13 +580,13 @@ class ne {
           if (!i) return;
           const r = this.viewer.scene.globe.pick(i, this.viewer.scene);
           if (!r) {
-            const h = this.getCameraViewCenter();
-            if (!h) return;
-            const c = d.toDegrees(h.longitude), o = d.toDegrees(h.latitude);
-            this.isPointInShenzhen(c, o) ? this.lastValidCameraPosition = this.viewer.camera.position.clone() : this.lastValidCameraPosition && (this.viewer.camera.position = this.lastValidCameraPosition.clone());
+            const o = this.getCameraViewCenter();
+            if (!o) return;
+            const d = u.toDegrees(o.longitude), h = u.toDegrees(o.latitude);
+            this.isPointInShenzhen(d, h) ? this.lastValidCameraPosition = this.viewer.camera.position.clone() : this.lastValidCameraPosition && (this.viewer.camera.position = this.lastValidCameraPosition.clone());
             return;
           }
-          const s = y.fromCartesian(r), n = d.toDegrees(s.longitude), a = d.toDegrees(s.latitude);
+          const s = C.fromCartesian(r), n = u.toDegrees(s.longitude), a = u.toDegrees(s.latitude);
           this.isPointInShenzhen(n, a) ? this.lastValidCameraPosition = this.viewer.camera.position.clone() : this.lastValidCameraPosition && (this.viewer.camera.position = this.lastValidCameraPosition.clone(), this.viewer.camera.direction = this.viewer.scene.camera.direction.clone());
         } finally {
           this.isCheckingBounds = !1;
@@ -584,7 +600,7 @@ class ne {
         const e = new I(this.viewer.canvas.clientWidth / 2, this.viewer.canvas.clientHeight / 2), t = this.viewer.camera.getPickRay(e);
         if (!t) return;
         const i = this.viewer.scene.globe.pick(t, this.viewer.scene);
-        return i ? y.fromCartesian(i) : this.viewer.camera.positionCartographic;
+        return i ? C.fromCartesian(i) : this.viewer.camera.positionCartographic;
       } catch (e) {
         return console.warn("获取相机视角中心失败", e), this.viewer.camera.positionCartographic;
       }
