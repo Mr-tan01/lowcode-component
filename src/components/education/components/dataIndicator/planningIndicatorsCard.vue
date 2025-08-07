@@ -63,20 +63,26 @@ const { fixed = true } = defineProps<{
     data: Data
 }>()
 
-const renderValue = memoize((value: number | undefined, decimal = 0) => {
-    if (fixed) {
-        const { result } = bigNumber(value ?? 0, decimal)
-        return result
-    }
-    return value
-})
-const renderUnit = memoize((value: number | undefined, unit: string | undefined, decimal = 0) => {
-    if (fixed) {
-        const { unit: numUnit } = bigNumber(value ?? 0, decimal)
-        return `${numUnit}${unit ?? ''}`
-    }
-    return unit ?? ''
-})
+const renderValue = memoize(
+    (value: number | undefined, decimal = 0) => {
+        if (fixed) {
+            const { result } = bigNumber(value ?? 0, decimal)
+            return result
+        }
+        return value
+    },
+    (value, decimal) => `${value}_${decimal}`,
+)
+const renderUnit = memoize(
+    (value: number | undefined, unit: string | undefined, decimal = 0) => {
+        if (fixed) {
+            const { unit: numUnit } = bigNumber(value ?? 0, decimal)
+            return `${numUnit}${unit ?? ''}`
+        }
+        return unit ?? ''
+    },
+    (value, unit, decimal) => `${value}_${unit}_${decimal}`,
+)
 
 const formatedText = (text, maxLength) => {
     if (!text) return '-'
