@@ -1,2 +1,4 @@
-import f from './index.js'
-export { f as default }
+import _sfc_main from "./index.js";
+export {
+  _sfc_main as default
+};

@@ -21,10 +21,21 @@ const options = merge({}, commonViteConfig, {
         watch: programActions.watch,
         outDir: '../es/education',
         emptyOutDir: false,
+        minify: 'terser',
+        terserOptions: {
+            compress: {
+                ecma: 2015,
+                warnings: true,
+                comparisons: false,
+                inline: 2,
+                drop_console: true,
+                pure_funcs: []
+            }
+        },
     },
 })
 const esmComBuilder = new EsmComBuilder(modeListBase, options)
-const modeList = programActions.target
+const modeList = programActions.target && programActions.target.trim() !== ''
     ? programActions.target?.split(' ')
     : fs.readdirSync(modeListBase)
 console.log('编译模块：', modeList)

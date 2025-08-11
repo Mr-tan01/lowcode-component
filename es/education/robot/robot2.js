@@ -1,17 +1,19 @@
-import { defineComponent as H, mergeModels as M, useCssVars as P, unref as o, useModel as S, computed as s, toRefs as k, openBlock as u, createElementBlock as $, normalizeClass as p, createElementVNode as m, createBlock as b, mergeProps as c, createCommentVNode as h } from "vue";
-import { robotBQMap as V, imageShowTrigger as E, imageHideDir as v } from "./const.js";
-import w from "./robot-chat-popup.js";
-import { useDragRobotPosition as F } from "./drag.js";
-const N = ["draggable"], R = ["src"], O = /* @__PURE__ */ H({
+import { defineComponent, mergeModels, useCssVars, unref, useModel, computed, toRefs, openBlock, createElementBlock, normalizeClass, createElementVNode, createBlock, mergeProps, createCommentVNode } from "vue";
+import { robotBQMap, imageShowTrigger, imageHideDir } from "./const.js";
+import robotChatPopup from "./robot-chat-popup.js";
+import { useDragRobotPosition } from "./drag.js";
+const _hoisted_1 = ["draggable"];
+const _hoisted_2 = ["src"];
+const _sfc_main = /* @__PURE__ */ defineComponent({
   __name: "robot",
-  props: /* @__PURE__ */ M({
+  props: /* @__PURE__ */ mergeModels({
     src: { default: "" },
     value: { default: "s1" },
     width: { default: "219px" },
     height: { default: "233px" },
     trigger: { default: "none" },
     hidDir: { default: "lt" },
-    showPopup: { type: Boolean, default: !1 },
+    showPopup: { type: Boolean, default: false },
     aiConfig: { default: () => ({
       sayHello: "Hi，我是小教！ 您可以试着说",
       quick: [
@@ -29,79 +31,88 @@ const N = ["draggable"], R = ["src"], O = /* @__PURE__ */ H({
         }
       ]
     }) },
-    popupContextMaxH: { default: () => {
-    } },
-    draggable: { type: Boolean, default: !1 },
+    popupContextMaxH: { default: () => void 0 },
+    draggable: { type: Boolean, default: false },
     position: { default: "fixed" }
   }, {
-    isShow: { type: Boolean, default: !1 },
-    isShowModifiers: {}
+    "isShow": { type: Boolean, ...{ default: false } },
+    "isShowModifiers": {}
   }),
   emits: ["update:isShow"],
-  setup(a) {
-    P((e) => ({
-      "533baf34": e.position,
-      "0825eb3e": o(y),
-      "224a2fa9": e.width,
-      "0d2ccba4": e.height
+  setup(__props) {
+    useCssVars((_ctx) => ({
+      "533baf34": _ctx.position,
+      "0825eb3e": unref(robotPositionBottom),
+      "224a2fa9": _ctx.width,
+      "0d2ccba4": _ctx.height
     }));
-    const r = S(a, "isShow"), C = s(() => a.src || V[a.value]), { isDraging: x, startDrag: n, stopDrag: d, robotOffset: D, xAdsorptionDir: g } = F(), l = s(() => a.draggable ? g.value : a.hidDir), B = s(() => ({
-      [`lc-robot__wrapper__image--status-${l.value}`]: a.trigger !== E.none
-    }));
-    function f(e) {
-      return s(() => a.showPopup && l.value === e).value;
+    const isFocus = useModel(__props, "isShow");
+    const robotSrc = computed(() => __props.src || robotBQMap[__props.value]);
+    const { isDraging, startDrag, stopDrag, robotOffset, xAdsorptionDir } = useDragRobotPosition();
+    const robotHideDir = computed(() => {
+      return !__props.draggable ? __props.hidDir : xAdsorptionDir.value;
+    });
+    const imageLayoutClass = computed(() => {
+      return {
+        [`lc-robot__wrapper__image--status-${robotHideDir.value}`]: __props.trigger !== imageShowTrigger.none
+      };
+    });
+    function useShowPopup(dir) {
+      return computed(() => __props.showPopup && robotHideDir.value === dir).value;
     }
-    const { y } = k(D);
-    return (e, t) => (u(), $("div", {
-      class: p(["lc-robot", [
-        {
-          "lc-robot--draggable": e.draggable,
-          "lc-robot--draging": o(x)
-        },
-        `lc-robot--dir-${o(g)}`
-      ]]),
-      draggable: e.draggable,
-      onDragstart: t[2] || (t[2] = //@ts-ignore
-      (...i) => o(n) && o(n)(...i)),
-      onDragend: t[3] || (t[3] = //@ts-ignore
-      (...i) => o(d) && o(d)(...i))
-    }, [
-      m(
-        "div",
-        {
-          class: "lc-robot__wrapper",
-          tabindex: "-1",
-          onFocus: t[0] || (t[0] = (i) => r.value = !0),
-          onBlur: t[1] || (t[1] = (i) => r.value = !1)
-        },
-        [
-          f(o(v).rt) ? (u(), b(w, c({
-            key: 0,
-            "max-height": e.popupContextMaxH,
-            "ai-config": e.aiConfig,
-            "is-focus": r.value,
-            "hid-dir": l.value
-          }, e.$attrs), null, 16, ["max-height", "ai-config", "is-focus", "hid-dir"])) : h("v-if", !0),
-          m("img", {
-            class: p(["lc-robot__wrapper__image", [B.value]]),
-            src: C.value,
-            draggable: "false",
-            alt: ""
-          }, null, 10, R),
-          f(o(v).lt) ? (u(), b(w, c({
-            key: 1,
-            "max-height": e.popupContextMaxH,
-            "ai-config": e.aiConfig,
-            "is-focus": r.value,
-            "hid-dir": l.value
-          }, e.$attrs), null, 16, ["max-height", "ai-config", "is-focus", "hid-dir"])) : h("v-if", !0)
-        ],
-        32
-        /* NEED_HYDRATION */
-      )
-    ], 42, N));
+    const { y: robotPositionBottom } = toRefs(robotOffset);
+    return (_ctx, _cache) => {
+      return openBlock(), createElementBlock("div", {
+        class: normalizeClass(["lc-robot", [
+          {
+            "lc-robot--draggable": _ctx.draggable,
+            "lc-robot--draging": unref(isDraging)
+          },
+          `lc-robot--dir-${unref(xAdsorptionDir)}`
+        ]]),
+        draggable: _ctx.draggable,
+        onDragstart: _cache[2] || (_cache[2] = //@ts-ignore
+        (...args) => unref(startDrag) && unref(startDrag)(...args)),
+        onDragend: _cache[3] || (_cache[3] = //@ts-ignore
+        (...args) => unref(stopDrag) && unref(stopDrag)(...args))
+      }, [
+        createElementVNode(
+          "div",
+          {
+            class: "lc-robot__wrapper",
+            tabindex: "-1",
+            onFocus: _cache[0] || (_cache[0] = ($event) => isFocus.value = true),
+            onBlur: _cache[1] || (_cache[1] = ($event) => isFocus.value = false)
+          },
+          [
+            useShowPopup(unref(imageHideDir).rt) ? (openBlock(), createBlock(robotChatPopup, mergeProps({
+              key: 0,
+              "max-height": _ctx.popupContextMaxH,
+              "ai-config": _ctx.aiConfig,
+              "is-focus": isFocus.value,
+              "hid-dir": robotHideDir.value
+            }, _ctx.$attrs), null, 16, ["max-height", "ai-config", "is-focus", "hid-dir"])) : createCommentVNode("v-if", true),
+            createElementVNode("img", {
+              class: normalizeClass(["lc-robot__wrapper__image", [imageLayoutClass.value]]),
+              src: robotSrc.value,
+              draggable: "false",
+              alt: ""
+            }, null, 10, _hoisted_2),
+            useShowPopup(unref(imageHideDir).lt) ? (openBlock(), createBlock(robotChatPopup, mergeProps({
+              key: 1,
+              "max-height": _ctx.popupContextMaxH,
+              "ai-config": _ctx.aiConfig,
+              "is-focus": isFocus.value,
+              "hid-dir": robotHideDir.value
+            }, _ctx.$attrs), null, 16, ["max-height", "ai-config", "is-focus", "hid-dir"])) : createCommentVNode("v-if", true)
+          ],
+          32
+          /* NEED_HYDRATION */
+        )
+      ], 42, _hoisted_1);
+    };
   }
 });
 export {
-  O as default
+  _sfc_main as default
 };

@@ -1,2 +1,4 @@
-import f from './checkbox-group.js'
-export { f as default }
+import _sfc_main from "./checkbox-group.js";
+export {
+  _sfc_main as default
+};

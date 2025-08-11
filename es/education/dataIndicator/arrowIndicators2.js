@@ -1,11 +1,17 @@
-import { defineComponent as u, mergeDefaults as d, computed as i, openBlock as m, createElementBlock as v, createElementVNode as n, createVNode as r, unref as a, toDisplayString as o, renderSlot as f } from "vue";
-import _ from "./icon/index2.js";
+import { defineComponent, mergeDefaults, computed, openBlock, createElementBlock, createElementVNode, createVNode, unref, toDisplayString, renderSlot } from "vue";
+import LcIcon from "./icon/index.js";
 import './assets/icon/iconCard.css';/* empty css              */
-import { NNumberAnimation as b } from "naive-ui/es/number-animation";
-import { bigNumber as c } from "lowcode-share/es/share";
-const h = { class: "lc-arrow-indicators" }, w = { class: "lc-arrow-indicators__icon" }, y = { class: "lc-arrow-indicators__center" }, N = { class: "lc-arrow-indicators__center__lable" }, g = { class: "lc-arrow-indicators__center__value" }, x = { class: "lc-arrow-indicators__center__value__unit" }, D = /* @__PURE__ */ u({
+import { NNumberAnimation } from "naive-ui/es/number-animation";
+import { bigNumber } from "lowcode-share/es/share";
+const _hoisted_1 = { class: "lc-arrow-indicators" };
+const _hoisted_2 = { class: "lc-arrow-indicators__icon" };
+const _hoisted_3 = { class: "lc-arrow-indicators__center" };
+const _hoisted_4 = { class: "lc-arrow-indicators__center__lable" };
+const _hoisted_5 = { class: "lc-arrow-indicators__center__value" };
+const _hoisted_6 = { class: "lc-arrow-indicators__center__value__unit" };
+const _sfc_main = /* @__PURE__ */ defineComponent({
   __name: "arrowIndicators",
-  props: /* @__PURE__ */ d({
+  props: /* @__PURE__ */ mergeDefaults({
     label: {
       type: String
     },
@@ -27,63 +33,66 @@ const h = { class: "lc-arrow-indicators" }, w = { class: "lc-arrow-indicators__i
   }, {
     label: "",
     value: 0,
-    fixed: !0,
+    fixed: true,
     decimal: 0,
     icon: "person2",
     unit: ""
   }),
-  setup(e) {
-    const l = i(() => {
-      if (e.fixed) {
-        const { result: t } = c(e.value, e.decimal);
-        return t;
+  setup(__props) {
+    const renderValue = computed(() => {
+      if (__props.fixed) {
+        const { result } = bigNumber(__props.value, __props.decimal);
+        return result;
       }
-      return e.value;
-    }), s = i(() => {
-      if (e.fixed) {
-        const { unit: t } = c(e.value, e.decimal);
-        return `${t}${e.unit}`;
-      }
-      return e.unit;
+      return __props.value;
     });
-    return (t, S) => (m(), v("div", h, [
-      n("div", w, [
-        r(a(_), {
-          domain: "event",
-          name: e.icon,
-          size: 70
-        }, null, 8, ["name"])
-      ]),
-      n("div", y, [
-        n(
-          "div",
-          N,
-          o(e.label),
-          1
-          /* TEXT */
-        ),
-        n("div", g, [
-          f(t.$slots, "value", {}, () => [
-            r(a(b), {
-              "show-separator": "",
-              from: 0,
-              to: l.value,
-              active: "",
-              precision: e.decimal
-            }, null, 8, ["to", "precision"]),
-            n(
-              "span",
-              x,
-              o(s.value),
-              1
-              /* TEXT */
-            )
-          ], !0)
+    const renderUnit = computed(() => {
+      if (__props.fixed) {
+        const { unit: numUnit } = bigNumber(__props.value, __props.decimal);
+        return `${numUnit}${__props.unit}`;
+      }
+      return __props.unit;
+    });
+    return (_ctx, _cache) => {
+      return openBlock(), createElementBlock("div", _hoisted_1, [
+        createElementVNode("div", _hoisted_2, [
+          createVNode(unref(LcIcon), {
+            domain: "event",
+            name: __props.icon,
+            size: 70
+          }, null, 8, ["name"])
+        ]),
+        createElementVNode("div", _hoisted_3, [
+          createElementVNode(
+            "div",
+            _hoisted_4,
+            toDisplayString(__props.label),
+            1
+            /* TEXT */
+          ),
+          createElementVNode("div", _hoisted_5, [
+            renderSlot(_ctx.$slots, "value", {}, () => [
+              createVNode(unref(NNumberAnimation), {
+                "show-separator": "",
+                from: 0,
+                to: renderValue.value,
+                active: "",
+                precision: __props.decimal
+              }, null, 8, ["to", "precision"]),
+              createElementVNode(
+                "span",
+                _hoisted_6,
+                toDisplayString(renderUnit.value),
+                1
+                /* TEXT */
+              )
+            ], true)
+          ])
         ])
-      ])
-    ]));
+      ]);
+    };
   }
 });
 export {
-  D as default
+  _sfc_main as default
 };

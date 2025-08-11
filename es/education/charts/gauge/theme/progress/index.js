@@ -1,21 +1,21 @@
-const t = {
+const progressSeries = {
   startAngle: -180,
   endAngle: 0,
   min: 0,
   max: 240,
   splitNumber: 10,
-  clockwise: !0,
+  clockwise: true,
   itemStyle: {},
   progress: {
-    show: !0,
-    roundCap: !1,
+    show: true,
+    roundCap: false,
     width: 18,
     itemStyle: {
       borderWidth: 0
     }
   },
   pointer: {
-    show: !0,
+    show: true,
     length: "100%",
     width: 4,
     offsetCenter: [0, "0%"],
@@ -25,21 +25,21 @@ const t = {
     }
   },
   axisLine: {
-    show: !0,
-    roundCap: !1,
+    show: true,
+    roundCap: false,
     lineStyle: {
       width: 18
     }
   },
   axisTick: {
-    show: !1
+    show: false
   },
   splitLine: {
-    show: !1
+    show: false
   },
   anchor: {
-    show: !0,
-    showAbove: !0,
+    show: true,
+    showAbove: true,
     size: 25,
     itemStyle: {
       color: "#fff",
@@ -48,23 +48,23 @@ const t = {
     }
   },
   axisLabel: {
-    show: !0,
+    show: true,
     distance: -40,
     color: "#fff",
     fontSize: 14,
-    formatter: function(e) {
-      return e.toFixed(0);
+    formatter: function(value) {
+      return value.toFixed(0);
     }
   },
   title: {
-    show: !1
+    show: false
   },
   detail: {
-    show: !0,
+    show: true,
     offsetCenter: [0, "30%"],
-    valueAnimation: !0,
-    formatter: function(e) {
-      return "{value|" + e.toFixed(0) + "}";
+    valueAnimation: true,
+    formatter: function(value) {
+      return "{value|" + value.toFixed(0) + "}";
     },
     rich: {
       value: {
@@ -75,5 +75,5 @@ const t = {
   }
 };
 export {
-  t as progressSeries
+  progressSeries
 };

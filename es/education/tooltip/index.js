@@ -1,2 +1,4 @@
-import { default as a } from './tooltip.js'
-export { a as LcTooltip }
+import { default as default2 } from "./tooltip.js";
+export {
+  default2 as LcTooltip
+};

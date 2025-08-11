@@ -1,5 +1,5 @@
-import { defaultFunnelTierOptions as i, defaultFunnelTierSeriesOptions as r } from "./funnelTier/index.js";
+import { defaultFunnelTierOptions, defaultFunnelTierSeriesOptions } from "./funnelTier/index.js";
 export {
-  i as defaultFunnelTierOptions,
-  r as defaultFunnelTierSeriesOptions
+  defaultFunnelTierOptions,
+  defaultFunnelTierSeriesOptions
 };

@@ -1,11 +1,14 @@
-import { defineComponent as s, mergeDefaults as c, computed as n, openBlock as r, createElementBlock as o, normalizeClass as d, createElementVNode as l, renderSlot as i, toDisplayString as m, createCommentVNode as p } from "vue";
-import { overflowStr as u } from "lowcode-share/es/share";
-const _ = { class: "lc-decorator-title__wrapper" }, f = ["title"], h = {
+import { defineComponent, mergeDefaults, computed, openBlock, createElementBlock, normalizeClass, createElementVNode, renderSlot, toDisplayString, createCommentVNode } from "vue";
+import { overflowStr } from "lowcode-share/es/share";
+const _hoisted_1 = { class: "lc-decorator-title__wrapper" };
+const _hoisted_2 = ["title"];
+const _hoisted_3 = {
   key: 0,
   class: "lc-decortator-title__slot"
-}, y = /* @__PURE__ */ s({
+};
+const _sfc_main = /* @__PURE__ */ defineComponent({
   __name: "decoratorTitle",
-  props: /* @__PURE__ */ c({
+  props: /* @__PURE__ */ mergeDefaults({
     text: {
       type: String
     },
@@ -20,31 +23,35 @@ const _ = { class: "lc-decorator-title__wrapper" }, f = ["title"], h = {
     maxLength: 12,
     dir: "ltr"
   }),
-  setup(t) {
-    const a = n(() => u(t.text, t.maxLength));
-    return (e, x) => (r(), o(
-      "div",
-      {
-        class: d(["lc-decorator-title", [`lc-decorator-title--${t.dir}`]])
-      },
-      [
-        l("div", _, [
-          i(e.$slots, "title", {}, () => [
-            l("div", {
-              class: "lc-decorator-title__wrapper__text",
-              title: t.text
-            }, m(a.value), 9, f)
-          ], !0),
-          e.$slots.helper ? (r(), o("div", h, [
-            i(e.$slots, "helper", {}, void 0, !0)
-          ])) : p("v-if", !0)
-        ])
-      ],
-      2
-      /* CLASS */
-    ));
+  setup(__props) {
+    const formatedText = computed(() => {
+      return overflowStr(__props.text, __props.maxLength);
+    });
+    return (_ctx, _cache) => {
+      return openBlock(), createElementBlock(
+        "div",
+        {
+          class: normalizeClass(["lc-decorator-title", [`lc-decorator-title--${__props.dir}`]])
+        },
+        [
+          createElementVNode("div", _hoisted_1, [
+            renderSlot(_ctx.$slots, "title", {}, () => [
+              createElementVNode("div", {
+                class: "lc-decorator-title__wrapper__text",
+                title: __props.text
+              }, toDisplayString(formatedText.value), 9, _hoisted_2)
+            ], true),
+            _ctx.$slots.helper ? (openBlock(), createElementBlock("div", _hoisted_3, [
+              renderSlot(_ctx.$slots, "helper", {}, void 0, true)
+            ])) : createCommentVNode("v-if", true)
+          ])
+        ],
+        2
+        /* CLASS */
+      );
+    };
   }
 });
 export {
-  y as default
+  _sfc_main as default
 };

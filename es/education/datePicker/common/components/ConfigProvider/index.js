@@ -1,35 +1,25 @@
-import {
-    defineComponent as t,
-    openBlock as r,
-    createBlock as a,
-    unref as e,
-    withCtx as l,
-    renderSlot as m,
-} from 'vue'
-import { NConfigProvider as n } from 'naive-ui/es/config-provider'
-import { darkTheme as c } from 'naive-ui/es/themes'
-import { dateZhCN as d, zhCN as f } from 'naive-ui/es/locales'
-const C = /* @__PURE__ */ t({
-    __name: 'index',
-    setup(i) {
-        return (o, p) => (
-            r(),
-            a(
-                e(n),
-                {
-                    'date-locale': e(d),
-                    'locale': e(f),
-                    'theme': e(c),
-                },
-                {
-                    default: l(() => [m(o.$slots, 'default')]),
-                    _: 3,
-                    /* FORWARDED */
-                },
-                8,
-                ['date-locale', 'locale', 'theme'],
-            )
-        )
-    },
-})
-export { C as default }
+import { defineComponent, openBlock, createBlock, unref, withCtx, renderSlot } from "vue";
+import { NConfigProvider } from "naive-ui/es/config-provider";
+import { darkTheme } from "naive-ui/es/themes";
+import { dateZhCN, zhCN } from "naive-ui/es/locales";
+const _sfc_main = /* @__PURE__ */ defineComponent({
+  __name: "index",
+  setup(__props) {
+    return (_ctx, _cache) => {
+      return openBlock(), createBlock(unref(NConfigProvider), {
+        "date-locale": unref(dateZhCN),
+        locale: unref(zhCN),
+        theme: unref(darkTheme)
+      }, {
+        default: withCtx(() => [
+          renderSlot(_ctx.$slots, "default")
+        ]),
+        _: 3
+        /* FORWARDED */
+      }, 8, ["date-locale", "locale", "theme"]);
+    };
+  }
+});
+export {
+  _sfc_main as default
+};

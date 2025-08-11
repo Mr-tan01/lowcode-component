@@ -1,46 +1,60 @@
-import { defineComponent as f, shallowRef as o, useTemplateRef as p, openBlock as m, createElementBlock as v, createElementVNode as w } from "vue";
-import { useScriptTag as _ } from "@vueuse/core";
-import k from "../mark/images/normal.png.js";
-const h = { class: "lc-tianditu" }, E = {
+import { defineComponent, shallowRef, useTemplateRef, openBlock, createElementBlock, createElementVNode } from "vue";
+import { useScriptTag } from "@vueuse/core";
+import normalMarker from "../mark/images/normal.png.js";
+const _hoisted_1 = { class: "lc-tianditu" };
+const _hoisted_2 = {
   ref: "tiandituCanvasEl",
   class: "lc-tianditu__map"
-}, g = /* @__PURE__ */ f({
+};
+const _sfc_main = /* @__PURE__ */ defineComponent({
   __name: "tianditu",
   props: {
     tk: { default: "" },
     apiSrc: { default: "http://api.tianditu.gov.cn/api?v=4.0&tk=" }
   },
-  setup(a) {
-    const t = o(), e = o(), c = p("tiandituCanvasEl"), { load: l } = _(`${a.apiSrc}${a.tk}`, void 0, {
-      async: !1,
-      defer: !0,
-      noModule: !1
+  setup(__props) {
+    const tiandituApi = shallowRef();
+    const tiandituInstance = shallowRef();
+    const tiandituCanvasElRef = useTemplateRef("tiandituCanvasEl");
+    const { load } = useScriptTag(`${__props.apiSrc}${__props.tk}`, void 0, {
+      async: false,
+      defer: true,
+      noModule: false
     });
-    function u() {
-      e.value = new t.value.Map(c.value), e.value.centerAndZoom(new t.value.LngLat(116.40769, 39.89945), 12);
+    function initTianditu() {
+      tiandituInstance.value = new tiandituApi.value.Map(tiandituCanvasElRef.value);
+      tiandituInstance.value.centerAndZoom(new tiandituApi.value.LngLat(116.40769, 39.89945), 12);
     }
-    function r() {
-      const n = t.value, i = new n.Icon({
-        iconUrl: k,
-        iconSize: new n.Point(50, 75),
-        iconAnchor: new n.Point(10, 25)
-      }), s = new n.Marker(new n.LngLat(116.411794, 39.9068), { icon: i });
-      e.value.addOverLay(s);
+    function addMark() {
+      const T = tiandituApi.value;
+      const icon = new T.Icon({
+        iconUrl: normalMarker,
+        iconSize: new T.Point(50, 75),
+        iconAnchor: new T.Point(10, 25)
+      });
+      const marker = new T.Marker(new T.LngLat(116.411794, 39.9068), { icon });
+      tiandituInstance.value.addOverLay(marker);
     }
-    async function d() {
-      await l(), t.value = window.T, u(), r();
+    async function init() {
+      await load();
+      tiandituApi.value = window.T;
+      initTianditu();
+      addMark();
     }
-    return d(), (n, i) => (m(), v("div", h, [
-      w(
-        "div",
-        E,
-        null,
-        512
-        /* NEED_PATCH */
-      )
-    ]));
+    init();
+    return (_ctx, _cache) => {
+      return openBlock(), createElementBlock("div", _hoisted_1, [
+        createElementVNode(
+          "div",
+          _hoisted_2,
+          null,
+          512
+          /* NEED_PATCH */
+        )
+      ]);
+    };
   }
 });
 export {
-  g as default
+  _sfc_main as default
 };

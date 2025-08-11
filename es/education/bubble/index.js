@@ -1,4 +1,4 @@
-import { default as b } from "./bubble.js";
+import { default as default2 } from "./bubble.js";
 export {
-  b as LcBubble
+  default2 as LcBubble
 };

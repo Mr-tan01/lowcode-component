@@ -1,101 +1,81 @@
-import {
-    defineComponent as d,
-    mergeModels as u,
-    useCssVars as r,
-    useModel as c,
-    openBlock as f,
-    createElementBlock as g,
-    createElementVNode as t,
-    toDisplayString as a,
-    createTextVNode as p,
-} from 'vue'
-const m = { class: 'pagination-container' },
-    _ = { class: 'pagination-left' },
-    v = ['disabled'],
-    b = { class: 'page-info' },
-    h = { class: 'page-info' },
-    P = ['disabled'],
-    V = { class: 'pagination-right total-pages' },
-    F = /* @__PURE__ */ d({
-        __name: 'paging',
-        props: /* @__PURE__ */ u(
-            {
-                totalPages: { default: 1 },
-                modelValue: {},
-                fontSize: { default: '16px' },
-                fontColor: { default: '#FFFFFF' },
-            },
-            {
-                modelValue: { default: 1 },
-                modelModifiers: {},
-            },
-        ),
-        emits: ['update:modelValue'],
-        setup(l) {
-            r((o) => ({
-                '023c5c0b': o.fontSize,
-                '44703499': o.fontColor,
-            }))
-            const e = c(l, 'modelValue'),
-                n = () => {
-                    e.value > 1 && e.value--
-                },
-                i = () => {
-                    e.value < l.totalPages && e.value++
-                }
-            return (o, s) => (
-                f(),
-                g('div', m, [
-                    t('div', _, [
-                        t(
-                            'button',
-                            {
-                                onClick: n,
-                                disabled: e.value === 1,
-                                class: 'arrow-button left-arrow',
-                            },
-                            null,
-                            8,
-                            v,
-                        ),
-                        t(
-                            'span',
-                            b,
-                            a(e.value),
-                            1,
-                            /* TEXT */
-                        ),
-                        s[0] || (s[0] = p(' / ')),
-                        t(
-                            'span',
-                            h,
-                            a(o.totalPages),
-                            1,
-                            /* TEXT */
-                        ),
-                        t(
-                            'button',
-                            {
-                                onClick: i,
-                                disabled: e.value === o.totalPages,
-                                class: 'arrow-button right-arrow',
-                            },
-                            null,
-                            8,
-                            P,
-                        ),
-                    ]),
-                    t('div', V, [
-                        t(
-                            'span',
-                            null,
-                            '共 ' + a(o.totalPages) + ' 页',
-                            1,
-                            /* TEXT */
-                        ),
-                    ]),
-                ])
-            )
-        },
-    })
-export { F as default }
+import { defineComponent, mergeModels, useCssVars, useModel, openBlock, createElementBlock, createElementVNode, toDisplayString, createTextVNode } from "vue";
+const _hoisted_1 = { class: "pagination-container" };
+const _hoisted_2 = { class: "pagination-left" };
+const _hoisted_3 = ["disabled"];
+const _hoisted_4 = { class: "page-info" };
+const _hoisted_5 = { class: "page-info" };
+const _hoisted_6 = ["disabled"];
+const _hoisted_7 = { class: "pagination-right total-pages" };
+const _sfc_main = /* @__PURE__ */ defineComponent({
+  __name: "paging",
+  props: /* @__PURE__ */ mergeModels({
+    totalPages: { default: 1 },
+    modelValue: {},
+    fontSize: { default: "16px" },
+    fontColor: { default: "#FFFFFF" }
+  }, {
+    "modelValue": { default: 1 },
+    "modelModifiers": {}
+  }),
+  emits: ["update:modelValue"],
+  setup(__props) {
+    useCssVars((_ctx) => ({
+      "572a4070": _ctx.fontSize,
+      "e5824658": _ctx.fontColor
+    }));
+    const model = useModel(__props, "modelValue");
+    const prevPage = () => {
+      if (model.value > 1) {
+        model.value--;
+      }
+    };
+    const nextPage = () => {
+      if (model.value < __props.totalPages) {
+        model.value++;
+      }
+    };
+    return (_ctx, _cache) => {
+      return openBlock(), createElementBlock("div", _hoisted_1, [
+        createElementVNode("div", _hoisted_2, [
+          createElementVNode("button", {
+            disabled: model.value === 1,
+            class: "arrow-button left-arrow",
+            onClick: prevPage
+          }, null, 8, _hoisted_3),
+          createElementVNode(
+            "span",
+            _hoisted_4,
+            toDisplayString(model.value),
+            1
+            /* TEXT */
+          ),
+          _cache[0] || (_cache[0] = createTextVNode(" / ")),
+          createElementVNode(
+            "span",
+            _hoisted_5,
+            toDisplayString(_ctx.totalPages),
+            1
+            /* TEXT */
+          ),
+          createElementVNode("button", {
+            disabled: model.value === _ctx.totalPages,
+            class: "arrow-button right-arrow",
+            onClick: nextPage
+          }, null, 8, _hoisted_6)
+        ]),
+        createElementVNode("div", _hoisted_7, [
+          createElementVNode(
+            "span",
+            null,
+            "共 " + toDisplayString(_ctx.totalPages) + " 页",
+            1
+            /* TEXT */
+          )
+        ])
+      ]);
+    };
+  }
+});
+export {
+  _sfc_main as default
+};

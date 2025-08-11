@@ -1,22 +1,17 @@
-import {
-    openBlock as t,
-    createElementBlock as o,
-    createElementVNode as c,
-    renderSlot as n,
-} from 'vue'
-import './assets/headline.css' /* empty css          */
-import r from './_virtual/_plugin-vue_export-helper.js'
-const d = {},
-    s = { class: 'lc-headline' },
-    l = { class: 'lc-headline__text' }
-function _(e, a) {
-    return (
-        t(),
-        o('div', s, [c('div', l, [n(e.$slots, 'default', {}, void 0, !0)])])
-    )
+import { openBlock, createElementBlock, createElementVNode, renderSlot } from "vue";
+import './assets/headline.css';/* empty css          */
+import _export_sfc from "./_virtual/_plugin-vue_export-helper.js";
+const _sfc_main = {};
+const _hoisted_1 = { class: "lc-headline" };
+const _hoisted_2 = { class: "lc-headline__text" };
+function _sfc_render(_ctx, _cache) {
+  return openBlock(), createElementBlock("div", _hoisted_1, [
+    createElementVNode("div", _hoisted_2, [
+      renderSlot(_ctx.$slots, "default", {}, void 0, true)
+    ])
+  ]);
 }
-const p = /* @__PURE__ */ r(d, [
-    ['render', _],
-    ['__scopeId', 'data-v-29fe5c45'],
-])
-export { p as default }
+const headline = /* @__PURE__ */ _export_sfc(_sfc_main, [["render", _sfc_render], ["__scopeId", "data-v-f29368d8"]]);
+export {
+  headline as default
+};

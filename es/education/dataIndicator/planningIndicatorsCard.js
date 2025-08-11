@@ -1,7 +1,7 @@
-import o from "./planningIndicatorsCard2.js";
+import _sfc_main from "./planningIndicatorsCard2.js";
 import './assets/planningIndicatorsCard.css';/* empty css                        */
-import r from "./_virtual/_plugin-vue_export-helper.js";
-const c = /* @__PURE__ */ r(o, [["__scopeId", "data-v-916ed1c9"]]);
+import _export_sfc from "./_virtual/_plugin-vue_export-helper.js";
+const planningIndicatorsCard = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-916ed1c9"]]);
 export {
-  c as default
+  planningIndicatorsCard as default
 };

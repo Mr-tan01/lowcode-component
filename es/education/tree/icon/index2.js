@@ -1,86 +1,65 @@
-import {
-    defineComponent as _,
-    useCssVars as p,
-    toRefs as g,
-    computed as h,
-    openBlock as x,
-    createElementBlock as v,
-    normalizeClass as o,
-    unref as e,
-    normalizeStyle as y,
-    createElementVNode as c,
-    renderSlot as z,
-} from 'vue'
-import { useImage as $ } from './icons.js'
-const B = ['src'],
-    C = { class: 'lc-icon__span' },
-    E = /* @__PURE__ */ _({
-        __name: 'icon',
-        props: {
-            domain: { default: 'func' },
-            name: { default: 'add' },
-            size: { default: 16 },
-            ext: { default: '.png' },
-            selected: { type: Boolean, default: void 0 },
+import { defineComponent, useCssVars, toRefs, computed, openBlock, createElementBlock, normalizeClass, unref, normalizeStyle, createElementVNode, renderSlot } from "vue";
+import { useImage } from "./icons.js";
+const _hoisted_1 = ["src"];
+const _hoisted_2 = { class: "lc-icon__span" };
+const _sfc_main = /* @__PURE__ */ defineComponent({
+  __name: "icon",
+  props: {
+    domain: { default: "func" },
+    name: { default: "add" },
+    size: { default: 32 },
+    ext: { default: ".png" },
+    selected: { type: Boolean, default: void 0 }
+  },
+  setup(__props) {
+    useCssVars((_ctx) => ({
+      "2f24b870": iconWidth.value
+    }));
+    const props = __props;
+    const { domain, name, size, ext, selected } = toRefs(props);
+    const { src, selectedSrc } = useImage(domain, name, ext);
+    const iconWidth = computed(() => typeof size.value === "number" ? `${size.value}px` : size.value);
+    return (_ctx, _cache) => {
+      return openBlock(), createElementBlock(
+        "div",
+        {
+          class: normalizeClass(["lc-icon", {
+            "lc-icon--selected": unref(selected)
+          }]),
+          style: normalizeStyle({
+            "--img-src": `url(${unref(src)})`,
+            "--img-selected-src": `url(${unref(selectedSrc)})`
+          })
         },
-        setup(a) {
-            p((l) => ({
-                '498fff03': f.value,
-            }))
-            const i = a,
-                { domain: r, name: d, size: s, ext: m, selected: u } = g(i),
-                { src: t, selectedSrc: n } = $(r, d, m),
-                f = h(() => (typeof s == 'number' ? `${s}px` : s))
-            return (l, S) => (
-                x(),
-                v(
-                    'div',
-                    {
-                        class: o([
-                            'lc-icon',
-                            {
-                                'lc-icon--selected': e(u),
-                            },
-                        ]),
-                        style: y({
-                            '--img-src': `url(${e(t)})`,
-                            '--img-selected-src': `url(${e(n)})`,
-                        }),
-                    },
-                    [
-                        c(
-                            'div',
-                            {
-                                class: o([
-                                    'lc-icon__image',
-                                    {
-                                        'lc-icon__image--enhover': !!e(n),
-                                    },
-                                ]),
-                            },
-                            [
-                                c(
-                                    'img',
-                                    {
-                                        class: 'lc-icon__img',
-                                        src: e(t),
-                                        draggable: 'false',
-                                        alt: '',
-                                    },
-                                    null,
-                                    8,
-                                    B,
-                                ),
-                            ],
-                            2,
-                            /* CLASS */
-                        ),
-                        c('span', C, [z(l.$slots, 'default', {}, void 0, !0)]),
-                    ],
-                    6,
-                    /* CLASS, STYLE */
-                )
-            )
-        },
-    })
-export { E as default }
+        [
+          createElementVNode(
+            "div",
+            {
+              class: normalizeClass(["lc-icon__image", {
+                "lc-icon__image--enhover": !!unref(selectedSrc)
+              }])
+            },
+            [
+              createElementVNode("img", {
+                class: "lc-icon__img",
+                src: unref(src),
+                draggable: "false",
+                alt: ""
+              }, null, 8, _hoisted_1)
+            ],
+            2
+            /* CLASS */
+          ),
+          createElementVNode("span", _hoisted_2, [
+            renderSlot(_ctx.$slots, "default", {}, void 0, true)
+          ])
+        ],
+        6
+        /* CLASS, STYLE */
+      );
+    };
+  }
+});
+export {
+  _sfc_main as default
+};

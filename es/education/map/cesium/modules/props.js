@@ -1,16 +1,16 @@
-import { ArcGisMapServerImageryProvider as e, Color as t } from "@cesium/engine";
-const a = {
+import { ArcGisMapServerImageryProvider, Color } from "@cesium/engine";
+const cesiumProps = {
   clientId: { type: String },
   accessToken: { type: String },
   baseUrl: { type: String, default: "/jysl" },
   imageryLayersUrl: { type: String },
   areaName: { type: String },
   // 初始化区域
-  defaultShowState: { type: Boolean, default: !1 },
+  defaultShowState: { type: Boolean, default: false },
   // 默认展示状态
   flyToHeight: { type: Number, default: 26e3 },
   // 相机飞行高度
-  offsetState: { type: Boolean, default: !1 },
+  offsetState: { type: Boolean, default: false },
   // 启用/禁用 缩放偏移
   spinStroke: { type: String, default: "#046ab1" },
   // spin图标颜色
@@ -30,25 +30,25 @@ const a = {
   controlStatus: {
     type: Object,
     default: {
-      timeline: !1,
-      animation: !1,
-      geocoder: !1,
-      homeButton: !1,
-      sceneModePicker: !1,
-      baseLayerPicker: !1,
-      imageryProvider: e.fromUrl("https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer"),
+      timeline: false,
+      animation: false,
+      geocoder: false,
+      homeButton: false,
+      sceneModePicker: false,
+      baseLayerPicker: false,
+      imageryProvider: ArcGisMapServerImageryProvider.fromUrl("https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer"),
       // 避免使用cesium ions资源
-      navigationHelpButton: !1,
-      fullscreenButton: !1,
-      scene3DOnly: !0,
-      orderIndependentTranslucency: !0,
-      selectionIndicator: !1,
+      navigationHelpButton: false,
+      fullscreenButton: false,
+      scene3DOnly: true,
+      orderIndependentTranslucency: true,
+      selectionIndicator: false,
       contextOptions: {
-        allowTextureFilterAnisotropic: !0,
+        allowTextureFilterAnisotropic: true,
         webgl: {
-          alpha: !0,
-          antialias: !0,
-          preserveDrawingBuffer: !0
+          alpha: true,
+          antialias: true,
+          preserveDrawingBuffer: true
         }
       }
     }
@@ -58,8 +58,8 @@ const a = {
     default: {
       minZoom: 200,
       maxZoom: 13e4,
-      baseColor: t.TRANSPARENT,
-      clusteringEnabled: !1,
+      baseColor: Color.TRANSPARENT,
+      clusteringEnabled: false,
       clusteringPixelRange: 30,
       clusteringMinimumClusterSize: 2
     }
@@ -72,9 +72,9 @@ const a = {
   },
   openOffset: {
     type: Object,
-    default: { flag: !1, offset: 0 }
+    default: { flag: false, offset: 0 }
   }
 };
 export {
-  a as cesiumProps
+  cesiumProps
 };

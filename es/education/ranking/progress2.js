@@ -1,174 +1,134 @@
-import {
-    defineComponent as g,
-    mergeDefaults as h,
-    useTemplateRef as v,
-    computed as x,
-    openBlock as n,
-    createElementBlock as i,
-    createVNode as y,
-    unref as c,
-    withCtx as w,
-    createElementVNode as l,
-    Fragment as b,
-    renderList as L,
-    normalizeStyle as u,
-    toDisplayString as s,
-} from 'vue'
-import S from './elasticScrollbar/index.js'
-import { bigNumber as d } from 'lowcode-share/es/share'
-import V from 'lodash-es/memoize'
-const $ = { class: 'lc-progress' },
-    N = { class: 'lc-progress__wrapper' },
-    R = { class: 'lc-progress__wrapper__item__left__label' },
-    W = ['title'],
-    k = /* @__PURE__ */ g({
-        __name: 'progress',
-        props: /* @__PURE__ */ h(
-            {
-                fixed: {
-                    type: Boolean,
-                },
-                decimal: {
-                    type: Number,
-                },
-                dataList: {
-                    type: Array,
-                },
-            },
-            {
-                fixed: !0,
-                decimal: 2,
-                dataList: () => [],
-            },
-        ),
-        setup(a) {
-            const o = v('valueRef'),
-                _ = x(() => {
-                    if (o.value && Array.isArray(o.value)) {
-                        const t = o.value.map((e) => Math.floor(e.offsetWidth))
-                        return `${Math.max(...t)}px`
-                    }
+import { defineComponent, mergeDefaults, useTemplateRef, computed, openBlock, createElementBlock, createVNode, unref, withCtx, createElementVNode, Fragment, renderList, normalizeStyle, toDisplayString } from "vue";
+import LcElasticScrollbar from "./elasticScrollbar/index.js";
+import { bigNumber } from "lowcode-share/es/share";
+import memoize from "lodash-es/memoize";
+const _hoisted_1 = { class: "lc-progress" };
+const _hoisted_2 = { class: "lc-progress__wrapper" };
+const _hoisted_3 = { class: "lc-progress__wrapper__item__left__label" };
+const _hoisted_4 = ["title"];
+const _sfc_main = /* @__PURE__ */ defineComponent({
+  __name: "progress",
+  props: /* @__PURE__ */ mergeDefaults({
+    fixed: {
+      type: Boolean
+    },
+    decimal: {
+      type: Number
+    },
+    dataList: {
+      type: Array
+    }
+  }, {
+    fixed: true,
+    decimal: 2,
+    dataList: () => []
+  }),
+  setup(__props) {
+    const valueRefS = useTemplateRef("valueRef");
+    const maxWidth = computed(() => {
+      if (valueRefS.value && Array.isArray(valueRefS.value)) {
+        const widths = valueRefS.value.map((item) => Math.floor(item.offsetWidth));
+        const maxWidthValue = Math.max(...widths);
+        return `${maxWidthValue}px`;
+      }
+      return "100%";
+    });
+    const renderValue = (tootal) => {
+      if (__props.fixed) {
+        const { result } = bigNumber(tootal, __props.decimal);
+        return result;
+      }
+      return tootal;
+    };
+    const renderUnit = memoize(
+      (value, _unit) => {
+        if (__props.fixed) {
+          const { unit: numUnit } = bigNumber(value, __props.decimal);
+          return `${numUnit}${_unit}`;
+        }
+        return _unit;
+      },
+      (value, _unit) => `${value}_${_unit}`
+    );
+    return (_ctx, _cache) => {
+      return openBlock(), createElementBlock("div", _hoisted_1, [
+        createVNode(unref(LcElasticScrollbar), null, {
+          default: withCtx(() => [
+            createElementVNode("div", _hoisted_2, [
+              (openBlock(true), createElementBlock(
+                Fragment,
+                null,
+                renderList(__props.dataList, (item, key) => {
+                  return openBlock(), createElementBlock("div", {
+                    key,
+                    class: "lc-progress__wrapper__item"
+                  }, [
+                    createElementVNode(
+                      "div",
+                      {
+                        class: "lc-progress__wrapper__item__left",
+                        style: normalizeStyle({
+                          "--progress": item.value,
+                          "--bgColor": item.color
+                        })
+                      },
+                      [
+                        createElementVNode("span", _hoisted_3, [
+                          createElementVNode(
+                            "span",
+                            null,
+                            toDisplayString(item.label),
+                            1
+                            /* TEXT */
+                          ),
+                          createElementVNode(
+                            "span",
+                            null,
+                            toDisplayString(item.value) + "%",
+                            1
+                            /* TEXT */
+                          )
+                        ])
+                      ],
+                      4
+                      /* STYLE */
+                    ),
+                    createElementVNode("div", {
+                      ref_for: true,
+                      ref: "valueRef",
+                      class: "lc-progress__wrapper__item__right",
+                      style: normalizeStyle({ width: maxWidth.value }),
+                      title: item.tootal.toString()
+                    }, [
+                      createElementVNode(
+                        "span",
+                        null,
+                        toDisplayString(renderValue(item.tootal)),
+                        1
+                        /* TEXT */
+                      ),
+                      createElementVNode(
+                        "span",
+                        null,
+                        toDisplayString(unref(renderUnit)(item.tootal, item.unit)),
+                        1
+                        /* TEXT */
+                      )
+                    ], 12, _hoisted_4)
+                  ]);
                 }),
-                p = (t) => {
-                    if (a.fixed) {
-                        const { result: r } = d(t, a.decimal)
-                        return r
-                    }
-                    return t
-                },
-                f = V(
-                    (t, r) => {
-                        if (a.fixed) {
-                            const { unit: e } = d(t, a.decimal)
-                            return `${e}${r}`
-                        }
-                        return r
-                    },
-                    (t, r) => `${t}_${r}`,
-                )
-            return (t, r) => (
-                n(),
-                i('div', $, [
-                    y(c(S), null, {
-                        default: w(() => [
-                            l('div', N, [
-                                (n(!0),
-                                i(
-                                    b,
-                                    null,
-                                    L(
-                                        a.dataList,
-                                        (e, m) => (
-                                            n(),
-                                            i(
-                                                'div',
-                                                {
-                                                    class: 'lc-progress__wrapper__item',
-                                                    key: m,
-                                                },
-                                                [
-                                                    l(
-                                                        'div',
-                                                        {
-                                                            class: 'lc-progress__wrapper__item__left',
-                                                            style: u({
-                                                                '--progress':
-                                                                    e.value,
-                                                                '--bgColor':
-                                                                    e.color,
-                                                            }),
-                                                        },
-                                                        [
-                                                            l('span', R, [
-                                                                l(
-                                                                    'span',
-                                                                    null,
-                                                                    s(e.label),
-                                                                    1,
-                                                                    /* TEXT */
-                                                                ),
-                                                                l(
-                                                                    'span',
-                                                                    null,
-                                                                    s(e.value) +
-                                                                        '%',
-                                                                    1,
-                                                                    /* TEXT */
-                                                                ),
-                                                            ]),
-                                                        ],
-                                                        4,
-                                                        /* STYLE */
-                                                    ),
-                                                    l(
-                                                        'div',
-                                                        {
-                                                            class: 'lc-progress__wrapper__item__right',
-                                                            style: u({
-                                                                width: _.value,
-                                                            }),
-                                                            ref_for: !0,
-                                                            ref: 'valueRef',
-                                                            title: e.tootal.toString(),
-                                                        },
-                                                        [
-                                                            l(
-                                                                'span',
-                                                                null,
-                                                                s(p(e.tootal)),
-                                                                1,
-                                                                /* TEXT */
-                                                            ),
-                                                            l(
-                                                                'span',
-                                                                null,
-                                                                s(
-                                                                    c(f)(
-                                                                        e.tootal,
-                                                                        e.unit,
-                                                                    ),
-                                                                ),
-                                                                1,
-                                                                /* TEXT */
-                                                            ),
-                                                        ],
-                                                        12,
-                                                        W,
-                                                    ),
-                                                ],
-                                            )
-                                        ),
-                                    ),
-                                    128,
-                                    /* KEYED_FRAGMENT */
-                                )),
-                            ]),
-                        ]),
-                        _: 1,
-                        /* STABLE */
-                    }),
-                ])
-            )
-        },
-    })
-export { k as default }
+                128
+                /* KEYED_FRAGMENT */
+              ))
+            ])
+          ]),
+          _: 1
+          /* STABLE */
+        })
+      ]);
+    };
+  }
+});
+export {
+  _sfc_main as default
+};

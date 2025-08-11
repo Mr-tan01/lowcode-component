@@ -1,2 +1,4 @@
-import { default as c } from './descTable.js'
-export { c as LcDescTable }
+import { default as default2 } from "./descTable.js";
+export {
+  default2 as LcDescTable
+};

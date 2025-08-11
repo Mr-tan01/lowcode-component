@@ -1,30 +1,25 @@
-import {
-    defineComponent as o,
-    openBlock as r,
-    createBlock as t,
-    unref as c,
-    mergeProps as n,
-    withCtx as s,
-    renderSlot as a,
-} from 'vue'
-import { NCheckbox as f } from 'naive-ui/es/checkbox'
-const d = /* @__PURE__ */ o({
-    __name: 'checkbox',
-    setup(l) {
-        return (e, p) => (
-            r(),
-            t(
-                c(f),
-                n({ class: 'lc-checkbox' }, e.$attrs),
-                {
-                    default: s(() => [a(e.$slots, 'default', {}, void 0, !0)]),
-                    _: 3,
-                    /* FORWARDED */
-                },
-                16,
-                /* FULL_PROPS */
-            )
-        )
-    },
-})
-export { d as default }
+import { defineComponent, openBlock, createBlock, unref, mergeProps, withCtx, renderSlot } from "vue";
+import { NCheckbox } from "naive-ui/es/checkbox";
+const _sfc_main = /* @__PURE__ */ defineComponent({
+  __name: "checkbox",
+  setup(__props) {
+    return (_ctx, _cache) => {
+      return openBlock(), createBlock(
+        unref(NCheckbox),
+        mergeProps({ class: "lc-checkbox" }, _ctx.$attrs),
+        {
+          default: withCtx(() => [
+            renderSlot(_ctx.$slots, "default", {}, void 0, true)
+          ]),
+          _: 3
+          /* FORWARDED */
+        },
+        16
+        /* FULL_PROPS */
+      );
+    };
+  }
+});
+export {
+  _sfc_main as default
+};

@@ -1,46 +1,55 @@
-import { ref as u, reactive as y, computed as p } from "vue";
-const i = "__localStorage:dragHistory__";
-function x() {
-  const r = u(!1), o = y({ x: 100, y: "80%" });
+import { ref, reactive, computed } from "vue";
+const dragHistoryKey = "__localStorage:dragHistory__";
+function useDragRobotPosition() {
+  const isDraging = ref(false);
+  const robotOffset = reactive({ x: 100, y: "80%" });
   try {
-    const t = localStorage.getItem(i);
-    if (t) {
-      const e = JSON.parse(t);
-      o.x = e.x, o.y = parseInt(e.y) > innerHeight ? "80%" : e.y;
+    const historyData = localStorage.getItem(dragHistoryKey);
+    if (historyData) {
+      const _history = JSON.parse(historyData);
+      robotOffset.x = _history.x;
+      robotOffset.y = parseInt(_history.y) > innerHeight ? "80%" : _history.y;
     }
   } catch {
     console.warn("获取拖拽历史数据失败，使用默认值");
   }
-  const a = p(() => o.x <= 0 ? "lt" : "rt");
-  function s() {
-    r.value = !0;
+  const xAdsorptionDir = computed(() => robotOffset.x <= 0 ? "lt" : "rt");
+  function startDrag() {
+    isDraging.value = true;
   }
-  function c(t) {
-    t.preventDefault();
+  function draging(event) {
+    event.preventDefault();
   }
-  function g(t) {
-    var n;
-    t.preventDefault(), r.value = !1, t.clientX < window.innerWidth / 2 ? o.x = 0 : o.x = 100;
-    const { height: e = 200 } = ((n = t.target) == null ? void 0 : n.getBoundingClientRect()) ?? {};
-    o.y = (t.clientY <= e ? e : t.clientY) + "px", localStorage.setItem(i, JSON.stringify(o));
+  function stopDrag(event) {
+    var _a;
+    event.preventDefault();
+    isDraging.value = false;
+    if (event.clientX < window.innerWidth / 2) {
+      robotOffset.x = 0;
+    } else {
+      robotOffset.x = 100;
+    }
+    const { height = 200 } = ((_a = event.target) == null ? void 0 : _a.getBoundingClientRect()) ?? {};
+    robotOffset.y = (event.clientY <= height ? height : event.clientY) + "px";
+    localStorage.setItem(dragHistoryKey, JSON.stringify(robotOffset));
   }
-  function l() {
+  function dragenter() {
     console.log("拖拽进入");
   }
-  function f(t) {
-    t.preventDefault();
+  function dragover(event) {
+    event.preventDefault();
   }
   return {
-    isDraging: r,
-    startDrag: s,
-    stopDrag: g,
-    draging: c,
-    dragenter: l,
-    robotOffset: o,
-    xAdsorptionDir: a,
-    dragover: f
+    isDraging,
+    startDrag,
+    stopDrag,
+    draging,
+    dragenter,
+    robotOffset,
+    xAdsorptionDir,
+    dragover
   };
 }
 export {
-  x as useDragRobotPosition
+  useDragRobotPosition
 };

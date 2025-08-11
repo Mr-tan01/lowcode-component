@@ -1,9 +1,15 @@
-import { defineComponent as i, mergeDefaults as a, openBlock as n, createElementBlock as c, createElementVNode as e, toDisplayString as o, createVNode as l, unref as r } from "vue";
-import { NNumberAnimation as s } from "naive-ui/es/number-animation";
-import m from "./images/card/small-substrate-bg.png.js";
-const _ = { class: "minitype-card" }, d = { class: "minitype-card__label" }, p = { class: "minitype-card__value" }, u = { class: "minitype-card__value__num" }, b = { class: "minitype-card__img" }, g = ["src"], I = /* @__PURE__ */ i({
+import { defineComponent, mergeDefaults, openBlock, createElementBlock, createElementVNode, toDisplayString, createVNode, unref } from "vue";
+import { NNumberAnimation } from "naive-ui/es/number-animation";
+import defaultImage from "./images/card/small-substrate-bg.png.js";
+const _hoisted_1 = { class: "minitype-card" };
+const _hoisted_2 = { class: "minitype-card__label" };
+const _hoisted_3 = { class: "minitype-card__value" };
+const _hoisted_4 = { class: "minitype-card__value__num" };
+const _hoisted_5 = { class: "minitype-card__img" };
+const _hoisted_6 = ["src"];
+const _sfc_main = /* @__PURE__ */ defineComponent({
   __name: "minitypeCard",
-  props: /* @__PURE__ */ a({
+  props: /* @__PURE__ */ mergeDefaults({
     label: {
       type: String
     },
@@ -19,39 +25,41 @@ const _ = { class: "minitype-card" }, d = { class: "minitype-card__label" }, p =
   }, {
     label: "已建成并投入运行设施(个)",
     value: 0,
-    bgIcon: m,
-    __skip_bgIcon: !0,
+    bgIcon: defaultImage,
+    __skip_bgIcon: true,
     decimal: 0
   }),
-  setup(t) {
-    return (y, f) => (n(), c("div", _, [
-      e(
-        "div",
-        d,
-        o(t.label),
-        1
-        /* TEXT */
-      ),
-      e("div", p, [
-        e("span", u, [
-          l(r(s), {
-            "show-separator": "",
-            from: 0,
-            to: t.value,
-            active: "",
-            precision: t.decimal
-          }, null, 8, ["to", "precision"])
+  setup(__props) {
+    return (_ctx, _cache) => {
+      return openBlock(), createElementBlock("div", _hoisted_1, [
+        createElementVNode(
+          "div",
+          _hoisted_2,
+          toDisplayString(__props.label),
+          1
+          /* TEXT */
+        ),
+        createElementVNode("div", _hoisted_3, [
+          createElementVNode("span", _hoisted_4, [
+            createVNode(unref(NNumberAnimation), {
+              "show-separator": "",
+              from: 0,
+              to: __props.value,
+              active: "",
+              precision: __props.decimal
+            }, null, 8, ["to", "precision"])
+          ])
+        ]),
+        createElementVNode("div", _hoisted_5, [
+          createElementVNode("img", {
+            src: __props.bgIcon,
+            alt: ""
+          }, null, 8, _hoisted_6)
         ])
-      ]),
-      e("div", b, [
-        e("img", {
-          src: t.bgIcon,
-          alt: ""
-        }, null, 8, g)
-      ])
-    ]));
+      ]);
+    };
   }
 });
 export {
-  I as default
+  _sfc_main as default
 };

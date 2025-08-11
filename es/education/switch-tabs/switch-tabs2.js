@@ -1,88 +1,49 @@
-import {
-    defineComponent as n,
-    mergeDefaults as c,
-    computed as m,
-    openBlock as l,
-    createElementBlock as p,
-    createVNode as _,
-    unref as f,
-    mergeProps as u,
-    withCtx as b,
-    createElementVNode as r,
-    normalizeClass as d,
-    toDisplayString as w,
-} from 'vue'
-import h from './carouseBox/index.js'
-import { propsRaw as k } from './carouseBox/props.js'
-import { defSwitchTabList as C } from './const.js'
-const v = { class: 'lc-switch-tabs' },
-    y = ['title'],
-    S = /* @__PURE__ */ n({
-        __name: 'switch-tabs',
-        props: /* @__PURE__ */ c(k, {
-            backCenter: !0,
-        }),
-        setup(o) {
-            const s = m(() => o.list ?? C)
-            return (t, T) => (
-                l(),
-                p('div', v, [
-                    _(
-                        f(h),
-                        u(
-                            {
-                                'list': s.value,
-                                'back-center': t.backCenter,
-                                'offsetAnimationTime': t.offsetAnimationTime,
-                                'rowKey': t.rowKey,
-                            },
-                            t.$attrs,
-                        ),
-                        {
-                            default: b(
-                                ({
-                                    isActive: i,
-                                    isEven: a,
-                                    record: { label: e },
-                                }) => [
-                                    r(
-                                        'button',
-                                        {
-                                            class: d([
-                                                'lc-switch-tabs__wrapper__tabs--train__button',
-                                                { 'active': i, 'is-even': a },
-                                            ]),
-                                        },
-                                        [
-                                            r(
-                                                'div',
-                                                {
-                                                    class: 'lc-switch-tabs__wrapper__tabs--train__button--text',
-                                                    title: e,
-                                                },
-                                                w(e),
-                                                9,
-                                                y,
-                                            ),
-                                        ],
-                                        2,
-                                        /* CLASS */
-                                    ),
-                                ],
-                            ),
-                            _: 1,
-                            /* STABLE */
-                        },
-                        16,
-                        [
-                            'list',
-                            'back-center',
-                            'offsetAnimationTime',
-                            'rowKey',
-                        ],
-                    ),
-                ])
+import { defineComponent, mergeDefaults, computed, openBlock, createElementBlock, createVNode, unref, mergeProps, withCtx, createElementVNode, normalizeClass, toDisplayString } from "vue";
+import LcCarouseBox from "./carouseBox/index.js";
+import { propsRaw } from "./carouseBox/props.js";
+import { defSwitchTabList } from "./const.js";
+const _hoisted_1 = { class: "lc-switch-tabs" };
+const _hoisted_2 = ["title"];
+const _sfc_main = /* @__PURE__ */ defineComponent({
+  __name: "switch-tabs",
+  props: /* @__PURE__ */ mergeDefaults(propsRaw, {
+    backCenter: true
+  }),
+  setup(__props) {
+    const listSource = computed(() => {
+      return __props.list ?? defSwitchTabList;
+    });
+    return (_ctx, _cache) => {
+      return openBlock(), createElementBlock("div", _hoisted_1, [
+        createVNode(unref(LcCarouseBox), mergeProps({
+          list: listSource.value,
+          "back-center": _ctx.backCenter,
+          "offset-animation-time": _ctx.offsetAnimationTime,
+          "row-key": _ctx.rowKey
+        }, _ctx.$attrs), {
+          default: withCtx(({ isActive, isEven, record: { label } }) => [
+            createElementVNode(
+              "button",
+              {
+                class: normalizeClass(["lc-switch-tabs__wrapper__tabs--train__button", { "active": isActive, "is-even": isEven }])
+              },
+              [
+                createElementVNode("div", {
+                  class: "lc-switch-tabs__wrapper__tabs--train__button--text",
+                  title: label
+                }, toDisplayString(label), 9, _hoisted_2)
+              ],
+              2
+              /* CLASS */
             )
-        },
-    })
-export { S as default }
+          ]),
+          _: 1
+          /* STABLE */
+        }, 16, ["list", "back-center", "offset-animation-time", "row-key"])
+      ]);
+    };
+  }
+});
+export {
+  _sfc_main as default
+};

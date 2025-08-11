@@ -1,6 +1,8 @@
-const r = {
-  show: !1
-}, o = ["rgba(15, 251, 248, 1)", "rgba(225, 188, 75, 1)", "rgba(0, 148, 255, 1)"], a = {
+const radarTitleOptions = {
+  show: false
+};
+const radarColors = ["rgba(15, 251, 248, 1)", "rgba(225, 188, 75, 1)", "rgba(0, 148, 255, 1)"];
+const radarTooltipOptions = {
   backgroundColor: "rgba(0, 32, 61, 1)",
   borderColor: "rgba(15, 251, 248, 1)",
   textStyle: {
@@ -9,8 +11,9 @@ const r = {
     lineHeight: 20
   },
   appendTo: "body"
-}, n = {
-  show: !0,
+};
+const radarLegendOptions = {
+  show: true,
   top: "bottom",
   left: "center",
   icon: "roundRect",
@@ -23,11 +26,13 @@ const r = {
     lineHeight: 20
   },
   type: "scroll"
-}, i = {
-  containLabel: !0
-}, l = {
+};
+const radarGridOptions = {
+  containLabel: true
+};
+const radarItemOptions = {
   splitArea: {
-    show: !1
+    show: false
   },
   center: ["50%", "50%"],
   radius: "50%",
@@ -45,9 +50,9 @@ const r = {
     color: "#fff",
     fontSize: 14,
     lineHeight: 20,
-    formatter(e, t) {
-      return `{max|${t == null ? void 0 : t.max}}
-{name|${e}}`;
+    formatter(name, indicatorOpt) {
+      return `{max|${indicatorOpt == null ? void 0 : indicatorOpt.max}}
+{name|${name}}`;
     },
     rich: {
       max: {
@@ -60,12 +65,13 @@ const r = {
     }
   },
   indicator: []
-}, s = {
+};
+const radarSeriesOptions = {
   type: "radar",
   itemStyle: {
     // @ts-ignore
-    color(e) {
-      return o[e.dataIndex % o.length];
+    color(params) {
+      return radarColors[params.dataIndex % radarColors.length];
     }
   },
   symbol: "none",
@@ -78,11 +84,11 @@ const r = {
   }
 };
 export {
-  o as radarColors,
-  i as radarGridOptions,
-  l as radarItemOptions,
-  n as radarLegendOptions,
-  s as radarSeriesOptions,
-  r as radarTitleOptions,
-  a as radarTooltipOptions
+  radarColors,
+  radarGridOptions,
+  radarItemOptions,
+  radarLegendOptions,
+  radarSeriesOptions,
+  radarTitleOptions,
+  radarTooltipOptions
 };

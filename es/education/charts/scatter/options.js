@@ -1,38 +1,44 @@
-import s from "lodash-es/merge";
-import { deepMergeArrayOptions as p } from "@mmj-code-lib/lowcode/es/components";
-import { tooltipOptions as a, legendOptions as l, gridOptions as u, xAxisOptions as O, yAxisOptions as g, scatterColors as m, commonScatterSeries as c } from "./const.js";
-import { setRgbaAlpha as f } from "lowcode-share/es/share";
-const i = {
-  tooltip: a,
-  legend: l,
-  grid: u,
-  xAxis: O,
-  yAxis: g,
-  color: m,
-  series: c
+import merge from "lodash-es/merge";
+import { deepMergeArrayOptions } from "@mmj-code-lib/lowcode/es/components";
+import { tooltipOptions, legendOptions, gridOptions, xAxisOptions, yAxisOptions, scatterColors, commonScatterSeries } from "./const.js";
+import { setRgbaAlpha } from "lowcode-share/es/share";
+const commonScatterOptions = {
+  tooltip: tooltipOptions,
+  legend: legendOptions,
+  grid: gridOptions,
+  xAxis: xAxisOptions,
+  yAxis: yAxisOptions,
+  color: scatterColors,
+  series: commonScatterSeries
 };
-function y(r) {
-  return p(r, Object.keys(i), Object.values(i)), s({}, i, r);
+function useCommonScatterOptions(opts) {
+  deepMergeArrayOptions(opts, Object.keys(commonScatterOptions), Object.values(commonScatterOptions));
+  return merge({}, commonScatterOptions, opts);
 }
-function n(r, o, e) {
-  const t = e[o % m.length];
-  return s(
+function mregeSeriesRecord(newSeries, seriesIndex, colors) {
+  const color = colors[seriesIndex % scatterColors.length];
+  return merge(
     {},
-    c,
+    commonScatterSeries,
     {
       itemStyle: {
-        color: () => f(t, 0.2),
-        borderColor: t
+        color: () => setRgbaAlpha(color, 0.2),
+        borderColor: color
       }
     },
-    r
+    newSeries
   );
 }
-function b(r, o) {
-  return Array.isArray(r) ? r.map((e, t) => n(e, t, o)) : n(r ?? {}, 0, o);
+function useCommonScatterSeries(series, colors) {
+  if (Array.isArray(series)) {
+    return series.map((item, index) => {
+      return mregeSeriesRecord(item, index, colors);
+    });
+  }
+  return mregeSeriesRecord(series ?? {}, 0, colors);
 }
 export {
-  i as commonScatterOptions,
-  y as useCommonScatterOptions,
-  b as useCommonScatterSeries
+  commonScatterOptions,
+  useCommonScatterOptions,
+  useCommonScatterSeries
 };

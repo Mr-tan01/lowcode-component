@@ -1,8 +1,8 @@
-import o from "./rawMap4.js";
+import _sfc_main from "./rawMap4.js";
 import '../assets/szmap/rawMap2.css';import '../assets/szmap/rawMap.css';/* empty css        */
 /* empty css        */
-import t from "../_virtual/_plugin-vue_export-helper.js";
-const f = /* @__PURE__ */ t(o, [["__scopeId", "data-v-9b74a00f"]]);
+import _export_sfc from "../_virtual/_plugin-vue_export-helper.js";
+const RawMap = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-9b74a00f"]]);
 export {
-  f as default
+  RawMap as default
 };

@@ -1,4 +1,4 @@
-import { progressSeries as o } from "./progress/index.js";
+import { progressSeries } from "./progress/index.js";
 export {
-  o as progressSeries
+  progressSeries
 };

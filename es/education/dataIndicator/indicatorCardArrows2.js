@@ -1,10 +1,15 @@
-import { defineComponent as o, mergeDefaults as a, openBlock as s, createElementBlock as l, createElementVNode as r, toDisplayString as c, createVNode as n, unref as _ } from "vue";
-import i from "./images/card/spot-bg.png.js";
-import p from "./images/card/big-substrate-bg.png.js";
-import { NNumberAnimation as d } from "naive-ui/es/number-animation";
-const m = { class: "indicator-card-vice" }, u = { class: "indicator-card-vice__wrapper" }, v = { class: "indicator-card-vice__wrapper__label" }, f = { class: "indicator-card-vice__wrapper__value" }, g = { class: "indicator-card-vice__wrapper__value__num" }, x = /* @__PURE__ */ o({
+import { defineComponent, mergeDefaults, openBlock, createElementBlock, createElementVNode, toDisplayString, createVNode, unref } from "vue";
+import _imports_0 from "./images/card/spot-bg.png.js";
+import _imports_1 from "./images/card/big-substrate-bg.png.js";
+import { NNumberAnimation } from "naive-ui/es/number-animation";
+const _hoisted_1 = { class: "indicator-card-vice" };
+const _hoisted_2 = { class: "indicator-card-vice__wrapper" };
+const _hoisted_3 = { class: "indicator-card-vice__wrapper__label" };
+const _hoisted_4 = { class: "indicator-card-vice__wrapper__value" };
+const _hoisted_5 = { class: "indicator-card-vice__wrapper__value__num" };
+const _sfc_main = /* @__PURE__ */ defineComponent({
   __name: "indicatorCardArrows",
-  props: /* @__PURE__ */ a({
+  props: /* @__PURE__ */ mergeDefaults({
     label: {
       type: String
     },
@@ -15,65 +20,67 @@ const m = { class: "indicator-card-vice" }, u = { class: "indicator-card-vice__w
     label: "已建成并投入运行设施(个)",
     value: 0
   }),
-  setup(e) {
-    return (w, t) => (s(), l("div", m, [
-      t[1] || (t[1] = r(
-        "img",
-        {
-          src: i,
-          alt: "",
-          class: "spot-img spot-top"
-        },
-        null,
-        -1
-        /* HOISTED */
-      )),
-      t[2] || (t[2] = r(
-        "img",
-        {
-          src: i,
-          alt: "",
-          class: "spot-img spot-down"
-        },
-        null,
-        -1
-        /* HOISTED */
-      )),
-      r("div", u, [
-        r(
-          "div",
-          v,
-          c(e.label),
-          1
-          /* TEXT */
-        ),
-        r("div", f, [
-          r("span", g, [
-            n(_(d), {
-              "show-separator": "",
-              from: 0,
-              to: e.value,
-              active: "",
-              precision: 0
-            }, null, 8, ["to"])
-          ])
-        ]),
-        t[0] || (t[0] = r(
-          "div",
-          { class: "indicator-card-vice__wrapper__img" },
-          [
-            r("img", {
-              src: p,
-              alt: ""
-            })
-          ],
+  setup(__props) {
+    return (_ctx, _cache) => {
+      return openBlock(), createElementBlock("div", _hoisted_1, [
+        _cache[1] || (_cache[1] = createElementVNode(
+          "img",
+          {
+            src: _imports_0,
+            alt: "",
+            class: "spot-img spot-top"
+          },
+          null,
           -1
           /* HOISTED */
-        ))
-      ])
-    ]));
+        )),
+        _cache[2] || (_cache[2] = createElementVNode(
+          "img",
+          {
+            src: _imports_0,
+            alt: "",
+            class: "spot-img spot-down"
+          },
+          null,
+          -1
+          /* HOISTED */
+        )),
+        createElementVNode("div", _hoisted_2, [
+          createElementVNode(
+            "div",
+            _hoisted_3,
+            toDisplayString(__props.label),
+            1
+            /* TEXT */
+          ),
+          createElementVNode("div", _hoisted_4, [
+            createElementVNode("span", _hoisted_5, [
+              createVNode(unref(NNumberAnimation), {
+                "show-separator": "",
+                from: 0,
+                to: __props.value,
+                active: "",
+                precision: 0
+              }, null, 8, ["to"])
+            ])
+          ]),
+          _cache[0] || (_cache[0] = createElementVNode(
+            "div",
+            { class: "indicator-card-vice__wrapper__img" },
+            [
+              createElementVNode("img", {
+                src: _imports_1,
+                alt: ""
+              })
+            ],
+            -1
+            /* HOISTED */
+          ))
+        ])
+      ]);
+    };
   }
 });
 export {
-  x as default
+  _sfc_main as default
 };

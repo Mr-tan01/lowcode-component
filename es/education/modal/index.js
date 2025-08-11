@@ -1,4 +1,4 @@
-import { default as d } from "./modal.js";
+import { default as default2 } from "./modal.js";
 export {
-  d as LcModal
+  default2 as LcModal
 };

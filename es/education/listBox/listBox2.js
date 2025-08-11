@@ -1,207 +1,139 @@
-import {
-    defineComponent as x,
-    openBlock as i,
-    createElementBlock as s,
-    normalizeClass as m,
-    createVNode as c,
-    unref as d,
-    withCtx as r,
-    Fragment as w,
-    renderList as b,
-    createBlock as p,
-    normalizeStyle as n,
-    createElementVNode as f,
-    toDisplayString as y,
-} from 'vue'
-import { NGrid as h, NGi as v } from 'naive-ui'
-import k from './elasticScrollbar/index.js'
-const A = ['title'],
-    B = ['title'],
-    L = /* @__PURE__ */ x({
-        __name: 'listBox',
-        props: {
-            rows: { default: () => [] },
-            rowStyle: { default: () => ({}) },
-            bordered: { type: Boolean, default: !1 },
-            keyStyle: {
-                default: () => ({
-                    whiteSpace: 'nowrap',
-                    overflow: 'hidden',
-                    textOverflow: 'ellipsis',
-                }),
-            },
-            valueStyle: {
-                default: () => ({
-                    whiteSpace: 'nowrap',
-                    overflow: 'hidden',
-                    textOverflow: 'ellipsis',
-                }),
-            },
-            cellPadding: { default: '12px 15px' },
-            defaultAlign: {},
-            gap: { default: 0 },
-            cols: { default: 2 },
+import { defineComponent, openBlock, createElementBlock, normalizeClass, createVNode, unref, withCtx, Fragment, renderList, createBlock, normalizeStyle, createElementVNode, toDisplayString } from "vue";
+import { NGrid, NGi } from "naive-ui";
+import LcElasticScrollbar from "./elasticScrollbar/index.js";
+const _hoisted_1 = ["title"];
+const _hoisted_2 = ["title"];
+const _sfc_main = /* @__PURE__ */ defineComponent({
+  __name: "listBox",
+  props: {
+    rows: { default: () => [] },
+    rowStyle: { default: () => ({}) },
+    bordered: { type: Boolean, default: false },
+    keyStyle: { default: () => ({
+      whiteSpace: "nowrap",
+      overflow: "hidden",
+      textOverflow: "ellipsis"
+    }) },
+    valueStyle: { default: () => ({
+      whiteSpace: "nowrap",
+      overflow: "hidden",
+      textOverflow: "ellipsis"
+    }) },
+    cellPadding: { default: "12px 15px" },
+    defaultAlign: {},
+    gap: { default: 0 },
+    cols: { default: 2 }
+  },
+  setup(__props) {
+    const getKeyCellStyle = (index) => {
+      var _a;
+      const style = {
+        whiteSpace: "pre",
+        flex: "4 1 0%",
+        backgroundColor: "#063B6B",
+        ...__props.keyStyle,
+        padding: __props.cellPadding || "12px 15px",
+        textAlign: __props.keyStyle.textAlign || "left",
+        ...((_a = __props.rows[index]) == null ? void 0 : _a.keyStyle) || {}
+      };
+      if (__props.bordered) {
+        style.borderLeft = "1px solid #07467a";
+        style.borderTop = "1px solid #07467a";
+        style.borderBottom = "1px solid #07467a";
+        if (index === __props.rows.length - 1) {
+          style.borderRight = "1px solid #07467a";
+        }
+      }
+      return style;
+    };
+    const getValueCellStyle = (index) => {
+      var _a;
+      const style = {
+        whiteSpace: "pre",
+        flex: "6 1 0%",
+        backgroundColor: "#063661",
+        ...__props.valueStyle,
+        padding: __props.cellPadding || "12px 15px",
+        textAlign: __props.valueStyle.textAlign || "left",
+        ...((_a = __props.rows[index]) == null ? void 0 : _a.valueStyle) || {}
+      };
+      if (__props.bordered) {
+        style.borderTop = "1px solid #07467A";
+        style.borderBottom = "1px solid #07467A";
+        style.borderRight = "1px solid #07467A";
+        style.borderLeft = "1px solid #07467A";
+      }
+      return style;
+    };
+    const getRowStyle = (index) => {
+      const style = {
+        display: "flex",
+        width: "100%"
+      };
+      if (index % 2 === 0 && __props.rowStyle.even) {
+        Object.assign(style, __props.rowStyle.even);
+      } else if (index % 2 !== 0 && __props.rowStyle.odd) {
+        Object.assign(style, __props.rowStyle.odd);
+      }
+      return style;
+    };
+    return (_ctx, _cache) => {
+      return openBlock(), createElementBlock(
+        "div",
+        {
+          class: normalizeClass(["dynamic-data-list", { "is-bordered": _ctx.bordered }])
         },
-        setup(l) {
-            const u = (t) => {
-                    var o
-                    const e = {
-                        whiteSpace: 'pre',
-                        flex: '4 1 0%',
-                        backgroundColor: '#063B6B',
-                        ...l.keyStyle,
-                        padding: l.cellPadding || '12px 15px',
-                        textAlign: l.keyStyle.textAlign || 'left',
-                        ...(((o = l.rows[t]) == null ? void 0 : o.keyStyle) ||
-                            {}),
-                    }
-                    return (
-                        l.bordered &&
-                            ((e.borderLeft = '1px solid #07467a'),
-                            (e.borderTop = '1px solid #07467a'),
-                            (e.borderBottom = '1px solid #07467a'),
-                            t === l.rows.length - 1 &&
-                                (e.borderRight = '1px solid #07467a')),
-                        e
-                    )
-                },
-                g = (t) => {
-                    var o
-                    const e = {
-                        whiteSpace: 'pre',
-                        flex: '6 1 0%',
-                        backgroundColor: '#063661',
-                        ...l.valueStyle,
-                        padding: l.cellPadding || '12px 15px',
-                        textAlign: l.valueStyle.textAlign || 'left',
-                        ...(((o = l.rows[t]) == null ? void 0 : o.valueStyle) ||
-                            {}),
-                    }
-                    return (
-                        l.bordered &&
-                            ((e.borderTop = '1px solid #07467A'),
-                            (e.borderBottom = '1px solid #07467A'),
-                            (e.borderRight = '1px solid #07467A'),
-                            (e.borderLeft = '1px solid #07467A')),
-                        e
-                    )
-                },
-                S = (t) => {
-                    const e = {
-                        display: 'flex',
-                        width: '100%',
-                    }
-                    return (
-                        t % 2 === 0 && l.rowStyle.even
-                            ? Object.assign(e, l.rowStyle.even)
-                            : t % 2 !== 0 &&
-                              l.rowStyle.odd &&
-                              Object.assign(e, l.rowStyle.odd),
-                        e
-                    )
-                }
-            return (t, e) => (
-                i(),
-                s(
-                    'div',
-                    {
-                        class: m([
-                            'dynamic-data-list',
-                            { 'is-bordered': t.bordered },
+        [
+          createVNode(unref(LcElasticScrollbar), null, {
+            default: withCtx(() => [
+              createVNode(unref(NGrid), {
+                "x-gap": _ctx.gap,
+                cols: _ctx.cols
+              }, {
+                default: withCtx(() => [
+                  (openBlock(true), createElementBlock(
+                    Fragment,
+                    null,
+                    renderList(_ctx.rows, (row, rowIndex) => {
+                      return openBlock(), createBlock(unref(NGi), {
+                        key: `row-${rowIndex}`,
+                        class: "list-row",
+                        style: normalizeStyle(getRowStyle(rowIndex))
+                      }, {
+                        default: withCtx(() => [
+                          createElementVNode("div", {
+                            class: "key-cell",
+                            style: normalizeStyle(getKeyCellStyle(rowIndex)),
+                            title: row.indicatorName
+                          }, toDisplayString(row.indicatorName), 13, _hoisted_1),
+                          createElementVNode("div", {
+                            class: "value-cell",
+                            style: normalizeStyle(getValueCellStyle(rowIndex)),
+                            title: row.indicatorValue
+                          }, toDisplayString(row.indicatorValue), 13, _hoisted_2)
                         ]),
-                    },
-                    [
-                        c(d(k), null, {
-                            default: r(() => [
-                                c(
-                                    d(h),
-                                    {
-                                        'x-gap': t.gap,
-                                        'cols': t.cols,
-                                    },
-                                    {
-                                        default: r(() => [
-                                            (i(!0),
-                                            s(
-                                                w,
-                                                null,
-                                                b(
-                                                    t.rows,
-                                                    (o, a) => (
-                                                        i(),
-                                                        p(
-                                                            d(v),
-                                                            {
-                                                                key: `row-${a}`,
-                                                                class: 'list-row',
-                                                                style: n(S(a)),
-                                                            },
-                                                            {
-                                                                default: r(
-                                                                    () => [
-                                                                        f(
-                                                                            'div',
-                                                                            {
-                                                                                class: 'key-cell',
-                                                                                style: n(
-                                                                                    u(
-                                                                                        a,
-                                                                                    ),
-                                                                                ),
-                                                                                title: o.indicatorName,
-                                                                            },
-                                                                            y(
-                                                                                o.indicatorName,
-                                                                            ),
-                                                                            13,
-                                                                            A,
-                                                                        ),
-                                                                        f(
-                                                                            'div',
-                                                                            {
-                                                                                class: 'value-cell',
-                                                                                style: n(
-                                                                                    g(
-                                                                                        a,
-                                                                                    ),
-                                                                                ),
-                                                                                title: o.indicatorValue,
-                                                                            },
-                                                                            y(
-                                                                                o.indicatorValue,
-                                                                            ),
-                                                                            13,
-                                                                            B,
-                                                                        ),
-                                                                    ],
-                                                                ),
-                                                                _: 2,
-                                                                /* DYNAMIC */
-                                                            },
-                                                            1032,
-                                                            ['style'],
-                                                        )
-                                                    ),
-                                                ),
-                                                128,
-                                                /* KEYED_FRAGMENT */
-                                            )),
-                                        ]),
-                                        _: 1,
-                                        /* STABLE */
-                                    },
-                                    8,
-                                    ['x-gap', 'cols'],
-                                ),
-                            ]),
-                            _: 1,
-                            /* STABLE */
-                        }),
-                    ],
-                    2,
-                    /* CLASS */
-                )
-            )
-        },
-    })
-export { L as default }
+                        _: 2
+                        /* DYNAMIC */
+                      }, 1032, ["style"]);
+                    }),
+                    128
+                    /* KEYED_FRAGMENT */
+                  ))
+                ]),
+                _: 1
+                /* STABLE */
+              }, 8, ["x-gap", "cols"])
+            ]),
+            _: 1
+            /* STABLE */
+          })
+        ],
+        2
+        /* CLASS */
+      );
+    };
+  }
+});
+export {
+  _sfc_main as default
+};

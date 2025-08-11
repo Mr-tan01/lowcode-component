@@ -1,115 +1,144 @@
-import { defineComponent as b, useCssVars as g, computed as l, openBlock as u, createElementBlock as c, normalizeClass as w, createElementVNode as a, renderSlot as i, createVNode as s, unref as f, withCtx as N, createTextVNode as V, toDisplayString as o, createCommentVNode as y } from "vue";
-import { NNumberAnimation as k } from "naive-ui/es/number-animation";
-import { bigNumber as n } from "lowcode-share/es/share";
-import x from "./tooltip/index.js";
-const $ = { class: "lc-indicator-card__wrapper" }, B = { class: "lc-indicator-card__wrapper--content" }, I = {
+import { defineComponent, useCssVars, computed, openBlock, createElementBlock, normalizeClass, createElementVNode, renderSlot, createVNode, unref, withCtx, createTextVNode, toDisplayString, createCommentVNode } from "vue";
+import { NNumberAnimation } from "naive-ui/es/number-animation";
+import { bigNumber } from "lowcode-share/es/share";
+import LcTooltip from "./tooltip/index.js";
+const _hoisted_1 = { class: "lc-indicator-card__wrapper" };
+const _hoisted_2 = { class: "lc-indicator-card__wrapper--content" };
+const _hoisted_3 = {
   key: 0,
   class: "lc-indicator-card__wrapper--tooltip"
-}, S = { class: "lc-indicator-card__wrapper--result" }, z = ["title"], E = { class: "lc-indicator-card__wrapper--result--unit" }, F = { class: "lc-indicator-card__wrapper--text" }, P = /* @__PURE__ */ b({
+};
+const _hoisted_4 = { class: "lc-indicator-card__wrapper--result" };
+const _hoisted_5 = ["title"];
+const _hoisted_6 = { class: "lc-indicator-card__wrapper--result--unit" };
+const _hoisted_7 = { class: "lc-indicator-card__wrapper--text" };
+const _sfc_main = /* @__PURE__ */ defineComponent({
   __name: "indicatorCard",
   props: {
     value: { default: 0 },
     hint: { default: "" },
     unit: { default: "" },
     size: { default: "small" },
-    fixed: { type: Boolean, default: !1 },
+    fixed: { type: Boolean, default: false },
     decimal: { default: 0 },
     type: { default: "border" },
     tip: { default: "" },
     valueColor: { default: "#ffffff" },
     hintColor: { default: "#F2F3F4" },
-    notCheckInteger: { type: Boolean, default: !1 }
+    notCheckInteger: { type: Boolean, default: false }
   },
-  setup(e) {
-    g((t) => ({
-      "050f4b83": h.value,
-      "639cbe17": t.valueColor,
-      "7c4a42d7": t.hintColor
+  setup(__props) {
+    useCssVars((_ctx) => ({
+      "050f4b83": padValue.value,
+      "639cbe17": _ctx.valueColor,
+      "7c4a42d7": _ctx.hintColor
     }));
-    const r = {
+    const SIZE = {
       small: "small",
       medium: "medium",
       large: "large"
-    }, m = l(() => e.fixed ? n(e.value, e.decimal).result : e.value), v = l(() => {
-      const { unit: t } = n(e.value);
-      return Number.isInteger(e.value) && !t && !e.notCheckInteger ? 0 : e.decimal;
-    }), p = {
-      [r.small]: "22px 32px 0",
-      [r.medium]: "22px 54px 0",
-      [r.large]: "22px 116px 0"
-    }, h = l(() => p[e.size]), C = l(() => e.fixed ? `${n(e.value, e.decimal).unit}${e.unit}` : e.unit);
-    return (t, d) => (u(), c(
-      "div",
-      {
-        class: w(["lc-indicator-card", {
-          "lc-indicator-card--noborder": t.type === "noborder"
-        }])
-      },
-      [
-        a("div", $, [
-          a("div", B, [
-            t.tip ? (u(), c("div", I, [
-              i(t.$slots, "tooltip", {}, () => [
-                s(f(x), null, {
-                  default: N(() => [
-                    V(
-                      o(t.tip),
-                      1
-                      /* TEXT */
-                    )
-                  ]),
-                  _: 1
-                  /* STABLE */
-                })
-              ], !0)
-            ])) : y("v-if", !0),
-            a("div", S, [
-              a("span", {
-                class: "lc-indicator-card__wrapper--result--value",
-                title: t.value.toString()
-              }, [
-                i(t.$slots, "value", {}, () => [
-                  s(f(k), {
-                    "show-separator": "",
-                    from: 0,
-                    to: m.value,
-                    active: "",
-                    precision: v.value
-                  }, null, 8, ["to", "precision"])
-                ], !0)
-              ], 8, z),
-              a(
-                "span",
-                E,
-                o(C.value),
+    };
+    const renderValue = computed(() => {
+      if (__props.fixed) {
+        return bigNumber(__props.value, __props.decimal).result;
+      }
+      return __props.value;
+    });
+    const decimals = computed(() => {
+      const { unit: numUnit } = bigNumber(__props.value);
+      if (Number.isInteger(__props.value) && !numUnit && !__props.notCheckInteger) {
+        return 0;
+      }
+      return __props.decimal;
+    });
+    const innerPad = {
+      [SIZE.small]: "22px 32px 0",
+      [SIZE.medium]: "22px 54px 0",
+      [SIZE.large]: "22px 116px 0"
+    };
+    const padValue = computed(() => {
+      return innerPad[__props.size];
+    });
+    const unitValue = computed(() => {
+      if (__props.fixed) {
+        return `${bigNumber(__props.value, __props.decimal).unit}${__props.unit}`;
+      }
+      return __props.unit;
+    });
+    return (_ctx, _cache) => {
+      return openBlock(), createElementBlock(
+        "div",
+        {
+          class: normalizeClass(["lc-indicator-card", {
+            "lc-indicator-card--noborder": _ctx.type === "noborder"
+          }])
+        },
+        [
+          createElementVNode("div", _hoisted_1, [
+            createElementVNode("div", _hoisted_2, [
+              _ctx.tip ? (openBlock(), createElementBlock("div", _hoisted_3, [
+                renderSlot(_ctx.$slots, "tooltip", {}, () => [
+                  createVNode(unref(LcTooltip), null, {
+                    default: withCtx(() => [
+                      createTextVNode(
+                        toDisplayString(_ctx.tip),
+                        1
+                        /* TEXT */
+                      )
+                    ]),
+                    _: 1
+                    /* STABLE */
+                  })
+                ], true)
+              ])) : createCommentVNode("v-if", true),
+              createElementVNode("div", _hoisted_4, [
+                createElementVNode("span", {
+                  class: "lc-indicator-card__wrapper--result--value",
+                  title: _ctx.value.toString()
+                }, [
+                  renderSlot(_ctx.$slots, "value", {}, () => [
+                    createVNode(unref(NNumberAnimation), {
+                      "show-separator": "",
+                      from: 0,
+                      to: renderValue.value,
+                      active: "",
+                      precision: decimals.value
+                    }, null, 8, ["to", "precision"])
+                  ], true)
+                ], 8, _hoisted_5),
+                createElementVNode(
+                  "span",
+                  _hoisted_6,
+                  toDisplayString(unitValue.value),
+                  1
+                  /* TEXT */
+                )
+              ]),
+              createElementVNode(
+                "div",
+                _hoisted_7,
+                toDisplayString(_ctx.hint),
                 1
                 /* TEXT */
               )
             ]),
-            a(
-              "div",
-              F,
-              o(t.hint),
-              1
-              /* TEXT */
-            )
-          ]),
-          i(t.$slots, "footer", {}, () => [
-            d[0] || (d[0] = a(
-              "div",
-              { class: "lc-indicator-card__footer" },
-              null,
-              -1
-              /* HOISTED */
-            ))
-          ], !0)
-        ])
-      ],
-      2
-      /* CLASS */
-    ));
+            renderSlot(_ctx.$slots, "footer", {}, () => [
+              _cache[0] || (_cache[0] = createElementVNode(
+                "div",
+                { class: "lc-indicator-card__footer" },
+                null,
+                -1
+                /* HOISTED */
+              ))
+            ], true)
+          ])
+        ],
+        2
+        /* CLASS */
+      );
+    };
   }
 });
 export {
-  P as default
+  _sfc_main as default
 };

@@ -1,4 +1,4 @@
-import f from "./defines.js";
+import _sfc_main from "./defines.js";
 export {
-  f as default
+  _sfc_main as default
 };

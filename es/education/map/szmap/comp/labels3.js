@@ -1,7 +1,7 @@
-import { defineComponent as i, computed as o, openBlock as r, createElementBlock as _, createElementVNode as t, toDisplayString as s, unref as l } from "vue";
-import d from "lodash-es/merge";
-import { defBlockLableMap as c, szBlockNames as a } from "../const.js";
-const x = {
+import { defineComponent, computed, openBlock, createElementBlock, createElementVNode, toDisplayString, unref } from "vue";
+import merge from "lodash-es/merge";
+import { defBlockLableMap, szBlockNames } from "../const.js";
+const _hoisted_1 = {
   id: "编组-17",
   class: "lables-group",
   transform: "translate(100.4352, 99.2194)",
@@ -9,193 +9,218 @@ const x = {
   "font-size": "16",
   "font-weight": "normal",
   "line-spacing": "28"
-}, u = {
+};
+const _hoisted_2 = {
   id: "南山",
   class: "text",
   fill: "url(#linearGradient-46)"
-}, f = {
+};
+const _hoisted_3 = {
   x: "95.7816",
   y: "230.4492"
-}, h = {
+};
+const _hoisted_4 = {
   id: "福田",
   class: "text",
   fill: "url(#linearGradient-46)"
-}, p = {
+};
+const _hoisted_5 = {
   x: "188.56944",
   y: "268.4872"
-}, m = {
+};
+const _hoisted_6 = {
   id: "罗湖",
   class: "text",
   fill: "url(#linearGradient-46)"
-}, y = {
+};
+const _hoisted_7 = {
   x: "318.6216",
   y: "220.43644"
-}, v = {
+};
+const _hoisted_8 = {
   id: "盐田",
   class: "text",
   fill: "url(#linearGradient-46)"
-}, G = {
+};
+const _hoisted_9 = {
   x: "418.52288",
   y: "196.19084"
-}, g = {
+};
+const _hoisted_10 = {
   id: "宝安",
   class: "text",
   fill: "url(#linearGradient-46)"
-}, S = {
+};
+const _hoisted_11 = {
   x: "0",
   y: "151.7938"
-}, b = {
+};
+const _hoisted_12 = {
   id: "光明",
   class: "text",
   fill: "url(#linearGradient-46)"
-}, k = {
+};
+const _hoisted_13 = {
   x: "62.1208",
   y: "15"
-}, B = {
+};
+const _hoisted_14 = {
   id: "龙岗",
   class: "text",
   fill: "url(#linearGradient-46)"
-}, C = {
+};
+const _hoisted_15 = {
   x: "418.27104",
   y: "66.9946"
-}, z = {
+};
+const _hoisted_16 = {
   id: "坪山",
   class: "text",
   fill: "url(#linearGradient-46)"
-}, E = {
+};
+const _hoisted_17 = {
   x: "521.8768",
   y: "116.5672"
-}, H = {
+};
+const _hoisted_18 = {
   id: "大鹏新区",
   class: "text",
   fill: "url(#linearGradient-47)"
-}, L = {
+};
+const _hoisted_19 = {
   x: "612.31892",
   y: "180.2158"
-}, N = {
+};
+const _hoisted_20 = {
   id: "龙华",
   class: "text",
   fill: "url(#linearGradient-48)"
-}, O = {
+};
+const _hoisted_21 = {
   x: "166",
   y: "105"
-}, w = {
+};
+const _hoisted_22 = {
   id: "深汕合作区",
   class: "text",
   fill: "url(#linearGradient-48)"
-}, D = {
+};
+const _hoisted_23 = {
   x: "690",
   y: "-48"
-}, F = /* @__PURE__ */ i({
+};
+const _sfc_main = /* @__PURE__ */ defineComponent({
   __name: "labels",
   props: {
     labels: { default: () => ({}) }
   },
-  setup(n) {
-    const e = o(() => d({}, c, n.labels));
-    return (M, V) => (r(), _("g", x, [
-      t("text", u, [
-        t(
-          "tspan",
-          f,
-          s(e.value[l(a).南山]),
-          1
-          /* TEXT */
-        )
-      ]),
-      t("text", h, [
-        t(
-          "tspan",
-          p,
-          s(e.value[l(a).福田]),
-          1
-          /* TEXT */
-        )
-      ]),
-      t("text", m, [
-        t(
-          "tspan",
-          y,
-          s(e.value[l(a).罗湖]),
-          1
-          /* TEXT */
-        )
-      ]),
-      t("text", v, [
-        t(
-          "tspan",
-          G,
-          s(e.value[l(a).盐田]),
-          1
-          /* TEXT */
-        )
-      ]),
-      t("text", g, [
-        t(
-          "tspan",
-          S,
-          s(e.value[l(a).宝安]),
-          1
-          /* TEXT */
-        )
-      ]),
-      t("text", b, [
-        t(
-          "tspan",
-          k,
-          s(e.value[l(a).光明]),
-          1
-          /* TEXT */
-        )
-      ]),
-      t("text", B, [
-        t(
-          "tspan",
-          C,
-          s(e.value[l(a).龙岗]),
-          1
-          /* TEXT */
-        )
-      ]),
-      t("text", z, [
-        t(
-          "tspan",
-          E,
-          s(e.value[l(a).坪山]),
-          1
-          /* TEXT */
-        )
-      ]),
-      t("text", H, [
-        t(
-          "tspan",
-          L,
-          s(e.value[l(a).大鹏新区]),
-          1
-          /* TEXT */
-        )
-      ]),
-      t("text", N, [
-        t(
-          "tspan",
-          O,
-          s(e.value[l(a).龙华]),
-          1
-          /* TEXT */
-        )
-      ]),
-      t("text", w, [
-        t(
-          "tspan",
-          D,
-          s(e.value[l(a).深汕合作区]),
-          1
-          /* TEXT */
-        )
-      ])
-    ]));
+  setup(__props) {
+    const mergedLabels = computed(() => merge({}, defBlockLableMap, __props.labels));
+    return (_ctx, _cache) => {
+      return openBlock(), createElementBlock("g", _hoisted_1, [
+        createElementVNode("text", _hoisted_2, [
+          createElementVNode(
+            "tspan",
+            _hoisted_3,
+            toDisplayString(mergedLabels.value[unref(szBlockNames)["南山"]]),
+            1
+            /* TEXT */
+          )
+        ]),
+        createElementVNode("text", _hoisted_4, [
+          createElementVNode(
+            "tspan",
+            _hoisted_5,
+            toDisplayString(mergedLabels.value[unref(szBlockNames)["福田"]]),
+            1
+            /* TEXT */
+          )
+        ]),
+        createElementVNode("text", _hoisted_6, [
+          createElementVNode(
+            "tspan",
+            _hoisted_7,
+            toDisplayString(mergedLabels.value[unref(szBlockNames)["罗湖"]]),
+            1
+            /* TEXT */
+          )
+        ]),
+        createElementVNode("text", _hoisted_8, [
+          createElementVNode(
+            "tspan",
+            _hoisted_9,
+            toDisplayString(mergedLabels.value[unref(szBlockNames)["盐田"]]),
+            1
+            /* TEXT */
+          )
+        ]),
+        createElementVNode("text", _hoisted_10, [
+          createElementVNode(
+            "tspan",
+            _hoisted_11,
+            toDisplayString(mergedLabels.value[unref(szBlockNames)["宝安"]]),
+            1
+            /* TEXT */
+          )
+        ]),
+        createElementVNode("text", _hoisted_12, [
+          createElementVNode(
+            "tspan",
+            _hoisted_13,
+            toDisplayString(mergedLabels.value[unref(szBlockNames)["光明"]]),
+            1
+            /* TEXT */
+          )
+        ]),
+        createElementVNode("text", _hoisted_14, [
+          createElementVNode(
+            "tspan",
+            _hoisted_15,
+            toDisplayString(mergedLabels.value[unref(szBlockNames)["龙岗"]]),
+            1
+            /* TEXT */
+          )
+        ]),
+        createElementVNode("text", _hoisted_16, [
+          createElementVNode(
+            "tspan",
+            _hoisted_17,
+            toDisplayString(mergedLabels.value[unref(szBlockNames)["坪山"]]),
+            1
+            /* TEXT */
+          )
+        ]),
+        createElementVNode("text", _hoisted_18, [
+          createElementVNode(
+            "tspan",
+            _hoisted_19,
+            toDisplayString(mergedLabels.value[unref(szBlockNames)["大鹏新区"]]),
+            1
+            /* TEXT */
+          )
+        ]),
+        createElementVNode("text", _hoisted_20, [
+          createElementVNode(
+            "tspan",
+            _hoisted_21,
+            toDisplayString(mergedLabels.value[unref(szBlockNames)["龙华"]]),
+            1
+            /* TEXT */
+          )
+        ]),
+        createElementVNode("text", _hoisted_22, [
+          createElementVNode(
+            "tspan",
+            _hoisted_23,
+            toDisplayString(mergedLabels.value[unref(szBlockNames)["深汕合作区"]]),
+            1
+            /* TEXT */
+          )
+        ])
+      ]);
+    };
   }
 });
 export {
-  F as default
+  _sfc_main as default
 };

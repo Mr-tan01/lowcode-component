@@ -1,90 +1,71 @@
-import {
-    defineComponent as x,
-    computed as p,
-    openBlock as n,
-    createElementBlock as r,
-    createElementVNode as m,
-    Fragment as h,
-    renderList as S,
-    normalizeClass as y,
-    normalizeStyle as v,
-    toDisplayString as I,
-} from 'vue'
-import P from './images/spiral-figure.png.js'
-const M = { class: 'symmetric-layout' },
-    k = { class: 'center-image-container' },
-    C = ['src'],
-    B = /* @__PURE__ */ x({
-        __name: 'spiral-figure',
-        props: {
-            texts: { default: () => [] },
-            radius: { default: 150 },
-            maxPerSide: { default: 5 },
-            centerImage: { default: () => P },
-        },
-        setup(a) {
-            const l = p(() => {
-                    const e = a.maxPerSide * 2
-                    return a.texts.slice(0, e)
-                }),
-                d = (e) => (e % 2 === 0 ? 'right-side' : 'left-side'),
-                u = (e) => {
-                    l.value.length
-                    const c = e % 2 === 0,
-                        s = Math.floor(e / 2),
-                        t = 120,
-                        i = (t / (a.maxPerSide - 1)) * s - t / 2,
-                        o = ((c ? 180 + i : -i) * Math.PI) / 180,
-                        g = a.radius * Math.cos(o),
-                        f = a.radius * Math.sin(o)
-                    return {
-                        left: `calc(50% + ${g}px)`,
-                        top: `calc(50% + ${f}px)`,
-                        transform: 'translate(-50%, -50%)',
-                    }
-                }
-            return (e, c) => (
-                n(),
-                r('div', M, [
-                    m('div', k, [
-                        m(
-                            'img',
-                            {
-                                src: e.centerImage,
-                                alt: 'Center image',
-                                class: 'center-image',
-                            },
-                            null,
-                            8,
-                            C,
-                        ),
-                    ]),
-                    (n(!0),
-                    r(
-                        h,
-                        null,
-                        S(
-                            l.value,
-                            (s, t) => (
-                                n(),
-                                r(
-                                    'div',
-                                    {
-                                        key: t,
-                                        class: y(['text-item', d(t)]),
-                                        style: v(u(t)),
-                                    },
-                                    I(s),
-                                    7,
-                                    /* TEXT, CLASS, STYLE */
-                                )
-                            ),
-                        ),
-                        128,
-                        /* KEYED_FRAGMENT */
-                    )),
-                ])
-            )
-        },
-    })
-export { B as default }
+import { defineComponent, computed, openBlock, createElementBlock, createElementVNode, Fragment, renderList, normalizeClass, normalizeStyle, toDisplayString } from "vue";
+import spiralFigure from "./images/spiral-figure.png.js";
+const _hoisted_1 = { class: "symmetric-layout" };
+const _hoisted_2 = { class: "center-image-container" };
+const _hoisted_3 = ["src"];
+const _sfc_main = /* @__PURE__ */ defineComponent({
+  __name: "spiral-figure",
+  props: {
+    texts: { default: () => [] },
+    radius: { default: 150 },
+    maxPerSide: { default: 5 },
+    centerImage: { default: () => spiralFigure }
+  },
+  setup(__props) {
+    const displayedTexts = computed(() => {
+      const maxItems = __props.maxPerSide * 2;
+      return __props.texts.slice(0, maxItems);
+    });
+    const getTextSide = (index) => {
+      return index % 2 === 0 ? "right-side" : "left-side";
+    };
+    const getTextPosition = (index) => {
+      const isLeftSide = index % 2 === 0;
+      const positionIndex = Math.floor(index / 2);
+      const angleRange = 120;
+      const angleStep = angleRange / (__props.maxPerSide - 1);
+      const angle = angleStep * positionIndex - angleRange / 2;
+      const angleRad = (isLeftSide ? 180 + angle : -angle) * Math.PI / 180;
+      const x = __props.radius * Math.cos(angleRad);
+      const y = __props.radius * Math.sin(angleRad);
+      return {
+        left: `calc(50% + ${x}px)`,
+        top: `calc(50% + ${y}px)`,
+        transform: "translate(-50%, -50%)"
+      };
+    };
+    return (_ctx, _cache) => {
+      return openBlock(), createElementBlock("div", _hoisted_1, [
+        createElementVNode("div", _hoisted_2, [
+          createElementVNode("img", {
+            src: _ctx.centerImage,
+            alt: "Center image",
+            class: "center-image"
+          }, null, 8, _hoisted_3)
+        ]),
+        (openBlock(true), createElementBlock(
+          Fragment,
+          null,
+          renderList(displayedTexts.value, (text, index) => {
+            return openBlock(), createElementBlock(
+              "div",
+              {
+                key: index,
+                class: normalizeClass(["text-item", getTextSide(index)]),
+                style: normalizeStyle(getTextPosition(index))
+              },
+              toDisplayString(text),
+              7
+              /* TEXT, CLASS, STYLE */
+            );
+          }),
+          128
+          /* KEYED_FRAGMENT */
+        ))
+      ]);
+    };
+  }
+});
+export {
+  _sfc_main as default
+};

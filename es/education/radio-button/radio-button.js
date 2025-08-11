@@ -1,5 +1,7 @@
-import o from './radio-button2.js'
-import './assets/radio-button.css' /* empty css              */
-import t from './_virtual/_plugin-vue_export-helper.js'
-const m = /* @__PURE__ */ t(o, [['__scopeId', 'data-v-408dfe52']])
-export { m as default }
+import _sfc_main from "./radio-button2.js";
+import './assets/radio-button.css';/* empty css              */
+import _export_sfc from "./_virtual/_plugin-vue_export-helper.js";
+const radioButton = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-530fbb18"]]);
+export {
+  radioButton as default
+};

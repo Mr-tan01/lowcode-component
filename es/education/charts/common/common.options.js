@@ -1,12 +1,12 @@
-import l from "lodash-es/merge";
-const n = {
+import merge from "lodash-es/merge";
+const baseDifferenceSerie = {
   type: "bar",
   data: [],
-  showBackground: !1,
+  showBackground: false,
   markPoint: {
     symbol: "none",
     label: {
-      show: !1
+      show: false
     }
   },
   markLine: {
@@ -16,7 +16,7 @@ const n = {
       type: "solid"
     },
     label: {
-      show: !1
+      show: false
     }
   },
   itemStyle: {
@@ -24,22 +24,26 @@ const n = {
     color: "rgba(225, 188, 75, 1)"
   }
 };
-function s(r, o) {
-  return l(
+function useDifferenceSeries(data, serie) {
+  return merge(
     {},
-    n,
+    baseDifferenceSerie,
     {
       markLine: {
-        data: r.map((e, a) => e.map((t) => ({
-          coord: [a, t],
-          name: a
-        })))
+        data: data.map((item, index) => {
+          return item.map((el) => {
+            return {
+              coord: [index, el],
+              name: index
+            };
+          });
+        })
       },
-      data: r.map((e) => e[1])
+      data: data.map((item) => item[1])
     },
-    o
+    serie
   );
 }
 export {
-  s as useDifferenceSeries
+  useDifferenceSeries
 };

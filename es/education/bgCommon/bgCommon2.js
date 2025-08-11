@@ -1,53 +1,42 @@
-import {
-    defineComponent as l,
-    mergeDefaults as n,
-    useCssVars as s,
-    computed as m,
-    openBlock as _,
-    createElementBlock as d,
-    createElementVNode as e,
-    renderSlot as a,
-} from 'vue'
-import { bgImage as g } from './const.js'
-const u = { class: 'lcc-bg__common' },
-    b = { class: 'lcc-bg__common__wrapper' },
-    f = /* @__PURE__ */ l({
-        __name: 'bgCommon',
-        props: /* @__PURE__ */ n(
-            {
-                bgSrc: String,
-            },
-            {
-                bgSrc: '',
-            },
-        ),
-        setup(t) {
-            s((r) => ({
-                '00d4669c': c.value,
-            }))
-            const c = m(() => `url(${t.bgSrc || g.url})`)
-            return (r, o) => (
-                _(),
-                d('div', u, [
-                    o[0] ||
-                        (o[0] = e(
-                            'div',
-                            { class: 'lcc-bg__common__bl-decoartor-bg' },
-                            null,
-                            -1,
-                            /* HOISTED */
-                        )),
-                    o[1] ||
-                        (o[1] = e(
-                            'div',
-                            { class: 'lcc-bg__common__br-decoartor-bg' },
-                            null,
-                            -1,
-                            /* HOISTED */
-                        )),
-                    e('div', b, [a(r.$slots, 'default', {}, void 0, !0)]),
-                ])
-            )
-        },
-    })
-export { f as default }
+import { defineComponent, mergeDefaults, useCssVars, computed, openBlock, createElementBlock, createElementVNode, renderSlot } from "vue";
+import { bgImage } from "./const.js";
+const _hoisted_1 = { class: "lcc-bg__common" };
+const _hoisted_2 = { class: "lcc-bg__common__wrapper" };
+const _sfc_main = /* @__PURE__ */ defineComponent({
+  __name: "bgCommon",
+  props: /* @__PURE__ */ mergeDefaults({
+    bgSrc: String
+  }, {
+    bgSrc: ""
+  }),
+  setup(__props) {
+    useCssVars((_ctx) => ({
+      "5da8506c": bgURL.value
+    }));
+    const bgURL = computed(() => `url(${__props.bgSrc || bgImage.url})`);
+    return (_ctx, _cache) => {
+      return openBlock(), createElementBlock("div", _hoisted_1, [
+        _cache[0] || (_cache[0] = createElementVNode(
+          "div",
+          { class: "lcc-bg__common__bl-decoartor-bg" },
+          null,
+          -1
+          /* HOISTED */
+        )),
+        _cache[1] || (_cache[1] = createElementVNode(
+          "div",
+          { class: "lcc-bg__common__br-decoartor-bg" },
+          null,
+          -1
+          /* HOISTED */
+        )),
+        createElementVNode("div", _hoisted_2, [
+          renderSlot(_ctx.$slots, "default", {}, void 0, true)
+        ])
+      ]);
+    };
+  }
+});
+export {
+  _sfc_main as default
+};

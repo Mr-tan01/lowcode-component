@@ -1,449 +1,358 @@
-import {
-    defineComponent as oe,
-    mergeModels as O,
-    mergeDefaults as re,
-    useCssVars as le,
-    ref as x,
-    useModel as N,
-    computed as d,
-    shallowRef as B,
-    watch as X,
-    nextTick as j,
-    onMounted as G,
-    openBlock as m,
-    createElementBlock as b,
-    createElementVNode as f,
-    unref as C,
-    createCommentVNode as R,
-    normalizeClass as I,
-    normalizeStyle as ue,
-    Fragment as se,
-    renderList as ie,
-    renderSlot as J,
-    mergeProps as ce,
-    toDisplayString as fe,
-} from 'vue'
-import ve from './images/lt-arrow.png.js'
-import de from './images/rt-arrow.png.js'
-import me from './images/top-arrow.png.js'
-import Q from 'lodash-es/throttle'
-import be from 'lodash-es/debounce'
-import { propsRaw as Ce } from './props.js'
-const pe = { class: 'lc-carouse-box' },
-    we = { class: 'lc-carouse-box__wrapper' },
-    ge = ['onClick'],
-    he = ['title'],
-    ke = {
-        key: 0,
-        class: 'lc-carouse-box__track',
-    },
-    We = /* @__PURE__ */ oe({
-        __name: 'carouseBox',
-        props: /* @__PURE__ */ O(
-            /* @__PURE__ */ re(Ce, {
-                offsetAnimationTime: 250,
-                rowKey: (a) => a.value ?? Math.random(),
-                __skip_rowKey: !0,
-                showTrack: !0,
-                gap: 10,
-                disabled: !1,
-                backCenter: !0,
-            }),
-            {
-                index: { default: -1 },
-                indexModifiers: {},
-                value: { default: '' },
-                valueModifiers: {},
-            },
-        ),
-        emits: /* @__PURE__ */ O(['change'], ['update:index', 'update:value']),
-        setup(a, { emit: U }) {
-            var P
-            le((t) => ({
-                '0cbcbb43': t.gap,
-                '2d2d450b': t.offsetAnimationTime,
-            }))
-            const l = x(0),
-                p = x(!0),
-                v = N(a, 'index'),
-                W = N(a, 'value'),
-                i = d(() => a.list ?? []),
-                M = d(() => !a.disabled)
-            v.value === -1 &&
-                (v.value =
-                    ((P = i.value) == null
-                        ? void 0
-                        : P.findIndex((t) => a.rowKey(t) === W.value)) ?? 0)
-            const Y = U,
-                s = x({
-                    before: [],
-                    after: [],
-                    appendCount: 0,
-                }),
-                g = d(() => {
-                    const t = i.value ?? []
-                    return [...s.value.before, ...t, ...s.value.after]
-                }),
-                E = d(() => l.value % 2 === 0)
-            function D() {
-                l.value = v.value
-            }
-            D()
-            function K(t) {
-                return Q(() => {
-                    let e = l.value + t
-                    ;(e < 0
-                        ? (e = g.value.length - 1)
-                        : e >= g.value.length && (e = 0),
-                        T(g.value[e], e))
-                }, a.offsetAnimationTime)
-            }
-            const $ = K(-1),
-                z = K(1),
-                h = B([]),
-                w = B(),
-                _ = B(),
-                S = x(0)
-            ;(X(
-                () => a.list,
-                () => {
-                    ;(F(), j(A))
-                },
-                {
-                    deep: 1,
-                },
-            ),
-                X(
-                    () => v.value,
-                    () => {
-                        H()
-                    },
-                ),
-                G(A))
-            function A() {
-                if (!k.value) return
-                const { maxAppendCount: t } = k.value,
-                    e = t
-                if (e === 0) return
-                if (
-                    ((s.value.appendCount = e), D(), (l.value += e), a.disabled)
-                ) {
-                    ;((s.value.before = []), (s.value.after = []))
-                    return
-                }
-                const n = i.value ?? []
-                ;((s.value.before = n.slice(-e).map(V)),
-                    (s.value.after = n.slice(0, e).map(V)))
-            }
-            function V(t, e) {
-                return {
-                    ...t,
-                    value: a.rowKey(t) + '_clone_' + e + '_' + Date.now(),
-                }
-            }
-            function F() {
-                S.value++
-            }
-            function H() {
-                if (!window.ResizeObserver || !w.value) return
-                new ResizeObserver(
-                    be(() => {
-                        ;(F(), A())
-                    }, a.offsetAnimationTime),
-                ).observe(w.value)
-            }
-            G(H)
-            const k = d(() => {
-                    var q
-                    if ((S.value++, !w.value || !h.value || !_.value)) return
-                    const t = w.value.offsetWidth,
-                        e = {
-                            normal: 0,
-                            active: 0,
-                        }
-                    for (let y = 0; y <= h.value.length; y++) {
-                        const c = h.value[y]
-                        if (
-                            ((q = c == null ? void 0 : c.classList) != null &&
-                            q.contains('active')
-                                ? (e.active = c.offsetWidth)
-                                : (e.normal =
-                                      c == null ? void 0 : c.offsetWidth),
-                            e.active && e.normal)
-                        )
-                            break
-                    }
-                    const n = e.normal,
-                        o = e.active,
-                        r = t / n,
-                        u = r,
-                        ae = a.disabled ? 0 : Math.round(r),
-                        ne = _.value.offsetWidth
-                    return {
-                        normalButtonWidth: a.backCenter ? n : 0,
-                        maxButtonCount: a.backCenter ? u : 0,
-                        carouselWidth: a.backCenter ? ne : 0,
-                        maxAppendCount: a.backCenter ? ae : 0,
-                        offset: a.backCenter ? o / 2 : 0,
-                        // 加上选中的按钮宽度一半, 让选中的按钮在中心点
-                    }
-                }),
-                Z = d(() => {
-                    if (k.value) {
-                        const {
-                                normalButtonWidth: t,
-                                maxButtonCount: e,
-                                offset: n,
-                                carouselWidth: o,
-                            } = k.value,
-                            r = e / 2
-                        let u = (t * (l.value - r) + n) * -1
-                        return (
-                            u >= 0
-                                ? (u = 0)
-                                : u <= -o + t * e && (u = -o + t * e),
-                            u
-                        )
-                    }
-                    return 0
-                })
-            function ee(t) {
-                window.requestAnimationFrame
-                    ? window.requestAnimationFrame(t)
-                    : t()
-            }
-            function te(t, e = !0) {
-                ee(() => {
-                    e
-                        ? j(setTimeout.bind(null, t, a.offsetAnimationTime))
-                        : setTimeout(t, a.offsetAnimationTime)
-                })
-            }
-            function L(t) {
-                te(() => {
-                    ;((p.value = !1), (l.value = t))
-                }, !1)
-            }
-            const T = Q((t, e) => {
-                if (a.disabled) return
-                p.value || (p.value = !0)
-                const n = s.value.appendCount
-                let o = e - n
-                if (v.value == o) return
-                ;((l.value = e),
-                    o < 0
-                        ? (L(i.value.length + o + n), (o = i.value.length - 1))
-                        : o >= i.value.length && (L(n), (o = 0)),
-                    (v.value = o))
-                const r = i.value[o]
-                W.value = r == null ? void 0 : r.value
-                const u = {
-                    index: o,
-                    label: r == null ? void 0 : r.label,
-                    value: r == null ? void 0 : r.value,
-                    data: r,
-                }
-                Y('change', u)
-            }, a.offsetAnimationTime)
-            return (t, e) => (
-                m(),
-                b('div', pe, [
-                    f('div', we, [
-                        M.value
-                            ? (m(),
-                              b(
-                                  'div',
-                                  {
-                                      key: 0,
-                                      class: 'lc-carouse-box__wrapper__arrow arrow--left',
-                                      onClick:
-                                          e[0] ||
-                                          (e[0] = //@ts-ignore
-                                              (...n) => C($) && C($)(...n)),
-                                  },
-                                  e[2] ||
-                                      (e[2] = [
-                                          f(
-                                              'img',
-                                              {
-                                                  class: 'lc-carouse-box__wrapper__arrow--image',
-                                                  src: ve,
-                                                  draggable: 'false',
-                                                  alt: '',
-                                              },
-                                              null,
-                                              -1,
-                                              /* HOISTED */
-                                          ),
-                                      ]),
-                              ))
-                            : R('v-if', !0),
-                        f(
-                            'div',
-                            {
-                                class: 'lc-carouse-box__wrapper__tabs',
-                                ref_key: 'tabButtonParentElRef',
-                                ref: w,
-                            },
-                            [
-                                f(
-                                    'div',
-                                    {
-                                        class: I([
-                                            'lc-carouse-box__wrapper__tabs--train',
-                                            { 'is-transition': p.value },
-                                        ]),
-                                        style: ue({
-                                            '--carousel-offset': `translateX(${Z.value}px)`,
-                                        }),
-                                        ref_key: 'carouselTrainElRef',
-                                        ref: _,
-                                    },
-                                    [
-                                        (m(!0),
-                                        b(
-                                            se,
-                                            null,
-                                            ie(
-                                                g.value,
-                                                (n, o) => (
-                                                    m(),
-                                                    b(
-                                                        'button',
-                                                        {
-                                                            class: I([
-                                                                'lc-carouse-box__wrapper__tabs--train__button',
-                                                                {
-                                                                    'active':
-                                                                        l.value ===
-                                                                        o,
-                                                                    'is-even':
-                                                                        E.value,
-                                                                },
-                                                            ]),
-                                                            key: t.rowKey(n),
-                                                            onClick: (r) =>
-                                                                C(T)(n, o),
-                                                            ref_for: !0,
-                                                            ref_key:
-                                                                'tabButtonRef',
-                                                            ref: h,
-                                                        },
-                                                        [
-                                                            J(
-                                                                t.$slots,
-                                                                'default',
-                                                                ce(
-                                                                    {
-                                                                        ref_for:
-                                                                            !0,
-                                                                    },
-                                                                    {
-                                                                        record: n,
-                                                                        isActive:
-                                                                            l.value ===
-                                                                            o,
-                                                                        isEven: E.value,
-                                                                        isTransition:
-                                                                            p.value,
-                                                                        index: o,
-                                                                        handleClick:
-                                                                            C(
-                                                                                T,
-                                                                            ),
-                                                                    },
-                                                                ),
-                                                                () => [
-                                                                    f(
-                                                                        'div',
-                                                                        {
-                                                                            class: 'lc-carouse-box__wrapper__tabs--train__button--text',
-                                                                            title: n.label,
-                                                                        },
-                                                                        fe(
-                                                                            n.label,
-                                                                        ),
-                                                                        9,
-                                                                        he,
-                                                                    ),
-                                                                ],
-                                                                !0,
-                                                            ),
-                                                        ],
-                                                        10,
-                                                        ge,
-                                                    )
-                                                ),
-                                            ),
-                                            128,
-                                            /* KEYED_FRAGMENT */
-                                        )),
-                                    ],
-                                    6,
-                                    /* CLASS, STYLE */
-                                ),
-                            ],
-                            512,
-                            /* NEED_PATCH */
-                        ),
-                        M.value
-                            ? (m(),
-                              b(
-                                  'div',
-                                  {
-                                      key: 1,
-                                      class: 'lc-carouse-box__wrapper__arrow arrow--right',
-                                      onClick:
-                                          e[1] ||
-                                          (e[1] = //@ts-ignore
-                                              (...n) => C(z) && C(z)(...n)),
-                                  },
-                                  e[3] ||
-                                      (e[3] = [
-                                          f(
-                                              'img',
-                                              {
-                                                  class: 'lc-carouse-box__wrapper__arrow--image',
-                                                  src: de,
-                                                  draggable: 'false',
-                                                  alt: '',
-                                              },
-                                              null,
-                                              -1,
-                                              /* HOISTED */
-                                          ),
-                                      ]),
-                              ))
-                            : R('v-if', !0),
-                    ]),
-                    t.showTrack
-                        ? (m(),
-                          b('div', ke, [
-                              J(
-                                  t.$slots,
-                                  'track',
-                                  {},
-                                  () => [
-                                      e[4] ||
-                                          (e[4] = f(
-                                              'img',
-                                              {
-                                                  class: 'lc-carouse-box__track__image--pointer',
-                                                  src: me,
-                                                  draggable: 'false',
-                                                  alt: '',
-                                              },
-                                              null,
-                                              -1,
-                                              /* HOISTED */
-                                          )),
-                                  ],
-                                  !0,
-                              ),
-                          ]))
-                        : R('v-if', !0),
-                ])
+import { defineComponent, mergeModels, mergeDefaults, useCssVars, ref, useModel, computed, shallowRef, watch, nextTick, onMounted, openBlock, createElementBlock, createElementVNode, unref, createCommentVNode, normalizeClass, normalizeStyle, Fragment, renderList, renderSlot, mergeProps, toDisplayString } from "vue";
+import _imports_0 from "./images/lt-arrow.png.js";
+import _imports_1 from "./images/rt-arrow.png.js";
+import _imports_2 from "./images/top-arrow.png.js";
+import throttle from "lodash-es/throttle";
+import debounce from "lodash-es/debounce";
+import { propsRaw } from "./props.js";
+const _hoisted_1 = { class: "lc-carouse-box" };
+const _hoisted_2 = { class: "lc-carouse-box__wrapper" };
+const _hoisted_3 = ["onClick"];
+const _hoisted_4 = ["title"];
+const _hoisted_5 = {
+  key: 0,
+  class: "lc-carouse-box__track"
+};
+const _sfc_main = /* @__PURE__ */ defineComponent({
+  __name: "carouseBox",
+  props: /* @__PURE__ */ mergeModels(/* @__PURE__ */ mergeDefaults(propsRaw, {
+    offsetAnimationTime: 250,
+    rowKey: (item) => item.value ?? Math.random(),
+    __skip_rowKey: true,
+    showTrack: true,
+    gap: 10,
+    disabled: false,
+    backCenter: true
+  }), {
+    "index": { default: -1 },
+    "indexModifiers": {},
+    "value": { default: "" },
+    "valueModifiers": {}
+  }),
+  emits: /* @__PURE__ */ mergeModels(["change"], ["update:index", "update:value"]),
+  setup(__props, { emit: __emit }) {
+    var _a;
+    useCssVars((_ctx) => ({
+      "6883b170": _ctx.gap,
+      "b3b77d90": _ctx.offsetAnimationTime
+    }));
+    const carouseIndex = ref(0);
+    const _isTransition = ref(true);
+    const modelIndex = useModel(__props, "index");
+    const modelValue = useModel(__props, "value");
+    const listSource = computed(() => {
+      return __props.list ?? [];
+    });
+    const showArrow = computed(() => !__props.disabled);
+    if (modelIndex.value === -1) {
+      modelIndex.value = ((_a = listSource.value) == null ? void 0 : _a.findIndex((item) => __props.rowKey(item) === modelValue.value)) ?? 0;
+    }
+    const $emit = __emit;
+    const beforeAfterTempData = ref({
+      before: [],
+      after: [],
+      appendCount: 0
+    });
+    const renderList$1 = computed(() => {
+      const listClone = listSource.value ?? [];
+      return [...beforeAfterTempData.value.before, ...listClone, ...beforeAfterTempData.value.after];
+    });
+    const isEven = computed(() => carouseIndex.value % 2 === 0);
+    function initCarouseIndex() {
+      carouseIndex.value = modelIndex.value;
+    }
+    initCarouseIndex();
+    function createStepHandler(dir) {
+      return throttle(() => {
+        let currentIndex = carouseIndex.value + dir;
+        if (currentIndex < 0) {
+          currentIndex = renderList$1.value.length - 1;
+        } else if (currentIndex >= renderList$1.value.length) {
+          currentIndex = 0;
+        }
+        handleClick(renderList$1.value[currentIndex], currentIndex);
+      }, __props.offsetAnimationTime);
+    }
+    const leftHandler = createStepHandler(-1);
+    const rightHandler = createStepHandler(1);
+    const tabButtonRef = shallowRef([]);
+    const tabButtonParentElRef = shallowRef();
+    const carouselTrainElRef = shallowRef();
+    const forceCompile = ref(0);
+    watch(
+      () => __props.list,
+      () => {
+        updateCompile();
+        nextTick(appendBeforeAfterData);
+      },
+      {
+        deep: 1
+      }
+    );
+    watch(
+      () => modelIndex.value,
+      () => {
+        onParentElResize();
+      }
+    );
+    onMounted(appendBeforeAfterData);
+    function appendBeforeAfterData() {
+      if (!clientRect.value) return;
+      const { maxAppendCount } = clientRect.value;
+      const appendCount = maxAppendCount;
+      if (appendCount === 0) return;
+      beforeAfterTempData.value.appendCount = appendCount;
+      initCarouseIndex();
+      carouseIndex.value += appendCount;
+      if (__props.disabled) {
+        beforeAfterTempData.value.before = [];
+        beforeAfterTempData.value.after = [];
+        return;
+      }
+      const listClone = listSource.value ?? [];
+      beforeAfterTempData.value.before = listClone.slice(-appendCount).map(uuCloneKey);
+      beforeAfterTempData.value.after = listClone.slice(0, appendCount).map(uuCloneKey);
+    }
+    function uuCloneKey(item, index) {
+      return {
+        ...item,
+        value: __props.rowKey(item) + "_clone_" + index + "_" + Date.now()
+      };
+    }
+    function updateCompile() {
+      forceCompile.value++;
+    }
+    function onParentElResize() {
+      if (!window.ResizeObserver || !tabButtonParentElRef.value) return;
+      const observer = new ResizeObserver(
+        debounce(() => {
+          updateCompile();
+          appendBeforeAfterData();
+        }, __props.offsetAnimationTime)
+      );
+      observer.observe(tabButtonParentElRef.value);
+    }
+    onMounted(onParentElResize);
+    const clientRect = computed(() => {
+      var _a2;
+      forceCompile.value++;
+      if (!tabButtonParentElRef.value || !tabButtonRef.value || !carouselTrainElRef.value) return;
+      const width = tabButtonParentElRef.value.offsetWidth;
+      const buttonMapsWidth = {
+        normal: 0,
+        active: 0
+      };
+      for (let i = 0; i <= tabButtonRef.value.length; i++) {
+        const buttonEl = tabButtonRef.value[i];
+        if ((_a2 = buttonEl == null ? void 0 : buttonEl.classList) == null ? void 0 : _a2.contains("active")) {
+          buttonMapsWidth.active = buttonEl.offsetWidth;
+        } else {
+          buttonMapsWidth.normal = buttonEl == null ? void 0 : buttonEl.offsetWidth;
+        }
+        if (buttonMapsWidth.active && buttonMapsWidth.normal) {
+          break;
+        }
+      }
+      const normalButtonWidth = buttonMapsWidth.normal;
+      const activeButtonWidth = buttonMapsWidth.active;
+      const maxCount = width / normalButtonWidth;
+      const maxButtonCount = maxCount;
+      const maxAppendCount = __props.disabled ? 0 : Math.round(maxCount);
+      const carouselWidth = carouselTrainElRef.value.offsetWidth;
+      return {
+        normalButtonWidth: __props.backCenter ? normalButtonWidth : 0,
+        maxButtonCount: __props.backCenter ? maxButtonCount : 0,
+        carouselWidth: __props.backCenter ? carouselWidth : 0,
+        maxAppendCount: __props.backCenter ? maxAppendCount : 0,
+        offset: __props.backCenter ? activeButtonWidth / 2 : 0
+        // 加上选中的按钮宽度一半, 让选中的按钮在中心点
+      };
+    });
+    const carouselOffset = computed(() => {
+      if (clientRect.value) {
+        const { normalButtonWidth, maxButtonCount, offset, carouselWidth } = clientRect.value;
+        const maxButtonCountHalf = maxButtonCount / 2;
+        let offsetValue = (normalButtonWidth * (carouseIndex.value - maxButtonCountHalf) + offset) * -1;
+        if (offsetValue >= 0) {
+          offsetValue = 0;
+        } else if (offsetValue <= -carouselWidth + normalButtonWidth * maxButtonCount) {
+          offsetValue = -carouselWidth + normalButtonWidth * maxButtonCount;
+        }
+        return offsetValue;
+      }
+      return 0;
+    });
+    function requestAnimationFrame(callback) {
+      if (window.requestAnimationFrame) {
+        window.requestAnimationFrame(callback);
+      } else {
+        callback();
+      }
+    }
+    function transitionCallabck(callback, isNextTick = true) {
+      requestAnimationFrame(() => {
+        if (isNextTick) {
+          nextTick(setTimeout.bind(null, callback, __props.offsetAnimationTime));
+        } else {
+          setTimeout(callback, __props.offsetAnimationTime);
+        }
+      });
+    }
+    function transitionCallabckLoop(index) {
+      transitionCallabck(() => {
+        _isTransition.value = false;
+        carouseIndex.value = index;
+      }, false);
+    }
+    const handleClick = throttle((_item, index) => {
+      if (__props.disabled) return;
+      if (!_isTransition.value) {
+        _isTransition.value = true;
+      }
+      const appendCount = beforeAfterTempData.value.appendCount;
+      let _index = index - appendCount;
+      if (modelIndex.value == _index) return;
+      carouseIndex.value = index;
+      if (_index < 0) {
+        transitionCallabckLoop(listSource.value.length + _index + appendCount);
+        _index = listSource.value.length - 1;
+      } else if (_index >= listSource.value.length) {
+        transitionCallabckLoop(appendCount);
+        _index = 0;
+      }
+      modelIndex.value = _index;
+      const _newItem = listSource.value[_index];
+      modelValue.value = _newItem == null ? void 0 : _newItem.value;
+      const _newChangeEventData = {
+        index: _index,
+        label: _newItem == null ? void 0 : _newItem.label,
+        value: _newItem == null ? void 0 : _newItem.value,
+        data: _newItem
+      };
+      $emit("change", _newChangeEventData);
+    }, __props.offsetAnimationTime);
+    return (_ctx, _cache) => {
+      return openBlock(), createElementBlock("div", _hoisted_1, [
+        createElementVNode("div", _hoisted_2, [
+          showArrow.value ? (openBlock(), createElementBlock("div", {
+            key: 0,
+            class: "lc-carouse-box__wrapper__arrow arrow--left",
+            onClick: _cache[0] || (_cache[0] = //@ts-ignore
+            (...args) => unref(leftHandler) && unref(leftHandler)(...args))
+          }, _cache[2] || (_cache[2] = [
+            createElementVNode(
+              "img",
+              {
+                class: "lc-carouse-box__wrapper__arrow--image",
+                src: _imports_0,
+                draggable: "false",
+                alt: ""
+              },
+              null,
+              -1
+              /* HOISTED */
             )
-        },
-    })
-export { We as default }
+          ]))) : createCommentVNode("v-if", true),
+          createElementVNode(
+            "div",
+            {
+              ref_key: "tabButtonParentElRef",
+              ref: tabButtonParentElRef,
+              class: "lc-carouse-box__wrapper__tabs"
+            },
+            [
+              createElementVNode(
+                "div",
+                {
+                  ref_key: "carouselTrainElRef",
+                  ref: carouselTrainElRef,
+                  class: normalizeClass(["lc-carouse-box__wrapper__tabs--train", { "is-transition": _isTransition.value }]),
+                  style: normalizeStyle({
+                    "--carousel-offset": `translateX(${carouselOffset.value}px)`
+                  })
+                },
+                [
+                  (openBlock(true), createElementBlock(
+                    Fragment,
+                    null,
+                    renderList(renderList$1.value, (item, index) => {
+                      return openBlock(), createElementBlock("button", {
+                        key: _ctx.rowKey(item),
+                        ref_for: true,
+                        ref_key: "tabButtonRef",
+                        ref: tabButtonRef,
+                        class: normalizeClass(["lc-carouse-box__wrapper__tabs--train__button", {
+                          "active": carouseIndex.value === index,
+                          "is-even": isEven.value
+                        }]),
+                        onClick: ($event) => unref(handleClick)(item, index)
+                      }, [
+                        renderSlot(_ctx.$slots, "default", mergeProps({ ref_for: true }, {
+                          record: item,
+                          isActive: carouseIndex.value === index,
+                          isEven: isEven.value,
+                          isTransition: _isTransition.value,
+                          index,
+                          handleClick: unref(handleClick)
+                        }), () => [
+                          createElementVNode("div", {
+                            class: "lc-carouse-box__wrapper__tabs--train__button--text",
+                            title: item.label
+                          }, toDisplayString(item.label), 9, _hoisted_4)
+                        ], true)
+                      ], 10, _hoisted_3);
+                    }),
+                    128
+                    /* KEYED_FRAGMENT */
+                  ))
+                ],
+                6
+                /* CLASS, STYLE */
+              )
+            ],
+            512
+            /* NEED_PATCH */
+          ),
+          showArrow.value ? (openBlock(), createElementBlock("div", {
+            key: 1,
+            class: "lc-carouse-box__wrapper__arrow arrow--right",
+            onClick: _cache[1] || (_cache[1] = //@ts-ignore
+            (...args) => unref(rightHandler) && unref(rightHandler)(...args))
+          }, _cache[3] || (_cache[3] = [
+            createElementVNode(
+              "img",
+              {
+                class: "lc-carouse-box__wrapper__arrow--image",
+                src: _imports_1,
+                draggable: "false",
+                alt: ""
+              },
+              null,
+              -1
+              /* HOISTED */
+            )
+          ]))) : createCommentVNode("v-if", true)
+        ]),
+        _ctx.showTrack ? (openBlock(), createElementBlock("div", _hoisted_5, [
+          renderSlot(_ctx.$slots, "track", {}, () => [
+            _cache[4] || (_cache[4] = createElementVNode(
+              "img",
+              {
+                class: "lc-carouse-box__track__image--pointer",
+                src: _imports_2,
+                draggable: "false",
+                alt: ""
+              },
+              null,
+              -1
+              /* HOISTED */
+            ))
+          ], true)
+        ])) : createCommentVNode("v-if", true)
+      ]);
+    };
+  }
+});
+export {
+  _sfc_main as default
+};
