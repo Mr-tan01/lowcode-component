@@ -422,6 +422,8 @@ on('result', () => {
                 &__suffix {
                     margin-left: 5%;
                     width: 5%;
+                    display: flex;
+                    align-items: center;
 
                     &--img {
                         width: 100%;
