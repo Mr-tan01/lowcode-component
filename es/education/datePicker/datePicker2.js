@@ -1,59 +1,44 @@
-import {
-    defineComponent as a,
-    openBlock as n,
-    createElementBlock as s,
-    createVNode as t,
-    withCtx as r,
-    unref as c,
-    mergeProps as p,
-    createElementVNode as i,
-} from 'vue'
-import { NDatePicker as l } from 'naive-ui/es/date-picker'
-import m from './common/components/ConfigProvider/index.js'
-const _ = { class: 'lc-date-picker' },
-    N = /* @__PURE__ */ a({
-        __name: 'datePicker',
-        setup(d) {
-            return (o, e) => (
-                n(),
-                s('div', _, [
-                    t(m, null, {
-                        default: r(() => [
-                            t(
-                                c(l),
-                                p(
-                                    {
-                                        type: 'daterange',
-                                        to: !1,
-                                    },
-                                    o.$attrs,
-                                ),
-                                {
-                                    separator: r(
-                                        () =>
-                                            e[0] ||
-                                            (e[0] = [
-                                                i(
-                                                    'span',
-                                                    { class: 'color-white' },
-                                                    '-',
-                                                    -1,
-                                                    /* HOISTED */
-                                                ),
-                                            ]),
-                                    ),
-                                    _: 1,
-                                    /* STABLE */
-                                },
-                                16,
-                                /* FULL_PROPS */
-                            ),
-                        ]),
-                        _: 1,
-                        /* STABLE */
-                    }),
-                ])
+import { defineComponent, openBlock, createElementBlock, createVNode, withCtx, unref, mergeProps, createElementVNode } from "vue";
+import { NDatePicker } from "naive-ui/es/date-picker";
+import _sfc_main$1 from "./common/components/ConfigProvider/index.js";
+const _hoisted_1 = { class: "lc-date-picker" };
+const _sfc_main = /* @__PURE__ */ defineComponent({
+  __name: "datePicker",
+  setup(__props) {
+    return (_ctx, _cache) => {
+      return openBlock(), createElementBlock("div", _hoisted_1, [
+        createVNode(_sfc_main$1, null, {
+          default: withCtx(() => [
+            createVNode(
+              unref(NDatePicker),
+              mergeProps({
+                type: "daterange",
+                to: false
+              }, _ctx.$attrs),
+              {
+                separator: withCtx(() => _cache[0] || (_cache[0] = [
+                  createElementVNode(
+                    "span",
+                    { class: "color-white" },
+                    "-",
+                    -1
+                    /* HOISTED */
+                  )
+                ])),
+                _: 1
+                /* STABLE */
+              },
+              16
+              /* FULL_PROPS */
             )
-        },
-    })
-export { N as default }
+          ]),
+          _: 1
+          /* STABLE */
+        })
+      ]);
+    };
+  }
+});
+export {
+  _sfc_main as default
+};

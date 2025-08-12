@@ -1,2 +1,4 @@
-import { default as f } from './paging.js'
-export { f as LcPaging }
+import { default as default2 } from "./paging.js";
+export {
+  default2 as LcPaging
+};

@@ -1,45 +1,51 @@
-import s from "lodash-es/merge";
-import { deepMergeArrayOptions as c } from "@mmj-code-lib/lowcode/es/components";
-import { tooltipOptions as a, legendOptions as u, gridOptions as l, xAxisOptions as f, yAxisOptions as p, funnelColors as O, commonScatterSeries as m } from "./const.js";
-const t = {
-  tooltip: a,
-  legend: u,
-  grid: l,
-  xAxis: f,
-  yAxis: p,
-  color: O,
-  series: m
+import merge from "lodash-es/merge";
+import { deepMergeArrayOptions } from "@mmj-code-lib/lowcode/es/components";
+import { tooltipOptions, legendOptions, gridOptions, xAxisOptions, yAxisOptions, funnelColors, commonScatterSeries } from "./const.js";
+const commonScatterOptions = {
+  tooltip: tooltipOptions,
+  legend: legendOptions,
+  grid: gridOptions,
+  xAxis: xAxisOptions,
+  yAxis: yAxisOptions,
+  color: funnelColors,
+  series: commonScatterSeries
 };
-function A(e) {
-  var n;
-  c(e, Object.keys(t), Object.values(t));
-  const o = {};
-  return (((n = e == null ? void 0 : e.series[0]) == null ? void 0 : n.data) ?? []).forEach((r) => {
-    o[r.name] = r.value;
-  }), s(
+function useCommonScatterOptions(opts) {
+  var _a;
+  deepMergeArrayOptions(opts, Object.keys(commonScatterOptions), Object.values(commonScatterOptions));
+  const legendValues = {};
+  (((_a = opts == null ? void 0 : opts.series[0]) == null ? void 0 : _a.data) ?? []).forEach((item) => {
+    legendValues[item.name] = item.value;
+  });
+  return merge(
     {},
-    t,
+    commonScatterOptions,
     {
       legend: [
         {},
         {
-          formatter(r) {
-            return r + "：" + o[r] + "%";
+          formatter(name) {
+            return name + "：" + legendValues[name] + "%";
           }
         }
       ]
     },
-    e
+    opts
   );
 }
-function i(e) {
-  return s({}, m, e);
+function mregeSeriesRecord(newSeries) {
+  return merge({}, commonScatterSeries, newSeries);
 }
-function S(e) {
-  return Array.isArray(e) ? e.map((o) => i(o)) : i(e ?? {});
+function useCommonScatterSeries(series) {
+  if (Array.isArray(series)) {
+    return series.map((item) => {
+      return mregeSeriesRecord(item);
+    });
+  }
+  return mregeSeriesRecord(series ?? {});
 }
 export {
-  t as commonScatterOptions,
-  A as useCommonScatterOptions,
-  S as useCommonScatterSeries
+  commonScatterOptions,
+  useCommonScatterOptions,
+  useCommonScatterSeries
 };

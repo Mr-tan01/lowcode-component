@@ -1,36 +1,40 @@
-import t from "lodash-es/merge";
-import { deepMergeArrayOptions as s } from "@mmj-code-lib/lowcode/es/components";
-import { gaugeTitleOptions as g, gaugeSeriesRecordOptions as p, gaugeColors as c, gaugeInnerGraphicColors as i } from "./const.js";
-import { commonTooltipOptions as l } from "../common/components/Charts/options/index.js";
-const e = {
-  tooltip: l,
-  title: g,
-  series: p,
-  color: c
+import merge from "lodash-es/merge";
+import { deepMergeArrayOptions } from "@mmj-code-lib/lowcode/es/components";
+import { gaugeTitleOptions, gaugeSeriesRecordOptions, gaugeColors, gaugeInnerGraphicColors } from "./const.js";
+import { commonTooltipOptions } from "../common/components/Charts/options/index.js";
+const commonGaugeOptions = {
+  tooltip: commonTooltipOptions,
+  title: gaugeTitleOptions,
+  series: gaugeSeriesRecordOptions,
+  color: gaugeColors
 };
-function f(o) {
+function getInnerSeries(index) {
   return {
     itemStyle: {
-      color: i[o % i.length]
+      color: gaugeInnerGraphicColors[index % gaugeInnerGraphicColors.length]
     }
   };
 }
-function n(o) {
-  const r = o == null ? void 0 : o.data;
-  return t(
+function mergeSeriesData(newData) {
+  const tempData = newData == null ? void 0 : newData.data;
+  return merge(
     {
-      data: (r == null ? void 0 : r.map((u, m) => t(f(m), u))) ?? []
+      data: (tempData == null ? void 0 : tempData.map((item, index) => merge(getInnerSeries(index), item))) ?? []
     },
-    o
+    newData
   );
 }
-function d(o) {
-  return Array.isArray(o) ? o.map((r) => n(r)) : n(o);
+function useGaugeSeriesOptions(series) {
+  if (Array.isArray(series)) {
+    return series.map((item) => mergeSeriesData(item));
+  }
+  return mergeSeriesData(series);
 }
-function G(o) {
-  return s(o, Object.keys(e), Object.values(e)), t({}, e, o);
+function useCommonGaugeOptions(opts) {
+  deepMergeArrayOptions(opts, Object.keys(commonGaugeOptions), Object.values(commonGaugeOptions));
+  return merge({}, commonGaugeOptions, opts);
 }
 export {
-  G as useCommonGaugeOptions,
-  d as useGaugeSeriesOptions
+  useCommonGaugeOptions,
+  useGaugeSeriesOptions
 };

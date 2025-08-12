@@ -1,3 +1,6 @@
-import { default as r } from './checkbox.js'
-import { default as c } from './checkbox-group.js'
-export { r as LcCheckbox, c as LcCheckboxGroup }
+import { default as default2 } from "./checkbox.js";
+import { default as default3 } from "./checkbox-group.js";
+export {
+  default2 as LcCheckbox,
+  default3 as LcCheckboxGroup
+};

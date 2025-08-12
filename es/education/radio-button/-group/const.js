@@ -1,2 +1,4 @@
-import { radioButtonGroupProvideKey } from '../../radio-button-group/const.js'
-export { radioButtonGroupProvideKey }
+const radioButtonGroupProvideKey = Symbol("radioButtonGroupInject");
+export {
+  radioButtonGroupProvideKey
+};

@@ -1,46 +1,54 @@
-import d from "lodash-es/merge";
-import { radarGridOptions as m, radarTooltipOptions as c, radarTitleOptions as p, radarLegendOptions as u, radarItemOptions as f, radarSeriesOptions as O, radarColors as R } from "./const.js";
-import { deepMergeArrayOptions as v } from "@mmj-code-lib/lowcode/es/components";
-const o = {
-  grid: m,
-  tooltip: c,
-  title: p,
-  legend: u,
-  radar: f,
-  series: O,
-  color: R
+import merge from "lodash-es/merge";
+import { radarGridOptions, radarTooltipOptions, radarTitleOptions, radarLegendOptions, radarItemOptions, radarSeriesOptions, radarColors } from "./const.js";
+import { deepMergeArrayOptions } from "@mmj-code-lib/lowcode/es/components";
+const commonRadarOptions = {
+  grid: radarGridOptions,
+  tooltip: radarTooltipOptions,
+  title: radarTitleOptions,
+  legend: radarLegendOptions,
+  radar: radarItemOptions,
+  series: radarSeriesOptions,
+  color: radarColors
 };
-function n(r, e) {
-  return d({
+function mergeRadarRecord(index, record) {
+  const innerRadarSeriesRecord = {
     itemStyle: {}
-  }, o.series, e);
+  };
+  return merge(innerRadarSeriesRecord, commonRadarOptions.series, record);
 }
-function S(r) {
-  return Array.isArray(r) ? r.map((e, i) => n(i, e)) : n(0, r);
+function useCommonRadarSeries(series) {
+  if (Array.isArray(series)) {
+    return series.map((item, index) => {
+      return mergeRadarRecord(index, item);
+    });
+  }
+  return mergeRadarRecord(0, series);
 }
-const a = `
+const tooltipItemStyle = `
     font-size: 16px;
     color: #fff;
     line-height: 30px;
 `;
-function x(r) {
-  var i;
-  v(r, Object.keys(o), Object.values(o));
-  const e = ((i = r == null ? void 0 : r.radar) == null ? void 0 : i.indicator) ?? [];
-  return d(
+function useCommonRadarOptions(opts) {
+  var _a;
+  deepMergeArrayOptions(opts, Object.keys(commonRadarOptions), Object.values(commonRadarOptions));
+  const indicator = ((_a = opts == null ? void 0 : opts.radar) == null ? void 0 : _a.indicator) ?? [];
+  return merge(
     {
       tooltip: {
-        formatter: (t) => `
-                    <div class="tooltip-title" style="${a}">${t.seriesName}：${t.name}</div>
-                    <div class="tooltip-item" style="${a}">${e.map((s, l) => `<div>${t.marker} ${s.name}：${t.value[l]}</div>`).join("")}</div>
-                `
+        formatter: (params) => {
+          return `
+                    <div class="tooltip-title" style="${tooltipItemStyle}">${params.seriesName}：${params.name}</div>
+                    <div class="tooltip-item" style="${tooltipItemStyle}">${indicator.map((item, i) => `<div>${params.marker} ${item.name}：${params.value[i]}</div>`).join("")}</div>
+                `;
+        }
       }
     },
-    o,
-    r
+    commonRadarOptions,
+    opts
   );
 }
 export {
-  x as useCommonRadarOptions,
-  S as useCommonRadarSeries
+  useCommonRadarOptions,
+  useCommonRadarSeries
 };

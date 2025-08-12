@@ -1,48 +1,64 @@
-import { defineComponent as h, useTemplateRef as g, computed as B, onMounted as k, openBlock as y, createElementBlock as v, createVNode as O, unref as C, mergeProps as A } from "vue";
-import { SChartsBar as I } from "@mmj-code-lib/lowcode/es/components";
-import { useCommonBarOptions as b, useCommonBarSeries as w, commonBarOptions as z } from "./options.js";
-import R from "lodash-es/merge";
-import { barBuiltInStyle as S } from "./const.js";
-const E = { class: "lc-bar-chart" }, N = /* @__PURE__ */ h({
+import { defineComponent, useTemplateRef, computed, onMounted, openBlock, createElementBlock, createVNode, unref, mergeProps } from "vue";
+import { SChartsBar } from "@mmj-code-lib/lowcode/es/components";
+import { useCommonBarOptions, useCommonBarSeries, commonBarOptions } from "./options.js";
+import merge from "lodash-es/merge";
+import { barBuiltInStyle } from "./const.js";
+const _hoisted_1 = { class: "lc-bar-chart" };
+const _sfc_main = /* @__PURE__ */ defineComponent({
   __name: "bar",
   props: {
     options: { default: () => ({}) },
-    linearGradientColor: { default: () => S.color },
-    isHorizontal: { type: Boolean, default: !1 },
-    stack: { type: Boolean, default: !1 },
-    fake3d: { type: Boolean, default: !0 },
+    linearGradientColor: { default: () => barBuiltInStyle.color },
+    isHorizontal: { type: Boolean, default: false },
+    stack: { type: Boolean, default: false },
+    fake3d: { type: Boolean, default: true },
     events: { default: () => ({}) }
   },
-  setup(t) {
-    const n = g("chartBarRef"), p = B(() => {
-      const e = b(t.options, { isHorizontal: t.isHorizontal });
-      return e.series = w(e.series, { stack: t.stack }), R({}, z, e);
+  setup(__props) {
+    const chartBar = useTemplateRef("chartBarRef");
+    const renderOptions = computed(() => {
+      const newOptions = useCommonBarOptions(__props.options, { isHorizontal: __props.isHorizontal });
+      newOptions.series = useCommonBarSeries(newOptions.series, { stack: __props.stack });
+      return merge({}, commonBarOptions, newOptions);
     });
-    return k(() => {
-      var e, l;
-      n.value && n.value.chartInstance && (Object.entries(t.events).forEach(([r, o]) => {
-        var c, s;
-        typeof o == "function" && ((s = (c = n.value) == null ? void 0 : c.chartInstance) == null || s.on(r, o(n)));
-      }), typeof t.events.legendselectchanged != "function" && t.events.legendselectchanged !== null && ((l = (e = n.value) == null ? void 0 : e.chartInstance) == null || l.on("legendselectchanged", function() {
-        var f, u, d, m;
-        const r = (f = n.value) == null ? void 0 : f.chartInstance;
-        if (!r) return;
-        const o = r.getOption(), s = ((u = o.legend) == null ? void 0 : u[0]).selected || {}, a = o.series, i = o.yAxis;
-        !Array.isArray(i) || i.length <= 1 || r.setOption({
-          yAxis: [{ show: s[(d = a == null ? void 0 : a[0]) == null ? void 0 : d.name] !== !1 }, { show: s[(m = a == null ? void 0 : a[1]) == null ? void 0 : m.name] !== !1 }]
+    onMounted(() => {
+      var _a, _b;
+      if (chartBar.value && chartBar.value.chartInstance) {
+        Object.entries(__props.events).forEach(([eventName, eventHandler]) => {
+          var _a2, _b2;
+          if (typeof eventHandler !== "function") return;
+          (_b2 = (_a2 = chartBar.value) == null ? void 0 : _a2.chartInstance) == null ? void 0 : _b2.on(eventName, eventHandler(chartBar));
         });
-      })));
-    }), (e, l) => (y(), v("div", E, [
-      O(C(I), A(e.$attrs, {
-        ref: "chartBarRef",
-        opts: p.value,
-        "linear-gradient-color": e.linearGradientColor,
-        stack: e.stack,
-        fake3d: e.fake3d
-      }), null, 16, ["opts", "linear-gradient-color", "stack", "fake3d"])
-    ]));
+        if (typeof __props.events.legendselectchanged !== "function" && __props.events.legendselectchanged !== null)
+          (_b = (_a = chartBar.value) == null ? void 0 : _a.chartInstance) == null ? void 0 : _b.on("legendselectchanged", function() {
+            var _a2, _b2, _c, _d;
+            const chart = (_a2 = chartBar.value) == null ? void 0 : _a2.chartInstance;
+            if (!chart) return;
+            const option = chart.getOption();
+            const legend = (_b2 = option.legend) == null ? void 0 : _b2[0];
+            const selected = legend.selected || {};
+            const seriesData = option.series;
+            const yAxis = option.yAxis;
+            if (!Array.isArray(yAxis) || yAxis.length <= 1) return;
+            chart.setOption({
+              yAxis: [{ show: selected[(_c = seriesData == null ? void 0 : seriesData[0]) == null ? void 0 : _c.name] !== false }, { show: selected[(_d = seriesData == null ? void 0 : seriesData[1]) == null ? void 0 : _d.name] !== false }]
+            });
+          });
+      }
+    });
+    return (_ctx, _cache) => {
+      return openBlock(), createElementBlock("div", _hoisted_1, [
+        createVNode(unref(SChartsBar), mergeProps(_ctx.$attrs, {
+          ref: "chartBarRef",
+          opts: renderOptions.value,
+          "linear-gradient-color": _ctx.linearGradientColor,
+          stack: _ctx.stack,
+          fake3d: _ctx.fake3d
+        }), null, 16, ["opts", "linear-gradient-color", "stack", "fake3d"])
+      ]);
+    };
   }
 });
 export {
-  N as default
+  _sfc_main as default
 };

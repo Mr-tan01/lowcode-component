@@ -1,122 +1,181 @@
-import { defineComponent as P, mergeDefaults as k, ref as m, computed as E, watch as l, onMounted as I, onBeforeUnmount as V, openBlock as x, createElementBlock as B, createVNode as L, unref as U, normalizeStyle as N, withCtx as y, createTextVNode as M, createElementVNode as K } from "vue";
-import { cesiumService as O } from "./modules/cesiumUtils.js";
-import { cesiumProps as Z } from "./modules/props.js";
-import { NSpin as $ } from "naive-ui";
-import { Cartesian3 as z, JulianDate as A } from "@cesium/engine";
-const j = { class: "lc-cesium" }, G = /* @__PURE__ */ P({
+import { defineComponent, mergeDefaults, ref, computed, watch, onMounted, onBeforeUnmount, openBlock, createElementBlock, createVNode, unref, normalizeStyle, withCtx, createTextVNode, createElementVNode } from "vue";
+import { cesiumService } from "./modules/cesiumUtils.js";
+import { cesiumProps } from "./modules/props.js";
+import { NSpin } from "naive-ui";
+import { Cartesian3, JulianDate } from "@cesium/engine";
+const _hoisted_1 = { class: "lc-cesium" };
+const _sfc_main = /* @__PURE__ */ defineComponent({
   __name: "cesium",
-  props: /* @__PURE__ */ k(Z, {
+  props: /* @__PURE__ */ mergeDefaults(cesiumProps, {
     clientId: "74109f7095974ab1a5e930c8e998580d",
     defaultCenterKey: "深圳市",
-    centerPosition: () => z.fromDegrees(114.187446, 22.674131, 13e4),
+    centerPosition: () => Cartesian3.fromDegrees(114.187446, 22.674131, 13e4),
     pointData: () => [],
-    openIndexDB: !1,
-    openOffset: () => ({ flag: !1, offset: 0 })
+    openIndexDB: false,
+    openOffset: () => ({ flag: false, offset: 0 })
   }),
   emits: ["pointHandler", "limitHeightHandler", "loadHandler"],
-  setup(e, { expose: g, emit: S }) {
-    const c = m(!0), a = m(!0), s = S, w = async () => {
-      var n;
-      f();
-      const i = t.offsetDuplicateCoordinates(e.pointData, "lng", "lat", e.openOffset.offset);
-      e.openOffset.flag ? t.pointData = i : t.pointData = e.pointData, (n = t.pointData) == null || n.forEach((o) => {
-        t.addPoint(o, "value"), e.defaultShowState && t.addPoint(o);
+  setup(__props, { expose: __expose, emit: __emit }) {
+    const initImageryLayersStatus = ref(true);
+    const initPointDataStatus = ref(true);
+    const emit = __emit;
+    const reloadPointData = async () => {
+      var _a;
+      clearEntity();
+      const offsetPointData = cesiumUtils.offsetDuplicateCoordinates(__props.pointData, "lng", "lat", __props.openOffset.offset);
+      if (__props.openOffset.flag) {
+        cesiumUtils.pointData = offsetPointData;
+      } else {
+        cesiumUtils.pointData = __props.pointData;
+      }
+      (_a = cesiumUtils.pointData) == null ? void 0 : _a.forEach((point) => {
+        cesiumUtils.addPoint(point, "value");
+        if (__props.defaultShowState) {
+          cesiumUtils.addPoint(point);
+        }
       });
-    }, r = async (i) => {
-      a.value = i;
-    }, D = async (i) => {
-      s("loadHandler", !i), c.value = i, a.value && (a.value = i);
-    }, t = new O("cesium-3d-viewer", {
-      config: e.basicConfig,
-      defaultShowState: e.defaultShowState,
-      flyToHeight: e.flyToHeight,
-      offsetState: e.offsetState,
-      centerPosition: e.centerPosition,
-      defaultCenterKey: e.defaultCenterKey,
-      openIndexDB: e.openIndexDB,
-      pointHandler: (i) => {
-        var d;
-        const n = A.now(), o = (d = i.properties) == null ? void 0 : d.getValue(n);
-        o && s("pointHandler", o);
-      },
-      limitHeightHandler: (i) => {
-        s("limitHeightHandler", i);
-      },
-      loadTileLayerHandler: (i) => {
-        D(i);
-      }
-    }), f = () => {
-      t.clearEntity("pointEntities", "dataSource"), t.clearEntity("pointEntities", "viewer");
-    }, h = (i, n) => {
-      t[i] ? t[i](n) : console.log("未匹配cesiumUtils的方法");
-    }, u = async () => {
-      try {
-        if (!e.accessToken)
-          return { status: !1 };
-        if (t.pointData = e.pointData, t.options.config = e.basicConfig, t.options.defaultShowState = e.defaultShowState, t.options.flyToHeight = e.flyToHeight, t.options.offsetState = e.offsetState, !await t.initViewer(e.controlStatus))
-          throw new Error("Viewer 初始化失败");
-        t.updateViewerAttribute(), t.setInitialView({ destination: e.centerPosition });
-        const n = e.imageryLayersUrl ?? `${e.baseUrl}/service/api/e99b765798d1412b9c2b458a1473396e/igs/rest/services/SZMAP/SZDZDT_2024_Yingji_T1_4490/WMTSServer?client_id=${e.clientId}&access_token=${e.accessToken}`;
-        return await t.loadTileLayer(n), e.areaName && t.polygonClickHandler(e.areaName), { status: !0 };
-      } catch {
-        return r(!1), { status: !1 };
-      }
-    }, v = E(() => ({
-      "--spin-container-bg": e.spinContainerBg ?? "#6C7E93",
-      "--n-spin-description-color": e.spinDescriptionColor ?? "#046ab1"
-    })), C = () => {
-      t.destroy(), u();
     };
-    g({
-      changeModel: h,
-      loadedTileLayer: r,
-      clearEntity: f,
-      cesiumUtils: t
+    const loadedTileLayer = async (status) => {
+      initPointDataStatus.value = status;
+    };
+    const loadImageryLayers = async (status) => {
+      emit("loadHandler", !status);
+      initImageryLayersStatus.value = status;
+      if (initPointDataStatus.value) {
+        initPointDataStatus.value = status;
+      }
+    };
+    const cesiumUtils = new cesiumService("cesium-3d-viewer", {
+      config: __props.basicConfig,
+      defaultShowState: __props.defaultShowState,
+      flyToHeight: __props.flyToHeight,
+      offsetState: __props.offsetState,
+      centerPosition: __props.centerPosition,
+      defaultCenterKey: __props.defaultCenterKey,
+      openIndexDB: __props.openIndexDB,
+      pointHandler: (data) => {
+        var _a;
+        const currentTime = JulianDate.now();
+        const value0ption = (_a = data.properties) == null ? void 0 : _a.getValue(currentTime);
+        if (!value0ption) return;
+        emit("pointHandler", value0ption);
+      },
+      limitHeightHandler: (value) => {
+        emit("limitHeightHandler", value);
+      },
+      loadTileLayerHandler: (status) => {
+        loadImageryLayers(status);
+      }
     });
-    const H = l([() => e.accessToken, () => e.imageryLayersUrl], C), T = l(
-      () => e.offsetState,
-      (i) => {
-        t.options = {
-          ...t.options,
-          offsetState: i
+    const clearEntity = () => {
+      cesiumUtils.clearEntity("pointEntities", "dataSource");
+      cesiumUtils.clearEntity("pointEntities", "viewer");
+    };
+    const changeModel = (type, value) => {
+      if (cesiumUtils[type]) {
+        cesiumUtils[type](value);
+      } else {
+        console.log("未匹配cesiumUtils的方法");
+      }
+    };
+    const initCesium = async () => {
+      try {
+        if (!__props.accessToken) {
+          return { status: false };
+        }
+        cesiumUtils.pointData = __props.pointData;
+        cesiumUtils.options.config = __props.basicConfig;
+        cesiumUtils.options.defaultShowState = __props.defaultShowState;
+        cesiumUtils.options.flyToHeight = __props.flyToHeight;
+        cesiumUtils.options.offsetState = __props.offsetState;
+        const viewerInitSuccess = await cesiumUtils.initViewer(__props.controlStatus);
+        if (!viewerInitSuccess) {
+          throw new Error("Viewer 初始化失败");
+        }
+        cesiumUtils.updateViewerAttribute();
+        cesiumUtils.setInitialView({ destination: __props.centerPosition });
+        const titleUrl = __props.imageryLayersUrl ?? `${__props.baseUrl}/service/api/e99b765798d1412b9c2b458a1473396e/igs/rest/services/SZMAP/SZDZDT_2024_Yingji_T1_4490/WMTSServer?client_id=${__props.clientId}&access_token=${__props.accessToken}`;
+        await cesiumUtils.loadTileLayer(titleUrl);
+        if (__props.areaName) {
+          cesiumUtils.polygonClickHandler(__props.areaName);
+        }
+        return { status: true };
+      } catch {
+        loadedTileLayer(false);
+        return { status: false };
+      }
+    };
+    const spinStyle = computed(() => {
+      return {
+        "--spin-container-bg": __props.spinContainerBg ?? "#6C7E93",
+        "--n-spin-description-color": __props.spinDescriptionColor ?? "#046ab1"
+      };
+    });
+    const initCesiumDebounced = () => {
+      cesiumUtils.destroy();
+      initCesium();
+    };
+    __expose({
+      changeModel,
+      loadedTileLayer,
+      clearEntity,
+      cesiumUtils
+    });
+    const initCesiumDebouncedChange = watch([() => __props.accessToken, () => __props.imageryLayersUrl], initCesiumDebounced);
+    const offsetStateChange = watch(
+      () => __props.offsetState,
+      (newValue) => {
+        cesiumUtils.options = {
+          ...cesiumUtils.options,
+          offsetState: newValue
         };
       },
-      { deep: !0 }
-    ), b = l([a, e.pointData], () => {
-      a.value || w();
+      { deep: true }
+    );
+    const initPointDataChange = watch([initPointDataStatus, __props.pointData], () => {
+      if (!initPointDataStatus.value) {
+        reloadPointData();
+      }
     });
-    return I(async () => {
-      await u();
-    }), V(() => {
-      H(), T(), b(), t.destroy();
-    }), (i, n) => (x(), B("div", j, [
-      L(U($), {
-        show: c.value || a.value,
-        stroke: i.spinStroke,
-        style: N(v.value),
-        size: "large"
-      }, {
-        description: y(() => n[0] || (n[0] = [
-          M(" 地图加载中... ")
-        ])),
-        default: y(() => [
-          n[1] || (n[1] = K(
-            "div",
-            {
-              id: "cesium-3d-viewer",
-              class: "lc-cesium_map"
-            },
-            null,
-            -1
-            /* HOISTED */
-          ))
-        ]),
-        _: 1
-        /* STABLE */
-      }, 8, ["show", "stroke", "style"])
-    ]));
+    onMounted(async () => {
+      await initCesium();
+    });
+    onBeforeUnmount(() => {
+      initCesiumDebouncedChange();
+      offsetStateChange();
+      initPointDataChange();
+      cesiumUtils.destroy();
+    });
+    return (_ctx, _cache) => {
+      return openBlock(), createElementBlock("div", _hoisted_1, [
+        createVNode(unref(NSpin), {
+          show: initImageryLayersStatus.value || initPointDataStatus.value,
+          stroke: _ctx.spinStroke,
+          style: normalizeStyle(spinStyle.value),
+          size: "large"
+        }, {
+          description: withCtx(() => _cache[0] || (_cache[0] = [
+            createTextVNode(" 地图加载中... ")
+          ])),
+          default: withCtx(() => [
+            _cache[1] || (_cache[1] = createElementVNode(
+              "div",
+              {
+                id: "cesium-3d-viewer",
+                class: "lc-cesium_map"
+              },
+              null,
+              -1
+              /* HOISTED */
+            ))
+          ]),
+          _: 1
+          /* STABLE */
+        }, 8, ["show", "stroke", "style"])
+      ]);
+    };
   }
 });
 export {
-  G as default
+  _sfc_main as default
 };

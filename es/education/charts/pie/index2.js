@@ -1,23 +1,26 @@
-import { defineComponent as T, useCssVars as z, useTemplateRef as A, shallowRef as O, computed as s, onMounted as B, watchPostEffect as D, ref as R, onBeforeUnmount as V, openBlock as h, createElementBlock as _, normalizeClass as v, normalizeStyle as W, createElementVNode as a, createVNode as E, unref as N, createCommentVNode as $ } from "vue";
-import { init as M } from "echarts";
-import { useCommonPieOptions as F, usePieCommonSeries as G } from "./options.js";
-import H from "lodash-es/merge";
-import { useResizeObserver as I } from "@vueuse/core";
-import { debounce as U } from "lodash-es";
-import { innerGraphicColors as j } from "./const.js";
-import q from "../common/components/Charts/legend/index.js";
-const x = { class: "lc-pie__wrapper" }, J = {
+import { defineComponent, useCssVars, useTemplateRef, shallowRef, computed, onMounted, watchPostEffect, ref, onBeforeUnmount, openBlock, createElementBlock, normalizeClass, normalizeStyle, createElementVNode, createVNode, unref, createCommentVNode } from "vue";
+import { init } from "echarts";
+import { useCommonPieOptions, usePieCommonSeries } from "./options.js";
+import merge from "lodash-es/merge";
+import { useResizeObserver } from "@vueuse/core";
+import { debounce } from "lodash-es";
+import { innerGraphicColors } from "./const.js";
+import CommonLegend from "../common/components/Charts/legend/index.js";
+const _hoisted_1 = { class: "lc-pie__wrapper" };
+const _hoisted_2 = {
   key: 0,
   class: "lc-pie__wrapper__legend"
-}, K = { class: "lc-pie__wrapper__chart" }, le = /* @__PURE__ */ T({
+};
+const _hoisted_3 = { class: "lc-pie__wrapper__chart" };
+const _sfc_main = /* @__PURE__ */ defineComponent({
   __name: "pie",
   props: {
     options: {},
     debounceTime: { default: 300 },
-    legendLabel: { type: Function, default: (n) => n },
-    graphicColors: { default: () => j },
+    legendLabel: { type: Function, default: (name) => name },
+    graphicColors: { default: () => innerGraphicColors },
     flexDirection: { default: "row" },
-    showCustomLegend: { type: Boolean, default: !0 },
+    showCustomLegend: { type: Boolean, default: true },
     layout: { default: "default" },
     legendLeft: { default: "20%" },
     legendTop: { default: "50%" },
@@ -25,96 +28,114 @@ const x = { class: "lc-pie__wrapper" }, J = {
     legendWidth: { default: "128px" }
   },
   emits: ["legend:click", "legend:toggleSelect"],
-  setup(n, { expose: w, emit: y }) {
-    z((e) => ({
-      "3a5169d4": e.flexDirection,
-      "01958b30": S.value,
-      "666793c8": e.legendPosition,
-      "01b3c226": e.legendLeft,
-      "18d45f56": e.legendTop,
-      "0ed25f5d": f.value
+  setup(__props, { expose: __expose, emit: __emit }) {
+    useCssVars((_ctx) => ({
+      "3a5169d4": _ctx.flexDirection,
+      "01958b30": wrapperPading.value,
+      "666793c8": _ctx.legendPosition,
+      "01b3c226": _ctx.legendLeft,
+      "18d45f56": _ctx.legendTop,
+      "0ed25f5d": cssBlockSize.value
     }));
-    const c = A("chartDom"), l = O(), i = s(() => {
-      const e = F(n.options);
-      return e.series = G(e.series, n.graphicColors, e.color, n.layout), e.series && !Array.isArray(e.series) && (e.series = [e.series]), H({}, e);
+    const chartDomRef = useTemplateRef("chartDom");
+    const chartInstance = shallowRef();
+    const renderOptions = computed(() => {
+      const newOptions = useCommonPieOptions(__props.options);
+      newOptions.series = usePieCommonSeries(newOptions.series, __props.graphicColors, newOptions.color, __props.layout);
+      if (newOptions.series && !Array.isArray(newOptions.series)) {
+        newOptions.series = [newOptions.series];
+      }
+      return merge({}, newOptions);
     });
-    function d(e, t) {
-      var o;
-      (o = l.value) == null || o.dispatchAction({
-        type: e,
-        name: t
+    function dispatchAction(type, name) {
+      var _a;
+      (_a = chartInstance.value) == null ? void 0 : _a.dispatchAction({
+        type,
+        name
       });
     }
-    const u = y;
-    function C(e) {
-      u("legend:click", e);
+    const $emit = __emit;
+    function legendClick(record) {
+      $emit("legend:click", record);
     }
-    function b(e) {
-      d(e.type, e.name), u("legend:toggleSelect", e);
+    function legendToggleSelect(record) {
+      dispatchAction(record.type, record.name);
+      $emit("legend:toggleSelect", record);
     }
-    B(k), D(() => {
-      p(i.value, !0);
+    onMounted(initChart);
+    watchPostEffect(() => {
+      setOptions(renderOptions.value, true);
     });
-    const L = s(() => {
-      const { title: e } = i.value;
-      return Array.isArray(e) ? e.every((t) => (t == null ? void 0 : t.show) === !1) : (e == null ? void 0 : e.show) === !1;
+    const notHasTitle = computed(() => {
+      const { title } = renderOptions.value;
+      if (Array.isArray(title)) {
+        return title.every((item) => (item == null ? void 0 : item.show) === false);
+      }
+      return (title == null ? void 0 : title.show) === false;
     });
-    function k() {
-      l.value = M(c.value, i.value);
+    function initChart() {
+      chartInstance.value = init(chartDomRef.value, renderOptions.value);
     }
-    function p(e, t, o) {
-      var r;
-      (r = l.value) == null || r.setOption(e, t, o);
+    function setOptions(option, notMerge, lazyUpdate) {
+      var _a;
+      (_a = chartInstance.value) == null ? void 0 : _a.setOption(option, notMerge, lazyUpdate);
     }
-    const f = R("100%");
-    function P(e) {
-      var g;
-      const t = e[0], { width: o, height: r } = t.contentRect;
-      f.value = Math.min(o, r) + "px", (g = l.value) == null || g.resize();
+    const cssBlockSize = ref("100%");
+    function resizeChart(entries) {
+      var _a;
+      const entry = entries[0];
+      const { width, height } = entry.contentRect;
+      cssBlockSize.value = Math.min(width, height) + "px";
+      (_a = chartInstance.value) == null ? void 0 : _a.resize();
     }
-    const { stop: m } = I(c, U(P, n.debounceTime)), S = s(() => n.legendPosition === "absolute" ? `0 ${n.legendWidth}` : "0");
-    return V(m), w({
-      chartInstance: l,
-      stop: m,
-      setOptions: p,
-      dispatchAction: d
-    }), (e, t) => (h(), _(
-      "div",
-      {
-        class: v(["lc-pie", [`lc-pie--${e.layout}`]]),
-        style: W({
-          "--legendWidth": e.legendWidth
-        })
-      },
-      [
-        a("div", x, [
-          e.showCustomLegend ? (h(), _("div", J, [
-            E(N(q), {
-              "legend-label": e.legendLabel,
-              options: i.value,
-              "onLegend:click": C,
-              "onLegend:toggleSelect": b
-            }, null, 8, ["legend-label", "options"])
-          ])) : $("v-if", !0),
-          a("div", K, [
-            a(
-              "div",
-              {
-                ref: "chartDom",
-                class: v(["lc-pie__wrapper__chart__inner", [L.value ? "lc-pie__wrapper__chart__inner--not--title" : "lc-pie__wrapper__chart__inner--title"]])
-              },
-              null,
-              2
-              /* CLASS */
-            )
+    const { stop } = useResizeObserver(chartDomRef, debounce(resizeChart, __props.debounceTime));
+    const wrapperPading = computed(() => __props.legendPosition === "absolute" ? `0 ${__props.legendWidth}` : "0");
+    onBeforeUnmount(stop);
+    __expose({
+      chartInstance,
+      stop,
+      setOptions,
+      dispatchAction
+    });
+    return (_ctx, _cache) => {
+      return openBlock(), createElementBlock(
+        "div",
+        {
+          class: normalizeClass(["lc-pie", [`lc-pie--${_ctx.layout}`]]),
+          style: normalizeStyle({
+            "--legendWidth": _ctx.legendWidth
+          })
+        },
+        [
+          createElementVNode("div", _hoisted_1, [
+            _ctx.showCustomLegend ? (openBlock(), createElementBlock("div", _hoisted_2, [
+              createVNode(unref(CommonLegend), {
+                "legend-label": _ctx.legendLabel,
+                options: renderOptions.value,
+                "onLegend:click": legendClick,
+                "onLegend:toggleSelect": legendToggleSelect
+              }, null, 8, ["legend-label", "options"])
+            ])) : createCommentVNode("v-if", true),
+            createElementVNode("div", _hoisted_3, [
+              createElementVNode(
+                "div",
+                {
+                  ref: "chartDom",
+                  class: normalizeClass(["lc-pie__wrapper__chart__inner", [notHasTitle.value ? "lc-pie__wrapper__chart__inner--not--title" : "lc-pie__wrapper__chart__inner--title"]])
+                },
+                null,
+                2
+                /* CLASS */
+              )
+            ])
           ])
-        ])
-      ],
-      6
-      /* CLASS, STYLE */
-    ));
+        ],
+        6
+        /* CLASS, STYLE */
+      );
+    };
   }
 });
 export {
-  le as default
+  _sfc_main as default
 };

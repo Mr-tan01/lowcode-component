@@ -1,20 +1,23 @@
-import e from "./images/s1.png.js";
-import l from "./images/s2.png.js";
-import a from "./images/s3.png.js";
-import b from "./images/s4.png.js";
-const s = {
-  s1: e,
-  s2: l,
-  s3: a,
-  s4: b
-}, i = {
+import s1Img from "./images/s1.png.js";
+import s2Img from "./images/s2.png.js";
+import s3Img from "./images/s3.png.js";
+import s4Img from "./images/s4.png.js";
+const robotBQMap = {
+  s1: s1Img,
+  s2: s2Img,
+  s3: s3Img,
+  s4: s4Img
+};
+const imageShowTrigger = {
   none: "none",
   focus: "focus"
-}, r = {
+};
+const imageHideDir = {
   lt: "lt",
   rt: "rt",
   auto: "auto"
-}, p = [
+};
+const defStarData = [
   {
     key: "001",
     domain: "event",
@@ -215,8 +218,8 @@ const s = {
   }
 ];
 export {
-  p as defStarData,
-  r as imageHideDir,
-  i as imageShowTrigger,
-  s as robotBQMap
+  defStarData,
+  imageHideDir,
+  imageShowTrigger,
+  robotBQMap
 };

@@ -1,6 +1,8 @@
-import { defineComponent as x, useCssVars as C, toRefs as N, ref as B, computed as l, openBlock as k, createElementBlock as D, normalizeClass as u, normalizeStyle as E, unref as a, createElementVNode as n, renderSlot as G } from "vue";
-import { useImage as i } from "./icons.js";
-const I = ["src"], V = { class: "lc-icon-card__span" }, q = /* @__PURE__ */ x({
+import { defineComponent, useCssVars, toRefs, ref, computed, openBlock, createElementBlock, normalizeClass, normalizeStyle, unref, createElementVNode, renderSlot } from "vue";
+import { useImage } from "./icons.js";
+const _hoisted_1 = ["src"];
+const _hoisted_2 = { class: "lc-icon-card__span" };
+const _sfc_main = /* @__PURE__ */ defineComponent({
   __name: "iconCard",
   props: {
     bagName: { default: "pedestal" },
@@ -12,55 +14,66 @@ const I = ["src"], V = { class: "lc-icon-card__span" }, q = /* @__PURE__ */ x({
     ext: { default: ".png" },
     selected: { type: Boolean, default: void 0 }
   },
-  setup(m) {
-    C((e) => ({
-      "87c79cd6": $.value,
-      "6b32b323": y.value,
-      "68bc711a": z.value
+  setup(__props) {
+    useCssVars((_ctx) => ({
+      "87c79cd6": imageWidth.value,
+      "6b32b323": iconWidth.value,
+      "68bc711a": iconGap.value
     }));
-    const p = m, { bagName: o, domain: f, name: g, size: c, iconSize: t, gap: s, ext: r } = N(p), b = B("baseSupport"), _ = i(b, o, r), v = i(f, g, r), { src: S, selectedSrc: d } = _, { src: h } = v, $ = l(() => typeof c.value == "number" ? `${c.value}px` : c.value), y = l(() => typeof t.value == "number" ? `${t.value}%` : t.value + "%"), z = l(() => {
-      const e = typeof s.value == "number" ? s.value : Number(s.value);
-      return o.value === "booth" ? `${e + 16}%` : `${e}%`;
+    const props = __props;
+    const { bagName, domain, name, size, iconSize, gap, ext } = toRefs(props);
+    const bagImg = ref("baseSupport");
+    const bgSrcData = useImage(bagImg, bagName, ext);
+    const srcData = useImage(domain, name, ext);
+    const { src: bgSrc, selectedSrc: bgSelectedSrc } = bgSrcData;
+    const { src: iconSrc } = srcData;
+    const imageWidth = computed(() => typeof size.value === "number" ? `${size.value}px` : size.value);
+    const iconWidth = computed(() => typeof iconSize.value === "number" ? `${iconSize.value}%` : iconSize.value + "%");
+    const iconGap = computed(() => {
+      const baseGap = typeof gap.value === "number" ? gap.value : Number(gap.value);
+      return bagName.value === "booth" ? `${baseGap + 16}%` : `${baseGap}%`;
     });
-    return (e, W) => (k(), D(
-      "div",
-      {
-        class: u(["lc-icon-card", {
-          "lc-icon-card--selected": e.selected
-        }]),
-        style: E({
-          "--img-src": `url(${a(S)})`,
-          "--img-selected-src": `url(${a(d)})`
-        })
-      },
-      [
-        n(
-          "div",
-          {
-            class: u(["lc-icon-card__image", {
-              "lc-icon-card__image--enhover": !!a(d)
-            }])
-          },
-          [
-            n("img", {
-              class: "lc-icon-card__img",
-              src: a(h),
-              draggable: "false",
-              alt: ""
-            }, null, 8, I)
-          ],
-          2
-          /* CLASS */
-        ),
-        n("span", V, [
-          G(e.$slots, "default", {}, void 0, !0)
-        ])
-      ],
-      6
-      /* CLASS, STYLE */
-    ));
+    return (_ctx, _cache) => {
+      return openBlock(), createElementBlock(
+        "div",
+        {
+          class: normalizeClass(["lc-icon-card", {
+            "lc-icon-card--selected": _ctx.selected
+          }]),
+          style: normalizeStyle({
+            "--img-src": `url(${unref(bgSrc)})`,
+            "--img-selected-src": `url(${unref(bgSelectedSrc)})`
+          })
+        },
+        [
+          createElementVNode(
+            "div",
+            {
+              class: normalizeClass(["lc-icon-card__image", {
+                "lc-icon-card__image--enhover": !!unref(bgSelectedSrc)
+              }])
+            },
+            [
+              createElementVNode("img", {
+                class: "lc-icon-card__img",
+                src: unref(iconSrc),
+                draggable: "false",
+                alt: ""
+              }, null, 8, _hoisted_1)
+            ],
+            2
+            /* CLASS */
+          ),
+          createElementVNode("span", _hoisted_2, [
+            renderSlot(_ctx.$slots, "default", {}, void 0, true)
+          ])
+        ],
+        6
+        /* CLASS, STYLE */
+      );
+    };
   }
 });
 export {
-  q as default
+  _sfc_main as default
 };

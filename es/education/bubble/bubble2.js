@@ -1,83 +1,103 @@
-import { defineComponent as O, ref as l, computed as c, onMounted as h, onBeforeUnmount as y, openBlock as z, createElementBlock as D } from "vue";
-import f from "./images/default.png.js";
-import k from "./images/hover_image.png.js";
-import { useResizeObserver as B } from "@vueuse/core";
-import { merge as C, debounce as I } from "lodash-es";
-import { baseOptions as R } from "./options.js";
-import { init as T } from "echarts";
-const U = /* @__PURE__ */ O({
+import { defineComponent, ref, computed, onMounted, onBeforeUnmount, openBlock, createElementBlock } from "vue";
+import defaultImage from "./images/default.png.js";
+import hoverImg from "./images/hover_image.png.js";
+import { useResizeObserver } from "@vueuse/core";
+import { merge, debounce } from "lodash-es";
+import { baseOptions } from "./options.js";
+import { init } from "echarts";
+const _sfc_main = /* @__PURE__ */ defineComponent({
   __name: "bubble",
   props: {
     data: { default: () => [] },
     debounceTime: { default: 300 },
     chartOptions: { default: () => ({}) }
   },
-  setup(n) {
-    const a = l(), o = l(), r = c(() => n.data.map((e) => ({
-      name: e.label,
-      symbolSize: [180, 129],
-      draggable: !0,
-      symbol: `image://${f}`,
-      ...e
-    }))), b = c(() => C(
-      {},
-      R,
-      {
-        series: [
-          {
-            data: r.value
-          }
-        ]
-      },
-      n.chartOptions
-    )), d = () => {
-      var e, u;
-      o.value = T(a.value), o.value.setOption(b.value, !0), (e = o.value) == null || e.on("mouseover", function(t) {
-        var i;
-        if (t.dataType === "node") {
-          const g = r.value.map((m) => {
-            var s;
+  setup(__props) {
+    const bubbleDomRef = ref();
+    const chartInstance = ref();
+    const fomartData = computed(() => {
+      return __props.data.map((item) => {
+        return {
+          name: item.label,
+          symbolSize: [180, 129],
+          draggable: true,
+          symbol: `image://${defaultImage}`,
+          ...item
+        };
+      });
+    });
+    const renderOptions = computed(() => {
+      const merged = merge(
+        {},
+        baseOptions,
+        {
+          series: [
+            {
+              data: fomartData.value
+            }
+          ]
+        },
+        __props.chartOptions
+      );
+      return merged;
+    });
+    const initChart = () => {
+      var _a, _b;
+      chartInstance.value = init(bubbleDomRef.value);
+      chartInstance.value.setOption(renderOptions.value, true);
+      (_a = chartInstance.value) == null ? void 0 : _a.on("mouseover", function(params) {
+        var _a2;
+        if (params.dataType === "node") {
+          const newData = fomartData.value.map((node) => {
+            var _a3;
             return {
-              ...m,
-              symbol: m.name === ((s = t == null ? void 0 : t.data) == null ? void 0 : s.name) ? `image://${k}` : `image://${f}`,
-              symbolSize: m.name === t.data.name ? [200, 150] : [180, 129]
+              ...node,
+              symbol: node.name === ((_a3 = params == null ? void 0 : params.data) == null ? void 0 : _a3.name) ? `image://${hoverImg}` : `image://${defaultImage}`,
+              symbolSize: node.name === params.data.name ? [200, 150] : [180, 129]
             };
           });
-          (i = o.value) == null || i.setOption({
+          (_a2 = chartInstance.value) == null ? void 0 : _a2.setOption({
             series: [
               {
-                data: g
+                data: newData
               }
             ]
           });
         }
-      }), (u = o.value) == null || u.on("mouseout", function() {
-        var t;
-        (t = o.value) == null || t.setOption({
+      });
+      (_b = chartInstance.value) == null ? void 0 : _b.on("mouseout", function() {
+        var _a2;
+        (_a2 = chartInstance.value) == null ? void 0 : _a2.setOption({
           series: [
             {
-              data: r.value
+              data: fomartData.value
             }
           ]
         });
       });
-    }, v = () => {
-      var e;
-      (e = o.value) == null || e.resize();
-    }, { stop: p } = B(a, I(v, n.debounceTime));
-    return h(d), y(p), (e, u) => (z(), D(
-      "div",
-      {
-        ref_key: "bubbleDomRef",
-        ref: a,
-        class: "bubble"
-      },
-      null,
-      512
-      /* NEED_PATCH */
-    ));
+    };
+    const resizeChart = () => {
+      var _a;
+      (_a = chartInstance.value) == null ? void 0 : _a.resize();
+    };
+    const { stop } = useResizeObserver(bubbleDomRef, debounce(resizeChart, __props.debounceTime));
+    onMounted(initChart);
+    onBeforeUnmount(stop);
+    return (_ctx, _cache) => {
+      return openBlock(), createElementBlock(
+        "div",
+        {
+          ref_key: "bubbleDomRef",
+          ref: bubbleDomRef,
+          class: "bubble"
+        },
+        null,
+        512
+        /* NEED_PATCH */
+      );
+    };
   }
 });
 export {
-  U as default
+  _sfc_main as default
 };

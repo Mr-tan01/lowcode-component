@@ -1,17 +1,28 @@
-import { defineComponent as Z, mergeModels as M, mergeDefaults as ee, computed as b, watchEffect as te, ref as ae, useModel as ne, openBlock as i, createElementBlock as s, createElementVNode as n, withDirectives as k, createTextVNode as re, toDisplayString as w, unref as u, vShow as le, vModelText as oe, renderSlot as ie, Fragment as y, renderList as T, normalizeStyle as _, createVNode as se } from "vue";
-import ue from "./images/main-robot.png.js";
-import ce from "./images/voice.png.js";
-import me from "./images/microphone.png.js";
-import { useSpeech as de } from "./speech.js";
-import fe from "./icon/index.js";
+import { defineComponent, mergeModels, mergeDefaults, computed, watchEffect, ref, useModel, openBlock, createElementBlock, createElementVNode, withDirectives, createTextVNode, toDisplayString, unref, vShow, vModelText, renderSlot, Fragment, renderList, normalizeStyle, createVNode } from "vue";
+import _imports_0 from "./images/main-robot.png.js";
+import _imports_1 from "./images/voice.png.js";
+import _imports_2 from "./images/microphone.png.js";
+import { useSpeech } from "./speech.js";
+import LcIcon from "./icon/index.js";
 import './assets/icon/iconCard.css';/* empty css              */
-import { defStarData as N } from "./const.js";
-import { useStarRotate as _e } from "./main-robot-hook.js";
-import pe from "lodash-es/memoize";
-import { useMessage as ve } from "naive-ui";
-const ge = { class: "lc-main-robot" }, be = { class: "lc-main-robot__wrapper" }, we = { class: "lc-main-robot__wrapper__inner-input" }, he = { class: "lc-main-robot__wrapper__inner-input--content" }, xe = { class: "lc-main-robot__wrapper__inner-input--help" }, Ae = ["placeholder", "disabled"], Ce = { class: "lc-main-robot__wrapper__inner-input--content__suffix" }, Se = { class: "lc-main-robot-icon" }, Me = { class: "lc-main-robot__wrapper__star-wrap--star__meta" }, ke = ["title", "onClick"], ye = ["title", "onClick"], qe = /* @__PURE__ */ Z({
+import { defStarData } from "./const.js";
+import { useStarRotate } from "./main-robot-hook.js";
+import memoize from "lodash-es/memoize";
+import { useMessage } from "naive-ui";
+const _hoisted_1 = { class: "lc-main-robot" };
+const _hoisted_2 = { class: "lc-main-robot__wrapper" };
+const _hoisted_3 = { class: "lc-main-robot__wrapper__inner-input" };
+const _hoisted_4 = { class: "lc-main-robot__wrapper__inner-input--content" };
+const _hoisted_5 = { class: "lc-main-robot__wrapper__inner-input--help" };
+const _hoisted_6 = ["placeholder", "disabled"];
+const _hoisted_7 = { class: "lc-main-robot__wrapper__inner-input--content__suffix" };
+const _hoisted_8 = { class: "lc-main-robot-icon" };
+const _hoisted_9 = { class: "lc-main-robot__wrapper__star-wrap--star__meta" };
+const _hoisted_10 = ["title", "onClick"];
+const _hoisted_11 = ["title", "onClick"];
+const _sfc_main = /* @__PURE__ */ defineComponent({
   __name: "main-robot",
-  props: /* @__PURE__ */ M(/* @__PURE__ */ ee({
+  props: /* @__PURE__ */ mergeModels(/* @__PURE__ */ mergeDefaults({
     placeholder: String,
     stars: Array,
     duration: Number,
@@ -22,243 +33,282 @@ const ge = { class: "lc-main-robot" }, be = { class: "lc-main-robot__wrapper" },
     forbidden: Boolean
   }, {
     placeholder: "AI 智能问数",
-    stars: () => {
-    },
+    stars: () => void 0,
     duration: 1e3,
-    animate: !0,
+    animate: true,
     startAngle: 90,
     maxShowCount: 7,
     fullAngle: 360,
-    forbidden: !1
+    forbidden: false
   }), {
-    value: { default: "" },
-    valueModifiers: {}
+    "value": { default: "" },
+    "valueModifiers": {}
   }),
-  emits: /* @__PURE__ */ M(["click", "itemClick"], ["update:value"]),
-  setup(a, { emit: R }) {
-    const $ = ve(), { start: D, stop: E, output: p, on: z } = de();
-    function F() {
-      a.forbidden ? $.warning("此功能敬请期待") : D();
+  emits: /* @__PURE__ */ mergeModels(["click", "itemClick"], ["update:value"]),
+  setup(__props, { emit: __emit }) {
+    const message = useMessage();
+    const { start, stop, output, on } = useSpeech();
+    function handleMouseDown() {
+      if (__props.forbidden) {
+        message.warning("此功能敬请期待");
+      } else {
+        start();
+      }
     }
-    function I() {
-      a.forbidden || E();
+    function handleMouseUp() {
+      if (!__props.forbidden) {
+        stop();
+      }
     }
     const {
-      starWrapperRef: B,
-      customRotateStyle: V,
-      getTextStyle: h,
-      starLneght: q,
-      starElRefs: L,
-      angleOffset: m,
-      averageAngle: x,
-      startAngle: U,
-      starMaxShowCount: W,
-      displayAlternately: O,
-      fullAngle: j
-    } = _e(), G = pe(
-      (e, t) => e - (t + 1),
-      (e, t) => `${e}-${t}`
-    ), f = b(() => {
-      var e;
-      return (e = a.stars) != null && e.length ? a.stars : N;
+      starWrapperRef,
+      customRotateStyle,
+      getTextStyle,
+      starLneght,
+      starElRefs,
+      angleOffset,
+      averageAngle,
+      startAngle: circleStartAngle,
+      starMaxShowCount,
+      displayAlternately,
+      fullAngle: circleFullAngle
+    } = useStarRotate();
+    const reverseIndex = memoize(
+      (len, index) => {
+        return len - (index + 1);
+      },
+      (len, index) => `${len}-${index}`
+    );
+    const renderStartData = computed(() => {
+      var _a;
+      return ((_a = __props.stars) == null ? void 0 : _a.length) ? __props.stars : defStarData;
     });
-    te(() => {
-      var t;
-      q.value = ((t = f.value) == null ? void 0 : t.length) || 0, U.value = a.startAngle, W.value = a.maxShowCount, j.value = a.fullAngle;
-      const e = f.value.length - a.maxShowCount;
-      e < 0 || N.slice(e * -1).forEach((r, l) => {
-        const o = f.value.length - e + l;
-        O.value.push(o);
+    watchEffect(() => {
+      var _a;
+      starLneght.value = ((_a = renderStartData.value) == null ? void 0 : _a.length) || 0;
+      circleStartAngle.value = __props.startAngle;
+      starMaxShowCount.value = __props.maxShowCount;
+      circleFullAngle.value = __props.fullAngle;
+      const yc = renderStartData.value.length - __props.maxShowCount;
+      yc < 0 ? [] : defStarData.slice(yc * -1).forEach((_, index) => {
+        const newIndex = renderStartData.value.length - yc + index;
+        displayAlternately.value.push(newIndex);
       });
     });
-    const H = b(() => 360 / a.duration), J = b(() => 1e3 / a.duration), c = ae(a.animate);
-    let A;
-    function K(e) {
-      window.requestAnimationFrame ? window.requestAnimationFrame.call(this, e) : e();
+    const step = computed(() => 360 / __props.duration);
+    const time = computed(() => 1e3 / __props.duration);
+    const isAnimate = ref(__props.animate);
+    let timer;
+    function _requestAnimationFrame(callback) {
+      if (window.requestAnimationFrame) {
+        window.requestAnimationFrame.call(this, callback);
+      } else {
+        callback();
+      }
     }
-    function v() {
-      c.value && setTimeout(() => {
-        c.value && K(() => {
-          m.value += H.value, m.value >= 360 && (m.value = 0), v();
+    function autoRotate() {
+      if (!isAnimate.value) return;
+      setTimeout(() => {
+        if (!isAnimate.value) return;
+        _requestAnimationFrame(() => {
+          angleOffset.value += step.value;
+          if (angleOffset.value >= 360) {
+            angleOffset.value = 0;
+          }
+          autoRotate();
         });
-      }, J.value);
+      }, time.value);
     }
-    c.value && v();
-    const C = R;
-    function S(e, t) {
-      m.value = x.value * t * -1, C("click", e, t);
+    if (isAnimate.value) {
+      autoRotate();
     }
-    function P(e, t) {
-      m.value = x.value * t * -1, C("itemClick", e, t);
+    const $emit = __emit;
+    function starClick(item, index) {
+      angleOffset.value = averageAngle.value * index * -1;
+      $emit("click", item, index);
     }
-    function Q() {
-      clearTimeout(A), c.value = !1;
+    function starItemClick(item, index) {
+      angleOffset.value = averageAngle.value * index * -1;
+      $emit("itemClick", item, index);
     }
-    function X() {
-      A = setTimeout(() => {
-        c.value || (c.value = a.animate, v());
+    function mouseenter() {
+      clearTimeout(timer);
+      isAnimate.value = false;
+    }
+    function mouseleave() {
+      timer = setTimeout(() => {
+        if (isAnimate.value) return;
+        isAnimate.value = __props.animate;
+        autoRotate();
       }, 2e3);
     }
-    const g = ne(a, "value");
-    return z("result", () => {
-      var e;
-      g.value = ((e = p.value) == null ? void 0 : e.textContent) || "";
-    }), (e, t) => (i(), s("div", ge, [
-      n("div", be, [
-        t[2] || (t[2] = n(
-          "img",
-          {
-            class: "lc-main-robot__img",
-            src: ue,
-            draggable: "false",
-            alt: ""
-          },
-          null,
-          -1
-          /* HOISTED */
-        )),
-        n("div", we, [
-          n("div", he, [
-            k(n(
-              "div",
-              xe,
-              [
-                t[1] || (t[1] = n(
-                  "img",
-                  {
-                    class: "lc-main-robot__wrapper__inner-input--help--voice",
-                    src: ce,
-                    draggable: "false",
-                    alt: ""
-                  },
-                  null,
-                  -1
-                  /* HOISTED */
-                )),
-                re(
-                  " " + w(u(p).helpText),
-                  1
-                  /* TEXT */
-                )
-              ],
-              512
-              /* NEED_PATCH */
-            ), [
-              [le, u(p).helpText]
-            ]),
-            k(n("input", {
-              "onUpdate:modelValue": t[0] || (t[0] = (r) => g.value = r),
-              type: "text",
-              placeholder: a.placeholder,
-              disabled: a.forbidden,
-              class: "lc-main-robot__wrapper__inner-input--content__input"
-            }, null, 8, Ae), [
-              [oe, g.value]
-            ]),
-            n("div", Ce, [
-              ie(e.$slots, "input-suffix", {}, () => [
-                n(
-                  "img",
-                  {
-                    class: "lc-main-robot__wrapper__inner-input--content__suffix--img",
-                    src: me,
-                    draggable: "false",
-                    alt: "",
-                    onMousedown: F,
-                    onMouseup: I
-                  },
-                  null,
-                  32
-                  /* NEED_HYDRATION */
-                )
-              ], !0)
-            ])
-          ])
-        ]),
-        n(
-          "div",
-          {
-            ref_key: "starWrapperRef",
-            ref: B,
-            class: "lc-main-robot__wrapper__star-wrap"
-          },
-          [
-            (i(!0), s(
-              y,
-              null,
-              T(f.value, (r, l) => (i(), s(
+    const modelContext = useModel(__props, "value");
+    on("result", () => {
+      var _a;
+      modelContext.value = ((_a = output.value) == null ? void 0 : _a.textContent) || "";
+    });
+    return (_ctx, _cache) => {
+      return openBlock(), createElementBlock("div", _hoisted_1, [
+        createElementVNode("div", _hoisted_2, [
+          _cache[2] || (_cache[2] = createElementVNode(
+            "img",
+            {
+              class: "lc-main-robot__img",
+              src: _imports_0,
+              draggable: "false",
+              alt: ""
+            },
+            null,
+            -1
+            /* HOISTED */
+          )),
+          createElementVNode("div", _hoisted_3, [
+            createElementVNode("div", _hoisted_4, [
+              withDirectives(createElementVNode(
                 "div",
-                {
-                  key: r.key ?? l,
-                  ref_for: !0,
-                  ref_key: "starElRefs",
-                  ref: L,
-                  class: "lc-main-robot__wrapper__star-wrap--star",
-                  style: _(u(V)(l)),
-                  onMouseenter: Q,
-                  onMouseleave: X
-                },
+                _hoisted_5,
                 [
-                  n("div", Se, [
-                    se(u(fe), {
-                      class: "lc-main-robot-icon-center",
-                      domain: r.domain,
-                      name: r.name,
-                      size: r.size,
-                      onClick: (o) => S(r, l)
-                    }, null, 8, ["domain", "name", "size", "onClick"])
-                  ]),
-                  n("div", Me, [
-                    (i(!0), s(
-                      y,
-                      null,
-                      T(r.meta, (o, d) => (i(), s(
-                        "div",
-                        {
-                          key: d,
-                          class: "lc-main-robot__wrapper__star-wrap--star__meta--item",
-                          style: _({
-                            "--left-offset-number": d,
-                            "--left-reverse-offset-number": u(G)(r.meta.length, d)
-                          })
-                        },
-                        [
-                          d === 0 ? (i(), s("div", {
-                            key: 0,
-                            class: "lc-main-robot__wrapper__star-wrap--star__meta--item--text",
-                            title: o.label,
-                            style: _(u(h)(l)),
-                            onClick: (Y) => S(r, l)
-                          }, w(o.label), 13, ke)) : (i(), s("div", {
-                            key: 1,
-                            class: "lc-main-robot__wrapper__star-wrap--star__meta--item--text",
-                            title: o.label,
-                            style: _(u(h)(l)),
-                            onClick: (Y) => P(o, d)
-                          }, w(o.label), 13, ye))
-                        ],
-                        4
-                        /* STYLE */
-                      ))),
-                      128
-                      /* KEYED_FRAGMENT */
-                    ))
-                  ])
+                  _cache[1] || (_cache[1] = createElementVNode(
+                    "img",
+                    {
+                      class: "lc-main-robot__wrapper__inner-input--help--voice",
+                      src: _imports_1,
+                      draggable: "false",
+                      alt: ""
+                    },
+                    null,
+                    -1
+                    /* HOISTED */
+                  )),
+                  createTextVNode(
+                    " " + toDisplayString(unref(output).helpText),
+                    1
+                    /* TEXT */
+                  )
                 ],
-                36
-                /* STYLE, NEED_HYDRATION */
-              ))),
-              128
-              /* KEYED_FRAGMENT */
-            ))
-          ],
-          512
-          /* NEED_PATCH */
-        )
-      ])
-    ]));
+                512
+                /* NEED_PATCH */
+              ), [
+                [vShow, unref(output).helpText]
+              ]),
+              withDirectives(createElementVNode("input", {
+                "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => modelContext.value = $event),
+                type: "text",
+                placeholder: __props.placeholder,
+                disabled: __props.forbidden,
+                class: "lc-main-robot__wrapper__inner-input--content__input"
+              }, null, 8, _hoisted_6), [
+                [vModelText, modelContext.value]
+              ]),
+              createElementVNode("div", _hoisted_7, [
+                renderSlot(_ctx.$slots, "input-suffix", {}, () => [
+                  createElementVNode(
+                    "img",
+                    {
+                      class: "lc-main-robot__wrapper__inner-input--content__suffix--img",
+                      src: _imports_2,
+                      draggable: "false",
+                      alt: "",
+                      onMousedown: handleMouseDown,
+                      onMouseup: handleMouseUp
+                    },
+                    null,
+                    32
+                    /* NEED_HYDRATION */
+                  )
+                ], true)
+              ])
+            ])
+          ]),
+          createElementVNode(
+            "div",
+            {
+              ref_key: "starWrapperRef",
+              ref: starWrapperRef,
+              class: "lc-main-robot__wrapper__star-wrap"
+            },
+            [
+              (openBlock(true), createElementBlock(
+                Fragment,
+                null,
+                renderList(renderStartData.value, (item, key) => {
+                  return openBlock(), createElementBlock(
+                    "div",
+                    {
+                      key: item.key ?? key,
+                      ref_for: true,
+                      ref_key: "starElRefs",
+                      ref: starElRefs,
+                      class: "lc-main-robot__wrapper__star-wrap--star",
+                      style: normalizeStyle(unref(customRotateStyle)(key)),
+                      onMouseenter: mouseenter,
+                      onMouseleave: mouseleave
+                    },
+                    [
+                      createElementVNode("div", _hoisted_8, [
+                        createVNode(unref(LcIcon), {
+                          class: "lc-main-robot-icon-center",
+                          domain: item.domain,
+                          name: item.name,
+                          size: item.size,
+                          onClick: ($event) => starClick(item, key)
+                        }, null, 8, ["domain", "name", "size", "onClick"])
+                      ]),
+                      createElementVNode("div", _hoisted_9, [
+                        (openBlock(true), createElementBlock(
+                          Fragment,
+                          null,
+                          renderList(item.meta, (el, ckey) => {
+                            return openBlock(), createElementBlock(
+                              "div",
+                              {
+                                key: ckey,
+                                class: "lc-main-robot__wrapper__star-wrap--star__meta--item",
+                                style: normalizeStyle({
+                                  "--left-offset-number": ckey,
+                                  "--left-reverse-offset-number": unref(reverseIndex)(item.meta.length, ckey)
+                                })
+                              },
+                              [
+                                ckey === 0 ? (openBlock(), createElementBlock("div", {
+                                  key: 0,
+                                  class: "lc-main-robot__wrapper__star-wrap--star__meta--item--text",
+                                  title: el.label,
+                                  style: normalizeStyle(unref(getTextStyle)(key)),
+                                  onClick: ($event) => starClick(item, key)
+                                }, toDisplayString(el.label), 13, _hoisted_10)) : (openBlock(), createElementBlock("div", {
+                                  key: 1,
+                                  class: "lc-main-robot__wrapper__star-wrap--star__meta--item--text",
+                                  title: el.label,
+                                  style: normalizeStyle(unref(getTextStyle)(key)),
+                                  onClick: ($event) => starItemClick(el, ckey)
+                                }, toDisplayString(el.label), 13, _hoisted_11))
+                              ],
+                              4
+                              /* STYLE */
+                            );
+                          }),
+                          128
+                          /* KEYED_FRAGMENT */
+                        ))
+                      ])
+                    ],
+                    36
+                    /* STYLE, NEED_HYDRATION */
+                  );
+                }),
+                128
+                /* KEYED_FRAGMENT */
+              ))
+            ],
+            512
+            /* NEED_PATCH */
+          )
+        ])
+      ]);
+    };
   }
 });
 export {
-  qe as default
+  _sfc_main as default
 };

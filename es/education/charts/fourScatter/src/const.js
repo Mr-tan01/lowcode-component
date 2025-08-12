@@ -1,6 +1,8 @@
-import r from "./images/tooltip-content-bg.png.js";
-import i from "./images/tooltip-content-blue-bg.png.js";
-const a = ["rgba(15, 251, 248, 1)", "rgba(225, 188, 75, 1)", "rgba(34, 118, 252, 1)", "rgba(222, 56, 4, 1)"], l = [i, r], s = `
+import tooltipContentBg from "./images/tooltip-content-bg.png.js";
+import tooltipContentBlueBg from "./images/tooltip-content-blue-bg.png.js";
+const scatterColors = ["rgba(15, 251, 248, 1)", "rgba(225, 188, 75, 1)", "rgba(34, 118, 252, 1)", "rgba(222, 56, 4, 1)"];
+const tooltipContentImageList = [tooltipContentBlueBg, tooltipContentBg];
+const tooltipContentStyler = `
 width: 107px;
 height: 32px;
 display: flex;
@@ -11,7 +13,8 @@ padding: 7px 14p;
 z-index: 100;
 backdrop-filter: blur(5px);
 transform: translate(-6px, 0px);
-`, p = [
+`;
+const tooltipOptions = [
   {
     trigger: "item",
     backgroundColor: "transparent",
@@ -20,27 +23,32 @@ transform: translate(-6px, 0px);
     position: "right",
     padding: 0,
     appendTo: "body",
-    formatter(t) {
-      var n;
-      const e = ((n = t.data) == null ? void 0 : n.meta) ?? {}, o = (e == null ? void 0 : e.bg) ?? l[t.seriesIndex];
-      return `<div class="tooltip-content" style="${s}background: url(${o}) no-repeat center center / 100% 100%;">
-                <div style="width: 100%;white-space: nowrap; overflow: hidden;  text-overflow: ellipsis; color: ${e.color}; font-size: 16px;">${t.name}</div>
+    formatter(params) {
+      var _a;
+      const meta = ((_a = params.data) == null ? void 0 : _a.meta) ?? {};
+      const bg = (meta == null ? void 0 : meta.bg) ?? tooltipContentImageList[params.seriesIndex];
+      return `<div class="tooltip-content" style="${tooltipContentStyler}background: url(${bg}) no-repeat center center / 100% 100%;">
+                <div style="width: 100%;white-space: nowrap; overflow: hidden;  text-overflow: ellipsis; color: ${meta.color}; font-size: 16px;">${params.name}</div>
             </div>`;
     },
     axisPointer: {
       type: "none",
       label: {
         backgroundColor: "#6a7985",
-        formatter(t) {
-          var o;
-          const e = (o = Number(t.value)) == null ? void 0 : o.toFixed(2);
-          return t.axisDimension === "y" ? `${e}%` : e;
+        formatter(params) {
+          var _a;
+          const value = (_a = Number(params.value)) == null ? void 0 : _a.toFixed(2);
+          if (params.axisDimension === "y") {
+            return `${value}%`;
+          }
+          return value;
         }
       }
     }
   }
-], c = {
-  show: !0,
+];
+const legendOptions = {
+  show: true,
   icon: "roundRect",
   top: "65%",
   left: null,
@@ -57,16 +65,18 @@ transform: translate(-6px, 0px);
     fontSize: 14,
     padding: [0, 0, 0, 0]
   }
-}, g = {
+};
+const gridOptions = {
   bottom: 70,
   left: 100,
   right: 100,
   top: 30
-}, m = [
+};
+const yAxisOptions = [
   {
     type: "value",
     axisLabel: {
-      show: !1
+      show: false
     },
     min: 40,
     max: 110,
@@ -74,30 +84,22 @@ transform: translate(-6px, 0px);
     position: "right"
   },
   {
-    boundaryGap: !1,
+    boundaryGap: false,
     axisLabel: {
-      formatter(t) {
-        return `${t}%`;
+      formatter(value) {
+        return `${value}%`;
       },
-      color(t, e) {
-        return e === 4 ? "rgba(225, 75, 75, 1)" : "#ffffff";
+      color(_value, index) {
+        return index === 4 ? "rgba(225, 75, 75, 1)" : "#ffffff";
       }
     },
     type: "category",
     position: "left",
     data: [40, 50, 60, 70, 75, 80, 90, 100, 110],
     axisTick: {
-      show: !1
+      show: false
     },
-    name: `平
-均
-达
-成
-率
-︵
-优
-质
-︶`,
+    name: "平\n均\n达\n成\n率\n︵\n优\n质\n︶",
     nameLocation: "middle",
     nameRotate: 0,
     nameTextStyle: {
@@ -106,18 +108,19 @@ transform: translate(-6px, 0px);
       align: "center"
     }
   }
-], b = [
+];
+const xAxisOptions = [
   {
-    show: !1,
+    show: false,
     position: "top"
   },
   {
     position: "bottom",
-    boundaryGap: !1,
+    boundaryGap: false,
     data: ["(0.05)", "0.00", "0.05", "0.10", "0.15", "0.20", "0.25", "0.30", "0.35"],
     axisLabel: {
-      color(t, e) {
-        return e === 0 ? "rgba(225, 75, 75, 1)" : "#ffffff";
+      color(_value, index) {
+        return index === 0 ? "rgba(225, 75, 75, 1)" : "#ffffff";
       }
     },
     name: "标准差(均衡)",
@@ -129,21 +132,22 @@ transform: translate(-6px, 0px);
       lineHeight: 20
     }
   }
-], x = {
+];
+const commonScatterSeries = {
   type: "effectScatter",
-  symbolSize: function(t) {
-    return Math.max(Math.sqrt(t), 25);
+  symbolSize: function(data) {
+    return Math.max(Math.sqrt(data), 25);
   },
   itemStyle: {
-    color: (t) => a[t.componentIndex],
+    color: (data) => scatterColors[data.componentIndex],
     borderColor: "#fff",
     borderWidth: 2.5,
     opacity: 1
   },
-  animation: !0,
+  animation: true,
   markPoint: {
     symbol: "circle",
-    silent: !1,
+    silent: false,
     itemStyle: {
       borderType: "dotted",
       borderWidth: 2,
@@ -152,15 +156,15 @@ transform: translate(-6px, 0px);
       color: "transparent"
     },
     tooltip: {
-      show: !0,
+      show: true,
       trigger: "item"
     },
     label: {
-      show: !1,
-      silent: !0,
-      formatter(t) {
-        var e, o;
-        return (o = (e = t.data) == null ? void 0 : e.coord) == null ? void 0 : o[1].toFixed(2);
+      show: false,
+      silent: true,
+      formatter(params) {
+        var _a, _b;
+        return (_b = (_a = params.data) == null ? void 0 : _a.coord) == null ? void 0 : _b[1].toFixed(2);
       },
       color: "#ffffff",
       fontSize: 14,
@@ -174,18 +178,18 @@ transform: translate(-6px, 0px);
     },
     emphasis: {
       label: {
-        show: !0
+        show: true
       }
     },
     data: []
   }
 };
 export {
-  x as commonScatterSeries,
-  g as gridOptions,
-  c as legendOptions,
-  a as scatterColors,
-  p as tooltipOptions,
-  b as xAxisOptions,
-  m as yAxisOptions
+  commonScatterSeries,
+  gridOptions,
+  legendOptions,
+  scatterColors,
+  tooltipOptions,
+  xAxisOptions,
+  yAxisOptions
 };

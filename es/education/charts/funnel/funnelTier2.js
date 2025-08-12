@@ -1,102 +1,111 @@
-import { defineComponent as y, computed as O, openBlock as l, createElementBlock as _, Fragment as m, renderList as d, createElementVNode as n, toDisplayString as s, normalizeStyle as f } from "vue";
-import { defaultFunnelTierOptions as g, defaultFunnelTierSeriesOptions as k } from "./themeConfig/funnelTier/index.js";
-import p from "lodash-es/merge";
-const x = { class: "lc-funnel-tier" }, F = { class: "lc-funnel-tier__serie__item__label" }, S = { class: "lc-funnel-tier__serie__item__bar__inner--text" }, T = { class: "lc-funnel-tier__serie__item__value" }, E = /* @__PURE__ */ y({
+import { defineComponent, computed, openBlock, createElementBlock, Fragment, renderList, createElementVNode, toDisplayString, normalizeStyle } from "vue";
+import { defaultFunnelTierOptions, defaultFunnelTierSeriesOptions } from "./themeConfig/funnelTier/index.js";
+import merge from "lodash-es/merge";
+const _hoisted_1 = { class: "lc-funnel-tier" };
+const _hoisted_2 = { class: "lc-funnel-tier__serie__item__label" };
+const _hoisted_3 = { class: "lc-funnel-tier__serie__item__bar__inner--text" };
+const _hoisted_4 = { class: "lc-funnel-tier__serie__item__value" };
+const _sfc_main = /* @__PURE__ */ defineComponent({
   __name: "funnelTier",
   props: {
     options: {}
   },
-  setup(v) {
-    const o = O(() => {
-      const r = p({}, g, v.options);
-      return r.series = r.series.map((t) => p({}, k, t)), r;
+  setup(__props) {
+    const computedOptions = computed(() => {
+      const newOptions = merge({}, defaultFunnelTierOptions, __props.options);
+      newOptions.series = newOptions.series.map((serie) => {
+        return merge({}, defaultFunnelTierSeriesOptions, serie);
+      });
+      return newOptions;
     });
-    return (r, t) => {
-      var u;
-      return l(), _("div", x, [
-        (l(!0), _(
-          m,
+    return (_ctx, _cache) => {
+      var _a;
+      return openBlock(), createElementBlock("div", _hoisted_1, [
+        (openBlock(true), createElementBlock(
+          Fragment,
           null,
-          d((u = o.value) == null ? void 0 : u.series, (e, b) => (l(), _("div", {
-            key: b,
-            class: "lc-funnel-tier__serie"
-          }, [
-            (l(!0), _(
-              m,
-              null,
-              d(e == null ? void 0 : e.data, (i, a) => {
-                var c;
-                return l(), _("div", {
-                  key: a,
-                  class: "lc-funnel-tier__serie__item"
-                }, [
-                  n(
-                    "div",
-                    F,
-                    s(i.name),
-                    1
-                    /* TEXT */
-                  ),
-                  n(
-                    "div",
-                    {
-                      class: "lc-funnel-tier__serie__item__bar",
-                      style: f({
-                        "--inner-color": o.value.color[a]
-                      })
-                    },
-                    [
-                      t[0] || (t[0] = n(
-                        "div",
-                        { class: "lc-funnel-tier__serie__item__bar__line" },
-                        null,
-                        -1
-                        /* HOISTED */
-                      )),
-                      n(
-                        "div",
-                        {
-                          class: "lc-funnel-tier__serie__item__bar__inner",
-                          style: f({
-                            "--inner-width": `${i.value / e.max * 100}%`
-                          })
-                        },
-                        [
-                          n(
-                            "div",
-                            S,
-                            s((c = e == null ? void 0 : e.label) == null ? void 0 : c.call(e, i, e)),
-                            1
-                            /* TEXT */
-                          )
-                        ],
-                        4
-                        /* STYLE */
-                      ),
-                      t[1] || (t[1] = n(
-                        "div",
-                        { class: "lc-funnel-tier__serie__item__bar__line" },
-                        null,
-                        -1
-                        /* HOISTED */
-                      ))
-                    ],
-                    4
-                    /* STYLE */
-                  ),
-                  n(
-                    "div",
-                    T,
-                    s(i.value),
-                    1
-                    /* TEXT */
-                  )
-                ]);
-              }),
-              128
-              /* KEYED_FRAGMENT */
-            ))
-          ]))),
+          renderList((_a = computedOptions.value) == null ? void 0 : _a.series, (serie, key) => {
+            return openBlock(), createElementBlock("div", {
+              key,
+              class: "lc-funnel-tier__serie"
+            }, [
+              (openBlock(true), createElementBlock(
+                Fragment,
+                null,
+                renderList(serie == null ? void 0 : serie.data, (item, index) => {
+                  var _a2;
+                  return openBlock(), createElementBlock("div", {
+                    key: index,
+                    class: "lc-funnel-tier__serie__item"
+                  }, [
+                    createElementVNode(
+                      "div",
+                      _hoisted_2,
+                      toDisplayString(item.name),
+                      1
+                      /* TEXT */
+                    ),
+                    createElementVNode(
+                      "div",
+                      {
+                        class: "lc-funnel-tier__serie__item__bar",
+                        style: normalizeStyle({
+                          "--inner-color": computedOptions.value.color[index]
+                        })
+                      },
+                      [
+                        _cache[0] || (_cache[0] = createElementVNode(
+                          "div",
+                          { class: "lc-funnel-tier__serie__item__bar__line" },
+                          null,
+                          -1
+                          /* HOISTED */
+                        )),
+                        createElementVNode(
+                          "div",
+                          {
+                            class: "lc-funnel-tier__serie__item__bar__inner",
+                            style: normalizeStyle({
+                              "--inner-width": `${item.value / serie.max * 100}%`
+                            })
+                          },
+                          [
+                            createElementVNode(
+                              "div",
+                              _hoisted_3,
+                              toDisplayString((_a2 = serie == null ? void 0 : serie.label) == null ? void 0 : _a2.call(serie, item, serie)),
+                              1
+                              /* TEXT */
+                            )
+                          ],
+                          4
+                          /* STYLE */
+                        ),
+                        _cache[1] || (_cache[1] = createElementVNode(
+                          "div",
+                          { class: "lc-funnel-tier__serie__item__bar__line" },
+                          null,
+                          -1
+                          /* HOISTED */
+                        ))
+                      ],
+                      4
+                      /* STYLE */
+                    ),
+                    createElementVNode(
+                      "div",
+                      _hoisted_4,
+                      toDisplayString(item.value),
+                      1
+                      /* TEXT */
+                    )
+                  ]);
+                }),
+                128
+                /* KEYED_FRAGMENT */
+              ))
+            ]);
+          }),
           128
           /* KEYED_FRAGMENT */
         ))
@@ -105,5 +114,5 @@ const x = { class: "lc-funnel-tier" }, F = { class: "lc-funnel-tier__serie__item
   }
 });
 export {
-  E as default
+  _sfc_main as default
 };

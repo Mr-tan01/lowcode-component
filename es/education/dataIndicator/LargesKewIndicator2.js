@@ -1,26 +1,43 @@
-import { defineComponent as b, mergeDefaults as h, computed as c, openBlock as a, createElementBlock as n, normalizeClass as w, createElementVNode as t, renderSlot as p, toDisplayString as r, createVNode as s, unref as o, createCommentVNode as l, createTextVNode as f, withCtx as g } from "vue";
-import V from "./images/skew/icon/person.png.js";
-import { bigNumber as u } from "lowcode-share/es/share";
-import { NNumberAnimation as v } from "naive-ui/es/number-animation";
-import N from "./tooltip/index.js";
-const S = { class: "lc-skew-indicator__wrapper" }, C = { class: "lc-skew-indicator__wrapper__table--bg" }, x = { class: "lc-skew-indicator__wrapper__table--bg--icon" }, I = ["src"], B = { class: "lc-skew-indicator__wrapper__info" }, H = { class: "lc-skew-indicator__wrapper__info--label" }, L = { class: "lc-skew-indicator__wrapper__info--result" }, $ = { class: "lc-skew-indicator__wrapper__info--result--value" }, U = {
+import { defineComponent, mergeDefaults, computed, openBlock, createElementBlock, normalizeClass, createElementVNode, renderSlot, toDisplayString, createVNode, unref, createCommentVNode, createTextVNode, withCtx } from "vue";
+import personIcon from "./images/skew/icon/person.png.js";
+import { bigNumber } from "lowcode-share/es/share";
+import { NNumberAnimation } from "naive-ui/es/number-animation";
+import LcTooltip from "./tooltip/index.js";
+const _hoisted_1 = { class: "lc-skew-indicator__wrapper" };
+const _hoisted_2 = { class: "lc-skew-indicator__wrapper__table--bg" };
+const _hoisted_3 = { class: "lc-skew-indicator__wrapper__table--bg--icon" };
+const _hoisted_4 = ["src"];
+const _hoisted_5 = { class: "lc-skew-indicator__wrapper__info" };
+const _hoisted_6 = { class: "lc-skew-indicator__wrapper__info--label" };
+const _hoisted_7 = { class: "lc-skew-indicator__wrapper__info--result" };
+const _hoisted_8 = { class: "lc-skew-indicator__wrapper__info--result--value" };
+const _hoisted_9 = {
   key: 0,
   class: "lc-skew-indicator__wrapper__info--result--unit"
-}, D = { class: "lc-skew-indicator__wrapper__info--result--year--label" }, E = { class: "lc-skew-indicator__wrapper__info--result--year--value" }, T = {
+};
+const _hoisted_10 = { class: "lc-skew-indicator__wrapper__info--result--year--label" };
+const _hoisted_11 = { class: "lc-skew-indicator__wrapper__info--result--year--value" };
+const _hoisted_12 = {
   key: 0,
   class: "lc-skew-indicator__wrapper__info--result--year--up"
-}, z = {
+};
+const _hoisted_13 = {
   key: 2,
   class: "lc-skew-indicator__wrapper__info--result--altericon"
-}, A = {
+};
+const _hoisted_14 = {
   key: 0,
   class: "lc-skew-indicator__wrapper__info--sub"
-}, K = { class: "lc-skew-indicator__wrapper__info--sub-wrapper" }, j = { class: "lc-skew-indicator__wrapper__info--sub-content" }, q = {
+};
+const _hoisted_15 = { class: "lc-skew-indicator__wrapper__info--sub-wrapper" };
+const _hoisted_16 = { class: "lc-skew-indicator__wrapper__info--sub-content" };
+const _hoisted_17 = {
   key: 0,
   class: "lc-skew-indicator__wrapper__info--sub-head"
-}, P = /* @__PURE__ */ b({
+};
+const _sfc_main = /* @__PURE__ */ defineComponent({
   __name: "LargesKewIndicator",
-  props: /* @__PURE__ */ h({
+  props: /* @__PURE__ */ mergeDefaults({
     label: {
       type: String
     },
@@ -69,153 +86,163 @@ const S = { class: "lc-skew-indicator__wrapper" }, C = { class: "lc-skew-indicat
     unit: "",
     yearLabel: "同比去年",
     yearValue: 0,
-    fixed: !0,
+    fixed: true,
     decimal: 0,
-    icon: V,
-    __skip_icon: !0,
+    icon: personIcon,
+    __skip_icon: true,
     tip: "",
     type: "skew",
     subHead: "",
     subContent: "",
-    notCheckInteger: !1
+    notCheckInteger: false
   }),
-  setup(e) {
-    const m = c(() => {
-      const { unit: i } = u(e.value);
-      return Number.isInteger(e.value) && !i && !e.notCheckInteger ? 0 : e.decimal;
-    }), y = c(() => {
-      if (e.fixed) {
-        const { result: i } = u(e.value, e.decimal);
-        return i;
+  setup(__props) {
+    const decimals = computed(() => {
+      const { unit: numUnit } = bigNumber(__props.value);
+      if (Number.isInteger(__props.value) && !numUnit && !__props.notCheckInteger) {
+        return 0;
       }
-      return e.value;
-    }), d = c(() => {
-      if (e.fixed) {
-        const { unit: i } = u(e.value, e.decimal);
-        return `${i}${e.unit}`;
+      return __props.decimal;
+    });
+    const renderValue = computed(() => {
+      if (__props.fixed) {
+        const { result } = bigNumber(__props.value, __props.decimal);
+        return result;
       }
-      return e.unit;
-    }), k = c(() => e.yearValue > 0 ? "↑" : "↓");
-    return (i, _) => (a(), n(
-      "div",
-      {
-        class: w(["lc-skew-indicator", [`lc-skew-indicator--${e.type}`]])
-      },
-      [
-        t("div", S, [
-          t("div", C, [
-            t("div", x, [
-              p(i.$slots, "default", {}, () => [
-                t("img", {
-                  src: e.icon,
-                  alt: ""
-                }, null, 8, I)
-              ], !0)
-            ])
-          ]),
-          t("div", B, [
-            t(
-              "div",
-              H,
-              r(e.label),
-              1
-              /* TEXT */
-            ),
-            t("div", L, [
-              t("div", $, [
-                s(o(v), {
-                  "show-separator": "",
-                  from: 0,
-                  to: y.value,
-                  active: "",
-                  precision: m.value
-                }, null, 8, ["to", "precision"])
-              ]),
-              d.value ? (a(), n(
+      return __props.value;
+    });
+    const renderUnit = computed(() => {
+      if (__props.fixed) {
+        const { unit: numUnit } = bigNumber(__props.value, __props.decimal);
+        return `${numUnit}${__props.unit}`;
+      }
+      return __props.unit;
+    });
+    const prefixIcon = computed(() => {
+      return __props.yearValue > 0 ? "↑" : "↓";
+    });
+    return (_ctx, _cache) => {
+      return openBlock(), createElementBlock(
+        "div",
+        {
+          class: normalizeClass(["lc-skew-indicator", [`lc-skew-indicator--${__props.type}`]])
+        },
+        [
+          createElementVNode("div", _hoisted_1, [
+            createElementVNode("div", _hoisted_2, [
+              createElementVNode("div", _hoisted_3, [
+                renderSlot(_ctx.$slots, "default", {}, () => [
+                  createElementVNode("img", {
+                    src: __props.icon,
+                    alt: ""
+                  }, null, 8, _hoisted_4)
+                ], true)
+              ])
+            ]),
+            createElementVNode("div", _hoisted_5, [
+              createElementVNode(
                 "div",
-                U,
-                r(d.value),
+                _hoisted_6,
+                toDisplayString(__props.label),
                 1
                 /* TEXT */
-              )) : l("v-if", !0),
-              e.yearValue ? (a(), n(
-                "div",
-                {
-                  key: 1,
-                  class: w(["lc-skew-indicator__wrapper__info--result--year", {
-                    down: e.yearValue < 0,
-                    up: e.yearValue > 0
-                  }])
-                },
-                [
-                  t(
+              ),
+              createElementVNode("div", _hoisted_7, [
+                createElementVNode("div", _hoisted_8, [
+                  createVNode(unref(NNumberAnimation), {
+                    "show-separator": "",
+                    from: 0,
+                    to: renderValue.value,
+                    active: "",
+                    precision: decimals.value
+                  }, null, 8, ["to", "precision"])
+                ]),
+                renderUnit.value ? (openBlock(), createElementBlock(
+                  "div",
+                  _hoisted_9,
+                  toDisplayString(renderUnit.value),
+                  1
+                  /* TEXT */
+                )) : createCommentVNode("v-if", true),
+                __props.yearValue ? (openBlock(), createElementBlock(
+                  "div",
+                  {
+                    key: 1,
+                    class: normalizeClass(["lc-skew-indicator__wrapper__info--result--year", {
+                      down: __props.yearValue < 0,
+                      up: __props.yearValue > 0
+                    }])
+                  },
+                  [
+                    createElementVNode(
+                      "div",
+                      _hoisted_10,
+                      toDisplayString(__props.yearLabel),
+                      1
+                      /* TEXT */
+                    ),
+                    createElementVNode("div", _hoisted_11, [
+                      createVNode(unref(NNumberAnimation), {
+                        "show-separator": "",
+                        from: 0,
+                        to: __props.yearValue,
+                        active: "",
+                        precision: __props.decimal
+                      }, null, 8, ["to", "precision"]),
+                      _cache[0] || (_cache[0] = createTextVNode("% "))
+                    ]),
+                    __props.yearValue ? (openBlock(), createElementBlock(
+                      "div",
+                      _hoisted_12,
+                      toDisplayString(prefixIcon.value),
+                      1
+                      /* TEXT */
+                    )) : createCommentVNode("v-if", true)
+                  ],
+                  2
+                  /* CLASS */
+                )) : createCommentVNode("v-if", true),
+                __props.tip ? (openBlock(), createElementBlock("div", _hoisted_13, [
+                  createVNode(unref(LcTooltip), null, {
+                    default: withCtx(() => [
+                      createTextVNode(
+                        toDisplayString(__props.tip),
+                        1
+                        /* TEXT */
+                      )
+                    ]),
+                    _: 1
+                    /* STABLE */
+                  })
+                ])) : createCommentVNode("v-if", true)
+              ]),
+              __props.subHead ? (openBlock(), createElementBlock("div", _hoisted_14, [
+                createElementVNode("div", _hoisted_15, [
+                  createElementVNode(
                     "div",
-                    D,
-                    r(e.yearLabel),
+                    _hoisted_16,
+                    toDisplayString(__props.subContent),
                     1
                     /* TEXT */
                   ),
-                  t("div", E, [
-                    s(o(v), {
-                      "show-separator": "",
-                      from: 0,
-                      to: e.yearValue,
-                      active: "",
-                      precision: e.decimal
-                    }, null, 8, ["to", "precision"]),
-                    _[0] || (_[0] = f("% "))
-                  ]),
-                  e.yearValue ? (a(), n(
+                  __props.subHead ? (openBlock(), createElementBlock(
                     "div",
-                    T,
-                    r(k.value),
+                    _hoisted_17,
+                    toDisplayString(__props.subHead),
                     1
                     /* TEXT */
-                  )) : l("v-if", !0)
-                ],
-                2
-                /* CLASS */
-              )) : l("v-if", !0),
-              e.tip ? (a(), n("div", z, [
-                s(o(N), null, {
-                  default: g(() => [
-                    f(
-                      r(e.tip),
-                      1
-                      /* TEXT */
-                    )
-                  ]),
-                  _: 1
-                  /* STABLE */
-                })
-              ])) : l("v-if", !0)
-            ]),
-            e.subHead ? (a(), n("div", A, [
-              t("div", K, [
-                t(
-                  "div",
-                  j,
-                  r(e.subContent),
-                  1
-                  /* TEXT */
-                ),
-                e.subHead ? (a(), n(
-                  "div",
-                  q,
-                  r(e.subHead),
-                  1
-                  /* TEXT */
-                )) : l("v-if", !0)
-              ])
-            ])) : l("v-if", !0)
+                  )) : createCommentVNode("v-if", true)
+                ])
+              ])) : createCommentVNode("v-if", true)
+            ])
           ])
-        ])
-      ],
-      2
-      /* CLASS */
-    ));
+        ],
+        2
+        /* CLASS */
+      );
+    };
   }
 });
 export {
-  P as default
+  _sfc_main as default
 };

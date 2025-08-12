@@ -1,11 +1,12 @@
-const e = [
+const scatterColors = [
   "rgba(15, 251, 248, 1)",
   "rgba(254, 210, 77, 1)",
   "rgba(34, 252, 158, 1)",
   "rgba(255, 132, 83, 1)",
   "rgba(173, 210, 255, 1)",
   "rgba(222, 56, 4, 1)"
-], o = {
+];
+const yAxisOptions = {
   nameLocation: "end",
   nameTextStyle: {
     padding: [0, 20, 0, 0],
@@ -24,14 +25,17 @@ const e = [
     fontSize: 14,
     lineHeight: 20,
     margin: 13,
-    formatter: (t) => t
+    formatter: (value) => {
+      return value;
+    }
   },
   axisLine: {
     lineStyle: {
       color: "rgba(255, 255, 255, 0.2)"
     }
   }
-}, i = {
+};
+const tooltipOptions = {
   backgroundColor: "rgba(0, 32, 61, 1)",
   borderColor: "rgba(15, 251, 248, 1)",
   textStyle: {
@@ -39,8 +43,9 @@ const e = [
     fontSize: 14,
     lineHeight: 20
   }
-}, r = {
-  show: !1,
+};
+const legendOptions = {
+  show: false,
   top: "bottom",
   left: "center",
   textStyle: {
@@ -58,14 +63,16 @@ const e = [
     fontSize: 12,
     color: "#fff"
   }
-}, n = {
+};
+const gridOptions = {
   top: 50,
   bottom: 40
-}, l = {
+};
+const xAxisOptions = {
   type: "category",
-  boundaryGap: !0,
+  boundaryGap: true,
   splitLine: {
-    show: !0,
+    show: true,
     lineStyle: {
       color: "rgba(255, 255, 255, 0.2)",
       type: "dotted",
@@ -73,7 +80,7 @@ const e = [
     }
   },
   axisTick: {
-    show: !1
+    show: false
   },
   axisLine: {
     lineStyle: {
@@ -85,24 +92,25 @@ const e = [
     fontSize: 14,
     lineHeight: 20
   }
-}, a = {
+};
+const commonScatterSeries = {
   type: "scatter",
-  symbolSize: function(t) {
-    return Math.max(Math.sqrt(t), 10);
+  symbolSize: function(data) {
+    return Math.max(Math.sqrt(data), 10);
   },
   itemStyle: {
-    color: (t) => e[t.componentIndex],
+    color: (data) => scatterColors[data.componentIndex],
     borderColor: "#fff",
     borderWidth: 1.2,
     opacity: 1
   }
 };
 export {
-  a as commonScatterSeries,
-  n as gridOptions,
-  r as legendOptions,
-  e as scatterColors,
-  i as tooltipOptions,
-  l as xAxisOptions,
-  o as yAxisOptions
+  commonScatterSeries,
+  gridOptions,
+  legendOptions,
+  scatterColors,
+  tooltipOptions,
+  xAxisOptions,
+  yAxisOptions
 };

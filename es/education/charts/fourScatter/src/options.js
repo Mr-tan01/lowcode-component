@@ -1,29 +1,33 @@
-import p from "lodash-es/merge";
-import { deepMergeArrayOptions as d } from "@mmj-code-lib/lowcode/es/components";
-import { tooltipOptions as u, legendOptions as f, gridOptions as g, xAxisOptions as y, yAxisOptions as O, scatterColors as n, commonScatterSeries as c } from "./const.js";
-import { setRgbaAlpha as A } from "lowcode-share/es/share";
-const a = {
-  tooltip: u,
-  legend: f,
-  grid: g,
-  xAxis: y,
-  yAxis: O,
-  color: n,
-  series: c
+import merge from "lodash-es/merge";
+import { deepMergeArrayOptions } from "@mmj-code-lib/lowcode/es/components";
+import { tooltipOptions, legendOptions, gridOptions, xAxisOptions, yAxisOptions, scatterColors, commonScatterSeries } from "./const.js";
+import { setRgbaAlpha } from "lowcode-share/es/share";
+const commonScatterOptions = {
+  tooltip: tooltipOptions,
+  legend: legendOptions,
+  grid: gridOptions,
+  xAxis: xAxisOptions,
+  yAxis: yAxisOptions,
+  color: scatterColors,
+  series: commonScatterSeries
 };
-function S(o, t) {
-  return t && Reflect.deleteProperty(a, "tooltip"), d(o, Object.keys(a), Object.values(a)), p({}, a, o);
+function useCommonScatterOptions(opts, isDefaultTooltip) {
+  if (isDefaultTooltip) {
+    Reflect.deleteProperty(commonScatterOptions, "tooltip");
+  }
+  deepMergeArrayOptions(opts, Object.keys(commonScatterOptions), Object.values(commonScatterOptions));
+  return merge({}, commonScatterOptions, opts);
 }
-function l(o, t) {
-  var m, i;
-  const r = n[t % n.length];
-  return p(
+function mregeSeriesRecord(newSeries, seriesIndex) {
+  var _a, _b;
+  const color = scatterColors[seriesIndex % scatterColors.length];
+  return merge(
     {},
-    c,
+    commonScatterSeries,
     {
       itemStyle: {
-        color: A(r, 0.51),
-        borderColor: r,
+        color: setRgbaAlpha(color, 0.51),
+        borderColor: color,
         shadowBlur: 10,
         shadowColor: "rgba(0,0,0,0.5)"
       },
@@ -31,28 +35,35 @@ function l(o, t) {
         emphasis: {
           itemStyle: {
             // @ts-ignore
-            borderColor: ((m = o == null ? void 0 : o.itemStyle) == null ? void 0 : m.borderColor) ?? r
+            borderColor: ((_a = newSeries == null ? void 0 : newSeries.itemStyle) == null ? void 0 : _a.borderColor) ?? color
           }
         },
-        data: ((i = o.data) == null ? void 0 : i.map((e, s) => ({
-          name: e.name,
-          coord: [s, e.value, e],
-          meta: {
-            color: r,
-            ...e.meta ?? {}
-          },
-          item: e
-        }))) ?? []
+        data: ((_b = newSeries.data) == null ? void 0 : _b.map((item, index) => {
+          return {
+            name: item.name,
+            coord: [index, item.value, item],
+            meta: {
+              color,
+              ...item.meta ?? {}
+            },
+            item
+          };
+        })) ?? []
       }
     },
-    o
+    newSeries
   );
 }
-function R(o) {
-  return Array.isArray(o) ? o.map((t, r) => l(t, r)) : l(o, 0);
+function useCommonScatterSeries(series) {
+  if (Array.isArray(series)) {
+    return series.map((item, index) => {
+      return mregeSeriesRecord(item, index);
+    });
+  }
+  return mregeSeriesRecord(series, 0);
 }
 export {
-  a as commonScatterOptions,
-  S as useCommonScatterOptions,
-  R as useCommonScatterSeries
+  commonScatterOptions,
+  useCommonScatterOptions,
+  useCommonScatterSeries
 };

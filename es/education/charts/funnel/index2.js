@@ -1,26 +1,31 @@
-import { defineComponent as n, mergeDefaults as m, computed as i, openBlock as p, createElementBlock as a, createVNode as c, unref as u, mergeProps as f } from "vue";
-import l from "../common/components/Charts/baseChart/base.js";
-import { useCommonChartExpose as d } from "../common/components/Charts/utils/index.js";
-import { useCommonScatterSeries as C, useCommonScatterOptions as h } from "./options.js";
-import x from "lodash-es/merge";
-const O = { class: "lc-scatter-chart" }, v = /* @__PURE__ */ n({
+import { defineComponent, mergeDefaults, computed, openBlock, createElementBlock, createVNode, unref, mergeProps } from "vue";
+import BaseChart from "../common/components/Charts/baseChart/base.js";
+import { useCommonChartExpose } from "../common/components/Charts/utils/index.js";
+import { useCommonScatterSeries, useCommonScatterOptions } from "./options.js";
+import merge from "lodash-es/merge";
+const _hoisted_1 = { class: "lc-scatter-chart" };
+const _sfc_main = /* @__PURE__ */ defineComponent({
   __name: "funnel",
-  props: /* @__PURE__ */ m({
+  props: /* @__PURE__ */ mergeDefaults({
     options: Object
   }, {
     options: () => ({})
   }),
-  setup(e, { expose: t }) {
-    const s = i(() => {
-      e.options.series = C(e.options.series || []);
-      const o = h(e.options);
-      return x({}, o);
-    }), { exposes: r } = d("baseChart");
-    return t(r), (o, g) => (p(), a("div", O, [
-      c(u(l), f({ options: s.value }, o.$attrs), null, 16, ["options"])
-    ]));
+  setup(__props, { expose: __expose }) {
+    const renderOptions = computed(() => {
+      __props.options.series = useCommonScatterSeries(__props.options.series || []);
+      const newOptions = useCommonScatterOptions(__props.options);
+      return merge({}, newOptions);
+    });
+    const { exposes } = useCommonChartExpose("baseChart");
+    __expose(exposes);
+    return (_ctx, _cache) => {
+      return openBlock(), createElementBlock("div", _hoisted_1, [
+        createVNode(unref(BaseChart), mergeProps({ options: renderOptions.value }, _ctx.$attrs), null, 16, ["options"])
+      ]);
+    };
   }
 });
 export {
-  v as default
+  _sfc_main as default
 };

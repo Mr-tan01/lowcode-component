@@ -1,2 +1,4 @@
-import { default as r } from './datePicker.js'
-export { r as LcDatePicker }
+import { default as default2 } from "./datePicker.js";
+export {
+  default2 as LcDatePicker
+};

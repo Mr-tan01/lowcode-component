@@ -1,200 +1,249 @@
-import { defineComponent as D, mergeDefaults as F, useCssVars as R, ref as z, onMounted as O, computed as p, openBlock as s, createElementBlock as i, createVNode as w, createElementVNode as g, Fragment as M, renderList as k, mergeProps as _, resolveDynamicComponent as T, createBlock as j, createCommentVNode as V, renderSlot as x, unref as H } from "vue";
-import K from "./comp/sshzq.js";
-import Y from "./comp/baoan.js";
-import S from "./comp/dapeng.js";
-import U from "./comp/futian.js";
-import W from "./comp/guangming.js";
-import q from "./comp/longgang.js";
-import J from "./comp/luohu.js";
-import Q from "./comp/pingshan.js";
-import Z from "./comp/yantian.js";
-import ee from "./comp/nanshan.js";
-import re from "./comp/longhua.js";
-import oe from "./comp/defines.js";
-import ae from "./comp/labels2.js";
-import le from "../mark/index2.js";
-import { propsRaw as te } from "./props.js";
-import { LabelModelEnum as C, defFloatLevelConfig as ne, szBlockNames as t, defBlockLableMap as se } from "./const.js";
-import ue from "lodash-es/merge";
-const ie = { class: "lc-szmap-raw" }, ce = {
+import { defineComponent, mergeDefaults, useCssVars, ref, onMounted, computed, openBlock, createElementBlock, createVNode, createElementVNode, Fragment, renderList, mergeProps, resolveDynamicComponent, createBlock, createCommentVNode, renderSlot, unref } from "vue";
+import _sfc_main$2 from "./comp/sshzq.js";
+import Baoan from "./comp/baoan.js";
+import Dapeng from "./comp/dapeng.js";
+import Futian from "./comp/futian.js";
+import Guangming from "./comp/guangming.js";
+import Longgang from "./comp/longgang.js";
+import Luohu from "./comp/luohu.js";
+import Pingshan from "./comp/pingshan.js";
+import Yantian from "./comp/yantian.js";
+import Nanshan from "./comp/nanshan.js";
+import Longhua from "./comp/longhua.js";
+import _sfc_main$1 from "./comp/defines.js";
+import Labels from "./comp/labels2.js";
+import LcMark from "../mark/index2.js";
+import { propsRaw } from "./props.js";
+import { LabelModelEnum, defFloatLevelConfig, szBlockNames, defBlockLableMap } from "./const.js";
+import merge from "lodash-es/merge";
+const _hoisted_1 = { class: "lc-szmap-raw" };
+const _hoisted_2 = {
   class: "lc-szmap-raw__svg",
   viewBox: "0 0 922 527",
   version: "1.1"
-}, me = ["id"], fe = {
+};
+const _hoisted_3 = ["id"];
+const _hoisted_4 = {
   id: "页面-2",
   stroke: "none",
   "stroke-width": "1",
   fill: "none",
   "fill-rule": "evenodd"
-}, de = {
+};
+const _hoisted_5 = {
   id: "编组-76",
   transform: "translate(4, 0)"
-}, ve = {
+};
+const _hoisted_6 = {
   id: "编组",
   transform: "translate(0, 35)",
   "fill-rule": "nonzero"
-}, pe = {
+};
+const _hoisted_7 = {
   key: 0,
   class: "lc-szmap-raw__mark-group"
-}, Pe = /* @__PURE__ */ D({
+};
+const _sfc_main = /* @__PURE__ */ defineComponent({
   __name: "rawMap",
-  props: /* @__PURE__ */ F(te, {
-    showLabel: !0,
-    showBorder: !0,
+  props: /* @__PURE__ */ mergeDefaults(propsRaw, {
+    showLabel: true,
+    showBorder: true,
     levels: () => ({}),
     values: () => ({}),
     fillModel: "default",
     rotateX: 0,
-    disabledGradient: !1,
-    labelModel: () => C.DEFAULT
+    disabledGradient: false,
+    labelModel: () => LabelModelEnum.DEFAULT
   }),
   emits: ["markClick", "markMouseover", "markMouseenter", "markMouseleave"],
-  setup(u, { emit: y }) {
-    R((e) => ({
-      "4ad76962": G.value,
-      "61a8eb0e": I.value
+  setup(__props, { emit: __emit }) {
+    useCssVars((_ctx) => ({
+      "4ad76962": mapRotateX.value,
+      "61a8eb0e": labelWrapInsetY.value
     }));
-    const b = {
-      [t.光明]: W,
-      [t.宝安]: Y,
-      [t.龙华]: re,
-      [t.南山]: ee,
-      [t.福田]: U,
-      [t.罗湖]: J,
-      [t.盐田]: Z,
-      [t.坪山]: Q,
-      [t.龙岗]: q,
-      [t.大鹏新区]: S,
-      [t.深汕合作区]: K
-    }, h = z(0), d = y, v = z("");
-    function L(e) {
-      const n = u.values[e] ?? { value: 0 }, a = c.value.findIndex(
-        ([, o]) => (o == null ? void 0 : o.range) && n.value >= o.range[0] && n.value <= o.range[1]
-      ), [, r] = c.value[a] ?? [];
+    const blockList = {
+      [szBlockNames["光明"]]: Guangming,
+      [szBlockNames["宝安"]]: Baoan,
+      [szBlockNames["龙华"]]: Longhua,
+      [szBlockNames["南山"]]: Nanshan,
+      [szBlockNames["福田"]]: Futian,
+      [szBlockNames["罗湖"]]: Luohu,
+      [szBlockNames["盐田"]]: Yantian,
+      [szBlockNames["坪山"]]: Pingshan,
+      [szBlockNames["龙岗"]]: Longgang,
+      [szBlockNames["大鹏新区"]]: Dapeng,
+      [szBlockNames["深汕合作区"]]: _sfc_main$2
+    };
+    const labelAnimateNum = ref(0);
+    const $emits = __emit;
+    const currentMapKey = ref("");
+    function getMarkProp(key) {
+      const markMate = __props.values[key] ?? { value: 0 };
+      const currentLevelIndex = levelsList.value.findIndex(
+        ([, item]) => (item == null ? void 0 : item.range) && markMate.value >= item.range[0] && markMate.value <= item.range[1]
+      );
+      const [, currentLevelConf] = levelsList.value[currentLevelIndex] ?? [];
       return {
-        ...n,
-        mapLabel: se[e],
+        ...markMate,
+        mapLabel: defBlockLableMap[key],
         style: {
-          "--level-scale": h.value ? (r == null ? void 0 : r.scale) ?? 1 : h.value
+          "--level-scale": labelAnimateNum.value ? (currentLevelConf == null ? void 0 : currentLevelConf.scale) ?? 1 : labelAnimateNum.value
         }
       };
     }
-    function $(e) {
-      d("markClick", L(e));
+    function markClick(key) {
+      $emits("markClick", getMarkProp(key));
     }
-    O(() => {
+    onMounted(() => {
       setTimeout(() => {
-        h.value = 1;
+        labelAnimateNum.value = 1;
       }, 300);
     });
-    const N = p(() => ["lc-szmap-raw__block", `visible--${u.fillModel}`]), c = p(() => Object.entries(ue({}, ne, u.levels)));
-    function E(e) {
-      const n = u.values[e];
-      if (!n || u.disabledGradient) return;
-      const a = c.value.findIndex(
-        ([, f]) => (f == null ? void 0 : f.range) && n.value >= f.range[0] && n.value <= f.range[1]
-      ), [r, o] = c.value[a] ?? [];
-      let l = [], m = {};
-      return o && r && (l.push("float-active"), typeof o.stop == "string" ? m["--linear-gradient-fill"] = o.stop : m["--linear-gradient-fill"] = `url(#linearGradient-float-${r})`), {
-        class: l,
-        style: m
+    const blockClass = computed(() => {
+      return ["lc-szmap-raw__block", `visible--${__props.fillModel}`];
+    });
+    const levelsList = computed(() => {
+      return Object.entries(merge({}, defFloatLevelConfig, __props.levels));
+    });
+    function getBlockProperties(key) {
+      const currentValueConf = __props.values[key];
+      if (!currentValueConf || __props.disabledGradient) return;
+      const currentLevelIndex = levelsList.value.findIndex(
+        ([, item]) => (item == null ? void 0 : item.range) && currentValueConf.value >= item.range[0] && currentValueConf.value <= item.range[1]
+      );
+      const [type, currentLevelConf] = levelsList.value[currentLevelIndex] ?? [];
+      let className = [];
+      let styles = {};
+      if (currentLevelConf && type) {
+        className.push("float-active");
+        if (typeof currentLevelConf.stop === "string") {
+          styles["--linear-gradient-fill"] = currentLevelConf.stop;
+        } else {
+          styles["--linear-gradient-fill"] = `url(#linearGradient-float-${type})`;
+        }
+      }
+      return {
+        class: className,
+        style: styles
       };
     }
-    const G = p(() => `rotateX(${u.rotateX}deg)`), I = p(() => Math.abs(u.rotateX)), B = (e) => ["lc-szmap-raw__mark-group--item", `mark-${e}`];
-    function P(e) {
-      u.labelModel === C.HOVER && (v.value = e, d("markMouseover", e));
-    }
-    function X(e) {
-      u.labelModel === C.HOVER && (v.value = e, d("markMouseenter", e));
-    }
-    const A = (e, n) => {
-      const a = e.relatedTarget;
-      a && a.closest(".lc-szmap-raw__mark-group") || (v.value = "", d("markMouseleave", n));
+    const mapRotateX = computed(() => `rotateX(${__props.rotateX}deg)`);
+    const labelWrapInsetY = computed(() => Math.abs(__props.rotateX));
+    const labelClass = (key) => {
+      return ["lc-szmap-raw__mark-group--item", `mark-${key}`];
     };
-    return (e, n) => (s(), i("div", ie, [
-      (s(), i("svg", ce, [
-        w(oe),
-        g("defs", null, [
-          (s(!0), i(
-            M,
-            null,
-            k(c.value, ([a, r], o) => (s(), i("linearGradient", {
-              id: `linearGradient-float-${a}`,
-              key: o
-            }, [
-              (s(!0), i(
-                M,
-                null,
-                k(r == null ? void 0 : r.stop, (l, m) => (s(), i(
-                  "stop",
-                  _({ ref_for: !0 }, typeof l == "object" && !Array.isArray(l) ? l : {}, { key: m }),
+    function onMouseoverMapkey(key) {
+      if (__props.labelModel !== LabelModelEnum.HOVER) return;
+      currentMapKey.value = key;
+      $emits("markMouseover", key);
+    }
+    function onMouseenterMapkey(key) {
+      if (__props.labelModel !== LabelModelEnum.HOVER) return;
+      currentMapKey.value = key;
+      $emits("markMouseenter", key);
+    }
+    const hidePopver = (event, key) => {
+      const target = event.relatedTarget;
+      if (target && target.closest(".lc-szmap-raw__mark-group")) {
+        return;
+      }
+      currentMapKey.value = "";
+      $emits("markMouseleave", key);
+    };
+    return (_ctx, _cache) => {
+      return openBlock(), createElementBlock("div", _hoisted_1, [
+        (openBlock(), createElementBlock("svg", _hoisted_2, [
+          createVNode(_sfc_main$1),
+          createElementVNode("defs", null, [
+            (openBlock(true), createElementBlock(
+              Fragment,
+              null,
+              renderList(levelsList.value, ([type, item], key) => {
+                return openBlock(), createElementBlock("linearGradient", {
+                  id: `linearGradient-float-${type}`,
+                  key
+                }, [
+                  (openBlock(true), createElementBlock(
+                    Fragment,
+                    null,
+                    renderList(item == null ? void 0 : item.stop, (el, index) => {
+                      return openBlock(), createElementBlock(
+                        "stop",
+                        mergeProps({ ref_for: true }, typeof el === "object" && !Array.isArray(el) ? el : {}, { key: index }),
+                        null,
+                        16
+                        /* FULL_PROPS */
+                      );
+                    }),
+                    128
+                    /* KEYED_FRAGMENT */
+                  ))
+                ], 8, _hoisted_3);
+              }),
+              128
+              /* KEYED_FRAGMENT */
+            ))
+          ]),
+          createElementVNode("g", _hoisted_4, [
+            createElementVNode("g", _hoisted_5, [
+              createElementVNode("g", _hoisted_6, [
+                (openBlock(), createElementBlock(
+                  Fragment,
                   null,
-                  16
-                  /* FULL_PROPS */
-                ))),
-                128
-                /* KEYED_FRAGMENT */
-              ))
-            ], 8, me))),
-            128
-            /* KEYED_FRAGMENT */
-          ))
-        ]),
-        g("g", fe, [
-          g("g", de, [
-            g("g", ve, [
-              (s(), i(
-                M,
-                null,
-                k(b, (a, r, o) => w(T(a), _({
-                  key: o,
-                  class: N.value,
-                  ref_for: !0
-                }, E(r), {
-                  "show-border": e.showBorder,
-                  onMouseenter: (l) => P(r),
-                  onMouseover: (l) => X(r),
-                  onMouseleave: (l) => A(l, r),
-                  onClick: (l) => $(r)
-                }), null, 16, ["class", "show-border", "onMouseenter", "onMouseover", "onMouseleave", "onClick"])),
-                64
-                /* STABLE_FRAGMENT */
-              )),
-              e.showLabel ? (s(), j(ae, {
-                key: 0,
-                labels: e.labels,
-                values: e.values
-              }, null, 8, ["labels", "values"])) : V("v-if", !0)
+                  renderList(blockList, (is, key, index) => {
+                    return createVNode(resolveDynamicComponent(is), mergeProps({
+                      key: index,
+                      class: blockClass.value,
+                      ref_for: true
+                    }, getBlockProperties(key), {
+                      "show-border": _ctx.showBorder,
+                      onMouseenter: ($event) => onMouseoverMapkey(key),
+                      onMouseover: ($event) => onMouseenterMapkey(key),
+                      onMouseleave: ($event) => hidePopver($event, key),
+                      onClick: ($event) => markClick(key)
+                    }), null, 16, ["class", "show-border", "onMouseenter", "onMouseover", "onMouseleave", "onClick"]);
+                  }),
+                  64
+                  /* STABLE_FRAGMENT */
+                )),
+                _ctx.showLabel ? (openBlock(), createBlock(Labels, {
+                  key: 0,
+                  labels: _ctx.labels,
+                  values: _ctx.values
+                }, null, 8, ["labels", "values"])) : createCommentVNode("v-if", true)
+              ])
             ])
           ])
-        ])
-      ])),
-      e.showLabel ? (s(), i("div", pe, [
-        x(e.$slots, "mapLabel", {
-          blockList: b,
-          labelClass: B,
-          getVlaue: L,
-          currentMapKey: v.value
-        }, () => [
-          (s(), i(
-            M,
-            null,
-            k(b, (a, r) => w(H(le), _({
-              key: r,
-              class: B(r),
-              ref_for: !0
-            }, L(r), {
-              size: "small",
-              onClick: (o) => $(r)
-            }), null, 16, ["class", "onClick"])),
-            64
-            /* STABLE_FRAGMENT */
-          ))
-        ], !0)
-      ])) : V("v-if", !0)
-    ]));
+        ])),
+        _ctx.showLabel ? (openBlock(), createElementBlock("div", _hoisted_7, [
+          renderSlot(_ctx.$slots, "mapLabel", {
+            blockList,
+            labelClass,
+            getVlaue: getMarkProp,
+            currentMapKey: currentMapKey.value
+          }, () => [
+            (openBlock(), createElementBlock(
+              Fragment,
+              null,
+              renderList(blockList, (_, key) => {
+                return createVNode(unref(LcMark), mergeProps({
+                  key,
+                  class: labelClass(key),
+                  ref_for: true
+                }, getMarkProp(key), {
+                  size: "small",
+                  onClick: ($event) => markClick(key)
+                }), null, 16, ["class", "onClick"]);
+              }),
+              64
+              /* STABLE_FRAGMENT */
+            ))
+          ], true)
+        ])) : createCommentVNode("v-if", true)
+      ]);
+    };
   }
 });
 export {
-  Pe as default
+  _sfc_main as default
 };

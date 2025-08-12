@@ -1,37 +1,44 @@
-import { defineComponent as l, computed as p, openBlock as t, createElementBlock as m, createElementVNode as i, createVNode as u, unref as n, createBlock as c, createCommentVNode as d } from "vue";
-import g from "../common/components/Charts/baseChart/base.js";
-import { useCommonChartExpose as f } from "../common/components/Charts/utils/index.js";
-import C from "lodash-es/merge";
-import { useCommonGaugeOptions as _, useGaugeSeriesOptions as h } from "./options.js";
-import b from "../common/components/Charts/legend/index.js";
-const v = { class: "lc-gauge" }, B = { class: "lc-gauge__wrapper" }, N = /* @__PURE__ */ l({
+import { defineComponent, computed, openBlock, createElementBlock, createElementVNode, createVNode, unref, createBlock, createCommentVNode } from "vue";
+import BaseChart from "../common/components/Charts/baseChart/base.js";
+import { useCommonChartExpose } from "../common/components/Charts/utils/index.js";
+import merge from "lodash-es/merge";
+import { useCommonGaugeOptions, useGaugeSeriesOptions } from "./options.js";
+import CommonLegend from "../common/components/Charts/legend/index.js";
+const _hoisted_1 = { class: "lc-gauge" };
+const _hoisted_2 = { class: "lc-gauge__wrapper" };
+const _sfc_main = /* @__PURE__ */ defineComponent({
   __name: "gauge",
   props: {
     legendLabel: { type: Function },
     options: { default: () => ({}) },
-    showCustomLegend: { type: Boolean, default: !0 }
+    showCustomLegend: { type: Boolean, default: true }
   },
-  setup(s, { expose: r }) {
-    const { exposes: a } = f("baseChart"), o = p(() => {
-      const e = _(s.options);
-      return e.series = h(e.series), C({}, e);
+  setup(__props, { expose: __expose }) {
+    const { exposes } = useCommonChartExpose("baseChart");
+    const renderOptions = computed(() => {
+      const newOptions = useCommonGaugeOptions(__props.options);
+      newOptions.series = useGaugeSeriesOptions(newOptions.series);
+      return merge({}, newOptions);
     });
-    return r(a), (e, L) => (t(), m("div", v, [
-      i("div", B, [
-        u(n(g), {
-          ref: "baseChart",
-          options: o.value
-        }, null, 8, ["options"]),
-        e.showCustomLegend ? (t(), c(n(b), {
-          key: 0,
-          disabled: "",
-          "legend-label": e.legendLabel,
-          options: o.value
-        }, null, 8, ["legend-label", "options"])) : d("v-if", !0)
-      ])
-    ]));
+    __expose(exposes);
+    return (_ctx, _cache) => {
+      return openBlock(), createElementBlock("div", _hoisted_1, [
+        createElementVNode("div", _hoisted_2, [
+          createVNode(unref(BaseChart), {
+            ref: "baseChart",
+            options: renderOptions.value
+          }, null, 8, ["options"]),
+          _ctx.showCustomLegend ? (openBlock(), createBlock(unref(CommonLegend), {
+            key: 0,
+            disabled: "",
+            "legend-label": _ctx.legendLabel,
+            options: renderOptions.value
+          }, null, 8, ["legend-label", "options"])) : createCommentVNode("v-if", true)
+        ])
+      ]);
+    };
   }
 });
 export {
-  N as default
+  _sfc_main as default
 };

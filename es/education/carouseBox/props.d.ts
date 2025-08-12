@@ -1,29 +1,29 @@
-import { PropType } from 'vue'
-import { TabListRaw } from './types'
+import { PropType } from 'vue';
+import { TabListRaw } from './types';
 export declare const propsRaw: {
     list: {
-        type: PropType<TabListRaw[]>
-        required: boolean
-    }
+        type: PropType<TabListRaw[]>;
+        required: boolean;
+    };
     offsetAnimationTime: {
-        type: NumberConstructor
-    }
+        type: NumberConstructor;
+    };
     gap: {
-        type: NumberConstructor
-    }
+        type: NumberConstructor;
+    };
     rowKey: {
-        type: PropType<(item: TabListRaw) => string>
-        required: boolean
-    }
+        type: PropType<(item: TabListRaw) => string>;
+        required: boolean;
+    };
     showTrack: {
-        type: PropType<boolean>
-        required: boolean
-    }
+        type: PropType<boolean>;
+        required: boolean;
+    };
     disabled: {
-        type: PropType<boolean>
-    }
+        type: PropType<boolean>;
+    };
     backCenter: {
-        type: PropType<boolean>
-        default: boolean
-    }
-}
+        type: PropType<boolean>;
+        default: boolean;
+    };
+};

@@ -1,5 +1,6 @@
-import { graphic as e } from "echarts";
-const i = ["rgba(15, 250, 248, 1)", "rgba(225, 188, 75, 1)", "rgba(222, 56, 4, 1)"], r = {
+import { graphic } from "echarts";
+const lineColors = ["rgba(15, 250, 248, 1)", "rgba(225, 188, 75, 1)", "rgba(222, 56, 4, 1)"];
+const yAxisOptions = {
   nameLocation: "end",
   nameTextStyle: {
     padding: [0, 20, 0, 0],
@@ -18,14 +19,17 @@ const i = ["rgba(15, 250, 248, 1)", "rgba(225, 188, 75, 1)", "rgba(222, 56, 4, 1
     fontSize: 14,
     lineHeight: 20,
     margin: 13,
-    formatter: (o) => o
+    formatter: (value) => {
+      return value;
+    }
   },
   axisLine: {
     lineStyle: {
       color: "rgba(255, 255, 255, 0.2)"
     }
   }
-}, n = {
+};
+const tooltipOptions = {
   backgroundColor: "rgba(0, 32, 61, 1)",
   borderColor: "rgba(15, 251, 248, 1)",
   textStyle: {
@@ -33,8 +37,9 @@ const i = ["rgba(15, 250, 248, 1)", "rgba(225, 188, 75, 1)", "rgba(222, 56, 4, 1
     fontSize: 14,
     lineHeight: 20
   }
-}, l = {
-  show: !0,
+};
+const legendOptions = {
+  show: true,
   top: "bottom",
   left: "center",
   textStyle: {
@@ -52,14 +57,16 @@ const i = ["rgba(15, 250, 248, 1)", "rgba(225, 188, 75, 1)", "rgba(222, 56, 4, 1
     fontSize: 12,
     color: "#fff"
   }
-}, a = {
+};
+const gridOptions = {
   top: 50,
   bottom: 40
-}, f = {
+};
+const xAxisOptions = {
   type: "category",
-  boundaryGap: !0,
+  boundaryGap: true,
   splitLine: {
-    show: !0,
+    show: true,
     lineStyle: {
       color: "rgba(255, 255, 255, 0.2)",
       type: "dotted",
@@ -67,7 +74,7 @@ const i = ["rgba(15, 250, 248, 1)", "rgba(225, 188, 75, 1)", "rgba(222, 56, 4, 1
     }
   },
   axisTick: {
-    show: !1
+    show: false
   },
   axisLine: {
     lineStyle: {
@@ -79,8 +86,9 @@ const i = ["rgba(15, 250, 248, 1)", "rgba(225, 188, 75, 1)", "rgba(222, 56, 4, 1
     fontSize: 14,
     lineHeight: 20
   }
-}, s = [
-  new e.LinearGradient(0, 0, 0, 1, [
+};
+const defLinearGradients = [
+  new graphic.LinearGradient(0, 0, 0, 1, [
     {
       offset: 0,
       color: "rgba(15, 251, 248, 1)"
@@ -90,7 +98,7 @@ const i = ["rgba(15, 250, 248, 1)", "rgba(225, 188, 75, 1)", "rgba(222, 56, 4, 1
       color: "rgba(15, 251, 248, 0.05)"
     }
   ]),
-  new e.LinearGradient(0, 0, 0, 1, [
+  new graphic.LinearGradient(0, 0, 0, 1, [
     {
       offset: 0,
       color: "rgba(255, 175, 103, 1)"
@@ -102,11 +110,11 @@ const i = ["rgba(15, 250, 248, 1)", "rgba(225, 188, 75, 1)", "rgba(222, 56, 4, 1
   ])
 ];
 export {
-  s as defLinearGradients,
-  a as gridOptions,
-  l as legendOptions,
-  i as lineColors,
-  n as tooltipOptions,
-  f as xAxisOptions,
-  r as yAxisOptions
+  defLinearGradients,
+  gridOptions,
+  legendOptions,
+  lineColors,
+  tooltipOptions,
+  xAxisOptions,
+  yAxisOptions
 };

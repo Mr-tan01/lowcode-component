@@ -1,6 +1,6 @@
-import { graphic as e } from "echarts";
-import l from "lodash-es/merge";
-const p = [
+import { graphic } from "echarts";
+import merge from "lodash-es/merge";
+const pieColors = [
   "#0FFBF8",
   "rgba(225, 188, 75, 1)",
   "rgba(0, 148, 255, 1)",
@@ -16,7 +16,8 @@ const p = [
   "rgb(170, 192, 161)",
   "rgba(181, 167, 212, 1)",
   "rgba(207, 228, 92, 1)"
-], h = {
+];
+const pieTitleOptions = {
   text: "0",
   subtext: "总数",
   left: "center",
@@ -39,7 +40,8 @@ const p = [
     lineHeight: 16,
     overflow: "truncate"
   }
-}, w = {
+};
+const pieTooltipOptions = {
   appendTo: "body",
   trigger: "item",
   backgroundColor: "rgba(0, 32, 61, 1)",
@@ -49,9 +51,11 @@ const p = [
     fontSize: 14,
     lineHeight: 20
   },
-  formatter: function(o) {
-    var t, n, a;
-    const r = ((t = g[o.dataIndex]) == null ? void 0 : t.colorStops) ?? [], i = ((n = r == null ? void 0 : r[0]) == null ? void 0 : n.color) ?? "rgba(166, 207, 255, 0.20)", f = ((a = r == null ? void 0 : r[1]) == null ? void 0 : a.color) ?? "rgba(166, 207, 255, 1)";
+  formatter: function(params) {
+    var _a, _b, _c;
+    const colorStops = ((_a = innerGraphicColors[params.dataIndex]) == null ? void 0 : _a.colorStops) ?? [];
+    const startColor = ((_b = colorStops == null ? void 0 : colorStops[0]) == null ? void 0 : _b.color) ?? "rgba(166, 207, 255, 0.20)";
+    const endColor = ((_c = colorStops == null ? void 0 : colorStops[1]) == null ? void 0 : _c.color) ?? "rgba(166, 207, 255, 1)";
     return `
         <div style="display: flex; align-items: center;">
           <span style="
@@ -59,102 +63,105 @@ const p = [
             width: 10px;
             height: 10px;
             border-radius: 50%;
-            background: linear-gradient(to bottom, ${i}, ${f});
+            background: linear-gradient(to bottom, ${startColor}, ${endColor});
             margin-right: 6px;
           "></span>
-          ${o.name}: ${o.value} (${o.percent}%)
+          ${params.name}: ${params.value} (${params.percent}%)
         </div>
       `;
   }
-}, L = {
-  show: !1,
+};
+const pieLegend = {
+  show: false,
   orient: "vertical",
   left: "left",
   top: "center",
   textStyle: {
     color: "#fff"
   }
-}, g = [
-  new e.LinearGradient(0, 0, 0, 1, [
+};
+const innerGraphicColors = [
+  new graphic.LinearGradient(0, 0, 0, 1, [
     { offset: 0, color: "rgba(15, 251, 248, 0.20)" },
     // 渐变色起始颜色
     { offset: 1, color: "#0FFBF8" }
     // 渐变色结束颜色
   ]),
-  new e.LinearGradient(0, 0, 0, 1, [
+  new graphic.LinearGradient(0, 0, 0, 1, [
     { offset: 0, color: "rgba(225, 188, 75, 0.20)" },
     { offset: 1, color: "rgba(225, 188, 75, 1)" }
   ]),
-  new e.LinearGradient(0, 0, 0, 1, [
+  new graphic.LinearGradient(0, 0, 0, 1, [
     { offset: 0, color: "rgba(0, 148, 255, 0.20)" },
     { offset: 1, color: "rgba(0, 148, 255, 1)" }
   ]),
-  new e.LinearGradient(0, 0, 0, 1, [
+  new graphic.LinearGradient(0, 0, 0, 1, [
     { offset: 0, color: "rgba(166, 207, 255, 0.20)" },
     { offset: 1, color: "rgba(166, 207, 255, 1)" }
   ]),
-  new e.LinearGradient(0, 0, 0, 1, [
+  new graphic.LinearGradient(0, 0, 0, 1, [
     { offset: 0, color: "rgba(119, 73, 255, 0.20)" },
     { offset: 1, color: "rgba(119, 73, 255, 1)" }
   ]),
-  new e.LinearGradient(0, 0, 0, 1, [
+  new graphic.LinearGradient(0, 0, 0, 1, [
     { offset: 0, color: "rgba(238, 111, 124, 0.20)" },
     { offset: 1, color: "rgba(238, 111, 124, 1)" }
   ]),
-  new e.LinearGradient(0, 0, 0, 1, [
+  new graphic.LinearGradient(0, 0, 0, 1, [
     { offset: 0, color: "rgba(255, 196, 34, 0.20)" },
     { offset: 1, color: "rgba(255, 121, 12, 1)" }
   ]),
-  new e.LinearGradient(0, 0, 0, 1, [
+  new graphic.LinearGradient(0, 0, 0, 1, [
     { offset: 0, color: "rgba(222, 130, 57, 0.20)" },
     { offset: 1, color: "rgba(222, 130, 57, 1)" }
   ]),
-  new e.LinearGradient(0, 0, 0, 1, [
+  new graphic.LinearGradient(0, 0, 0, 1, [
     { offset: 0, color: "rgba(100, 214, 119, 0.20)" },
     { offset: 1, color: "rgba(100, 214, 119, 1)" }
   ]),
-  new e.LinearGradient(0, 0, 0, 1, [
+  new graphic.LinearGradient(0, 0, 0, 1, [
     { offset: 0, color: "rgba(34, 118, 252, 0.20)" },
     { offset: 1, color: "rgba(34, 118, 252, 1)" }
   ]),
-  new e.LinearGradient(0, 0, 0, 1, [
+  new graphic.LinearGradient(0, 0, 0, 1, [
     { offset: 0, color: "rgba(34, 118, 252, 0.20)" },
     { offset: 1, color: "rgba(234, 34, 252, 1)" }
   ]),
-  new e.LinearGradient(0, 0, 0, 1, [
+  new graphic.LinearGradient(0, 0, 0, 1, [
     { offset: 0, color: "rgba(34, 118, 252, 0.20)" },
     { offset: 1, color: "rgba(89, 149, 184, 1)" }
   ]),
-  new e.LinearGradient(0, 0, 0, 1, [
+  new graphic.LinearGradient(0, 0, 0, 1, [
     { offset: 0, color: "rgba(34, 118, 252, 0.20)" },
     { offset: 1, color: "rgba(170, 192, 161, 1)" }
   ]),
-  new e.LinearGradient(0, 0, 0, 1, [
+  new graphic.LinearGradient(0, 0, 0, 1, [
     { offset: 0, color: "rgba(34, 118, 252, 0.20)" },
     { offset: 1, color: "rgba(181, 167, 212, 1)" }
   ]),
-  new e.LinearGradient(0, 0, 0, 1, [
+  new graphic.LinearGradient(0, 0, 0, 1, [
     { offset: 0, color: "rgba(34, 118, 252, 0.20)" },
     { offset: 1, color: "rgba(207, 228, 92, 1)" }
   ])
-], c = {
+];
+const pieSeriesRecord = {
   name: "pie",
   type: "pie",
   radius: ["62%", "92%"],
   center: ["50%", "50%"],
   label: {
-    show: !1
+    show: false
   },
   emphasis: {
     itemStyle: {}
   }
-}, s = {
+};
+const innerLableOption = {
   radius: ["42%", "62%"],
   label: {
-    show: !0,
+    show: true,
     alignTo: "edge",
-    formatter: `{prop|{d}}{unit|%}
-{name|{b}}`,
+    formatter: "{prop|{d}}{unit|%}\n{name|{b}}",
     minMargin: 5,
     edgeDistance: 10,
     rich: {
@@ -180,13 +187,14 @@ const p = [
     length2: 0,
     maxSurfaceAngle: 0
   }
-}, m = l({}, c, s);
+};
+const innerLabelSeries1 = merge({}, pieSeriesRecord, innerLableOption);
 export {
-  g as innerGraphicColors,
-  m as innerLabelSeries1,
-  p as pieColors,
-  L as pieLegend,
-  c as pieSeriesRecord,
-  h as pieTitleOptions,
-  w as pieTooltipOptions
+  innerGraphicColors,
+  innerLabelSeries1,
+  pieColors,
+  pieLegend,
+  pieSeriesRecord,
+  pieTitleOptions,
+  pieTooltipOptions
 };

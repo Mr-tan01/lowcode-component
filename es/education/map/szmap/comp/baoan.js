@@ -1,9 +1,10 @@
-import { openBlock as L, createElementBlock as e, createElementVNode as C } from "vue";
-import t from "../../_virtual/_plugin-vue_export-helper.js";
-const r = {}, i = { id: "宝安" };
-function n(o, l) {
-  return L(), e("g", i, l[0] || (l[0] = [
-    C(
+import { openBlock, createElementBlock, createElementVNode } from "vue";
+import _export_sfc from "../../_virtual/_plugin-vue_export-helper.js";
+const _sfc_main = {};
+const _hoisted_1 = { id: "宝安" };
+function _sfc_render(_ctx, _cache) {
+  return openBlock(), createElementBlock("g", _hoisted_1, _cache[0] || (_cache[0] = [
+    createElementVNode(
       "use",
       {
         fill: "black",
@@ -15,7 +16,7 @@ function n(o, l) {
       -1
       /* HOISTED */
     ),
-    C(
+    createElementVNode(
       "use",
       {
         "fill-opacity": "0.8",
@@ -26,7 +27,7 @@ function n(o, l) {
       -1
       /* HOISTED */
     ),
-    C(
+    createElementVNode(
       "use",
       {
         fill: "black",
@@ -38,7 +39,7 @@ function n(o, l) {
       -1
       /* HOISTED */
     ),
-    C(
+    createElementVNode(
       "path",
       {
         stroke: "url(#linearGradient-34)",
@@ -51,7 +52,7 @@ function n(o, l) {
     )
   ]));
 }
-const c = /* @__PURE__ */ t(r, [["render", n]]);
+const Baoan = /* @__PURE__ */ _export_sfc(_sfc_main, [["render", _sfc_render]]);
 export {
-  c as default
+  Baoan as default
 };

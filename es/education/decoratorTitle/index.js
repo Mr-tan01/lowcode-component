@@ -1,2 +1,4 @@
-import { default as r } from './decoratorTitle.js'
-export { r as LcDecoratorTitle }
+import { default as default2 } from "./decoratorTitle.js";
+export {
+  default2 as LcDecoratorTitle
+};

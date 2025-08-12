@@ -1,63 +1,71 @@
-import { defineComponent as u, mergeDefaults as l, useTemplateRef as f, shallowRef as h, onMounted as d, watchEffect as p, openBlock as b, createElementBlock as v, createElementVNode as g } from "vue";
-import { useResizeObserver as C } from "@vueuse/core";
-import { init as M } from "echarts";
-import O from "lodash-es/debounce";
-const R = { class: "lc-common-chart" }, T = {
+import { defineComponent, mergeDefaults, useTemplateRef, shallowRef, onMounted, watchEffect, openBlock, createElementBlock, createElementVNode } from "vue";
+import { useResizeObserver } from "@vueuse/core";
+import { init } from "echarts";
+import debounce from "lodash-es/debounce";
+const _hoisted_1 = { class: "lc-common-chart" };
+const _hoisted_2 = {
   ref: "commonChart",
   class: "lc-common-chart__wrapper"
-}, I = /* @__PURE__ */ u({
+};
+const _sfc_main = /* @__PURE__ */ defineComponent({
   __name: "base",
-  props: /* @__PURE__ */ l({
+  props: /* @__PURE__ */ mergeDefaults({
     debounceTime: Number,
     options: Object,
     notMerge: Boolean
   }, {
     debounceTime: 300,
     options: () => ({}),
-    notMerge: !0
+    notMerge: true
   }),
-  setup(e, { expose: s }) {
-    const c = f("commonChart"), o = h();
-    C(
-      c,
-      O(() => {
-        var t;
-        (t = o.value) == null || t.resize();
-      }, e.debounceTime)
+  setup(__props, { expose: __expose }) {
+    const commonChartRef = useTemplateRef("commonChart");
+    const chartInstance = shallowRef();
+    useResizeObserver(
+      commonChartRef,
+      debounce(() => {
+        var _a;
+        (_a = chartInstance.value) == null ? void 0 : _a.resize();
+      }, __props.debounceTime)
     );
-    function m() {
-      o.value = M(c.value, e.options);
+    function initChartInstance() {
+      chartInstance.value = init(commonChartRef.value, __props.options);
     }
-    d(() => {
-      m(), n(e.options, e.notMerge);
+    onMounted(() => {
+      initChartInstance();
+      setOptions(__props.options, __props.notMerge);
     });
-    function n(t, r, i) {
-      var a;
-      (a = o.value) == null || a.setOption(t, r, i);
+    function setOptions(options, deep, lazyUpdate) {
+      var _a;
+      (_a = chartInstance.value) == null ? void 0 : _a.setOption(options, deep, lazyUpdate);
     }
-    return p(
+    watchEffect(
       () => {
-        n(e.options, e.notMerge);
+        setOptions(__props.options, __props.notMerge);
       },
       {
         flush: "post"
       }
-    ), s({
+    );
+    __expose({
       get chartInstance() {
-        return o.value;
+        return chartInstance.value;
       },
-      setOptions: n
-    }), (t, r) => (b(), v("div", R, [
-      g(
-        "div",
-        T,
-        null,
-        512
-        /* NEED_PATCH */
-      )
-    ]));
+      setOptions
+    });
+    return (_ctx, _cache) => {
+      return openBlock(), createElementBlock("div", _hoisted_1, [
+        createElementVNode(
+          "div",
+          _hoisted_2,
+          null,
+          512
+          /* NEED_PATCH */
+        )
+      ]);
+    };
   }
 });
 export {
-  I as default
+  _sfc_main as default
 };

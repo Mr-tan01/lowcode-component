@@ -1,4 +1,4 @@
-import { default as a } from "./select.js";
+import { default as default2 } from "./select.js";
 export {
-  a as LcSelect
+  default2 as LcSelect
 };

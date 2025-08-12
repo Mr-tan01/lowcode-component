@@ -1,2 +1,4 @@
-import { default as a } from './bgCommon.js'
-export { a as LcBgCommon }
+import { default as default2 } from "./bgCommon.js";
+export {
+  default2 as LcBgCommon
+};

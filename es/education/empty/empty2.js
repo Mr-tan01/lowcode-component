@@ -1,54 +1,36 @@
-import {
-    defineComponent as o,
-    openBlock as r,
-    createElementBlock as p,
-    createVNode as i,
-    unref as s,
-    mergeProps as m,
-    withCtx as n,
-    createElementVNode as c,
-} from 'vue'
-import l from './empty_image.svg.js'
-import { NEmpty as a } from 'naive-ui/es/empty'
-const d = { class: 'lc-empty' },
-    g = /* @__PURE__ */ o({
-        __name: 'empty',
-        props: {
-            description: { default: '暂无数据' },
-        },
-        setup(_) {
-            return (e, t) => (
-                r(),
-                p('div', d, [
-                    i(
-                        s(a),
-                        m(e.$attrs, { description: e.description }),
-                        {
-                            icon: n(
-                                () =>
-                                    t[0] ||
-                                    (t[0] = [
-                                        c(
-                                            'img',
-                                            {
-                                                class: 'lc-empty__iamge',
-                                                src: l,
-                                                alt: '',
-                                            },
-                                            null,
-                                            -1,
-                                            /* HOISTED */
-                                        ),
-                                    ]),
-                            ),
-                            _: 1,
-                            /* STABLE */
-                        },
-                        16,
-                        ['description'],
-                    ),
-                ])
+import { defineComponent, openBlock, createElementBlock, createVNode, unref, mergeProps, withCtx, createElementVNode } from "vue";
+import _imports_0 from "./empty_image.svg.js";
+import { NEmpty } from "naive-ui/es/empty";
+const _hoisted_1 = { class: "lc-empty" };
+const _sfc_main = /* @__PURE__ */ defineComponent({
+  __name: "empty",
+  props: {
+    description: { default: "暂无数据" }
+  },
+  setup(__props) {
+    return (_ctx, _cache) => {
+      return openBlock(), createElementBlock("div", _hoisted_1, [
+        createVNode(unref(NEmpty), mergeProps(_ctx.$attrs, { description: _ctx.description }), {
+          icon: withCtx(() => _cache[0] || (_cache[0] = [
+            createElementVNode(
+              "img",
+              {
+                class: "lc-empty__iamge",
+                src: _imports_0,
+                alt: ""
+              },
+              null,
+              -1
+              /* HOISTED */
             )
-        },
-    })
-export { g as default }
+          ])),
+          _: 1
+          /* STABLE */
+        }, 16, ["description"])
+      ]);
+    };
+  }
+});
+export {
+  _sfc_main as default
+};

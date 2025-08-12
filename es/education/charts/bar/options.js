@@ -1,15 +1,16 @@
-import e from "lodash-es/merge";
-import { mergeLineRecord as c } from "../line/options.js";
-import { tooltipOptions as s, legendOptions as d, gridOptions as y, xAxisOptions as m, yAxisOptions as u, barColors as g } from "./const.js";
-import { deepMergeArrayOptions as b } from "@mmj-code-lib/lowcode/es/components";
-const p = {
-  tooltip: s,
-  legend: d,
-  grid: y,
-  xAxis: m,
-  yAxis: u,
-  color: g
-}, f = {
+import merge from "lodash-es/merge";
+import { mergeLineRecord } from "../line/options.js";
+import { tooltipOptions, legendOptions, gridOptions, xAxisOptions, yAxisOptions, barColors } from "./const.js";
+import { deepMergeArrayOptions } from "@mmj-code-lib/lowcode/es/components";
+const commonBarOptions = {
+  tooltip: tooltipOptions,
+  legend: legendOptions,
+  grid: gridOptions,
+  xAxis: xAxisOptions,
+  yAxis: yAxisOptions,
+  color: barColors
+};
+const defHorizontalBarOptions = {
   grid: {
     top: 40,
     right: 80,
@@ -27,7 +28,7 @@ const p = {
       lineHeight: 20
     },
     splitLine: {
-      show: !0,
+      show: true,
       lineStyle: {
         color: "rgba(255, 255, 255, 0.2)",
         type: "dotted"
@@ -36,12 +37,12 @@ const p = {
   },
   yAxis: {
     type: "category",
-    boundaryGap: !0,
+    boundaryGap: true,
     splitLine: {
-      show: !1
+      show: false
     },
     axisTick: {
-      show: !1
+      show: false
     },
     axisLine: {
       lineStyle: {
@@ -49,9 +50,11 @@ const p = {
       }
     }
   }
-}, h = e({}, p, f), a = {
+};
+const horizontalBarOptions = merge({}, commonBarOptions, defHorizontalBarOptions);
+const commonBarSeries = {
   barWidth: 20,
-  showBackground: !0,
+  showBackground: true,
   z: 1,
   // 混合情况在折线图下方
   itemStyle: {
@@ -68,7 +71,8 @@ const p = {
   markPoint: {
     symbolSize: [20, 10]
   }
-}, i = e({}, a, {
+};
+const smallBarSeries = merge({}, commonBarSeries, {
   barWidth: 12,
   backgroundStyle: {
     borderWidth: 12,
@@ -79,21 +83,38 @@ const p = {
   },
   z: 1
 });
-function A(o, t) {
-  const r = t.isHorizontal ? h : p;
-  return b(o, Object.keys(r), Object.values(r)), e({}, r, o);
+function useCommonBarOptions(opts, props) {
+  const dynaicOptions = props.isHorizontal ? horizontalBarOptions : commonBarOptions;
+  deepMergeArrayOptions(opts, Object.keys(dynaicOptions), Object.values(dynaicOptions));
+  return merge({}, dynaicOptions, opts);
 }
-function l(o, t, r) {
-  return t.type === "bar" || !t.type ? e({}, o, t) : t.type === "line" ? c(r, t) : t;
+function mergeSeriesRecord(series1, series2, index) {
+  if (series2.type === "bar" || !series2.type) {
+    return merge({}, series1, series2);
+  } else if (series2.type === "line") {
+    return mergeLineRecord(index, series2);
+  }
+  return series2;
 }
-function B(o, t) {
-  return Array.isArray(o) ? o.length > 1 ? (t.stack ? i.backgroundStyle.opacity = 1 / o.length : i.backgroundStyle.opacity = 1, o.map((r, n) => l(i, r, n))) : o.map((r, n) => l(a, r, n)) : e({}, a, o);
+function useCommonBarSeries(series, props) {
+  if (Array.isArray(series)) {
+    if (series.length > 1) {
+      if (props.stack) {
+        smallBarSeries.backgroundStyle.opacity = 1 / series.length;
+      } else {
+        smallBarSeries.backgroundStyle.opacity = 1;
+      }
+      return series.map((item, index) => mergeSeriesRecord(smallBarSeries, item, index));
+    }
+    return series.map((item, index) => mergeSeriesRecord(commonBarSeries, item, index));
+  }
+  return merge({}, commonBarSeries, series);
 }
 export {
-  p as commonBarOptions,
-  a as commonBarSeries,
-  h as horizontalBarOptions,
-  i as smallBarSeries,
-  A as useCommonBarOptions,
-  B as useCommonBarSeries
+  commonBarOptions,
+  commonBarSeries,
+  horizontalBarOptions,
+  smallBarSeries,
+  useCommonBarOptions,
+  useCommonBarSeries
 };

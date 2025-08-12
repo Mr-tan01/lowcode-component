@@ -1,12 +1,13 @@
-const t = [
+const funnelColors = [
   "rgba(15, 251, 248, 1)",
   "rgba(225, 188, 75, 1)",
   "rgba(34, 118, 252, 1)",
   "rgba(166, 207, 255, 1)",
   "rgba(119, 73, 255, 1)"
-], o = {
+];
+const yAxisOptions = {
   nameLocation: "end",
-  show: !1,
+  show: false,
   nameTextStyle: {
     padding: [0, 20, 0, 0],
     color: "#fff",
@@ -24,14 +25,17 @@ const t = [
     fontSize: 14,
     lineHeight: 20,
     margin: 13,
-    formatter: (e) => e
+    formatter: (value) => {
+      return value;
+    }
   },
   axisLine: {
     lineStyle: {
       color: "rgba(255, 255, 255, 0.2)"
     }
   }
-}, i = {
+};
+const tooltipOptions = {
   backgroundColor: "rgba(0, 32, 61, 1)",
   borderColor: "rgba(15, 251, 248, 1)",
   textStyle: {
@@ -41,9 +45,10 @@ const t = [
   },
   trigger: "item",
   formatter: "{a} <br/>{b} : {c}%"
-}, n = [
+};
+const legendOptions = [
   {
-    show: !0,
+    show: true,
     top: "bottom",
     left: "center",
     textStyle: {
@@ -69,8 +74,8 @@ const t = [
     orient: "vertical",
     icon: "none",
     type: "scroll",
-    formatter(e) {
-      return e;
+    formatter(name) {
+      return name;
     },
     padding: [0, 0, 0, 10],
     textStyle: {
@@ -80,15 +85,17 @@ const t = [
       padding: [0, 0, 0, 0]
     }
   }
-], r = {
+];
+const gridOptions = {
   top: 50,
   bottom: 40
-}, l = {
+};
+const xAxisOptions = {
   type: "category",
-  show: !1,
-  boundaryGap: !0,
+  show: false,
+  boundaryGap: true,
   splitLine: {
-    show: !0,
+    show: true,
     lineStyle: {
       color: "rgba(255, 255, 255, 0.2)",
       type: "dotted",
@@ -96,7 +103,7 @@ const t = [
     }
   },
   axisTick: {
-    show: !1
+    show: false
   },
   axisLine: {
     lineStyle: {
@@ -108,7 +115,8 @@ const t = [
     fontSize: 14,
     lineHeight: 20
   }
-}, a = {
+};
+const commonScatterSeries = {
   type: "funnel",
   name: "Funnel",
   left: "10%",
@@ -122,7 +130,7 @@ const t = [
   sort: "descending",
   gap: 2,
   label: {
-    show: !0,
+    show: true,
     position: "inside",
     color: "#fff",
     fontSize: 12,
@@ -147,11 +155,11 @@ const t = [
   }
 };
 export {
-  a as commonScatterSeries,
-  t as funnelColors,
-  r as gridOptions,
-  n as legendOptions,
-  i as tooltipOptions,
-  l as xAxisOptions,
-  o as yAxisOptions
+  commonScatterSeries,
+  funnelColors,
+  gridOptions,
+  legendOptions,
+  tooltipOptions,
+  xAxisOptions,
+  yAxisOptions
 };

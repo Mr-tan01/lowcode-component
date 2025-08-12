@@ -1,7 +1,7 @@
-import o from "./gaugeSvg2.js";
+import _sfc_main from "./gaugeSvg2.js";
 import '../assets/gauge/gaugeSvg.css';/* empty css          */
-import a from "../_virtual/_plugin-vue_export-helper.js";
-const m = /* @__PURE__ */ a(o, [["__scopeId", "data-v-9ea79a48"]]);
+import _export_sfc from "../_virtual/_plugin-vue_export-helper.js";
+const gaugeSvg = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-9ea79a48"]]);
 export {
-  m as default
+  gaugeSvg as default
 };

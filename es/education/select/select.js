@@ -1,7 +1,7 @@
-import o from "./select2.js";
+import _sfc_main from "./select2.js";
 import './assets/select.css';/* empty css        */
-import t from "./_virtual/_plugin-vue_export-helper.js";
-const m = /* @__PURE__ */ t(o, [["__scopeId", "data-v-246c3606"]]);
+import _export_sfc from "./_virtual/_plugin-vue_export-helper.js";
+const select = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-f1852500"]]);
 export {
-  m as default
+  select as default
 };

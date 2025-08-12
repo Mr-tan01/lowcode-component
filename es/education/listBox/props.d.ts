@@ -1,21 +1,21 @@
-import { CSSProperties } from 'vue'
+import { CSSProperties } from 'vue';
 export interface ColumnStyle extends CSSProperties {
-    backgroundColor?: string
+    backgroundColor?: string;
 }
 export type RowData = {
-    [key: string]: any
-}
+    [key: string]: any;
+};
 export type DataListProps = {
-    rows: RowData[]
+    rows: RowData[];
     rowStyle?: {
-        even?: ColumnStyle
-        odd?: ColumnStyle
-    }
-    bordered?: boolean
-    keyStyle?: ColumnStyle
-    valueStyle?: ColumnStyle
-    cellPadding?: string
-    defaultAlign?: 'left' | 'center' | 'right'
-    gap?: number
-    cols?: number
-}
+        even?: ColumnStyle;
+        odd?: ColumnStyle;
+    };
+    bordered?: boolean;
+    keyStyle?: ColumnStyle;
+    valueStyle?: ColumnStyle;
+    cellPadding?: string;
+    defaultAlign?: 'left' | 'center' | 'right';
+    gap?: number;
+    cols?: number;
+};

@@ -1,40 +1,34 @@
-import {
-    defineComponent as u,
-    useModel as d,
-    computed as l,
-    provide as a,
-    openBlock as n,
-    createElementBlock as s,
-    createElementVNode as i,
-    renderSlot as c,
-} from 'vue'
-import { radioButtonGroupProvideKey as p } from './const.js'
-const m = { class: 'lc-radio-button-group' },
-    _ = { class: 'lc-radio-button-group__wrapper' },
-    b = /* @__PURE__ */ u({
-        __name: 'radio-button-group',
-        props: {
-            modelValue: { default: '' },
-            modelModifiers: {},
-        },
-        emits: ['update:modelValue'],
-        setup(t) {
-            const o = d(t, 'modelValue'),
-                r = l(() => ({
-                    value: o.value,
-                    change(e) {
-                        o.value = e
-                    },
-                }))
-            return (
-                a(p, r),
-                (e, f) => (
-                    n(),
-                    s('div', m, [
-                        i('div', _, [c(e.$slots, 'default', {}, void 0, !0)]),
-                    ])
-                )
-            )
-        },
-    })
-export { b as default }
+import { defineComponent, useModel, computed, provide, openBlock, createElementBlock, createElementVNode, renderSlot } from "vue";
+import { radioButtonGroupProvideKey } from "./const.js";
+const _hoisted_1 = { class: "lc-radio-button-group" };
+const _hoisted_2 = { class: "lc-radio-button-group__wrapper" };
+const _sfc_main = /* @__PURE__ */ defineComponent({
+  __name: "radio-button-group",
+  props: {
+    "modelValue": { default: "" },
+    "modelModifiers": {}
+  },
+  emits: ["update:modelValue"],
+  setup(__props) {
+    const vmodelValue = useModel(__props, "modelValue");
+    const buttonGroupProvide = computed(() => {
+      return {
+        value: vmodelValue.value,
+        change(_value) {
+          vmodelValue.value = _value;
+        }
+      };
+    });
+    provide(radioButtonGroupProvideKey, buttonGroupProvide);
+    return (_ctx, _cache) => {
+      return openBlock(), createElementBlock("div", _hoisted_1, [
+        createElementVNode("div", _hoisted_2, [
+          renderSlot(_ctx.$slots, "default", {}, void 0, true)
+        ])
+      ]);
+    };
+  }
+});
+export {
+  _sfc_main as default
+};

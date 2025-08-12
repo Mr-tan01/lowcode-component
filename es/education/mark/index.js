@@ -1,2 +1,4 @@
-import { default as e } from './mark.js'
-export { e as LcMark }
+import { default as default2 } from "./mark.js";
+export {
+  default2 as LcMark
+};

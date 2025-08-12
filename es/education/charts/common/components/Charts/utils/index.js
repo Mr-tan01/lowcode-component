@@ -1,14 +1,18 @@
-import { useTemplateRef as s, watchEffect as c } from "vue";
-function a(r) {
-  const t = s(r), e = {};
-  return c(() => {
-    for (const o in e)
-      Reflect.deleteProperty(e, o);
-    const n = t.value ?? {};
-    for (const o in n)
-      e[o] = n[o];
-  }), { exposes: e, baseChartRef: t };
+import { useTemplateRef, watchEffect } from "vue";
+function useCommonChartExpose(key) {
+  const baseChartRef = useTemplateRef(key);
+  const exposes = {};
+  watchEffect(() => {
+    for (const key2 in exposes) {
+      Reflect.deleteProperty(exposes, key2);
+    }
+    const obj = baseChartRef.value ?? {};
+    for (const key2 in obj) {
+      exposes[key2] = obj[key2];
+    }
+  });
+  return { exposes, baseChartRef };
 }
 export {
-  a as useCommonChartExpose
+  useCommonChartExpose
 };

@@ -1,94 +1,146 @@
-var L = Object.defineProperty;
-var E = (n, t, e) => t in n ? L(n, t, { enumerable: !0, configurable: !0, writable: !0, value: e }) : n[t] = e;
-var r = (n, t, e) => E(n, typeof t != "symbol" ? t + "" : t, e);
-import { ref as g } from "vue";
-import * as c from "echarts";
-import { Cartesian3 as h, Math as w, EllipsoidTerrainProvider as O, ScreenSpaceEventHandler as M, ScreenSpaceEventType as p, Color as x, SingleTileImageryProvider as S, SceneMode as G } from "@cesium/engine";
-import { Viewer as P } from "@cesium/widgets";
-const k = (n) => new Promise((t, e) => {
-  const a = new Image();
-  a.onload = () => t(!0), a.onerror = () => e(!1), a.src = n;
-}), U = (n) => {
-  const t = g(!1), e = g(null);
-  let a = null, s = null;
-  const o = () => {
-    e.value && !a && n.defaultRotate && (a = e.value.clock.onTick.addEventListener(() => {
-      var l;
-      (l = e.value) == null || l.camera.rotate(h.UNIT_Z, w.toRadians(n.rotateSpeed));
-    }));
-  }, i = () => {
-    a && (a(), a = null);
+var __defProp = Object.defineProperty;
+var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+var __publicField = (obj, key, value) => __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
+import { ref } from "vue";
+import * as echarts from "echarts";
+import { Cartesian3, Math as Math2, EllipsoidTerrainProvider, ScreenSpaceEventHandler, ScreenSpaceEventType, Color, SingleTileImageryProvider, SceneMode } from "@cesium/engine";
+import { Viewer } from "@cesium/widgets";
+const checkImageLoaded = (url) => {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    img.onload = () => resolve(true);
+    img.onerror = () => reject(false);
+    img.src = url;
+  });
+};
+const useInitPlanet = (props) => {
+  const imageLoading = ref(false);
+  const viewer = ref(null);
+  let rotateHandler = null;
+  let handler = null;
+  const startRotation = () => {
+    if (viewer.value && !rotateHandler && props.defaultRotate) {
+      rotateHandler = viewer.value.clock.onTick.addEventListener(() => {
+        var _a;
+        (_a = viewer.value) == null ? void 0 : _a.camera.rotate(Cartesian3.UNIT_Z, Math2.toRadians(props.rotateSpeed));
+      });
+    }
+  };
+  const stopRotation = () => {
+    if (rotateHandler) {
+      rotateHandler();
+      rotateHandler = null;
+    }
+  };
+  const initViewer = async () => {
+    viewer.value = new Viewer("cesium3D-box", {
+      animation: false,
+      // 是否创建动画小器件，左下角仪表
+      baseLayerPicker: false,
+      // 是否显示图层选择器，右上角图层选择按钮
+      fullscreenButton: false,
+      // 是否显示全屏按钮，右下角全屏选择按钮
+      timeline: false,
+      // 是否显示时间轴
+      infoBox: false,
+      // 是否显示信息框
+      navigationHelpButton: false,
+      // 是否显示右上角的导航帮助按钮
+      sceneModePicker: false,
+      // 是否显示右上角的场景模式切换按钮
+      homeButton: false,
+      // 隐藏Home按钮
+      geocoder: false,
+      // 隐藏搜索框
+      scene3DOnly: true,
+      // @ts-ignore
+      imageryProvider: false,
+      terrainProvider: new EllipsoidTerrainProvider(),
+      // 添加WebGL上下文配置
+      contextOptions: {
+        webgl: {
+          alpha: true,
+          // 启用alpha通道
+          preserveDrawingBuffer: true
+          // 保留绘图缓冲区
+        }
+      },
+      ...props.cesiumOptions
+    });
+    const scene = viewer.value.scene;
+    handler = new ScreenSpaceEventHandler(scene.canvas);
+    handler.setInputAction((movement) => {
+      var _a, _b;
+      const ray = (_a = viewer.value) == null ? void 0 : _a.camera.getPickRay(movement.endPosition);
+      const globe = (_b = viewer.value) == null ? void 0 : _b.scene.globe;
+      let isOnGlobe = false;
+      if (ray && globe) {
+        const cartesian = globe.pick(ray, scene);
+        isOnGlobe = !!cartesian;
+      }
+      if (isOnGlobe) {
+        stopRotation();
+      } else if (props.defaultRotate && !rotateHandler) {
+        startRotation();
+      }
+    }, ScreenSpaceEventType.MOUSE_MOVE);
+    viewer.value.scene.screenSpaceCameraController.minimumZoomDistance = 10;
+    viewer.value.scene.screenSpaceCameraController.maximumZoomDistance = 5e7;
+    viewer.value.scene.skyBox.show = false;
+    viewer.value.scene.sun.show = false;
+    viewer.value.scene.moon.show = false;
+    viewer.value.scene.skyAtmosphere.show = false;
+    viewer.value.scene.globe.showGroundAtmosphere = true;
+    viewer.value.scene.globe.atmosphereBrightnessShift = -1;
+    viewer.value.scene.backgroundColor = Color.TRANSPARENT;
+    const imagelayer = new SingleTileImageryProvider({
+      url: props.baseUrl,
+      tileWidth: 256,
+      tileHeight: 256
+    });
+    viewer.value.imageryLayers.addImageryProvider(imagelayer);
+    viewer.value.cesiumWidget.creditContainer.style.display = "none";
+    viewer.value.cesiumWidget.screenSpaceEventHandler.removeInputAction(ScreenSpaceEventType.LEFT_DOUBLE_CLICK);
+    viewer.value.camera.flyTo({ destination: props.centerPosition });
+    imageLoading.value = await checkImageLoaded(props.baseUrl);
+  };
+  const destroyViewer = () => {
+    if (viewer.value) {
+      if (rotateHandler) {
+        rotateHandler();
+        rotateHandler = null;
+      }
+      if (handler) {
+        handler.destroy();
+        handler = null;
+      }
+      viewer.value.destroy();
+      viewer.value = null;
+    }
   };
   return {
-    destroyViewer: () => {
-      e.value && (a && (a(), a = null), s && (s.destroy(), s = null), e.value.destroy(), e.value = null);
-    },
-    initViewer: async () => {
-      e.value = new P("cesium3D-box", {
-        animation: !1,
-        // 是否创建动画小器件，左下角仪表
-        baseLayerPicker: !1,
-        // 是否显示图层选择器，右上角图层选择按钮
-        fullscreenButton: !1,
-        // 是否显示全屏按钮，右下角全屏选择按钮
-        timeline: !1,
-        // 是否显示时间轴
-        infoBox: !1,
-        // 是否显示信息框
-        navigationHelpButton: !1,
-        // 是否显示右上角的导航帮助按钮
-        sceneModePicker: !1,
-        // 是否显示右上角的场景模式切换按钮
-        homeButton: !1,
-        // 隐藏Home按钮
-        geocoder: !1,
-        // 隐藏搜索框
-        scene3DOnly: !0,
-        // @ts-ignore
-        imageryProvider: !1,
-        terrainProvider: new O(),
-        // 添加WebGL上下文配置
-        contextOptions: {
-          webgl: {
-            alpha: !0,
-            // 启用alpha通道
-            preserveDrawingBuffer: !0
-            // 保留绘图缓冲区
-          }
-        },
-        ...n.cesiumOptions
-      });
-      const l = e.value.scene;
-      s = new M(l.canvas), s.setInputAction((b) => {
-        var y, _;
-        const m = (y = e.value) == null ? void 0 : y.camera.getPickRay(b.endPosition), f = (_ = e.value) == null ? void 0 : _.scene.globe;
-        let v = !1;
-        m && f && (v = !!f.pick(m, l)), v ? i() : n.defaultRotate && !a && o();
-      }, p.MOUSE_MOVE), e.value.scene.screenSpaceCameraController.minimumZoomDistance = 10, e.value.scene.screenSpaceCameraController.maximumZoomDistance = 5e7, e.value.scene.skyBox.show = !1, e.value.scene.sun.show = !1, e.value.scene.moon.show = !1, e.value.scene.skyAtmosphere.show = !1, e.value.scene.globe.showGroundAtmosphere = !0, e.value.scene.globe.atmosphereBrightnessShift = -1, e.value.scene.backgroundColor = x.TRANSPARENT;
-      const C = new S({
-        url: n.baseUrl,
-        tileWidth: 256,
-        tileHeight: 256
-      });
-      e.value.imageryLayers.addImageryProvider(C), e.value.cesiumWidget.creditContainer.style.display = "none", e.value.cesiumWidget.screenSpaceEventHandler.removeInputAction(p.LEFT_DOUBLE_CLICK), e.value.camera.flyTo({ destination: n.centerPosition }), t.value = await k(n.baseUrl);
-    },
-    startRotation: o,
-    stopRotation: i,
-    viewer: e,
-    imageLoading: t
+    destroyViewer,
+    initViewer,
+    startRotation,
+    stopRotation,
+    viewer,
+    imageLoading
   };
-}, u = class u {
-  constructor(t) {
-    r(this, "_GLMap");
-    r(this, "_mapOffset", [0, 0]);
-    this._GLMap = t, this._mapOffset = [0, 0], this.dimensions = ["lng", "lat"];
+};
+const _RegisterCoordinateSystem = class _RegisterCoordinateSystem {
+  constructor(glMap) {
+    __publicField(this, "_GLMap");
+    __publicField(this, "_mapOffset", [0, 0]);
+    this._GLMap = glMap;
+    this._mapOffset = [0, 0];
+    this.dimensions = ["lng", "lat"];
   }
   /**
    * 设置地图偏移量
    * @param mapOffset 偏移量数组[x, y]
    */
-  setMapOffset(t) {
-    this._mapOffset = t;
+  setMapOffset(mapOffset) {
+    this._mapOffset = mapOffset;
   }
   /**
    * 获取地图实例
@@ -102,21 +154,25 @@ const k = (n) => new Promise((t, e) => {
    * @param lat 纬度值
    * @returns 修正后的纬度值
    */
-  fixLat(t) {
-    return t >= 90 ? 89.99999999999999 : t <= -90 ? -89.99999999999999 : t;
+  fixLat(lat) {
+    return lat >= 90 ? 89.99999999999999 : lat <= -90 ? -89.99999999999999 : lat;
   }
   /**
    * 将地理坐标转换为屏幕像素坐标
    * @param coords 地理坐标数组[lng, lat]
    * @returns 屏幕像素坐标数组[x, y]
    */
-  dataToPoint(t) {
-    const e = [99999, 99999];
-    t[1] = this.fixLat(t[1]);
-    const a = h.fromDegrees(t[0], t[1]);
-    if (!a) return e;
-    const s = this._GLMap.cartesianToCanvasCoordinates(a);
-    return s ? this._GLMap.mode === G.SCENE3D && h.angleBetween(this._GLMap.camera.position, a) > w.toRadians(75) ? [] : [s.x - this._mapOffset[0], s.y - this._mapOffset[1]] : e;
+  dataToPoint(coords) {
+    const lonlat = [99999, 99999];
+    coords[1] = this.fixLat(coords[1]);
+    const position = Cartesian3.fromDegrees(coords[0], coords[1]);
+    if (!position) return lonlat;
+    const coordinates = this._GLMap.cartesianToCanvasCoordinates(position);
+    if (!coordinates) return lonlat;
+    if (this._GLMap.mode === SceneMode.SCENE3D) {
+      if (Cartesian3.angleBetween(this._GLMap.camera.position, position) > Math2.toRadians(75)) return [];
+    }
+    return [coordinates.x - this._mapOffset[0], coordinates.y - this._mapOffset[1]];
   }
   /**
    * 静态方法，创建并注册坐标系统
@@ -124,115 +180,162 @@ const k = (n) => new Promise((t, e) => {
    * @param api ECharts API
    * @returns 空数组
    */
-  static create(t, e) {
-    let a;
-    return t.eachComponent("GLMap", function(s) {
-      if (e.getZr().painter) {
-        const i = window.glMap;
-        a = new u(i), a.setMapOffset(s.__mapOffset || [0, 0]), s.coordinateSystem = a;
+  static create(echartModel, api) {
+    let registerCoordinateSystem;
+    echartModel.eachComponent("GLMap", function(seriesModel) {
+      const painter = api.getZr().painter;
+      if (painter) {
+        const glMap = window.glMap;
+        registerCoordinateSystem = new _RegisterCoordinateSystem(glMap);
+        registerCoordinateSystem.setMapOffset(seriesModel.__mapOffset || [0, 0]);
+        seriesModel.coordinateSystem = registerCoordinateSystem;
       }
-    }), t.eachSeries(function(s) {
-      s.get("coordinateSystem") === "GLMap" && (s.coordinateSystem = a);
-    }), [];
+    });
+    echartModel.eachSeries(function(series) {
+      if ("GLMap" === series.get("coordinateSystem")) {
+        series.coordinateSystem = registerCoordinateSystem;
+      }
+    });
+    return [];
   }
 };
-r(u, "dimensions", ["lng", "lat"]);
-let d = u;
-const R = (n, t) => {
-  const e = new MouseEvent("mousedown", {
-    bubbles: !0,
-    cancelable: !0
-  }), a = new MouseEvent("mouseup", {
-    bubbles: !0,
-    cancelable: !0
-  }), s = new MouseEvent("click", {
-    bubbles: !0,
-    cancelable: !0
+__publicField(_RegisterCoordinateSystem, "dimensions", ["lng", "lat"]);
+let RegisterCoordinateSystem = _RegisterCoordinateSystem;
+const mockClickChart = (event2, chart) => {
+  const evmousedown = new MouseEvent("mousedown", {
+    bubbles: true,
+    cancelable: true
   });
-  for (const i in n)
+  const evmouseup = new MouseEvent("mouseup", {
+    bubbles: true,
+    cancelable: true
+  });
+  const evmouseclick = new MouseEvent("click", {
+    bubbles: true,
+    cancelable: true
+  });
+  for (const key in event2) {
     try {
-      Object.defineProperty(e, i, { value: n[i] }), Object.defineProperty(a, i, { value: n[i] }), Object.defineProperty(s, i, { value: n[i] });
+      Object.defineProperty(evmousedown, key, { value: event2[key] });
+      Object.defineProperty(evmouseup, key, { value: event2[key] });
+      Object.defineProperty(evmouseclick, key, { value: event2[key] });
     } catch {
     }
-  const o = t._dom.firstElementChild;
-  o.dispatchEvent(e), o.dispatchEvent(a), o.dispatchEvent(s);
+  }
+  const container = chart._dom.firstElementChild;
+  container.dispatchEvent(evmousedown);
+  container.dispatchEvent(evmouseup);
+  container.dispatchEvent(evmouseclick);
 };
-class N {
-  constructor(t, e) {
-    r(this, "_map");
-    r(this, "_overlay");
-    r(this, "_echartsContainer", null);
-    r(this, "_isRegistered", !1);
-    var a;
-    this._map = t, this._overlay = this._createChartOverlay(), e && this._registerMap(), (a = this._overlay) == null || a.setOption(e || {});
+class EchartsLayer {
+  constructor(map, options) {
+    __publicField(this, "_map");
+    __publicField(this, "_overlay");
+    __publicField(this, "_echartsContainer", null);
+    __publicField(this, "_isRegistered", false);
+    var _a;
+    this._map = map;
+    this._overlay = this._createChartOverlay();
+    if (options) this._registerMap();
+    (_a = this._overlay) == null ? void 0 : _a.setOption(options || {});
   }
   /**
    * 注册地图到ECharts坐标系统
    */
   _registerMap() {
-    this._isRegistered || (c.registerCoordinateSystem("GLMap", d), c.registerAction(
-      {
-        type: "GLMapRoam",
-        event: "GLMapRoam",
-        update: "updateLayout"
-      },
-      function() {
-      }
-    ), c.extendComponentModel({
-      type: "GLMap",
-      getBMap() {
-        return this.__GLMap;
-      },
-      defaultOption: { roam: !1 }
-    }), c.extendComponentView({
-      type: "GLMap",
-      init(t, e) {
-        this.api = e, window.glMap.postRender.addEventListener(this.moveHandler, this);
-      },
-      moveHandler() {
-        this.api.dispatchAction({ type: "GLMapRoam" });
-      },
-      dispose() {
-        window.glMap.postRender.removeEventListener(this.moveHandler, this);
-      }
-    }), this._isRegistered = !0);
+    if (!this._isRegistered) {
+      echarts.registerCoordinateSystem("GLMap", RegisterCoordinateSystem);
+      echarts.registerAction(
+        {
+          type: "GLMapRoam",
+          event: "GLMapRoam",
+          update: "updateLayout"
+        },
+        function() {
+        }
+      );
+      echarts.extendComponentModel({
+        type: "GLMap",
+        getBMap() {
+          return this.__GLMap;
+        },
+        defaultOption: { roam: false }
+      });
+      echarts.extendComponentView({
+        type: "GLMap",
+        init(_, e) {
+          this.api = e;
+          window.glMap.postRender.addEventListener(this.moveHandler, this);
+        },
+        moveHandler() {
+          this.api.dispatchAction({ type: "GLMapRoam" });
+        },
+        dispose() {
+          window.glMap.postRender.removeEventListener(this.moveHandler, this);
+        }
+      });
+      this._isRegistered = true;
+    }
   }
   /**
    * 创建图表覆盖层
    * @returns 初始化的ECharts实例
    */
   _createChartOverlay() {
-    const t = this._map.scene;
-    t.canvas.setAttribute("tabIndex", "0");
-    const e = document.createElement("div");
-    e.style.position = "absolute", e.style.top = "0px", e.style.left = "0px", e.style.width = t.canvas.width + "px", e.style.height = t.canvas.height + "px", e.style.pointerEvents = "none", e.setAttribute("id", "echarts"), e.setAttribute("class", "echartMap"), this._map.container.appendChild(e), this._echartsContainer = e, window.glMap = t;
-    const a = c.init(e);
-    return new M(t.canvas).setInputAction(() => R(event, a), p.LEFT_CLICK), a;
+    const scene = this._map.scene;
+    scene.canvas.setAttribute("tabIndex", "0");
+    const ele = document.createElement("div");
+    ele.style.position = "absolute";
+    ele.style.top = "0px";
+    ele.style.left = "0px";
+    ele.style.width = scene.canvas.width + "px";
+    ele.style.height = scene.canvas.height + "px";
+    ele.style.pointerEvents = "none";
+    ele.setAttribute("id", "echarts");
+    ele.setAttribute("class", "echartMap");
+    this._map.container.appendChild(ele);
+    this._echartsContainer = ele;
+    window.glMap = scene;
+    const chart = echarts.init(ele);
+    const handler = new ScreenSpaceEventHandler(scene.canvas);
+    handler.setInputAction(() => mockClickChart(event, chart), ScreenSpaceEventType.LEFT_CLICK);
+    return chart;
   }
   /**
    * 销毁图层，清理资源
    */
   dispose() {
-    this._echartsContainer && (this._map.container.removeChild(this._echartsContainer), this._echartsContainer = null), this._overlay && (this._overlay.dispose(), this._overlay = null);
+    if (this._echartsContainer) {
+      this._map.container.removeChild(this._echartsContainer);
+      this._echartsContainer = null;
+    }
+    if (this._overlay) {
+      this._overlay.dispose();
+      this._overlay = null;
+    }
   }
   /**
    * 更新图表配置
    * @param t 新的ECharts配置选项
    */
   updateOverlay(t) {
-    this._overlay && this._overlay.setOption(t);
+    if (this._overlay) {
+      this._overlay.setOption(t);
+    }
   }
   /**
    * 调整图表大小以适应地图容器
    */
   resize() {
     if (!this._echartsContainer || !this._overlay) return;
-    const t = this._map.container;
-    this._echartsContainer.style.width = `${t.clientWidth}px`, this._echartsContainer.style.height = `${t.clientHeight}px`, this._overlay.resize();
+    const container = this._map.container;
+    this._echartsContainer.style.width = `${container.clientWidth}px`;
+    this._echartsContainer.style.height = `${container.clientHeight}px`;
+    this._overlay.resize();
   }
 }
 export {
-  N as EchartsLayer,
-  k as checkImageLoaded,
-  U as useInitPlanet
+  EchartsLayer,
+  checkImageLoaded,
+  useInitPlanet
 };

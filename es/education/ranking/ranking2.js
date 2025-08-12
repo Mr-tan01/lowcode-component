@@ -1,185 +1,151 @@
-import {
-    defineComponent as g,
-    computed as p,
-    ref as w,
-    onMounted as k,
-    openBlock as i,
-    createElementBlock as o,
-    createVNode as h,
-    unref as b,
-    withCtx as x,
-    createElementVNode as t,
-    Fragment as y,
-    renderList as B,
-    normalizeClass as C,
-    normalizeStyle as V,
-    toDisplayString as s,
-    createCommentVNode as E,
-} from 'vue'
-import L from './elasticScrollbar/index.js'
-const N = { class: 'lc-ranking' },
-    P = { class: 'lc-ranking__wrapper' },
-    S = { class: 'lc-ranking__wrapper__item__top' },
-    z = { class: 'lc-ranking__wrapper__item__top__start' },
-    F = { class: 'lc-ranking__wrapper__item__top__start__index' },
-    I = { class: 'lc-ranking__wrapper__item__top__start__label' },
-    $ = { class: 'lc-ranking__wrapper__item__top__end' },
-    A = { class: 'lc-ranking__wrapper__item__top__end__value' },
-    D = { class: 'lc-ranking__wrapper__item__top__end__unit' },
-    M = { class: 'lc-ranking__wrapper__item__inner' },
-    T = {
-        key: 0,
-        class: 'lc-ranking__wrapper__item__inner__ball',
-    },
-    G = /* @__PURE__ */ g({
-        __name: 'ranking',
-        props: {
-            list: { default: () => [] },
-            sort: { default: 'order' },
-            animateIndex: { default: 0 },
-            type: { default: 'ranking' },
-            showBall: { type: Boolean, default: !0 },
-        },
-        setup(n) {
-            function u(e) {
-                return e.reduce((r, a) => (r += a.value), 0)
-            }
-            const _ = p(() => u(n.list)),
-                c = w(n.animateIndex)
-            function v(e) {
-                return e ? (e / _.value) * 100 * c.value : 0
-            }
-            function f(e) {
-                return (u(d.value.slice(0, e)) / _.value) * 100 * c.value
-            }
-            function m(e) {
-                if (typeof e.formatter == 'function') return e.formatter(e)
-                switch (e.formatter) {
-                    case '{b}':
-                        return ((e.value / _.value) * 100).toFixed(2)
-                    case '{a}':
-                        return e.value * _.value
-                    default:
-                        return e.value
-                }
-            }
-            const d = p(() => {
-                switch (n.sort) {
-                    case 'none':
-                        return n.list
-                    case 'order':
-                        return n.list.sort((e, r) => r.value - e.value)
-                    case 'reverse':
-                        return n.list.sort((e, r) => e.value - r.value)
-                    default:
-                        return n.list
-                }
-            })
-            return (
-                k(() => {
-                    c.value = 1
+import { defineComponent, computed, ref, onMounted, openBlock, createElementBlock, createVNode, unref, withCtx, createElementVNode, Fragment, renderList, normalizeClass, normalizeStyle, toDisplayString, createCommentVNode } from "vue";
+import LcElasticScrollbar from "./elasticScrollbar/index.js";
+const _hoisted_1 = { class: "lc-ranking" };
+const _hoisted_2 = { class: "lc-ranking__wrapper" };
+const _hoisted_3 = { class: "lc-ranking__wrapper__item__top" };
+const _hoisted_4 = { class: "lc-ranking__wrapper__item__top__start" };
+const _hoisted_5 = { class: "lc-ranking__wrapper__item__top__start__index" };
+const _hoisted_6 = { class: "lc-ranking__wrapper__item__top__start__label" };
+const _hoisted_7 = { class: "lc-ranking__wrapper__item__top__end" };
+const _hoisted_8 = { class: "lc-ranking__wrapper__item__top__end__value" };
+const _hoisted_9 = { class: "lc-ranking__wrapper__item__top__end__unit" };
+const _hoisted_10 = { class: "lc-ranking__wrapper__item__inner" };
+const _hoisted_11 = {
+  key: 0,
+  class: "lc-ranking__wrapper__item__inner__ball"
+};
+const _sfc_main = /* @__PURE__ */ defineComponent({
+  __name: "ranking",
+  props: {
+    list: {},
+    sort: { default: "order" },
+    animateIndex: { default: 0 },
+    type: { default: "ranking" },
+    showBall: { type: Boolean, default: true }
+  },
+  setup(__props) {
+    function complierTotal(data) {
+      return data.reduce((pre, cur) => pre += cur.value, 0);
+    }
+    const total = computed(() => complierTotal(__props.list));
+    const isAnimate = ref(__props.animateIndex);
+    function getCurrentProportion(value) {
+      if (!value) return 0;
+      return value / total.value * 100 * isAnimate.value;
+    }
+    function getPreProportion(i) {
+      return complierTotal(renderList$1.value.slice(0, i)) / total.value * 100 * isAnimate.value;
+    }
+    function fromValue(item) {
+      if (typeof item.formatter === "function") {
+        return item.formatter(item);
+      }
+      switch (item.formatter) {
+        case "{b}":
+          return (item.value / total.value * 100).toFixed(2);
+        case "{a}":
+          return item.value * total.value;
+        default:
+          return item.value;
+      }
+    }
+    const renderList$1 = computed(() => {
+      switch (__props.sort) {
+        case "none":
+          return __props.list;
+        case "order":
+          return __props.list.sort((a, b) => b.value - a.value);
+        case "reverse":
+          return __props.list.sort((a, b) => a.value - b.value);
+        default:
+          return __props.list;
+      }
+    });
+    onMounted(() => {
+      isAnimate.value = 1;
+    });
+    return (_ctx, _cache) => {
+      return openBlock(), createElementBlock("div", _hoisted_1, [
+        createVNode(unref(LcElasticScrollbar), null, {
+          default: withCtx(() => [
+            createElementVNode("div", _hoisted_2, [
+              (openBlock(true), createElementBlock(
+                Fragment,
+                null,
+                renderList(renderList$1.value, (item, key) => {
+                  return openBlock(), createElementBlock(
+                    "div",
+                    {
+                      key,
+                      class: normalizeClass(["lc-ranking__wrapper__item", [`lc-ranking__wrapper__item--${_ctx.type}`]]),
+                      style: normalizeStyle({
+                        "--proportion": getCurrentProportion(item.value),
+                        "--ranking-num": key,
+                        "--pre-proportion": getPreProportion(key)
+                      })
+                    },
+                    [
+                      createElementVNode("div", _hoisted_3, [
+                        createElementVNode("div", _hoisted_4, [
+                          createElementVNode(
+                            "div",
+                            _hoisted_5,
+                            toDisplayString(key + 1),
+                            1
+                            /* TEXT */
+                          ),
+                          createElementVNode(
+                            "div",
+                            _hoisted_6,
+                            toDisplayString(item.label),
+                            1
+                            /* TEXT */
+                          )
+                        ]),
+                        createElementVNode("div", _hoisted_7, [
+                          createElementVNode(
+                            "div",
+                            _hoisted_8,
+                            toDisplayString(fromValue(item)),
+                            1
+                            /* TEXT */
+                          ),
+                          createElementVNode(
+                            "div",
+                            _hoisted_9,
+                            toDisplayString(item.unit),
+                            1
+                            /* TEXT */
+                          )
+                        ])
+                      ]),
+                      createElementVNode("div", _hoisted_10, [
+                        _cache[0] || (_cache[0] = createElementVNode(
+                          "div",
+                          { class: "lc-ranking__wrapper__item__inner__bar" },
+                          null,
+                          -1
+                          /* HOISTED */
+                        )),
+                        _ctx.showBall ? (openBlock(), createElementBlock("div", _hoisted_11)) : createCommentVNode("v-if", true)
+                      ])
+                    ],
+                    6
+                    /* CLASS, STYLE */
+                  );
                 }),
-                (e, r) => (
-                    i(),
-                    o('div', N, [
-                        h(b(L), null, {
-                            default: x(() => [
-                                t('div', P, [
-                                    (i(!0),
-                                    o(
-                                        y,
-                                        null,
-                                        B(
-                                            d.value,
-                                            (a, l) => (
-                                                i(),
-                                                o(
-                                                    'div',
-                                                    {
-                                                        class: C([
-                                                            'lc-ranking__wrapper__item',
-                                                            [
-                                                                `lc-ranking__wrapper__item--${e.type}`,
-                                                            ],
-                                                        ]),
-                                                        key: l,
-                                                        style: V({
-                                                            '--proportion': v(
-                                                                a.value,
-                                                            ),
-                                                            '--ranking-num': l,
-                                                            '--pre-proportion':
-                                                                f(l),
-                                                        }),
-                                                    },
-                                                    [
-                                                        t('div', S, [
-                                                            t('div', z, [
-                                                                t(
-                                                                    'div',
-                                                                    F,
-                                                                    s(l + 1),
-                                                                    1,
-                                                                    /* TEXT */
-                                                                ),
-                                                                t(
-                                                                    'div',
-                                                                    I,
-                                                                    s(a.label),
-                                                                    1,
-                                                                    /* TEXT */
-                                                                ),
-                                                            ]),
-                                                            t('div', $, [
-                                                                t(
-                                                                    'div',
-                                                                    A,
-                                                                    s(m(a)),
-                                                                    1,
-                                                                    /* TEXT */
-                                                                ),
-                                                                t(
-                                                                    'div',
-                                                                    D,
-                                                                    s(a.unit),
-                                                                    1,
-                                                                    /* TEXT */
-                                                                ),
-                                                            ]),
-                                                        ]),
-                                                        t('div', M, [
-                                                            r[0] ||
-                                                                (r[0] = t(
-                                                                    'div',
-                                                                    {
-                                                                        class: 'lc-ranking__wrapper__item__inner__bar',
-                                                                    },
-                                                                    null,
-                                                                    -1,
-                                                                    /* HOISTED */
-                                                                )),
-                                                            e.showBall
-                                                                ? (i(),
-                                                                  o('div', T))
-                                                                : E('v-if', !0),
-                                                        ]),
-                                                    ],
-                                                    6,
-                                                    /* CLASS, STYLE */
-                                                )
-                                            ),
-                                        ),
-                                        128,
-                                        /* KEYED_FRAGMENT */
-                                    )),
-                                ]),
-                            ]),
-                            _: 1,
-                            /* STABLE */
-                        }),
-                    ])
-                )
-            )
-        },
-    })
-export { G as default }
+                128
+                /* KEYED_FRAGMENT */
+              ))
+            ])
+          ]),
+          _: 1
+          /* STABLE */
+        })
+      ]);
+    };
+  }
+});
+export {
+  _sfc_main as default
+};

@@ -1,116 +1,131 @@
-import { defineComponent as h, ref as w, watch as L, computed as M, openBlock as c, createElementBlock as i, createElementVNode as a, Fragment as S, renderList as y, normalizeStyle as b, renderSlot as k, createVNode as C, unref as T, withCtx as g } from "vue";
-import { NTooltip as $ } from "naive-ui/es/tooltip";
-const H = { class: "lc-common-legend" }, A = { class: "lc-common-legend__wrapper__legend" }, B = ["onClick", "onMouseenter", "onMouseleave"], E = { class: "lc-common-legend__trigger" }, N = ["innerHTML"], F = ["innerHTML"], z = /* @__PURE__ */ h({
+import { defineComponent, ref, watch, computed, openBlock, createElementBlock, createElementVNode, Fragment, renderList, normalizeStyle, renderSlot, createVNode, unref, withCtx } from "vue";
+import { NTooltip } from "naive-ui/es/tooltip";
+const _hoisted_1 = { class: "lc-common-legend" };
+const _hoisted_2 = { class: "lc-common-legend__wrapper__legend" };
+const _hoisted_3 = ["onClick", "onMouseenter", "onMouseleave"];
+const _hoisted_4 = { class: "lc-common-legend__trigger" };
+const _hoisted_5 = ["innerHTML"];
+const _hoisted_6 = ["innerHTML"];
+const _sfc_main = /* @__PURE__ */ defineComponent({
   __name: "legend",
   props: {
     options: { default: () => ({}) },
-    legendLabel: { type: Function, default: (t) => t },
-    disabled: { type: Boolean, default: !1 }
+    legendLabel: { type: Function, default: (name) => name },
+    disabled: { type: Boolean, default: false }
   },
   emits: ["legend:click", "legend:toggleSelect"],
-  setup(t, { emit: m }) {
-    const s = w(/* @__PURE__ */ new Map());
-    L(
-      () => t.options.series,
+  setup(__props, { emit: __emit }) {
+    const legendSelectedMaps = ref(/* @__PURE__ */ new Map());
+    watch(
+      () => __props.options.series,
       () => {
-        var e, n;
-        s.value.clear(), Array.isArray(t.options.series) && ((n = (e = t.options.series[0]) == null ? void 0 : e.data) == null || n.forEach((l) => {
-          if (!l.name)
+        var _a, _b;
+        legendSelectedMaps.value.clear();
+        if (!Array.isArray(__props.options.series)) return;
+        (_b = (_a = __props.options.series[0]) == null ? void 0 : _a.data) == null ? void 0 : _b.forEach((item) => {
+          if (!item.name) {
             return window.console.warn("item.name is required");
-          s.value.set(l.name, {
-            selected: !0,
-            ...l
+          }
+          legendSelectedMaps.value.set(item.name, {
+            selected: true,
+            ...item
           });
-        }));
+        });
       },
       {
         deep: 2,
-        immediate: !0
+        immediate: true
       }
     );
-    const r = m;
-    function d(e, n) {
-      r("legend:toggleSelect", {
-        type: e,
-        name: n
+    const $emit = __emit;
+    function dispatchAction(type, name) {
+      $emit("legend:toggleSelect", {
+        type,
+        name
       });
     }
-    function _(e) {
-      if (!s.value.has(e) || t.disabled) return;
-      const n = s.value.get(e);
-      d(n != null && n.selected ? "legendUnSelect" : "legendSelect", e), s.value.set(e, {
-        ...n,
-        selected: !(n != null && n.selected)
+    function togggleLegendSelected(name) {
+      if (!legendSelectedMaps.value.has(name) || __props.disabled) return;
+      const record = legendSelectedMaps.value.get(name);
+      dispatchAction((record == null ? void 0 : record.selected) ? "legendUnSelect" : "legendSelect", name);
+      legendSelectedMaps.value.set(name, {
+        ...record,
+        selected: !(record == null ? void 0 : record.selected)
       });
     }
-    function p(e) {
-      _(e.name), r("legend:click", e);
+    function legendClick(record) {
+      togggleLegendSelected(record.name);
+      $emit("legend:click", record);
     }
-    function f(e, n) {
-      var o;
-      const { color: l = [] } = t.options ?? {};
+    function getLegendStyle(index, record) {
+      var _a;
+      const { color = [] } = __props.options ?? {};
       return {
-        "--item-color": l[e],
-        "--unselect-color": (o = s.value.get(n.name)) != null && o.selected ? 1 : 0.5
+        "--item-color": color[index],
+        "--unselect-color": !((_a = legendSelectedMaps.value.get(record.name)) == null ? void 0 : _a.selected) ? 0.5 : 1
       };
     }
-    const v = M(() => {
-      var e, n, l, o;
-      return ((n = (e = t.options) == null ? void 0 : e.series) == null ? void 0 : n[0].data) ?? ((o = (l = t.options) == null ? void 0 : l.series) == null ? void 0 : o.data) ?? [];
+    const customLegendData = computed(() => {
+      var _a, _b, _c, _d;
+      return ((_b = (_a = __props.options) == null ? void 0 : _a.series) == null ? void 0 : _b[0].data) ?? ((_d = (_c = __props.options) == null ? void 0 : _c.series) == null ? void 0 : _d.data) ?? [];
     });
-    return (e, n) => (c(), i("div", H, [
-      a("div", A, [
-        (c(!0), i(
-          S,
-          null,
-          y(v.value, (l, o) => (c(), i("div", {
-            key: o,
-            class: "lc-common-legend__wrapper__legend__item",
-            style: b(f(o, l)),
-            onClick: (u) => p(l),
-            onMouseenter: (u) => d("highlight", l.name),
-            onMouseleave: (u) => d("downplay", l.name)
-          }, [
-            k(e.$slots, "legend", { record: l }, () => [
-              C(
-                T($),
-                { delay: 800 },
-                {
-                  trigger: g(() => [
-                    a("div", E, [
-                      n[0] || (n[0] = a(
-                        "div",
-                        { class: "lc-common-legend__wrapper__legend__item__icon" },
-                        null,
-                        -1
-                        /* HOISTED */
-                      )),
-                      a("div", {
-                        class: "lc-common-legend__wrapper__legend__item__label",
-                        innerHTML: e.legendLabel(l.name, l.value)
-                      }, null, 8, N)
-                    ])
-                  ]),
-                  default: g(() => [
-                    a("span", {
-                      innerHTML: e.legendLabel(l.name, l.value)
-                    }, null, 8, F)
-                  ]),
-                  _: 2
-                  /* DYNAMIC */
-                },
-                1024
-                /* DYNAMIC_SLOTS */
-              )
-            ], !0)
-          ], 44, B))),
-          128
-          /* KEYED_FRAGMENT */
-        ))
-      ])
-    ]));
+    return (_ctx, _cache) => {
+      return openBlock(), createElementBlock("div", _hoisted_1, [
+        createElementVNode("div", _hoisted_2, [
+          (openBlock(true), createElementBlock(
+            Fragment,
+            null,
+            renderList(customLegendData.value, (item, key) => {
+              return openBlock(), createElementBlock("div", {
+                key,
+                class: "lc-common-legend__wrapper__legend__item",
+                style: normalizeStyle(getLegendStyle(key, item)),
+                onClick: ($event) => legendClick(item),
+                onMouseenter: ($event) => dispatchAction("highlight", item.name),
+                onMouseleave: ($event) => dispatchAction("downplay", item.name)
+              }, [
+                renderSlot(_ctx.$slots, "legend", { record: item }, () => [
+                  createVNode(
+                    unref(NTooltip),
+                    { delay: 800 },
+                    {
+                      trigger: withCtx(() => [
+                        createElementVNode("div", _hoisted_4, [
+                          _cache[0] || (_cache[0] = createElementVNode(
+                            "div",
+                            { class: "lc-common-legend__wrapper__legend__item__icon" },
+                            null,
+                            -1
+                            /* HOISTED */
+                          )),
+                          createElementVNode("div", {
+                            class: "lc-common-legend__wrapper__legend__item__label",
+                            innerHTML: _ctx.legendLabel(item.name, item.value)
+                          }, null, 8, _hoisted_5)
+                        ])
+                      ]),
+                      default: withCtx(() => [
+                        createElementVNode("span", {
+                          innerHTML: _ctx.legendLabel(item.name, item.value)
+                        }, null, 8, _hoisted_6)
+                      ]),
+                      _: 2
+                      /* DYNAMIC */
+                    },
+                    1024
+                    /* DYNAMIC_SLOTS */
+                  )
+                ], true)
+              ], 44, _hoisted_3);
+            }),
+            128
+            /* KEYED_FRAGMENT */
+          ))
+        ])
+      ]);
+    };
   }
 });
 export {
-  z as default
+  _sfc_main as default
 };

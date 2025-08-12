@@ -1,4 +1,4 @@
-const e = {
+const propsRaw = {
   showLabel: {
     type: Boolean
   },
@@ -30,5 +30,5 @@ const e = {
   }
 };
 export {
-  e as propsRaw
+  propsRaw
 };

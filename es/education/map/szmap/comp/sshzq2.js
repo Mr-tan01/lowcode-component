@@ -1,4 +1,4 @@
-import f from "./sshzq.js";
+import _sfc_main from "./sshzq.js";
 export {
-  f as default
+  _sfc_main as default
 };

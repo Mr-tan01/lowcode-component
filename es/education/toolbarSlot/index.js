@@ -1,2 +1,4 @@
-import { default as l } from './toolbarSlot.js'
-export { l as LcToolbarSlot }
+import { default as default2 } from "./toolbarSlot.js";
+export {
+  default2 as LcToolbarSlot
+};

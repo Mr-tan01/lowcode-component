@@ -1,103 +1,118 @@
-import { defineComponent as d, useTemplateRef as p, computed as u, watch as y, openBlock as g, createElementBlock as x, createVNode as C, unref as S } from "vue";
-import k from "../../scatter/index.js";
-import R from "lodash-es/merge";
+import { defineComponent, useTemplateRef, computed, watch, openBlock, createElementBlock, createVNode, unref } from "vue";
+import LcScatterChart from "../../scatter/index.js";
+import merge from "lodash-es/merge";
 import "@mmj-code-lib/lowcode/es/components";
 import "lowcode-share/es/share";
-import { useCommonScatterSeries as v, useCommonScatterOptions as I } from "./options.js";
-const w = { class: "lc-fourscatter" }, D = /* @__PURE__ */ d({
+import { useCommonScatterSeries, useCommonScatterOptions } from "./options.js";
+const _hoisted_1 = { class: "lc-fourscatter" };
+const _sfc_main = /* @__PURE__ */ defineComponent({
   __name: "fourScatter",
   props: {
     options: { default: () => ({}) },
-    isPushAxis: { type: Boolean, default: !0 },
-    isDefaultTooltip: { type: Boolean, default: !1 }
+    isPushAxis: { type: Boolean, default: true },
+    isDefaultTooltip: { type: Boolean, default: false }
   },
   emits: ["click"],
-  setup(r, { expose: l, emit: a }) {
-    const n = p("lcScatterChartCom"), m = u(() => {
-      r.options.series = v(r.options.series || []);
-      const e = I(r.options, r.isDefaultTooltip);
-      return h(e), R({}, e);
-    }), f = a;
-    y(
+  setup(__props, { expose: __expose, emit: __emit }) {
+    const lcScatterChartComRef = useTemplateRef("lcScatterChartCom");
+    const renderOptions = computed(() => {
+      __props.options.series = useCommonScatterSeries(__props.options.series || []);
+      const newOptions = useCommonScatterOptions(__props.options, __props.isDefaultTooltip);
+      appendSplitAxis(newOptions);
+      return merge({}, newOptions);
+    });
+    const $emits = __emit;
+    watch(
       () => {
-        var e;
-        return (e = n.value) == null ? void 0 : e.instance;
+        var _a;
+        return (_a = lcScatterChartComRef.value) == null ? void 0 : _a.instance;
       },
-      (e) => {
-        e != null && e.chartInstance && (e == null || e.chartInstance.off("click"), e == null || e.chartInstance.on("click", function(t) {
-          f("click", t);
-        }));
+      (instance) => {
+        if (!(instance == null ? void 0 : instance.chartInstance)) return;
+        instance == null ? void 0 : instance.chartInstance.off("click");
+        instance == null ? void 0 : instance.chartInstance.on("click", function(params) {
+          $emits("click", params);
+        });
       },
       {
-        deep: !0
+        deep: true
       }
     );
-    function h(e) {
-      r.isPushAxis && e.series.push(
-        {
-          type: "custom",
-          coordinateSystem: "cartesian2d",
-          silent: !0,
-          renderItem: function(t, o) {
-            if (t.isRenderer) return;
-            t.isRenderer = !0;
-            const s = o.getWidth() - 100, i = o.getHeight() / 2 - 20;
-            return {
-              type: "line",
-              shape: {
-                x1: 100,
-                y1: i,
-                x2: s,
-                y2: i
-              },
-              style: {
-                lineWidth: 0.5,
-                stroke: "rgba(255, 255, 255, 1)"
-              }
-            };
+    function appendSplitAxis(newOptions) {
+      if (__props.isPushAxis) {
+        newOptions.series.push(
+          {
+            type: "custom",
+            coordinateSystem: "cartesian2d",
+            silent: true,
+            renderItem: function(params, api) {
+              if (params.isRenderer) return;
+              params.isRenderer = true;
+              const width = api.getWidth() - 100;
+              const height = api.getHeight();
+              const y = height / 2 - 20;
+              return {
+                type: "line",
+                shape: {
+                  x1: 100,
+                  y1: y,
+                  x2: width,
+                  y2: y
+                },
+                style: {
+                  lineWidth: 0.5,
+                  stroke: "rgba(255, 255, 255, 1)"
+                }
+              };
+            },
+            z: 10,
+            level: 10,
+            data: [1]
           },
-          z: 10,
-          level: 10,
-          data: [1]
-        },
-        {
-          type: "custom",
-          silent: !0,
-          renderItem: function(t, o) {
-            if (t.isRenderer) return;
-            t.isRenderer = !0;
-            const s = o.getWidth(), c = o.getHeight() - 70, i = s / 2;
-            return {
-              type: "line",
-              shape: {
-                x1: i,
-                y1: 30,
-                x2: i,
-                y2: c
-              },
-              style: {
-                lineWidth: 0.5,
-                stroke: "rgba(255, 255, 255, 1)"
-              }
-            };
-          },
-          data: [1]
-        }
-      );
+          {
+            type: "custom",
+            silent: true,
+            renderItem: function(params, api) {
+              if (params.isRenderer) return;
+              params.isRenderer = true;
+              const width = api.getWidth();
+              const height = api.getHeight() - 70;
+              const x = width / 2;
+              return {
+                type: "line",
+                shape: {
+                  x1: x,
+                  y1: 30,
+                  x2: x,
+                  y2: height
+                },
+                style: {
+                  lineWidth: 0.5,
+                  stroke: "rgba(255, 255, 255, 1)"
+                }
+              };
+            },
+            data: [1]
+          }
+        );
+      }
     }
-    return l({
-      instance: u(() => {
-        var e;
-        return (e = n.value) == null ? void 0 : e.instance;
+    __expose({
+      instance: computed(() => {
+        var _a;
+        return (_a = lcScatterChartComRef.value) == null ? void 0 : _a.instance;
       })
-    }), (e, t) => (g(), x("div", w, [
-      C(S(k), {
-        ref: "lcScatterChartCom",
-        options: m.value
-      }, null, 8, ["options"])
-    ]));
+    });
+    return (_ctx, _cache) => {
+      return openBlock(), createElementBlock("div", _hoisted_1, [
+        createVNode(unref(LcScatterChart), {
+          ref: "lcScatterChartCom",
+          options: renderOptions.value
+        }, null, 8, ["options"])
+      ]);
+    };
   }
 });
 export {
-  D as default
+  _sfc_main as default
 };

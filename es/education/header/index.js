@@ -1,2 +1,4 @@
-import { default as r } from './header.js'
-export { r as LcHeader }
+import { default as default2 } from "./header.js";
+export {
+  default2 as LcHeader
+};

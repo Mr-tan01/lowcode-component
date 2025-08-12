@@ -1,3 +1,6 @@
-import { default as a } from './pageTitle.js'
-import { default as l } from './textTitle.js'
-export { a as LcPageTitle, l as LcTextTitle }
+import { default as default2 } from "./pageTitle.js";
+import { default as default3 } from "./textTitle.js";
+export {
+  default2 as LcPageTitle,
+  default3 as LcTextTitle
+};
