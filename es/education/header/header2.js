@@ -1,4 +1,4 @@
-import { defineComponent, mergeModels, useModel, computed, openBlock, createElementBlock, createElementVNode, renderSlot, createVNode, unref, withCtx, normalizeClass, toDisplayString, Fragment, renderList, createCommentVNode } from "vue";
+import { defineComponent, mergeModels, useModel, computed, createElementBlock, openBlock, createElementVNode, renderSlot, createVNode, unref, withCtx, normalizeClass, createCommentVNode, Fragment, renderList, toDisplayString } from "vue";
 import _imports_0 from "./images/right-arrow.png.js";
 import { NPopover } from "naive-ui/es/popover";
 import LcCarouseBox from "./carouseBox/index.js";
@@ -112,7 +112,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                                           })
                                         ],
                                         -1
-                                        /* HOISTED */
+                                        /* CACHED */
                                       )),
                                       createElementVNode("div", {
                                         class: "lcc-header__wrapper__navs__drop__group__label--text",
@@ -135,7 +135,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                                               index,
                                               handleClick
                                             })
-                                          }, toDisplayString(child.label) + toDisplayString(selectedKey.value), 11, _hoisted_10);
+                                          }, toDisplayString(child.label), 11, _hoisted_10);
                                         }),
                                         128
                                         /* KEYED_FRAGMENT */

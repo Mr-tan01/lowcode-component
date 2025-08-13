@@ -58,7 +58,7 @@
                                                     })
                                                 "
                                             >
-                                                {{ child.label }}{{ selectedKey }}
+                                                {{ child.label }}
                                             </div>
                                         </div>
                                     </div>
