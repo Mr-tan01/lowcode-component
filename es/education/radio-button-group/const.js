@@ -1,4 +1,4 @@
-const radioButtonGroupProvideKey = Symbol("radioButtonGroupInject");
+const radioButtonGroupProvideKey = Symbol.for("radioButtonGroupInject");
 export {
   radioButtonGroupProvideKey
 };

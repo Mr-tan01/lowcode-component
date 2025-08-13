@@ -4,4 +4,5 @@ export type InjectionKeyType = ComputedRef<{
     value: string | number
     change(value: string | number): void
 }>
-export const radioButtonGroupProvideKey: InjectionKey<InjectionKeyType> = Symbol('radioButtonGroupInject')
+// 创建全局唯一的 Symbol
+export const radioButtonGroupProvideKey: InjectionKey<InjectionKeyType> = Symbol.for('radioButtonGroupInject') as InjectionKey<InjectionKeyType>
