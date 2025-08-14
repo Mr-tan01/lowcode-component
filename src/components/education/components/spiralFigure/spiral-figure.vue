@@ -13,7 +13,7 @@
 import { computed } from 'vue'
 import spiralFigure from './images/spiral-figure.png'
 import { EducationSpiralFigureProps } from './props'
-
+import { scale } from 'mmjs-core'
 const { centerImage = spiralFigure, texts = [], radius = 150, maxPerSide = 5 } = defineProps<EducationSpiralFigureProps>()
 
 const displayedTexts = computed(() => {
@@ -41,8 +41,8 @@ const getTextPosition = (index: number) => {
     const y = radius * Math.sin(angleRad)
 
     return {
-        left: `calc(50% + ${x}px)`,
-        top: `calc(50% + ${y}px)`,
+        left: `calc(50% + ${scale(x)}px)`,
+        top: `calc(50% + ${scale(y)}px)`,
         transform: 'translate(-50%, -50%)',
     }
 }
