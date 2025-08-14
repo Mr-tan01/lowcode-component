@@ -1,12 +1,17 @@
 <template>
     <div class="lc-tree">
-        <n-tree v-bind="$attrs" :render-switcher-icon="renderSwitcherIconWithExpaned" />
+        <n-tree v-bind="$attrs" :render-switcher-icon="renderSwitcherIconWithExpaned">
+            <template #empty>
+                <LcEmpty></LcEmpty>
+            </template>
+        </n-tree>
     </div>
 </template>
 <script setup lang="ts">
 import { NTree } from 'naive-ui/es/tree'
 import { LcIcon, type NameTypes } from '@/components/education/components/icon/index'
 import { h, toRefs } from 'vue'
+import { LcEmpty } from '../empty'
 const props = withDefaults(
     defineProps<{
         expandedIcon?: NameTypes

@@ -1,7 +1,8 @@
-import { defineComponent, toRefs, openBlock, createElementBlock, createVNode, unref, mergeProps, h } from "vue";
+import { defineComponent, toRefs, openBlock, createElementBlock, createVNode, unref, mergeProps, withCtx, h } from "vue";
 import { NTree } from "naive-ui/es/tree";
 import LcIcon from "./icon/index.js";
 import './assets/icon/iconCard.css';/* empty css              */
+import LcEmpty from "./empty/index.js";
 const _hoisted_1 = { class: "lc-tree" };
 const _sfc_main = /* @__PURE__ */ defineComponent({
   __name: "tree",
@@ -22,7 +23,13 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
         createVNode(
           unref(NTree),
           mergeProps(_ctx.$attrs, { "render-switcher-icon": renderSwitcherIconWithExpaned }),
-          null,
+          {
+            empty: withCtx(() => [
+              createVNode(unref(LcEmpty))
+            ]),
+            _: 1
+            /* STABLE */
+          },
           16
           /* FULL_PROPS */
         )
