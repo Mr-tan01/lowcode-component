@@ -1,7 +1,7 @@
 <template>
     <div class="lctime">
         <img v-if="isShowIcon" class="img" :src="imageIconSrc" draggable="false" />
-        <n-time :time="currentTime" class="n-time-class"></n-time>
+        <n-time :time="currentTime" :format="timeFormat" class="n-time-class"></n-time>
     </div>
 </template>
 
@@ -11,7 +11,7 @@ import { EducationTimeProps } from './props'
 import { NTime } from 'naive-ui/es/time'
 import defaultImage from './images/time.png'
 
-const { icon = '', color = '#fff', fontSize = '20px', isShowIcon = true } = defineProps<EducationTimeProps>()
+const { icon = '', color = '#fff', fontSize = '20px', isShowIcon = true, timeFormat = 'yyyy-MM-dd hh:mm' } = defineProps<EducationTimeProps>()
 
 const imageIconSrc = computed<string>(() => icon || defaultImage)
 

@@ -9,12 +9,13 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     icon: { default: "" },
     color: { default: "#fff" },
     fontSize: { default: "20px" },
-    isShowIcon: { type: Boolean, default: true }
+    isShowIcon: { type: Boolean, default: true },
+    timeFormat: { default: "yyyy-MM-dd hh:mm" }
   },
   setup(__props) {
     useCssVars((_ctx) => ({
-      "5b6f5884": _ctx.color,
-      "0a105ab5": _ctx.fontSize
+      "56711967": _ctx.color,
+      "e27b6f28": _ctx.fontSize
     }));
     const imageIconSrc = computed(() => __props.icon || defaultImage);
     const currentTime = ref();
@@ -33,8 +34,9 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
         }, null, 8, _hoisted_2)) : createCommentVNode("v-if", true),
         createVNode(unref(NTime), {
           time: currentTime.value,
+          format: _ctx.timeFormat,
           class: "n-time-class"
-        }, null, 8, ["time"])
+        }, null, 8, ["time", "format"])
       ]);
     };
   }
