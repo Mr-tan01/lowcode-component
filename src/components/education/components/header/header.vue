@@ -95,10 +95,14 @@ export type jumpParams = {
     index: number
     handleClick?: (item: ListRaw, index: number) => void
 }
-const { navDatas, hideArrow, highlightHandler } = defineProps<{
+const {
+    navDatas,
+    hideArrow,
+    highlightHandler = null,
+} = defineProps<{
     navDatas: NavData[]
     hideArrow?: boolean
-    highlightHandler: (item: NavData) => string
+    highlightHandler?: (item: NavData) => string | null
 }>()
 const selectedKey = defineModel<string>('selectedKey', { default: '' })
 const modelIndex = defineModel<number>('index', { default: 0 })
