@@ -31,6 +31,8 @@ const renderSwitcherIconWithExpaned = ({ expanded }: { expanded: boolean }) => {
 </script>
 <style lang="scss" scoped>
 .lc-tree {
+    width: 100%;
+    height: 100%;
     :deep(.n-tree-node-indent.n-tree-node-indent--show-line) {
         &::before {
             border-left: 1px dashed #005c86;
@@ -49,6 +51,16 @@ const renderSwitcherIconWithExpaned = ({ expanded }: { expanded: boolean }) => {
     }
     :deep(.n-tree-node-switcher--expanded) {
         transform: rotate(0);
+    }
+    :deep(.n-tree--checkable) {
+        width: 100%;
+        height: 100%;
+    }
+    :deep(.lc-empty) {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
     }
 }
 </style>
