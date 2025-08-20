@@ -17,7 +17,7 @@ export type jumpParams = {
 type __VLS_Props = {
     navDatas: NavData[];
     hideArrow?: boolean;
-    highlightHandler: (item: NavData) => string;
+    highlightHandler?: (item: NavData) => string | null;
 };
 type __VLS_PublicProps = {
     'selectedKey'?: string;
