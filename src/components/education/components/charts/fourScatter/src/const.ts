@@ -1,20 +1,20 @@
 import { type EChartsOption, EffectScatterSeriesOption } from 'echarts'
 import tooltipContentBg from './images/tooltip-content-bg.png'
 import tooltipContentBlueBg from './images/tooltip-content-blue-bg.png'
-
+import { scale } from 'mmjs-core'
 export const scatterColors = ['rgba(15, 251, 248, 1)', 'rgba(225, 188, 75, 1)', 'rgba(34, 118, 252, 1)', 'rgba(222, 56, 4, 1)']
 const tooltipContentImageList = [tooltipContentBlueBg, tooltipContentBg]
 const tooltipContentStyler = `
-width: 107px;
-height: 32px;
+width: ${scale('107px')};
+height: ${scale('32px')};
 display: flex;
 justify-content: center;
 align-items: center;
 box-sizing: border-box;
-padding: 7px 14p;
+padding: ${scale('7px')} ${scale('14px')};
 z-index: 100;
-backdrop-filter: blur(5px);
-transform: translate(-6px, 0px);
+backdrop-filter: blur(${scale('5px')});
+transform: translate(-${scale('6px')}, 0px);
 `
 export const tooltipOptions: EChartsOption['tooltip'] = [
     {
@@ -29,7 +29,7 @@ export const tooltipOptions: EChartsOption['tooltip'] = [
             const meta = params.data?.meta ?? {}
             const bg = meta?.bg ?? tooltipContentImageList[params.seriesIndex]
             return `<div class="tooltip-content" style="${tooltipContentStyler}background: url(${bg}) no-repeat center center / 100% 100%;">
-                <div style="width: 100%;white-space: nowrap; overflow: hidden;  text-overflow: ellipsis; color: ${meta.color}; font-size: 16px;">${params.name}</div>
+                <div style="width: 100%;white-space: nowrap; overflow: hidden;  text-overflow: ellipsis; color: ${meta.color}; font-size: ${scale('16px')};">${params.name}</div>
             </div>`
         },
         axisPointer: {
@@ -139,7 +139,7 @@ export const xAxisOptions: EChartsOption['xAxis'] = [
 export const commonScatterSeries: EffectScatterSeriesOption = {
     type: 'effectScatter',
     symbolSize: function (data) {
-        return Math.max(Math.sqrt(data), 25)
+        return Math.max(Math.sqrt(data), scale(25))
     },
     itemStyle: {
         color: data => scatterColors[data.componentIndex],

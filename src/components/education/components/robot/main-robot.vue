@@ -399,7 +399,7 @@ on('result', () => {
                 overflow: hidden;
                 display: flex;
                 align-items: center;
-                padding: 2% 5%;
+                padding: 2%;
 
                 &__input {
                     flex: 1;
@@ -421,7 +421,6 @@ on('result', () => {
 
                 &__suffix {
                     margin-left: 5%;
-                    width: 5%;
                     display: flex;
                     align-items: center;
 

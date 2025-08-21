@@ -8,9 +8,9 @@
                 <span class="indicator-card-vice__wrapper__value__num">
                     <NNumberAnimation show-separator :from="0" :to="value" active :precision="0"
                 /></span>
-            </div>
-            <div class="indicator-card-vice__wrapper__img">
-                <img src="./images/card/big-substrate-bg.png" alt="" />
+                <div class="indicator-card-vice__wrapper__img">
+                    <img src="./images/card/big-substrate-bg.png" alt="" />
+                </div>
             </div>
         </div>
     </div>
@@ -32,13 +32,23 @@ const { label = '已建成并投入运行设施(个)', value = 0 } = defineProps
 <style lang="scss" scoped>
 .indicator-card-vice {
     min-width: 391px;
-    background-image: url(./images/card/arrows-bg.png);
-    background-repeat: no-repeat;
     display: flex;
     justify-content: center;
     position: relative;
+    height: 100%;
+    &::before {
+        content: '';
+        width: 100%;
+        height: 115px;
+        background-image: url(./images/card/arrows-bg.png);
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        position: absolute;
+        top: 36px;
+        left: 0;
+    }
+
     &__wrapper {
-        margin-top: -36px;
         &__label {
             font-family: HarmonyOS_Sans_SC;
             font-size: 16px;
@@ -52,7 +62,10 @@ const { label = '已建成并投入运行设施(个)', value = 0 } = defineProps
             display: flex;
             justify-content: center;
             margin-top: 10px;
+            position: relative;
+
             &__num {
+                position: absolute;
                 font-family: HarmonyOS_Sans_SC_Medium;
                 font-size: 60px;
                 color: transparent;
@@ -67,7 +80,12 @@ const { label = '已建成并投入运行设施(个)', value = 0 } = defineProps
             }
         }
         &__img {
-            margin-top: -80px;
+            width: 185px;
+            height: 185px;
+            img {
+                width: 100%;
+                height: 100%;
+            }
         }
     }
     .spot-img {
@@ -77,12 +95,12 @@ const { label = '已建成并投入运行设施(个)', value = 0 } = defineProps
     }
     .spot-top {
         position: absolute;
-        top: 0;
+        top: 34px;
         right: 20px;
     }
     .spot-down {
         position: absolute;
-        bottom: 55px;
+        bottom: 30px;
         left: 20px;
     }
 }

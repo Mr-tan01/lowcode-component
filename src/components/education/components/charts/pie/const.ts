@@ -1,6 +1,7 @@
 import { type EChartsOption, graphic } from 'echarts'
-import { type LinearGradient } from 'echarts/types/src/util/graphic'
 import merge from 'lodash-es/merge'
+// @ts-expect-error
+import { scale } from 'mmjs-core/utils/scale'
 
 export const pieColors = [
     '#0FFBF8',
@@ -65,11 +66,11 @@ export const pieTooltipOptions: EChartsOption['tooltip'] = {
         <div style="display: flex; align-items: center;">
           <span style="
             display: inline-block;
-            width: 10px;
-            height: 10px;
+            width: ${scale(10)}px;
+            height: ${scale(10)}px;
             border-radius: 50%;
             background: linear-gradient(to bottom, ${startColor}, ${endColor});
-            margin-right: 6px;
+            margin-right: ${scale(6)}px;
           "></span>
           ${params.name}: ${params.value} (${params.percent}%)
         </div>
@@ -87,7 +88,7 @@ export const pieLegend: EChartsOption['legend'] = {
     },
 }
 // 为每个扇形设置不同的渐变颜色
-export const innerGraphicColors: LinearGradient[] = [
+export const innerGraphicColors: graphic.LinearGradient[] = [
     new graphic.LinearGradient(0, 0, 0, 1, [
         { offset: 0, color: 'rgba(15, 251, 248, 0.20)' }, // 渐变色起始颜色
         { offset: 1, color: '#0FFBF8' }, // 渐变色结束颜色

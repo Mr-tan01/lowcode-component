@@ -15,9 +15,9 @@
                             <span>{{ item.value }}%</span>
                         </span>
                     </div>
-                    <div ref="valueRef" class="lc-progress__wrapper__item__right" :style="{ width: maxWidth }" :title="item.tootal.toString()">
-                        <span>{{ renderValue(item.tootal) }}</span>
-                        <span>{{ renderUnit(item.tootal, item.unit) }}</span>
+                    <div ref="valueRef" class="lc-progress__wrapper__item__right" :style="{ width: maxWidth }" :title="item.total.toString()">
+                        <span>{{ renderValue(item.total) }}</span>
+                        <span>{{ renderUnit(item.total, item.unit) }}</span>
                     </div>
                 </div>
             </div>
@@ -35,7 +35,7 @@ export type ProgereeDataList = {
     value: number // 百分比值
     unit: string // 单位
     color: string // 颜色值
-    tootal: number // 总量
+    total: number // 总量
 }
 const {
     fixed = true,
@@ -62,12 +62,12 @@ const maxWidth = computed(() => {
     }
     return '100%'
 })
-const renderValue = tootal => {
+const renderValue = total => {
     if (fixed) {
-        const { result } = bigNumber(tootal, decimal)
+        const { result } = bigNumber(total, decimal)
         return result
     }
-    return tootal
+    return total
 }
 const renderUnit = memoize(
     (value, _unit) => {
@@ -143,6 +143,7 @@ const renderUnit = memoize(
                 text-align: right;
                 padding-left: 8px;
                 font-size: 14px;
+                max-width: 84px;
                 color: #ffffff;
             }
         }

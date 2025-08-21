@@ -32,7 +32,7 @@ import { computed, onBeforeUnmount, onMounted, ref, shallowRef, watchPostEffect,
 import { useCommonPieOptions, usePieCommonSeries } from './options'
 import merge from 'lodash-es/merge'
 import { useResizeObserver } from '@vueuse/core'
-import { debounce } from 'lodash-es'
+import { debounce, cloneDeep } from 'lodash-es'
 import { graphic } from 'echarts'
 import { innerGraphicColors } from './const'
 import { type LayoutType } from './types'
@@ -42,7 +42,8 @@ import {
     type LegendDataRecord,
     type LegendSelectParams,
 } from '@/components/education/common/components/Charts/legend'
-
+import { transformEChartsConfig } from '@mmj-code-lib/lowcode/es/shared'
+import { scale } from 'mmjs-core'
 const {
     options,
     debounceTime = 300,
@@ -54,7 +55,7 @@ const {
     legendLeft = '20%',
     legendTop = '50%',
     legendPosition = 'relative',
-    legendWidth = '128px',
+    legendWidth = scale('128px'),
 } = defineProps<{
     options: EChartsOption | EChartsCoreOption
     debounceTime?: number
@@ -70,6 +71,7 @@ const {
 }>()
 const chartDomRef = useTemplateRef('chartDom')
 const chartInstance = shallowRef<ECharts>()
+const cloneDeepOptions = ref()
 const renderOptions = computed(() => {
     const newOptions = useCommonPieOptions(options)
     newOptions.series = usePieCommonSeries(newOptions.series, graphicColors, newOptions.color, layout)
@@ -114,21 +116,27 @@ const notHasTitle = computed(() => {
 })
 function initChart() {
     chartInstance.value = init(chartDomRef.value, renderOptions.value)
+    // 因为getOption只能在chart实例setOption，再合并配置
+    chartInstance.value?.setOption(renderOptions.value)
+    cloneDeepOptions.value = cloneDeep(merge(chartInstance.value?.getOption(), renderOptions.value))
+    const adaptOptions = transformEChartsConfig(cloneDeepOptions.value)
+    chartInstance.value?.setOption(adaptOptions)
 }
 
-function setOptions(option: EChartsCoreOption, notMerge?: boolean, lazyUpdate?: boolean) {
-    chartInstance.value?.setOption(option, notMerge, lazyUpdate)
+function setOptions(option: EChartsOption, notMerge?: boolean, lazyUpdate?: boolean) {
+    const adaptOptions = transformEChartsConfig(merge(cloneDeepOptions.value, option))
+    chartInstance.value?.setOption(adaptOptions, notMerge, lazyUpdate)
 }
 const cssBlockSize = ref('100%')
 function resizeChart(entries) {
     const entry = entries[0]
     const { width, height } = entry.contentRect
-    cssBlockSize.value = Math.min(width, height) + 'px'
+    cssBlockSize.value = scale(Math.min(width, height)) + 'px'
     chartInstance.value?.resize()
 }
 const { stop } = useResizeObserver(chartDomRef, debounce(resizeChart, debounceTime))
 
-const wrapperPading = computed(() => (legendPosition === 'absolute' ? `0 ${legendWidth}` : '0'))
+const wrapperPading = computed(() => (legendPosition === 'absolute' ? `0 ${scale(legendWidth)}` : '0'))
 onBeforeUnmount(stop)
 defineExpose({
     chartInstance,

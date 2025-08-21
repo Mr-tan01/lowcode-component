@@ -47,7 +47,6 @@ const tooltipOptions = {
 const legendOptions = {
   show: false,
   top: "bottom",
-  left: "center",
   textStyle: {
     fontSize: 14,
     color: "#fff",

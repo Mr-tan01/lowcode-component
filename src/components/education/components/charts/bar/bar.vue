@@ -12,7 +12,6 @@ import { commonBarOptions, useCommonBarOptions, useCommonBarSeries } from './opt
 import merge from 'lodash-es/merge'
 import { graphic } from 'echarts'
 import { barBuiltInStyle } from './const'
-
 const {
     options = {},
     linearGradientColor = barBuiltInStyle.color,

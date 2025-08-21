@@ -21,6 +21,7 @@ export default {
             external: [
                 'vue',
                 'vue-router',
+                /mmjs-core*/,
                 /lodash-es*/,
                 /naive-ui*/,
                 /localforage*/,

@@ -3,6 +3,7 @@
         "target": "esnext",
         "module": "esnext",
         "moduleResolution": "node",
+
         "strict": true,
         "allowJs": true,
         "jsx": "preserve",
@@ -25,14 +26,7 @@
         // "strictNullChecks": true, //不允许使用null
         "noImplicitThis": false //不允许往this上面挂属性
     },
-    "include": [
-        "src/**/*.ts",
-        "src/**/*.d.ts",
-        "src/**/*.tsx",
-        "src/**/*.vue",
-        "types/**/*",
-        "scripts/**/*.ts"
-    ],
+    "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue", "types/**/*", "scripts/**/*.ts"],
     "exclude": ["node_modules", "dist", "**/*.js"],
     "ts-node": {
         "esm": true

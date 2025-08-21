@@ -36,6 +36,7 @@ import { computed } from 'vue'
 import { NNumberAnimation } from 'naive-ui/es/number-animation'
 import { bigNumber } from 'lowcode-share/es/share'
 import { LcTooltip } from '@/components/education/components/tooltip'
+import { scale } from 'mmjs-core'
 
 const SIZE = {
     small: 'small',
@@ -83,9 +84,9 @@ const decimals = computed(() => {
     return decimal
 })
 const innerPad = {
-    [SIZE.small]: '22px 32px 0',
-    [SIZE.medium]: '22px 54px 0',
-    [SIZE.large]: '22px 116px 0',
+    [SIZE.small]: `${scale('22px')} ${scale('32px')} 0`,
+    [SIZE.medium]: `${scale('22px')} ${scale('54px')} 0`,
+    [SIZE.large]: `${scale('22px')} ${scale('116px')} 0`,
 }
 const padValue = computed(() => {
     return innerPad[size]

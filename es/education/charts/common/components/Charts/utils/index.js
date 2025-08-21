@@ -1,4 +1,5 @@
 import { useTemplateRef, watchEffect } from "vue";
+import "mmjs-core/utils/scale";
 function useCommonChartExpose(key) {
   const baseChartRef = useTemplateRef(key);
   const exposes = {};

@@ -1,0 +1,201 @@
+import { graphic } from "echarts";
+import merge from "lodash-es/merge";
+import { scale } from "mmjs-core/utils/scale";
+const pieColors = [
+  "#0FFBF8",
+  "rgba(225, 188, 75, 1)",
+  "rgba(0, 148, 255, 1)",
+  "rgba(166, 207, 255, 1)",
+  "rgba(119, 73, 255, 1)",
+  "rgba(238, 111, 124, 1)",
+  "rgba(255, 121, 12, 1)",
+  "rgba(100, 214, 119, 1)",
+  "rgba(222, 130, 57, 1)",
+  "rgba(34, 118, 252, 1)",
+  "rgba(234, 34, 252, 1)",
+  "rgba(89, 149, 184, 1)",
+  "rgb(170, 192, 161)",
+  "rgba(181, 167, 212, 1)",
+  "rgba(207, 228, 92, 1)"
+];
+const pieTitleOptions = {
+  text: "0",
+  subtext: "总数",
+  left: "center",
+  top: "center",
+  itemGap: 0,
+  textVerticalAlign: "top",
+  textStyle: {
+    color: "#fff",
+    fontSize: 30,
+    width: 106,
+    height: 42,
+    lineHeight: 42,
+    padding: 0,
+    overflow: "truncate"
+  },
+  subtextStyle: {
+    color: "#F2F3F4",
+    fontSize: 16,
+    padding: 0,
+    lineHeight: 16,
+    overflow: "truncate"
+  }
+};
+const pieTooltipOptions = {
+  appendTo: "body",
+  trigger: "item",
+  backgroundColor: "rgba(0, 32, 61, 1)",
+  borderColor: "rgba(15, 251, 248, 1)",
+  textStyle: {
+    color: "#fff",
+    fontSize: 14,
+    lineHeight: 20
+  },
+  formatter: function(params) {
+    var _a, _b, _c;
+    const colorStops = ((_a = innerGraphicColors[params.dataIndex]) == null ? void 0 : _a.colorStops) ?? [];
+    const startColor = ((_b = colorStops == null ? void 0 : colorStops[0]) == null ? void 0 : _b.color) ?? "rgba(166, 207, 255, 0.20)";
+    const endColor = ((_c = colorStops == null ? void 0 : colorStops[1]) == null ? void 0 : _c.color) ?? "rgba(166, 207, 255, 1)";
+    return `
+        <div style="display: flex; align-items: center;">
+          <span style="
+            display: inline-block;
+            width: ${scale(10)}px;
+            height: ${scale(10)}px;
+            border-radius: 50%;
+            background: linear-gradient(to bottom, ${startColor}, ${endColor});
+            margin-right: ${scale(6)}px;
+          "></span>
+          ${params.name}: ${params.value} (${params.percent}%)
+        </div>
+      `;
+  }
+};
+const pieLegend = {
+  show: false,
+  orient: "vertical",
+  left: "left",
+  top: "center",
+  textStyle: {
+    color: "#fff"
+  }
+};
+const innerGraphicColors = [
+  new graphic.LinearGradient(0, 0, 0, 1, [
+    { offset: 0, color: "rgba(15, 251, 248, 0.20)" },
+    // 渐变色起始颜色
+    { offset: 1, color: "#0FFBF8" }
+    // 渐变色结束颜色
+  ]),
+  new graphic.LinearGradient(0, 0, 0, 1, [
+    { offset: 0, color: "rgba(225, 188, 75, 0.20)" },
+    { offset: 1, color: "rgba(225, 188, 75, 1)" }
+  ]),
+  new graphic.LinearGradient(0, 0, 0, 1, [
+    { offset: 0, color: "rgba(0, 148, 255, 0.20)" },
+    { offset: 1, color: "rgba(0, 148, 255, 1)" }
+  ]),
+  new graphic.LinearGradient(0, 0, 0, 1, [
+    { offset: 0, color: "rgba(166, 207, 255, 0.20)" },
+    { offset: 1, color: "rgba(166, 207, 255, 1)" }
+  ]),
+  new graphic.LinearGradient(0, 0, 0, 1, [
+    { offset: 0, color: "rgba(119, 73, 255, 0.20)" },
+    { offset: 1, color: "rgba(119, 73, 255, 1)" }
+  ]),
+  new graphic.LinearGradient(0, 0, 0, 1, [
+    { offset: 0, color: "rgba(238, 111, 124, 0.20)" },
+    { offset: 1, color: "rgba(238, 111, 124, 1)" }
+  ]),
+  new graphic.LinearGradient(0, 0, 0, 1, [
+    { offset: 0, color: "rgba(255, 196, 34, 0.20)" },
+    { offset: 1, color: "rgba(255, 121, 12, 1)" }
+  ]),
+  new graphic.LinearGradient(0, 0, 0, 1, [
+    { offset: 0, color: "rgba(222, 130, 57, 0.20)" },
+    { offset: 1, color: "rgba(222, 130, 57, 1)" }
+  ]),
+  new graphic.LinearGradient(0, 0, 0, 1, [
+    { offset: 0, color: "rgba(100, 214, 119, 0.20)" },
+    { offset: 1, color: "rgba(100, 214, 119, 1)" }
+  ]),
+  new graphic.LinearGradient(0, 0, 0, 1, [
+    { offset: 0, color: "rgba(34, 118, 252, 0.20)" },
+    { offset: 1, color: "rgba(34, 118, 252, 1)" }
+  ]),
+  new graphic.LinearGradient(0, 0, 0, 1, [
+    { offset: 0, color: "rgba(34, 118, 252, 0.20)" },
+    { offset: 1, color: "rgba(234, 34, 252, 1)" }
+  ]),
+  new graphic.LinearGradient(0, 0, 0, 1, [
+    { offset: 0, color: "rgba(34, 118, 252, 0.20)" },
+    { offset: 1, color: "rgba(89, 149, 184, 1)" }
+  ]),
+  new graphic.LinearGradient(0, 0, 0, 1, [
+    { offset: 0, color: "rgba(34, 118, 252, 0.20)" },
+    { offset: 1, color: "rgba(170, 192, 161, 1)" }
+  ]),
+  new graphic.LinearGradient(0, 0, 0, 1, [
+    { offset: 0, color: "rgba(34, 118, 252, 0.20)" },
+    { offset: 1, color: "rgba(181, 167, 212, 1)" }
+  ]),
+  new graphic.LinearGradient(0, 0, 0, 1, [
+    { offset: 0, color: "rgba(34, 118, 252, 0.20)" },
+    { offset: 1, color: "rgba(207, 228, 92, 1)" }
+  ])
+];
+const pieSeriesRecord = {
+  name: "pie",
+  type: "pie",
+  radius: ["62%", "92%"],
+  center: ["50%", "50%"],
+  label: {
+    show: false
+  },
+  emphasis: {
+    itemStyle: {}
+  }
+};
+const innerLableOption = {
+  radius: ["42%", "62%"],
+  label: {
+    show: true,
+    alignTo: "edge",
+    formatter: "{prop|{d}}{unit|%}\n{name|{b}}",
+    minMargin: 5,
+    edgeDistance: 10,
+    rich: {
+      prop: {
+        fontSize: 20,
+        lineHeight: 0,
+        padding: [-20, 0, 0, 0]
+      },
+      unit: {
+        fontSize: 14,
+        lineHeight: 0,
+        padding: [-17, 0, 0, 0]
+      },
+      name: {
+        fontSize: 14,
+        lineHeight: 20,
+        color: "#ffffff"
+      }
+    }
+  },
+  labelLine: {
+    length: 15,
+    length2: 0,
+    maxSurfaceAngle: 0
+  }
+};
+const innerLabelSeries1 = merge({}, pieSeriesRecord, innerLableOption);
+export {
+  innerGraphicColors,
+  innerLabelSeries1,
+  pieColors,
+  pieLegend,
+  pieSeriesRecord,
+  pieTitleOptions,
+  pieTooltipOptions
+};

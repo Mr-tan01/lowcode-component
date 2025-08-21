@@ -1,5 +1,6 @@
 import { defineComponent, computed, openBlock, createElementBlock, createElementVNode, Fragment, renderList, normalizeClass, normalizeStyle, toDisplayString } from "vue";
 import spiralFigure from "./images/spiral-figure.png.js";
+import { scale } from "mmjs-core";
 const _hoisted_1 = { class: "symmetric-layout" };
 const _hoisted_2 = { class: "center-image-container" };
 const _hoisted_3 = ["src"];
@@ -29,8 +30,8 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       const x = __props.radius * Math.cos(angleRad);
       const y = __props.radius * Math.sin(angleRad);
       return {
-        left: `calc(50% + ${x}px)`,
-        top: `calc(50% + ${y}px)`,
+        left: `calc(50% + ${scale(x)}px)`,
+        top: `calc(50% + ${scale(y)}px)`,
         transform: "translate(-50%, -50%)"
       };
     };

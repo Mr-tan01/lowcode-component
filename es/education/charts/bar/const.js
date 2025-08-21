@@ -57,7 +57,6 @@ const tooltipOptions = {
 const legendOptions = {
   show: true,
   top: "bottom",
-  left: "center",
   icon: "roundRect",
   textStyle: {
     fontSize: 14,

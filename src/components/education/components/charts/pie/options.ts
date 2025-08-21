@@ -1,8 +1,7 @@
 import { deepMergeArrayOptions } from '@mmj-code-lib/lowcode/es/components'
 import { innerLabelSeries1, pieColors, pieLegend, pieSeriesRecord, pieTitleOptions, pieTooltipOptions } from './const'
-import { type EChartsCoreOption, type EChartsOption } from 'echarts'
+import { type EChartsCoreOption, type EChartsOption, type graphic } from 'echarts'
 import merge from 'lodash-es/merge'
-import { type LinearGradient } from 'echarts/types/src/util/graphic'
 import { type LayoutType } from './types'
 import type { OptionDataValueNumeric, ZRColor } from 'echarts/types/src/util/types'
 
@@ -15,7 +14,7 @@ export const pieCommonOptions: EChartsOption = {
 
 export function usePieCommonSeries(
     series: EChartsOption['series'],
-    linearGradients: string[] | LinearGradient[],
+    linearGradients: string[] | graphic.LinearGradient[],
     colors: EChartsOption['color'],
     layout: LayoutType,
 ): EChartsOption['series'] {
@@ -31,7 +30,7 @@ export function usePieCommonSeries(
     series!.data = usePieSeriesData(series!.data as OptionDataValueNumeric[], newColors)
     return merge(getInnerSeries(linearGradients), dynamicSeries, series)
 }
-function getInnerSeries(linearColors: string[] | LinearGradient[]) {
+function getInnerSeries(linearColors: string[] | graphic.LinearGradient[]) {
     return {
         itemStyle: {
             color: function (params) {
