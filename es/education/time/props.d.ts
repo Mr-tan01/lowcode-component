@@ -3,4 +3,5 @@ export type EducationTimeProps = {
     color?: string;
     fontSize?: string;
     isShowIcon?: boolean;
+    timeFormat?: string;
 };
