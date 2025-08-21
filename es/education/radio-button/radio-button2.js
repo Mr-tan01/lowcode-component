@@ -1,4 +1,4 @@
-import { defineComponent, mergeDefaults, inject, computed, createElementBlock, openBlock, normalizeClass, createElementVNode, createCommentVNode, renderSlot, toDisplayString } from "vue";
+import { defineComponent, mergeDefaults, inject, computed, openBlock, createElementBlock, normalizeClass, createElementVNode, renderSlot, createCommentVNode, toDisplayString } from "vue";
 import { radioButtonGroupProvideKey } from "./-group/const.js";
 const _hoisted_1 = { class: "lc-radio-button__wrapper" };
 const _hoisted_2 = {

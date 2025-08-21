@@ -41,7 +41,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       var _a, _b, _c;
       (_a = chartInstance.value) == null ? void 0 : _a.setOption(options, deep, lazyUpdate);
       cloneDeepOptions.value = cloneDeep(merge((_b = chartInstance.value) == null ? void 0 : _b.getOption(), options));
-      const adaptOptions = transformEChartsConfig(cloneDeepOptions.value, ["x1", "x2", "y1", "y2"]);
+      const adaptOptions = transformEChartsConfig(cloneDeepOptions.value);
       (_c = chartInstance.value) == null ? void 0 : _c.setOption(adaptOptions, deep, lazyUpdate);
     }
     watchEffect(
