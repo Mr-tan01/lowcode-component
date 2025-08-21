@@ -32,12 +32,12 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
   emits: ["legend:click", "legend:toggleSelect"],
   setup(__props, { expose: __expose, emit: __emit }) {
     useCssVars((_ctx) => ({
-      "7a666bda": _ctx.flexDirection,
-      "41aa8d36": wrapperPading.value,
-      "28f2d282": _ctx.legendPosition,
-      "54612440": _ctx.legendLeft,
-      "65d15748": _ctx.legendTop,
-      "4ab20497": cssBlockSize.value
+      "7f2b5b58": _ctx.flexDirection,
+      "466f7cb4": wrapperPading.value,
+      "86685a78": _ctx.legendPosition,
+      "9db241bc": _ctx.legendLeft,
+      "584bb2da": _ctx.legendTop,
+      "a41ba54e": cssBlockSize.value
     }));
     const chartDomRef = useTemplateRef("chartDom");
     const chartInstance = shallowRef();
@@ -86,7 +86,8 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     }
     function setOptions(option, notMerge, lazyUpdate) {
       var _a;
-      const adaptOptions = transformEChartsConfig(merge(cloneDeepOptions.value, option));
+      const adaptOptions = transformEChartsConfig({ ...cloneDeepOptions.value, ...option });
+      console.log(adaptOptions, "===。");
       (_a = chartInstance.value) == null ? void 0 : _a.setOption(adaptOptions, notMerge, lazyUpdate);
     }
     const cssBlockSize = ref("100%");

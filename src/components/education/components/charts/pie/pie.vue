@@ -124,7 +124,7 @@ function initChart() {
 }
 
 function setOptions(option: EChartsOption, notMerge?: boolean, lazyUpdate?: boolean) {
-    const adaptOptions = transformEChartsConfig(merge(cloneDeepOptions.value, option))
+    const adaptOptions = transformEChartsConfig({ ...cloneDeepOptions.value, ...option })
     chartInstance.value?.setOption(adaptOptions, notMerge, lazyUpdate)
 }
 const cssBlockSize = ref('100%')
