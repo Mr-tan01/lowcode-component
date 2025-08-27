@@ -226,6 +226,16 @@ class cesiumService {
       scene.debugShowFramesPerSecond = false;
       scene.globe.depthTestAgainstTerrain = true;
       scene.screenSpaceCameraController.enableTranslate = true;
+      this.viewer.scene.skyBox.show = false;
+      this.viewer.scene.sun.show = false;
+      this.viewer.scene.moon.show = false;
+      this.viewer.scene.skyAtmosphere.show = false;
+      this.viewer.scene.globe.showGroundAtmosphere = false;
+      this.viewer.scene.globe.atmosphereBrightnessShift = 0.25;
+      this.viewer.scene.globe.baseColor = Color.TRANSPARENT;
+      this.viewer.useBrowserRecommendedResolution = true;
+      this.viewer.scene.backgroundColor = Color.TRANSPARENT;
+      this.viewer.imageryLayers.removeAll();
       this.updateViewerAttribute();
       this.viewer.cesiumWidget.screenSpaceEventHandler.removeInputAction(ScreenSpaceEventType.LEFT_DOUBLE_CLICK);
       this.viewer.scene.canvas.addEventListener("dblclick", this.doubleClickHandler, false);
