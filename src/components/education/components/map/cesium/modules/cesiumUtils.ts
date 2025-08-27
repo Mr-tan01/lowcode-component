@@ -284,7 +284,23 @@ export class cesiumService {
             scene.debugShowFramesPerSecond = false
             scene.globe.depthTestAgainstTerrain = true
             scene.screenSpaceCameraController.enableTranslate = true
+            // 场景效果配置
+            this.viewer.scene.skyBox.show = false // 禁用天空盒
+            this.viewer.scene.sun.show = false // 禁用太阳效果
+            this.viewer.scene.moon.show = false // 禁用月亮效果
+            this.viewer.scene.skyAtmosphere.show = false // 禁用天空大气效果
+            this.viewer.scene.globe.showGroundAtmosphere = false // 禁用地面大气散射效果
+            this.viewer.scene.globe.atmosphereBrightnessShift = 0.25 // 设置大气亮度偏移
+            this.viewer.scene.globe.baseColor = Color.TRANSPARENT // 设置地球基础颜色为透明
 
+            // 使用浏览器推荐的分辨率
+            this.viewer.useBrowserRecommendedResolution = true
+
+            // 设置场景背景为透明
+            this.viewer.scene.backgroundColor = Color.TRANSPARENT
+
+            // 移除所有默认影像图层
+            this.viewer.imageryLayers.removeAll()
             this.updateViewerAttribute()
 
             // 移除默认双击事件并添加自定义双击事件
