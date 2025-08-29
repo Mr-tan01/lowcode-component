@@ -5,12 +5,9 @@ import { LabelModelEnum, defBlockLableMap, defFloatLevelConfig, szBlockNames } f
 import { propsRaw } from "./szmap/props.js";
 import { default as default5 } from "./tianditu/index.js";
 import { default as default6 } from "./cesium/index.js";
-import { default as default7 } from "./cesiumEarth/index.js";
-import './assets/cesiumEarth/cesiumEarth.css';/* empty css                   */
 export {
   LabelModelEnum,
   default6 as LcCesium,
-  default7 as LcCesiumEarth,
   default2 as LcMap,
   default5 as LcTianditu,
   default4 as SzRawMap,

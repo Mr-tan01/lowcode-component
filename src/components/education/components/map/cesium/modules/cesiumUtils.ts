@@ -22,59 +22,10 @@ import {
     Primitive,
     BoundingSphere,
 } from 'cesium'
-import localforage from 'localforage'
 import { CesiumHeatmap } from 'cesium-heatmap-es6'
 import { areaData, type controlStatusType, type optionType, type pointType, type changeModelParamType } from './type'
 import { createInfoCanvas, createClusterBillboard, updateViewerEntityInfo, createEntityConfig, heatmapGradient } from './tools'
 import { useMessage } from 'naive-ui'
-class TileCacheHelper {
-    private storeName = 'WMTS_Tiles'
-    private maxAge = 7 * 24 * 60 * 60 * 1000 // 缓存有效期7天
-
-    constructor() {
-        // 配置localforage
-        localforage.config({
-            driver: [localforage.INDEXEDDB, localforage.WEBSQL, localforage.LOCALSTORAGE],
-            name: 'CesiumTileCache',
-            storeName: this.storeName,
-        })
-    }
-
-    async getTile(key: { url: string; level: number; x: number; y: number }): Promise<Blob | null> {
-        try {
-            const cacheKey = `${key.url}_${key.level}_${key.x}_${key.y}`
-            const result = await localforage.getItem<{
-                data: Blob
-                timestamp: number
-            }>(cacheKey)
-
-            if (result && Date.now() - result.timestamp < this.maxAge) {
-                return result.data
-            }
-            // 自动清理过期缓存
-            if (result) await localforage.removeItem(cacheKey)
-            return null
-        } catch (error) {
-            console.error('读取缓存失败:', error)
-            return null
-        }
-    }
-
-    async putTile(key: { url: string; level: number; x: number; y: number }, blob: Blob): Promise<boolean> {
-        try {
-            const cacheKey = `${key.url}_${key.level}_${key.x}_${key.y}`
-            await localforage.setItem(cacheKey, {
-                data: blob,
-                timestamp: Date.now(),
-            })
-            return true
-        } catch (error) {
-            console.error('存储缓存失败:', error)
-            return false
-        }
-    }
-}
-
 export class cesiumService {
     public viewer: Viewer | null = null
     public pointData: pointType[] | null = []
@@ -109,17 +60,10 @@ export class cesiumService {
     private lastThrottleTime: number = 0
     private throttleDelay: number = 100
     private rretryCount: number = 3
-    private openIndexDB: boolean = false
     // 深圳市地理边界（根据瓦片定义经纬度范围）
-    private shenzhenBounds = Rectangle.fromDegrees(
-        113.8, // 西边界 - 经度
-        22.36, // 南边界 - 纬度
-        114.6, // 东边界 - 经度
-        22.7, // 北边界 - 纬度
-    )
+    private shenzhenBounds = Rectangle.fromDegrees(113.94, 22.43, 114.57, 22.83)
 
     private message = useMessage()
-    private tileCache = new TileCacheHelper()
     constructor(
         public containerId: string,
         public options: optionType,
@@ -131,7 +75,6 @@ export class cesiumService {
         }
         this.centerPosition = options.centerPosition
         this.defaultCenterKey = options.defaultCenterKey
-        this.openIndexDB = options.openIndexDB
         // 图层加载监听器
         this.tileLoadCallback = this.handleTileLoadProgress.bind(this)
     }
@@ -527,78 +470,19 @@ export class cesiumService {
     }): Promise<WebMapTileServiceImageryProvider | ArcGisMapServerImageryProvider> {
         try {
             let provider: any
+
             if (options.useZondy) {
                 // @ts-ignore
-                provider = await Zondy.WebMapTileServiceImageryProvider.fromUrl(options.targetUrl)
+                provider = await Zondy.WebMapTileServiceImageryProvider.fromUrl(options.targetUrl, {
+                    rectangle: Rectangle.fromDegrees(
+                        113.72, // 西经
+                        22.11, // 南纬
+                        115.05, // 东经
+                        22.88, // 北纬
+                    ),
+                })
             } else {
                 provider = await ArcGisMapServerImageryProvider.fromUrl(options.targetUrl)
-            }
-            if (this.openIndexDB) {
-                const originalRequestImage = provider.requestImage.bind(provider)
-
-                // 新增缓存检查方法
-                const getCachedImage = async (cacheKey: any) => {
-                    try {
-                        const cached = await this.tileCache.getTile(cacheKey)
-                        if (cached) {
-                            return await createImageBitmap(cached)
-                        }
-                        return null
-                    } catch (e) {
-                        console.warn('读取缓存失败:', e)
-                        return null
-                    }
-                }
-
-                provider.requestImage = async (x: number, y: number, level: number) => {
-                    const cacheKey = {
-                        url: options.targetUrl,
-                        x,
-                        y,
-                        level,
-                    }
-
-                    // 1. 优先尝试从缓存获取
-                    const cachedImage = await getCachedImage(cacheKey)
-                    if (cachedImage) {
-                        return cachedImage
-                    }
-
-                    // 2. 缓存未命中则从原始源获取
-                    try {
-                        const image = await originalRequestImage(x, y, level)
-                        if (!image || image.width === 0 || image.height === 0) {
-                            throw new Error('Invalid image dimensions')
-                        }
-
-                        // 3. 异步缓存新获取的瓦片
-                        setTimeout(async () => {
-                            try {
-                                const canvas = document.createElement('canvas')
-                                canvas.width = image.width
-                                canvas.height = image.height
-                                const ctx = canvas.getContext('2d')
-                                if (ctx) {
-                                    ctx.drawImage(image, 0, 0)
-                                    canvas.toBlob(async blob => {
-                                        if (blob) {
-                                            await this.tileCache.putTile(cacheKey, blob)
-                                        }
-                                    })
-                                }
-                            } catch (e) {
-                                console.warn('异步缓存失败:', e)
-                            }
-                        }, 0)
-
-                        return image
-                    } catch (error) {
-                        console.warn('获取瓦片失败:', error)
-                        // 4. 失败时再次尝试从缓存获取
-                        const fallbackImage = await getCachedImage(cacheKey)
-                        return fallbackImage || originalRequestImage(x, y, level)
-                    }
-                }
             }
 
             return provider
@@ -953,9 +837,14 @@ export class cesiumService {
     }
 
     // 设置初始视角
-    setInitialView(option: changeModelParamType['setInitialView']): void {
+    setInitialView(option: changeModelParamType['setInitialView'], openFly = true): void {
         if (!this.viewer) return
-
+        if (!openFly) {
+            this.viewer.camera.setView({
+                destination: option.destination,
+            })
+            return
+        }
         this.viewer.camera.flyTo({
             destination: option.destination,
             duration: option.duration || 1,

@@ -132,7 +132,7 @@ const initCesium = async (): Promise<{ status: boolean }> => {
         cesiumUtils.updateViewerAttribute()
 
         // 设置初始视角
-        cesiumUtils.setInitialView({ destination: centerPosition })
+        cesiumUtils.setInitialView({ destination: centerPosition }, false)
 
         // 加载瓦片图层
         const titleUrl =

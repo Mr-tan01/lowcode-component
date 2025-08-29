@@ -1,52 +1,12 @@
 var __defProp = Object.defineProperty;
 var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
 var __publicField = (obj, key, value) => __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
-import localforage from "localforage";
 import { CesiumHeatmap } from "cesium-heatmap-es6";
 import { areaData } from "./type.js";
 import { createClusterBillboard, createInfoCanvas, createEntityConfig, updateViewerEntityInfo, heatmapGradient } from "./tools.js";
 import { useMessage } from "naive-ui";
 import { Color, Rectangle, CustomDataSource, JulianDate, VerticalOrigin, HorizontalOrigin, ScreenSpaceEventType, ScreenSpaceEventHandler, Cartographic, Cartesian3, Math as Math$1, BoundingSphere, defined, ArcGisMapServerImageryProvider, PolylineDashMaterialProperty, PolygonHierarchy, ImageryLayer, Primitive, Entity, Cartesian2 } from "@cesium/engine";
 import { Viewer } from "@cesium/widgets";
-class TileCacheHelper {
-  // 缓存有效期7天
-  constructor() {
-    __publicField(this, "storeName", "WMTS_Tiles");
-    __publicField(this, "maxAge", 7 * 24 * 60 * 60 * 1e3);
-    localforage.config({
-      driver: [localforage.INDEXEDDB, localforage.WEBSQL, localforage.LOCALSTORAGE],
-      name: "CesiumTileCache",
-      storeName: this.storeName
-    });
-  }
-  async getTile(key) {
-    try {
-      const cacheKey = `${key.url}_${key.level}_${key.x}_${key.y}`;
-      const result = await localforage.getItem(cacheKey);
-      if (result && Date.now() - result.timestamp < this.maxAge) {
-        return result.data;
-      }
-      if (result) await localforage.removeItem(cacheKey);
-      return null;
-    } catch (error) {
-      console.error("读取缓存失败:", error);
-      return null;
-    }
-  }
-  async putTile(key, blob) {
-    try {
-      const cacheKey = `${key.url}_${key.level}_${key.x}_${key.y}`;
-      await localforage.setItem(cacheKey, {
-        data: blob,
-        timestamp: Date.now()
-      });
-      return true;
-    } catch (error) {
-      console.error("存储缓存失败:", error);
-      return false;
-    }
-  }
-}
 class cesiumService {
   constructor(containerId, options) {
     __publicField(this, "viewer", null);
@@ -81,20 +41,9 @@ class cesiumService {
     __publicField(this, "lastThrottleTime", 0);
     __publicField(this, "throttleDelay", 100);
     __publicField(this, "rretryCount", 3);
-    __publicField(this, "openIndexDB", false);
     // 深圳市地理边界（根据瓦片定义经纬度范围）
-    __publicField(this, "shenzhenBounds", Rectangle.fromDegrees(
-      113.8,
-      // 西边界 - 经度
-      22.36,
-      // 南边界 - 纬度
-      114.6,
-      // 东边界 - 经度
-      22.7
-      // 北边界 - 纬度
-    ));
+    __publicField(this, "shenzhenBounds", Rectangle.fromDegrees(113.94, 22.43, 114.57, 22.83));
     __publicField(this, "message", useMessage());
-    __publicField(this, "tileCache", new TileCacheHelper());
     __publicField(this, "doubleClickHandler", (event) => {
       event.preventDefault();
       event.stopPropagation();
@@ -108,7 +57,6 @@ class cesiumService {
     };
     this.centerPosition = options.centerPosition;
     this.defaultCenterKey = options.defaultCenterKey;
-    this.openIndexDB = options.openIndexDB;
     this.tileLoadCallback = this.handleTileLoadProgress.bind(this);
   }
   /**
@@ -416,65 +364,20 @@ class cesiumService {
     try {
       let provider;
       if (options.useZondy) {
-        provider = await Zondy.WebMapTileServiceImageryProvider.fromUrl(options.targetUrl);
+        provider = await Zondy.WebMapTileServiceImageryProvider.fromUrl(options.targetUrl, {
+          rectangle: Rectangle.fromDegrees(
+            113.72,
+            // 西经
+            22.11,
+            // 南纬
+            115.05,
+            // 东经
+            22.88
+            // 北纬
+          )
+        });
       } else {
         provider = await ArcGisMapServerImageryProvider.fromUrl(options.targetUrl);
-      }
-      if (this.openIndexDB) {
-        const originalRequestImage = provider.requestImage.bind(provider);
-        const getCachedImage = async (cacheKey) => {
-          try {
-            const cached = await this.tileCache.getTile(cacheKey);
-            if (cached) {
-              return await createImageBitmap(cached);
-            }
-            return null;
-          } catch (e) {
-            console.warn("读取缓存失败:", e);
-            return null;
-          }
-        };
-        provider.requestImage = async (x, y, level) => {
-          const cacheKey = {
-            url: options.targetUrl,
-            x,
-            y,
-            level
-          };
-          const cachedImage = await getCachedImage(cacheKey);
-          if (cachedImage) {
-            return cachedImage;
-          }
-          try {
-            const image = await originalRequestImage(x, y, level);
-            if (!image || image.width === 0 || image.height === 0) {
-              throw new Error("Invalid image dimensions");
-            }
-            setTimeout(async () => {
-              try {
-                const canvas = document.createElement("canvas");
-                canvas.width = image.width;
-                canvas.height = image.height;
-                const ctx = canvas.getContext("2d");
-                if (ctx) {
-                  ctx.drawImage(image, 0, 0);
-                  canvas.toBlob(async (blob) => {
-                    if (blob) {
-                      await this.tileCache.putTile(cacheKey, blob);
-                    }
-                  });
-                }
-              } catch (e) {
-                console.warn("异步缓存失败:", e);
-              }
-            }, 0);
-            return image;
-          } catch (error) {
-            console.warn("获取瓦片失败:", error);
-            const fallbackImage = await getCachedImage(cacheKey);
-            return fallbackImage || originalRequestImage(x, y, level);
-          }
-        };
       }
       return provider;
     } catch {
@@ -742,8 +645,14 @@ class cesiumService {
     });
   }
   // 设置初始视角
-  setInitialView(option) {
+  setInitialView(option, openFly = true) {
     if (!this.viewer) return;
+    if (!openFly) {
+      this.viewer.camera.setView({
+        destination: option.destination
+      });
+      return;
+    }
     this.viewer.camera.flyTo({
       destination: option.destination,
       duration: option.duration || 1

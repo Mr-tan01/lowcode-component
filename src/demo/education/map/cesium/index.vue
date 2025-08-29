@@ -36,7 +36,7 @@ import { Cartesian3 } from 'cesium'
 import data from './index.json'
 const basicConfig = ref<basicConfigType>({
     clusteringEnabled: true,
-    cameraLimitsEnabled: false,
+    cameraLimitsEnabled: true,
 })
 import { getToken } from '@/request'
 
@@ -158,13 +158,8 @@ onMounted(async () => {
 const add = () => {
     const heatMapData = heatMapDataHandle(data.data)
     // 点位value
-    const valueArr = heatMapData.map(i => i.value)
-    // 点位最大值
-    const max = Math.max(...valueArr)
-    // 点位最小值
-    const min = Math.min(...valueArr)
+
     buildHeatMap = cesiumMap.value?.cesiumUtils.buildHeatMap(heatMapData)
-    cesiumMap.value?.changeModel('updateHeatMapMaxMin', { max: max, min: min })
 }
 </script>
 
