@@ -480,6 +480,7 @@ export class cesiumService {
                         115.05, // 东经
                         22.88, // 北纬
                     ),
+                    ...(this.options?.config?.providerOptions ?? {}),
                 })
             } else {
                 provider = await ArcGisMapServerImageryProvider.fromUrl(options.targetUrl)

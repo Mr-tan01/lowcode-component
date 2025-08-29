@@ -265,6 +265,7 @@ export interface basicConfigType {
     cameraLimitsEnabled?: boolean;
     hoverState?: boolean;
     defaultUrl?: string;
+    providerOptions?: Record<string, any>;
 }
 export interface optionType {
     config: basicConfigType;
