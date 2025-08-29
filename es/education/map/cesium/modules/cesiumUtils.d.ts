@@ -24,10 +24,8 @@ export declare class cesiumService {
     private lastThrottleTime;
     private throttleDelay;
     private rretryCount;
-    private openIndexDB;
     private shenzhenBounds;
     private message;
-    private tileCache;
     constructor(containerId: string, options: optionType);
     /**
      * 对经纬度完全相同的数据点进行均匀环形偏移
@@ -78,7 +76,7 @@ export declare class cesiumService {
     private restoreEntityState;
     private handleLabelVisibilityOnExit;
     polygonClickHandler(name: string): void;
-    setInitialView(option: changeModelParamType['setInitialView']): void;
+    setInitialView(option: changeModelParamType['setInitialView'], openFly?: boolean): void;
     setViewerLayer(imageryLayersUrl: string): void;
     buildHeatMap(points: {
         x: number;
