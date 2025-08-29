@@ -361,6 +361,7 @@ class cesiumService {
     this.imageLayerState = !this.imageLayerState;
   }
   async loadProviderWithFallback(options) {
+    var _a, _b;
     try {
       let provider;
       if (options.useZondy) {
@@ -374,7 +375,8 @@ class cesiumService {
             // 东经
             22.88
             // 北纬
-          )
+          ),
+          ...((_b = (_a = this.options) == null ? void 0 : _a.config) == null ? void 0 : _b.providerOptions) ?? {}
         });
       } else {
         provider = await ArcGisMapServerImageryProvider.fromUrl(options.targetUrl);
