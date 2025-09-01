@@ -1,4 +1,4 @@
-import { defineComponent, openBlock, createElementBlock, createElementVNode, toDisplayString, Fragment, renderList, renderSlot, createVNode, unref, createCommentVNode } from "vue";
+import { defineComponent, createElementBlock, openBlock, createElementVNode, toDisplayString, Fragment, renderList, renderSlot, createCommentVNode, createVNode, unref } from "vue";
 import { bigNumber } from "lowcode-share/es/share";
 import { NNumberAnimation } from "naive-ui/es/number-animation";
 import memoize from "lodash-es/memoize";
@@ -105,7 +105,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
             { class: "lc-bothway-card__wrapper__table--bg" },
             null,
             -1
-            /* HOISTED */
+            /* CACHED */
           ))
         ])
       ]);

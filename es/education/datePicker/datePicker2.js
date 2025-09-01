@@ -1,4 +1,4 @@
-import { defineComponent, openBlock, createElementBlock, createVNode, withCtx, unref, mergeProps, createElementVNode } from "vue";
+import { defineComponent, createElementBlock, openBlock, createVNode, withCtx, unref, mergeProps, createElementVNode } from "vue";
 import { NDatePicker } from "naive-ui/es/date-picker";
 import _sfc_main$1 from "./common/components/ConfigProvider/index.js";
 const _hoisted_1 = { class: "lc-date-picker" };
@@ -16,15 +16,15 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                 to: false
               }, _ctx.$attrs),
               {
-                separator: withCtx(() => _cache[0] || (_cache[0] = [
+                separator: withCtx(() => [..._cache[0] || (_cache[0] = [
                   createElementVNode(
                     "span",
                     { class: "color-white" },
                     "-",
                     -1
-                    /* HOISTED */
+                    /* CACHED */
                   )
-                ])),
+                ])]),
                 _: 1
                 /* STABLE */
               },

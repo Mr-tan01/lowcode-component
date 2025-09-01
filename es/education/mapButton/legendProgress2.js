@@ -1,4 +1,4 @@
-import { defineComponent, ref, computed, watch, openBlock, createElementBlock, createElementVNode, toDisplayString, Fragment, renderList, normalizeStyle, withDirectives, vShow } from "vue";
+import { defineComponent, ref, computed, watch, createElementBlock, openBlock, createElementVNode, toDisplayString, Fragment, renderList, normalizeStyle, withDirectives, vShow } from "vue";
 const _hoisted_1 = { class: "legend-progress" };
 const _hoisted_2 = { class: "legend-progress__label" };
 const _hoisted_3 = { class: "legend-progress__center" };

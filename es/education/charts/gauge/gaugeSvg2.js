@@ -1,4 +1,4 @@
-import { defineComponent, useCssVars, computed, useId, openBlock, createElementBlock, createElementVNode, createCommentVNode, createStaticVNode, toDisplayString, createVNode, unref } from "vue";
+import { defineComponent, useCssVars, computed, useId, createElementBlock, openBlock, createElementVNode, createStaticVNode, createCommentVNode, toDisplayString, createVNode, unref } from "vue";
 import { NNumberAnimation } from "naive-ui/es/number-animation";
 const _hoisted_1 = { class: "lc-gauge-svg" };
 const _hoisted_2 = {
@@ -110,7 +110,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                 },
                 null,
                 -1
-                /* HOISTED */
+                /* CACHED */
               )),
               createCommentVNode(" 起始颜色 "),
               _cache[1] || (_cache[1] = createElementVNode(
@@ -121,7 +121,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                 },
                 null,
                 -1
-                /* HOISTED */
+                /* CACHED */
               )),
               createCommentVNode(" 结束颜色 ")
             ], 8, _hoisted_3),
@@ -155,7 +155,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                       ])
                     ],
                     -1
-                    /* HOISTED */
+                    /* CACHED */
                   )),
                   createElementVNode("g", _hoisted_8, [
                     _cache[3] || (_cache[3] = createElementVNode(
@@ -168,7 +168,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                       },
                       null,
                       -1
-                      /* HOISTED */
+                      /* CACHED */
                     )),
                     createElementVNode("path", _hoisted_9, [
                       createElementVNode("animate", {
@@ -194,7 +194,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                   },
                   null,
                   -1
-                  /* HOISTED */
+                  /* CACHED */
                 )),
                 _cache[7] || (_cache[7] = createElementVNode(
                   "path",
@@ -207,7 +207,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                   },
                   null,
                   -1
-                  /* HOISTED */
+                  /* CACHED */
                 )),
                 _cache[8] || (_cache[8] = createElementVNode(
                   "path",
@@ -221,7 +221,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                   },
                   null,
                   -1
-                  /* HOISTED */
+                  /* CACHED */
                 )),
                 createElementVNode("g", _hoisted_11, [
                   createElementVNode("text", _hoisted_12, [

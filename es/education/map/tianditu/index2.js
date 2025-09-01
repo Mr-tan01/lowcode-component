@@ -1,4 +1,4 @@
-import { defineComponent, shallowRef, useTemplateRef, openBlock, createElementBlock, createElementVNode } from "vue";
+import { defineComponent, shallowRef, useTemplateRef, createElementBlock, openBlock, createElementVNode } from "vue";
 import { useScriptTag } from "@vueuse/core";
 import normalMarker from "../mark/images/normal.png.js";
 const _hoisted_1 = { class: "lc-tianditu" };

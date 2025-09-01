@@ -21,8 +21,7 @@ const barBuiltInStyle = {
       { offset: 1, color: "rgba(119, 73, 255, 0)" },
       { offset: 0, color: "rgba(119, 73, 255, 1)" }
     ])
-  ],
-  symbols: []
+  ]
 };
 const barColors = ["rgba(54, 115, 245, 1)", "rgba(1, 158, 43, 1)", "rgba(222, 56, 4, 1)"];
 const yAxisOptions = {

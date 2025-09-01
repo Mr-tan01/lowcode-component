@@ -1,4 +1,4 @@
-import { defineComponent, mergeDefaults, computed, openBlock, createElementBlock, createVNode, unref, mergeProps } from "vue";
+import { defineComponent, mergeDefaults, computed, createElementBlock, openBlock, createVNode, unref, mergeProps } from "vue";
 import { SChartsLine } from "@mmj-code-lib/lowcode/es/components";
 import { useCommonLineOptions, useCommonLineSeries } from "./options.js";
 import merge from "lodash-es/merge";

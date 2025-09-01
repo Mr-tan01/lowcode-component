@@ -1,4 +1,4 @@
-import { defineComponent, openBlock, createElementBlock, createElementVNode, Fragment, renderList, toDisplayString, createVNode, unref, createTextVNode, renderSlot } from "vue";
+import { defineComponent, createElementBlock, openBlock, createElementVNode, Fragment, renderList, toDisplayString, createVNode, createTextVNode, unref, renderSlot } from "vue";
 import _imports_0 from "./images/card/bg-human.png.js";
 import { NNumberAnimation } from "naive-ui/es/number-animation";
 import memoize from "lodash-es/memoize";
@@ -94,7 +94,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                     { class: "lc-human-shapeCard__wrapper__item__content__val" },
                     "|",
                     -1
-                    /* HOISTED */
+                    /* CACHED */
                   )),
                   createElementVNode("div", {
                     class: "lc-human-shapeCard__wrapper__item__content__val tooltip-container",
@@ -130,7 +130,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
               },
               null,
               -1
-              /* HOISTED */
+              /* CACHED */
             ))
           ], true)
         ]),
@@ -173,7 +173,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                     { class: "lc-human-shapeCard__wrapper__item__content__val" },
                     "|",
                     -1
-                    /* HOISTED */
+                    /* CACHED */
                   )),
                   createElementVNode("div", {
                     class: "lc-human-shapeCard__wrapper__item__content__val tooltip-container",

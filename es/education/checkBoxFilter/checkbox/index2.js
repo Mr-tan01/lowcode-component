@@ -1,4 +1,4 @@
-import { defineComponent, openBlock, createBlock, unref, mergeProps, withCtx, renderSlot } from "vue";
+import { defineComponent, createBlock, openBlock, unref, mergeProps, withCtx, renderSlot } from "vue";
 import { NCheckbox } from "naive-ui/es/checkbox";
 const _sfc_main = /* @__PURE__ */ defineComponent({
   __name: "checkbox",

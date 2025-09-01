@@ -1,6 +1,6 @@
 import merge from "lodash-es/merge";
 import { deepMergeArrayOptions } from "@mmj-code-lib/lowcode/es/components";
-import { gaugeTitleOptions, gaugeSeriesRecordOptions, gaugeColors, gaugeInnerGraphicColors } from "./const.js";
+import { gaugeColors, gaugeSeriesRecordOptions, gaugeTitleOptions, gaugeInnerGraphicColors } from "./const.js";
 import { commonTooltipOptions } from "../common/components/Charts/options/index.js";
 const commonGaugeOptions = {
   tooltip: commonTooltipOptions,

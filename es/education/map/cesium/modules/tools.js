@@ -8,7 +8,7 @@ import warningLabel from "../image/warning_label.png.js";
 import dangerLabel from "../image/danger_label.png.js";
 import iconPrimary from "../image/icon_primary.png.js";
 import iconSuccess from "../image/icon_success.png.js";
-import { JulianDate, CallbackProperty, Cartesian2, VerticalOrigin, Cartesian3 } from "@cesium/engine";
+import { VerticalOrigin, Cartesian2, Cartesian3, JulianDate, CallbackProperty } from "@cesium/engine";
 const imageUrlOption = {
   primary,
   success,
@@ -33,7 +33,6 @@ const options = {
   textStyle: {
     size: "16px",
     family: "HarmonyOS_Sans_SC_Medium",
-    color: "#fff",
     weight: "normal"
   }
 };

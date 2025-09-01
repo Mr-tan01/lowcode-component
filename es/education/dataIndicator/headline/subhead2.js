@@ -1,4 +1,4 @@
-import { defineComponent, mergeDefaults, useCssVars, computed, openBlock, createElementBlock, createElementVNode, createCommentVNode, renderSlot, toDisplayString } from "vue";
+import { defineComponent, mergeDefaults, useCssVars, computed, createElementBlock, openBlock, createCommentVNode, createElementVNode, renderSlot, toDisplayString } from "vue";
 import _imports_0 from "./images/subhead-lft.png.js";
 import _imports_1 from "./images/subhead-rgt.png.js";
 import _imports_2 from "./images/subhead-lgt.png.js";
@@ -68,7 +68,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     });
     return (_ctx, _cache) => {
       return openBlock(), createElementBlock("div", _hoisted_1, [
-        __props.type === direction.left && !__props.hideRadioIcon ? (openBlock(), createElementBlock("div", _hoisted_2, _cache[0] || (_cache[0] = [
+        __props.type === direction.left && !__props.hideRadioIcon ? (openBlock(), createElementBlock("div", _hoisted_2, [..._cache[0] || (_cache[0] = [
           createElementVNode(
             "img",
             {
@@ -77,10 +77,10 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
             },
             null,
             -1
-            /* HOISTED */
+            /* CACHED */
           )
-        ]))) : createCommentVNode("v-if", true),
-        __props.type === direction.right || __props.type === direction.center ? (openBlock(), createElementBlock("div", _hoisted_3, _cache[1] || (_cache[1] = [
+        ])])) : createCommentVNode("v-if", true),
+        __props.type === direction.right || __props.type === direction.center ? (openBlock(), createElementBlock("div", _hoisted_3, [..._cache[1] || (_cache[1] = [
           createElementVNode(
             "img",
             {
@@ -89,9 +89,9 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
             },
             null,
             -1
-            /* HOISTED */
+            /* CACHED */
           )
-        ]))) : createCommentVNode("v-if", true),
+        ])])) : createCommentVNode("v-if", true),
         _ctx.$slots["icon-left"] ? (openBlock(), createElementBlock("div", _hoisted_4, [
           renderSlot(_ctx.$slots, "icon-left", {}, void 0, true)
         ])) : createCommentVNode("v-if", true),
@@ -102,7 +102,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
         _ctx.$slots["icon-right"] ? (openBlock(), createElementBlock("div", _hoisted_6, [
           renderSlot(_ctx.$slots, "icon-right", {}, void 0, true)
         ])) : createCommentVNode("v-if", true),
-        __props.type === direction.right && !__props.hideRadioIcon ? (openBlock(), createElementBlock("div", _hoisted_7, _cache[2] || (_cache[2] = [
+        __props.type === direction.right && !__props.hideRadioIcon ? (openBlock(), createElementBlock("div", _hoisted_7, [..._cache[2] || (_cache[2] = [
           createElementVNode(
             "img",
             {
@@ -111,10 +111,10 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
             },
             null,
             -1
-            /* HOISTED */
+            /* CACHED */
           )
-        ]))) : createCommentVNode("v-if", true),
-        __props.type === direction.left || __props.type === direction.center ? (openBlock(), createElementBlock("div", _hoisted_8, _cache[3] || (_cache[3] = [
+        ])])) : createCommentVNode("v-if", true),
+        __props.type === direction.left || __props.type === direction.center ? (openBlock(), createElementBlock("div", _hoisted_8, [..._cache[3] || (_cache[3] = [
           createElementVNode(
             "img",
             {
@@ -123,9 +123,9 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
             },
             null,
             -1
-            /* HOISTED */
+            /* CACHED */
           )
-        ]))) : createCommentVNode("v-if", true)
+        ])])) : createCommentVNode("v-if", true)
       ]);
     };
   }

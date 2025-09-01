@@ -1,4 +1,4 @@
-import { defineComponent, mergeDefaults, useCssVars, computed, openBlock, createElementBlock, createElementVNode, renderSlot } from "vue";
+import { defineComponent, mergeDefaults, useCssVars, computed, createElementBlock, openBlock, createElementVNode, renderSlot } from "vue";
 import { bgImage } from "./const.js";
 const _hoisted_1 = { class: "lcc-bg__common" };
 const _hoisted_2 = { class: "lcc-bg__common__wrapper" };
@@ -21,14 +21,14 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
           { class: "lcc-bg__common__bl-decoartor-bg" },
           null,
           -1
-          /* HOISTED */
+          /* CACHED */
         )),
         _cache[1] || (_cache[1] = createElementVNode(
           "div",
           { class: "lcc-bg__common__br-decoartor-bg" },
           null,
           -1
-          /* HOISTED */
+          /* CACHED */
         )),
         createElementVNode("div", _hoisted_2, [
           renderSlot(_ctx.$slots, "default", {}, void 0, true)

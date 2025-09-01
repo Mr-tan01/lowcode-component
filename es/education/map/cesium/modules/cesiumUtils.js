@@ -5,7 +5,7 @@ import { CesiumHeatmap } from "cesium-heatmap-es6";
 import { areaData } from "./type.js";
 import { createClusterBillboard, createInfoCanvas, createEntityConfig, updateViewerEntityInfo, heatmapGradient } from "./tools.js";
 import { useMessage } from "naive-ui";
-import { Color, Rectangle, CustomDataSource, JulianDate, VerticalOrigin, HorizontalOrigin, ScreenSpaceEventType, ScreenSpaceEventHandler, Cartographic, Cartesian3, Math as Math$1, BoundingSphere, defined, ArcGisMapServerImageryProvider, PolylineDashMaterialProperty, PolygonHierarchy, ImageryLayer, Primitive, Entity, Cartesian2 } from "@cesium/engine";
+import { Color, Rectangle, CustomDataSource, JulianDate, HorizontalOrigin, VerticalOrigin, ScreenSpaceEventType, ScreenSpaceEventHandler, Cartographic, Cartesian3, Math as Math$1, BoundingSphere, defined, ArcGisMapServerImageryProvider, PolygonHierarchy, PolylineDashMaterialProperty, ImageryLayer, Primitive, Entity, Cartesian2 } from "@cesium/engine";
 import { Viewer } from "@cesium/widgets";
 class cesiumService {
   constructor(containerId, options) {

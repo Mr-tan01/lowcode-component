@@ -1,4 +1,4 @@
-import { defineComponent, mergeModels, useCssVars, unref, useModel, computed, toRefs, openBlock, createElementBlock, normalizeClass, createElementVNode, createBlock, mergeProps, createCommentVNode } from "vue";
+import { defineComponent, mergeModels, useCssVars, unref, toRefs, useModel, computed, createElementBlock, openBlock, normalizeClass, createElementVNode, createBlock, createCommentVNode, mergeProps } from "vue";
 import { robotBQMap, imageShowTrigger, imageHideDir } from "./const.js";
 import robotChatPopup from "./robot-chat-popup.js";
 import { useDragRobotPosition } from "./drag.js";

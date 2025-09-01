@@ -1,4 +1,4 @@
-import { openBlock, createElementBlock } from "vue";
+import { createElementBlock, openBlock } from "vue";
 import _export_sfc from "../_virtual/_plugin-vue_export-helper.js";
 const _sfc_main = {};
 const _hoisted_1 = { class: "lc-word-cloud" };

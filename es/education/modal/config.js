@@ -3,7 +3,6 @@ import a169BgImg from "./images/16x9.png.js";
 const sizeModeEnum = {
   large: "large",
   medium: "medium",
-  custom: "custom",
   a169: "a169"
 };
 const options = {
@@ -24,7 +23,6 @@ const options = {
       headerWidth: "450px"
     }
   },
-  sizeMode: sizeModeEnum.custom,
   bgImgs: {
     [sizeModeEnum.large]: largeBgImg,
     [sizeModeEnum.medium]: largeBgImg,

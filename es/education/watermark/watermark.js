@@ -1,4 +1,4 @@
-import { defineComponent, ref, watch, onUnmounted, computed, openBlock, createElementBlock, normalizeStyle, toDisplayString, createCommentVNode } from "vue";
+import { defineComponent, ref, watch, onUnmounted, computed, createElementBlock, openBlock, normalizeStyle, createCommentVNode, toDisplayString } from "vue";
 const _hoisted_1 = { key: 0 };
 const _sfc_main = /* @__PURE__ */ defineComponent({
   __name: "watermark",

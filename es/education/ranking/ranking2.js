@@ -1,4 +1,4 @@
-import { defineComponent, computed, ref, onMounted, openBlock, createElementBlock, createVNode, unref, withCtx, createElementVNode, Fragment, renderList, normalizeClass, normalizeStyle, toDisplayString, createCommentVNode } from "vue";
+import { defineComponent, computed, ref, onMounted, createElementBlock, openBlock, createVNode, unref, withCtx, createElementVNode, Fragment, renderList, normalizeStyle, normalizeClass, toDisplayString, createCommentVNode } from "vue";
 import LcElasticScrollbar from "./elasticScrollbar/index.js";
 const _hoisted_1 = { class: "lc-ranking" };
 const _hoisted_2 = { class: "lc-ranking__wrapper" };
@@ -125,7 +125,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                           { class: "lc-ranking__wrapper__item__inner__bar" },
                           null,
                           -1
-                          /* HOISTED */
+                          /* CACHED */
                         )),
                         _ctx.showBall ? (openBlock(), createElementBlock("div", _hoisted_11)) : createCommentVNode("v-if", true)
                       ])

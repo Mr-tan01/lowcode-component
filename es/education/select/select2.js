@@ -1,4 +1,4 @@
-import { defineComponent, mergeDefaults, openBlock, createElementBlock, normalizeClass, createVNode, unref, mergeProps, withCtx, createElementVNode } from "vue";
+import { defineComponent, mergeDefaults, createElementBlock, openBlock, normalizeClass, createVNode, unref, mergeProps, withCtx, createElementVNode } from "vue";
 import { NSelect } from "naive-ui/es/select";
 const _sfc_main = /* @__PURE__ */ defineComponent({
   __name: "select",
@@ -33,7 +33,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
             clearable: "",
             to: false
           }, _ctx.$attrs), {
-            arrow: withCtx(() => _cache[0] || (_cache[0] = [
+            arrow: withCtx(() => [..._cache[0] || (_cache[0] = [
               createElementVNode(
                 "svg",
                 {
@@ -48,9 +48,9 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                   })
                 ],
                 -1
-                /* HOISTED */
+                /* CACHED */
               )
-            ])),
+            ])]),
             _: 1
             /* STABLE */
           }, 16, ["placeholder", "options"])

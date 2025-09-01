@@ -1,6 +1,6 @@
 import merge from "lodash-es/merge";
 import { mergeLineRecord } from "../line/options.js";
-import { tooltipOptions, legendOptions, gridOptions, xAxisOptions, yAxisOptions, barColors } from "./const.js";
+import { barColors, yAxisOptions, xAxisOptions, gridOptions, legendOptions, tooltipOptions } from "./const.js";
 import { deepMergeArrayOptions } from "@mmj-code-lib/lowcode/es/components";
 const commonBarOptions = {
   tooltip: tooltipOptions,

@@ -1,4 +1,4 @@
-import { defineComponent, mergeDefaults, computed, openBlock, createElementBlock, createElementVNode, toDisplayString } from "vue";
+import { defineComponent, mergeDefaults, computed, createElementBlock, openBlock, createElementVNode, toDisplayString } from "vue";
 import { overflowStr } from "lowcode-share/es/share";
 const _hoisted_1 = { class: "lc-page__texthead" };
 const _hoisted_2 = ["title"];
@@ -26,7 +26,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
           { class: "lc-page__texthead__bg" },
           null,
           -1
-          /* HOISTED */
+          /* CACHED */
         )),
         createElementVNode("div", {
           class: "lc-page__texthead__text",

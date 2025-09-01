@@ -1,4 +1,4 @@
-import { defineComponent, openBlock, createElementBlock, normalizeClass, createElementVNode, renderSlot, createCommentVNode } from "vue";
+import { defineComponent, createElementBlock, openBlock, normalizeClass, createElementVNode, createCommentVNode, renderSlot } from "vue";
 const _hoisted_1 = { class: "lc-button__wrapper" };
 const _hoisted_2 = {
   key: 0,

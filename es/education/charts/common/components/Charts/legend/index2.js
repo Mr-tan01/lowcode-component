@@ -1,4 +1,4 @@
-import { defineComponent, ref, watch, computed, openBlock, createElementBlock, createElementVNode, Fragment, renderList, normalizeStyle, renderSlot, createVNode, unref, withCtx } from "vue";
+import { defineComponent, ref, watch, computed, createElementBlock, openBlock, createElementVNode, Fragment, renderList, normalizeStyle, renderSlot, createVNode, unref, withCtx } from "vue";
 import { NTooltip } from "naive-ui/es/tooltip";
 const _hoisted_1 = { class: "lc-common-legend" };
 const _hoisted_2 = { class: "lc-common-legend__wrapper__legend" };
@@ -96,7 +96,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                             { class: "lc-common-legend__wrapper__legend__item__icon" },
                             null,
                             -1
-                            /* HOISTED */
+                            /* CACHED */
                           )),
                           createElementVNode("div", {
                             class: "lc-common-legend__wrapper__legend__item__label",

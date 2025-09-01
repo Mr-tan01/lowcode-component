@@ -1,4 +1,4 @@
-import { defineComponent, ref, computed, onMounted, onBeforeUnmount, openBlock, createElementBlock } from "vue";
+import { defineComponent, ref, computed, onMounted, onBeforeUnmount, createElementBlock, openBlock } from "vue";
 import defaultImage from "./images/default.png.js";
 import hoverImg from "./images/hover_image.png.js";
 import { useResizeObserver } from "@vueuse/core";

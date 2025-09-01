@@ -1,4 +1,4 @@
-import { defineComponent, mergeDefaults, computed, openBlock, createElementBlock, createVNode, unref, mergeProps } from "vue";
+import { defineComponent, mergeDefaults, computed, createElementBlock, openBlock, createVNode, unref, mergeProps } from "vue";
 import BaseChart from "../common/components/Charts/baseChart/base.js";
 import { useCommonChartExpose } from "../common/components/Charts/utils/index.js";
 import { useCommonScatterSeries, useCommonScatterOptions } from "./options.js";

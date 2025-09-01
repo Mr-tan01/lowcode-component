@@ -1,4 +1,4 @@
-import { defineComponent, openBlock, createElementBlock, Fragment, renderList, renderSlot, createElementVNode, toDisplayString } from "vue";
+import { defineComponent, createElementBlock, openBlock, Fragment, renderList, renderSlot, createElementVNode, toDisplayString } from "vue";
 import { samplingStaticIcons } from "./const.js";
 const _hoisted_1 = { class: "Lc-boder" };
 const _hoisted_2 = ["src"];

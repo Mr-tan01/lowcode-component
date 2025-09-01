@@ -1,4 +1,4 @@
-import { defineComponent, mergeDefaults, computed, openBlock, createElementBlock, createElementVNode, Fragment, renderList, toDisplayString } from "vue";
+import { defineComponent, mergeDefaults, computed, createElementBlock, openBlock, createElementVNode, Fragment, renderList, toDisplayString } from "vue";
 const _hoisted_1 = { class: "bimodal-index" };
 const _hoisted_2 = { class: "bimodal-index__indicator" };
 const _hoisted_3 = { class: "bimodal-index__indicator__lable" };

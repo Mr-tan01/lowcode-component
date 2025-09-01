@@ -1,4 +1,4 @@
-import { defineComponent, mergeDefaults, openBlock, createElementBlock, createElementVNode, toDisplayString, createVNode, unref } from "vue";
+import { defineComponent, mergeDefaults, createElementBlock, openBlock, createElementVNode, toDisplayString, createVNode, unref } from "vue";
 import _imports_0 from "./images/card/spot-bg.png.js";
 import _imports_1 from "./images/card/big-substrate-bg.png.js";
 import { NNumberAnimation } from "naive-ui/es/number-animation";
@@ -32,7 +32,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
           },
           null,
           -1
-          /* HOISTED */
+          /* CACHED */
         )),
         _cache[2] || (_cache[2] = createElementVNode(
           "img",
@@ -43,7 +43,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
           },
           null,
           -1
-          /* HOISTED */
+          /* CACHED */
         )),
         createElementVNode("div", _hoisted_2, [
           createElementVNode(
@@ -73,7 +73,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                 })
               ],
               -1
-              /* HOISTED */
+              /* CACHED */
             ))
           ])
         ])
