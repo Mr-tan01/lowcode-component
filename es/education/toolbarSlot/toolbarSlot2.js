@@ -1,4 +1,4 @@
-import { defineComponent, mergeModels, useModel, openBlock, createElementBlock, normalizeClass, createElementVNode, renderSlot, createVNode, unref, withCtx } from "vue";
+import { defineComponent, mergeModels, useModel, createElementBlock, openBlock, normalizeClass, createElementVNode, renderSlot, createVNode, unref, withCtx } from "vue";
 import { NDatePicker } from "naive-ui/es/date-picker";
 import LcIcon from "./icon/index.js";
 import './assets/icon/iconCard.css';/* empty css              */
@@ -65,15 +65,15 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                   format: "yyyy.MM.dd",
                   type: "date"
                 }, {
-                  "date-icon": withCtx(() => _cache[1] || (_cache[1] = [
+                  "date-icon": withCtx(() => [..._cache[1] || (_cache[1] = [
                     createElementVNode(
                       "span",
                       null,
                       null,
                       -1
-                      /* HOISTED */
+                      /* CACHED */
                     )
-                  ])),
+                  ])]),
                   _: 1
                   /* STABLE */
                 }, 8, ["value"])

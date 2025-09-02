@@ -1,4 +1,4 @@
-import { defineComponent, computed, openBlock, createElementBlock, normalizeClass, createElementVNode, renderSlot, toDisplayString, createVNode, unref, createCommentVNode, withCtx, createTextVNode } from "vue";
+import { defineComponent, computed, createElementBlock, openBlock, normalizeClass, createElementVNode, renderSlot, toDisplayString, createCommentVNode, createVNode, unref, withCtx, createTextVNode } from "vue";
 import personIcon from "./images/skew/icon/person.png.js";
 import { bigNumber } from "lowcode-share/es/share";
 import { NNumberAnimation } from "naive-ui/es/number-animation";

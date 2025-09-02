@@ -1,4 +1,4 @@
-import { defineComponent, mergeDefaults, computed, openBlock, createElementBlock, normalizeClass, createElementVNode, renderSlot, toDisplayString, createVNode, unref, createCommentVNode, createTextVNode, withCtx } from "vue";
+import { defineComponent, mergeDefaults, computed, createElementBlock, openBlock, normalizeClass, createElementVNode, renderSlot, createCommentVNode, toDisplayString, createVNode, unref, createTextVNode, withCtx } from "vue";
 import personIcon from "./images/skew/icon/person.png.js";
 import { bigNumber } from "lowcode-share/es/share";
 import { NNumberAnimation } from "naive-ui/es/number-animation";
@@ -189,7 +189,11 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                         active: "",
                         precision: __props.decimal
                       }, null, 8, ["to", "precision"]),
-                      _cache[0] || (_cache[0] = createTextVNode("% "))
+                      _cache[0] || (_cache[0] = createTextVNode(
+                        "% ",
+                        -1
+                        /* CACHED */
+                      ))
                     ]),
                     __props.yearValue ? (openBlock(), createElementBlock(
                       "div",

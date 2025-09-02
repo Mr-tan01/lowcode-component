@@ -1,4 +1,4 @@
-import { defineComponent, openBlock, createElementBlock, createVNode, unref, mergeProps, withCtx, renderSlot, createElementVNode, normalizeStyle, toDisplayString } from "vue";
+import { defineComponent, createElementBlock, openBlock, createVNode, unref, mergeProps, withCtx, createElementVNode, renderSlot, normalizeStyle, toDisplayString } from "vue";
 import { NTooltip } from "naive-ui/es/tooltip";
 const _hoisted_1 = { class: "lc-tooltip" };
 const _hoisted_2 = { class: "lc-tooltip__trigger" };
@@ -30,7 +30,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                       class: "lc-tooltip__trigger_icon",
                       style: normalizeStyle({ width: `${_ctx.size}px` })
                     },
-                    _cache[0] || (_cache[0] = [
+                    [..._cache[0] || (_cache[0] = [
                       createElementVNode(
                         "svg",
                         {
@@ -50,9 +50,9 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                           ])
                         ],
                         -1
-                        /* HOISTED */
+                        /* CACHED */
                       )
-                    ]),
+                    ])],
                     4
                     /* STYLE */
                   ),

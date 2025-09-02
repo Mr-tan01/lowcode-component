@@ -1,4 +1,4 @@
-import { defineComponent, useCssVars, computed, openBlock, createElementBlock, normalizeClass, createElementVNode, renderSlot, createVNode, unref, withCtx, createTextVNode, toDisplayString, createCommentVNode } from "vue";
+import { defineComponent, useCssVars, computed, createElementBlock, openBlock, normalizeClass, createElementVNode, renderSlot, createCommentVNode, createVNode, unref, withCtx, createTextVNode, toDisplayString } from "vue";
 import { NNumberAnimation } from "naive-ui/es/number-animation";
 import { bigNumber } from "lowcode-share/es/share";
 import LcTooltip from "./tooltip/index.js";
@@ -129,7 +129,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                 { class: "lc-indicator-card__footer" },
                 null,
                 -1
-                /* HOISTED */
+                /* CACHED */
               ))
             ], true)
           ])

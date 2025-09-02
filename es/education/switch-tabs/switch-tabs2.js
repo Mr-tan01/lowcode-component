@@ -1,4 +1,4 @@
-import { defineComponent, mergeDefaults, computed, openBlock, createElementBlock, createVNode, unref, mergeProps, withCtx, createElementVNode, normalizeClass, toDisplayString } from "vue";
+import { defineComponent, mergeDefaults, computed, createElementBlock, openBlock, createVNode, unref, mergeProps, withCtx, createElementVNode, normalizeClass, toDisplayString } from "vue";
 import LcCarouseBox from "./carouseBox/index.js";
 import { propsRaw } from "./carouseBox/props.js";
 import { defSwitchTabList } from "./const.js";

@@ -1,4 +1,4 @@
-import { defineComponent, mergeDefaults, computed, openBlock, createElementBlock, normalizeClass, createElementVNode, toDisplayString } from "vue";
+import { defineComponent, mergeDefaults, computed, createElementBlock, openBlock, normalizeClass, createElementVNode, toDisplayString } from "vue";
 import _imports_0 from "./images/ltr-bz.png.js";
 import { overflowStr } from "lowcode-share/es/share";
 const _hoisted_1 = { class: "lc-chart-title__wrapper" };
@@ -46,7 +46,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                 })
               ],
               -1
-              /* HOISTED */
+              /* CACHED */
             ))
           ])
         ],

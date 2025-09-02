@@ -1,7 +1,7 @@
-import { defineComponent, openBlock, createBlock, unref, withCtx, renderSlot } from "vue";
+import { defineComponent, createBlock, openBlock, unref, withCtx, renderSlot } from "vue";
 import { NConfigProvider } from "naive-ui/es/config-provider";
 import { darkTheme } from "naive-ui/es/themes";
-import { dateZhCN, zhCN } from "naive-ui/es/locales";
+import { zhCN, dateZhCN } from "naive-ui/es/locales";
 const _sfc_main = /* @__PURE__ */ defineComponent({
   __name: "index",
   setup(__props) {

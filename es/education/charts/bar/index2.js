@@ -1,4 +1,4 @@
-import { defineComponent, useTemplateRef, computed, onMounted, openBlock, createElementBlock, createVNode, unref, mergeProps } from "vue";
+import { defineComponent, useTemplateRef, computed, onMounted, createElementBlock, openBlock, createVNode, unref, mergeProps } from "vue";
 import { SChartsBar } from "@mmj-code-lib/lowcode/es/components";
 import { useCommonBarOptions, useCommonBarSeries, commonBarOptions } from "./options.js";
 import merge from "lodash-es/merge";

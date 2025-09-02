@@ -1,4 +1,4 @@
-import { defineComponent, mergeDefaults, computed, openBlock, createElementBlock, createVNode, unref } from "vue";
+import { defineComponent, mergeDefaults, computed, createElementBlock, openBlock, createVNode, unref } from "vue";
 import BaseChart from "../common/components/Charts/baseChart/base.js";
 import { useCommonChartExpose } from "../common/components/Charts/utils/index.js";
 import merge from "lodash-es/merge";

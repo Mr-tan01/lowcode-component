@@ -1,4 +1,4 @@
-import { defineComponent, mergeDefaults, openBlock, createElementBlock, createElementVNode, toDisplayString, Fragment, renderList } from "vue";
+import { defineComponent, mergeDefaults, createElementBlock, openBlock, createElementVNode, toDisplayString, Fragment, renderList } from "vue";
 const _hoisted_1 = { class: "lc-indicator-list" };
 const _hoisted_2 = { class: "lc-indicator-list__wrapper" };
 const _hoisted_3 = { class: "lc-indicator-list__wrapper__image" };

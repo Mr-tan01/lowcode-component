@@ -1,4 +1,4 @@
-import { defineComponent, useCssVars, useTemplateRef, shallowRef, ref, computed, onMounted, watchPostEffect, onBeforeUnmount, openBlock, createElementBlock, normalizeClass, normalizeStyle, createElementVNode, createVNode, unref, createCommentVNode } from "vue";
+import { defineComponent, useCssVars, ref, computed, useTemplateRef, shallowRef, onMounted, watchPostEffect, onBeforeUnmount, createElementBlock, openBlock, normalizeStyle, normalizeClass, createElementVNode, createCommentVNode, createVNode, unref } from "vue";
 import { init } from "echarts";
 import { useCommonPieOptions, usePieCommonSeries } from "./options.js";
 import merge from "lodash-es/merge";
@@ -32,12 +32,12 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
   emits: ["legend:click", "legend:toggleSelect"],
   setup(__props, { expose: __expose, emit: __emit }) {
     useCssVars((_ctx) => ({
-      "7f2b5b58": _ctx.flexDirection,
-      "466f7cb4": wrapperPading.value,
-      "86685a78": _ctx.legendPosition,
-      "9db241bc": _ctx.legendLeft,
-      "584bb2da": _ctx.legendTop,
-      "a41ba54e": cssBlockSize.value
+      "169b6b33": _ctx.flexDirection,
+      "4440e6e2": wrapperPading.value,
+      "135dbe49": _ctx.legendPosition,
+      "98c555b2": _ctx.legendLeft,
+      "47dbe835": _ctx.legendTop,
+      "26b993c4": cssBlockSize.value
     }));
     const chartDomRef = useTemplateRef("chartDom");
     const chartInstance = shallowRef();
@@ -87,7 +87,6 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     function setOptions(option, notMerge, lazyUpdate) {
       var _a;
       const adaptOptions = transformEChartsConfig({ ...cloneDeepOptions.value, ...option });
-      console.log(adaptOptions, "===。");
       (_a = chartInstance.value) == null ? void 0 : _a.setOption(adaptOptions, notMerge, lazyUpdate);
     }
     const cssBlockSize = ref("100%");

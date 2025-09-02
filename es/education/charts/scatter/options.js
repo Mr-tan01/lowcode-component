@@ -1,6 +1,6 @@
 import merge from "lodash-es/merge";
 import { deepMergeArrayOptions } from "@mmj-code-lib/lowcode/es/components";
-import { tooltipOptions, legendOptions, gridOptions, xAxisOptions, yAxisOptions, scatterColors, commonScatterSeries } from "./const.js";
+import { commonScatterSeries, scatterColors, yAxisOptions, xAxisOptions, gridOptions, legendOptions, tooltipOptions } from "./const.js";
 import { setRgbaAlpha } from "lowcode-share/es/share";
 const commonScatterOptions = {
   tooltip: tooltipOptions,

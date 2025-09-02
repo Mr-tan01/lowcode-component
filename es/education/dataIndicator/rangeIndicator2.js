@@ -1,4 +1,4 @@
-import { defineComponent, openBlock, createElementBlock, createElementVNode, Fragment, renderList, renderSlot, createVNode, unref, toDisplayString, createCommentVNode } from "vue";
+import { defineComponent, createElementBlock, openBlock, createElementVNode, Fragment, renderList, createCommentVNode, renderSlot, createVNode, unref, toDisplayString } from "vue";
 import { bigNumber } from "lowcode-share/es/share";
 import { NNumberAnimation } from "naive-ui/es/number-animation";
 import memoize from "lodash-es/memoize";
@@ -58,7 +58,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
             { class: "lc-range-indicator__wrapper__table--bg" },
             null,
             -1
-            /* HOISTED */
+            /* CACHED */
           )),
           createElementVNode("div", _hoisted_3, [
             (openBlock(true), createElementBlock(
@@ -74,7 +74,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                     { class: "lc-range-indicator__wrapper__info__decorator--bg" },
                     null,
                     -1
-                    /* HOISTED */
+                    /* CACHED */
                   )),
                   createElementVNode("div", _hoisted_4, [
                     renderSlot(_ctx.$slots, item.customSlot, { item }, () => {

@@ -1,4 +1,4 @@
-import { defineComponent, computed, openBlock, createBlock, unref, normalizeProps, guardReactiveProps, withCtx, createElementVNode, normalizeStyle, renderSlot, createVNode, normalizeClass } from "vue";
+import { defineComponent, computed, createBlock, openBlock, unref, normalizeProps, guardReactiveProps, withCtx, createElementVNode, normalizeStyle, renderSlot, createVNode, normalizeClass } from "vue";
 import { NModal } from "naive-ui/es/modal";
 import { options } from "./config.js";
 import LcDecoratorTitle from "./decoratorTitle/index.js";
@@ -69,7 +69,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                         createElementVNode("button", {
                           class: "lc-modal__wrapper__closeable__button",
                           onClick: close
-                        }, _cache[0] || (_cache[0] = [
+                        }, [..._cache[0] || (_cache[0] = [
                           createElementVNode(
                             "svg",
                             {
@@ -90,9 +90,9 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                               ])
                             ],
                             -1
-                            /* HOISTED */
+                            /* CACHED */
                           )
-                        ]))
+                        ])])
                       ], true)
                     ],
                     2

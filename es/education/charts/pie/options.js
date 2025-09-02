@@ -1,5 +1,5 @@
 import { deepMergeArrayOptions } from "@mmj-code-lib/lowcode/es/components";
-import { pieTitleOptions, pieTooltipOptions, pieLegend, pieColors, innerLabelSeries1, pieSeriesRecord } from "./const.js";
+import { pieColors, pieLegend, pieTooltipOptions, pieTitleOptions, innerLabelSeries1, pieSeriesRecord } from "./const.js";
 import merge from "lodash-es/merge";
 const pieCommonOptions = {
   title: pieTitleOptions,

@@ -1,4 +1,4 @@
-import { defineComponent, ref, useTemplateRef, computed, openBlock, createElementBlock, normalizeClass, createElementVNode, unref, toDisplayString, Fragment, renderList, normalizeStyle } from "vue";
+import { defineComponent, ref, useTemplateRef, computed, createElementBlock, openBlock, normalizeClass, createElementVNode, unref, toDisplayString, Fragment, renderList, normalizeStyle } from "vue";
 import { useResizeObserver } from "@vueuse/core";
 import debounce from "lodash-es/debounce";
 const _hoisted_1 = { class: "lc-word-cloud__wrapper__title" };
@@ -52,7 +52,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     const _baseAngle = Math.PI / 360;
     let speed = 1;
     const angleX = ref(speed * _baseAngle);
-    const angleY = ref(-1 * _baseAngle);
+    const angleY = ref(-speed * _baseAngle);
     let x, y, z, cos, sin = 0;
     function rotateX() {
       cos = Math.cos(angleX.value);
@@ -109,7 +109,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     }, 10);
     function wrapperMosueLeave() {
       angleX.value = speed * _baseAngle;
-      angleY.value = -1 * _baseAngle;
+      angleY.value = -speed * _baseAngle;
       if (__props.enableAnimate) {
         autoRotate = _autRotateAnimate;
         autoRotate();

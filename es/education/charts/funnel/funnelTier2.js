@@ -1,4 +1,4 @@
-import { defineComponent, computed, openBlock, createElementBlock, Fragment, renderList, createElementVNode, toDisplayString, normalizeStyle } from "vue";
+import { defineComponent, computed, createElementBlock, openBlock, Fragment, renderList, createElementVNode, toDisplayString, normalizeStyle } from "vue";
 import { defaultFunnelTierOptions, defaultFunnelTierSeriesOptions } from "./themeConfig/funnelTier/index.js";
 import merge from "lodash-es/merge";
 const _hoisted_1 = { class: "lc-funnel-tier" };
@@ -59,7 +59,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                           { class: "lc-funnel-tier__serie__item__bar__line" },
                           null,
                           -1
-                          /* HOISTED */
+                          /* CACHED */
                         )),
                         createElementVNode(
                           "div",
@@ -86,7 +86,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                           { class: "lc-funnel-tier__serie__item__bar__line" },
                           null,
                           -1
-                          /* HOISTED */
+                          /* CACHED */
                         ))
                       ],
                       4

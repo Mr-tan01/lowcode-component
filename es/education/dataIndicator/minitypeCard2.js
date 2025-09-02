@@ -1,4 +1,4 @@
-import { defineComponent, mergeDefaults, openBlock, createElementBlock, createElementVNode, toDisplayString, createVNode, unref } from "vue";
+import { defineComponent, mergeDefaults, createElementBlock, openBlock, createElementVNode, toDisplayString, createVNode, unref } from "vue";
 import { NNumberAnimation } from "naive-ui/es/number-animation";
 import defaultImage from "./images/card/small-substrate-bg.png.js";
 const _hoisted_1 = { class: "minitype-card" };

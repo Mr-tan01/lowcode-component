@@ -1,5 +1,5 @@
 import merge from "lodash-es/merge";
-import { radarGridOptions, radarTooltipOptions, radarTitleOptions, radarLegendOptions, radarItemOptions, radarSeriesOptions, radarColors } from "./const.js";
+import { radarColors, radarSeriesOptions, radarItemOptions, radarLegendOptions, radarTitleOptions, radarTooltipOptions, radarGridOptions } from "./const.js";
 import { deepMergeArrayOptions } from "@mmj-code-lib/lowcode/es/components";
 const commonRadarOptions = {
   grid: radarGridOptions,

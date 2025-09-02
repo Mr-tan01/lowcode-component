@@ -1,4 +1,4 @@
-import { defineComponent, computed, openBlock, createElementBlock, createElementVNode, Fragment, renderList, normalizeClass, normalizeStyle, toDisplayString } from "vue";
+import { defineComponent, computed, createElementBlock, openBlock, createElementVNode, Fragment, renderList, normalizeStyle, normalizeClass, toDisplayString } from "vue";
 import spiralFigure from "./images/spiral-figure.png.js";
 import { scale } from "mmjs-core";
 const _hoisted_1 = { class: "symmetric-layout" };

@@ -1,6 +1,6 @@
 import merge from "lodash-es/merge";
 import { deepMergeArrayOptions } from "@mmj-code-lib/lowcode/es/components";
-import { tooltipOptions, legendOptions, gridOptions, xAxisOptions, yAxisOptions, lineColors, defLinearGradients } from "./const.js";
+import { lineColors, yAxisOptions, xAxisOptions, gridOptions, legendOptions, tooltipOptions, defLinearGradients } from "./const.js";
 import lineSymbol from "./images/symobl.png.js";
 import lineSymbol2 from "./images/symobl2.png.js";
 import { useCommonBarSeries } from "../bar/options.js";

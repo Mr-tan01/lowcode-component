@@ -1,4 +1,4 @@
-import { defineComponent, mergeModels, useCssVars, useModel, openBlock, createElementBlock, createElementVNode, toDisplayString, createTextVNode } from "vue";
+import { defineComponent, mergeModels, useCssVars, useModel, createElementBlock, openBlock, createElementVNode, createTextVNode, toDisplayString } from "vue";
 const _hoisted_1 = { class: "pagination-container" };
 const _hoisted_2 = { class: "pagination-left" };
 const _hoisted_3 = ["disabled"];
@@ -49,7 +49,11 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
             1
             /* TEXT */
           ),
-          _cache[0] || (_cache[0] = createTextVNode(" / ")),
+          _cache[0] || (_cache[0] = createTextVNode(
+            " / ",
+            -1
+            /* CACHED */
+          )),
           createElementVNode(
             "span",
             _hoisted_5,

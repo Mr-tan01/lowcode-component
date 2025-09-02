@@ -1,4 +1,4 @@
-import { defineComponent, mergeDefaults, computed, openBlock, createElementBlock, normalizeClass, createElementVNode, renderSlot, toDisplayString, createCommentVNode } from "vue";
+import { defineComponent, mergeDefaults, computed, createElementBlock, openBlock, normalizeClass, createElementVNode, renderSlot, createCommentVNode, toDisplayString } from "vue";
 import { overflowStr } from "lowcode-share/es/share";
 const _hoisted_1 = { class: "lc-decorator-title__wrapper" };
 const _hoisted_2 = ["title"];

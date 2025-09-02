@@ -1,4 +1,4 @@
-import { openBlock, createElementBlock, createElementVNode, renderSlot } from "vue";
+import { createElementBlock, openBlock, createElementVNode, renderSlot } from "vue";
 import './assets/headline.css';/* empty css          */
 import _export_sfc from "./_virtual/_plugin-vue_export-helper.js";
 const _sfc_main = {};

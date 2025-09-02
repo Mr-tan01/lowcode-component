@@ -1,4 +1,4 @@
-import { defineComponent, useTemplateRef, computed, watch, openBlock, createElementBlock, createVNode, unref } from "vue";
+import { defineComponent, useTemplateRef, computed, watch, createElementBlock, openBlock, createVNode, unref } from "vue";
 import LcScatterChart from "../../scatter/index.js";
 import merge from "lodash-es/merge";
 import "@mmj-code-lib/lowcode/es/components";

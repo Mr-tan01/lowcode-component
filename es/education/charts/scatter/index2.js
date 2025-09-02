@@ -1,4 +1,4 @@
-import { defineComponent, mergeDefaults, useTemplateRef, computed, openBlock, createElementBlock, createVNode, unref, mergeProps } from "vue";
+import { defineComponent, mergeDefaults, useTemplateRef, computed, createElementBlock, openBlock, createVNode, unref, mergeProps } from "vue";
 import BaseChart from "../common/components/Charts/baseChart/base.js";
 import "mmjs-core/utils/scale";
 import { useCommonScatterSeries, useCommonScatterOptions } from "./options.js";
