@@ -1,4 +1,4 @@
-import { Entity, Cartesian3 } from 'cesium';
+import { Viewer, Entity, Cartesian3 } from 'cesium';
 import { EntityConfig, pointType } from './type';
 export declare const changeIconOption: any;
 export declare const createInfoCanvas: (info: any, valueKey?: string, labelType?: string) => Promise<{
@@ -14,7 +14,12 @@ export declare function updateViewerEntityInfo(info: any, entity: Entity | undef
  * 创建entity信息
  * @returns EntityConfig
  */
-export declare const createEntityConfig: (point: pointType, valueInfo: HTMLCanvasElement, type?: string) => Promise<EntityConfig>;
+export declare const createEntityConfig: ({ point, valueInfo, type, viewer, }: {
+    point: pointType;
+    valueInfo: HTMLCanvasElement;
+    type?: string;
+    viewer: Viewer;
+}) => Promise<EntityConfig>;
 /**
  * 转换笛卡尔坐标到经纬度
  * @returns Cartesian3

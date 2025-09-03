@@ -1,4 +1,4 @@
-import { defineComponent, mergeDefaults, createElementBlock, openBlock, createVNode, mergeProps, withCtx, renderSlot } from "vue";
+import { defineComponent, mergeDefaults, openBlock, createElementBlock, createVNode, mergeProps, withCtx, renderSlot } from "vue";
 import { propsRaw } from "./props.js";
 import RawMap from "./rawMap.js";
 import { LabelModelEnum } from "./const.js";

@@ -1,3 +1,11 @@
+const type = "FeatureCollection";
+const name = "深圳市（分拆）";
+const crs = {
+  type: "name",
+  properties: {
+    name: "urn:ogc:def:crs:EPSG::4490"
+  }
+};
 const features = [
   {
     type: "Feature",
@@ -6233,9 +6241,15 @@ const features = [
   }
 ];
 const shenZhen = {
+  type,
+  name,
+  crs,
   features
 };
 export {
+  crs,
   shenZhen as default,
-  features
+  features,
+  name,
+  type
 };

@@ -1,4 +1,4 @@
-import { createElementBlock, openBlock, Fragment, createElementVNode } from "vue";
+import { openBlock, createElementBlock, Fragment, createElementVNode } from "vue";
 import _export_sfc from "../../_virtual/_plugin-vue_export-helper.js";
 const _sfc_main = {};
 function _sfc_render(_ctx, _cache) {
@@ -22,7 +22,7 @@ function _sfc_render(_ctx, _cache) {
           })
         ],
         -1
-        /* CACHED */
+        /* HOISTED */
       )),
       _cache[1] || (_cache[1] = createElementVNode(
         "linearGradient",
@@ -40,7 +40,7 @@ function _sfc_render(_ctx, _cache) {
           })
         ],
         -1
-        /* CACHED */
+        /* HOISTED */
       )),
       _cache[2] || (_cache[2] = createElementVNode(
         "linearGradient",
@@ -58,7 +58,7 @@ function _sfc_render(_ctx, _cache) {
           })
         ],
         -1
-        /* CACHED */
+        /* HOISTED */
       )),
       _cache[3] || (_cache[3] = createElementVNode(
         "linearGradient",
@@ -76,7 +76,7 @@ function _sfc_render(_ctx, _cache) {
           })
         ],
         -1
-        /* CACHED */
+        /* HOISTED */
       ))
     ],
     64

@@ -1,3 +1,4 @@
+import { Viewer } from 'cesium'
 /**
  * 创建信息Canvas元素
  * @param info 信息对象
@@ -6,16 +7,16 @@
  * @returns Promise<{canvas: HTMLCanvasElement, cleanup: () => void}>
  */
 import { VerticalOrigin } from 'cesium'
-import primary from '../image/primary.png'
-import success from '../image/success.png'
-import warning from '../image/warning.png'
-import danger from '../image/danger.png'
+import primary from '../image/primary.svg'
+import success from '../image/success.svg'
+import warning from '../image/warning.svg'
+import danger from '../image/danger.svg'
 import primaryLabel from '../image/primary_label.png'
 import successLabel from '../image/success_label.png'
 import warningLabel from '../image/warning_label.png'
 import dangerLabel from '../image/danger_label.png'
-import iconPrimary from '../image/icon_primary.png'
-import iconSuccess from '../image/icon_success.png'
+import iconPrimary from '../image/icon_primary.svg'
+import iconSuccess from '../image/icon_success.svg'
 
 interface fontStyle {
     size?: string
@@ -373,7 +374,17 @@ export async function updateViewerEntityInfo(info: any, entity: Entity | undefin
  * 创建entity信息
  * @returns EntityConfig
  */
-export const createEntityConfig = async (point: pointType, valueInfo: HTMLCanvasElement, type?: string): Promise<EntityConfig> => {
+export const createEntityConfig = async ({
+    point,
+    valueInfo,
+    type,
+    viewer,
+}: {
+    point: pointType
+    valueInfo: HTMLCanvasElement
+    type?: string
+    viewer: Viewer
+}): Promise<EntityConfig> => {
     // 没有type就是label
     const commonProperties: EntityProperties = {
         value: point?.value,
@@ -383,19 +394,29 @@ export const createEntityConfig = async (point: pointType, valueInfo: HTMLCanvas
         position: [point.lng, point.lat],
         name: type ? point.name : `${point.name}Label`,
     }
-
     const commonBillboard = {
         image: valueInfo,
-        pixelOffset: type ? new Cartesian2(0, 0) : new Cartesian2(valueInfo.width / 2, valueInfo.height / 2 - 3),
+        pixelOffset: new CallbackProperty(() => {
+            const height = viewer.camera.positionCartographic.height
+            // 修改为高度越大缩放越小，使用1.5作为基础值减去高度比例// 添加边界检查，确保缩放比例在合理范围内
+            const scale = Math.max(0.3, Math.min(2, 1 - height / 100000))
+            return type ? new Cartesian2(0, 0) : new Cartesian2((valueInfo.width * scale) / 2, (valueInfo.height * scale) / 2 - 3)
+        }, false),
         disableDepthTestDistance: type ? undefined : Number.POSITIVE_INFINITY,
         verticalOrigin: type ? VerticalOrigin.CENTER : VerticalOrigin.BOTTOM,
+        scale: new CallbackProperty(() => {
+            const height = viewer.camera.positionCartographic.height
+            // 修改为高度越大缩放越小，使用1.5作为基础值减去高度比例// 添加边界检查，确保缩放比例在合理范围内
+            const scale = Math.max(0.3, Math.min(2, 1 - height / 100000))
+            return scale
+        }, false),
     }
 
     return {
         position: Cartesian3.fromDegrees(point.lng, point.lat, 50),
         name: type ? point.name : `${point.name}Label`,
         properties: commonProperties,
-        billboard: commonBillboard,
+        billboard: commonBillboard as any,
     }
 }
 

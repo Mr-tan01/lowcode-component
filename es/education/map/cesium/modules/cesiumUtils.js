@@ -5,7 +5,7 @@ import { CesiumHeatmap } from "cesium-heatmap-es6";
 import { areaData } from "./type.js";
 import { createClusterBillboard, createInfoCanvas, createEntityConfig, updateViewerEntityInfo, heatmapGradient } from "./tools.js";
 import { useMessage } from "naive-ui";
-import { Color, Rectangle, CustomDataSource, JulianDate, HorizontalOrigin, VerticalOrigin, ScreenSpaceEventType, ScreenSpaceEventHandler, Cartographic, Cartesian3, Math as Math$1, BoundingSphere, defined, ArcGisMapServerImageryProvider, PolygonHierarchy, PolylineDashMaterialProperty, ImageryLayer, Primitive, Entity, Cartesian2 } from "@cesium/engine";
+import { Color, Rectangle, CustomDataSource, JulianDate, VerticalOrigin, HorizontalOrigin, ScreenSpaceEventType, ScreenSpaceEventHandler, Cartographic, Cartesian3, Math as Math$1, BoundingSphere, defined, ArcGisMapServerImageryProvider, PolylineDashMaterialProperty, PolygonHierarchy, ImageryLayer, Primitive, Entity, Cartesian2 } from "@cesium/engine";
 import { Viewer } from "@cesium/widgets";
 class cesiumService {
   constructor(containerId, options) {
@@ -411,7 +411,7 @@ class cesiumService {
     var _a;
     if (!this.viewer && !this.dataSource) return null;
     const valueInfo = await createInfoCanvas(point, type, labelType);
-    const entityConfig = await createEntityConfig(point, valueInfo.canvas, type);
+    const entityConfig = await createEntityConfig({ point, valueInfo: valueInfo.canvas, type, viewer: this.viewer });
     const entity = ((_a = this[labelType === "Label" ? "viewer" : "dataSource"]) == null ? void 0 : _a.entities.add(entityConfig)) ?? null;
     if (!this.pointEntities) {
       this.pointEntities = [];
@@ -457,19 +457,6 @@ class cesiumService {
   addAllDistricts() {
     this.clearEntity("polygonEntities", "viewer");
     Object.keys(areaData).filter((key) => key !== "深圳市").forEach(this.addPolygon.bind(this));
-  }
-  getClickPosition(position) {
-    if (!this.viewer) return;
-    const cartesian = this.viewer.scene.pickPosition(position);
-    const resultPosition = this.getPositionCartographic();
-    if (cartesian && resultPosition) {
-      const cartographic = Cartographic.fromCartesian(cartesian);
-      cartographic.height = resultPosition[2] < 2e3 ? 200 : 2e3;
-      return Cartesian3.fromRadians(cartographic.longitude, cartographic.latitude, cartographic.height);
-    }
-    Object.keys(areaData).filter((key) => key !== this.defaultCenterKey).forEach((districtName) => {
-      this.addPolygon(districtName);
-    });
   }
   // 获取当前地图经纬度、高度
   getPositionCartographic() {

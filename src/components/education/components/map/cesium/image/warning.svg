@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="54px" height="78px" viewBox="0 0 54 78" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>编组 16</title>
+    <defs>
+        <linearGradient x1="35.4484364%" y1="-29.2626313%" x2="50%" y2="100%" id="linearGradient-1">
+            <stop stop-color="#FB800F" offset="0%"></stop>
+            <stop stop-color="#B68A04" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-2">
+            <stop stop-color="#FBC60F" offset="0%"></stop>
+            <stop stop-color="#FBB40F" offset="100%"></stop>
+        </linearGradient>
+        <path d="M50.000372,24.5812864 C50.000372,34.3611596 43.604716,40.7550517 35.7840378,46.7656386 C31.8332694,49.802004 28.8149737,55.5824713 26.7294563,64.1071154 C26.5364027,64.8952041 25.7858032,65.4003009 25,65.3056198 C24.2145689,65.4003009 23.4639693,64.8952041 23.2709158,64.1071154 C21.1853984,55.5824713 18.1671026,49.802004 14.2163342,46.7656386 L13.4874722,46.2009314 C6.00217333,40.3521268 0,34.0555386 0,24.5812864 C0,11.0054168 11.190986,0 24.9957669,0 C38.809386,0 50.000372,11.0054168 50.000372,24.5812864 Z" id="path-3"></path>
+        <mask id="mask-4" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="50.000372" height="65.3169904" fill="white">
+            <use xlink:href="#path-3"></use>
+        </mask>
+        <filter x="-30.2%" y="-148.8%" width="160.4%" height="397.6%" filterUnits="objectBoundingBox" id="filter-5">
+            <feGaussianBlur stdDeviation="1.58713043" in="SourceGraphic"></feGaussianBlur>
+        </filter>
+    </defs>
+    <g id="控件" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="编组-16">
+            <rect id="矩形备份-8" x="0" y="0" width="54" height="75"></rect>
+            <g id="编组-20备份-17" transform="translate(2, 3)">
+                <use id="路径" stroke="url(#linearGradient-2)" mask="url(#mask-4)" stroke-width="4" fill="url(#linearGradient-1)" stroke-dasharray="0,0" xlink:href="#path-3"></use>
+                <ellipse id="椭圆形" fill-opacity="0.72380354" fill="#366FC1" filter="url(#filter-5)" cx="25.5237434" cy="67.8783268" rx="7.880936" ry="1.6"></ellipse>
+            </g>
+        </g>
+    </g>
+</svg>

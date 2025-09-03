@@ -1,14 +1,14 @@
-import primary from "../image/primary.png.js";
-import success from "../image/success.png.js";
-import warning from "../image/warning.png.js";
-import danger from "../image/danger.png.js";
+import primary from "../image/primary.svg.js";
+import success from "../image/success.svg.js";
+import warning from "../image/warning.svg.js";
+import danger from "../image/danger.svg.js";
 import primaryLabel from "../image/primary_label.png.js";
 import successLabel from "../image/success_label.png.js";
 import warningLabel from "../image/warning_label.png.js";
 import dangerLabel from "../image/danger_label.png.js";
-import iconPrimary from "../image/icon_primary.png.js";
-import iconSuccess from "../image/icon_success.png.js";
-import { VerticalOrigin, Cartesian2, Cartesian3, JulianDate, CallbackProperty } from "@cesium/engine";
+import iconPrimary from "../image/icon_primary.svg.js";
+import iconSuccess from "../image/icon_success.svg.js";
+import { JulianDate, CallbackProperty, Cartesian2, VerticalOrigin, Cartesian3 } from "@cesium/engine";
 const imageUrlOption = {
   primary,
   success,
@@ -33,6 +33,7 @@ const options = {
   textStyle: {
     size: "16px",
     family: "HarmonyOS_Sans_SC_Medium",
+    color: "#fff",
     weight: "normal"
   }
 };
@@ -242,7 +243,12 @@ async function updateViewerEntityInfo(info, entity, type) {
     }, false);
   }
 }
-const createEntityConfig = async (point, valueInfo, type) => {
+const createEntityConfig = async ({
+  point,
+  valueInfo,
+  type,
+  viewer
+}) => {
   const commonProperties = {
     value: point == null ? void 0 : point.value,
     text: point == null ? void 0 : point.text,
@@ -253,9 +259,18 @@ const createEntityConfig = async (point, valueInfo, type) => {
   };
   const commonBillboard = {
     image: valueInfo,
-    pixelOffset: type ? new Cartesian2(0, 0) : new Cartesian2(valueInfo.width / 2, valueInfo.height / 2 - 3),
+    pixelOffset: new CallbackProperty(() => {
+      const height = viewer.camera.positionCartographic.height;
+      const scale = Math.max(0.3, Math.min(2, 1 - height / 1e5));
+      return type ? new Cartesian2(0, 0) : new Cartesian2(valueInfo.width * scale / 2, valueInfo.height * scale / 2 - 3);
+    }, false),
     disableDepthTestDistance: type ? void 0 : Number.POSITIVE_INFINITY,
-    verticalOrigin: type ? VerticalOrigin.CENTER : VerticalOrigin.BOTTOM
+    verticalOrigin: type ? VerticalOrigin.CENTER : VerticalOrigin.BOTTOM,
+    scale: new CallbackProperty(() => {
+      const height = viewer.camera.positionCartographic.height;
+      const scale = Math.max(0.3, Math.min(2, 1 - height / 1e5));
+      return scale;
+    }, false)
   };
   return {
     position: Cartesian3.fromDegrees(point.lng, point.lat, 50),
