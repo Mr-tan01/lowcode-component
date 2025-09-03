@@ -1,14 +1,17 @@
 import { defineComponent, createElementBlock, openBlock, Fragment, renderList, renderSlot, createElementVNode, toDisplayString } from "vue";
 import { samplingStaticIcons } from "./const.js";
 const _hoisted_1 = { class: "Lc-boder" };
-const _hoisted_2 = ["src"];
-const _hoisted_3 = { class: "Lc-boder-box-text" };
+const _hoisted_2 = ["onClick"];
+const _hoisted_3 = ["src"];
+const _hoisted_4 = { class: "Lc-boder-box-text" };
 const _sfc_main = /* @__PURE__ */ defineComponent({
   __name: "sampling",
   props: {
     list: { default: () => [] }
   },
-  setup(__props) {
+  emits: ["handleChange"],
+  setup(__props, { emit: __emit }) {
+    const $emit = __emit;
     function getIcon(p) {
       if (!p) return;
       return samplingStaticIcons[p] ?? p;
@@ -21,7 +24,8 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
           renderList(_ctx.list, (item, key) => {
             return openBlock(), createElementBlock("div", {
               key,
-              class: "Lc-boder-box"
+              class: "Lc-boder-box",
+              onClick: ($event) => $emit("handleChange", item, key)
             }, [
               renderSlot(_ctx.$slots, "default", {
                 record: item,
@@ -30,16 +34,16 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                 createElementVNode("img", {
                   src: getIcon(item.icon),
                   alt: ""
-                }, null, 8, _hoisted_2),
+                }, null, 8, _hoisted_3),
                 createElementVNode(
                   "span",
-                  _hoisted_3,
+                  _hoisted_4,
                   toDisplayString(item.name),
                   1
                   /* TEXT */
                 )
               ], true)
-            ]);
+            ], 8, _hoisted_2);
           }),
           128
           /* KEYED_FRAGMENT */

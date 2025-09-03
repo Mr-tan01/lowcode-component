@@ -1,8 +1,8 @@
-import { defineComponent, mergeDefaults, ref, computed, watch, onMounted, onBeforeUnmount, createElementBlock, openBlock, createVNode, unref, normalizeStyle, withCtx, createElementVNode, createTextVNode } from "vue";
+import { defineComponent, mergeDefaults, ref, computed, watch, onMounted, onBeforeUnmount, openBlock, createElementBlock, createVNode, unref, normalizeStyle, withCtx, createTextVNode, createElementVNode } from "vue";
 import { cesiumService } from "./modules/cesiumUtils.js";
 import { cesiumProps } from "./modules/props.js";
 import { NSpin } from "naive-ui";
-import { JulianDate, Cartesian3 } from "@cesium/engine";
+import { Cartesian3, JulianDate } from "@cesium/engine";
 const _hoisted_1 = { class: "lc-cesium" };
 const _sfc_main = /* @__PURE__ */ defineComponent({
   __name: "cesium",
@@ -154,13 +154,9 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
           style: normalizeStyle(spinStyle.value),
           size: "large"
         }, {
-          description: withCtx(() => [..._cache[0] || (_cache[0] = [
-            createTextVNode(
-              " 地图加载中... ",
-              -1
-              /* CACHED */
-            )
-          ])]),
+          description: withCtx(() => _cache[0] || (_cache[0] = [
+            createTextVNode(" 地图加载中... ")
+          ])),
           default: withCtx(() => [
             _cache[1] || (_cache[1] = createElementVNode(
               "div",
@@ -170,7 +166,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
               },
               null,
               -1
-              /* CACHED */
+              /* HOISTED */
             ))
           ]),
           _: 1

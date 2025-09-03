@@ -1,4 +1,4 @@
-import { Color, ArcGisMapServerImageryProvider } from "@cesium/engine";
+import { ArcGisMapServerImageryProvider, Color } from "@cesium/engine";
 const cesiumProps = {
   clientId: { type: String },
   accessToken: { type: String },

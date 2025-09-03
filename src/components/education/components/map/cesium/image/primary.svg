@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="54px" height="77px" viewBox="0 0 54 77" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>编组 19</title>
+    <defs>
+        <linearGradient x1="37.7885537%" y1="3.42170573e-13%" x2="92.4510282%" y2="156.239389%" id="linearGradient-1">
+            <stop stop-color="#0094FF" offset="0%"></stop>
+            <stop stop-color="#7FC9FF" offset="100%"></stop>
+        </linearGradient>
+        <filter x="-30.2%" y="-148.8%" width="160.4%" height="397.6%" filterUnits="objectBoundingBox" id="filter-2">
+            <feGaussianBlur stdDeviation="1.58713043" in="SourceGraphic"></feGaussianBlur>
+        </filter>
+    </defs>
+    <g id="控件" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="编组-19">
+            <rect id="矩形" x="0" y="0" width="54" height="75"></rect>
+            <g id="编组-20备份-17" transform="translate(2, 2)">
+                <path d="M24.9957669,1 C31.6278548,1 37.6311728,3.6404257 41.9761598,7.91185371 C46.3155416,12.1777714 49.000372,18.070949 49.000372,24.5812864 C49.000372,34.0483652 42.7158275,40.1769898 35.174666,45.972754 C31.0938383,49.1090766 27.9171099,55.0444397 25.7581738,63.869186 C22.0832622,55.0444397 18.9065338,49.1090766 14.8287968,45.975139 L14.103176,45.4129538 C6.89069609,39.7773223 1,33.7436852 1,24.5812864 C1,18.0713808 3.68446485,12.1785525 8.02226126,7.9126856 C12.3661602,3.64081735 18.3675813,1 24.9957669,1 Z" id="路径" stroke="#0094FF" stroke-width="2" fill="url(#linearGradient-1)"></path>
+                <ellipse id="椭圆形" fill-opacity="0.72380354" fill="#366FC1" filter="url(#filter-2)" cx="25.5237434" cy="67.8783268" rx="7.880936" ry="1.6"></ellipse>
+            </g>
+        </g>
+    </g>
+</svg>

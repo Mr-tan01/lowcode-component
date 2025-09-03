@@ -35,7 +35,7 @@ import { pointType, basicConfigType, pointInfo } from '@/components/education/co
 import { Cartesian3 } from 'cesium'
 import data from './index.json'
 const basicConfig = ref<basicConfigType>({
-    clusteringEnabled: true,
+    clusteringEnabled: false,
     cameraLimitsEnabled: true,
 })
 import { getToken } from '@/request'

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="54px" height="77px" viewBox="0 0 54 77" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>编组 13</title>
+    <defs>
+        <linearGradient x1="35.4484364%" y1="-29.2626313%" x2="50%" y2="100%" id="linearGradient-1">
+            <stop stop-color="#0FFBF8" offset="0%"></stop>
+            <stop stop-color="#04B6B3" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-2">
+            <stop stop-color="#0FFBF8" offset="0%"></stop>
+            <stop stop-color="#0FFBF8" offset="100%"></stop>
+        </linearGradient>
+        <path d="M50.000372,24.5812864 C50.000372,34.3611596 43.604716,40.7550517 35.7840378,46.7656386 C31.8332694,49.802004 28.8149737,55.5824713 26.7294563,64.1071154 C26.5364027,64.8952041 25.7858032,65.4003009 25,65.3056198 C24.2145689,65.4003009 23.4639693,64.8952041 23.2709158,64.1071154 C21.1853984,55.5824713 18.1671026,49.802004 14.2163342,46.7656386 L13.4874722,46.2009314 C6.00217333,40.3521268 0,34.0555386 0,24.5812864 C0,11.0054168 11.190986,0 24.9957669,0 C38.809386,0 50.000372,11.0054168 50.000372,24.5812864 Z" id="path-3"></path>
+        <mask id="mask-4" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="50.000372" height="65.3169904" fill="white">
+            <use xlink:href="#path-3"></use>
+        </mask>
+        <filter x="-30.2%" y="-148.8%" width="160.4%" height="397.6%" filterUnits="objectBoundingBox" id="filter-5">
+            <feGaussianBlur stdDeviation="1.58713043" in="SourceGraphic"></feGaussianBlur>
+        </filter>
+        <path d="M20.1577091,25.977161 L26.1195277,38 L18.2201181,38 C17.3148049,37.9661752 16.5603772,37.6410812 15.9568351,37.022839 C15.353293,36.4045967 15.0349613,35.636022 15,34.7114773 L15,29.2656837 C15.0331212,28.3411391 15.3514529,27.5706852 15.9568351,26.9543221 C16.5622173,26.3379589 17.3148049,26.012865 18.2201181,25.977161 L20.1577091,25.977161 Z M22.7098827,13.7983521 C23.8249636,12.6501879 25.2289351,12.0507372 26.9236372,12 C28.6183393,12.0507372 30.0223108,12.6501879 31.1373917,13.7983521 C32.2524726,14.9465163 32.835774,16.3765539 32.8854558,18.0884649 C32.8688952,19.2028043 32.6002453,20.2213067 32.0795062,21.1458514 C31.5587672,22.0703961 30.8301004,22.8070252 29.891666,23.3557387 C28.9513916,23.9044522 27.9632753,24.1788089 26.9236372,24.1788089 C25.8839991,24.1788089 24.8940428,23.9044522 23.9556084,23.3557387 C23.0153339,22.8070252 22.2866672,22.0703961 21.7677682,21.1458514 C21.2470291,20.2213067 20.9783792,19.2028043 20.9618186,18.0884649 C21.0115004,16.3765539 21.5948018,14.9465163 22.7098827,13.7983521 Z M29.6671778,29.4460827 L26.9254773,35.3560278 L24.1837767,29.4460827 L26.9254773,26.9806302 L29.6671778,29.4460827 Z M37.9180403,26.9524429 C38.5381431,27.568806 38.8987963,28.3392599 39,29.2638046 L39,34.7095981 C38.9834394,35.6341428 38.6687879,36.4045967 38.0560454,37.0209598 C37.4433029,37.6373229 36.6851951,37.9624169 35.7798819,37.9981208 L27.8804723,37.9981208 L33.6914054,25.9752819 L35.6289964,25.9752819 C36.5343096,26.0109858 37.2979376,26.3360798 37.9180403,26.9524429 Z" id="path-6"></path>
+        <filter x="-8.3%" y="-3.8%" width="116.7%" height="115.4%" filterUnits="objectBoundingBox" id="filter-7">
+            <feOffset dx="0" dy="1" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="0.5" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.5 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="控件" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="编组-13">
+            <rect id="矩形备份-10" x="0" y="0" width="54" height="75"></rect>
+            <g id="编组-20备份-19" transform="translate(2, 2)">
+                <use id="路径" stroke="url(#linearGradient-2)" mask="url(#mask-4)" stroke-width="4" fill="url(#linearGradient-1)" stroke-dasharray="0,0" xlink:href="#path-3"></use>
+                <ellipse id="椭圆形" fill-opacity="0.72380354" fill="#366FC1" filter="url(#filter-5)" cx="25.5237434" cy="67.8783268" rx="7.880936" ry="1.6"></ellipse>
+            </g>
+            <g id="形状备份" fill-rule="nonzero">
+                <use fill="black" fill-opacity="1" filter="url(#filter-7)" xlink:href="#path-6"></use>
+                <use fill="#FFFFFF" xlink:href="#path-6"></use>
+            </g>
+        </g>
+    </g>
+</svg>

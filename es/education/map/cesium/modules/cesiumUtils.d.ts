@@ -62,7 +62,6 @@ export declare class cesiumService {
     clearEntity(key: 'pointEntities' | 'polygonEntities', type: 'dataSource' | 'viewer'): Promise<void>;
     addPolygon(name: string): void;
     addAllDistricts(): void;
-    private getClickPosition;
     private getPositionCartographic;
     setCameraHeight(type: string): void;
     private getEntityNameInfo;

@@ -1,6 +1,6 @@
 <template>
     <div class="Lc-boder">
-        <div v-for="(item, key) in list" :key class="Lc-boder-box">
+        <div v-for="(item, key) in list" :key class="Lc-boder-box" @click="$emit('handleChange', item, key)">
             <slot :record="item" :index="key">
                 <img :src="getIcon(item.icon)" alt="" />
                 <span class="Lc-boder-box-text">
@@ -19,6 +19,9 @@ const { list = [] } = defineProps<{
     list?: LcSamplingRecords[]
 }>()
 
+const $emit = defineEmits<{
+    (e: 'handleChange', record: LcSamplingRecords, index: number): void
+}>()
 function getIcon(p?: string) {
     if (!p) return
     return samplingStaticIcons[p] ?? p

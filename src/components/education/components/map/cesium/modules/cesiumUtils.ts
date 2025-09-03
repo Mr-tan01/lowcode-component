@@ -517,7 +517,7 @@ export class cesiumService {
     async addPoint(point: pointType, type?: string, labelType?: string): Promise<Entity | null | void> {
         if (!this.viewer && !this.dataSource) return null
         const valueInfo = await createInfoCanvas(point, type, labelType)
-        const entityConfig = await createEntityConfig(point, valueInfo.canvas, type)
+        const entityConfig = await createEntityConfig({ point, valueInfo: valueInfo.canvas, type, viewer: this.viewer! })
         const entity: Entity | null = this[labelType === 'Label' ? 'viewer' : 'dataSource']?.entities.add(entityConfig) ?? null
 
         if (!this.pointEntities) {
@@ -572,23 +572,6 @@ export class cesiumService {
     addAllDistricts() {
         this.clearEntity('polygonEntities', 'viewer')
         ;(Object.keys(areaData) as Array<keyof typeof areaData>).filter(key => key !== '深圳市').forEach(this.addPolygon.bind(this))
-    }
-
-    private getClickPosition(position: Cartesian2) {
-        if (!this.viewer) return
-
-        const cartesian: Cartesian3 = this.viewer.scene.pickPosition(position) // 点击位置的经纬度、高度
-        const resultPosition = this.getPositionCartographic()
-        if (cartesian && resultPosition) {
-            const cartographic = Cartographic.fromCartesian(cartesian)
-            cartographic.height = resultPosition[2] < 2000 ? 200 : 2000 // 设置目标高度
-            return Cartesian3.fromRadians(cartographic.longitude, cartographic.latitude, cartographic.height)
-        }
-        ;(Object.keys(areaData) as Array<keyof typeof areaData>)
-            .filter(key => key !== this.defaultCenterKey)
-            .forEach(districtName => {
-                this.addPolygon(districtName)
-            })
     }
 
     // 获取当前地图经纬度、高度
