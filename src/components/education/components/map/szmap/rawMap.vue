@@ -262,43 +262,43 @@ const hidePopver = (event: MouseEvent, key: BlockName) => {
         }
 
         &.mark-baoan {
-            left: 13%;
-            top: 48%;
+            left: 14%;
+            top: 46%;
         }
 
         &.mark-longhua {
             left: 32%;
-            top: 39%;
+            top: 37%;
         }
 
         &.mark-nanshan {
-            left: 24%;
-            top: 62%;
+            left: 24.1%;
+            top: 61.5%;
         }
 
         &.mark-futian {
-            left: 34%;
-            top: 70%;
+            left: 34.5%;
+            top: 67.8%;
         }
 
         &.mark-luohu {
-            left: 47%;
-            top: 61%;
+            left: 45%;
+            top: 62.5%;
         }
 
         &.mark-yantian {
             left: 59%;
-            top: 56%;
+            top: 57%;
         }
 
         &.mark-pingshan {
-            left: 70%;
-            top: 41%;
+            left: 70.5%;
+            top: 39.5%;
         }
 
         &.mark-longgang {
-            left: 59%;
-            top: 32%;
+            left: 59.3%;
+            top: 30%;
         }
 
         &.mark-dapeng {

@@ -9,7 +9,7 @@
         line-spacing="28"
     >
         <text id="南山" class="text" fill="url(#linearGradient-46)">
-            <tspan x="95.7816" y="230.4492">
+            <tspan x="94" y="235">
                 {{ mergedLabels[szBlockNames['南山']] }}
             </tspan>
         </text>
@@ -19,12 +19,12 @@
             </tspan>
         </text>
         <text id="罗湖" class="text" fill="url(#linearGradient-46)">
-            <tspan x="318.6216" y="220.43644">
+            <tspan x="285" y="240">
                 {{ mergedLabels[szBlockNames['罗湖']] }}
             </tspan>
         </text>
         <text id="盐田" class="text" fill="url(#linearGradient-46)">
-            <tspan x="418.52288" y="196.19084">
+            <tspan x="415" y="210">
                 {{ mergedLabels[szBlockNames['盐田']] }}
             </tspan>
         </text>
@@ -34,7 +34,7 @@
             </tspan>
         </text>
         <text id="光明" class="text" fill="url(#linearGradient-46)">
-            <tspan x="62.1208" y="15">
+            <tspan x="55" y="25">
                 {{ mergedLabels[szBlockNames['光明']] }}
             </tspan>
         </text>
@@ -49,7 +49,7 @@
             </tspan>
         </text>
         <text id="大鹏新区" class="text" fill="url(#linearGradient-47)">
-            <tspan x="612.31892" y="180.2158">
+            <tspan x="612.31892" y="190">
                 {{ mergedLabels[szBlockNames['大鹏新区']] }}
             </tspan>
         </text>
