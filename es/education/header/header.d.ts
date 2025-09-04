@@ -40,10 +40,22 @@ declare const __VLS_component: import('vue').DefineComponent<__VLS_PublicProps, 
 } & {
     scroll: (data: LcCarouseBoxChangeEvent) => any;
     jump: (jumpParams: jumpParams) => any;
+    handleMouseover: (data: {
+        item: NavData;
+        index: number;
+        modelIndex: number;
+    }) => any;
+    handleMouseleave: () => any;
 }, string, import('vue').PublicProps, Readonly<__VLS_PublicProps> & Readonly<{
     "onUpdate:index"?: ((value: number) => any) | undefined;
     onScroll?: ((data: LcCarouseBoxChangeEvent) => any) | undefined;
     onJump?: ((jumpParams: jumpParams) => any) | undefined;
+    onHandleMouseover?: ((data: {
+        item: NavData;
+        index: number;
+        modelIndex: number;
+    }) => any) | undefined;
+    onHandleMouseleave?: (() => any) | undefined;
     "onUpdate:selectedKey"?: ((value: string) => any) | undefined;
 }>, {}, {}, {}, {}, string, import('vue').ComponentProvideOptions, false, {}, HTMLDivElement>;
 declare const _default: __VLS_WithTemplateSlots<typeof __VLS_component, __VLS_TemplateResult["slots"]>;

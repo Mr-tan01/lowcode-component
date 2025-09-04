@@ -14,7 +14,7 @@ const router: Router = createRouter({
     routes: [
         {
             path: '/',
-            redirect: routes[0].path,
+            redirect: '/education/header',
             meta: {
                 title: '首页',
             },

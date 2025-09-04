@@ -13,7 +13,13 @@
                                 active: isActive,
                             }"
                         >
-                            <n-popover trigger="hover" arrow-class="header-arrow-class" class="header-popover-class">
+                            <n-popover
+                                trigger="hover"
+                                v-bind="$attrs"
+                                placement="bottom"
+                                arrow-class="header-arrow-class"
+                                class="header-popover-class"
+                            >
                                 <template #trigger>
                                     <a
                                         class="lcc-header__wrapper__navs__item__link"
@@ -23,6 +29,8 @@
                                                 index,
                                             })
                                         "
+                                        @mouseover="handleMouseover(record, index)"
+                                        @mouseleave="handleMouseleave"
                                     >
                                         {{ record.label }}
                                     </a>
@@ -156,6 +164,8 @@ watch(
 const $emit = defineEmits<{
     (e: 'jump', jumpParams: jumpParams): void
     (e: 'scroll', data: LcCarouseBoxChangeEvent): void
+    (e: 'handleMouseover', data: { item: NavData; index: number; modelIndex: number }): void
+    (e: 'handleMouseleave'): void
 }>()
 
 function jump({ parent, item, index, handleClick }: jumpParams) {
@@ -168,6 +178,14 @@ function jump({ parent, item, index, handleClick }: jumpParams) {
 
 function carouseChange(value: LcCarouseBoxChangeEvent) {
     $emit('scroll', value)
+}
+
+function handleMouseover(record, index) {
+    $emit('handleMouseover', { item: record, modelIndex: modelIndex.value, index })
+}
+
+function handleMouseleave() {
+    $emit('handleMouseleave')
 }
 </script>
 
