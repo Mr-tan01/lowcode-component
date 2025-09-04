@@ -1,4 +1,4 @@
-import { defineComponent, mergeModels, useModel, computed, ref, watch, openBlock, createElementBlock, createElementVNode, renderSlot, createVNode, unref, withCtx, normalizeClass, toDisplayString, Fragment, renderList, normalizeStyle, createCommentVNode } from "vue";
+import { defineComponent, mergeModels, useModel, computed, ref, watch, openBlock, createElementBlock, createElementVNode, renderSlot, createVNode, unref, withCtx, normalizeClass, mergeProps, toDisplayString, Fragment, renderList, normalizeStyle, createCommentVNode } from "vue";
 import _imports_0 from "./images/right-arrow.png.js";
 import { NPopover } from "naive-ui/es/popover";
 import LcCarouseBox from "./carouseBox/index.js";
@@ -6,7 +6,7 @@ const _hoisted_1 = { class: "lcc-header" };
 const _hoisted_2 = { class: "lcc-header__prefix-slot" };
 const _hoisted_3 = { class: "lcc-header__wrapper" };
 const _hoisted_4 = { class: "lcc-header__wrapper__navs" };
-const _hoisted_5 = ["onClick"];
+const _hoisted_5 = ["onClick", "onMouseover"];
 const _hoisted_6 = {
   key: 0,
   class: "lcc-header__wrapper__navs__drop"
@@ -29,7 +29,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     "index": { default: 0 },
     "indexModifiers": {}
   }),
-  emits: /* @__PURE__ */ mergeModels(["jump", "scroll"], ["update:selectedKey", "update:index"]),
+  emits: /* @__PURE__ */ mergeModels(["jump", "scroll", "handleMouseover", "handleMouseleave"], ["update:selectedKey", "update:index"]),
   setup(__props, { emit: __emit }) {
     const selectedKey = useModel(__props, "selectedKey");
     const modelIndex = useModel(__props, "index");
@@ -77,6 +77,12 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     function carouseChange(value) {
       $emit("scroll", value);
     }
+    function handleMouseover(record, index) {
+      $emit("handleMouseover", { item: record, modelIndex: modelIndex.value, index });
+    }
+    function handleMouseleave() {
+      $emit("handleMouseleave");
+    }
     return (_ctx, _cache) => {
       return openBlock(), createElementBlock("div", _hoisted_1, [
         createElementVNode("div", _hoisted_2, [
@@ -103,11 +109,11 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                   [
                     createVNode(
                       unref(NPopover),
-                      {
-                        trigger: "hover",
+                      mergeProps({ trigger: "hover" }, _ctx.$attrs, {
+                        placement: "bottom",
                         "arrow-class": "header-arrow-class",
                         class: "header-popover-class"
-                      },
+                      }),
                       {
                         trigger: withCtx(() => [
                           createElementVNode("a", {
@@ -115,8 +121,10 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                             onClick: ($event) => jump({
                               item: record,
                               index
-                            })
-                          }, toDisplayString(record.label), 9, _hoisted_5)
+                            }),
+                            onMouseover: ($event) => handleMouseover(record, index),
+                            onMouseleave: handleMouseleave
+                          }, toDisplayString(record.label), 41, _hoisted_5)
                         ]),
                         default: withCtx(() => {
                           var _a;
@@ -192,8 +200,8 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                         _: 2
                         /* DYNAMIC */
                       },
-                      1024
-                      /* DYNAMIC_SLOTS */
+                      1040
+                      /* FULL_PROPS, DYNAMIC_SLOTS */
                     )
                   ],
                   2
