@@ -1,22 +1,24 @@
 export const code1 = `
 <template>
-    <LcSampling :list>
-        </LcSampling>
+   <LcSampling v-model:value="checkboxValue" :show-checkbox :list> </LcSampling>
 </template>
 <script lang="ts" setup>
 const list: LcSamplingRecords[] = [
-  {
-    icon: 'blue',
-    name: '正常行驶'
-  },
-  {
-    icon: 'yellow',
-    name: '预警事件'
-  },
-  {
-    icon: 'red',
-    name: '疲劳驾驶'
-  },
+    {
+        icon: 'blue',
+        name: '正常行驶',
+    },
+    {
+        icon: 'yellow',
+        name: '预警事件',
+    },
+    {
+        icon: 'red',
+        name: '疲劳驾驶',
+    },
 ]
+
+const showCheckbox = true
+const checkboxValue = ref([])
 </script>
 `
