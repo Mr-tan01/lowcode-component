@@ -1,4 +1,4 @@
-import { defineComponent, mergeModels, useModel, computed, createElementBlock, openBlock, createElementVNode, renderSlot, createVNode, unref, withCtx, normalizeClass, createCommentVNode, Fragment, renderList, toDisplayString } from "vue";
+import { defineComponent, mergeModels, useModel, computed, ref, watch, openBlock, createElementBlock, createElementVNode, renderSlot, createVNode, unref, withCtx, normalizeClass, toDisplayString, Fragment, renderList, normalizeStyle, createCommentVNode } from "vue";
 import _imports_0 from "./images/right-arrow.png.js";
 import { NPopover } from "naive-ui/es/popover";
 import LcCarouseBox from "./carouseBox/index.js";
@@ -21,6 +21,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
   props: /* @__PURE__ */ mergeModels({
     navDatas: {},
     hideArrow: { type: Boolean },
+    menuItemWidth: { default: "fixed" },
     highlightHandler: { type: Function, default: null }
   }, {
     "selectedKey": { default: "" },
@@ -35,6 +36,35 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     const listSource = computed(() => {
       return __props.navDatas === void 0 ? [] : __props.navDatas;
     });
+    const maxWidth = ref(0);
+    const fontSize = ref(16);
+    function calculateTextWidth(text) {
+      const chineseCharRegex = /[\u4e00-\u9fa5]/g;
+      const englishCharRegex = /[a-zA-Z]/g;
+      const chineseCount = (text.match(chineseCharRegex) || []).length;
+      const englishCount = (text.match(englishCharRegex) || []).length;
+      const width = chineseCount * fontSize.value + englishCount * fontSize.value * 0.5;
+      return width;
+    }
+    watch(
+      () => __props.navDatas,
+      (newVal) => {
+        if (newVal == null ? void 0 : newVal.length) {
+          const allChildren = newVal.flatMap((item) => {
+            var _a;
+            return ((_a = item.list) == null ? void 0 : _a.flatMap((el) => el.children)) || [];
+          });
+          const allLabels = [...newVal.map((item) => item.label), ...allChildren.map((child) => child.label)];
+          if (__props.menuItemWidth === "fixed") {
+            const widths = allLabels.map((label) => calculateTextWidth(label));
+            maxWidth.value = Math.max(...widths);
+          } else {
+            maxWidth.value = 0;
+          }
+        }
+      },
+      { immediate: true, deep: true }
+    );
     const $emit = __emit;
     function jump({ parent, item, index, handleClick }) {
       var _a;
@@ -96,52 +126,62 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                                 Fragment,
                                 null,
                                 renderList(record.list, (el, key) => {
-                                  return openBlock(), createElementBlock("div", {
-                                    key,
-                                    class: "lcc-header__wrapper__navs__drop__group"
-                                  }, [
-                                    createElementVNode("div", _hoisted_7, [
-                                      _cache[1] || (_cache[1] = createElementVNode(
-                                        "div",
-                                        { class: "lcc-header__wrapper__navs__drop__group__label--icon" },
-                                        [
-                                          createElementVNode("img", {
-                                            class: "lcc-header__wrapper__navs__drop__group__label--icon--image",
-                                            src: _imports_0,
-                                            alt: ""
-                                          })
-                                        ],
-                                        -1
-                                        /* CACHED */
-                                      )),
-                                      createElementVNode("div", {
-                                        class: "lcc-header__wrapper__navs__drop__group__label--text",
-                                        title: el.label
-                                      }, toDisplayString(el.label), 9, _hoisted_8)
-                                    ]),
-                                    createElementVNode("div", _hoisted_9, [
-                                      (openBlock(true), createElementBlock(
-                                        Fragment,
-                                        null,
-                                        renderList(el.children, (child, ckey) => {
-                                          return openBlock(), createElementBlock("div", {
-                                            key: ckey,
-                                            class: normalizeClass(["lcc-header__wrapper__navs__drop__group__item__group__nav", {
-                                              highlight: isActive && selectedKey.value === child.path || selectedKey.value === child.label
-                                            }]),
-                                            onClick: ($event) => jump({
-                                              parent: el,
-                                              item: child,
-                                              index,
-                                              handleClick
+                                  return openBlock(), createElementBlock(
+                                    "div",
+                                    {
+                                      key,
+                                      class: "lcc-header__wrapper__navs__drop__group",
+                                      style: normalizeStyle({
+                                        "--group-min-width": _ctx.menuItemWidth === "fixed" ? maxWidth.value + "px" : "auto"
+                                      })
+                                    },
+                                    [
+                                      createElementVNode("div", _hoisted_7, [
+                                        _cache[1] || (_cache[1] = createElementVNode(
+                                          "div",
+                                          { class: "lcc-header__wrapper__navs__drop__group__label--icon" },
+                                          [
+                                            createElementVNode("img", {
+                                              class: "lcc-header__wrapper__navs__drop__group__label--icon--image",
+                                              src: _imports_0,
+                                              alt: ""
                                             })
-                                          }, toDisplayString(child.label), 11, _hoisted_10);
-                                        }),
-                                        128
-                                        /* KEYED_FRAGMENT */
-                                      ))
-                                    ])
-                                  ]);
+                                          ],
+                                          -1
+                                          /* HOISTED */
+                                        )),
+                                        createElementVNode("div", {
+                                          class: "lcc-header__wrapper__navs__drop__group__label--text",
+                                          title: el.label,
+                                          style: normalizeStyle({ "--font-size": fontSize.value + "px" })
+                                        }, toDisplayString(el.label), 13, _hoisted_8)
+                                      ]),
+                                      createElementVNode("div", _hoisted_9, [
+                                        (openBlock(true), createElementBlock(
+                                          Fragment,
+                                          null,
+                                          renderList(el.children, (child, ckey) => {
+                                            return openBlock(), createElementBlock("div", {
+                                              key: ckey,
+                                              class: normalizeClass(["lcc-header__wrapper__navs__drop__group__item__group__nav", {
+                                                highlight: isActive && selectedKey.value === child.path || selectedKey.value === child.label
+                                              }]),
+                                              onClick: ($event) => jump({
+                                                parent: el,
+                                                item: child,
+                                                index,
+                                                handleClick
+                                              })
+                                            }, toDisplayString(child.label), 11, _hoisted_10);
+                                          }),
+                                          128
+                                          /* KEYED_FRAGMENT */
+                                        ))
+                                      ])
+                                    ],
+                                    4
+                                    /* STYLE */
+                                  );
                                 }),
                                 128
                                 /* KEYED_FRAGMENT */
