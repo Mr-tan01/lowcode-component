@@ -28,7 +28,14 @@
                                     </a>
                                 </template>
                                 <div v-if="record.list?.length" class="lcc-header__wrapper__navs__drop">
-                                    <div v-for="(el, key) in record.list" :key class="lcc-header__wrapper__navs__drop__group">
+                                    <div
+                                        v-for="(el, key) in record.list"
+                                        :key
+                                        class="lcc-header__wrapper__navs__drop__group"
+                                        :style="{
+                                            '--group-min-width': menuItemWidth === 'fixed' ? maxWidth + 'px' : 'auto',
+                                        }"
+                                    >
                                         <div class="lcc-header__wrapper__navs__drop__group__label">
                                             <div class="lcc-header__wrapper__navs__drop__group__label--icon">
                                                 <img
@@ -37,7 +44,11 @@
                                                     alt=""
                                                 />
                                             </div>
-                                            <div class="lcc-header__wrapper__navs__drop__group__label--text" :title="el.label">
+                                            <div
+                                                class="lcc-header__wrapper__navs__drop__group__label--text"
+                                                :title="el.label"
+                                                :style="{ '--font-size': fontSize + 'px' }"
+                                            >
                                                 {{ el.label }}
                                             </div>
                                         </div>
@@ -76,7 +87,7 @@
 </template>
 
 <script lang="ts" setup>
-import { computed } from 'vue'
+import { computed, ref, watch } from 'vue'
 import { NPopover } from 'naive-ui/es/popover'
 import { LcCarouseBox, type LcCarouseBoxChangeEvent } from '@/components/education/components/carouseBox'
 type ListRaw = {
@@ -98,10 +109,12 @@ export type jumpParams = {
 const {
     navDatas,
     hideArrow,
+    menuItemWidth = 'fixed',
     highlightHandler = null,
 } = defineProps<{
     navDatas: NavData[]
     hideArrow?: boolean
+    menuItemWidth?: 'auto' | 'fixed' // auto: 自适应宽度 fixed: 同等宽度
     highlightHandler?: (item: NavData) => string | null
 }>()
 const selectedKey = defineModel<string>('selectedKey', { default: '' })
@@ -109,6 +122,36 @@ const modelIndex = defineModel<number>('index', { default: 0 })
 const listSource = computed(() => {
     return navDatas === void 0 ? [] : navDatas
 })
+const maxWidth = ref(0)
+const fontSize = ref(16)
+
+function calculateTextWidth(text: string): number {
+    const chineseCharRegex = /[\u4e00-\u9fa5]/g
+    const englishCharRegex = /[a-zA-Z]/g
+    const chineseCount = (text.match(chineseCharRegex) || []).length
+    const englishCount = (text.match(englishCharRegex) || []).length
+    // 中文字符数 * 字体大小 + 英文字符数 * 字体大小/2
+    const width = chineseCount * fontSize.value + englishCount * fontSize.value * 0.5
+    return width
+}
+
+watch(
+    () => navDatas,
+    newVal => {
+        if (newVal?.length) {
+            const allChildren = newVal.flatMap(item => item.list?.flatMap(el => el.children) || [])
+            const allLabels = [...newVal.map(item => item.label), ...allChildren.map(child => child.label)]
+            if (menuItemWidth === 'fixed') {
+                // 最大宽度的menuLabel
+                const widths = allLabels.map(label => calculateTextWidth(label))
+                maxWidth.value = Math.max(...widths)
+            } else {
+                maxWidth.value = 0
+            }
+        }
+    },
+    { immediate: true, deep: true },
+)
 
 const $emit = defineEmits<{
     (e: 'jump', jumpParams: jumpParams): void
@@ -276,6 +319,7 @@ function carouseChange(value: LcCarouseBoxChangeEvent) {
 
                 &__group {
                     flex: 1;
+                    min-width: var(--group-min-width);
 
                     &__label {
                         display: flex;
@@ -300,7 +344,7 @@ function carouseChange(value: LcCarouseBoxChangeEvent) {
                             text-overflow: ellipsis;
                             overflow: hidden;
                             font-family: HarmonyOS_Sans_SC_Bold;
-                            font-size: 16px;
+                            font-size: var(--font-size);
                             color: #f2f3f4;
                             line-height: 24px;
                             text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.5);
@@ -314,7 +358,6 @@ function carouseChange(value: LcCarouseBoxChangeEvent) {
                         display: flex;
                         flex-direction: column;
                         gap: 15px;
-
                         &__nav {
                             font-family: HarmonyOS_Sans_SC_Medium;
                             font-size: 16px;
