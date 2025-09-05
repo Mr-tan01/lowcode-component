@@ -100,9 +100,9 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       return openBlock(), createElementBlock(
         "div",
         {
-          class: "lcc-header",
           ref_key: "headerRef",
-          ref: headerRef
+          ref: headerRef,
+          class: "lcc-header"
         },
         [
           createElementVNode("div", _hoisted_1, [

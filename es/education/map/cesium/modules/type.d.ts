@@ -266,6 +266,7 @@ export interface basicConfigType {
     hoverState?: boolean;
     defaultUrl?: string;
     providerOptions?: Record<string, any>;
+    labelShowHeightThreshold?: number;
 }
 export interface optionType {
     config: basicConfigType;

@@ -82,6 +82,7 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
             clusteringEnabled: boolean;
             clusteringPixelRange: number;
             clusteringMinimumClusterSize: number;
+            labelShowHeightThreshold: number;
         };
     };
     pointData: {
@@ -190,6 +191,7 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
             clusteringEnabled: boolean;
             clusteringPixelRange: number;
             clusteringMinimumClusterSize: number;
+            labelShowHeightThreshold: number;
         };
     };
     pointData: {

@@ -60,6 +60,9 @@ export class cesiumService {
     private lastThrottleTime: number = 0
     private throttleDelay: number = 100
     private rretryCount: number = 3
+    private cameraChangedListener: (() => void) | null = null
+    private shouldShowLabels: boolean = false // 当前是否展示全部悬浮label
+
     // 深圳市地理边界（根据瓦片定义经纬度范围）
     private shenzhenBounds = Rectangle.fromDegrees(113.94, 22.43, 114.57, 22.83)
 
@@ -259,12 +262,60 @@ export class cesiumService {
             }
 
             this.setupEventHandlers()
-
+            this.setupCameraChangeListener()
             return true
         } catch (error) {
             console.error('初始化Cesium失败:', error)
             return false
         }
+    }
+
+    // 设置相机变化监听器
+    private setupCameraChangeListener(): void {
+        const that = this
+        if (!this.viewer) return
+
+        // 移除现有的监听器
+        if (this.cameraChangedListener) {
+            this.cameraChangedListener()
+            this.cameraChangedListener = null
+        }
+
+        // 添加新的监听器
+        this.cameraChangedListener = this.viewer.camera.changed.addEventListener(() => {
+            that.handleCameraHeightChange()
+        })
+    }
+
+    // 处理相机高度变化
+    private handleCameraHeightChange(): void {
+        if (!this.viewer || !this.pointEntities) return
+
+        const cameraHeight = this.viewer.camera.positionCartographic.height
+        this.shouldShowLabels = cameraHeight <= (this.options.config?.labelShowHeightThreshold ?? 5000)
+        if (this.shouldShowLabels) {
+            this.pointData?.forEach(item => {
+                this.addPoint(item, undefined, 'Label')
+            })
+        }
+        this.pointEntities.forEach(entity => {
+            if (entity.name && entity.name.endsWith('Label')) {
+                // 只有在应该显示标签且标签当前未显示时才更新
+                if (this.shouldShowLabels && !entity.show) {
+                    entity.show = true
+
+                    // 设置标签的避让属性
+                    if (entity.label) {
+                        // @ts-expect-error
+                        entity.label.disableDepthTestDistance = Number.POSITIVE_INFINITY
+                        entity.label.heightReference = 1 as any // 使用高度参考
+                    }
+                } else if (!this.shouldShowLabels && entity.show) {
+                    // 如果不需要显示标签且标签当前显示，则隐藏
+                    entity.show = false
+                }
+            }
+        })
     }
 
     // 设置事件处理器
@@ -362,7 +413,7 @@ export class cesiumService {
 
     // 处理鼠标移动
     private handleMouseMove(movement: { endPosition: Cartesian2 }): void {
-        if (!this.viewer) return
+        if (!this.viewer || this.shouldShowLabels) return
 
         // 添加时间戳节流
         const now = Date.now()
@@ -531,7 +582,6 @@ export class cesiumService {
         const valueInfo = await createInfoCanvas(point, type, labelType)
         const entityConfig = await createEntityConfig({ point, valueInfo: valueInfo.canvas, type, viewer: this.viewer! })
         const entity: Entity | null = this[labelType === 'Label' ? 'viewer' : 'dataSource']?.entities.add(entityConfig) ?? null
-
         if (!this.pointEntities) {
             this.pointEntities = []
         }
@@ -698,7 +748,6 @@ export class cesiumService {
 
     // 处理悬浮时标签显示
     private handleHoverLabelDisplay(dataIndex: number, labelName: string, labelEntityIndex: number): void {
-        // console.log(dataIndex === -1 || this.options.defaultShowState, 'dataIndex === -1 || this.options.defaultShowState')
         if (dataIndex === -1 || this.options.defaultShowState) return
 
         // 检查是否需要添加新标签

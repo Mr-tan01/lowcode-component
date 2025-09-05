@@ -61,7 +61,8 @@ const cesiumProps = {
       baseColor: Color.TRANSPARENT,
       clusteringEnabled: false,
       clusteringPixelRange: 30,
-      clusteringMinimumClusterSize: 2
+      clusteringMinimumClusterSize: 2,
+      labelShowHeightThreshold: 5e3
     }
   },
   pointData: {

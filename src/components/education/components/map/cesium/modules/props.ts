@@ -57,6 +57,7 @@ export const cesiumProps = {
             clusteringEnabled: false,
             clusteringPixelRange: 30,
             clusteringMinimumClusterSize: 2,
+            labelShowHeightThreshold: 5000,
         },
     },
     pointData: {
