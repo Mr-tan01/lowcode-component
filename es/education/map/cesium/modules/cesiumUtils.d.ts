@@ -44,7 +44,7 @@ export declare class cesiumService {
     private doubleClickHandler;
     initViewer(controlStatus: controlStatusType): Promise<boolean>;
     private setupCameraChangeListener;
-    private handleCameraHeightChange;
+    handleCameraHeightChange(): void;
     private setupEventHandlers;
     /**
      * 根据点位集合计算最佳飞行高度
@@ -64,7 +64,7 @@ export declare class cesiumService {
     private addProviderToViewer;
     private handleLoadError;
     addPoint(point: pointType, type?: string, labelType?: string): Promise<Entity | null | void>;
-    clearEntity(key: 'pointEntities' | 'polygonEntities', type: 'dataSource' | 'viewer'): Promise<void>;
+    clearEntity(key: 'pointEntities' | 'polygonEntities', type?: 'dataSource' | 'viewer'): Promise<void>;
     addPolygon(name: string): void;
     addAllDistricts(): void;
     private getPositionCartographic;

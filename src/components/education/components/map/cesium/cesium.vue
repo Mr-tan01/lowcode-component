@@ -60,6 +60,8 @@ const reloadPointData = async (): Promise<void> => {
             cesiumUtils.addPoint(point)
         }
     })
+    // 进入得时候就判断高度
+    cesiumUtils.handleCameraHeightChange()
 }
 
 const loadedTileLayer = async (status: boolean): Promise<void> => {

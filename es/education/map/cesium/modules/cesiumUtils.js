@@ -472,10 +472,22 @@ class cesiumService {
   }
   // 清除指定entity
   async clearEntity(key, type) {
-    var _a;
-    if (!this[type] || !this[key]) return;
+    var _a, _b, _c;
+    if (!this[key]) return;
+    if (key === "pointEntities") {
+      for (const entity of this[key]) {
+        if (entity.name && entity.name.endsWith("Label")) {
+          (_a = this.viewer) == null ? void 0 : _a.entities.remove(entity);
+        } else {
+          (_b = this.dataSource) == null ? void 0 : _b.entities.remove(entity);
+        }
+      }
+      this[key] = [];
+      return;
+    }
+    if (!type || !this[type]) return;
     for (const entity of this[key]) {
-      (_a = this[type]) == null ? void 0 : _a.entities.remove(entity);
+      (_c = this[type]) == null ? void 0 : _c.entities.remove(entity);
     }
     this[key] = [];
   }

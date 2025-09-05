@@ -288,7 +288,7 @@ export class cesiumService {
     }
 
     // 处理相机高度变化
-    private handleCameraHeightChange(): void {
+    handleCameraHeightChange(): void {
         if (!this.viewer || !this.pointEntities) return
 
         const cameraHeight = this.viewer.camera.positionCartographic.height
@@ -594,9 +594,26 @@ export class cesiumService {
     }
 
     // 清除指定entity
-    async clearEntity(key: 'pointEntities' | 'polygonEntities', type: 'dataSource' | 'viewer'): Promise<void> {
-        if (!this[type] || !this[key]) return
+    async clearEntity(key: 'pointEntities' | 'polygonEntities', type?: 'dataSource' | 'viewer'): Promise<void> {
+        if (!this[key]) return
 
+        // 如果是点实体，需要特殊处理，因为点实体分布在dataSource和viewer中
+        if (key === 'pointEntities') {
+            for (const entity of this[key]) {
+                if (entity.name && entity.name.endsWith('Label')) {
+                    // 标签实体从viewer中移除
+                    this.viewer?.entities.remove(entity)
+                } else {
+                    // 普通点实体从dataSource中移除
+                    this.dataSource?.entities.remove(entity)
+                }
+            }
+            this[key] = []
+            return
+        }
+
+        // 多边形实体仍然根据type参数清除
+        if (!type || !this[type]) return
         for (const entity of this[key]) {
             this[type]?.entities.remove(entity)
         }

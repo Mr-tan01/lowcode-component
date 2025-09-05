@@ -34,6 +34,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
           cesiumUtils.addPoint(point);
         }
       });
+      cesiumUtils.handleCameraHeightChange();
     };
     const loadedTileLayer = async (status) => {
       initPointDataStatus.value = status;
