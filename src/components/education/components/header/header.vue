@@ -211,26 +211,7 @@ function handleMouseleave() {
 .header-popover-class {
     --n-padding: 0 !important;
     --n-color: transparent !important;
-    max-width: var(--popover-w) !important;
-    max-height: var(--popover-h) !important;
-    overflow-y: auto;
-    &::-webkit-scrollbar {
-        width: 6px;
-    }
 
-    &::-webkit-scrollbar-track {
-        background: rgba(0, 0, 0, 0.1);
-        border-radius: 3px;
-    }
-
-    &::-webkit-scrollbar-thumb {
-        background: rgb(8, 192, 189);
-        border-radius: 3px;
-
-        &:hover {
-            background: rgba(15, 251, 248, 1);
-        }
-    }
     .n-popover-arrow-wrapper {
         overflow: visible;
     }
@@ -362,6 +343,23 @@ function handleMouseleave() {
                 box-sizing: border-box;
                 border-radius: 8px;
                 cursor: pointer;
+                max-width: var(--popover-w) !important;
+                max-height: var(--popover-h) !important;
+                overflow-y: auto;
+                &::-webkit-scrollbar {
+                    width: 6px;
+                }
+                &::-webkit-scrollbar-track {
+                    background: rgba(0, 0, 0, 0.1);
+                    border-radius: 3px;
+                }
+                &::-webkit-scrollbar-thumb {
+                    background: rgb(8, 192, 189);
+                    border-radius: 3px;
+                    &:hover {
+                        background: rgba(15, 251, 248, 1);
+                    }
+                }
 
                 &::before {
                     content: '';
