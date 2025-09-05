@@ -284,6 +284,8 @@ export class cesiumService {
             this.handleMouseMove.bind(this),
             ScreenSpaceEventType.MOUSE_MOVE,
         )
+        // 添加鼠标离开地图事件监听
+        canvas.addEventListener('mouseout', this.handleCanvasMouseOut.bind(this))
     }
 
     /**
@@ -349,6 +351,15 @@ export class cesiumService {
         }
     }
 
+    // 新增方法：处理鼠标离开地图事件
+    private handleCanvasMouseOut(): void {
+        // 如果鼠标离开了地图，清除最后一个悬浮的实体
+        if (this.lastHoveredEntity) {
+            this.pointHoverExitHandler(this.lastHoveredEntity)
+            this.lastHoveredEntity = null
+        }
+    }
+
     // 处理鼠标移动
     private handleMouseMove(movement: { endPosition: Cartesian2 }): void {
         if (!this.viewer) return
@@ -368,6 +379,7 @@ export class cesiumService {
 
         // 如果鼠标移出了实体或悬浮在区域上
         if (!defined(pickedObject) || !pickedObject.id || pickedObject.id.name in areaData) {
+            // 当鼠标离开实体时，清除最后一个悬浮的实体
             if (this.lastHoveredEntity) {
                 this.pointHoverExitHandler(this.lastHoveredEntity)
                 this.lastHoveredEntity = null
@@ -989,6 +1001,8 @@ export class cesiumService {
 
     destroy(): void {
         if (this.viewer) {
+            const canvas = this.viewer.scene.canvas
+            canvas.removeEventListener('mouseout', this.handleCanvasMouseOut.bind(this))
             this.viewer.scene.canvas.removeEventListener('dblclick', this.doubleClickHandler, false)
             if (this.viewer.scene && this.viewer.scene.camera) {
                 // 移除边界限制监听器

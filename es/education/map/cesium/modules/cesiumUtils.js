@@ -210,6 +210,7 @@ class cesiumService {
       this.handleMouseMove.bind(this),
       ScreenSpaceEventType.MOUSE_MOVE
     );
+    canvas.addEventListener("mouseout", this.handleCanvasMouseOut.bind(this));
   }
   /**
    * 根据点位集合计算最佳飞行高度
@@ -267,6 +268,13 @@ class cesiumService {
         });
       }
       this.options.config.hoverState ? this.pointClickHandler(pickedObject.id) : this.options.pointHandler(pickedObject.id);
+    }
+  }
+  // 新增方法：处理鼠标离开地图事件
+  handleCanvasMouseOut() {
+    if (this.lastHoveredEntity) {
+      this.pointHoverExitHandler(this.lastHoveredEntity);
+      this.lastHoveredEntity = null;
     }
   }
   // 处理鼠标移动
@@ -758,6 +766,8 @@ class cesiumService {
   }
   destroy() {
     if (this.viewer) {
+      const canvas = this.viewer.scene.canvas;
+      canvas.removeEventListener("mouseout", this.handleCanvasMouseOut.bind(this));
       this.viewer.scene.canvas.removeEventListener("dblclick", this.doubleClickHandler, false);
       if (this.viewer.scene && this.viewer.scene.camera) {
         if (this.removePreUpdateListener) {
