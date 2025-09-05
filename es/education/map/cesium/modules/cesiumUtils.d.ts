@@ -49,6 +49,7 @@ export declare class cesiumService {
      */
     private calcHeightByExtent;
     private handleLeftClick;
+    private handleCanvasMouseOut;
     private handleMouseMove;
     private handleTileLoadProgress;
     loadTileLayer(url: string): Promise<void>;
