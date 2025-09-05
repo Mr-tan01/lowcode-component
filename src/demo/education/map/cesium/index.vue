@@ -37,6 +37,7 @@ import data from './index.json'
 const basicConfig = ref<basicConfigType>({
     clusteringEnabled: false,
     cameraLimitsEnabled: true,
+    labelShowHeightThreshold: 50000,
 })
 import { getToken } from '@/request'
 

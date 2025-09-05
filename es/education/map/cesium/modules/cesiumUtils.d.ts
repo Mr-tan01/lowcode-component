@@ -24,6 +24,8 @@ export declare class cesiumService {
     private lastThrottleTime;
     private throttleDelay;
     private rretryCount;
+    private cameraChangedListener;
+    private shouldShowLabels;
     private shenzhenBounds;
     private message;
     constructor(containerId: string, options: optionType);
@@ -41,6 +43,8 @@ export declare class cesiumService {
     private setupClustering;
     private doubleClickHandler;
     initViewer(controlStatus: controlStatusType): Promise<boolean>;
+    private setupCameraChangeListener;
+    private handleCameraHeightChange;
     private setupEventHandlers;
     /**
      * 根据点位集合计算最佳飞行高度

@@ -41,6 +41,9 @@ class cesiumService {
     __publicField(this, "lastThrottleTime", 0);
     __publicField(this, "throttleDelay", 100);
     __publicField(this, "rretryCount", 3);
+    __publicField(this, "cameraChangedListener", null);
+    __publicField(this, "shouldShowLabels", false);
+    // 当前是否展示全部悬浮label
     // 深圳市地理边界（根据瓦片定义经纬度范围）
     __publicField(this, "shenzhenBounds", Rectangle.fromDegrees(113.94, 22.43, 114.57, 22.83));
     __publicField(this, "message", useMessage());
@@ -192,11 +195,49 @@ class cesiumService {
         this.setupCameraLimits();
       }
       this.setupEventHandlers();
+      this.setupCameraChangeListener();
       return true;
     } catch (error) {
       console.error("初始化Cesium失败:", error);
       return false;
     }
+  }
+  // 设置相机变化监听器
+  setupCameraChangeListener() {
+    const that = this;
+    if (!this.viewer) return;
+    if (this.cameraChangedListener) {
+      this.cameraChangedListener();
+      this.cameraChangedListener = null;
+    }
+    this.cameraChangedListener = this.viewer.camera.changed.addEventListener(() => {
+      that.handleCameraHeightChange();
+    });
+  }
+  // 处理相机高度变化
+  handleCameraHeightChange() {
+    var _a, _b;
+    if (!this.viewer || !this.pointEntities) return;
+    const cameraHeight = this.viewer.camera.positionCartographic.height;
+    this.shouldShowLabels = cameraHeight <= (((_a = this.options.config) == null ? void 0 : _a.labelShowHeightThreshold) ?? 5e3);
+    if (this.shouldShowLabels) {
+      (_b = this.pointData) == null ? void 0 : _b.forEach((item) => {
+        this.addPoint(item, void 0, "Label");
+      });
+    }
+    this.pointEntities.forEach((entity) => {
+      if (entity.name && entity.name.endsWith("Label")) {
+        if (this.shouldShowLabels && !entity.show) {
+          entity.show = true;
+          if (entity.label) {
+            entity.label.disableDepthTestDistance = Number.POSITIVE_INFINITY;
+            entity.label.heightReference = 1;
+          }
+        } else if (!this.shouldShowLabels && entity.show) {
+          entity.show = false;
+        }
+      }
+    });
   }
   // 设置事件处理器
   setupEventHandlers() {
@@ -280,7 +321,7 @@ class cesiumService {
   // 处理鼠标移动
   handleMouseMove(movement) {
     var _a, _b;
-    if (!this.viewer) return;
+    if (!this.viewer || this.shouldShowLabels) return;
     const now = Date.now();
     if (now - this.lastThrottleTime < this.throttleDelay) return;
     this.lastThrottleTime = now;

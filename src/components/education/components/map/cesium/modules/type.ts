@@ -171,6 +171,7 @@ export interface basicConfigType {
     hoverState?: boolean // 启用鼠标悬浮状态
     defaultUrl?: string // 默认瓦片地址
     providerOptions?: Record<string, any> // 瓦片参数
+    labelShowHeightThreshold?: number // 多少高度显示全瓦片
 }
 
 export interface optionType {
