@@ -14,7 +14,7 @@ import _sfc_main$1 from "./comp/defines.js";
 import Labels from "./comp/labels2.js";
 import LcMark from "../mark/index2.js";
 import { propsRaw } from "./props.js";
-import { LabelModelEnum, defFloatLevelConfig, szBlockNames, defBlockLableMap } from "./const.js";
+import { LabelModelEnum, defFloatLevelConfig, szBlockNames, defBlockLabelMap } from "./const.js";
 import merge from "lodash-es/merge";
 const _hoisted_1 = { class: "lc-szmap-raw" };
 const _hoisted_2 = {
@@ -58,8 +58,8 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
   emits: ["markClick", "markMouseover", "markMouseenter", "markMouseleave"],
   setup(__props, { emit: __emit }) {
     useCssVars((_ctx) => ({
-      "4ad76962": mapRotateX.value,
-      "61a8eb0e": labelWrapInsetY.value
+      "e3d2bf9c": mapRotateX.value,
+      "43ee15a9": labelWrapInsetY.value
     }));
     const blockList = {
       [szBlockNames["光明"]]: Guangming,
@@ -72,7 +72,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       [szBlockNames["坪山"]]: Pingshan,
       [szBlockNames["龙岗"]]: Longgang,
       [szBlockNames["大鹏新区"]]: Dapeng,
-      [szBlockNames["深汕合作区"]]: _sfc_main$2
+      [szBlockNames["深汕特别合作区"]]: _sfc_main$2
     };
     const labelAnimateNum = ref(0);
     const $emits = __emit;
@@ -85,7 +85,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       const [, currentLevelConf] = levelsList.value[currentLevelIndex] ?? [];
       return {
         ...markMate,
-        mapLabel: defBlockLableMap[key],
+        mapLabel: defBlockLabelMap[key],
         style: {
           "--level-scale": labelAnimateNum.value ? (currentLevelConf == null ? void 0 : currentLevelConf.scale) ?? 1 : labelAnimateNum.value
         }

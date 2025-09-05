@@ -58,9 +58,9 @@
                 {{ mergedLabels[szBlockNames['龙华']] }}
             </tspan>
         </text>
-        <text id="深汕合作区" class="text" fill="url(#linearGradient-48)">
+        <text id="深汕特别合作区" class="text" fill="url(#linearGradient-48)">
             <tspan x="690" y="-48">
-                {{ mergedLabels[szBlockNames['深汕合作区']] }}
+                {{ mergedLabels[szBlockNames['深汕特别合作区']] }}
             </tspan>
         </text>
     </g>
@@ -68,13 +68,13 @@
 <script lang="ts" setup>
 import { computed } from 'vue'
 import merge from 'lodash-es/merge'
-import { type BlockLableMapType, defBlockLableMap, szBlockNames } from '../const'
+import { type BlockLableMapType, defBlockLabelMap, szBlockNames } from '../const'
 
 const { labels = {} } = defineProps<{
     labels?: BlockLableMapType
 }>()
 
-const mergedLabels = computed(() => merge({}, defBlockLableMap, labels))
+const mergedLabels = computed(() => merge({}, defBlockLabelMap, labels))
 </script>
 <style lang="scss" scoped>
 .lables-group {

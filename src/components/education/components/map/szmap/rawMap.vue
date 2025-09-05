@@ -58,7 +58,7 @@ import Labels from './comp/labels.vue'
 import { LcMark } from '@/components/education/components/mark'
 import { type Component, computed, onMounted, ref } from 'vue'
 import { type Levels, propsRaw } from './props'
-import { defFloatLevelConfig, LabelModelEnum, type BlockName, szBlockNames, defBlockLableMap } from './const'
+import { defFloatLevelConfig, LabelModelEnum, type BlockName, szBlockNames, defBlockLabelMap } from './const'
 import merge from 'lodash-es/merge'
 import { EducationMarkProps } from '../../mark/props'
 
@@ -85,7 +85,7 @@ const blockList: Record<BlockName, Component> = {
     [szBlockNames['坪山']]: Pingshan,
     [szBlockNames['龙岗']]: Longgang,
     [szBlockNames['大鹏新区']]: Dapeng,
-    [szBlockNames['深汕合作区']]: Sshzq,
+    [szBlockNames['深汕特别合作区']]: Sshzq,
 }
 
 const labelAnimateNum = ref(0)
@@ -105,7 +105,7 @@ function getMarkProp(key: BlockName) {
     const [, currentLevelConf] = levelsList.value[currentLevelIndex] ?? []
     return {
         ...markMate,
-        mapLabel: defBlockLableMap[key],
+        mapLabel: defBlockLabelMap[key],
         style: {
             '--level-scale': labelAnimateNum.value ? (currentLevelConf?.scale ?? 1) : labelAnimateNum.value,
         },
