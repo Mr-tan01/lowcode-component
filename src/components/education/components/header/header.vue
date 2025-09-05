@@ -1,5 +1,5 @@
 <template>
-    <div class="lcc-header">
+    <div ref="headerRef" class="lcc-header">
         <div class="lcc-header__prefix-slot">
             <slot name="prefix"> </slot>
         </div>
@@ -19,6 +19,7 @@
                                 placement="bottom"
                                 arrow-class="header-arrow-class"
                                 class="header-popover-class"
+                                :style="{ '--popover-w': popoverW, '--popover-h': popoverH }"
                             >
                                 <template #trigger>
                                     <a
@@ -95,8 +96,9 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, ref, watch } from 'vue'
+import { computed, ref, useTemplateRef, watch } from 'vue'
 import { NPopover } from 'naive-ui/es/popover'
+import { scale } from 'mmjs-core'
 import { LcCarouseBox, type LcCarouseBoxChangeEvent } from '@/components/education/components/carouseBox'
 type ListRaw = {
     label: string
@@ -132,6 +134,7 @@ const listSource = computed(() => {
 })
 const maxWidth = ref(0)
 const fontSize = ref(16)
+const headerRef = useTemplateRef('headerRef')
 
 function calculateTextWidth(text: string): number {
     const chineseCharRegex = /[\u4e00-\u9fa5]/g
@@ -140,8 +143,23 @@ function calculateTextWidth(text: string): number {
     const englishCount = (text.match(englishCharRegex) || []).length
     // 中文字符数 * 字体大小 + 英文字符数 * 字体大小/2
     const width = chineseCount * fontSize.value + englishCount * fontSize.value * 0.5
-    return width
+    return scale(width)
 }
+
+const popoverW = computed(() => {
+    const screenWidth = document.body.clientWidth
+    return `${scale(screenWidth / 1.8)}px`
+})
+
+const popoverH = computed(() => {
+    let headerDistTop = 0
+    if (headerRef.value) {
+        // 可能header没有放在顶部，所有就多加一个顶部的距离，能保持永远不超出屏幕
+        headerDistTop = headerRef.value.getBoundingClientRect().top
+    }
+    const screenHeight = document.body.clientWidth
+    return `${scale(screenHeight / 2.3 - Number(headerDistTop.toFixed(0)))}px`
+})
 
 watch(
     () => navDatas,
@@ -193,7 +211,26 @@ function handleMouseleave() {
 .header-popover-class {
     --n-padding: 0 !important;
     --n-color: transparent !important;
+    max-width: var(--popover-w) !important;
+    max-height: var(--popover-h) !important;
+    overflow-y: auto;
+    &::-webkit-scrollbar {
+        width: 6px;
+    }
 
+    &::-webkit-scrollbar-track {
+        background: rgba(0, 0, 0, 0.1);
+        border-radius: 3px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: rgb(8, 192, 189);
+        border-radius: 3px;
+
+        &:hover {
+            background: rgba(15, 251, 248, 1);
+        }
+    }
     .n-popover-arrow-wrapper {
         overflow: visible;
     }
@@ -315,6 +352,7 @@ function handleMouseleave() {
                 --offsetY: 10px;
                 width: 100%;
                 display: flex;
+                flex-wrap: wrap;
                 gap: 40px;
                 background: linear-gradient(174deg, #123479 0%, #0b2952 66%, #10507d 100%);
                 box-shadow: 0px 20px 20px -10px rgba(0, 0, 0, 0.31);
@@ -362,7 +400,7 @@ function handleMouseleave() {
                             text-overflow: ellipsis;
                             overflow: hidden;
                             font-family: HarmonyOS_Sans_SC_Bold;
-                            font-size: var(--font-size);
+                            font-size: 16px;
                             color: #f2f3f4;
                             line-height: 24px;
                             text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.5);
@@ -378,7 +416,7 @@ function handleMouseleave() {
                         gap: 15px;
                         &__nav {
                             font-family: HarmonyOS_Sans_SC_Medium;
-                            font-size: 16px;
+                            font-size: var(--font-size);
                             color: #f2f3f4;
                             line-height: 24px;
                             text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.5);

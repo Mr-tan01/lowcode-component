@@ -1,21 +1,21 @@
-import { defineComponent, mergeModels, useModel, computed, ref, watch, openBlock, createElementBlock, createElementVNode, renderSlot, createVNode, unref, withCtx, normalizeClass, mergeProps, toDisplayString, Fragment, renderList, normalizeStyle, createCommentVNode } from "vue";
+import { defineComponent, mergeModels, useModel, computed, ref, useTemplateRef, watch, openBlock, createElementBlock, createElementVNode, renderSlot, createVNode, unref, withCtx, normalizeClass, mergeProps, toDisplayString, Fragment, renderList, normalizeStyle, createCommentVNode } from "vue";
 import _imports_0 from "./images/right-arrow.png.js";
 import { NPopover } from "naive-ui/es/popover";
+import { scale } from "mmjs-core";
 import LcCarouseBox from "./carouseBox/index.js";
-const _hoisted_1 = { class: "lcc-header" };
-const _hoisted_2 = { class: "lcc-header__prefix-slot" };
-const _hoisted_3 = { class: "lcc-header__wrapper" };
-const _hoisted_4 = { class: "lcc-header__wrapper__navs" };
-const _hoisted_5 = ["onClick", "onMouseover"];
-const _hoisted_6 = {
+const _hoisted_1 = { class: "lcc-header__prefix-slot" };
+const _hoisted_2 = { class: "lcc-header__wrapper" };
+const _hoisted_3 = { class: "lcc-header__wrapper__navs" };
+const _hoisted_4 = ["onClick", "onMouseover"];
+const _hoisted_5 = {
   key: 0,
   class: "lcc-header__wrapper__navs__drop"
 };
-const _hoisted_7 = { class: "lcc-header__wrapper__navs__drop__group__label" };
-const _hoisted_8 = ["title"];
-const _hoisted_9 = { class: "lcc-header__wrapper__navs__drop__group__item__group" };
-const _hoisted_10 = ["onClick"];
-const _hoisted_11 = { class: "lcc-header__suffix-slot" };
+const _hoisted_6 = { class: "lcc-header__wrapper__navs__drop__group__label" };
+const _hoisted_7 = ["title"];
+const _hoisted_8 = { class: "lcc-header__wrapper__navs__drop__group__item__group" };
+const _hoisted_9 = ["onClick"];
+const _hoisted_10 = { class: "lcc-header__suffix-slot" };
 const _sfc_main = /* @__PURE__ */ defineComponent({
   __name: "header",
   props: /* @__PURE__ */ mergeModels({
@@ -38,14 +38,27 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     });
     const maxWidth = ref(0);
     const fontSize = ref(16);
+    const headerRef = useTemplateRef("headerRef");
     function calculateTextWidth(text) {
       const chineseCharRegex = /[\u4e00-\u9fa5]/g;
       const englishCharRegex = /[a-zA-Z]/g;
       const chineseCount = (text.match(chineseCharRegex) || []).length;
       const englishCount = (text.match(englishCharRegex) || []).length;
       const width = chineseCount * fontSize.value + englishCount * fontSize.value * 0.5;
-      return width;
+      return scale(width);
     }
+    const popoverW = computed(() => {
+      const screenWidth = document.body.clientWidth;
+      return `${scale(screenWidth / 1.8)}px`;
+    });
+    const popoverH = computed(() => {
+      let headerDistTop = 0;
+      if (headerRef.value) {
+        headerDistTop = headerRef.value.getBoundingClientRect().top;
+      }
+      const screenHeight = document.body.clientWidth;
+      return `${scale(screenHeight / 2.3 - Number(headerDistTop.toFixed(0)))}px`;
+    });
     watch(
       () => __props.navDatas,
       (newVal) => {
@@ -84,37 +97,42 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       $emit("handleMouseleave");
     }
     return (_ctx, _cache) => {
-      return openBlock(), createElementBlock("div", _hoisted_1, [
-        createElementVNode("div", _hoisted_2, [
-          renderSlot(_ctx.$slots, "prefix", {}, void 0, true)
-        ]),
-        createElementVNode("div", _hoisted_3, [
-          createElementVNode("div", _hoisted_4, [
-            createVNode(unref(LcCarouseBox), {
-              index: modelIndex.value,
-              "onUpdate:index": _cache[0] || (_cache[0] = ($event) => modelIndex.value = $event),
-              disabled: _ctx.hideArrow,
-              list: listSource.value,
-              "show-track": false,
-              onChange: carouseChange
-            }, {
-              default: withCtx(({ index, record, isActive, handleClick }) => [
-                createElementVNode(
-                  "div",
-                  {
-                    class: normalizeClass(["lcc-header__wrapper__navs__item", {
-                      active: isActive
-                    }])
-                  },
-                  [
-                    createVNode(
-                      unref(NPopover),
-                      mergeProps({ trigger: "hover" }, _ctx.$attrs, {
+      return openBlock(), createElementBlock(
+        "div",
+        {
+          class: "lcc-header",
+          ref_key: "headerRef",
+          ref: headerRef
+        },
+        [
+          createElementVNode("div", _hoisted_1, [
+            renderSlot(_ctx.$slots, "prefix", {}, void 0, true)
+          ]),
+          createElementVNode("div", _hoisted_2, [
+            createElementVNode("div", _hoisted_3, [
+              createVNode(unref(LcCarouseBox), {
+                index: modelIndex.value,
+                "onUpdate:index": _cache[0] || (_cache[0] = ($event) => modelIndex.value = $event),
+                disabled: _ctx.hideArrow,
+                list: listSource.value,
+                "show-track": false,
+                onChange: carouseChange
+              }, {
+                default: withCtx(({ index, record, isActive, handleClick }) => [
+                  createElementVNode(
+                    "div",
+                    {
+                      class: normalizeClass(["lcc-header__wrapper__navs__item", {
+                        active: isActive
+                      }])
+                    },
+                    [
+                      createVNode(unref(NPopover), mergeProps({ trigger: "hover" }, _ctx.$attrs, {
                         placement: "bottom",
                         "arrow-class": "header-arrow-class",
-                        class: "header-popover-class"
-                      }),
-                      {
+                        class: "header-popover-class",
+                        style: { "--popover-w": popoverW.value, "--popover-h": popoverH.value }
+                      }), {
                         trigger: withCtx(() => [
                           createElementVNode("a", {
                             class: "lcc-header__wrapper__navs__item__link",
@@ -124,12 +142,12 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                             }),
                             onMouseover: ($event) => handleMouseover(record, index),
                             onMouseleave: handleMouseleave
-                          }, toDisplayString(record.label), 41, _hoisted_5)
+                          }, toDisplayString(record.label), 41, _hoisted_4)
                         ]),
                         default: withCtx(() => {
                           var _a;
                           return [
-                            ((_a = record.list) == null ? void 0 : _a.length) ? (openBlock(), createElementBlock("div", _hoisted_6, [
+                            ((_a = record.list) == null ? void 0 : _a.length) ? (openBlock(), createElementBlock("div", _hoisted_5, [
                               (openBlock(true), createElementBlock(
                                 Fragment,
                                 null,
@@ -144,7 +162,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                                       })
                                     },
                                     [
-                                      createElementVNode("div", _hoisted_7, [
+                                      createElementVNode("div", _hoisted_6, [
                                         _cache[1] || (_cache[1] = createElementVNode(
                                           "div",
                                           { class: "lcc-header__wrapper__navs__drop__group__label--icon" },
@@ -162,9 +180,9 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                                           class: "lcc-header__wrapper__navs__drop__group__label--text",
                                           title: el.label,
                                           style: normalizeStyle({ "--font-size": fontSize.value + "px" })
-                                        }, toDisplayString(el.label), 13, _hoisted_8)
+                                        }, toDisplayString(el.label), 13, _hoisted_7)
                                       ]),
-                                      createElementVNode("div", _hoisted_9, [
+                                      createElementVNode("div", _hoisted_8, [
                                         (openBlock(true), createElementBlock(
                                           Fragment,
                                           null,
@@ -180,7 +198,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                                                 index,
                                                 handleClick
                                               })
-                                            }, toDisplayString(child.label), 11, _hoisted_10);
+                                            }, toDisplayString(child.label), 11, _hoisted_9);
                                           }),
                                           128
                                           /* KEYED_FRAGMENT */
@@ -199,24 +217,24 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                         }),
                         _: 2
                         /* DYNAMIC */
-                      },
-                      1040
-                      /* FULL_PROPS, DYNAMIC_SLOTS */
-                    )
-                  ],
-                  2
-                  /* CLASS */
-                )
-              ]),
-              _: 1
-              /* STABLE */
-            }, 8, ["index", "disabled", "list"])
+                      }, 1040, ["style"])
+                    ],
+                    2
+                    /* CLASS */
+                  )
+                ]),
+                _: 1
+                /* STABLE */
+              }, 8, ["index", "disabled", "list"])
+            ])
+          ]),
+          createElementVNode("div", _hoisted_10, [
+            renderSlot(_ctx.$slots, "suffix", {}, void 0, true)
           ])
-        ]),
-        createElementVNode("div", _hoisted_11, [
-          renderSlot(_ctx.$slots, "suffix", {}, void 0, true)
-        ])
-      ]);
+        ],
+        512
+        /* NEED_PATCH */
+      );
     };
   }
 });
