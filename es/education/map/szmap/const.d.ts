@@ -10,7 +10,7 @@ export declare const szBlockNames: {
     readonly 坪山: "pingshan";
     readonly 龙岗: "longgang";
     readonly 大鹏新区: "dapeng";
-    readonly 深汕合作区: "shenshan";
+    readonly 深汕特别合作区: "shenshan";
 };
 export type SzBlockNames = typeof szBlockNames;
 export type BlockName = SzBlockNames[keyof SzBlockNames];
@@ -18,7 +18,7 @@ export declare enum LabelModelEnum {
     HOVER = "hover",
     DEFAULT = "default"
 }
-export declare const defBlockLableMap: {
+export declare const defBlockLabelMap: {
     guangming: string;
     baoan: string;
     longhua: string;

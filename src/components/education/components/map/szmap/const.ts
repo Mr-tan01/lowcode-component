@@ -11,7 +11,7 @@ export const szBlockNames = {
     坪山: 'pingshan',
     龙岗: 'longgang',
     大鹏新区: 'dapeng',
-    深汕合作区: 'shenshan',
+    深汕特别合作区: 'shenshan',
 } as const
 export type SzBlockNames = typeof szBlockNames
 export type BlockName = SzBlockNames[keyof SzBlockNames]
@@ -19,7 +19,7 @@ export enum LabelModelEnum {
     HOVER = 'hover',
     DEFAULT = 'default',
 }
-export const defBlockLableMap = {
+export const defBlockLabelMap = {
     [szBlockNames['光明']]: '光明区',
     [szBlockNames['宝安']]: '宝安区',
     [szBlockNames['龙华']]: '龙华区',
@@ -30,7 +30,7 @@ export const defBlockLableMap = {
     [szBlockNames['坪山']]: '坪山区',
     [szBlockNames['龙岗']]: '龙岗区',
     [szBlockNames['大鹏新区']]: '大鹏新区',
-    [szBlockNames['深汕合作区']]: '深汕合作区',
+    [szBlockNames['深汕特别合作区']]: '深汕特别合作区',
 }
 
 export type BlockLableMapType = Record<BlockName, string>

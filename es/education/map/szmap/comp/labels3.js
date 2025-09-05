@@ -1,6 +1,6 @@
 import { defineComponent, computed, openBlock, createElementBlock, createElementVNode, toDisplayString, unref } from "vue";
 import merge from "lodash-es/merge";
-import { defBlockLableMap, szBlockNames } from "../const.js";
+import { defBlockLabelMap, szBlockNames } from "../const.js";
 const _hoisted_1 = {
   id: "编组-17",
   class: "lables-group",
@@ -101,7 +101,7 @@ const _hoisted_21 = {
   y: "105"
 };
 const _hoisted_22 = {
-  id: "深汕合作区",
+  id: "深汕特别合作区",
   class: "text",
   fill: "url(#linearGradient-48)"
 };
@@ -115,7 +115,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     labels: { default: () => ({}) }
   },
   setup(__props) {
-    const mergedLabels = computed(() => merge({}, defBlockLableMap, __props.labels));
+    const mergedLabels = computed(() => merge({}, defBlockLabelMap, __props.labels));
     return (_ctx, _cache) => {
       return openBlock(), createElementBlock("g", _hoisted_1, [
         createElementVNode("text", _hoisted_2, [
@@ -212,7 +212,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
           createElementVNode(
             "tspan",
             _hoisted_23,
-            toDisplayString(mergedLabels.value[unref(szBlockNames)["深汕合作区"]]),
+            toDisplayString(mergedLabels.value[unref(szBlockNames)["深汕特别合作区"]]),
             1
             /* TEXT */
           )

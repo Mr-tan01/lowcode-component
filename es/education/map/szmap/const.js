@@ -9,14 +9,14 @@ const szBlockNames = {
   坪山: "pingshan",
   龙岗: "longgang",
   大鹏新区: "dapeng",
-  深汕合作区: "shenshan"
+  深汕特别合作区: "shenshan"
 };
 var LabelModelEnum = /* @__PURE__ */ ((LabelModelEnum2) => {
   LabelModelEnum2["HOVER"] = "hover";
   LabelModelEnum2["DEFAULT"] = "default";
   return LabelModelEnum2;
 })(LabelModelEnum || {});
-const defBlockLableMap = {
+const defBlockLabelMap = {
   [szBlockNames["光明"]]: "光明区",
   [szBlockNames["宝安"]]: "宝安区",
   [szBlockNames["龙华"]]: "龙华区",
@@ -27,7 +27,7 @@ const defBlockLableMap = {
   [szBlockNames["坪山"]]: "坪山区",
   [szBlockNames["龙岗"]]: "龙岗区",
   [szBlockNames["大鹏新区"]]: "大鹏新区",
-  [szBlockNames["深汕合作区"]]: "深汕合作区"
+  [szBlockNames["深汕特别合作区"]]: "深汕特别合作区"
 };
 const defFloatLevelConfig = {
   warning: {
@@ -65,7 +65,7 @@ const defFloatLevelConfig = {
 };
 export {
   LabelModelEnum,
-  defBlockLableMap,
+  defBlockLabelMap,
   defFloatLevelConfig,
   szBlockNames
 };
