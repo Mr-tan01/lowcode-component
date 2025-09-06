@@ -133,11 +133,16 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       },
       { deep: true }
     );
-    const initPointDataChange = watch([initPointDataStatus, __props.pointData], () => {
-      if (!initPointDataStatus.value) {
-        reloadPointData();
-      }
-    });
+    const initPointDataChange = watch(
+      [initPointDataStatus, __props.pointData, () => __props.areaName],
+      () => {
+        if (!initPointDataStatus.value) {
+          clearEntity();
+          reloadPointData();
+        }
+      },
+      { deep: true }
+    );
     onMounted(async () => {
       await initCesium();
     });
