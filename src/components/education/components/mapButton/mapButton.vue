@@ -43,6 +43,7 @@ const handleClick = (alt: string) => {
     height: 339px;
     display: flex;
     flex-direction: column;
+    align-items: center;
     &-upside {
         display: flex;
         flex-direction: column;
@@ -60,6 +61,8 @@ const handleClick = (alt: string) => {
     }
     &-underside {
         margin-top: 33px;
+        display: flex;
+        justify-content: center;
     }
 }
 </style>
