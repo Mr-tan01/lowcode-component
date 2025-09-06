@@ -36,7 +36,11 @@
                                         {{ record.label }}
                                     </a>
                                 </template>
-                                <div v-if="record.list?.length" class="lcc-header__wrapper__navs__drop">
+                                <div
+                                    v-if="record.list?.length"
+                                    class="lcc-header__wrapper__navs__drop"
+                                    :style="{ '--grid-col': record.list?.length >= 3 ? 3 : record.list?.length }"
+                                >
                                     <div
                                         v-for="(el, key) in record.list"
                                         :key
@@ -53,11 +57,7 @@
                                                     alt=""
                                                 />
                                             </div>
-                                            <div
-                                                class="lcc-header__wrapper__navs__drop__group__label--text"
-                                                :title="el.label"
-                                                :style="{ '--font-size': fontSize + 'px' }"
-                                            >
+                                            <div class="lcc-header__wrapper__navs__drop__group__label--text" :title="el.label">
                                                 {{ el.label }}
                                             </div>
                                         </div>
@@ -332,8 +332,8 @@ function handleMouseleave() {
             &__drop {
                 --offsetY: 10px;
                 width: 100%;
-                display: flex;
-                flex-wrap: wrap;
+                display: grid;
+                grid-template-columns: repeat(var(--grid-col), 1fr);
                 gap: 40px;
                 background: linear-gradient(174deg, #123479 0%, #0b2952 66%, #10507d 100%);
                 box-shadow: 0px 20px 20px -10px rgba(0, 0, 0, 0.31);
@@ -346,6 +346,10 @@ function handleMouseleave() {
                 max-width: var(--popover-w) !important;
                 max-height: var(--popover-h) !important;
                 overflow-y: auto;
+                &--grid {
+                    grid-template-columns: repeat(3, 1fr);
+                    gap: 40px;
+                }
                 &::-webkit-scrollbar {
                     width: 6px;
                 }
@@ -414,7 +418,7 @@ function handleMouseleave() {
                         gap: 15px;
                         &__nav {
                             font-family: HarmonyOS_Sans_SC_Medium;
-                            font-size: var(--font-size);
+                            font-size: 16px;
                             color: #f2f3f4;
                             line-height: 24px;
                             text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.5);
