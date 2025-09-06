@@ -184,11 +184,16 @@ const offsetStateChange = watch(
     { deep: true },
 )
 
-const initPointDataChange = watch([initPointDataStatus, pointData], () => {
-    if (!initPointDataStatus.value) {
-        reloadPointData()
-    }
-})
+const initPointDataChange = watch(
+    [initPointDataStatus, pointData, () => areaName],
+    () => {
+        if (!initPointDataStatus.value) {
+            clearEntity()
+            reloadPointData()
+        }
+    },
+    { deep: true },
+)
 
 onMounted(async () => {
     await initCesium()

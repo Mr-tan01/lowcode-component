@@ -1,4 +1,4 @@
-import { defineComponent, mergeDefaults, useCssVars, computed, ref, onMounted, createElementBlock, openBlock, createCommentVNode, createVNode, createElementVNode, Fragment, renderList, mergeProps, createBlock, resolveDynamicComponent, renderSlot, unref } from "vue";
+import { defineComponent, mergeDefaults, useCssVars, ref, onMounted, computed, openBlock, createElementBlock, createVNode, createElementVNode, Fragment, renderList, mergeProps, resolveDynamicComponent, createBlock, createCommentVNode, renderSlot, unref } from "vue";
 import _sfc_main$2 from "./comp/sshzq.js";
 import Baoan from "./comp/baoan.js";
 import Dapeng from "./comp/dapeng.js";
@@ -14,7 +14,7 @@ import _sfc_main$1 from "./comp/defines.js";
 import Labels from "./comp/labels2.js";
 import LcMark from "../mark/index2.js";
 import { propsRaw } from "./props.js";
-import { defFloatLevelConfig, LabelModelEnum, szBlockNames, defBlockLableMap } from "./const.js";
+import { LabelModelEnum, defFloatLevelConfig, szBlockNames, defBlockLabelMap } from "./const.js";
 import merge from "lodash-es/merge";
 const _hoisted_1 = { class: "lc-szmap-raw" };
 const _hoisted_2 = {
@@ -58,8 +58,8 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
   emits: ["markClick", "markMouseover", "markMouseenter", "markMouseleave"],
   setup(__props, { emit: __emit }) {
     useCssVars((_ctx) => ({
-      "56fab9ce": mapRotateX.value,
-      "1ce59d8d": labelWrapInsetY.value
+      "e3d2bf9c": mapRotateX.value,
+      "43ee15a9": labelWrapInsetY.value
     }));
     const blockList = {
       [szBlockNames["光明"]]: Guangming,
@@ -72,7 +72,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       [szBlockNames["坪山"]]: Pingshan,
       [szBlockNames["龙岗"]]: Longgang,
       [szBlockNames["大鹏新区"]]: Dapeng,
-      [szBlockNames["深汕合作区"]]: _sfc_main$2
+      [szBlockNames["深汕特别合作区"]]: _sfc_main$2
     };
     const labelAnimateNum = ref(0);
     const $emits = __emit;
@@ -85,7 +85,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       const [, currentLevelConf] = levelsList.value[currentLevelIndex] ?? [];
       return {
         ...markMate,
-        mapLabel: defBlockLableMap[key],
+        mapLabel: defBlockLabelMap[key],
         style: {
           "--level-scale": labelAnimateNum.value ? (currentLevelConf == null ? void 0 : currentLevelConf.scale) ?? 1 : labelAnimateNum.value
         }
@@ -193,8 +193,9 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                   renderList(blockList, (is, key, index) => {
                     return createVNode(resolveDynamicComponent(is), mergeProps({
                       key: index,
-                      class: blockClass.value
-                    }, { ref_for: true }, getBlockProperties(key), {
+                      class: blockClass.value,
+                      ref_for: true
+                    }, getBlockProperties(key), {
                       "show-border": _ctx.showBorder,
                       onMouseenter: ($event) => onMouseoverMapkey(key),
                       onMouseover: ($event) => onMouseenterMapkey(key),
@@ -227,8 +228,9 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
               renderList(blockList, (_, key) => {
                 return createVNode(unref(LcMark), mergeProps({
                   key,
-                  class: labelClass(key)
-                }, { ref_for: true }, getMarkProp(key), {
+                  class: labelClass(key),
+                  ref_for: true
+                }, getMarkProp(key), {
                   size: "small",
                   onClick: ($event) => markClick(key)
                 }), null, 16, ["class", "onClick"]);
