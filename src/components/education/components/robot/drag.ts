@@ -27,14 +27,14 @@ export function useDragRobotPosition() {
     function stopDrag(event: DragEvent) {
         event.preventDefault()
         isDraging.value = false
-        if (event.clientX < window.innerWidth / 2) {
-            robotOffset.x = 0
-        } else {
-            robotOffset.x = 100
-        }
-        // @ts-ignore
-        const { height = 200 } = event.target?.getBoundingClientRect() ?? {}
-        robotOffset.y = (event.clientY <= height ? height : event.clientY) + 'px'
+        const targetX = event.clientX < window.innerWidth / 2 ? 0 : 100
+        // 计算相对于视口高度的位置比例 (0-1)
+        const yRatio = Math.min(Math.max(event.clientY / window.innerHeight, 0), 1)
+        // Y轴位置基于视口高度比例计算(15%-85%范围)
+        const targetY = `${15 + yRatio * 85}%`
+        // 平滑过渡到目标位置
+        robotOffset.x = targetX
+        robotOffset.y = targetY
         localStorage.setItem(dragHistoryKey, JSON.stringify(robotOffset))
     }
 

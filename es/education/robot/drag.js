@@ -21,16 +21,13 @@ function useDragRobotPosition() {
     event.preventDefault();
   }
   function stopDrag(event) {
-    var _a;
     event.preventDefault();
     isDraging.value = false;
-    if (event.clientX < window.innerWidth / 2) {
-      robotOffset.x = 0;
-    } else {
-      robotOffset.x = 100;
-    }
-    const { height = 200 } = ((_a = event.target) == null ? void 0 : _a.getBoundingClientRect()) ?? {};
-    robotOffset.y = (event.clientY <= height ? height : event.clientY) + "px";
+    const targetX = event.clientX < window.innerWidth / 2 ? 0 : 100;
+    const yRatio = Math.min(Math.max(event.clientY / window.innerHeight, 0), 1);
+    const targetY = `${15 + yRatio * 85}%`;
+    robotOffset.x = targetX;
+    robotOffset.y = targetY;
     localStorage.setItem(dragHistoryKey, JSON.stringify(robotOffset));
   }
   function dragenter() {

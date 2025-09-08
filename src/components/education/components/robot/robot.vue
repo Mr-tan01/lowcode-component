@@ -107,6 +107,13 @@ const { y: robotPositionBottom } = toRefs(robotOffset)
 .lc-robot {
     &:hover {
         cursor: pointer;
+        .lc-robot__wrapper__image--status-lt {
+            transform: translateX(-45%) rotate(30deg);
+        }
+
+        .lc-robot__wrapper__image--status-rt {
+            transform: translateX(45%) rotate(-30deg);
+        }
     }
 
     &--draggable {
@@ -114,7 +121,8 @@ const { y: robotPositionBottom } = toRefs(robotOffset)
         z-index: 9999;
         left: 100%;
         top: v-bind(robotPositionBottom);
-        transition: 0.2s linear;
+        transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+        will-change: transform;
 
         &.lc-robot {
             &--dir-lt {
@@ -134,6 +142,10 @@ const { y: robotPositionBottom } = toRefs(robotOffset)
     }
 
     &--draging {
+        transition: transform 0.2s ease-out;
+        transform: scale(0.95);
+        opacity: 0.8;
+        filter: drop-shadow(0 0 8px rgba(0, 0, 0, 0.2));
         &:hover {
             opacity: 0.1;
         }
@@ -162,11 +174,11 @@ const { y: robotPositionBottom } = toRefs(robotOffset)
             transition: transform linear 0.3s;
 
             &--status-lt {
-                transform: translateX(-50%) rotate(30deg);
+                transform: translateX(-70%) rotate(30deg);
             }
 
             &--status-rt {
-                transform: translateX(50%) rotate(-30deg);
+                transform: translateX(70%) rotate(-30deg);
             }
         }
     }
