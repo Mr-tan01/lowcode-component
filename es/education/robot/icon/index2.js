@@ -1,4 +1,4 @@
-import { defineComponent, useCssVars, computed, toRefs, createElementBlock, openBlock, normalizeStyle, normalizeClass, unref, createElementVNode, renderSlot } from "vue";
+import { defineComponent, useCssVars, toRefs, computed, openBlock, createElementBlock, normalizeClass, unref, normalizeStyle, createElementVNode, renderSlot } from "vue";
 import { useImage } from "./icons.js";
 const _hoisted_1 = ["src"];
 const _hoisted_2 = { class: "lc-icon__span" };

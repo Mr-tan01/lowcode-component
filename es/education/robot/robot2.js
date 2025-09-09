@@ -1,4 +1,4 @@
-import { defineComponent, mergeModels, useCssVars, unref, toRefs, useModel, computed, createElementBlock, openBlock, normalizeClass, createElementVNode, createBlock, createCommentVNode, mergeProps } from "vue";
+import { defineComponent, mergeModels, useCssVars, unref, useModel, computed, toRefs, openBlock, createElementBlock, normalizeClass, createElementVNode, createBlock, mergeProps, createCommentVNode } from "vue";
 import { robotBQMap, imageShowTrigger, imageHideDir } from "./const.js";
 import robotChatPopup from "./robot-chat-popup.js";
 import { useDragRobotPosition } from "./drag.js";
@@ -41,10 +41,10 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
   emits: ["update:isShow"],
   setup(__props) {
     useCssVars((_ctx) => ({
-      "533baf34": _ctx.position,
-      "0825eb3e": unref(robotPositionBottom),
-      "224a2fa9": _ctx.width,
-      "0d2ccba4": _ctx.height
+      "59c2d553": _ctx.position,
+      "171ef754": unref(robotPositionBottom),
+      "2cbd1c48": _ctx.width,
+      "30bdcfd1": _ctx.height
     }));
     const isFocus = useModel(__props, "isShow");
     const robotSrc = computed(() => __props.src || robotBQMap[__props.value]);
