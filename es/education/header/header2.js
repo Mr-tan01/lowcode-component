@@ -1,4 +1,4 @@
-import { defineComponent, mergeModels, useModel, computed, ref, useTemplateRef, watch, openBlock, createElementBlock, createElementVNode, renderSlot, createVNode, unref, withCtx, normalizeClass, mergeProps, toDisplayString, normalizeStyle, Fragment, renderList, createCommentVNode } from "vue";
+import { defineComponent, mergeModels, useModel, computed, ref, useTemplateRef, onMounted, openBlock, createElementBlock, createElementVNode, renderSlot, createVNode, unref, withCtx, normalizeClass, mergeProps, toDisplayString, normalizeStyle, Fragment, renderList, createCommentVNode } from "vue";
 import _imports_0 from "./images/right-arrow.png.js";
 import { NPopover } from "naive-ui/es/popover";
 import { scale } from "mmjs-core";
@@ -45,7 +45,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     }
     const popoverW = computed(() => {
       const screenWidth = document.body.clientWidth;
-      return `${scale(screenWidth / 1.8)}px`;
+      return `${screenWidth / 1.8}px`;
     });
     const popoverH = computed(() => {
       let headerDistTop = 0;
@@ -53,27 +53,23 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
         headerDistTop = headerRef.value.getBoundingClientRect().top;
       }
       const screenHeight = document.body.clientWidth;
-      return `${scale(screenHeight / 2.3 - Number(headerDistTop.toFixed(0)))}px`;
+      return `${screenHeight / 2.3 - Number(headerDistTop.toFixed(0))}px`;
     });
-    watch(
-      () => __props.navDatas,
-      (newVal) => {
-        if (newVal == null ? void 0 : newVal.length) {
-          const allChildren = newVal.flatMap((item) => {
-            var _a;
-            return ((_a = item.list) == null ? void 0 : _a.flatMap((el) => el.children)) || [];
-          });
-          const allLabels = [...newVal.map((item) => item.label), ...allChildren.map((child) => child.label)];
-          if (__props.menuItemWidth === "fixed") {
-            const widths = allLabels.map((label) => calculateTextWidth(label));
-            maxWidth.value = Math.max(...widths);
-          } else {
-            maxWidth.value = 0;
-          }
+    onMounted(() => {
+      if (__props.navDatas.length) {
+        const allChildren = __props.navDatas.flatMap((item) => {
+          var _a;
+          return ((_a = item.list) == null ? void 0 : _a.flatMap((el) => el.children)) || [];
+        });
+        const allLabels = [...__props.navDatas.map((item) => item.label), ...allChildren.map((child) => child.label)];
+        if (__props.menuItemWidth === "fixed") {
+          const widths = allLabels.map((label) => calculateTextWidth(label));
+          maxWidth.value = Math.max(...widths);
+        } else {
+          maxWidth.value = 0;
         }
-      },
-      { immediate: true, deep: true }
-    );
+      }
+    });
     const $emit = __emit;
     function jump({ parent, item, index, handleClick }) {
       var _a;

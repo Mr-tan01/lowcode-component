@@ -96,7 +96,7 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, ref, useTemplateRef, watch } from 'vue'
+import { computed, ref, useTemplateRef, onMounted } from 'vue'
 import { NPopover } from 'naive-ui/es/popover'
 import { scale } from 'mmjs-core'
 import { LcCarouseBox, type LcCarouseBoxChangeEvent } from '@/components/education/components/carouseBox'
@@ -148,7 +148,7 @@ function calculateTextWidth(text: string): number {
 
 const popoverW = computed(() => {
     const screenWidth = document.body.clientWidth
-    return `${scale(screenWidth / 1.8)}px`
+    return `${screenWidth / 1.8}px`
 })
 
 const popoverH = computed(() => {
@@ -158,26 +158,22 @@ const popoverH = computed(() => {
         headerDistTop = headerRef.value.getBoundingClientRect().top
     }
     const screenHeight = document.body.clientWidth
-    return `${scale(screenHeight / 2.3 - Number(headerDistTop.toFixed(0)))}px`
+    return `${screenHeight / 2.3 - Number(headerDistTop.toFixed(0))}px`
 })
 
-watch(
-    () => navDatas,
-    newVal => {
-        if (newVal?.length) {
-            const allChildren = newVal.flatMap(item => item.list?.flatMap(el => el.children) || [])
-            const allLabels = [...newVal.map(item => item.label), ...allChildren.map(child => child.label)]
-            if (menuItemWidth === 'fixed') {
-                // 最大宽度的menuLabel
-                const widths = allLabels.map(label => calculateTextWidth(label))
-                maxWidth.value = Math.max(...widths)
-            } else {
-                maxWidth.value = 0
-            }
+onMounted(() => {
+    if (navDatas.length) {
+        const allChildren = navDatas.flatMap(item => item.list?.flatMap(el => el.children) || [])
+        const allLabels = [...navDatas.map(item => item.label), ...allChildren.map(child => child.label)]
+        if (menuItemWidth === 'fixed') {
+            // 最大宽度的menuLabel
+            const widths = allLabels.map(label => calculateTextWidth(label))
+            maxWidth.value = Math.max(...widths)
+        } else {
+            maxWidth.value = 0
         }
-    },
-    { immediate: true, deep: true },
-)
+    }
+})
 
 const $emit = defineEmits<{
     (e: 'jump', jumpParams: jumpParams): void
