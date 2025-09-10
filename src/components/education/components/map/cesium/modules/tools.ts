@@ -400,10 +400,10 @@ export const createEntityConfig = async ({
             const height = viewer.camera.positionCartographic.height
             // 修改为高度越大缩放越小，使用1.5作为基础值减去高度比例// 添加边界检查，确保缩放比例在合理范围内
             const scale = Math.max(0.3, Math.min(2, 1 - height / 100000))
-            return type ? new Cartesian2(0, 0) : new Cartesian2((valueInfo.width * scale) / 2, (valueInfo.height * scale) / 2 - 3)
+            return type ? new Cartesian2(0, 0) : new Cartesian2((valueInfo.width * scale) / 2, (valueInfo.height / 2 - 43) * scale)
         }, false),
         disableDepthTestDistance: type ? undefined : Number.POSITIVE_INFINITY,
-        verticalOrigin: type ? VerticalOrigin.CENTER : VerticalOrigin.BOTTOM,
+        verticalOrigin: VerticalOrigin.BOTTOM,
         scale: new CallbackProperty(() => {
             const height = viewer.camera.positionCartographic.height
             // 修改为高度越大缩放越小，使用1.5作为基础值减去高度比例// 添加边界检查，确保缩放比例在合理范围内
