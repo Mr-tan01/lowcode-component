@@ -262,10 +262,10 @@ const createEntityConfig = async ({
     pixelOffset: new CallbackProperty(() => {
       const height = viewer.camera.positionCartographic.height;
       const scale = Math.max(0.3, Math.min(2, 1 - height / 1e5));
-      return type ? new Cartesian2(0, 0) : new Cartesian2(valueInfo.width * scale / 2, valueInfo.height * scale / 2 - 3);
+      return type ? new Cartesian2(0, 0) : new Cartesian2(valueInfo.width * scale / 2, (valueInfo.height / 2 - 43) * scale);
     }, false),
     disableDepthTestDistance: type ? void 0 : Number.POSITIVE_INFINITY,
-    verticalOrigin: type ? VerticalOrigin.CENTER : VerticalOrigin.BOTTOM,
+    verticalOrigin: VerticalOrigin.BOTTOM,
     scale: new CallbackProperty(() => {
       const height = viewer.camera.positionCartographic.height;
       const scale = Math.max(0.3, Math.min(2, 1 - height / 1e5));
