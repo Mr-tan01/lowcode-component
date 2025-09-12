@@ -139,7 +139,7 @@ const initCesium = async (): Promise<{ status: boolean }> => {
         // 加载瓦片图层
         const titleUrl =
             imageryLayersUrl ??
-            `${baseUrl}/service/api/e99b765798d1412b9c2b458a1473396e/igs/rest/services/SZMAP/SZDZDT_2024_Yingji_T1_4490/WMTSServer?client_id=${clientId}&access_token=${accessToken}`
+            `${baseUrl}/service/api/a466c72ef1ea4f93aae5af7f6ab5b56e/igs/rest/services/SZMAP_Blue_DT_ZW_2024_Q2_4490/WMTSServer?client_id=${clientId}&access_token=${accessToken}`
 
         await cesiumUtils.loadTileLayer(titleUrl)
         if (areaName) {

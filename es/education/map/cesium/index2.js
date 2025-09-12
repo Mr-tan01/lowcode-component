@@ -95,7 +95,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
         }
         cesiumUtils.updateViewerAttribute();
         cesiumUtils.setInitialView({ destination: __props.centerPosition }, false);
-        const titleUrl = __props.imageryLayersUrl ?? `${__props.baseUrl}/service/api/e99b765798d1412b9c2b458a1473396e/igs/rest/services/SZMAP/SZDZDT_2024_Yingji_T1_4490/WMTSServer?client_id=${__props.clientId}&access_token=${__props.accessToken}`;
+        const titleUrl = __props.imageryLayersUrl ?? `${__props.baseUrl}/service/api/a466c72ef1ea4f93aae5af7f6ab5b56e/igs/rest/services/SZMAP_Blue_DT_ZW_2024_Q2_4490/WMTSServer?client_id=${__props.clientId}&access_token=${__props.accessToken}`;
         await cesiumUtils.loadTileLayer(titleUrl);
         if (__props.areaName) {
           cesiumUtils.polygonClickHandler(__props.areaName);
