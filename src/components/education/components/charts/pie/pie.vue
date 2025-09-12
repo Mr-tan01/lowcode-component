@@ -180,6 +180,24 @@ defineExpose({
             left: v-bind(legendLeft);
             top: v-bind(legendTop);
             transform: translate(-50%, -50%);
+            &::-webkit-scrollbar {
+                width: 6px;
+                height: 6px;
+            }
+
+            &::-webkit-scrollbar-track {
+                background: transparent;
+                border-radius: 10px;
+            }
+
+            &::-webkit-scrollbar-thumb {
+                background: rgba(0, 127, 206, 0.1);
+                border-radius: 10px;
+            }
+
+            &::-webkit-scrollbar-thumb:hover {
+                background: rgba(0, 127, 206, 0.5);
+            }
         }
 
         &__chart {
