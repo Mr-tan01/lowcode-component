@@ -32,12 +32,12 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
   emits: ["legend:click", "legend:toggleSelect"],
   setup(__props, { expose: __expose, emit: __emit }) {
     useCssVars((_ctx) => ({
-      "169b6b33": _ctx.flexDirection,
-      "4440e6e2": wrapperPading.value,
-      "135dbe49": _ctx.legendPosition,
-      "98c555b2": _ctx.legendLeft,
-      "47dbe835": _ctx.legendTop,
-      "26b993c4": cssBlockSize.value
+      "07e6554e": _ctx.flexDirection,
+      "61ab12ac": wrapperPading.value,
+      "4b70178e": _ctx.legendPosition,
+      "731dce28": _ctx.legendLeft,
+      "b963d060": _ctx.legendTop,
+      "ccd5c6ba": cssBlockSize.value
     }));
     const chartDomRef = useTemplateRef("chartDom");
     const chartInstance = shallowRef();
