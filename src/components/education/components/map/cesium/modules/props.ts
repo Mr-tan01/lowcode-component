@@ -17,6 +17,10 @@ export const cesiumProps = {
         type: String as PropType<string>,
         default: '#046ab1',
     }, // spin文字颜色
+    showPopoverHeight: {
+        type: Number,
+        default: 10000,
+    },
     centerPosition: {
         type: Object as PropType<Cartesian3>,
     },
@@ -69,6 +73,10 @@ export const cesiumProps = {
     openOffset: {
         type: Object as PropType<{ flag: boolean; offset: number }>,
         default: { flag: false, offset: 0 },
+    },
+    popoverOffset: {
+        type: Object as PropType<{ popoverOffsetX: number; popoverOffsetY: number }>,
+        default: { popoverOffsetX: 0, popoverOffsetY: 0 },
     },
     pointBatchRender: {
         type: Object as PropType<{ batchRenderSize: number; batchRenderDelay: number }>,

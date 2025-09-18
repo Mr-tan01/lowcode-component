@@ -10,7 +10,7 @@ import {
 } from 'cesium'
 import { type CesiumHeatmap } from 'cesium-heatmap-es6'
 import shenZhen from './深圳市（各区）.json'
-import warning from '../image/warning.svg'
+
 export const areaData = {
     深圳市: { lng: 114.063109, lat: 22.544522, value: 440300, position: [] },
     光明区: {
@@ -90,12 +90,8 @@ export interface pointType {
     name: string // 唯一name属性 获取唯一entity实例 切勿重复
     lng: number
     lat: number
-    value?: string // 文字内容
-    iconType?: iconType | string // 点图标
-    text?: string // 窗体文字内容
-    textIconType?: textIconType | string // 窗体图标
     changeIconType?: changeIconType | string // 变动图标
-    changeTextIconType?: textIconType | string // 窗体变动图标
+    options: BaseCanvasConfigOptions
 }
 
 export interface polygonType {
@@ -115,19 +111,18 @@ export interface polygonType {
 
 // Enity自定义属性配置
 export interface EntityProperties {
-    value?: any
-    text?: string
     changeState: boolean
-    type: string
     position: number[]
-    name: string
+    options: BaseCanvasConfigOptions
+    valueInfo?: HTMLCanvasElement
 }
 
 // Enity配置
 export interface EntityConfig {
-    position: Cartesian3
     name: string
+    position: Cartesian3
     properties: EntityProperties
+    isPopoverEntity: boolean
     billboard: {
         image: HTMLCanvasElement
         disableDepthTestDistance: number | undefined
@@ -168,7 +163,6 @@ export interface basicConfigType {
     clusteringPixelRange?: number // 聚合像素范围
     clusteringMinimumClusterSize?: number // 最小聚合数量
     cameraLimitsEnabled?: boolean // 启用相机控制限制
-    hoverState?: boolean // 启用鼠标悬浮状态
     defaultUrl?: string // 默认瓦片地址
     providerOptions?: Record<string, any> // 瓦片参数
     labelShowHeightThreshold?: number // 多少高度显示全瓦片
@@ -187,6 +181,7 @@ export interface optionType {
     pointHoverExitHandler?: (value: Entity) => void
     limitHeightHandler: (value: number) => void
     loadTileLayerHandler: (status: boolean) => void
+    createdTooltip: (value: Entity, point: pointType) => void
 }
 
 export type changeModelType =
@@ -340,41 +335,122 @@ export const pointInfo = {
     ],
     福田区: [
         {
-            name: 'a12323',
+            name: '999',
             lng: 114.060581,
             lat: 22.523143,
-            value: '皇',
-            iconType: 'primary',
-            text: '皇岗村1',
-            textIconType: 'primary_label',
-            customIcon: warning,
+            options: {
+                currentMode: 'text',
+                iconType: 'primary',
+                label: '测',
+                popoverLabel: '测试',
+                fontConfig: {
+                    size: '24px',
+                    family: 'HarmonyOS Sans SC',
+                    color: '#fff',
+                    weight: 'bold',
+                },
+            },
         },
         {
             name: 'dad1',
             lng: 114.050475,
             lat: 22.518673,
-            value: '',
-            iconType: 'icon_primary',
-            text: '深圳市幼妇保健院',
-            textIconType: 'primary_label',
+            options: {
+                currentMode: 'text',
+                iconType: 'danger',
+                label: '测',
+                popoverLabel: 'adasdsadasdasdsadasdasdaddasdas',
+                fontConfig: {
+                    size: '24px',
+                    family: 'HarmonyOS Sans SC',
+                    color: '#fff',
+                    weight: 'bold',
+                },
+            },
         },
         {
             name: 'b1',
             lng: 114.045403,
             lat: 22.523431,
-            value: '小',
-            iconType: 'success',
-            text: '新沙小学',
-            textIconType: 'success_label',
+            options: {
+                currentMode: 'text',
+                iconType: 'success',
+                label: '8',
+                popoverLabel: '我',
+                fontConfig: {
+                    size: '24px',
+                    family: 'HarmonyOS Sans SC',
+                    color: '#fff',
+                    weight: 'bold',
+                },
+            },
         },
         {
             name: '2d23',
             lng: 114.049383,
             lat: 22.525512,
-            value: '',
-            iconType: 'icon_success',
-            text: '新洲小学',
-            textIconType: 'success_label',
+            options: {
+                currentMode: 'text',
+                iconType: 'warning',
+                label: '9',
+                popoverLabel: '测试你勒我真是无语',
+                fontConfig: {
+                    size: '24px',
+                    family: 'HarmonyOS Sans SC',
+                    color: '#fff',
+                    weight: 'bold',
+                },
+            },
         },
     ],
 }
+
+export interface fontStyle {
+    size: string
+    family: string
+    color: string
+    weight:
+        | number // 100-900
+        | 'normal' // 400
+        | 'bold' // 700
+        | 'bolder'
+        | 'lighter'
+    fillText?: (ctx: CanvasRenderingContext2D) => void // 自定义文字的位置
+    customCanvasText?: (ctx: CanvasRenderingContext2D, label: string) => void // 自定义文字的渲染
+}
+export enum CanvasMode {
+    Text = 'text',
+    Image = 'image',
+}
+// 默认的水滴类型
+export enum CanvasType {
+    Danger = 'danger',
+    Success = 'success',
+    Primary = 'primary',
+    Warning = 'warning',
+    Hover = 'hover',
+}
+type BaseCanvasConfigOptions = {
+    width?: number
+    height?: number
+    iconType?: CanvasType
+    currentMode?: CanvasMode
+    popoverLabel: string
+    fontConfig?: fontStyle
+    customCanvas?: (canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D) => void
+    customPopoverCanvas?: (canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D) => void
+    borderColor?: string
+    backgroundColor?: string
+}
+
+export type TextModeConfig = BaseCanvasConfigOptions & {
+    currentMode: CanvasMode.Text
+    label: string
+}
+
+export type ImageModeConfig = BaseCanvasConfigOptions & {
+    currentMode: CanvasMode.Image
+    uploadedImage: string
+}
+
+export type CanvasConfigOptions = TextModeConfig | ImageModeConfig

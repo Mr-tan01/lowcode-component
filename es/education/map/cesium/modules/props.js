@@ -21,6 +21,10 @@ const cesiumProps = {
     default: "#046ab1"
   },
   // spin文字颜色
+  showPopoverHeight: {
+    type: Number,
+    default: 1e4
+  },
   centerPosition: {
     type: Object
   },
@@ -74,6 +78,10 @@ const cesiumProps = {
   openOffset: {
     type: Object,
     default: { flag: false, offset: 0 }
+  },
+  popoverOffset: {
+    type: Object,
+    default: { popoverOffsetX: 0, popoverOffsetY: 0 }
   },
   pointBatchRender: {
     type: Object,

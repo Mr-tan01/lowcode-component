@@ -192,12 +192,8 @@ export interface pointType {
     name: string;
     lng: number;
     lat: number;
-    value?: string;
-    iconType?: iconType | string;
-    text?: string;
-    textIconType?: textIconType | string;
     changeIconType?: changeIconType | string;
-    changeTextIconType?: textIconType | string;
+    options: BaseCanvasConfigOptions;
 }
 export interface polygonType {
     name: string;
@@ -214,17 +210,16 @@ export interface polygonType {
     };
 }
 export interface EntityProperties {
-    value?: any;
-    text?: string;
     changeState: boolean;
-    type: string;
     position: number[];
-    name: string;
+    options: BaseCanvasConfigOptions;
+    valueInfo?: HTMLCanvasElement;
 }
 export interface EntityConfig {
-    position: Cartesian3;
     name: string;
+    position: Cartesian3;
     properties: EntityProperties;
+    isPopoverEntity: boolean;
     billboard: {
         image: HTMLCanvasElement;
         disableDepthTestDistance: number | undefined;
@@ -263,7 +258,6 @@ export interface basicConfigType {
     clusteringPixelRange?: number;
     clusteringMinimumClusterSize?: number;
     cameraLimitsEnabled?: boolean;
-    hoverState?: boolean;
     defaultUrl?: string;
     providerOptions?: Record<string, any>;
     labelShowHeightThreshold?: number;
@@ -281,6 +275,7 @@ export interface optionType {
     pointHoverExitHandler?: (value: Entity) => void;
     limitHeightHandler: (value: number) => void;
     loadTileLayerHandler: (status: boolean) => void;
+    createdTooltip: (value: Entity, point: pointType) => void;
 }
 export type changeModelType = 'polygonClickHandler' | 'setCameraHeight' | 'setInitialView' | 'setViewerLayer' | 'ZoomIn' | 'ZoomOut' | 'clearEntity' | 'removeHeatMap';
 export type changeModelParamType = {
@@ -361,23 +356,62 @@ export declare const pointInfo: {
         text: string;
         textIconType: string;
     }[];
-    福田区: ({
+    福田区: {
         name: string;
         lng: number;
         lat: number;
-        value: string;
-        iconType: string;
-        text: string;
-        textIconType: string;
-        customIcon: string;
-    } | {
-        name: string;
-        lng: number;
-        lat: number;
-        value: string;
-        iconType: string;
-        text: string;
-        textIconType: string;
-        customIcon?: undefined;
-    })[];
+        options: {
+            currentMode: string;
+            iconType: string;
+            label: string;
+            popoverLabel: string;
+            fontConfig: {
+                size: string;
+                family: string;
+                color: string;
+                weight: string;
+            };
+        };
+    }[];
 };
+export interface fontStyle {
+    size: string;
+    family: string;
+    color: string;
+    weight: number | 'normal' | 'bold' | 'bolder' | 'lighter';
+    fillText?: (ctx: CanvasRenderingContext2D) => void;
+    customCanvasText?: (ctx: CanvasRenderingContext2D, label: string) => void;
+}
+export declare enum CanvasMode {
+    Text = "text",
+    Image = "image"
+}
+export declare enum CanvasType {
+    Danger = "danger",
+    Success = "success",
+    Primary = "primary",
+    Warning = "warning",
+    Hover = "hover"
+}
+type BaseCanvasConfigOptions = {
+    width?: number;
+    height?: number;
+    iconType?: CanvasType;
+    currentMode?: CanvasMode;
+    popoverLabel: string;
+    fontConfig?: fontStyle;
+    customCanvas?: (canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D) => void;
+    customPopoverCanvas?: (canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D) => void;
+    borderColor?: string;
+    backgroundColor?: string;
+};
+export type TextModeConfig = BaseCanvasConfigOptions & {
+    currentMode: CanvasMode.Text;
+    label: string;
+};
+export type ImageModeConfig = BaseCanvasConfigOptions & {
+    currentMode: CanvasMode.Image;
+    uploadedImage: string;
+};
+export type CanvasConfigOptions = TextModeConfig | ImageModeConfig;
+export {};

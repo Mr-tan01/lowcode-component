@@ -1,9 +1,13 @@
-import { defineComponent, mergeDefaults, ref, computed, watch, onMounted, onBeforeUnmount, createElementBlock, openBlock, createVNode, unref, normalizeStyle, withCtx, createElementVNode, createTextVNode } from "vue";
+import { defineComponent, mergeDefaults, ref, useTemplateRef, computed, watch, onMounted, onBeforeUnmount, createElementBlock, openBlock, createVNode, withDirectives, unref, normalizeStyle, withCtx, createElementVNode, createTextVNode, toDisplayString, vShow } from "vue";
 import { cesiumService } from "./modules/cesiumUtils.js";
 import { cesiumProps } from "./modules/props.js";
 import { NSpin } from "naive-ui";
-import { JulianDate, Cartesian3 } from "@cesium/engine";
+import { JulianDate, SceneTransforms, Cartesian3 } from "@cesium/engine";
 const _hoisted_1 = { class: "lc-cesium" };
+const _hoisted_2 = {
+  ref: "tooltipRef",
+  class: "lc-cesium__tooltip"
+};
 const _sfc_main = /* @__PURE__ */ defineComponent({
   __name: "cesium",
   props: /* @__PURE__ */ mergeDefaults(cesiumProps, {
@@ -13,12 +17,18 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     pointData: () => [],
     pointBatchRender: () => ({ batchRenderSize: 50, batchRenderDelay: 100 }),
     openIndexDB: false,
-    openOffset: () => ({ flag: false, offset: 0 })
+    openOffset: () => ({ flag: false, offset: 0 }),
+    popoverOffset: () => ({ popoverOffsetX: 0, popoverOffsetY: 0 })
   }),
   emits: ["pointHandler", "limitHeightHandler", "loadHandler"],
   setup(__props, { expose: __expose, emit: __emit }) {
     const initImageryLayersStatus = ref(true);
     const initPointDataStatus = ref(true);
+    const isTooltipVisible = ref(false);
+    const lastPickedEntity = ref();
+    const lastPickedPointOptions = ref();
+    const tooltipContent = ref();
+    const tooltip = useTemplateRef("tooltipRef");
     const emit = __emit;
     const reloadPointData = async () => {
       clearEntity();
@@ -52,17 +62,54 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       pointHandler: (data) => {
         var _a;
         const currentTime = JulianDate.now();
-        const value0ption = (_a = data.properties) == null ? void 0 : _a.getValue(currentTime);
-        if (!value0ption) return;
-        emit("pointHandler", value0ption);
+        const valueOption = (_a = data.properties) == null ? void 0 : _a.getValue(currentTime);
+        if (!valueOption) return;
+        emit("pointHandler", valueOption);
       },
       limitHeightHandler: (value) => {
         emit("limitHeightHandler", value);
       },
       loadTileLayerHandler: (status) => {
         loadImageryLayers(status);
+      },
+      createdTooltip: (data, point) => {
+        var _a;
+        const height = ((_a = cesiumUtils.viewer) == null ? void 0 : _a.camera.positionCartographic.height) || 0;
+        if (height > __props.showPopoverHeight) return;
+        lastPickedEntity.value = data;
+        lastPickedPointOptions.value = point.options;
+        updateTooltipPosition(cesiumUtils.viewer);
+      },
+      pointHoverExitHandler: () => {
+        isTooltipVisible.value = false;
       }
     });
+    function updateTooltipPosition(viewer) {
+      var _a, _b, _c;
+      try {
+        const cartesian = lastPickedEntity.value.position.getValue(viewer.clock.currentTime);
+        const options = lastPickedEntity.value.properties.getValue(viewer.clock.currentTime);
+        const canvasPosition = SceneTransforms.worldToWindowCoordinates(viewer.scene, cartesian);
+        if (canvasPosition && !isNaN(canvasPosition.x) && !isNaN(canvasPosition.y)) {
+          isTooltipVisible.value = true;
+          if (!tooltip.value) return;
+          const height = viewer.camera.positionCartographic.height;
+          const scale = Math.max(0.3, Math.min(2, 1 - height / 1e5));
+          tooltip.value.style.transform = `scale(${scale})`;
+          tooltip.value.style.transformOrigin = `center center`;
+          const tooltipWidth = (_a = tooltip.value) == null ? void 0 : _a.offsetWidth;
+          const tooltipHeight = (_b = tooltip.value) == null ? void 0 : _b.offsetHeight;
+          const offsetX = (tooltipWidth - 40) / 2 + (__props.popoverOffset.popoverOffsetX || 0);
+          const offsetY = (tooltipHeight + 8) / 2 + (__props.popoverOffset.popoverOffsetY || 0);
+          tooltip.value.style.top = canvasPosition.y - (options.valueInfo.height + offsetY) * scale + "px";
+          tooltip.value.style.left = canvasPosition.x - offsetX + "px";
+          tooltipContent.value = (_c = lastPickedPointOptions.value) == null ? void 0 : _c.popoverLabel;
+        }
+      } catch (e) {
+        console.error("Error updating tooltip position:", e);
+        isTooltipVisible.value = false;
+      }
+    }
     const clearEntity = () => {
       cesiumUtils.clearEntity("pointEntities", "dataSource");
       cesiumUtils.clearEntity("pointEntities", "viewer");
@@ -75,6 +122,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       }
     };
     const initCesium = async () => {
+      var _a, _b;
       try {
         if (!__props.accessToken) {
           return { status: false };
@@ -88,6 +136,17 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
         if (!viewerInitSuccess) {
           throw new Error("Viewer 初始化失败");
         }
+        (_b = (_a = cesiumUtils.viewer) == null ? void 0 : _a.scene) == null ? void 0 : _b.postRender.addEventListener(function() {
+          var _a2;
+          const height = ((_a2 = cesiumUtils.viewer) == null ? void 0 : _a2.camera.positionCartographic.height) || 0;
+          if (height > __props.showPopoverHeight) {
+            isTooltipVisible.value = false;
+            return;
+          }
+          if (isTooltipVisible.value && lastPickedEntity) {
+            updateTooltipPosition(cesiumUtils.viewer);
+          }
+        });
         cesiumUtils.updateViewerAttribute();
         cesiumUtils.setInitialView({ destination: __props.centerPosition }, false);
         const titleUrl = __props.imageryLayersUrl ?? `${__props.baseUrl}/service/api/a466c72ef1ea4f93aae5af7f6ab5b56e/igs/rest/services/SZMAP_Blue_DT_ZW_2024_Q2_4490/WMTSServer?client_id=${__props.clientId}&access_token=${__props.accessToken}`;
@@ -176,7 +235,27 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
           ]),
           _: 1
           /* STABLE */
-        }, 8, ["show", "stroke", "style"])
+        }, 8, ["show", "stroke", "style"]),
+        withDirectives(createElementVNode(
+          "div",
+          _hoisted_2,
+          [
+            createElementVNode(
+              "div",
+              {
+                ref: "tooltipContentRef",
+                class: "lc-cesium__tooltip--content"
+              },
+              toDisplayString(tooltipContent.value),
+              513
+              /* TEXT, NEED_PATCH */
+            )
+          ],
+          512
+          /* NEED_PATCH */
+        ), [
+          [vShow, isTooltipVisible.value && tooltipContent.value]
+        ])
       ]);
     };
   }

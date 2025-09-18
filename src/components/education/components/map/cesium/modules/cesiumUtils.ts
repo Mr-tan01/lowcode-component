@@ -60,7 +60,6 @@ export class cesiumService {
     private throttleDelay: number = 100
     private rretryCount: number = 3
     private cameraChangedListener: (() => void) | null = null
-    private shouldShowLabels: boolean = false // 当前是否展示全部悬浮label
 
     // 深圳市地理边界（根据瓦片定义经纬度范围）
     private shenzhenBounds = Rectangle.fromDegrees(113.94, 22.43, 114.57, 22.83)
@@ -290,7 +289,6 @@ export class cesiumService {
     }
 
     // 处理相机高度变化
-    // 处理相机高度变化
     handleCameraHeightChange(): void {
         if (!this.viewer || !this.pointEntities) return
 
@@ -299,31 +297,6 @@ export class cesiumService {
         if (this.options.limitHeightHandler) {
             this.options.limitHeightHandler(cameraHeight)
         }
-
-        this.shouldShowLabels = cameraHeight <= (this.options.config?.labelShowHeightThreshold ?? 5000)
-        if (this.shouldShowLabels) {
-            this.pointData?.forEach(item => {
-                this.addPoint(item, undefined, 'Label')
-            })
-        }
-        this.pointEntities.forEach(entity => {
-            if (entity.name && entity.name.endsWith('Label')) {
-                // 只有在应该显示标签且标签当前未显示时才更新
-                if (this.shouldShowLabels && !entity.show) {
-                    entity.show = true
-
-                    // 设置标签的避让属性
-                    if (entity.label) {
-                        // @ts-expect-error
-                        entity.label.disableDepthTestDistance = Number.POSITIVE_INFINITY
-                        entity.label.heightReference = 1 as any // 使用高度参考
-                    }
-                } else if (!this.shouldShowLabels && entity.show) {
-                    // 如果不需要显示标签且标签当前显示，则隐藏
-                    entity.show = false
-                }
-            }
-        })
     }
 
     // 设置事件处理器
@@ -338,13 +311,38 @@ export class cesiumService {
             ScreenSpaceEventType.LEFT_CLICK,
         )
 
-        // 注册鼠标悬浮事件
+        // // 注册鼠标悬浮事件
         this.screenMouseMoveHandler = new ScreenSpaceEventHandler(canvas).setInputAction(
             this.handleMouseMove.bind(this),
             ScreenSpaceEventType.MOUSE_MOVE,
         )
         // 添加鼠标离开地图事件监听
         canvas.addEventListener('mouseout', this.handleCanvasMouseOut.bind(this))
+    }
+
+    // 处理左键点击
+    private handleLeftClick(click: { position: Cartesian2 }): void {
+        if (!this.viewer) return
+
+        this.viewer.selectedEntity = undefined // 取消选中，阻止默认弹窗
+
+        if (this.options?.offsetState) {
+            // 处理缩放偏移
+            click.position.x *= 1.18
+            click.position.y *= 1.18
+        }
+        const pickedObject: any = this.viewer.scene.pick(click.position)
+        if (defined(pickedObject) && pickedObject.id) {
+            if (pickedObject.id.type === 'cluster') {
+                const entities = pickedObject.id.entities
+                const { longitude, latitude, height } = this.calcHeightByExtent(entities, 4)
+                this.viewer.camera.flyTo({
+                    destination: Cartesian3.fromDegrees(longitude, latitude, height),
+                    duration: 0.5,
+                })
+            }
+            this.options.pointHandler(pickedObject.id)
+        }
     }
 
     /**
@@ -385,31 +383,6 @@ export class cesiumService {
         }
     }
 
-    // 处理左键点击
-    private handleLeftClick(click: { position: Cartesian2 }): void {
-        if (!this.viewer) return
-
-        this.viewer.selectedEntity = undefined // 取消选中，阻止默认弹窗
-
-        if (this.options?.offsetState) {
-            // 处理缩放偏移
-            click.position.x *= 1.18
-            click.position.y *= 1.18
-        }
-        const pickedObject: any = this.viewer.scene.pick(click.position)
-        if (defined(pickedObject) && pickedObject.id) {
-            if (pickedObject.id.type === 'cluster') {
-                const entities = pickedObject.id.entities
-                const { longitude, latitude, height } = this.calcHeightByExtent(entities, 4)
-                this.viewer.camera.flyTo({
-                    destination: Cartesian3.fromDegrees(longitude, latitude, height),
-                    duration: 0.5,
-                })
-            }
-            this.options.config.hoverState ? this.pointClickHandler(pickedObject.id) : this.options.pointHandler(pickedObject.id)
-        }
-    }
-
     // 新增方法：处理鼠标离开地图事件
     private handleCanvasMouseOut(): void {
         // 如果鼠标离开了地图，清除最后一个悬浮的实体
@@ -421,7 +394,7 @@ export class cesiumService {
 
     // 处理鼠标移动
     private handleMouseMove(movement: { endPosition: Cartesian2 }): void {
-        if (!this.viewer || this.shouldShowLabels) return
+        if (!this.viewer) return
 
         // 添加时间戳节流
         const now = Date.now()
@@ -584,11 +557,16 @@ export class cesiumService {
     }
 
     // 添加点标记
-    async addPoint(point: pointType, type?: string, labelType?: string): Promise<Entity | null | void> {
+    async addPoint({ point, isPopoverEntity = false }: { point: pointType; isPopoverEntity?: boolean }): Promise<Entity | null | void> {
         if (!this.viewer && !this.dataSource) return null
-        const valueInfo = await createInfoCanvas(point, type, labelType)
-        const entityConfig = await createEntityConfig({ point, valueInfo: valueInfo.canvas, type, viewer: this.viewer! })
-        const entity: Entity | null = this[labelType === 'Label' ? 'viewer' : 'dataSource']?.entities.add(entityConfig) ?? null
+        const valueInfo = await createInfoCanvas(point)
+        const entityConfig = await createEntityConfig({
+            point,
+            valueInfo: valueInfo.canvas,
+            isPopoverEntity,
+            viewer: this.viewer!,
+        })
+        const entity: Entity | null = this[isPopoverEntity ? 'viewer' : 'dataSource']?.entities.add(entityConfig) ?? null
         if (!this.pointEntities) {
             this.pointEntities = []
         }
@@ -629,9 +607,9 @@ export class cesiumService {
             const endIndex = Math.min(startIndex + batchSize, totalLength)
             const batchPoints = points.slice(startIndex, endIndex)
             batchPoints.forEach(point => {
-                this.addPoint(point, 'value')
+                this.addPoint({ point })
                 if (defaultShowState) {
-                    this.addPoint(point)
+                    this.addPoint({ point })
                 }
             })
 
@@ -759,57 +737,6 @@ export class cesiumService {
         }
     }
 
-    // 控制窗体
-    pointClickHandler(pickedObject: Entity): void {
-        const { name } = pickedObject
-        const { labelName, dataIndex, entityIndex, labelEntityIndex } = this.getEntityNameInfo(name)
-
-        // 文字描述状态
-        const shouldAddPoint = dataIndex !== -1 && labelEntityIndex === -1 && !this.options.defaultShowState
-
-        // 更新图标状态
-        updateViewerEntityInfo(this.pointData?.[dataIndex], this.pointEntities?.[entityIndex], 'value')
-
-        // 更新标签状态
-        if (labelEntityIndex !== -1 && this.options.defaultShowState) {
-            updateViewerEntityInfo(this.pointData?.[dataIndex], this.pointEntities?.[labelEntityIndex])
-        }
-
-        // 添加文字描述
-        if (shouldAddPoint && this.pointData) {
-            this.addPoint(this.pointData[dataIndex], undefined, 'Label')
-        }
-
-        // 处理标签显示/隐藏逻辑
-        this.handleLabelsVisibility(labelName)
-
-        // Entity事件回调
-        this.options.pointHandler(pickedObject)
-    }
-
-    // 处理标签显示/隐藏
-    private handleLabelsVisibility(currentLabelName: string): void {
-        if (this.options.defaultShowState || !this.pointEntities) return
-
-        const currentTime = JulianDate.now()
-
-        this.pointEntities.forEach(item => {
-            if (item.name?.endsWith('Label')) {
-                // 切换当前标签的显示状态，隐藏其他标签
-                item.show = item.name === currentLabelName && !item.show
-            } else {
-                // 处理非标签实体的状态恢复
-                const changeState = item.properties?.getValue(currentTime).changeState
-                if (!changeState) return
-
-                const valueIndex = this.pointData?.findIndex(option => option.name === item.name) ?? -1
-                if (valueIndex !== -1) {
-                    updateViewerEntityInfo(this.pointData?.[valueIndex], item, 'value')
-                }
-            }
-        })
-    }
-
     // 鼠标悬浮处理
     private pointHoverHandler(pickedObject: Entity): void {
         const { name } = pickedObject
@@ -818,22 +745,23 @@ export class cesiumService {
 
         const { labelName, dataIndex, entityIndex, labelEntityIndex } = this.getEntityNameInfo(name)
 
-        this.handleHoverLabelDisplay(dataIndex, labelName, labelEntityIndex)
+        this.handleHoverLabelDisplay(dataIndex, labelName, labelEntityIndex, pickedObject)
         this.applyHoverEffect(dataIndex, entityIndex)
         this.hideOtherLabels(labelName)
     }
 
     // 处理悬浮时标签显示
-    private handleHoverLabelDisplay(dataIndex: number, labelName: string, labelEntityIndex: number): void {
+    private handleHoverLabelDisplay(dataIndex: number, labelName: string, labelEntityIndex: number, pickedObject: Entity): void {
         if (dataIndex === -1 || this.options.defaultShowState) return
 
         // 检查是否需要添加新标签
         if (labelEntityIndex === -1 && this.pointData) {
+            this.options.createdTooltip?.(pickedObject, this.pointData[dataIndex])
             // 添加文字描述
-            this.addPoint(this.pointData[dataIndex], undefined, 'Label')
+            // this.addPoint({ point: this.pointData[dataIndex], isPopoverEntity: true })
         } else if (labelEntityIndex !== -1 && this.pointEntities) {
             // 如果标签已存在但未显示，则显示它
-            this.pointEntities[labelEntityIndex].show = true
+            // this.pointEntities[labelEntityIndex].show = true
         }
     }
 
@@ -853,7 +781,7 @@ export class cesiumService {
         }
 
         // 应用悬浮效果
-        updateViewerEntityInfo(this.pointData?.[dataIndex], entity, 'value')
+        updateViewerEntityInfo(this.pointData?.[dataIndex], entity)
     }
 
     // 隐藏其他标签
@@ -906,10 +834,10 @@ export class cesiumService {
         // 根据当前状态恢复正确的图标
         if (properties.changeState) {
             // 变更状态图标
-            point.changeIconType ? updateViewerEntityInfo(point, entity, 'change') : updateViewerEntityInfo(point, entity, 'value')
+            point.changeIconType ? updateViewerEntityInfo(point, entity) : updateViewerEntityInfo(point, entity)
         } else {
             // 恢复原始图标
-            updateViewerEntityInfo(point, entity, 'value')
+            updateViewerEntityInfo(point, entity)
         }
     }
 

@@ -25,7 +25,6 @@ export declare class cesiumService {
     private throttleDelay;
     private rretryCount;
     private cameraChangedListener;
-    private shouldShowLabels;
     private shenzhenBounds;
     private message;
     constructor(containerId: string, options: optionType);
@@ -46,13 +45,13 @@ export declare class cesiumService {
     private setupCameraChangeListener;
     handleCameraHeightChange(): void;
     private setupEventHandlers;
+    private handleLeftClick;
     /**
      * 根据点位集合计算最佳飞行高度
      * @param entities 聚合实体数组
      * @param scale 视野系数（>1 留边）
      */
     private calcHeightByExtent;
-    private handleLeftClick;
     private handleCanvasMouseOut;
     private handleMouseMove;
     private handleTileLoadProgress;
@@ -63,7 +62,10 @@ export declare class cesiumService {
     private loadProviderWithFallback;
     private addProviderToViewer;
     private handleLoadError;
-    addPoint(point: pointType, type?: string, labelType?: string): Promise<Entity | null | void>;
+    addPoint({ point, isPopoverEntity }: {
+        point: pointType;
+        isPopoverEntity?: boolean;
+    }): Promise<Entity | null | void>;
     private renderTasks;
     batchRenderPoints: (points: any[], defaultShowState: boolean, batchRenderConfig: {
         batchRenderSize: number;
@@ -76,8 +78,6 @@ export declare class cesiumService {
     private getPositionCartographic;
     setCameraHeight(type: string): void;
     private getEntityNameInfo;
-    pointClickHandler(pickedObject: Entity): void;
-    private handleLabelsVisibility;
     private pointHoverHandler;
     private handleHoverLabelDisplay;
     private applyHoverEffect;

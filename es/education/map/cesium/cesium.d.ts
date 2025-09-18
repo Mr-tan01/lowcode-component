@@ -42,6 +42,10 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
         type: import('vue').PropType<string>;
         default: string;
     };
+    showPopoverHeight: {
+        type: NumberConstructor;
+        default: number;
+    };
     centerPosition: {
         type: import('vue').PropType<Cartesian3>;
     };
@@ -99,6 +103,16 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
         default: {
             flag: boolean;
             offset: number;
+        };
+    };
+    popoverOffset: {
+        type: import('vue').PropType<{
+            popoverOffsetX: number;
+            popoverOffsetY: number;
+        }>;
+        default: {
+            popoverOffsetX: number;
+            popoverOffsetY: number;
         };
     };
     pointBatchRender: {
@@ -161,6 +175,10 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
         type: import('vue').PropType<string>;
         default: string;
     };
+    showPopoverHeight: {
+        type: NumberConstructor;
+        default: number;
+    };
     centerPosition: {
         type: import('vue').PropType<Cartesian3>;
     };
@@ -220,6 +238,16 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
             offset: number;
         };
     };
+    popoverOffset: {
+        type: import('vue').PropType<{
+            popoverOffsetX: number;
+            popoverOffsetY: number;
+        }>;
+        default: {
+            popoverOffsetX: number;
+            popoverOffsetY: number;
+        };
+    };
     pointBatchRender: {
         type: import('vue').PropType<{
             batchRenderSize: number;
@@ -242,6 +270,7 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
     spinStroke: string;
     spinContainerBg: string;
     spinDescriptionColor: string;
+    showPopoverHeight: number;
     controlStatus: import('./modules/type').controlStatusType;
     basicConfig: import('./modules/type').basicConfigType;
     openIndexDB: boolean;
@@ -249,9 +278,16 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
         flag: boolean;
         offset: number;
     };
+    popoverOffset: {
+        popoverOffsetX: number;
+        popoverOffsetY: number;
+    };
     pointBatchRender: {
         batchRenderSize: number;
         batchRenderDelay: number;
     };
-}, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, HTMLDivElement>;
+}, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {
+    tooltipRef: HTMLDivElement;
+    tooltipContentRef: HTMLDivElement;
+}, HTMLDivElement>;
 export default _default;
