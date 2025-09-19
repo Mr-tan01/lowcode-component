@@ -30,11 +30,11 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
           levels: _ctx.levels,
           values: _ctx.values
         }, _ctx.$attrs, { "show-border": false }), {
-          mapLabel: withCtx(({ blockList, labelClass, getVlaue, currentMapKey }) => [
+          mapLabel: withCtx(({ blockList, labelClass, getValue, currentMapKey }) => [
             renderSlot(_ctx.$slots, "mapLabel", {
               blockList,
               labelClass,
-              getVlaue,
+              getValue,
               currentMapKey
             }, void 0, true)
           ]),

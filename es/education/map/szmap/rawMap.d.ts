@@ -32,7 +32,7 @@ declare function __VLS_template(): {
         mapLabel?(_: {
             blockList: Record<BlockName, Component>;
             labelClass: (key: any) => string[];
-            getVlaue: typeof getMarkProp;
+            getValue: typeof getMarkProp;
             currentMapKey: string;
         }): any;
     };

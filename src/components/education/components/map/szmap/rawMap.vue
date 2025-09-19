@@ -28,7 +28,7 @@
             </g>
         </svg>
         <div v-if="showLabel" class="lc-szmap-raw__mark-group">
-            <slot name="mapLabel" :block-list="blockList" :label-class="labelClass" :get-vlaue="getMarkProp" :current-map-key="currentMapKey">
+            <slot name="mapLabel" :block-list="blockList" :label-class="labelClass" :get-value="getMarkProp" :current-map-key="currentMapKey">
                 <LcMark
                     v-for="(_, key) in blockList"
                     :key
