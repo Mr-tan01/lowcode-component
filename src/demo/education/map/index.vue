@@ -11,13 +11,13 @@
         <DemoHelpBox title="深圳地图" description="深圳教育项目-深圳地图自定义" rswidth="962px" :code="demoCodes.code1">
             <div class="size-box">
                 <Szmap :values :disabled-gradient="true">
-                    <template #mapLabel="{ blockList, labelClass, getVlaue }">
+                    <template #mapLabel="{ blockList, labelClass, getValue }">
                         <MapMarker
                             v-for="(_, index) in getBlockList(blockList)"
                             :key="index"
                             :class="labelClass(index)"
-                            :label="getVlaue(index).mapLabel"
-                            :value="getVlaue(index).value"
+                            :label="getValue(index).mapLabel"
+                            :value="getValue(index).value"
                             unit="所"
                         ></MapMarker>
                     </template>
@@ -27,13 +27,13 @@
         <DemoHelpBox title="深圳地图" description="深圳教育项目-深圳地图悬浮" rswidth="962px" :code="demoCodes.code1">
             <div class="size-box">
                 <Szmap :levels :values :disabled-gradient="false" :label-model="LabelModelEnum.HOVER">
-                    <template #mapLabel="{ labelClass, getVlaue, currentMapKey }">
+                    <template #mapLabel="{ labelClass, getValue, currentMapKey }">
                         <span>
                             <MapMarker
                                 v-if="currentMapKey"
                                 :class="labelClass(currentMapKey)"
-                                :label="getVlaue(currentMapKey as BlockName).mapLabel"
-                                :value="getVlaue(currentMapKey as BlockName).value"
+                                :label="getValue(currentMapKey as BlockName).mapLabel"
+                                :value="getValue(currentMapKey as BlockName).value"
                                 unit="所"
                             ></MapMarker>
                         </span>

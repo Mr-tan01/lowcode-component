@@ -58,8 +58,8 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
   emits: ["markClick", "markMouseover", "markMouseenter", "markMouseleave"],
   setup(__props, { emit: __emit }) {
     useCssVars((_ctx) => ({
-      "e3d2bf9c": mapRotateX.value,
-      "43ee15a9": labelWrapInsetY.value
+      "7cdd1f8c": mapRotateX.value,
+      "1c19c2e2": labelWrapInsetY.value
     }));
     const blockList = {
       [szBlockNames["光明"]]: Guangming,
@@ -219,7 +219,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
           renderSlot(_ctx.$slots, "mapLabel", {
             blockList,
             labelClass,
-            getVlaue: getMarkProp,
+            getValue: getMarkProp,
             currentMapKey: currentMapKey.value
           }, () => [
             (openBlock(), createElementBlock(

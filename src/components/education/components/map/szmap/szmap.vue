@@ -13,8 +13,8 @@
             v-bind="$attrs"
             :show-border="false"
         >
-            <template #mapLabel="{ blockList, labelClass, getVlaue, currentMapKey }">
-                <slot name="mapLabel" :block-list="blockList" :label-class="labelClass" :get-vlaue="getVlaue" :current-map-key="currentMapKey">
+            <template #mapLabel="{ blockList, labelClass, getValue, currentMapKey }">
+                <slot name="mapLabel" :block-list="blockList" :label-class="labelClass" :get-value="getValue" :current-map-key="currentMapKey">
                 </slot>
             </template>
         </RawMap>

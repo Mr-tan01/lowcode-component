@@ -5,7 +5,7 @@ declare function __VLS_template(): {
         mapLabel?(_: {
             blockList: Record<import('./const').BlockName, import('vue').Component>;
             labelClass: (key: any) => string[];
-            getVlaue: (key: import('./const').BlockName) => {
+            getValue: (key: import('./const').BlockName) => {
                 mapLabel: string;
                 style: {
                     '--level-scale': number | {
