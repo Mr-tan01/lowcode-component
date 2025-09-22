@@ -51,7 +51,9 @@
             </NSpace>
             <br />
             <NSpace>
-                <LcPlanningIndicators :data="data"></LcPlanningIndicators>
+                <LcPlanningIndicators :data="data" direction="left"></LcPlanningIndicators>
+                <LcPlanningIndicators :data="data" direction="center"></LcPlanningIndicators>
+                <LcPlanningIndicators :data="data" direction="right"></LcPlanningIndicators>
             </NSpace>
             <br />
             <NSpace>
