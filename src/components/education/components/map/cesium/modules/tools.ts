@@ -146,15 +146,14 @@ export const createInfoCanvas = (info: any, valueKey?: string, labelType?: strin
         canvas.width = info?.width ?? options.width
         canvas.height = info?.height ?? options.height
 
-        const { iconType, textIconType } = info
+        const { iconType, textIconType, customIcon } = info
         const icons = {
             icon: iconType ? imageUrlOption[iconType] : imageUrlOption['primary'],
             textIcon: textIconType ? imageUrlOption[textIconType] : imageUrlOption[(labelType ? 'success' : 'primary') + '_label'],
         }
 
         // 绘制背景
-        const bgImageUrl = icons?.[valueKey ? 'icon' : 'textIcon']
-
+        const bgImageUrl = customIcon && valueKey ? customIcon : icons?.[valueKey ? 'icon' : 'textIcon']
         const text = info?.[valueKey ?? 'text'] || ''
 
         // 清理dom中的canvas
@@ -349,7 +348,7 @@ export async function updateViewerEntityInfo(info: any, entity: Entity | undefin
         let valueInfo = entity.billboard.image?.getValue()
         valueInfo = typeof valueInfo === 'string' ? await drawImageCanvas(valueInfo) : valueInfo
         const ctx = valueInfo.getContext('2d')
-        const image = await loadImage(imageUrlOption[type ? valueIcon : textIcon])
+        const image = await loadImage(info.customIcon && type && changeState ? info.customIcon : imageUrlOption[type ? valueIcon : textIcon])
         ctx?.clearRect(0, 0, valueInfo.width, valueInfo.height)
         ctx.drawImage(image, 0, 0, valueInfo.width, valueInfo.height)
         if (!type) {

@@ -311,6 +311,7 @@ export declare const pointInfo: {
         iconType?: undefined;
         textIconType?: undefined;
         changeIconType?: undefined;
+        customIcon?: undefined;
     } | {
         name: string;
         lng: number;
@@ -320,6 +321,7 @@ export declare const pointInfo: {
         text: string;
         textIconType: string;
         changeIconType?: undefined;
+        customIcon?: undefined;
     } | {
         name: string;
         lng: number;
@@ -329,6 +331,7 @@ export declare const pointInfo: {
         text: string;
         textIconType?: undefined;
         changeIconType?: undefined;
+        customIcon?: undefined;
     } | {
         name: string;
         lng: number;
@@ -338,6 +341,7 @@ export declare const pointInfo: {
         text: string;
         textIconType: string;
         changeIconType: string;
+        customIcon: string;
     })[];
     龙华区: {
         name: string;
@@ -357,7 +361,7 @@ export declare const pointInfo: {
         text: string;
         textIconType: string;
     }[];
-    福田区: {
+    福田区: ({
         name: string;
         lng: number;
         lat: number;
@@ -365,5 +369,15 @@ export declare const pointInfo: {
         iconType: string;
         text: string;
         textIconType: string;
-    }[];
+        customIcon: string;
+    } | {
+        name: string;
+        lng: number;
+        lat: number;
+        value: string;
+        iconType: string;
+        text: string;
+        textIconType: string;
+        customIcon?: undefined;
+    })[];
 };
