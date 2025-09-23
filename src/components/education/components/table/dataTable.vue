@@ -14,9 +14,9 @@
 </template>
 
 <script setup lang="ts">
-import { ref, PropType, computed } from 'vue'
+import { ref, PropType, computed, VNode } from 'vue'
 import { NDataTable } from 'naive-ui'
-import type { DataTableSortState, DataTableColumns, DataTableBaseColumn, DataTableRenderSorter } from 'naive-ui'
+import type { DataTableSortState, DataTableColumns, DataTableBaseColumn } from 'naive-ui'
 
 export interface RowData {
     key: number
@@ -27,6 +27,7 @@ export interface RowData {
     math: number
     english: number
 }
+export type LooseRenderSorter = (options: { order: 'ascend' | 'descend' | false }) => VNode | string | number | null | undefined
 
 const props = defineProps({
     columns: {
@@ -34,7 +35,7 @@ const props = defineProps({
             Array<
                 | DataTableColumns<RowData>[number]
                 | (DataTableBaseColumn<RowData> & {
-                      renderSorter?: DataTableRenderSorter
+                      renderSorter?: LooseRenderSorter
                   })
             >
         >,
@@ -76,9 +77,13 @@ defineExpose({
     height: 100%;
     :deep(.n-data-table) {
         --n-merged-td-color: rgba(0, 148, 255, 0.1);
-        --n-merged-td-color-hover: rgba(15, 251, 247, 0.363) !important;
-        --n-border-color: none;
+        --n-merged-td-color-hover: none !important;
+        --n-border-color: none !important;
         --n-th-color: rgba(0, 149, 255, 0.219) !important;
+        --n-th-color-sorting: none !important;
+        --n-td-color-striped-popover: none !important;
+        --n-td-color-sorting: none !important;
+        --n-th-color-hover: none !important;
     }
     :deep(.n-data-table-th__title) {
         font-family: HarmonyOS_Sans_SC;
@@ -91,10 +96,15 @@ defineExpose({
         font-family: HarmonyOS_Sans_SC;
         font-size: 14px;
         color: #ffffff;
-        line-height: 20px;
-        font-style: normal;
         line-height: 26px;
         font-style: normal;
+        border-bottom: 1px solid #002559;
+        border-top: 5px solid #002559;
+    }
+    :deep(.n-data-table-tr:hover) {
+        background: linear-gradient(90deg, rgba(15, 251, 248, 0) 0%, rgba(15, 251, 248, 0.35) 100%);
+        border: 2px solid;
+        border-image: linear-gradient(90deg, rgba(34, 253, 252, 0), rgba(15, 251, 248, 1)) 1 1;
     }
 }
 </style>
