@@ -79,12 +79,12 @@ const createInfoCanvas = (info, valueKey, labelType) => {
     }
     canvas.width = (info == null ? void 0 : info.width) ?? options.width;
     canvas.height = (info == null ? void 0 : info.height) ?? options.height;
-    const { iconType, textIconType } = info;
+    const { iconType, textIconType, customIcon } = info;
     const icons = {
       icon: iconType ? imageUrlOption[iconType] : imageUrlOption["primary"],
       textIcon: textIconType ? imageUrlOption[textIconType] : imageUrlOption[(labelType ? "success" : "primary") + "_label"]
     };
-    const bgImageUrl = icons == null ? void 0 : icons[valueKey ? "icon" : "textIcon"];
+    const bgImageUrl = customIcon && valueKey ? customIcon : icons == null ? void 0 : icons[valueKey ? "icon" : "textIcon"];
     const text = (info == null ? void 0 : info[valueKey ?? "text"]) || "";
     const cleanup = () => {
       ctx.setTransform(1, 0, 0, 1, 0, 0);
@@ -224,7 +224,7 @@ async function updateViewerEntityInfo(info, entity, type) {
     let valueInfo = (_b = entity.billboard.image) == null ? void 0 : _b.getValue();
     valueInfo = typeof valueInfo === "string" ? await drawImageCanvas(valueInfo) : valueInfo;
     const ctx = valueInfo.getContext("2d");
-    const image = await loadImage(imageUrlOption[type ? valueIcon : textIcon]);
+    const image = await loadImage(info.customIcon && type && changeState ? info.customIcon : imageUrlOption[type ? valueIcon : textIcon]);
     ctx == null ? void 0 : ctx.clearRect(0, 0, valueInfo.width, valueInfo.height);
     ctx.drawImage(image, 0, 0, valueInfo.width, valueInfo.height);
     if (!type) {

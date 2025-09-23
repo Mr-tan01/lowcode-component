@@ -10,7 +10,7 @@ import {
 } from 'cesium'
 import { type CesiumHeatmap } from 'cesium-heatmap-es6'
 import shenZhen from './深圳市（各区）.json'
-
+import warning from '../image/warning.svg'
 export const areaData = {
     深圳市: { lng: 114.063109, lat: 22.544522, value: 440300, position: [] },
     光明区: {
@@ -250,6 +250,7 @@ export const pointInfo = {
             text: '立湖新公园园园美林峰美林峰',
             textIconType: 'success_label',
             changeIconType: 'icon_primary',
+            customIcon: 'icon_primary',
         },
     ],
     龙华区: [
@@ -346,6 +347,7 @@ export const pointInfo = {
             iconType: 'primary',
             text: '皇岗村1',
             textIconType: 'primary_label',
+            customIcon: warning,
         },
         {
             name: 'dad1',
