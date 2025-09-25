@@ -1,5 +1,5 @@
-import { PropType } from 'vue';
-import { DataTableSortState, DataTableColumns, DataTableBaseColumn, DataTableRenderSorter } from 'naive-ui';
+import { PropType, VNode } from 'vue';
+import { DataTableSortState, DataTableColumns, DataTableBaseColumn } from 'naive-ui';
 export interface RowData {
     key: number;
     name: string;
@@ -9,10 +9,13 @@ export interface RowData {
     math: number;
     english: number;
 }
+export type LooseRenderSorter = (options: {
+    order: 'ascend' | 'descend' | false;
+}) => VNode | string | number | null | undefined;
 declare const _default: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
     columns: {
         type: PropType<Array<DataTableColumns<RowData>[number] | (DataTableBaseColumn<RowData> & {
-            renderSorter?: DataTableRenderSorter;
+            renderSorter?: LooseRenderSorter;
         })>>;
         default: () => never[];
     };
@@ -7866,7 +7869,7 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
 }, string, import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
     columns: {
         type: PropType<Array<DataTableColumns<RowData>[number] | (DataTableBaseColumn<RowData> & {
-            renderSorter?: DataTableRenderSorter;
+            renderSorter?: LooseRenderSorter;
         })>>;
         default: () => never[];
     };
@@ -7909,13 +7912,13 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
         render?: ((rowData: RowData, rowIndex: number) => import('vue').VNodeChild) | undefined;
         renderFilter?: import('naive-ui').DataTableRenderFilter;
         renderFilterIcon?: import('naive-ui').DataTableRenderFilterIcon;
-        renderSorter?: DataTableRenderSorter;
+        renderSorter?: import('naive-ui').DataTableRenderSorter;
         renderSorterIcon?: import('naive-ui').DataTableRenderSorterIcon;
         renderFilterMenu?: import('naive-ui/es/data-table/src/interface').RenderFilterMenu;
         colSpan?: ((rowData: RowData, rowIndex: number) => number) | undefined;
         rowSpan?: ((rowData: RowData, rowIndex: number) => number) | undefined;
     } & import('naive-ui/es/data-table/src/interface').CommonColumnInfo<RowData> & {
-        renderSorter?: DataTableRenderSorter;
+        renderSorter?: LooseRenderSorter;
     }))[];
     pageSize: number;
     showPagination: boolean;
