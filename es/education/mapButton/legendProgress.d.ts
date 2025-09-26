@@ -8,6 +8,14 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
         required: true;
         validator: (value: number[]) => boolean;
     };
+    colors: {
+        type: () => string[];
+        default: () => never[];
+    };
+    unit: {
+        type: StringConstructor;
+        default: string;
+    };
 }>, {}, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {
     "update-stops": (...args: any[]) => void;
 }, string, import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
@@ -20,10 +28,20 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
         required: true;
         validator: (value: number[]) => boolean;
     };
+    colors: {
+        type: () => string[];
+        default: () => never[];
+    };
+    unit: {
+        type: StringConstructor;
+        default: string;
+    };
 }>> & Readonly<{
     "onUpdate-stops"?: ((...args: any[]) => any) | undefined;
 }>, {
     label: string;
+    colors: string[];
+    unit: string;
 }, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {
     progressBar: HTMLDivElement;
 }, HTMLDivElement>;
