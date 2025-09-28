@@ -1,4 +1,4 @@
-import { defineComponent, createElementBlock, openBlock, createVNode, unref, mergeProps, withCtx, createElementVNode, renderSlot, normalizeStyle, toDisplayString } from "vue";
+import { defineComponent, useCssVars, unref, createElementBlock, openBlock, createVNode, mergeProps, withCtx, createElementVNode, renderSlot, toDisplayString } from "vue";
 import { NTooltip } from "naive-ui/es/tooltip";
 const _hoisted_1 = { class: "lc-tooltip" };
 const _hoisted_2 = { class: "lc-tooltip__trigger" };
@@ -8,9 +8,13 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
   __name: "tooltip",
   props: {
     title: { default: "" },
-    size: { default: "18" }
+    size: { default: 18 }
   },
   setup(__props) {
+    useCssVars((_ctx) => ({
+      "17e094b9": unref(iconSize)
+    }));
+    const iconSize = typeof __props.size === "number" ? `${__props.size}px` : __props.size;
     return (_ctx, _cache) => {
       return openBlock(), createElementBlock("div", _hoisted_1, [
         createVNode(
@@ -24,38 +28,29 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
             trigger: withCtx(() => [
               renderSlot(_ctx.$slots, "trigger", {}, () => [
                 createElementVNode("div", _hoisted_2, [
-                  createElementVNode(
+                  _cache[0] || (_cache[0] = createElementVNode(
                     "div",
-                    {
-                      class: "lc-tooltip__trigger_icon",
-                      style: normalizeStyle({ width: `${_ctx.size}px` })
-                    },
-                    [..._cache[0] || (_cache[0] = [
-                      createElementVNode(
-                        "svg",
-                        {
-                          version: "1.1",
-                          xmlns: "http://www.w3.org/2000/svg",
-                          "xmlns:xlink": "http://www.w3.org/1999/xlink",
-                          x: "0px",
-                          y: "0px",
-                          viewBox: "0 0 512 512",
-                          "enable-background": "new 0 0 512 512",
-                          "xml:space": "preserve"
-                        },
-                        [
-                          createElementVNode("path", { d: "M256,90c44.3,0,86,17.3,117.4,48.6C404.7,170,422,211.7,422,256s-17.3,86-48.6,117.4C342,404.7,300.3,422,256,422\n	s-86-17.3-117.4-48.6C107.3,342,90,300.3,90,256s17.3-86,48.6-117.4C170,107.3,211.7,90,256,90 M256,48C141.1,48,48,141.1,48,256\n	s93.1,208,208,208s208-93.1,208-208S370.9,48,256,48L256,48z" }),
-                          createElementVNode("g", null, [
-                            createElementVNode("path", { d: "M277,360h-42V235h42V360z M277,194h-42v-42h42V194z" })
-                          ])
-                        ],
-                        -1
-                        /* CACHED */
-                      )
-                    ])],
-                    4
-                    /* STYLE */
-                  ),
+                    { class: "lc-tooltip__trigger_icon" },
+                    [
+                      createElementVNode("svg", {
+                        version: "1.1",
+                        xmlns: "http://www.w3.org/2000/svg",
+                        "xmlns:xlink": "http://www.w3.org/1999/xlink",
+                        x: "0px",
+                        y: "0px",
+                        viewBox: "0 0 512 512",
+                        "enable-background": "new 0 0 512 512",
+                        "xml:space": "preserve"
+                      }, [
+                        createElementVNode("path", { d: "M256,90c44.3,0,86,17.3,117.4,48.6C404.7,170,422,211.7,422,256s-17.3,86-48.6,117.4C342,404.7,300.3,422,256,422\n	s-86-17.3-117.4-48.6C107.3,342,90,300.3,90,256s17.3-86,48.6-117.4C170,107.3,211.7,90,256,90 M256,48C141.1,48,48,141.1,48,256\n	s93.1,208,208,208s208-93.1,208-208S370.9,48,256,48L256,48z" }),
+                        createElementVNode("g", null, [
+                          createElementVNode("path", { d: "M277,360h-42V235h42V360z M277,194h-42v-42h42V194z" })
+                        ])
+                      ])
+                    ],
+                    -1
+                    /* CACHED */
+                  )),
                   createElementVNode(
                     "div",
                     _hoisted_3,
