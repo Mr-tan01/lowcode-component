@@ -185,7 +185,7 @@ const offsetStateChange = watch(
 )
 
 const initPointDataChange = watch(
-    [initPointDataStatus, pointData, () => areaName],
+    [initPointDataStatus, () => pointData, () => areaName],
     () => {
         if (!initPointDataStatus.value) {
             clearEntity()
