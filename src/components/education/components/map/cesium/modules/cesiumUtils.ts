@@ -598,6 +598,63 @@ export class cesiumService {
         return entity
     }
 
+    private renderTasks = new WeakMap<this, number>()
+    // 分批渲染点位
+    batchRenderPoints = async (
+        points: any[],
+        defaultShowState: boolean,
+        batchRenderConfig: { batchRenderSize: number; batchRenderDelay: number },
+    ): Promise<void> => {
+        // 取消任何正在进行的渲染任务
+        this.cancelBatchRender()
+
+        const totalLength = points.length
+        if (totalLength === 0) return
+
+        // 需要分多少批
+        const batchSize = batchRenderConfig.batchRenderSize
+        const batches = Math.ceil(totalLength / batchSize)
+
+        // 处理每批点位
+        const renderBatch = (batchIndex: number): void => {
+            if (batchIndex >= batches) {
+                // 所有批次渲染完成，检查相机高度
+                this.handleCameraHeightChange()
+                return
+            }
+
+            const startIndex = batchIndex * batchSize
+            const endIndex = Math.min(startIndex + batchSize, totalLength)
+            const batchPoints = points.slice(startIndex, endIndex)
+
+            // 渲染当前批次的点位
+            batchPoints.forEach(point => {
+                this.addPoint(point, 'value')
+                if (defaultShowState) {
+                    this.addPoint(point)
+                }
+            })
+
+            // 继续进行下一批渲染
+            const taskId = requestAnimationFrame(() => {
+                renderBatch(batchIndex + 1)
+            })
+            this.renderTasks.set(this, taskId)
+        }
+
+        // 开始渲染第一批
+        renderBatch(0)
+    }
+
+    // 取消正在进行的批量渲染
+    cancelBatchRender(): void {
+        const taskId = this.renderTasks.get(this)
+        if (taskId) {
+            cancelAnimationFrame(taskId)
+            this.renderTasks.delete(this)
+        }
+    }
+
     // 清除指定entity
     async clearEntity(key: 'pointEntities' | 'polygonEntities', type?: 'dataSource' | 'viewer'): Promise<void> {
         if (!this[key]) return
@@ -1075,6 +1132,9 @@ export class cesiumService {
     }
 
     destroy(): void {
+        // 取消所有正在进行的渲染任务
+        this.cancelBatchRender()
+
         if (this.viewer) {
             const canvas = this.viewer.scene.canvas
             canvas.removeEventListener('mouseout', this.handleCanvasMouseOut.bind(this))

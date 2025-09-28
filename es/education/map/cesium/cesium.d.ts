@@ -101,6 +101,16 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
             offset: number;
         };
     };
+    pointBatchRender: {
+        type: import('vue').PropType<{
+            batchRenderSize: number;
+            batchRenderDelay: number;
+        }>;
+        default: {
+            batchRenderSize: number;
+            batchRenderDelay: number;
+        };
+    };
 }>, {
     changeModel: <T extends changeModelType>(type: changeModelType, value: changeModelParamType[T]) => void;
     loadedTileLayer: (status: boolean) => Promise<void>;
@@ -210,6 +220,16 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
             offset: number;
         };
     };
+    pointBatchRender: {
+        type: import('vue').PropType<{
+            batchRenderSize: number;
+            batchRenderDelay: number;
+        }>;
+        default: {
+            batchRenderSize: number;
+            batchRenderDelay: number;
+        };
+    };
 }>> & Readonly<{
     onPointHandler?: ((value: EntityProperties) => any) | undefined;
     onLimitHeightHandler?: ((value: number) => any) | undefined;
@@ -228,6 +248,10 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
     openOffset: {
         flag: boolean;
         offset: number;
+    };
+    pointBatchRender: {
+        batchRenderSize: number;
+        batchRenderDelay: number;
     };
 }, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, HTMLDivElement>;
 export default _default;

@@ -101,4 +101,14 @@ export declare const cesiumProps: {
             offset: number;
         };
     };
+    pointBatchRender: {
+        type: PropType<{
+            batchRenderSize: number;
+            batchRenderDelay: number;
+        }>;
+        default: {
+            batchRenderSize: number;
+            batchRenderDelay: number;
+        };
+    };
 };
