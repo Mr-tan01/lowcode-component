@@ -6,7 +6,7 @@
         <div class="lc-planning-indicators__item" :class="[`dir-${direction}`]">
             <div class="lc-planning-indicators__item__left" :class="[`dir-${direction}`]">
                 <span class="lc-planning-indicators__item__title">{{ formatedText(data?.leftItem?.title, data?.leftItem?.maxLength) }}</span>
-                <span class="lc-planning-indicators__item__left--value">
+                <span class="lc-planning-indicators__item__left--value" :title="String(data.leftItem.value)">
                     <span class="lc-number-value">
                         <NNumberAnimation
                             show-separator
@@ -23,7 +23,7 @@
             </div>
             <div class="lc-planning-indicators__item__right" :class="[`dir-${direction}`]">
                 <span class="lc-planning-indicators__item__title">{{ formatedText(data?.rightItem?.title, data?.rightItem?.maxLength) }}</span>
-                <span class="lc-planning-indicators__item__right--value">
+                <span class="lc-planning-indicators__item__right--value" :title="String(data.rightItem.value)">
                     <span class="lc-number-value"
                         ><NNumberAnimation
                             show-separator
