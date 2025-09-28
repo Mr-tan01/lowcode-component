@@ -1,4 +1,4 @@
-import { defineComponent, createElementBlock, openBlock, createElementVNode, Fragment, renderList } from "vue";
+import { defineComponent, openBlock, createElementBlock, createElementVNode, Fragment, renderList } from "vue";
 import _imports_0 from "./images/map.png.js";
 import layer from "./images/layer.png.js";
 import originalPpoint from "./images/original-point.png.js";

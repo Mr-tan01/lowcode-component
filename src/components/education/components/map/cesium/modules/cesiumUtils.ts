@@ -292,6 +292,11 @@ export class cesiumService {
         if (!this.viewer || !this.pointEntities) return
 
         const cameraHeight = this.viewer.camera.positionCartographic.height
+        // 触发高度变化事件
+        if (this.options.limitHeightHandler) {
+            this.options.limitHeightHandler(cameraHeight)
+        }
+
         this.shouldShowLabels = cameraHeight <= (this.options.config?.labelShowHeightThreshold ?? 5000)
         if (this.shouldShowLabels) {
             this.pointData?.forEach(item => {
@@ -925,15 +930,19 @@ export class cesiumService {
     }
 
     // 热力图
-    buildHeatMap(points: { x: number; y: number; value: number }[], gradient: Record<string, string> = heatmapGradient) {
+    buildHeatMap(
+        points: { x: number; y: number; value: number }[],
+        heatOptions: { radius: number; maxOpacity: number; minOpacity: number } = { radius: 5, maxOpacity: 0, minOpacity: 0.5 },
+        gradient: Record<string, string> = heatmapGradient,
+    ) {
         if (!this.viewer) return
         const heatmap = new CesiumHeatmap(this.viewer, {
             zoomToLayer: false,
             points,
             heatmapOptions: {
-                radius: 5,
-                maxOpacity: 0,
-                minOpacity: 0.5,
+                radius: heatOptions.radius,
+                maxOpacity: heatOptions.maxOpacity,
+                minOpacity: heatOptions.minOpacity,
                 gradient: gradient,
             },
         })

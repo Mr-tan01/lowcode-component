@@ -219,6 +219,9 @@ class cesiumService {
     var _a, _b;
     if (!this.viewer || !this.pointEntities) return;
     const cameraHeight = this.viewer.camera.positionCartographic.height;
+    if (this.options.limitHeightHandler) {
+      this.options.limitHeightHandler(cameraHeight);
+    }
     this.shouldShowLabels = cameraHeight <= (((_a = this.options.config) == null ? void 0 : _a.labelShowHeightThreshold) ?? 5e3);
     if (this.shouldShowLabels) {
       (_b = this.pointData) == null ? void 0 : _b.forEach((item) => {
@@ -715,15 +718,15 @@ class cesiumService {
     this.loadTileLayer(imageryLayersUrl);
   }
   // 热力图
-  buildHeatMap(points, gradient = heatmapGradient) {
+  buildHeatMap(points, heatOptions = { radius: 5, maxOpacity: 0, minOpacity: 0.5 }, gradient = heatmapGradient) {
     if (!this.viewer) return;
     const heatmap = new CesiumHeatmap(this.viewer, {
       zoomToLayer: false,
       points,
       heatmapOptions: {
-        radius: 5,
-        maxOpacity: 0,
-        minOpacity: 0.5,
+        radius: heatOptions.radius,
+        maxOpacity: heatOptions.maxOpacity,
+        minOpacity: heatOptions.minOpacity,
         gradient
       }
     });

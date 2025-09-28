@@ -1,5 +1,6 @@
-import { defineComponent, ref, computed, openBlock, createElementBlock, createVNode, unref, mergeProps } from "vue";
+import { defineComponent, ref, computed, openBlock, createElementBlock, createVNode, unref, mergeProps, withCtx } from "vue";
 import { NDataTable } from "naive-ui";
+import LcEmpty from "./empty/index.js";
 const _hoisted_1 = { class: "lc-data-table" };
 const _sfc_main = /* @__PURE__ */ defineComponent({
   __name: "dataTable",
@@ -43,7 +44,13 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
           pagination: pagination.value,
           style: { height: "100%" },
           "flex-height": ""
-        }, _ctx.$attrs, { "onUpdate:sorter": handleSorterChange }), null, 16, ["columns", "data", "pagination"])
+        }, _ctx.$attrs, { "onUpdate:sorter": handleSorterChange }), {
+          empty: withCtx(() => [
+            createVNode(unref(LcEmpty))
+          ]),
+          _: 1
+          /* STABLE */
+        }, 16, ["columns", "data", "pagination"])
       ]);
     };
   }

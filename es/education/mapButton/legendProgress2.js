@@ -1,4 +1,4 @@
-import { defineComponent, ref, computed, watch, createElementBlock, openBlock, createElementVNode, toDisplayString, Fragment, renderList, normalizeStyle, withDirectives, vShow } from "vue";
+import { defineComponent, ref, computed, watch, openBlock, createElementBlock, createElementVNode, toDisplayString, Fragment, renderList, normalizeStyle, withDirectives, vShow } from "vue";
 const _hoisted_1 = { class: "legend-progress" };
 const _hoisted_2 = { class: "legend-progress__label" };
 const _hoisted_3 = { class: "legend-progress__center" };
@@ -16,6 +16,14 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       type: Array,
       required: true,
       validator: (value) => value.every((item) => item >= 0 && item <= 1)
+    },
+    colors: {
+      type: Array,
+      default: () => []
+    },
+    unit: {
+      type: String,
+      default: "%"
     }
   },
   emits: ["update-stops"],
@@ -64,6 +72,9 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     const formattedMax = computed(() => displayMax.value.toFixed(1));
     const generateColors = (count) => {
       if (count === 0) return [];
+      if (props.colors && props.colors.length > 0) {
+        return props.colors.slice(0, Math.min(count, props.colors.length));
+      }
       const colors = [];
       const hueStart = 240;
       const hueEnd = 60;
@@ -135,7 +146,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
           createElementVNode(
             "div",
             _hoisted_4,
-            toDisplayString(formattedMin.value) + "%",
+            toDisplayString(formattedMin.value) + toDisplayString(__props.unit),
             1
             /* TEXT */
           ),
@@ -164,7 +175,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                         class: "segment-tooltip",
                         style: normalizeStyle(tooltipStyle.value)
                       },
-                      toDisplayString((segment.value * 100).toFixed(1)) + "% ",
+                      toDisplayString((segment.value * 100).toFixed(1)) + toDisplayString(__props.unit),
                       5
                       /* TEXT, STYLE */
                     ), [
@@ -182,7 +193,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
           createElementVNode(
             "div",
             _hoisted_6,
-            toDisplayString(formattedMax.value) + "%",
+            toDisplayString(formattedMax.value) + toDisplayString(__props.unit),
             1
             /* TEXT */
           )

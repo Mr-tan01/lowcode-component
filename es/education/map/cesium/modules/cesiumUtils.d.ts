@@ -86,7 +86,11 @@ export declare class cesiumService {
         x: number;
         y: number;
         value: number;
-    }[], gradient?: Record<string, string>): CesiumHeatmap | undefined;
+    }[], heatOptions?: {
+        radius: number;
+        maxOpacity: number;
+        minOpacity: number;
+    }, gradient?: Record<string, string>): CesiumHeatmap | undefined;
     removeHeatMap(heatmap: CesiumHeatmap | any): void;
     private isPointInShenzhen;
     private setupCameraLimits;

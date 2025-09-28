@@ -9,7 +9,11 @@
             flex-height
             v-bind="$attrs"
             @update:sorter="handleSorterChange"
-        />
+        >
+            <template #empty>
+                <LcEmpty />
+            </template>
+        </n-data-table>
     </div>
 </template>
 
@@ -17,6 +21,7 @@
 import { ref, PropType, computed, VNode } from 'vue'
 import { NDataTable } from 'naive-ui'
 import type { DataTableSortState, DataTableColumns, DataTableBaseColumn } from 'naive-ui'
+import { LcEmpty } from '@/components/education/components/empty'
 
 export interface RowData {
     key: number

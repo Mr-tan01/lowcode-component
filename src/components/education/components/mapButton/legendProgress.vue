@@ -2,7 +2,7 @@
     <div class="legend-progress">
         <div class="legend-progress__label">{{ label }}</div>
         <div class="legend-progress__center">
-            <div class="legend-progress__center__min-value sample-text">{{ formattedMin }}%</div>
+            <div class="legend-progress__center__min-value sample-text">{{ formattedMin }}{{ unit }}</div>
             <div ref="progressBar" class="legend-progress__center__progress-bar">
                 <div
                     v-for="(segment, index) in segments"
@@ -13,11 +13,11 @@
                     @mouseleave="hideTooltip"
                 >
                     <div v-show="activeTooltip.value === segment.value" class="segment-tooltip" :style="tooltipStyle">
-                        {{ (segment.value * 100).toFixed(1) }}%
+                        {{ (segment.value * 100).toFixed(1) }}{{ unit }}
                     </div>
                 </div>
             </div>
-            <div class="legend-progress__center__max-value sample-text">{{ formattedMax }}%</div>
+            <div class="legend-progress__center__max-value sample-text">{{ formattedMax }}{{ unit }}</div>
         </div>
     </div>
 </template>
@@ -53,6 +53,14 @@ const props = defineProps({
         type: Array as () => number[],
         required: true,
         validator: (value: number[]) => value.every(item => item >= 0 && item <= 1),
+    },
+    colors: {
+        type: Array as () => string[],
+        default: () => [],
+    },
+    unit: {
+        type: String,
+        default: '%',
     },
 })
 
@@ -104,16 +112,20 @@ const displayMax = computed(() => {
 const formattedMin = computed(() => displayMin.value.toFixed(1))
 const formattedMax = computed(() => displayMax.value.toFixed(1))
 
-// 颜色生成（确保无红色调，最大值除外）
+// 颜色生成
 const generateColors = (count: number): string[] => {
     if (count === 0) return []
+    // 使用传入的颜色
+    if (props.colors && props.colors.length > 0) {
+        return props.colors.slice(0, Math.min(count, props.colors.length))
+    }
 
+    // 自动生成颜色
     const colors: string[] = []
     const hueStart = 240 // 蓝色
     const hueEnd = 60 // 黄色
     const hueStep = (hueEnd - hueStart) / Math.max(1, count - 1)
 
-    // 生成蓝黄色渐变
     for (let i = 0; i < count - 1; i++) {
         const hue = hueStart + i * hueStep
         const saturation = 80 + Math.random() * 15
