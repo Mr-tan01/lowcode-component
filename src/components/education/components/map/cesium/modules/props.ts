@@ -70,4 +70,8 @@ export const cesiumProps = {
         type: Object as PropType<{ flag: boolean; offset: number }>,
         default: { flag: false, offset: 0 },
     },
+    pointBatchRender: {
+        type: Object as PropType<{ batchRenderSize: number; batchRenderDelay: number }>,
+        default: { batchRenderSize: 50, batchRenderDelay: 0 },
+    },
 }

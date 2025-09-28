@@ -52,6 +52,35 @@ class cesiumService {
       event.stopPropagation();
       this.setCameraHeight("ZoomIn");
     });
+    __publicField(this, "renderTasks", /* @__PURE__ */ new WeakMap());
+    // 分批渲染点位
+    __publicField(this, "batchRenderPoints", async (points, defaultShowState, batchRenderConfig) => {
+      this.cancelBatchRender();
+      const totalLength = points.length;
+      if (totalLength === 0) return;
+      const batchSize = batchRenderConfig.batchRenderSize;
+      const batches = Math.ceil(totalLength / batchSize);
+      const renderBatch = (batchIndex) => {
+        if (batchIndex >= batches) {
+          this.handleCameraHeightChange();
+          return;
+        }
+        const startIndex = batchIndex * batchSize;
+        const endIndex = Math.min(startIndex + batchSize, totalLength);
+        const batchPoints = points.slice(startIndex, endIndex);
+        batchPoints.forEach((point) => {
+          this.addPoint(point, "value");
+          if (defaultShowState) {
+            this.addPoint(point);
+          }
+        });
+        const taskId = requestAnimationFrame(() => {
+          renderBatch(batchIndex + 1);
+        });
+        this.renderTasks.set(this, taskId);
+      };
+      renderBatch(0);
+    });
     this.containerId = containerId;
     this.options = options;
     this.options.config = {
@@ -473,6 +502,14 @@ class cesiumService {
     }
     return entity;
   }
+  // 取消正在进行的批量渲染
+  cancelBatchRender() {
+    const taskId = this.renderTasks.get(this);
+    if (taskId) {
+      cancelAnimationFrame(taskId);
+      this.renderTasks.delete(this);
+    }
+  }
   // 清除指定entity
   async clearEntity(key, type) {
     var _a, _b, _c;
@@ -821,6 +858,7 @@ class cesiumService {
     }
   }
   destroy() {
+    this.cancelBatchRender();
     if (this.viewer) {
       const canvas = this.viewer.scene.canvas;
       canvas.removeEventListener("mouseout", this.handleCanvasMouseOut.bind(this));

@@ -40,6 +40,7 @@ const {
     controlStatus,
     basicConfig,
     pointData = [],
+    pointBatchRender = { batchRenderSize: 50, batchRenderDelay: 100 }, // 每批渲染的数量 每批之间的延迟时间（毫秒）
     openIndexDB = false,
     openOffset = { flag: false, offset: 0 },
 } = defineProps(cesiumProps)
@@ -54,12 +55,9 @@ const reloadPointData = async (): Promise<void> => {
         cesiumUtils.pointData = pointData
     }
 
-    cesiumUtils.pointData?.forEach(point => {
-        cesiumUtils.addPoint(point, 'value')
-        if (defaultShowState) {
-            cesiumUtils.addPoint(point)
-        }
-    })
+    // 批量渲染点位
+    await cesiumUtils.batchRenderPoints(cesiumUtils.pointData || [], defaultShowState, pointBatchRender)
+
     // 进入得时候就判断高度
     cesiumUtils.handleCameraHeightChange()
 }

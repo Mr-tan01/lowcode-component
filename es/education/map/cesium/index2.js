@@ -11,6 +11,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     defaultCenterKey: "深圳市",
     centerPosition: () => Cartesian3.fromDegrees(114.187446, 22.674131, 13e4),
     pointData: () => [],
+    pointBatchRender: () => ({ batchRenderSize: 50, batchRenderDelay: 100 }),
     openIndexDB: false,
     openOffset: () => ({ flag: false, offset: 0 })
   }),
@@ -20,7 +21,6 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     const initPointDataStatus = ref(true);
     const emit = __emit;
     const reloadPointData = async () => {
-      var _a;
       clearEntity();
       const offsetPointData = cesiumUtils.offsetDuplicateCoordinates(__props.pointData, "lng", "lat", __props.openOffset.offset);
       if (__props.openOffset.flag) {
@@ -28,12 +28,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       } else {
         cesiumUtils.pointData = __props.pointData;
       }
-      (_a = cesiumUtils.pointData) == null ? void 0 : _a.forEach((point) => {
-        cesiumUtils.addPoint(point, "value");
-        if (__props.defaultShowState) {
-          cesiumUtils.addPoint(point);
-        }
-      });
+      await cesiumUtils.batchRenderPoints(cesiumUtils.pointData || [], __props.defaultShowState, __props.pointBatchRender);
       cesiumUtils.handleCameraHeightChange();
     };
     const loadedTileLayer = async (status) => {

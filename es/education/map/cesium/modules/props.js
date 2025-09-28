@@ -74,6 +74,10 @@ const cesiumProps = {
   openOffset: {
     type: Object,
     default: { flag: false, offset: 0 }
+  },
+  pointBatchRender: {
+    type: Object,
+    default: { batchRenderSize: 50, batchRenderDelay: 0 }
   }
 };
 export {

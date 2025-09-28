@@ -64,6 +64,12 @@ export declare class cesiumService {
     private addProviderToViewer;
     private handleLoadError;
     addPoint(point: pointType, type?: string, labelType?: string): Promise<Entity | null | void>;
+    private renderTasks;
+    batchRenderPoints: (points: any[], defaultShowState: boolean, batchRenderConfig: {
+        batchRenderSize: number;
+        batchRenderDelay: number;
+    }) => Promise<void>;
+    cancelBatchRender(): void;
     clearEntity(key: 'pointEntities' | 'polygonEntities', type?: 'dataSource' | 'viewer'): Promise<void>;
     addPolygon(name: string): void;
     addAllDistricts(): void;
