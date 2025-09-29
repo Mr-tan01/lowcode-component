@@ -4,7 +4,7 @@
             <template #trigger>
                 <slot name="trigger">
                     <div class="lc-tooltip__trigger">
-                        <div class="lc-tooltip__trigger_icon" :style="{ width: `${size}px` }">
+                        <div class="lc-tooltip__trigger_icon">
                             <svg
                                 version="1.1"
                                 xmlns="http://www.w3.org/2000/svg"
@@ -39,10 +39,12 @@
 </template>
 <script lang="ts" setup>
 import { NTooltip } from 'naive-ui/es/tooltip'
-const { title = '', size = '18' } = defineProps<{
+const { title = '', size = 18 } = defineProps<{
     title?: string
     size?: string | number
 }>()
+
+const iconSize = typeof size === 'number' ? `${size}px` : size
 </script>
 
 <style lang="scss">
@@ -59,10 +61,13 @@ const { title = '', size = '18' } = defineProps<{
 <style lang="scss" scoped>
 .lc-tooltip {
     &__trigger_icon {
-        width: 24px;
+        --iconWidth: v-bind(iconSize);
+        width: var(--iconWidth);
+        height: var(--iconWidth);
         fill: rgba(15, 251, 248, 1);
         display: flex;
         align-items: center;
+        flex-shrink: 0;
     }
 
     &__trigger {

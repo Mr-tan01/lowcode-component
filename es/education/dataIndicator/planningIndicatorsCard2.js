@@ -10,13 +10,13 @@ import LcSubhead from "./headline/subhead.js";
 const _hoisted_1 = { class: "lc-planning-indicators" };
 const _hoisted_2 = { class: "lc-planning-indicators__header" };
 const _hoisted_3 = { class: "lc-planning-indicators__item__title" };
-const _hoisted_4 = { class: "lc-planning-indicators__item__left--value" };
+const _hoisted_4 = ["title"];
 const _hoisted_5 = { class: "lc-number-value" };
 const _hoisted_6 = { class: "lc-number-unit" };
 const _hoisted_7 = { class: "lc-planning-indicators__item__center" };
 const _hoisted_8 = ["src"];
 const _hoisted_9 = { class: "lc-planning-indicators__item__title" };
-const _hoisted_10 = { class: "lc-planning-indicators__item__right--value" };
+const _hoisted_10 = ["title"];
 const _hoisted_11 = { class: "lc-number-value" };
 const _hoisted_12 = { class: "lc-number-unit" };
 const _sfc_main = /* @__PURE__ */ defineComponent({
@@ -29,9 +29,9 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
   },
   setup(__props) {
     useCssVars((_ctx) => ({
-      "54fed476": leftOrderValue.value,
-      "41ddd778": centerOrderValue.value,
-      "5c05159a": rightOrderValue.value
+      "cc2487c6": leftOrderValue.value,
+      "b836a3aa": centerOrderValue.value,
+      "2aeb826c": rightOrderValue.value
     }));
     const renderValue = memoize(
       (value, decimal = 0) => {
@@ -101,7 +101,10 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                   1
                   /* TEXT */
                 ),
-                createElementVNode("span", _hoisted_4, [
+                createElementVNode("span", {
+                  class: "lc-planning-indicators__item__left--value",
+                  title: String(_ctx.data.leftItem.value)
+                }, [
                   createElementVNode("span", _hoisted_5, [
                     createVNode(unref(NNumberAnimation), {
                       "show-separator": "",
@@ -118,7 +121,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                     1
                     /* TEXT */
                   )
-                ])
+                ], 8, _hoisted_4)
               ],
               2
               /* CLASS */
@@ -142,7 +145,10 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                   1
                   /* TEXT */
                 ),
-                createElementVNode("span", _hoisted_10, [
+                createElementVNode("span", {
+                  class: "lc-planning-indicators__item__right--value",
+                  title: String(_ctx.data.rightItem.value)
+                }, [
                   createElementVNode("span", _hoisted_11, [
                     createVNode(unref(NNumberAnimation), {
                       "show-separator": "",
@@ -159,7 +165,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                     1
                     /* TEXT */
                   )
-                ])
+                ], 8, _hoisted_10)
               ],
               2
               /* CLASS */
