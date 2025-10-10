@@ -1,4 +1,4 @@
-import { defineComponent, mergeDefaults, openBlock, createElementBlock, normalizeClass, createElementVNode, toDisplayString, createVNode, unref, normalizeStyle, withCtx, Fragment, renderList, createBlock, createTextVNode } from "vue";
+import { defineComponent, mergeDefaults, createElementBlock, openBlock, normalizeClass, createElementVNode, toDisplayString, createVNode, unref, normalizeStyle, withCtx, Fragment, renderList, createBlock, createTextVNode } from "vue";
 import _imports_1 from "./images/voice.png.js";
 import { NScrollbar, NMarquee } from "naive-ui/es";
 const _hoisted_1 = { class: "lc-robot-chat-popup__content" };
@@ -82,7 +82,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                             },
                             null,
                             -1
-                            /* HOISTED */
+                            /* CACHED */
                           )),
                           createElementVNode("div", {
                             class: "lc-robot-chat-popup__content--inner__quick__item--text",
