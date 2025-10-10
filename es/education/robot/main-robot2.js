@@ -1,4 +1,4 @@
-import { defineComponent, mergeModels, mergeDefaults, computed, watchEffect, ref, useModel, openBlock, createElementBlock, createElementVNode, withDirectives, createTextVNode, toDisplayString, unref, vShow, vModelText, renderSlot, Fragment, renderList, normalizeStyle, createVNode } from "vue";
+import { defineComponent, mergeModels, computed, watchEffect, ref, useModel, createElementBlock, openBlock, createElementVNode, withDirectives, createTextVNode, toDisplayString, unref, vShow, vModelText, renderSlot, Fragment, renderList, normalizeStyle, createVNode, mergeDefaults } from "vue";
 import _imports_0 from "./images/main-robot.png.js";
 import _imports_1 from "./images/voice.png.js";
 import _imports_2 from "./images/microphone.png.js";
@@ -160,7 +160,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
             },
             null,
             -1
-            /* HOISTED */
+            /* CACHED */
           )),
           createElementVNode("div", _hoisted_3, [
             createElementVNode("div", _hoisted_4, [
@@ -178,7 +178,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                     },
                     null,
                     -1
-                    /* HOISTED */
+                    /* CACHED */
                   )),
                   createTextVNode(
                     " " + toDisplayString(unref(output).helpText),

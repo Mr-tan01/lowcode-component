@@ -411,7 +411,7 @@ on('result', () => {
                     padding: 0;
                     box-sizing: border-box;
                     color: #fff;
-                    font-family: HarmonyOS Sans SC Medium;
+                    font-family: HarmonyOS_Sans_SC_Medium;
 
                     &::placeholder {
                         font-size: inherit;
