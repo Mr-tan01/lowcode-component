@@ -47,7 +47,7 @@ export class cesiumService {
         clusteringEnabled: true,
         clusteringPixelRange: 30,
         clusteringMinimumClusterSize: 2,
-        flyToHeight: 26000,
+        flyToHeight: 28000,
         cameraLimitsEnabled: true,
         hoverState: true,
         defaultUrl: 'https://services.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer',
@@ -231,13 +231,16 @@ export class cesiumService {
             scene.globe.depthTestAgainstTerrain = true
             scene.screenSpaceCameraController.enableTranslate = true
             // 场景效果配置
-            this.viewer.scene.skyBox.show = false // 禁用天空盒
-            this.viewer.scene.sun.show = false // 禁用太阳效果
-            this.viewer.scene.moon.show = false // 禁用月亮效果
-            this.viewer.scene.skyAtmosphere.show = false // 禁用天空大气效果
+            this.viewer.scene.skyBox!.show = false // 禁用天空盒
+            this.viewer.scene.sun!.show = false // 禁用太阳效果
+            this.viewer.scene.moon!.show = false // 禁用月亮效果
+            this.viewer.scene.skyAtmosphere!.show = false // 禁用天空大气效果
             this.viewer.scene.globe.showGroundAtmosphere = false // 禁用地面大气散射效果
             this.viewer.scene.globe.atmosphereBrightnessShift = 0.25 // 设置大气亮度偏移
             this.viewer.scene.globe.baseColor = Color.TRANSPARENT // 设置地球基础颜色为透明
+            this.viewer.scene.globe.maximumScreenSpaceError = 0.66
+            // @ts-expect-error
+            this.viewer.scene.fxaa = false // 关闭抗锯齿
 
             // 使用浏览器推荐的分辨率
             this.viewer.useBrowserRecommendedResolution = true

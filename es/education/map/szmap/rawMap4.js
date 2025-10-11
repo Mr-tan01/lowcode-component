@@ -1,4 +1,4 @@
-import { defineComponent, mergeDefaults, useCssVars, ref, onMounted, computed, openBlock, createElementBlock, createVNode, createElementVNode, Fragment, renderList, mergeProps, resolveDynamicComponent, createBlock, createCommentVNode, renderSlot, unref } from "vue";
+import { defineComponent, mergeDefaults, useCssVars, computed, ref, onMounted, createElementBlock, openBlock, createCommentVNode, createVNode, createElementVNode, Fragment, renderList, mergeProps, createBlock, resolveDynamicComponent, renderSlot, unref } from "vue";
 import _sfc_main$2 from "./comp/sshzq.js";
 import Baoan from "./comp/baoan.js";
 import Dapeng from "./comp/dapeng.js";
@@ -14,7 +14,7 @@ import _sfc_main$1 from "./comp/defines.js";
 import Labels from "./comp/labels2.js";
 import LcMark from "../mark/index2.js";
 import { propsRaw } from "./props.js";
-import { LabelModelEnum, defFloatLevelConfig, szBlockNames, defBlockLabelMap } from "./const.js";
+import { defFloatLevelConfig, LabelModelEnum, szBlockNames, defBlockLabelMap } from "./const.js";
 import merge from "lodash-es/merge";
 const _hoisted_1 = { class: "lc-szmap-raw" };
 const _hoisted_2 = {
@@ -193,9 +193,8 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                   renderList(blockList, (is, key, index) => {
                     return createVNode(resolveDynamicComponent(is), mergeProps({
                       key: index,
-                      class: blockClass.value,
-                      ref_for: true
-                    }, getBlockProperties(key), {
+                      class: blockClass.value
+                    }, { ref_for: true }, getBlockProperties(key), {
                       "show-border": _ctx.showBorder,
                       onMouseenter: ($event) => onMouseoverMapkey(key),
                       onMouseover: ($event) => onMouseenterMapkey(key),
@@ -228,9 +227,8 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
               renderList(blockList, (_, key) => {
                 return createVNode(unref(LcMark), mergeProps({
                   key,
-                  class: labelClass(key),
-                  ref_for: true
-                }, getMarkProp(key), {
+                  class: labelClass(key)
+                }, { ref_for: true }, getMarkProp(key), {
                   size: "small",
                   onClick: ($event) => markClick(key)
                 }), null, 16, ["class", "onClick"]);
