@@ -23,6 +23,8 @@ export default {
                 'vue-router',
                 /mmjs-core*/,
                 /lodash-es*/,
+                /leaflet*/,
+                /mars2d*/,
                 /naive-ui*/,
                 /localforage*/,
                 /@vueuse\/core*/,

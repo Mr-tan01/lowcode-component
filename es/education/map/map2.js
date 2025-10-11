@@ -1,4 +1,4 @@
-import { defineComponent, openBlock, createElementBlock, createVNode, unref, normalizeProps, guardReactiveProps } from "vue";
+import { defineComponent, createElementBlock, openBlock, createVNode, unref, normalizeProps, guardReactiveProps } from "vue";
 import Szmap from "./szmap/index.js";
 import "lodash-es/merge";
 import "./szmap/const.js";

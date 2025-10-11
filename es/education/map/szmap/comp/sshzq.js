@@ -1,4 +1,4 @@
-import { defineComponent, mergeDefaults, openBlock, createElementBlock, createCommentVNode, createElementVNode } from "vue";
+import { defineComponent, mergeDefaults, createElementBlock, openBlock, createCommentVNode, createElementVNode } from "vue";
 const _hoisted_1 = { transform: "translate(0, -35)" };
 const _hoisted_2 = {
   key: 0,
@@ -60,7 +60,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
             ])
           ],
           -1
-          /* HOISTED */
+          /* CACHED */
         ))
       ]);
     };

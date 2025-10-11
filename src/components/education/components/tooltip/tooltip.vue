@@ -12,16 +12,19 @@
                                 x="0px"
                                 y="0px"
                                 viewBox="0 0 512 512"
-                                enable-background="new 0 0 512 512"
-                                xml:space="preserve"
+                                :width="iconSize"
+                                :height="iconSize"
+                                role="img"
+                                aria-hidden="true"
                             >
                                 <path
+                                    fill="currentColor"
                                     d="M256,90c44.3,0,86,17.3,117.4,48.6C404.7,170,422,211.7,422,256s-17.3,86-48.6,117.4C342,404.7,300.3,422,256,422
 	s-86-17.3-117.4-48.6C107.3,342,90,300.3,90,256s17.3-86,48.6-117.4C170,107.3,211.7,90,256,90 M256,48C141.1,48,48,141.1,48,256
 	s93.1,208,208,208s208-93.1,208-208S370.9,48,256,48L256,48z"
                                 ></path>
                                 <g>
-                                    <path d="M277,360h-42V235h42V360z M277,194h-42v-42h42V194z"></path>
+                                    <path fill="currentColor" d="M277,360h-42V235h42V360z M277,194h-42v-42h42V194z"></path>
                                 </g>
                             </svg>
                         </div>
@@ -37,8 +40,10 @@
         </n-tooltip>
     </div>
 </template>
+
 <script lang="ts" setup>
 import { NTooltip } from 'naive-ui/es/tooltip'
+
 const { title = '', size = 18 } = defineProps<{
     title?: string
     size?: string | number
@@ -53,27 +58,66 @@ const iconSize = typeof size === 'number' ? `${size}px` : size
     --n-color: rgba(6, 56, 94, 1) !important;
     border: 1px solid var(--border-color) !important;
 
+    /* 修复Safari定位问题 */
+    position: relative;
+    transform: translateZ(0); /* 触发硬件加速 */
+
     .lc-tooltip-arrow-class {
         border: 1px solid var(--border-color);
+
+        /* 修复Safari箭头显示问题 */
+        &:before {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 0;
+            border-style: solid;
+        }
+    }
+
+    /* Safari特定修复 */
+    @media not all and (min-resolution: 0.001dpcm) {
+        @supports (-webkit-appearance: none) {
+            transform: translate3d(0, 0, 0);
+            backface-visibility: hidden;
+            perspective: 1000;
+        }
+    }
+}
+
+/* 针对Safari的额外修复 */
+@supports (-webkit-touch-callout: none) {
+    .lc-n-tooltip {
+        transform: translate3d(0, 0, 0);
     }
 }
 </style>
+
 <style lang="scss" scoped>
 .lc-tooltip {
+    display: inline-block; /* 确保正确的布局上下文 */
+
     &__trigger_icon {
         --iconWidth: v-bind(iconSize);
         width: var(--iconWidth);
         height: var(--iconWidth);
-        fill: rgba(15, 251, 248, 1);
+        color: rgba(15, 251, 248, 1);
         display: flex;
         align-items: center;
         flex-shrink: 0;
+
+        svg {
+            width: 100%;
+            height: 100%;
+            fill: currentColor;
+        }
     }
 
     &__trigger {
         display: flex;
         gap: 6px;
         align-items: center;
+        cursor: pointer; /* 明确显示可点击 */
 
         &--text {
             color: rgba(15, 251, 248, 1);

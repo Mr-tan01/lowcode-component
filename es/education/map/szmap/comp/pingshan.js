@@ -1,9 +1,9 @@
-import { openBlock, createElementBlock, createElementVNode } from "vue";
+import { createElementBlock, openBlock, createElementVNode } from "vue";
 import _export_sfc from "../../_virtual/_plugin-vue_export-helper.js";
 const _sfc_main = {};
 const _hoisted_1 = { id: "坪山" };
 function _sfc_render(_ctx, _cache) {
-  return openBlock(), createElementBlock("g", _hoisted_1, _cache[0] || (_cache[0] = [
+  return openBlock(), createElementBlock("g", _hoisted_1, [..._cache[0] || (_cache[0] = [
     createElementVNode(
       "use",
       {
@@ -14,7 +14,7 @@ function _sfc_render(_ctx, _cache) {
       },
       null,
       -1
-      /* HOISTED */
+      /* CACHED */
     ),
     createElementVNode(
       "use",
@@ -25,7 +25,7 @@ function _sfc_render(_ctx, _cache) {
       },
       null,
       -1
-      /* HOISTED */
+      /* CACHED */
     ),
     createElementVNode(
       "use",
@@ -37,7 +37,7 @@ function _sfc_render(_ctx, _cache) {
       },
       null,
       -1
-      /* HOISTED */
+      /* CACHED */
     ),
     createElementVNode(
       "path",
@@ -48,9 +48,9 @@ function _sfc_render(_ctx, _cache) {
       },
       null,
       -1
-      /* HOISTED */
+      /* CACHED */
     )
-  ]));
+  ])]);
 }
 const Pingshan = /* @__PURE__ */ _export_sfc(_sfc_main, [["render", _sfc_render]]);
 export {

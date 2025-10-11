@@ -3,7 +3,7 @@ import __vite_glob_0_1 from "./images/mark.png.js";
 import __vite_glob_0_2 from "./images/mark2-rect.png.js";
 import __vite_glob_0_3 from "./images/mark2.png.js";
 import normalMarker from "./images/normal.png.js";
-import { defineComponent, computed, openBlock, createElementBlock, normalizeClass, normalizeStyle, createElementVNode, toDisplayString, renderSlot, createVNode, unref, createCommentVNode } from "vue";
+import { defineComponent, computed, createElementBlock, createCommentVNode, openBlock, normalizeStyle, normalizeClass, createElementVNode, toDisplayString, renderSlot, createVNode, unref } from "vue";
 import { NNumberAnimation } from "naive-ui/es/number-animation";
 const _hoisted_1 = { class: "lc-mark__wrapper__image" };
 const _hoisted_2 = ["src"];
