@@ -75,6 +75,13 @@ declare const __VLS_component: import('vue').DefineComponent<import('vue').Extra
         type: PropType<Record<string, any>[]>;
         default: () => never[];
     };
+    hoverTdIndex: {
+        type: PropType<number[] | number>;
+    };
+    showHoverArrow: {
+        type: BooleanConstructor;
+        default: boolean;
+    };
 }>, {}, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
     columns: {
         type: PropType<Columns[]>;
@@ -84,9 +91,17 @@ declare const __VLS_component: import('vue').DefineComponent<import('vue').Extra
         type: PropType<Record<string, any>[]>;
         default: () => never[];
     };
+    hoverTdIndex: {
+        type: PropType<number[] | number>;
+    };
+    showHoverArrow: {
+        type: BooleanConstructor;
+        default: boolean;
+    };
 }>> & Readonly<{}>, {
     data: Record<string, any>[];
     columns: Columns[];
+    showHoverArrow: boolean;
 }, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {
     scrollbarRef: ({
         $: import('vue').ComponentInternalInstance;

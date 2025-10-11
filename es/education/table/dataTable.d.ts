@@ -35,7 +35,7 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
     getInstance: () => import('vue').CreateComponentPublicInstanceWithMixins<Readonly<import('vue').ExtractPropTypes<{
         readonly onUnstableColumnResize: import('vue').PropType<(resizedWidth: number, limitedWidth: number, column: import('naive-ui/es/data-table/src/interface').TableBaseColumn, getColumnWidth: (key: import('naive-ui/es/data-table/src/interface').ColumnKey) => number | undefined) => void>;
         readonly pagination: {
-            readonly type: import('vue').PropType<false | import('naive-ui/es/pagination').PaginationProps>;
+            readonly type: import('vue').PropType<false | import('naive-ui').PaginationProps>;
             readonly default: false;
         };
         readonly paginateSinglePage: {
@@ -629,7 +629,20 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                             arrowOffsetVertical: string;
                             arrowHeight: string;
                             padding: string;
-                        }, any>;
+                        }, {
+                            Scrollbar: import('naive-ui/es/_mixins').Theme<"Scrollbar", {
+                                height: string;
+                                width: string;
+                                borderRadius: string;
+                                color: string;
+                                colorHover: string;
+                                railInsetHorizontalBottom: string;
+                                railInsetHorizontalTop: string;
+                                railInsetVerticalRight: string;
+                                railInsetVerticalLeft: string;
+                                railColor: string;
+                            }, any>;
+                        }>;
                     }>;
                     InternalSelectMenu: import('naive-ui/es/_mixins').Theme<"InternalSelectMenu", {
                         optionFontSizeTiny: string;
@@ -760,7 +773,20 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                     paddingMedium: string;
                     paddingLarge: string;
                     clearSize: string;
-                }, any>;
+                }, {
+                    Scrollbar: import('naive-ui/es/_mixins').Theme<"Scrollbar", {
+                        height: string;
+                        width: string;
+                        borderRadius: string;
+                        color: string;
+                        colorHover: string;
+                        railInsetHorizontalBottom: string;
+                        railInsetHorizontalTop: string;
+                        railInsetVerticalRight: string;
+                        railInsetVerticalLeft: string;
+                        railColor: string;
+                    }, any>;
+                }>;
                 Popselect: import('naive-ui/es/_mixins').Theme<"Popselect", {
                     menuBoxShadow: string;
                 }, {
@@ -777,7 +803,20 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                         arrowOffsetVertical: string;
                         arrowHeight: string;
                         padding: string;
-                    }, any>;
+                    }, {
+                        Scrollbar: import('naive-ui/es/_mixins').Theme<"Scrollbar", {
+                            height: string;
+                            width: string;
+                            borderRadius: string;
+                            color: string;
+                            colorHover: string;
+                            railInsetHorizontalBottom: string;
+                            railInsetHorizontalTop: string;
+                            railInsetVerticalRight: string;
+                            railInsetVerticalLeft: string;
+                            railColor: string;
+                        }, any>;
+                    }>;
                     InternalSelectMenu: import('naive-ui/es/_mixins').Theme<"InternalSelectMenu", {
                         optionFontSizeTiny: string;
                         optionFontSizeSmall: string;
@@ -887,7 +926,20 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                 arrowOffsetVertical: string;
                 arrowHeight: string;
                 padding: string;
-            }, any>;
+            }, {
+                Scrollbar: import('naive-ui/es/_mixins').Theme<"Scrollbar", {
+                    height: string;
+                    width: string;
+                    borderRadius: string;
+                    color: string;
+                    colorHover: string;
+                    railInsetHorizontalBottom: string;
+                    railInsetHorizontalTop: string;
+                    railInsetVerticalRight: string;
+                    railInsetVerticalLeft: string;
+                    railColor: string;
+                }, any>;
+            }>;
             Ellipsis: import('naive-ui/es/_mixins').Theme<"Ellipsis", unknown, {
                 Tooltip: import('naive-ui/es/_mixins').Theme<"Tooltip", {
                     borderRadius: string;
@@ -909,7 +961,20 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                         arrowOffsetVertical: string;
                         arrowHeight: string;
                         padding: string;
-                    }, any>;
+                    }, {
+                        Scrollbar: import('naive-ui/es/_mixins').Theme<"Scrollbar", {
+                            height: string;
+                            width: string;
+                            borderRadius: string;
+                            color: string;
+                            colorHover: string;
+                            railInsetHorizontalBottom: string;
+                            railInsetHorizontalTop: string;
+                            railInsetVerticalRight: string;
+                            railInsetVerticalLeft: string;
+                            railColor: string;
+                        }, any>;
+                    }>;
                 }>;
             }>;
             Dropdown: import('naive-ui/es/_mixins').Theme<"Dropdown", {
@@ -980,7 +1045,20 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                     arrowOffsetVertical: string;
                     arrowHeight: string;
                     padding: string;
-                }, any>;
+                }, {
+                    Scrollbar: import('naive-ui/es/_mixins').Theme<"Scrollbar", {
+                        height: string;
+                        width: string;
+                        borderRadius: string;
+                        color: string;
+                        colorHover: string;
+                        railInsetHorizontalBottom: string;
+                        railInsetHorizontalTop: string;
+                        railInsetVerticalRight: string;
+                        railInsetVerticalLeft: string;
+                        railColor: string;
+                    }, any>;
+                }>;
             }>;
         }>>;
         readonly themeOverrides: import('vue').PropType<import('naive-ui/es/_mixins/use-theme').ExtractThemeOverrides<import('naive-ui/es/_mixins').Theme<"DataTable", {
@@ -1456,7 +1534,20 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                             arrowOffsetVertical: string;
                             arrowHeight: string;
                             padding: string;
-                        }, any>;
+                        }, {
+                            Scrollbar: import('naive-ui/es/_mixins').Theme<"Scrollbar", {
+                                height: string;
+                                width: string;
+                                borderRadius: string;
+                                color: string;
+                                colorHover: string;
+                                railInsetHorizontalBottom: string;
+                                railInsetHorizontalTop: string;
+                                railInsetVerticalRight: string;
+                                railInsetVerticalLeft: string;
+                                railColor: string;
+                            }, any>;
+                        }>;
                     }>;
                     InternalSelectMenu: import('naive-ui/es/_mixins').Theme<"InternalSelectMenu", {
                         optionFontSizeTiny: string;
@@ -1587,7 +1678,20 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                     paddingMedium: string;
                     paddingLarge: string;
                     clearSize: string;
-                }, any>;
+                }, {
+                    Scrollbar: import('naive-ui/es/_mixins').Theme<"Scrollbar", {
+                        height: string;
+                        width: string;
+                        borderRadius: string;
+                        color: string;
+                        colorHover: string;
+                        railInsetHorizontalBottom: string;
+                        railInsetHorizontalTop: string;
+                        railInsetVerticalRight: string;
+                        railInsetVerticalLeft: string;
+                        railColor: string;
+                    }, any>;
+                }>;
                 Popselect: import('naive-ui/es/_mixins').Theme<"Popselect", {
                     menuBoxShadow: string;
                 }, {
@@ -1604,7 +1708,20 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                         arrowOffsetVertical: string;
                         arrowHeight: string;
                         padding: string;
-                    }, any>;
+                    }, {
+                        Scrollbar: import('naive-ui/es/_mixins').Theme<"Scrollbar", {
+                            height: string;
+                            width: string;
+                            borderRadius: string;
+                            color: string;
+                            colorHover: string;
+                            railInsetHorizontalBottom: string;
+                            railInsetHorizontalTop: string;
+                            railInsetVerticalRight: string;
+                            railInsetVerticalLeft: string;
+                            railColor: string;
+                        }, any>;
+                    }>;
                     InternalSelectMenu: import('naive-ui/es/_mixins').Theme<"InternalSelectMenu", {
                         optionFontSizeTiny: string;
                         optionFontSizeSmall: string;
@@ -1714,7 +1831,20 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                 arrowOffsetVertical: string;
                 arrowHeight: string;
                 padding: string;
-            }, any>;
+            }, {
+                Scrollbar: import('naive-ui/es/_mixins').Theme<"Scrollbar", {
+                    height: string;
+                    width: string;
+                    borderRadius: string;
+                    color: string;
+                    colorHover: string;
+                    railInsetHorizontalBottom: string;
+                    railInsetHorizontalTop: string;
+                    railInsetVerticalRight: string;
+                    railInsetVerticalLeft: string;
+                    railColor: string;
+                }, any>;
+            }>;
             Ellipsis: import('naive-ui/es/_mixins').Theme<"Ellipsis", unknown, {
                 Tooltip: import('naive-ui/es/_mixins').Theme<"Tooltip", {
                     borderRadius: string;
@@ -1736,7 +1866,20 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                         arrowOffsetVertical: string;
                         arrowHeight: string;
                         padding: string;
-                    }, any>;
+                    }, {
+                        Scrollbar: import('naive-ui/es/_mixins').Theme<"Scrollbar", {
+                            height: string;
+                            width: string;
+                            borderRadius: string;
+                            color: string;
+                            colorHover: string;
+                            railInsetHorizontalBottom: string;
+                            railInsetHorizontalTop: string;
+                            railInsetVerticalRight: string;
+                            railInsetVerticalLeft: string;
+                            railColor: string;
+                        }, any>;
+                    }>;
                 }>;
             }>;
             Dropdown: import('naive-ui/es/_mixins').Theme<"Dropdown", {
@@ -1807,7 +1950,20 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                     arrowOffsetVertical: string;
                     arrowHeight: string;
                     padding: string;
-                }, any>;
+                }, {
+                    Scrollbar: import('naive-ui/es/_mixins').Theme<"Scrollbar", {
+                        height: string;
+                        width: string;
+                        borderRadius: string;
+                        color: string;
+                        colorHover: string;
+                        railInsetHorizontalBottom: string;
+                        railInsetHorizontalTop: string;
+                        railInsetVerticalRight: string;
+                        railInsetVerticalLeft: string;
+                        railColor: string;
+                    }, any>;
+                }>;
             }>;
         }>>>;
         readonly builtinThemeOverrides: import('vue').PropType<import('naive-ui/es/_mixins/use-theme').ExtractThemeOverrides<import('naive-ui/es/_mixins').Theme<"DataTable", {
@@ -2283,7 +2439,20 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                             arrowOffsetVertical: string;
                             arrowHeight: string;
                             padding: string;
-                        }, any>;
+                        }, {
+                            Scrollbar: import('naive-ui/es/_mixins').Theme<"Scrollbar", {
+                                height: string;
+                                width: string;
+                                borderRadius: string;
+                                color: string;
+                                colorHover: string;
+                                railInsetHorizontalBottom: string;
+                                railInsetHorizontalTop: string;
+                                railInsetVerticalRight: string;
+                                railInsetVerticalLeft: string;
+                                railColor: string;
+                            }, any>;
+                        }>;
                     }>;
                     InternalSelectMenu: import('naive-ui/es/_mixins').Theme<"InternalSelectMenu", {
                         optionFontSizeTiny: string;
@@ -2414,7 +2583,20 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                     paddingMedium: string;
                     paddingLarge: string;
                     clearSize: string;
-                }, any>;
+                }, {
+                    Scrollbar: import('naive-ui/es/_mixins').Theme<"Scrollbar", {
+                        height: string;
+                        width: string;
+                        borderRadius: string;
+                        color: string;
+                        colorHover: string;
+                        railInsetHorizontalBottom: string;
+                        railInsetHorizontalTop: string;
+                        railInsetVerticalRight: string;
+                        railInsetVerticalLeft: string;
+                        railColor: string;
+                    }, any>;
+                }>;
                 Popselect: import('naive-ui/es/_mixins').Theme<"Popselect", {
                     menuBoxShadow: string;
                 }, {
@@ -2431,7 +2613,20 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                         arrowOffsetVertical: string;
                         arrowHeight: string;
                         padding: string;
-                    }, any>;
+                    }, {
+                        Scrollbar: import('naive-ui/es/_mixins').Theme<"Scrollbar", {
+                            height: string;
+                            width: string;
+                            borderRadius: string;
+                            color: string;
+                            colorHover: string;
+                            railInsetHorizontalBottom: string;
+                            railInsetHorizontalTop: string;
+                            railInsetVerticalRight: string;
+                            railInsetVerticalLeft: string;
+                            railColor: string;
+                        }, any>;
+                    }>;
                     InternalSelectMenu: import('naive-ui/es/_mixins').Theme<"InternalSelectMenu", {
                         optionFontSizeTiny: string;
                         optionFontSizeSmall: string;
@@ -2541,7 +2736,20 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                 arrowOffsetVertical: string;
                 arrowHeight: string;
                 padding: string;
-            }, any>;
+            }, {
+                Scrollbar: import('naive-ui/es/_mixins').Theme<"Scrollbar", {
+                    height: string;
+                    width: string;
+                    borderRadius: string;
+                    color: string;
+                    colorHover: string;
+                    railInsetHorizontalBottom: string;
+                    railInsetHorizontalTop: string;
+                    railInsetVerticalRight: string;
+                    railInsetVerticalLeft: string;
+                    railColor: string;
+                }, any>;
+            }>;
             Ellipsis: import('naive-ui/es/_mixins').Theme<"Ellipsis", unknown, {
                 Tooltip: import('naive-ui/es/_mixins').Theme<"Tooltip", {
                     borderRadius: string;
@@ -2563,7 +2771,20 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                         arrowOffsetVertical: string;
                         arrowHeight: string;
                         padding: string;
-                    }, any>;
+                    }, {
+                        Scrollbar: import('naive-ui/es/_mixins').Theme<"Scrollbar", {
+                            height: string;
+                            width: string;
+                            borderRadius: string;
+                            color: string;
+                            colorHover: string;
+                            railInsetHorizontalBottom: string;
+                            railInsetHorizontalTop: string;
+                            railInsetVerticalRight: string;
+                            railInsetVerticalLeft: string;
+                            railColor: string;
+                        }, any>;
+                    }>;
                 }>;
             }>;
             Dropdown: import('naive-ui/es/_mixins').Theme<"Dropdown", {
@@ -2634,7 +2855,20 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                     arrowOffsetVertical: string;
                     arrowHeight: string;
                     padding: string;
-                }, any>;
+                }, {
+                    Scrollbar: import('naive-ui/es/_mixins').Theme<"Scrollbar", {
+                        height: string;
+                        width: string;
+                        borderRadius: string;
+                        color: string;
+                        colorHover: string;
+                        railInsetHorizontalBottom: string;
+                        railInsetHorizontalTop: string;
+                        railInsetVerticalRight: string;
+                        railInsetVerticalLeft: string;
+                        railColor: string;
+                    }, any>;
+                }>;
             }>;
         }>>>;
     }>> & Readonly<{}>, {
@@ -3134,7 +3368,20 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                                 arrowOffsetVertical: string;
                                 arrowHeight: string;
                                 padding: string;
-                            }, any>;
+                            }, {
+                                Scrollbar: import('naive-ui/es/_mixins').Theme<"Scrollbar", {
+                                    height: string;
+                                    width: string;
+                                    borderRadius: string;
+                                    color: string;
+                                    colorHover: string;
+                                    railInsetHorizontalBottom: string;
+                                    railInsetHorizontalTop: string;
+                                    railInsetVerticalRight: string;
+                                    railInsetVerticalLeft: string;
+                                    railColor: string;
+                                }, any>;
+                            }>;
                         }>;
                         InternalSelectMenu: import('naive-ui/es/_mixins').Theme<"InternalSelectMenu", {
                             optionFontSizeTiny: string;
@@ -3265,7 +3512,20 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                         paddingMedium: string;
                         paddingLarge: string;
                         clearSize: string;
-                    }, any>;
+                    }, {
+                        Scrollbar: import('naive-ui/es/_mixins').Theme<"Scrollbar", {
+                            height: string;
+                            width: string;
+                            borderRadius: string;
+                            color: string;
+                            colorHover: string;
+                            railInsetHorizontalBottom: string;
+                            railInsetHorizontalTop: string;
+                            railInsetVerticalRight: string;
+                            railInsetVerticalLeft: string;
+                            railColor: string;
+                        }, any>;
+                    }>;
                     Popselect: import('naive-ui/es/_mixins').Theme<"Popselect", {
                         menuBoxShadow: string;
                     }, {
@@ -3282,7 +3542,20 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                             arrowOffsetVertical: string;
                             arrowHeight: string;
                             padding: string;
-                        }, any>;
+                        }, {
+                            Scrollbar: import('naive-ui/es/_mixins').Theme<"Scrollbar", {
+                                height: string;
+                                width: string;
+                                borderRadius: string;
+                                color: string;
+                                colorHover: string;
+                                railInsetHorizontalBottom: string;
+                                railInsetHorizontalTop: string;
+                                railInsetVerticalRight: string;
+                                railInsetVerticalLeft: string;
+                                railColor: string;
+                            }, any>;
+                        }>;
                         InternalSelectMenu: import('naive-ui/es/_mixins').Theme<"InternalSelectMenu", {
                             optionFontSizeTiny: string;
                             optionFontSizeSmall: string;
@@ -3392,7 +3665,20 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                     arrowOffsetVertical: string;
                     arrowHeight: string;
                     padding: string;
-                }, any>;
+                }, {
+                    Scrollbar: import('naive-ui/es/_mixins').Theme<"Scrollbar", {
+                        height: string;
+                        width: string;
+                        borderRadius: string;
+                        color: string;
+                        colorHover: string;
+                        railInsetHorizontalBottom: string;
+                        railInsetHorizontalTop: string;
+                        railInsetVerticalRight: string;
+                        railInsetVerticalLeft: string;
+                        railColor: string;
+                    }, any>;
+                }>;
                 Ellipsis: import('naive-ui/es/_mixins').Theme<"Ellipsis", unknown, {
                     Tooltip: import('naive-ui/es/_mixins').Theme<"Tooltip", {
                         borderRadius: string;
@@ -3414,7 +3700,20 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                             arrowOffsetVertical: string;
                             arrowHeight: string;
                             padding: string;
-                        }, any>;
+                        }, {
+                            Scrollbar: import('naive-ui/es/_mixins').Theme<"Scrollbar", {
+                                height: string;
+                                width: string;
+                                borderRadius: string;
+                                color: string;
+                                colorHover: string;
+                                railInsetHorizontalBottom: string;
+                                railInsetHorizontalTop: string;
+                                railInsetVerticalRight: string;
+                                railInsetVerticalLeft: string;
+                                railColor: string;
+                            }, any>;
+                        }>;
                     }>;
                 }>;
                 Dropdown: import('naive-ui/es/_mixins').Theme<"Dropdown", {
@@ -3485,7 +3784,20 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                         arrowOffsetVertical: string;
                         arrowHeight: string;
                         padding: string;
-                    }, any>;
+                    }, {
+                        Scrollbar: import('naive-ui/es/_mixins').Theme<"Scrollbar", {
+                            height: string;
+                            width: string;
+                            borderRadius: string;
+                            color: string;
+                            colorHover: string;
+                            railInsetHorizontalBottom: string;
+                            railInsetHorizontalTop: string;
+                            railInsetVerticalRight: string;
+                            railInsetVerticalLeft: string;
+                            railColor: string;
+                        }, any>;
+                    }>;
                 }>;
             };
             peerOverrides: {
@@ -3577,7 +3889,20 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                                     arrowOffsetVertical: string;
                                     arrowHeight: string;
                                     padding: string;
-                                }, any>;
+                                }, {
+                                    Scrollbar: import('naive-ui/es/_mixins').Theme<"Scrollbar", {
+                                        height: string;
+                                        width: string;
+                                        borderRadius: string;
+                                        color: string;
+                                        colorHover: string;
+                                        railInsetHorizontalBottom: string;
+                                        railInsetHorizontalTop: string;
+                                        railInsetVerticalRight: string;
+                                        railInsetVerticalLeft: string;
+                                        railColor: string;
+                                    }, any>;
+                                }>;
                             }>;
                             InternalSelectMenu: import('naive-ui/es/_mixins').Theme<"InternalSelectMenu", {
                                 optionFontSizeTiny: string;
@@ -3708,7 +4033,20 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                             paddingMedium: string;
                             paddingLarge: string;
                             clearSize: string;
-                        }, any>> | undefined;
+                        }, {
+                            Scrollbar: import('naive-ui/es/_mixins').Theme<"Scrollbar", {
+                                height: string;
+                                width: string;
+                                borderRadius: string;
+                                color: string;
+                                colorHover: string;
+                                railInsetHorizontalBottom: string;
+                                railInsetHorizontalTop: string;
+                                railInsetVerticalRight: string;
+                                railInsetVerticalLeft: string;
+                                railColor: string;
+                            }, any>;
+                        }>> | undefined;
                         Popselect?: import('naive-ui/es/_mixins/use-theme').ExtractThemeOverrides<import('naive-ui/es/_mixins').Theme<"Popselect", {
                             menuBoxShadow: string;
                         }, {
@@ -3725,7 +4063,20 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                                 arrowOffsetVertical: string;
                                 arrowHeight: string;
                                 padding: string;
-                            }, any>;
+                            }, {
+                                Scrollbar: import('naive-ui/es/_mixins').Theme<"Scrollbar", {
+                                    height: string;
+                                    width: string;
+                                    borderRadius: string;
+                                    color: string;
+                                    colorHover: string;
+                                    railInsetHorizontalBottom: string;
+                                    railInsetHorizontalTop: string;
+                                    railInsetVerticalRight: string;
+                                    railInsetVerticalLeft: string;
+                                    railColor: string;
+                                }, any>;
+                            }>;
                             InternalSelectMenu: import('naive-ui/es/_mixins').Theme<"InternalSelectMenu", {
                                 optionFontSizeTiny: string;
                                 optionFontSizeSmall: string;
@@ -3808,7 +4159,18 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                 } | undefined;
                 Popover?: {
                     peers?: {
-                        [x: string]: any;
+                        Scrollbar?: import('naive-ui/es/_mixins/use-theme').ExtractThemeOverrides<import('naive-ui/es/_mixins').Theme<"Scrollbar", {
+                            height: string;
+                            width: string;
+                            borderRadius: string;
+                            color: string;
+                            colorHover: string;
+                            railInsetHorizontalBottom: string;
+                            railInsetHorizontalTop: string;
+                            railInsetVerticalRight: string;
+                            railInsetVerticalLeft: string;
+                            railColor: string;
+                        }, any>> | undefined;
                     } | undefined;
                 } | undefined;
                 Ellipsis?: {
@@ -3833,7 +4195,20 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                                 arrowOffsetVertical: string;
                                 arrowHeight: string;
                                 padding: string;
-                            }, any>;
+                            }, {
+                                Scrollbar: import('naive-ui/es/_mixins').Theme<"Scrollbar", {
+                                    height: string;
+                                    width: string;
+                                    borderRadius: string;
+                                    color: string;
+                                    colorHover: string;
+                                    railInsetHorizontalBottom: string;
+                                    railInsetHorizontalTop: string;
+                                    railInsetVerticalRight: string;
+                                    railInsetVerticalLeft: string;
+                                    railColor: string;
+                                }, any>;
+                            }>;
                         }>> | undefined;
                     } | undefined;
                 } | undefined;
@@ -3852,7 +4227,20 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                             arrowOffsetVertical: string;
                             arrowHeight: string;
                             padding: string;
-                        }, any>> | undefined;
+                        }, {
+                            Scrollbar: import('naive-ui/es/_mixins').Theme<"Scrollbar", {
+                                height: string;
+                                width: string;
+                                borderRadius: string;
+                                color: string;
+                                colorHover: string;
+                                railInsetHorizontalBottom: string;
+                                railInsetHorizontalTop: string;
+                                railInsetVerticalRight: string;
+                                railInsetVerticalLeft: string;
+                                railColor: string;
+                            }, any>;
+                        }>> | undefined;
                     } | undefined;
                 } | undefined;
             };
@@ -3904,12 +4292,12 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
             "--n-td-color-striped": string;
             "--n-td-color-striped-modal": string;
             "--n-td-color-striped-popover": string;
-            "n-td-color-sorting": string;
-            "n-td-color-sorting-modal": string;
-            "n-td-color-sorting-popover": string;
-            "n-th-color-sorting": string;
-            "n-th-color-sorting-modal": string;
-            "n-th-color-sorting-popover": string;
+            "--n-td-color-sorting": string;
+            "--n-td-color-sorting-modal": string;
+            "--n-td-color-sorting-popover": string;
+            "--n-th-color-sorting": string;
+            "--n-th-color-sorting-modal": string;
+            "--n-th-color-sorting-popover": string;
         }> | undefined;
         themeClass: import('vue').Ref<string, string> | undefined;
         onRender: (() => void) | undefined;
@@ -3919,9 +4307,12 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
         readonly tableLayout: "fixed" | "auto";
         readonly columns: import('naive-ui/es/data-table/src/interface').TableColumns<any>;
         readonly loading: boolean;
+        readonly spinProps: import('naive-ui/es/_internal').BaseLoadingExposedProps;
         readonly bordered: boolean | undefined;
-        readonly virtualScroll: boolean;
+        readonly allowCheckingNotLoaded: boolean;
         readonly remote: boolean;
+        readonly cascade: boolean;
+        readonly virtualScroll: boolean;
         readonly pagination: false | import('naive-ui').PaginationProps;
         readonly paginateSinglePage: boolean;
         readonly bottomBordered: boolean | undefined;
@@ -3936,14 +4327,11 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
         readonly virtualScrollHeader: boolean;
         readonly headerHeight: number;
         readonly minRowHeight: number;
-        readonly allowCheckingNotLoaded: boolean;
-        readonly cascade: boolean;
         readonly childrenKey: string;
         readonly indent: number;
         readonly flexHeight: boolean;
         readonly summaryPlacement: "top" | "bottom";
         readonly paginationBehaviorOnFilter: "first" | "current";
-        readonly spinProps: import('naive-ui/es/_internal').BaseLoadingExposedProps;
     }, true, {}, import('vue').SlotsType<import('naive-ui').DataTableSlots>, import('vue').GlobalComponents, import('vue').GlobalDirectives, string, {}, any, import('vue').ComponentProvideOptions, {
         P: {};
         B: {};
@@ -3954,7 +4342,7 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
     }, Readonly<import('vue').ExtractPropTypes<{
         readonly onUnstableColumnResize: import('vue').PropType<(resizedWidth: number, limitedWidth: number, column: import('naive-ui/es/data-table/src/interface').TableBaseColumn, getColumnWidth: (key: import('naive-ui/es/data-table/src/interface').ColumnKey) => number | undefined) => void>;
         readonly pagination: {
-            readonly type: import('vue').PropType<false | import('naive-ui/es/pagination').PaginationProps>;
+            readonly type: import('vue').PropType<false | import('naive-ui').PaginationProps>;
             readonly default: false;
         };
         readonly paginateSinglePage: {
@@ -4548,7 +4936,20 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                             arrowOffsetVertical: string;
                             arrowHeight: string;
                             padding: string;
-                        }, any>;
+                        }, {
+                            Scrollbar: import('naive-ui/es/_mixins').Theme<"Scrollbar", {
+                                height: string;
+                                width: string;
+                                borderRadius: string;
+                                color: string;
+                                colorHover: string;
+                                railInsetHorizontalBottom: string;
+                                railInsetHorizontalTop: string;
+                                railInsetVerticalRight: string;
+                                railInsetVerticalLeft: string;
+                                railColor: string;
+                            }, any>;
+                        }>;
                     }>;
                     InternalSelectMenu: import('naive-ui/es/_mixins').Theme<"InternalSelectMenu", {
                         optionFontSizeTiny: string;
@@ -4679,7 +5080,20 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                     paddingMedium: string;
                     paddingLarge: string;
                     clearSize: string;
-                }, any>;
+                }, {
+                    Scrollbar: import('naive-ui/es/_mixins').Theme<"Scrollbar", {
+                        height: string;
+                        width: string;
+                        borderRadius: string;
+                        color: string;
+                        colorHover: string;
+                        railInsetHorizontalBottom: string;
+                        railInsetHorizontalTop: string;
+                        railInsetVerticalRight: string;
+                        railInsetVerticalLeft: string;
+                        railColor: string;
+                    }, any>;
+                }>;
                 Popselect: import('naive-ui/es/_mixins').Theme<"Popselect", {
                     menuBoxShadow: string;
                 }, {
@@ -4696,7 +5110,20 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                         arrowOffsetVertical: string;
                         arrowHeight: string;
                         padding: string;
-                    }, any>;
+                    }, {
+                        Scrollbar: import('naive-ui/es/_mixins').Theme<"Scrollbar", {
+                            height: string;
+                            width: string;
+                            borderRadius: string;
+                            color: string;
+                            colorHover: string;
+                            railInsetHorizontalBottom: string;
+                            railInsetHorizontalTop: string;
+                            railInsetVerticalRight: string;
+                            railInsetVerticalLeft: string;
+                            railColor: string;
+                        }, any>;
+                    }>;
                     InternalSelectMenu: import('naive-ui/es/_mixins').Theme<"InternalSelectMenu", {
                         optionFontSizeTiny: string;
                         optionFontSizeSmall: string;
@@ -4806,7 +5233,20 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                 arrowOffsetVertical: string;
                 arrowHeight: string;
                 padding: string;
-            }, any>;
+            }, {
+                Scrollbar: import('naive-ui/es/_mixins').Theme<"Scrollbar", {
+                    height: string;
+                    width: string;
+                    borderRadius: string;
+                    color: string;
+                    colorHover: string;
+                    railInsetHorizontalBottom: string;
+                    railInsetHorizontalTop: string;
+                    railInsetVerticalRight: string;
+                    railInsetVerticalLeft: string;
+                    railColor: string;
+                }, any>;
+            }>;
             Ellipsis: import('naive-ui/es/_mixins').Theme<"Ellipsis", unknown, {
                 Tooltip: import('naive-ui/es/_mixins').Theme<"Tooltip", {
                     borderRadius: string;
@@ -4828,7 +5268,20 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                         arrowOffsetVertical: string;
                         arrowHeight: string;
                         padding: string;
-                    }, any>;
+                    }, {
+                        Scrollbar: import('naive-ui/es/_mixins').Theme<"Scrollbar", {
+                            height: string;
+                            width: string;
+                            borderRadius: string;
+                            color: string;
+                            colorHover: string;
+                            railInsetHorizontalBottom: string;
+                            railInsetHorizontalTop: string;
+                            railInsetVerticalRight: string;
+                            railInsetVerticalLeft: string;
+                            railColor: string;
+                        }, any>;
+                    }>;
                 }>;
             }>;
             Dropdown: import('naive-ui/es/_mixins').Theme<"Dropdown", {
@@ -4899,7 +5352,20 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                     arrowOffsetVertical: string;
                     arrowHeight: string;
                     padding: string;
-                }, any>;
+                }, {
+                    Scrollbar: import('naive-ui/es/_mixins').Theme<"Scrollbar", {
+                        height: string;
+                        width: string;
+                        borderRadius: string;
+                        color: string;
+                        colorHover: string;
+                        railInsetHorizontalBottom: string;
+                        railInsetHorizontalTop: string;
+                        railInsetVerticalRight: string;
+                        railInsetVerticalLeft: string;
+                        railColor: string;
+                    }, any>;
+                }>;
             }>;
         }>>;
         readonly themeOverrides: import('vue').PropType<import('naive-ui/es/_mixins/use-theme').ExtractThemeOverrides<import('naive-ui/es/_mixins').Theme<"DataTable", {
@@ -5375,7 +5841,20 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                             arrowOffsetVertical: string;
                             arrowHeight: string;
                             padding: string;
-                        }, any>;
+                        }, {
+                            Scrollbar: import('naive-ui/es/_mixins').Theme<"Scrollbar", {
+                                height: string;
+                                width: string;
+                                borderRadius: string;
+                                color: string;
+                                colorHover: string;
+                                railInsetHorizontalBottom: string;
+                                railInsetHorizontalTop: string;
+                                railInsetVerticalRight: string;
+                                railInsetVerticalLeft: string;
+                                railColor: string;
+                            }, any>;
+                        }>;
                     }>;
                     InternalSelectMenu: import('naive-ui/es/_mixins').Theme<"InternalSelectMenu", {
                         optionFontSizeTiny: string;
@@ -5506,7 +5985,20 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                     paddingMedium: string;
                     paddingLarge: string;
                     clearSize: string;
-                }, any>;
+                }, {
+                    Scrollbar: import('naive-ui/es/_mixins').Theme<"Scrollbar", {
+                        height: string;
+                        width: string;
+                        borderRadius: string;
+                        color: string;
+                        colorHover: string;
+                        railInsetHorizontalBottom: string;
+                        railInsetHorizontalTop: string;
+                        railInsetVerticalRight: string;
+                        railInsetVerticalLeft: string;
+                        railColor: string;
+                    }, any>;
+                }>;
                 Popselect: import('naive-ui/es/_mixins').Theme<"Popselect", {
                     menuBoxShadow: string;
                 }, {
@@ -5523,7 +6015,20 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                         arrowOffsetVertical: string;
                         arrowHeight: string;
                         padding: string;
-                    }, any>;
+                    }, {
+                        Scrollbar: import('naive-ui/es/_mixins').Theme<"Scrollbar", {
+                            height: string;
+                            width: string;
+                            borderRadius: string;
+                            color: string;
+                            colorHover: string;
+                            railInsetHorizontalBottom: string;
+                            railInsetHorizontalTop: string;
+                            railInsetVerticalRight: string;
+                            railInsetVerticalLeft: string;
+                            railColor: string;
+                        }, any>;
+                    }>;
                     InternalSelectMenu: import('naive-ui/es/_mixins').Theme<"InternalSelectMenu", {
                         optionFontSizeTiny: string;
                         optionFontSizeSmall: string;
@@ -5633,7 +6138,20 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                 arrowOffsetVertical: string;
                 arrowHeight: string;
                 padding: string;
-            }, any>;
+            }, {
+                Scrollbar: import('naive-ui/es/_mixins').Theme<"Scrollbar", {
+                    height: string;
+                    width: string;
+                    borderRadius: string;
+                    color: string;
+                    colorHover: string;
+                    railInsetHorizontalBottom: string;
+                    railInsetHorizontalTop: string;
+                    railInsetVerticalRight: string;
+                    railInsetVerticalLeft: string;
+                    railColor: string;
+                }, any>;
+            }>;
             Ellipsis: import('naive-ui/es/_mixins').Theme<"Ellipsis", unknown, {
                 Tooltip: import('naive-ui/es/_mixins').Theme<"Tooltip", {
                     borderRadius: string;
@@ -5655,7 +6173,20 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                         arrowOffsetVertical: string;
                         arrowHeight: string;
                         padding: string;
-                    }, any>;
+                    }, {
+                        Scrollbar: import('naive-ui/es/_mixins').Theme<"Scrollbar", {
+                            height: string;
+                            width: string;
+                            borderRadius: string;
+                            color: string;
+                            colorHover: string;
+                            railInsetHorizontalBottom: string;
+                            railInsetHorizontalTop: string;
+                            railInsetVerticalRight: string;
+                            railInsetVerticalLeft: string;
+                            railColor: string;
+                        }, any>;
+                    }>;
                 }>;
             }>;
             Dropdown: import('naive-ui/es/_mixins').Theme<"Dropdown", {
@@ -5726,7 +6257,20 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                     arrowOffsetVertical: string;
                     arrowHeight: string;
                     padding: string;
-                }, any>;
+                }, {
+                    Scrollbar: import('naive-ui/es/_mixins').Theme<"Scrollbar", {
+                        height: string;
+                        width: string;
+                        borderRadius: string;
+                        color: string;
+                        colorHover: string;
+                        railInsetHorizontalBottom: string;
+                        railInsetHorizontalTop: string;
+                        railInsetVerticalRight: string;
+                        railInsetVerticalLeft: string;
+                        railColor: string;
+                    }, any>;
+                }>;
             }>;
         }>>>;
         readonly builtinThemeOverrides: import('vue').PropType<import('naive-ui/es/_mixins/use-theme').ExtractThemeOverrides<import('naive-ui/es/_mixins').Theme<"DataTable", {
@@ -6202,7 +6746,20 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                             arrowOffsetVertical: string;
                             arrowHeight: string;
                             padding: string;
-                        }, any>;
+                        }, {
+                            Scrollbar: import('naive-ui/es/_mixins').Theme<"Scrollbar", {
+                                height: string;
+                                width: string;
+                                borderRadius: string;
+                                color: string;
+                                colorHover: string;
+                                railInsetHorizontalBottom: string;
+                                railInsetHorizontalTop: string;
+                                railInsetVerticalRight: string;
+                                railInsetVerticalLeft: string;
+                                railColor: string;
+                            }, any>;
+                        }>;
                     }>;
                     InternalSelectMenu: import('naive-ui/es/_mixins').Theme<"InternalSelectMenu", {
                         optionFontSizeTiny: string;
@@ -6333,7 +6890,20 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                     paddingMedium: string;
                     paddingLarge: string;
                     clearSize: string;
-                }, any>;
+                }, {
+                    Scrollbar: import('naive-ui/es/_mixins').Theme<"Scrollbar", {
+                        height: string;
+                        width: string;
+                        borderRadius: string;
+                        color: string;
+                        colorHover: string;
+                        railInsetHorizontalBottom: string;
+                        railInsetHorizontalTop: string;
+                        railInsetVerticalRight: string;
+                        railInsetVerticalLeft: string;
+                        railColor: string;
+                    }, any>;
+                }>;
                 Popselect: import('naive-ui/es/_mixins').Theme<"Popselect", {
                     menuBoxShadow: string;
                 }, {
@@ -6350,7 +6920,20 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                         arrowOffsetVertical: string;
                         arrowHeight: string;
                         padding: string;
-                    }, any>;
+                    }, {
+                        Scrollbar: import('naive-ui/es/_mixins').Theme<"Scrollbar", {
+                            height: string;
+                            width: string;
+                            borderRadius: string;
+                            color: string;
+                            colorHover: string;
+                            railInsetHorizontalBottom: string;
+                            railInsetHorizontalTop: string;
+                            railInsetVerticalRight: string;
+                            railInsetVerticalLeft: string;
+                            railColor: string;
+                        }, any>;
+                    }>;
                     InternalSelectMenu: import('naive-ui/es/_mixins').Theme<"InternalSelectMenu", {
                         optionFontSizeTiny: string;
                         optionFontSizeSmall: string;
@@ -6460,7 +7043,20 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                 arrowOffsetVertical: string;
                 arrowHeight: string;
                 padding: string;
-            }, any>;
+            }, {
+                Scrollbar: import('naive-ui/es/_mixins').Theme<"Scrollbar", {
+                    height: string;
+                    width: string;
+                    borderRadius: string;
+                    color: string;
+                    colorHover: string;
+                    railInsetHorizontalBottom: string;
+                    railInsetHorizontalTop: string;
+                    railInsetVerticalRight: string;
+                    railInsetVerticalLeft: string;
+                    railColor: string;
+                }, any>;
+            }>;
             Ellipsis: import('naive-ui/es/_mixins').Theme<"Ellipsis", unknown, {
                 Tooltip: import('naive-ui/es/_mixins').Theme<"Tooltip", {
                     borderRadius: string;
@@ -6482,7 +7078,20 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                         arrowOffsetVertical: string;
                         arrowHeight: string;
                         padding: string;
-                    }, any>;
+                    }, {
+                        Scrollbar: import('naive-ui/es/_mixins').Theme<"Scrollbar", {
+                            height: string;
+                            width: string;
+                            borderRadius: string;
+                            color: string;
+                            colorHover: string;
+                            railInsetHorizontalBottom: string;
+                            railInsetHorizontalTop: string;
+                            railInsetVerticalRight: string;
+                            railInsetVerticalLeft: string;
+                            railColor: string;
+                        }, any>;
+                    }>;
                 }>;
             }>;
             Dropdown: import('naive-ui/es/_mixins').Theme<"Dropdown", {
@@ -6553,7 +7162,20 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                     arrowOffsetVertical: string;
                     arrowHeight: string;
                     padding: string;
-                }, any>;
+                }, {
+                    Scrollbar: import('naive-ui/es/_mixins').Theme<"Scrollbar", {
+                        height: string;
+                        width: string;
+                        borderRadius: string;
+                        color: string;
+                        colorHover: string;
+                        railInsetHorizontalBottom: string;
+                        railInsetHorizontalTop: string;
+                        railInsetVerticalRight: string;
+                        railInsetVerticalLeft: string;
+                        railColor: string;
+                    }, any>;
+                }>;
             }>;
         }>>>;
     }>> & Readonly<{}>, {
@@ -7053,7 +7675,20 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                                 arrowOffsetVertical: string;
                                 arrowHeight: string;
                                 padding: string;
-                            }, any>;
+                            }, {
+                                Scrollbar: import('naive-ui/es/_mixins').Theme<"Scrollbar", {
+                                    height: string;
+                                    width: string;
+                                    borderRadius: string;
+                                    color: string;
+                                    colorHover: string;
+                                    railInsetHorizontalBottom: string;
+                                    railInsetHorizontalTop: string;
+                                    railInsetVerticalRight: string;
+                                    railInsetVerticalLeft: string;
+                                    railColor: string;
+                                }, any>;
+                            }>;
                         }>;
                         InternalSelectMenu: import('naive-ui/es/_mixins').Theme<"InternalSelectMenu", {
                             optionFontSizeTiny: string;
@@ -7184,7 +7819,20 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                         paddingMedium: string;
                         paddingLarge: string;
                         clearSize: string;
-                    }, any>;
+                    }, {
+                        Scrollbar: import('naive-ui/es/_mixins').Theme<"Scrollbar", {
+                            height: string;
+                            width: string;
+                            borderRadius: string;
+                            color: string;
+                            colorHover: string;
+                            railInsetHorizontalBottom: string;
+                            railInsetHorizontalTop: string;
+                            railInsetVerticalRight: string;
+                            railInsetVerticalLeft: string;
+                            railColor: string;
+                        }, any>;
+                    }>;
                     Popselect: import('naive-ui/es/_mixins').Theme<"Popselect", {
                         menuBoxShadow: string;
                     }, {
@@ -7201,7 +7849,20 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                             arrowOffsetVertical: string;
                             arrowHeight: string;
                             padding: string;
-                        }, any>;
+                        }, {
+                            Scrollbar: import('naive-ui/es/_mixins').Theme<"Scrollbar", {
+                                height: string;
+                                width: string;
+                                borderRadius: string;
+                                color: string;
+                                colorHover: string;
+                                railInsetHorizontalBottom: string;
+                                railInsetHorizontalTop: string;
+                                railInsetVerticalRight: string;
+                                railInsetVerticalLeft: string;
+                                railColor: string;
+                            }, any>;
+                        }>;
                         InternalSelectMenu: import('naive-ui/es/_mixins').Theme<"InternalSelectMenu", {
                             optionFontSizeTiny: string;
                             optionFontSizeSmall: string;
@@ -7311,7 +7972,20 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                     arrowOffsetVertical: string;
                     arrowHeight: string;
                     padding: string;
-                }, any>;
+                }, {
+                    Scrollbar: import('naive-ui/es/_mixins').Theme<"Scrollbar", {
+                        height: string;
+                        width: string;
+                        borderRadius: string;
+                        color: string;
+                        colorHover: string;
+                        railInsetHorizontalBottom: string;
+                        railInsetHorizontalTop: string;
+                        railInsetVerticalRight: string;
+                        railInsetVerticalLeft: string;
+                        railColor: string;
+                    }, any>;
+                }>;
                 Ellipsis: import('naive-ui/es/_mixins').Theme<"Ellipsis", unknown, {
                     Tooltip: import('naive-ui/es/_mixins').Theme<"Tooltip", {
                         borderRadius: string;
@@ -7333,7 +8007,20 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                             arrowOffsetVertical: string;
                             arrowHeight: string;
                             padding: string;
-                        }, any>;
+                        }, {
+                            Scrollbar: import('naive-ui/es/_mixins').Theme<"Scrollbar", {
+                                height: string;
+                                width: string;
+                                borderRadius: string;
+                                color: string;
+                                colorHover: string;
+                                railInsetHorizontalBottom: string;
+                                railInsetHorizontalTop: string;
+                                railInsetVerticalRight: string;
+                                railInsetVerticalLeft: string;
+                                railColor: string;
+                            }, any>;
+                        }>;
                     }>;
                 }>;
                 Dropdown: import('naive-ui/es/_mixins').Theme<"Dropdown", {
@@ -7404,7 +8091,20 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                         arrowOffsetVertical: string;
                         arrowHeight: string;
                         padding: string;
-                    }, any>;
+                    }, {
+                        Scrollbar: import('naive-ui/es/_mixins').Theme<"Scrollbar", {
+                            height: string;
+                            width: string;
+                            borderRadius: string;
+                            color: string;
+                            colorHover: string;
+                            railInsetHorizontalBottom: string;
+                            railInsetHorizontalTop: string;
+                            railInsetVerticalRight: string;
+                            railInsetVerticalLeft: string;
+                            railColor: string;
+                        }, any>;
+                    }>;
                 }>;
             };
             peerOverrides: {
@@ -7496,7 +8196,20 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                                     arrowOffsetVertical: string;
                                     arrowHeight: string;
                                     padding: string;
-                                }, any>;
+                                }, {
+                                    Scrollbar: import('naive-ui/es/_mixins').Theme<"Scrollbar", {
+                                        height: string;
+                                        width: string;
+                                        borderRadius: string;
+                                        color: string;
+                                        colorHover: string;
+                                        railInsetHorizontalBottom: string;
+                                        railInsetHorizontalTop: string;
+                                        railInsetVerticalRight: string;
+                                        railInsetVerticalLeft: string;
+                                        railColor: string;
+                                    }, any>;
+                                }>;
                             }>;
                             InternalSelectMenu: import('naive-ui/es/_mixins').Theme<"InternalSelectMenu", {
                                 optionFontSizeTiny: string;
@@ -7627,7 +8340,20 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                             paddingMedium: string;
                             paddingLarge: string;
                             clearSize: string;
-                        }, any>> | undefined;
+                        }, {
+                            Scrollbar: import('naive-ui/es/_mixins').Theme<"Scrollbar", {
+                                height: string;
+                                width: string;
+                                borderRadius: string;
+                                color: string;
+                                colorHover: string;
+                                railInsetHorizontalBottom: string;
+                                railInsetHorizontalTop: string;
+                                railInsetVerticalRight: string;
+                                railInsetVerticalLeft: string;
+                                railColor: string;
+                            }, any>;
+                        }>> | undefined;
                         Popselect?: import('naive-ui/es/_mixins/use-theme').ExtractThemeOverrides<import('naive-ui/es/_mixins').Theme<"Popselect", {
                             menuBoxShadow: string;
                         }, {
@@ -7644,7 +8370,20 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                                 arrowOffsetVertical: string;
                                 arrowHeight: string;
                                 padding: string;
-                            }, any>;
+                            }, {
+                                Scrollbar: import('naive-ui/es/_mixins').Theme<"Scrollbar", {
+                                    height: string;
+                                    width: string;
+                                    borderRadius: string;
+                                    color: string;
+                                    colorHover: string;
+                                    railInsetHorizontalBottom: string;
+                                    railInsetHorizontalTop: string;
+                                    railInsetVerticalRight: string;
+                                    railInsetVerticalLeft: string;
+                                    railColor: string;
+                                }, any>;
+                            }>;
                             InternalSelectMenu: import('naive-ui/es/_mixins').Theme<"InternalSelectMenu", {
                                 optionFontSizeTiny: string;
                                 optionFontSizeSmall: string;
@@ -7727,7 +8466,18 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                 } | undefined;
                 Popover?: {
                     peers?: {
-                        [x: string]: any;
+                        Scrollbar?: import('naive-ui/es/_mixins/use-theme').ExtractThemeOverrides<import('naive-ui/es/_mixins').Theme<"Scrollbar", {
+                            height: string;
+                            width: string;
+                            borderRadius: string;
+                            color: string;
+                            colorHover: string;
+                            railInsetHorizontalBottom: string;
+                            railInsetHorizontalTop: string;
+                            railInsetVerticalRight: string;
+                            railInsetVerticalLeft: string;
+                            railColor: string;
+                        }, any>> | undefined;
                     } | undefined;
                 } | undefined;
                 Ellipsis?: {
@@ -7752,7 +8502,20 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                                 arrowOffsetVertical: string;
                                 arrowHeight: string;
                                 padding: string;
-                            }, any>;
+                            }, {
+                                Scrollbar: import('naive-ui/es/_mixins').Theme<"Scrollbar", {
+                                    height: string;
+                                    width: string;
+                                    borderRadius: string;
+                                    color: string;
+                                    colorHover: string;
+                                    railInsetHorizontalBottom: string;
+                                    railInsetHorizontalTop: string;
+                                    railInsetVerticalRight: string;
+                                    railInsetVerticalLeft: string;
+                                    railColor: string;
+                                }, any>;
+                            }>;
                         }>> | undefined;
                     } | undefined;
                 } | undefined;
@@ -7771,7 +8534,20 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                             arrowOffsetVertical: string;
                             arrowHeight: string;
                             padding: string;
-                        }, any>> | undefined;
+                        }, {
+                            Scrollbar: import('naive-ui/es/_mixins').Theme<"Scrollbar", {
+                                height: string;
+                                width: string;
+                                borderRadius: string;
+                                color: string;
+                                colorHover: string;
+                                railInsetHorizontalBottom: string;
+                                railInsetHorizontalTop: string;
+                                railInsetVerticalRight: string;
+                                railInsetVerticalLeft: string;
+                                railColor: string;
+                            }, any>;
+                        }>> | undefined;
                     } | undefined;
                 } | undefined;
             };
@@ -7823,12 +8599,12 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
             "--n-td-color-striped": string;
             "--n-td-color-striped-modal": string;
             "--n-td-color-striped-popover": string;
-            "n-td-color-sorting": string;
-            "n-td-color-sorting-modal": string;
-            "n-td-color-sorting-popover": string;
-            "n-th-color-sorting": string;
-            "n-th-color-sorting-modal": string;
-            "n-th-color-sorting-popover": string;
+            "--n-td-color-sorting": string;
+            "--n-td-color-sorting-modal": string;
+            "--n-td-color-sorting-popover": string;
+            "--n-th-color-sorting": string;
+            "--n-th-color-sorting-modal": string;
+            "--n-th-color-sorting-popover": string;
         }> | undefined;
         themeClass: import('vue').Ref<string, string> | undefined;
         onRender: (() => void) | undefined;
@@ -7838,9 +8614,12 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
         readonly tableLayout: "fixed" | "auto";
         readonly columns: import('naive-ui/es/data-table/src/interface').TableColumns<any>;
         readonly loading: boolean;
+        readonly spinProps: import('naive-ui/es/_internal').BaseLoadingExposedProps;
         readonly bordered: boolean | undefined;
-        readonly virtualScroll: boolean;
+        readonly allowCheckingNotLoaded: boolean;
         readonly remote: boolean;
+        readonly cascade: boolean;
+        readonly virtualScroll: boolean;
         readonly pagination: false | import('naive-ui').PaginationProps;
         readonly paginateSinglePage: boolean;
         readonly bottomBordered: boolean | undefined;
@@ -7855,14 +8634,11 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
         readonly virtualScrollHeader: boolean;
         readonly headerHeight: number;
         readonly minRowHeight: number;
-        readonly allowCheckingNotLoaded: boolean;
-        readonly cascade: boolean;
         readonly childrenKey: string;
         readonly indent: number;
         readonly flexHeight: boolean;
         readonly summaryPlacement: "top" | "bottom";
         readonly paginationBehaviorOnFilter: "first" | "current";
-        readonly spinProps: import('naive-ui/es/_internal').BaseLoadingExposedProps;
     }> | null;
 }, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {} & {
     sort: (state: DataTableSortState) => any;
@@ -7898,6 +8674,7 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
         sorter?: boolean | "default" | import('naive-ui/es/data-table/src/interface').Sorter<RowData> | undefined;
         defaultSortOrder?: import('naive-ui').DataTableSortOrder;
         sortOrder?: import('naive-ui').DataTableSortOrder;
+        customNextSortOrder?: (order: import('naive-ui').DataTableSortOrder) => import('naive-ui').DataTableSortOrder;
         resizable?: boolean;
         minWidth?: string | number;
         maxWidth?: string | number;
@@ -7926,7 +8703,7 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
     dataTableRef: import('vue').CreateComponentPublicInstanceWithMixins<Readonly<import('vue').ExtractPropTypes<{
         readonly onUnstableColumnResize: import('vue').PropType<(resizedWidth: number, limitedWidth: number, column: import('naive-ui/es/data-table/src/interface').TableBaseColumn, getColumnWidth: (key: import('naive-ui/es/data-table/src/interface').ColumnKey) => number | undefined) => void>;
         readonly pagination: {
-            readonly type: import('vue').PropType<false | import('naive-ui/es/pagination').PaginationProps>;
+            readonly type: import('vue').PropType<false | import('naive-ui').PaginationProps>;
             readonly default: false;
         };
         readonly paginateSinglePage: {
@@ -8520,7 +9297,20 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                             arrowOffsetVertical: string;
                             arrowHeight: string;
                             padding: string;
-                        }, any>;
+                        }, {
+                            Scrollbar: import('naive-ui/es/_mixins').Theme<"Scrollbar", {
+                                height: string;
+                                width: string;
+                                borderRadius: string;
+                                color: string;
+                                colorHover: string;
+                                railInsetHorizontalBottom: string;
+                                railInsetHorizontalTop: string;
+                                railInsetVerticalRight: string;
+                                railInsetVerticalLeft: string;
+                                railColor: string;
+                            }, any>;
+                        }>;
                     }>;
                     InternalSelectMenu: import('naive-ui/es/_mixins').Theme<"InternalSelectMenu", {
                         optionFontSizeTiny: string;
@@ -8651,7 +9441,20 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                     paddingMedium: string;
                     paddingLarge: string;
                     clearSize: string;
-                }, any>;
+                }, {
+                    Scrollbar: import('naive-ui/es/_mixins').Theme<"Scrollbar", {
+                        height: string;
+                        width: string;
+                        borderRadius: string;
+                        color: string;
+                        colorHover: string;
+                        railInsetHorizontalBottom: string;
+                        railInsetHorizontalTop: string;
+                        railInsetVerticalRight: string;
+                        railInsetVerticalLeft: string;
+                        railColor: string;
+                    }, any>;
+                }>;
                 Popselect: import('naive-ui/es/_mixins').Theme<"Popselect", {
                     menuBoxShadow: string;
                 }, {
@@ -8668,7 +9471,20 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                         arrowOffsetVertical: string;
                         arrowHeight: string;
                         padding: string;
-                    }, any>;
+                    }, {
+                        Scrollbar: import('naive-ui/es/_mixins').Theme<"Scrollbar", {
+                            height: string;
+                            width: string;
+                            borderRadius: string;
+                            color: string;
+                            colorHover: string;
+                            railInsetHorizontalBottom: string;
+                            railInsetHorizontalTop: string;
+                            railInsetVerticalRight: string;
+                            railInsetVerticalLeft: string;
+                            railColor: string;
+                        }, any>;
+                    }>;
                     InternalSelectMenu: import('naive-ui/es/_mixins').Theme<"InternalSelectMenu", {
                         optionFontSizeTiny: string;
                         optionFontSizeSmall: string;
@@ -8778,7 +9594,20 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                 arrowOffsetVertical: string;
                 arrowHeight: string;
                 padding: string;
-            }, any>;
+            }, {
+                Scrollbar: import('naive-ui/es/_mixins').Theme<"Scrollbar", {
+                    height: string;
+                    width: string;
+                    borderRadius: string;
+                    color: string;
+                    colorHover: string;
+                    railInsetHorizontalBottom: string;
+                    railInsetHorizontalTop: string;
+                    railInsetVerticalRight: string;
+                    railInsetVerticalLeft: string;
+                    railColor: string;
+                }, any>;
+            }>;
             Ellipsis: import('naive-ui/es/_mixins').Theme<"Ellipsis", unknown, {
                 Tooltip: import('naive-ui/es/_mixins').Theme<"Tooltip", {
                     borderRadius: string;
@@ -8800,7 +9629,20 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                         arrowOffsetVertical: string;
                         arrowHeight: string;
                         padding: string;
-                    }, any>;
+                    }, {
+                        Scrollbar: import('naive-ui/es/_mixins').Theme<"Scrollbar", {
+                            height: string;
+                            width: string;
+                            borderRadius: string;
+                            color: string;
+                            colorHover: string;
+                            railInsetHorizontalBottom: string;
+                            railInsetHorizontalTop: string;
+                            railInsetVerticalRight: string;
+                            railInsetVerticalLeft: string;
+                            railColor: string;
+                        }, any>;
+                    }>;
                 }>;
             }>;
             Dropdown: import('naive-ui/es/_mixins').Theme<"Dropdown", {
@@ -8871,7 +9713,20 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                     arrowOffsetVertical: string;
                     arrowHeight: string;
                     padding: string;
-                }, any>;
+                }, {
+                    Scrollbar: import('naive-ui/es/_mixins').Theme<"Scrollbar", {
+                        height: string;
+                        width: string;
+                        borderRadius: string;
+                        color: string;
+                        colorHover: string;
+                        railInsetHorizontalBottom: string;
+                        railInsetHorizontalTop: string;
+                        railInsetVerticalRight: string;
+                        railInsetVerticalLeft: string;
+                        railColor: string;
+                    }, any>;
+                }>;
             }>;
         }>>;
         readonly themeOverrides: import('vue').PropType<import('naive-ui/es/_mixins/use-theme').ExtractThemeOverrides<import('naive-ui/es/_mixins').Theme<"DataTable", {
@@ -9347,7 +10202,20 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                             arrowOffsetVertical: string;
                             arrowHeight: string;
                             padding: string;
-                        }, any>;
+                        }, {
+                            Scrollbar: import('naive-ui/es/_mixins').Theme<"Scrollbar", {
+                                height: string;
+                                width: string;
+                                borderRadius: string;
+                                color: string;
+                                colorHover: string;
+                                railInsetHorizontalBottom: string;
+                                railInsetHorizontalTop: string;
+                                railInsetVerticalRight: string;
+                                railInsetVerticalLeft: string;
+                                railColor: string;
+                            }, any>;
+                        }>;
                     }>;
                     InternalSelectMenu: import('naive-ui/es/_mixins').Theme<"InternalSelectMenu", {
                         optionFontSizeTiny: string;
@@ -9478,7 +10346,20 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                     paddingMedium: string;
                     paddingLarge: string;
                     clearSize: string;
-                }, any>;
+                }, {
+                    Scrollbar: import('naive-ui/es/_mixins').Theme<"Scrollbar", {
+                        height: string;
+                        width: string;
+                        borderRadius: string;
+                        color: string;
+                        colorHover: string;
+                        railInsetHorizontalBottom: string;
+                        railInsetHorizontalTop: string;
+                        railInsetVerticalRight: string;
+                        railInsetVerticalLeft: string;
+                        railColor: string;
+                    }, any>;
+                }>;
                 Popselect: import('naive-ui/es/_mixins').Theme<"Popselect", {
                     menuBoxShadow: string;
                 }, {
@@ -9495,7 +10376,20 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                         arrowOffsetVertical: string;
                         arrowHeight: string;
                         padding: string;
-                    }, any>;
+                    }, {
+                        Scrollbar: import('naive-ui/es/_mixins').Theme<"Scrollbar", {
+                            height: string;
+                            width: string;
+                            borderRadius: string;
+                            color: string;
+                            colorHover: string;
+                            railInsetHorizontalBottom: string;
+                            railInsetHorizontalTop: string;
+                            railInsetVerticalRight: string;
+                            railInsetVerticalLeft: string;
+                            railColor: string;
+                        }, any>;
+                    }>;
                     InternalSelectMenu: import('naive-ui/es/_mixins').Theme<"InternalSelectMenu", {
                         optionFontSizeTiny: string;
                         optionFontSizeSmall: string;
@@ -9605,7 +10499,20 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                 arrowOffsetVertical: string;
                 arrowHeight: string;
                 padding: string;
-            }, any>;
+            }, {
+                Scrollbar: import('naive-ui/es/_mixins').Theme<"Scrollbar", {
+                    height: string;
+                    width: string;
+                    borderRadius: string;
+                    color: string;
+                    colorHover: string;
+                    railInsetHorizontalBottom: string;
+                    railInsetHorizontalTop: string;
+                    railInsetVerticalRight: string;
+                    railInsetVerticalLeft: string;
+                    railColor: string;
+                }, any>;
+            }>;
             Ellipsis: import('naive-ui/es/_mixins').Theme<"Ellipsis", unknown, {
                 Tooltip: import('naive-ui/es/_mixins').Theme<"Tooltip", {
                     borderRadius: string;
@@ -9627,7 +10534,20 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                         arrowOffsetVertical: string;
                         arrowHeight: string;
                         padding: string;
-                    }, any>;
+                    }, {
+                        Scrollbar: import('naive-ui/es/_mixins').Theme<"Scrollbar", {
+                            height: string;
+                            width: string;
+                            borderRadius: string;
+                            color: string;
+                            colorHover: string;
+                            railInsetHorizontalBottom: string;
+                            railInsetHorizontalTop: string;
+                            railInsetVerticalRight: string;
+                            railInsetVerticalLeft: string;
+                            railColor: string;
+                        }, any>;
+                    }>;
                 }>;
             }>;
             Dropdown: import('naive-ui/es/_mixins').Theme<"Dropdown", {
@@ -9698,7 +10618,20 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                     arrowOffsetVertical: string;
                     arrowHeight: string;
                     padding: string;
-                }, any>;
+                }, {
+                    Scrollbar: import('naive-ui/es/_mixins').Theme<"Scrollbar", {
+                        height: string;
+                        width: string;
+                        borderRadius: string;
+                        color: string;
+                        colorHover: string;
+                        railInsetHorizontalBottom: string;
+                        railInsetHorizontalTop: string;
+                        railInsetVerticalRight: string;
+                        railInsetVerticalLeft: string;
+                        railColor: string;
+                    }, any>;
+                }>;
             }>;
         }>>>;
         readonly builtinThemeOverrides: import('vue').PropType<import('naive-ui/es/_mixins/use-theme').ExtractThemeOverrides<import('naive-ui/es/_mixins').Theme<"DataTable", {
@@ -10174,7 +11107,20 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                             arrowOffsetVertical: string;
                             arrowHeight: string;
                             padding: string;
-                        }, any>;
+                        }, {
+                            Scrollbar: import('naive-ui/es/_mixins').Theme<"Scrollbar", {
+                                height: string;
+                                width: string;
+                                borderRadius: string;
+                                color: string;
+                                colorHover: string;
+                                railInsetHorizontalBottom: string;
+                                railInsetHorizontalTop: string;
+                                railInsetVerticalRight: string;
+                                railInsetVerticalLeft: string;
+                                railColor: string;
+                            }, any>;
+                        }>;
                     }>;
                     InternalSelectMenu: import('naive-ui/es/_mixins').Theme<"InternalSelectMenu", {
                         optionFontSizeTiny: string;
@@ -10305,7 +11251,20 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                     paddingMedium: string;
                     paddingLarge: string;
                     clearSize: string;
-                }, any>;
+                }, {
+                    Scrollbar: import('naive-ui/es/_mixins').Theme<"Scrollbar", {
+                        height: string;
+                        width: string;
+                        borderRadius: string;
+                        color: string;
+                        colorHover: string;
+                        railInsetHorizontalBottom: string;
+                        railInsetHorizontalTop: string;
+                        railInsetVerticalRight: string;
+                        railInsetVerticalLeft: string;
+                        railColor: string;
+                    }, any>;
+                }>;
                 Popselect: import('naive-ui/es/_mixins').Theme<"Popselect", {
                     menuBoxShadow: string;
                 }, {
@@ -10322,7 +11281,20 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                         arrowOffsetVertical: string;
                         arrowHeight: string;
                         padding: string;
-                    }, any>;
+                    }, {
+                        Scrollbar: import('naive-ui/es/_mixins').Theme<"Scrollbar", {
+                            height: string;
+                            width: string;
+                            borderRadius: string;
+                            color: string;
+                            colorHover: string;
+                            railInsetHorizontalBottom: string;
+                            railInsetHorizontalTop: string;
+                            railInsetVerticalRight: string;
+                            railInsetVerticalLeft: string;
+                            railColor: string;
+                        }, any>;
+                    }>;
                     InternalSelectMenu: import('naive-ui/es/_mixins').Theme<"InternalSelectMenu", {
                         optionFontSizeTiny: string;
                         optionFontSizeSmall: string;
@@ -10432,7 +11404,20 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                 arrowOffsetVertical: string;
                 arrowHeight: string;
                 padding: string;
-            }, any>;
+            }, {
+                Scrollbar: import('naive-ui/es/_mixins').Theme<"Scrollbar", {
+                    height: string;
+                    width: string;
+                    borderRadius: string;
+                    color: string;
+                    colorHover: string;
+                    railInsetHorizontalBottom: string;
+                    railInsetHorizontalTop: string;
+                    railInsetVerticalRight: string;
+                    railInsetVerticalLeft: string;
+                    railColor: string;
+                }, any>;
+            }>;
             Ellipsis: import('naive-ui/es/_mixins').Theme<"Ellipsis", unknown, {
                 Tooltip: import('naive-ui/es/_mixins').Theme<"Tooltip", {
                     borderRadius: string;
@@ -10454,7 +11439,20 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                         arrowOffsetVertical: string;
                         arrowHeight: string;
                         padding: string;
-                    }, any>;
+                    }, {
+                        Scrollbar: import('naive-ui/es/_mixins').Theme<"Scrollbar", {
+                            height: string;
+                            width: string;
+                            borderRadius: string;
+                            color: string;
+                            colorHover: string;
+                            railInsetHorizontalBottom: string;
+                            railInsetHorizontalTop: string;
+                            railInsetVerticalRight: string;
+                            railInsetVerticalLeft: string;
+                            railColor: string;
+                        }, any>;
+                    }>;
                 }>;
             }>;
             Dropdown: import('naive-ui/es/_mixins').Theme<"Dropdown", {
@@ -10525,7 +11523,20 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                     arrowOffsetVertical: string;
                     arrowHeight: string;
                     padding: string;
-                }, any>;
+                }, {
+                    Scrollbar: import('naive-ui/es/_mixins').Theme<"Scrollbar", {
+                        height: string;
+                        width: string;
+                        borderRadius: string;
+                        color: string;
+                        colorHover: string;
+                        railInsetHorizontalBottom: string;
+                        railInsetHorizontalTop: string;
+                        railInsetVerticalRight: string;
+                        railInsetVerticalLeft: string;
+                        railColor: string;
+                    }, any>;
+                }>;
             }>;
         }>>>;
     }>> & Readonly<{}>, {
@@ -11025,7 +12036,20 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                                 arrowOffsetVertical: string;
                                 arrowHeight: string;
                                 padding: string;
-                            }, any>;
+                            }, {
+                                Scrollbar: import('naive-ui/es/_mixins').Theme<"Scrollbar", {
+                                    height: string;
+                                    width: string;
+                                    borderRadius: string;
+                                    color: string;
+                                    colorHover: string;
+                                    railInsetHorizontalBottom: string;
+                                    railInsetHorizontalTop: string;
+                                    railInsetVerticalRight: string;
+                                    railInsetVerticalLeft: string;
+                                    railColor: string;
+                                }, any>;
+                            }>;
                         }>;
                         InternalSelectMenu: import('naive-ui/es/_mixins').Theme<"InternalSelectMenu", {
                             optionFontSizeTiny: string;
@@ -11156,7 +12180,20 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                         paddingMedium: string;
                         paddingLarge: string;
                         clearSize: string;
-                    }, any>;
+                    }, {
+                        Scrollbar: import('naive-ui/es/_mixins').Theme<"Scrollbar", {
+                            height: string;
+                            width: string;
+                            borderRadius: string;
+                            color: string;
+                            colorHover: string;
+                            railInsetHorizontalBottom: string;
+                            railInsetHorizontalTop: string;
+                            railInsetVerticalRight: string;
+                            railInsetVerticalLeft: string;
+                            railColor: string;
+                        }, any>;
+                    }>;
                     Popselect: import('naive-ui/es/_mixins').Theme<"Popselect", {
                         menuBoxShadow: string;
                     }, {
@@ -11173,7 +12210,20 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                             arrowOffsetVertical: string;
                             arrowHeight: string;
                             padding: string;
-                        }, any>;
+                        }, {
+                            Scrollbar: import('naive-ui/es/_mixins').Theme<"Scrollbar", {
+                                height: string;
+                                width: string;
+                                borderRadius: string;
+                                color: string;
+                                colorHover: string;
+                                railInsetHorizontalBottom: string;
+                                railInsetHorizontalTop: string;
+                                railInsetVerticalRight: string;
+                                railInsetVerticalLeft: string;
+                                railColor: string;
+                            }, any>;
+                        }>;
                         InternalSelectMenu: import('naive-ui/es/_mixins').Theme<"InternalSelectMenu", {
                             optionFontSizeTiny: string;
                             optionFontSizeSmall: string;
@@ -11283,7 +12333,20 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                     arrowOffsetVertical: string;
                     arrowHeight: string;
                     padding: string;
-                }, any>;
+                }, {
+                    Scrollbar: import('naive-ui/es/_mixins').Theme<"Scrollbar", {
+                        height: string;
+                        width: string;
+                        borderRadius: string;
+                        color: string;
+                        colorHover: string;
+                        railInsetHorizontalBottom: string;
+                        railInsetHorizontalTop: string;
+                        railInsetVerticalRight: string;
+                        railInsetVerticalLeft: string;
+                        railColor: string;
+                    }, any>;
+                }>;
                 Ellipsis: import('naive-ui/es/_mixins').Theme<"Ellipsis", unknown, {
                     Tooltip: import('naive-ui/es/_mixins').Theme<"Tooltip", {
                         borderRadius: string;
@@ -11305,7 +12368,20 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                             arrowOffsetVertical: string;
                             arrowHeight: string;
                             padding: string;
-                        }, any>;
+                        }, {
+                            Scrollbar: import('naive-ui/es/_mixins').Theme<"Scrollbar", {
+                                height: string;
+                                width: string;
+                                borderRadius: string;
+                                color: string;
+                                colorHover: string;
+                                railInsetHorizontalBottom: string;
+                                railInsetHorizontalTop: string;
+                                railInsetVerticalRight: string;
+                                railInsetVerticalLeft: string;
+                                railColor: string;
+                            }, any>;
+                        }>;
                     }>;
                 }>;
                 Dropdown: import('naive-ui/es/_mixins').Theme<"Dropdown", {
@@ -11376,7 +12452,20 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                         arrowOffsetVertical: string;
                         arrowHeight: string;
                         padding: string;
-                    }, any>;
+                    }, {
+                        Scrollbar: import('naive-ui/es/_mixins').Theme<"Scrollbar", {
+                            height: string;
+                            width: string;
+                            borderRadius: string;
+                            color: string;
+                            colorHover: string;
+                            railInsetHorizontalBottom: string;
+                            railInsetHorizontalTop: string;
+                            railInsetVerticalRight: string;
+                            railInsetVerticalLeft: string;
+                            railColor: string;
+                        }, any>;
+                    }>;
                 }>;
             };
             peerOverrides: {
@@ -11468,7 +12557,20 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                                     arrowOffsetVertical: string;
                                     arrowHeight: string;
                                     padding: string;
-                                }, any>;
+                                }, {
+                                    Scrollbar: import('naive-ui/es/_mixins').Theme<"Scrollbar", {
+                                        height: string;
+                                        width: string;
+                                        borderRadius: string;
+                                        color: string;
+                                        colorHover: string;
+                                        railInsetHorizontalBottom: string;
+                                        railInsetHorizontalTop: string;
+                                        railInsetVerticalRight: string;
+                                        railInsetVerticalLeft: string;
+                                        railColor: string;
+                                    }, any>;
+                                }>;
                             }>;
                             InternalSelectMenu: import('naive-ui/es/_mixins').Theme<"InternalSelectMenu", {
                                 optionFontSizeTiny: string;
@@ -11599,7 +12701,20 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                             paddingMedium: string;
                             paddingLarge: string;
                             clearSize: string;
-                        }, any>> | undefined;
+                        }, {
+                            Scrollbar: import('naive-ui/es/_mixins').Theme<"Scrollbar", {
+                                height: string;
+                                width: string;
+                                borderRadius: string;
+                                color: string;
+                                colorHover: string;
+                                railInsetHorizontalBottom: string;
+                                railInsetHorizontalTop: string;
+                                railInsetVerticalRight: string;
+                                railInsetVerticalLeft: string;
+                                railColor: string;
+                            }, any>;
+                        }>> | undefined;
                         Popselect?: import('naive-ui/es/_mixins/use-theme').ExtractThemeOverrides<import('naive-ui/es/_mixins').Theme<"Popselect", {
                             menuBoxShadow: string;
                         }, {
@@ -11616,7 +12731,20 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                                 arrowOffsetVertical: string;
                                 arrowHeight: string;
                                 padding: string;
-                            }, any>;
+                            }, {
+                                Scrollbar: import('naive-ui/es/_mixins').Theme<"Scrollbar", {
+                                    height: string;
+                                    width: string;
+                                    borderRadius: string;
+                                    color: string;
+                                    colorHover: string;
+                                    railInsetHorizontalBottom: string;
+                                    railInsetHorizontalTop: string;
+                                    railInsetVerticalRight: string;
+                                    railInsetVerticalLeft: string;
+                                    railColor: string;
+                                }, any>;
+                            }>;
                             InternalSelectMenu: import('naive-ui/es/_mixins').Theme<"InternalSelectMenu", {
                                 optionFontSizeTiny: string;
                                 optionFontSizeSmall: string;
@@ -11699,7 +12827,18 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                 } | undefined;
                 Popover?: {
                     peers?: {
-                        [x: string]: any;
+                        Scrollbar?: import('naive-ui/es/_mixins/use-theme').ExtractThemeOverrides<import('naive-ui/es/_mixins').Theme<"Scrollbar", {
+                            height: string;
+                            width: string;
+                            borderRadius: string;
+                            color: string;
+                            colorHover: string;
+                            railInsetHorizontalBottom: string;
+                            railInsetHorizontalTop: string;
+                            railInsetVerticalRight: string;
+                            railInsetVerticalLeft: string;
+                            railColor: string;
+                        }, any>> | undefined;
                     } | undefined;
                 } | undefined;
                 Ellipsis?: {
@@ -11724,7 +12863,20 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                                 arrowOffsetVertical: string;
                                 arrowHeight: string;
                                 padding: string;
-                            }, any>;
+                            }, {
+                                Scrollbar: import('naive-ui/es/_mixins').Theme<"Scrollbar", {
+                                    height: string;
+                                    width: string;
+                                    borderRadius: string;
+                                    color: string;
+                                    colorHover: string;
+                                    railInsetHorizontalBottom: string;
+                                    railInsetHorizontalTop: string;
+                                    railInsetVerticalRight: string;
+                                    railInsetVerticalLeft: string;
+                                    railColor: string;
+                                }, any>;
+                            }>;
                         }>> | undefined;
                     } | undefined;
                 } | undefined;
@@ -11743,7 +12895,20 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                             arrowOffsetVertical: string;
                             arrowHeight: string;
                             padding: string;
-                        }, any>> | undefined;
+                        }, {
+                            Scrollbar: import('naive-ui/es/_mixins').Theme<"Scrollbar", {
+                                height: string;
+                                width: string;
+                                borderRadius: string;
+                                color: string;
+                                colorHover: string;
+                                railInsetHorizontalBottom: string;
+                                railInsetHorizontalTop: string;
+                                railInsetVerticalRight: string;
+                                railInsetVerticalLeft: string;
+                                railColor: string;
+                            }, any>;
+                        }>> | undefined;
                     } | undefined;
                 } | undefined;
             };
@@ -11795,12 +12960,12 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
             "--n-td-color-striped": string;
             "--n-td-color-striped-modal": string;
             "--n-td-color-striped-popover": string;
-            "n-td-color-sorting": string;
-            "n-td-color-sorting-modal": string;
-            "n-td-color-sorting-popover": string;
-            "n-th-color-sorting": string;
-            "n-th-color-sorting-modal": string;
-            "n-th-color-sorting-popover": string;
+            "--n-td-color-sorting": string;
+            "--n-td-color-sorting-modal": string;
+            "--n-td-color-sorting-popover": string;
+            "--n-th-color-sorting": string;
+            "--n-th-color-sorting-modal": string;
+            "--n-th-color-sorting-popover": string;
         }> | undefined;
         themeClass: import('vue').Ref<string, string> | undefined;
         onRender: (() => void) | undefined;
@@ -11810,9 +12975,12 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
         readonly tableLayout: "fixed" | "auto";
         readonly columns: import('naive-ui/es/data-table/src/interface').TableColumns<any>;
         readonly loading: boolean;
+        readonly spinProps: import('naive-ui/es/_internal').BaseLoadingExposedProps;
         readonly bordered: boolean | undefined;
-        readonly virtualScroll: boolean;
+        readonly allowCheckingNotLoaded: boolean;
         readonly remote: boolean;
+        readonly cascade: boolean;
+        readonly virtualScroll: boolean;
         readonly pagination: false | import('naive-ui').PaginationProps;
         readonly paginateSinglePage: boolean;
         readonly bottomBordered: boolean | undefined;
@@ -11827,14 +12995,11 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
         readonly virtualScrollHeader: boolean;
         readonly headerHeight: number;
         readonly minRowHeight: number;
-        readonly allowCheckingNotLoaded: boolean;
-        readonly cascade: boolean;
         readonly childrenKey: string;
         readonly indent: number;
         readonly flexHeight: boolean;
         readonly summaryPlacement: "top" | "bottom";
         readonly paginationBehaviorOnFilter: "first" | "current";
-        readonly spinProps: import('naive-ui/es/_internal').BaseLoadingExposedProps;
     }, true, {}, import('vue').SlotsType<import('naive-ui').DataTableSlots>, import('vue').GlobalComponents, import('vue').GlobalDirectives, string, {}, any, import('vue').ComponentProvideOptions, {
         P: {};
         B: {};
@@ -11845,7 +13010,7 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
     }, Readonly<import('vue').ExtractPropTypes<{
         readonly onUnstableColumnResize: import('vue').PropType<(resizedWidth: number, limitedWidth: number, column: import('naive-ui/es/data-table/src/interface').TableBaseColumn, getColumnWidth: (key: import('naive-ui/es/data-table/src/interface').ColumnKey) => number | undefined) => void>;
         readonly pagination: {
-            readonly type: import('vue').PropType<false | import('naive-ui/es/pagination').PaginationProps>;
+            readonly type: import('vue').PropType<false | import('naive-ui').PaginationProps>;
             readonly default: false;
         };
         readonly paginateSinglePage: {
@@ -12439,7 +13604,20 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                             arrowOffsetVertical: string;
                             arrowHeight: string;
                             padding: string;
-                        }, any>;
+                        }, {
+                            Scrollbar: import('naive-ui/es/_mixins').Theme<"Scrollbar", {
+                                height: string;
+                                width: string;
+                                borderRadius: string;
+                                color: string;
+                                colorHover: string;
+                                railInsetHorizontalBottom: string;
+                                railInsetHorizontalTop: string;
+                                railInsetVerticalRight: string;
+                                railInsetVerticalLeft: string;
+                                railColor: string;
+                            }, any>;
+                        }>;
                     }>;
                     InternalSelectMenu: import('naive-ui/es/_mixins').Theme<"InternalSelectMenu", {
                         optionFontSizeTiny: string;
@@ -12570,7 +13748,20 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                     paddingMedium: string;
                     paddingLarge: string;
                     clearSize: string;
-                }, any>;
+                }, {
+                    Scrollbar: import('naive-ui/es/_mixins').Theme<"Scrollbar", {
+                        height: string;
+                        width: string;
+                        borderRadius: string;
+                        color: string;
+                        colorHover: string;
+                        railInsetHorizontalBottom: string;
+                        railInsetHorizontalTop: string;
+                        railInsetVerticalRight: string;
+                        railInsetVerticalLeft: string;
+                        railColor: string;
+                    }, any>;
+                }>;
                 Popselect: import('naive-ui/es/_mixins').Theme<"Popselect", {
                     menuBoxShadow: string;
                 }, {
@@ -12587,7 +13778,20 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                         arrowOffsetVertical: string;
                         arrowHeight: string;
                         padding: string;
-                    }, any>;
+                    }, {
+                        Scrollbar: import('naive-ui/es/_mixins').Theme<"Scrollbar", {
+                            height: string;
+                            width: string;
+                            borderRadius: string;
+                            color: string;
+                            colorHover: string;
+                            railInsetHorizontalBottom: string;
+                            railInsetHorizontalTop: string;
+                            railInsetVerticalRight: string;
+                            railInsetVerticalLeft: string;
+                            railColor: string;
+                        }, any>;
+                    }>;
                     InternalSelectMenu: import('naive-ui/es/_mixins').Theme<"InternalSelectMenu", {
                         optionFontSizeTiny: string;
                         optionFontSizeSmall: string;
@@ -12697,7 +13901,20 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                 arrowOffsetVertical: string;
                 arrowHeight: string;
                 padding: string;
-            }, any>;
+            }, {
+                Scrollbar: import('naive-ui/es/_mixins').Theme<"Scrollbar", {
+                    height: string;
+                    width: string;
+                    borderRadius: string;
+                    color: string;
+                    colorHover: string;
+                    railInsetHorizontalBottom: string;
+                    railInsetHorizontalTop: string;
+                    railInsetVerticalRight: string;
+                    railInsetVerticalLeft: string;
+                    railColor: string;
+                }, any>;
+            }>;
             Ellipsis: import('naive-ui/es/_mixins').Theme<"Ellipsis", unknown, {
                 Tooltip: import('naive-ui/es/_mixins').Theme<"Tooltip", {
                     borderRadius: string;
@@ -12719,7 +13936,20 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                         arrowOffsetVertical: string;
                         arrowHeight: string;
                         padding: string;
-                    }, any>;
+                    }, {
+                        Scrollbar: import('naive-ui/es/_mixins').Theme<"Scrollbar", {
+                            height: string;
+                            width: string;
+                            borderRadius: string;
+                            color: string;
+                            colorHover: string;
+                            railInsetHorizontalBottom: string;
+                            railInsetHorizontalTop: string;
+                            railInsetVerticalRight: string;
+                            railInsetVerticalLeft: string;
+                            railColor: string;
+                        }, any>;
+                    }>;
                 }>;
             }>;
             Dropdown: import('naive-ui/es/_mixins').Theme<"Dropdown", {
@@ -12790,7 +14020,20 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                     arrowOffsetVertical: string;
                     arrowHeight: string;
                     padding: string;
-                }, any>;
+                }, {
+                    Scrollbar: import('naive-ui/es/_mixins').Theme<"Scrollbar", {
+                        height: string;
+                        width: string;
+                        borderRadius: string;
+                        color: string;
+                        colorHover: string;
+                        railInsetHorizontalBottom: string;
+                        railInsetHorizontalTop: string;
+                        railInsetVerticalRight: string;
+                        railInsetVerticalLeft: string;
+                        railColor: string;
+                    }, any>;
+                }>;
             }>;
         }>>;
         readonly themeOverrides: import('vue').PropType<import('naive-ui/es/_mixins/use-theme').ExtractThemeOverrides<import('naive-ui/es/_mixins').Theme<"DataTable", {
@@ -13266,7 +14509,20 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                             arrowOffsetVertical: string;
                             arrowHeight: string;
                             padding: string;
-                        }, any>;
+                        }, {
+                            Scrollbar: import('naive-ui/es/_mixins').Theme<"Scrollbar", {
+                                height: string;
+                                width: string;
+                                borderRadius: string;
+                                color: string;
+                                colorHover: string;
+                                railInsetHorizontalBottom: string;
+                                railInsetHorizontalTop: string;
+                                railInsetVerticalRight: string;
+                                railInsetVerticalLeft: string;
+                                railColor: string;
+                            }, any>;
+                        }>;
                     }>;
                     InternalSelectMenu: import('naive-ui/es/_mixins').Theme<"InternalSelectMenu", {
                         optionFontSizeTiny: string;
@@ -13397,7 +14653,20 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                     paddingMedium: string;
                     paddingLarge: string;
                     clearSize: string;
-                }, any>;
+                }, {
+                    Scrollbar: import('naive-ui/es/_mixins').Theme<"Scrollbar", {
+                        height: string;
+                        width: string;
+                        borderRadius: string;
+                        color: string;
+                        colorHover: string;
+                        railInsetHorizontalBottom: string;
+                        railInsetHorizontalTop: string;
+                        railInsetVerticalRight: string;
+                        railInsetVerticalLeft: string;
+                        railColor: string;
+                    }, any>;
+                }>;
                 Popselect: import('naive-ui/es/_mixins').Theme<"Popselect", {
                     menuBoxShadow: string;
                 }, {
@@ -13414,7 +14683,20 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                         arrowOffsetVertical: string;
                         arrowHeight: string;
                         padding: string;
-                    }, any>;
+                    }, {
+                        Scrollbar: import('naive-ui/es/_mixins').Theme<"Scrollbar", {
+                            height: string;
+                            width: string;
+                            borderRadius: string;
+                            color: string;
+                            colorHover: string;
+                            railInsetHorizontalBottom: string;
+                            railInsetHorizontalTop: string;
+                            railInsetVerticalRight: string;
+                            railInsetVerticalLeft: string;
+                            railColor: string;
+                        }, any>;
+                    }>;
                     InternalSelectMenu: import('naive-ui/es/_mixins').Theme<"InternalSelectMenu", {
                         optionFontSizeTiny: string;
                         optionFontSizeSmall: string;
@@ -13524,7 +14806,20 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                 arrowOffsetVertical: string;
                 arrowHeight: string;
                 padding: string;
-            }, any>;
+            }, {
+                Scrollbar: import('naive-ui/es/_mixins').Theme<"Scrollbar", {
+                    height: string;
+                    width: string;
+                    borderRadius: string;
+                    color: string;
+                    colorHover: string;
+                    railInsetHorizontalBottom: string;
+                    railInsetHorizontalTop: string;
+                    railInsetVerticalRight: string;
+                    railInsetVerticalLeft: string;
+                    railColor: string;
+                }, any>;
+            }>;
             Ellipsis: import('naive-ui/es/_mixins').Theme<"Ellipsis", unknown, {
                 Tooltip: import('naive-ui/es/_mixins').Theme<"Tooltip", {
                     borderRadius: string;
@@ -13546,7 +14841,20 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                         arrowOffsetVertical: string;
                         arrowHeight: string;
                         padding: string;
-                    }, any>;
+                    }, {
+                        Scrollbar: import('naive-ui/es/_mixins').Theme<"Scrollbar", {
+                            height: string;
+                            width: string;
+                            borderRadius: string;
+                            color: string;
+                            colorHover: string;
+                            railInsetHorizontalBottom: string;
+                            railInsetHorizontalTop: string;
+                            railInsetVerticalRight: string;
+                            railInsetVerticalLeft: string;
+                            railColor: string;
+                        }, any>;
+                    }>;
                 }>;
             }>;
             Dropdown: import('naive-ui/es/_mixins').Theme<"Dropdown", {
@@ -13617,7 +14925,20 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                     arrowOffsetVertical: string;
                     arrowHeight: string;
                     padding: string;
-                }, any>;
+                }, {
+                    Scrollbar: import('naive-ui/es/_mixins').Theme<"Scrollbar", {
+                        height: string;
+                        width: string;
+                        borderRadius: string;
+                        color: string;
+                        colorHover: string;
+                        railInsetHorizontalBottom: string;
+                        railInsetHorizontalTop: string;
+                        railInsetVerticalRight: string;
+                        railInsetVerticalLeft: string;
+                        railColor: string;
+                    }, any>;
+                }>;
             }>;
         }>>>;
         readonly builtinThemeOverrides: import('vue').PropType<import('naive-ui/es/_mixins/use-theme').ExtractThemeOverrides<import('naive-ui/es/_mixins').Theme<"DataTable", {
@@ -14093,7 +15414,20 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                             arrowOffsetVertical: string;
                             arrowHeight: string;
                             padding: string;
-                        }, any>;
+                        }, {
+                            Scrollbar: import('naive-ui/es/_mixins').Theme<"Scrollbar", {
+                                height: string;
+                                width: string;
+                                borderRadius: string;
+                                color: string;
+                                colorHover: string;
+                                railInsetHorizontalBottom: string;
+                                railInsetHorizontalTop: string;
+                                railInsetVerticalRight: string;
+                                railInsetVerticalLeft: string;
+                                railColor: string;
+                            }, any>;
+                        }>;
                     }>;
                     InternalSelectMenu: import('naive-ui/es/_mixins').Theme<"InternalSelectMenu", {
                         optionFontSizeTiny: string;
@@ -14224,7 +15558,20 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                     paddingMedium: string;
                     paddingLarge: string;
                     clearSize: string;
-                }, any>;
+                }, {
+                    Scrollbar: import('naive-ui/es/_mixins').Theme<"Scrollbar", {
+                        height: string;
+                        width: string;
+                        borderRadius: string;
+                        color: string;
+                        colorHover: string;
+                        railInsetHorizontalBottom: string;
+                        railInsetHorizontalTop: string;
+                        railInsetVerticalRight: string;
+                        railInsetVerticalLeft: string;
+                        railColor: string;
+                    }, any>;
+                }>;
                 Popselect: import('naive-ui/es/_mixins').Theme<"Popselect", {
                     menuBoxShadow: string;
                 }, {
@@ -14241,7 +15588,20 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                         arrowOffsetVertical: string;
                         arrowHeight: string;
                         padding: string;
-                    }, any>;
+                    }, {
+                        Scrollbar: import('naive-ui/es/_mixins').Theme<"Scrollbar", {
+                            height: string;
+                            width: string;
+                            borderRadius: string;
+                            color: string;
+                            colorHover: string;
+                            railInsetHorizontalBottom: string;
+                            railInsetHorizontalTop: string;
+                            railInsetVerticalRight: string;
+                            railInsetVerticalLeft: string;
+                            railColor: string;
+                        }, any>;
+                    }>;
                     InternalSelectMenu: import('naive-ui/es/_mixins').Theme<"InternalSelectMenu", {
                         optionFontSizeTiny: string;
                         optionFontSizeSmall: string;
@@ -14351,7 +15711,20 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                 arrowOffsetVertical: string;
                 arrowHeight: string;
                 padding: string;
-            }, any>;
+            }, {
+                Scrollbar: import('naive-ui/es/_mixins').Theme<"Scrollbar", {
+                    height: string;
+                    width: string;
+                    borderRadius: string;
+                    color: string;
+                    colorHover: string;
+                    railInsetHorizontalBottom: string;
+                    railInsetHorizontalTop: string;
+                    railInsetVerticalRight: string;
+                    railInsetVerticalLeft: string;
+                    railColor: string;
+                }, any>;
+            }>;
             Ellipsis: import('naive-ui/es/_mixins').Theme<"Ellipsis", unknown, {
                 Tooltip: import('naive-ui/es/_mixins').Theme<"Tooltip", {
                     borderRadius: string;
@@ -14373,7 +15746,20 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                         arrowOffsetVertical: string;
                         arrowHeight: string;
                         padding: string;
-                    }, any>;
+                    }, {
+                        Scrollbar: import('naive-ui/es/_mixins').Theme<"Scrollbar", {
+                            height: string;
+                            width: string;
+                            borderRadius: string;
+                            color: string;
+                            colorHover: string;
+                            railInsetHorizontalBottom: string;
+                            railInsetHorizontalTop: string;
+                            railInsetVerticalRight: string;
+                            railInsetVerticalLeft: string;
+                            railColor: string;
+                        }, any>;
+                    }>;
                 }>;
             }>;
             Dropdown: import('naive-ui/es/_mixins').Theme<"Dropdown", {
@@ -14444,7 +15830,20 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                     arrowOffsetVertical: string;
                     arrowHeight: string;
                     padding: string;
-                }, any>;
+                }, {
+                    Scrollbar: import('naive-ui/es/_mixins').Theme<"Scrollbar", {
+                        height: string;
+                        width: string;
+                        borderRadius: string;
+                        color: string;
+                        colorHover: string;
+                        railInsetHorizontalBottom: string;
+                        railInsetHorizontalTop: string;
+                        railInsetVerticalRight: string;
+                        railInsetVerticalLeft: string;
+                        railColor: string;
+                    }, any>;
+                }>;
             }>;
         }>>>;
     }>> & Readonly<{}>, {
@@ -14944,7 +16343,20 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                                 arrowOffsetVertical: string;
                                 arrowHeight: string;
                                 padding: string;
-                            }, any>;
+                            }, {
+                                Scrollbar: import('naive-ui/es/_mixins').Theme<"Scrollbar", {
+                                    height: string;
+                                    width: string;
+                                    borderRadius: string;
+                                    color: string;
+                                    colorHover: string;
+                                    railInsetHorizontalBottom: string;
+                                    railInsetHorizontalTop: string;
+                                    railInsetVerticalRight: string;
+                                    railInsetVerticalLeft: string;
+                                    railColor: string;
+                                }, any>;
+                            }>;
                         }>;
                         InternalSelectMenu: import('naive-ui/es/_mixins').Theme<"InternalSelectMenu", {
                             optionFontSizeTiny: string;
@@ -15075,7 +16487,20 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                         paddingMedium: string;
                         paddingLarge: string;
                         clearSize: string;
-                    }, any>;
+                    }, {
+                        Scrollbar: import('naive-ui/es/_mixins').Theme<"Scrollbar", {
+                            height: string;
+                            width: string;
+                            borderRadius: string;
+                            color: string;
+                            colorHover: string;
+                            railInsetHorizontalBottom: string;
+                            railInsetHorizontalTop: string;
+                            railInsetVerticalRight: string;
+                            railInsetVerticalLeft: string;
+                            railColor: string;
+                        }, any>;
+                    }>;
                     Popselect: import('naive-ui/es/_mixins').Theme<"Popselect", {
                         menuBoxShadow: string;
                     }, {
@@ -15092,7 +16517,20 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                             arrowOffsetVertical: string;
                             arrowHeight: string;
                             padding: string;
-                        }, any>;
+                        }, {
+                            Scrollbar: import('naive-ui/es/_mixins').Theme<"Scrollbar", {
+                                height: string;
+                                width: string;
+                                borderRadius: string;
+                                color: string;
+                                colorHover: string;
+                                railInsetHorizontalBottom: string;
+                                railInsetHorizontalTop: string;
+                                railInsetVerticalRight: string;
+                                railInsetVerticalLeft: string;
+                                railColor: string;
+                            }, any>;
+                        }>;
                         InternalSelectMenu: import('naive-ui/es/_mixins').Theme<"InternalSelectMenu", {
                             optionFontSizeTiny: string;
                             optionFontSizeSmall: string;
@@ -15202,7 +16640,20 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                     arrowOffsetVertical: string;
                     arrowHeight: string;
                     padding: string;
-                }, any>;
+                }, {
+                    Scrollbar: import('naive-ui/es/_mixins').Theme<"Scrollbar", {
+                        height: string;
+                        width: string;
+                        borderRadius: string;
+                        color: string;
+                        colorHover: string;
+                        railInsetHorizontalBottom: string;
+                        railInsetHorizontalTop: string;
+                        railInsetVerticalRight: string;
+                        railInsetVerticalLeft: string;
+                        railColor: string;
+                    }, any>;
+                }>;
                 Ellipsis: import('naive-ui/es/_mixins').Theme<"Ellipsis", unknown, {
                     Tooltip: import('naive-ui/es/_mixins').Theme<"Tooltip", {
                         borderRadius: string;
@@ -15224,7 +16675,20 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                             arrowOffsetVertical: string;
                             arrowHeight: string;
                             padding: string;
-                        }, any>;
+                        }, {
+                            Scrollbar: import('naive-ui/es/_mixins').Theme<"Scrollbar", {
+                                height: string;
+                                width: string;
+                                borderRadius: string;
+                                color: string;
+                                colorHover: string;
+                                railInsetHorizontalBottom: string;
+                                railInsetHorizontalTop: string;
+                                railInsetVerticalRight: string;
+                                railInsetVerticalLeft: string;
+                                railColor: string;
+                            }, any>;
+                        }>;
                     }>;
                 }>;
                 Dropdown: import('naive-ui/es/_mixins').Theme<"Dropdown", {
@@ -15295,7 +16759,20 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                         arrowOffsetVertical: string;
                         arrowHeight: string;
                         padding: string;
-                    }, any>;
+                    }, {
+                        Scrollbar: import('naive-ui/es/_mixins').Theme<"Scrollbar", {
+                            height: string;
+                            width: string;
+                            borderRadius: string;
+                            color: string;
+                            colorHover: string;
+                            railInsetHorizontalBottom: string;
+                            railInsetHorizontalTop: string;
+                            railInsetVerticalRight: string;
+                            railInsetVerticalLeft: string;
+                            railColor: string;
+                        }, any>;
+                    }>;
                 }>;
             };
             peerOverrides: {
@@ -15387,7 +16864,20 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                                     arrowOffsetVertical: string;
                                     arrowHeight: string;
                                     padding: string;
-                                }, any>;
+                                }, {
+                                    Scrollbar: import('naive-ui/es/_mixins').Theme<"Scrollbar", {
+                                        height: string;
+                                        width: string;
+                                        borderRadius: string;
+                                        color: string;
+                                        colorHover: string;
+                                        railInsetHorizontalBottom: string;
+                                        railInsetHorizontalTop: string;
+                                        railInsetVerticalRight: string;
+                                        railInsetVerticalLeft: string;
+                                        railColor: string;
+                                    }, any>;
+                                }>;
                             }>;
                             InternalSelectMenu: import('naive-ui/es/_mixins').Theme<"InternalSelectMenu", {
                                 optionFontSizeTiny: string;
@@ -15518,7 +17008,20 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                             paddingMedium: string;
                             paddingLarge: string;
                             clearSize: string;
-                        }, any>> | undefined;
+                        }, {
+                            Scrollbar: import('naive-ui/es/_mixins').Theme<"Scrollbar", {
+                                height: string;
+                                width: string;
+                                borderRadius: string;
+                                color: string;
+                                colorHover: string;
+                                railInsetHorizontalBottom: string;
+                                railInsetHorizontalTop: string;
+                                railInsetVerticalRight: string;
+                                railInsetVerticalLeft: string;
+                                railColor: string;
+                            }, any>;
+                        }>> | undefined;
                         Popselect?: import('naive-ui/es/_mixins/use-theme').ExtractThemeOverrides<import('naive-ui/es/_mixins').Theme<"Popselect", {
                             menuBoxShadow: string;
                         }, {
@@ -15535,7 +17038,20 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                                 arrowOffsetVertical: string;
                                 arrowHeight: string;
                                 padding: string;
-                            }, any>;
+                            }, {
+                                Scrollbar: import('naive-ui/es/_mixins').Theme<"Scrollbar", {
+                                    height: string;
+                                    width: string;
+                                    borderRadius: string;
+                                    color: string;
+                                    colorHover: string;
+                                    railInsetHorizontalBottom: string;
+                                    railInsetHorizontalTop: string;
+                                    railInsetVerticalRight: string;
+                                    railInsetVerticalLeft: string;
+                                    railColor: string;
+                                }, any>;
+                            }>;
                             InternalSelectMenu: import('naive-ui/es/_mixins').Theme<"InternalSelectMenu", {
                                 optionFontSizeTiny: string;
                                 optionFontSizeSmall: string;
@@ -15618,7 +17134,18 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                 } | undefined;
                 Popover?: {
                     peers?: {
-                        [x: string]: any;
+                        Scrollbar?: import('naive-ui/es/_mixins/use-theme').ExtractThemeOverrides<import('naive-ui/es/_mixins').Theme<"Scrollbar", {
+                            height: string;
+                            width: string;
+                            borderRadius: string;
+                            color: string;
+                            colorHover: string;
+                            railInsetHorizontalBottom: string;
+                            railInsetHorizontalTop: string;
+                            railInsetVerticalRight: string;
+                            railInsetVerticalLeft: string;
+                            railColor: string;
+                        }, any>> | undefined;
                     } | undefined;
                 } | undefined;
                 Ellipsis?: {
@@ -15643,7 +17170,20 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                                 arrowOffsetVertical: string;
                                 arrowHeight: string;
                                 padding: string;
-                            }, any>;
+                            }, {
+                                Scrollbar: import('naive-ui/es/_mixins').Theme<"Scrollbar", {
+                                    height: string;
+                                    width: string;
+                                    borderRadius: string;
+                                    color: string;
+                                    colorHover: string;
+                                    railInsetHorizontalBottom: string;
+                                    railInsetHorizontalTop: string;
+                                    railInsetVerticalRight: string;
+                                    railInsetVerticalLeft: string;
+                                    railColor: string;
+                                }, any>;
+                            }>;
                         }>> | undefined;
                     } | undefined;
                 } | undefined;
@@ -15662,7 +17202,20 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                             arrowOffsetVertical: string;
                             arrowHeight: string;
                             padding: string;
-                        }, any>> | undefined;
+                        }, {
+                            Scrollbar: import('naive-ui/es/_mixins').Theme<"Scrollbar", {
+                                height: string;
+                                width: string;
+                                borderRadius: string;
+                                color: string;
+                                colorHover: string;
+                                railInsetHorizontalBottom: string;
+                                railInsetHorizontalTop: string;
+                                railInsetVerticalRight: string;
+                                railInsetVerticalLeft: string;
+                                railColor: string;
+                            }, any>;
+                        }>> | undefined;
                     } | undefined;
                 } | undefined;
             };
@@ -15714,12 +17267,12 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
             "--n-td-color-striped": string;
             "--n-td-color-striped-modal": string;
             "--n-td-color-striped-popover": string;
-            "n-td-color-sorting": string;
-            "n-td-color-sorting-modal": string;
-            "n-td-color-sorting-popover": string;
-            "n-th-color-sorting": string;
-            "n-th-color-sorting-modal": string;
-            "n-th-color-sorting-popover": string;
+            "--n-td-color-sorting": string;
+            "--n-td-color-sorting-modal": string;
+            "--n-td-color-sorting-popover": string;
+            "--n-th-color-sorting": string;
+            "--n-th-color-sorting-modal": string;
+            "--n-th-color-sorting-popover": string;
         }> | undefined;
         themeClass: import('vue').Ref<string, string> | undefined;
         onRender: (() => void) | undefined;
@@ -15729,9 +17282,12 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
         readonly tableLayout: "fixed" | "auto";
         readonly columns: import('naive-ui/es/data-table/src/interface').TableColumns<any>;
         readonly loading: boolean;
+        readonly spinProps: import('naive-ui/es/_internal').BaseLoadingExposedProps;
         readonly bordered: boolean | undefined;
-        readonly virtualScroll: boolean;
+        readonly allowCheckingNotLoaded: boolean;
         readonly remote: boolean;
+        readonly cascade: boolean;
+        readonly virtualScroll: boolean;
         readonly pagination: false | import('naive-ui').PaginationProps;
         readonly paginateSinglePage: boolean;
         readonly bottomBordered: boolean | undefined;
@@ -15746,14 +17302,11 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
         readonly virtualScrollHeader: boolean;
         readonly headerHeight: number;
         readonly minRowHeight: number;
-        readonly allowCheckingNotLoaded: boolean;
-        readonly cascade: boolean;
         readonly childrenKey: string;
         readonly indent: number;
         readonly flexHeight: boolean;
         readonly summaryPlacement: "top" | "bottom";
         readonly paginationBehaviorOnFilter: "first" | "current";
-        readonly spinProps: import('naive-ui/es/_internal').BaseLoadingExposedProps;
     }> | null;
 }, HTMLDivElement>;
 export default _default;
