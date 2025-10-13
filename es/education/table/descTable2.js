@@ -1,4 +1,4 @@
-import { defineComponent, mergeDefaults, ref, onMounted, watch, nextTick, openBlock, createElementBlock, createElementVNode, normalizeStyle, Fragment, renderList, unref, toDisplayString, withDirectives, createVNode, withCtx, renderSlot, vShow } from "vue";
+import { defineComponent, mergeDefaults, useCssVars, computed, ref, onMounted, watch, nextTick, createElementBlock, openBlock, createElementVNode, withDirectives, normalizeStyle, Fragment, renderList, unref, toDisplayString, createVNode, withCtx, normalizeClass, renderSlot, vShow } from "vue";
 import memoize from "lodash-es/memoize";
 import LcElasticScrollbar from "./elasticScrollbar/index.js";
 import LcEmpty from "./empty/index.js";
@@ -18,11 +18,23 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     data: {
       type: Array,
       default: () => []
+    },
+    // hoverTdIndex用于手动控制高亮的行，传入索引或索引数组
+    hoverTdIndex: {
+      type: Array
+    },
+    // 是否显示hover高亮左侧箭头
+    showHoverArrow: {
+      type: Boolean,
+      default: true
     }
   }, {
     data: () => []
   }),
   setup(__props) {
+    useCssVars((_ctx) => ({
+      "651f976e": computedHoverArrowOpacity.value
+    }));
     const tdCellTypeMap = {
       index: (_tdRecord, _thRecord, _tdIndex) => {
         return _tdIndex + 1;
@@ -68,6 +80,14 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     });
     function getTdCellSlotName(_thRecord) {
       return _thRecord.dataIndex ?? "default";
+    }
+    const computedHoverArrowOpacity = computed(() => {
+      return __props.showHoverArrow ? "1" : "0";
+    });
+    function matchHoverTd(tdIndex) {
+      if (__props.hoverTdIndex == null) return false;
+      const hoverTdList = Array.isArray(__props.hoverTdIndex) ? __props.hoverTdIndex : [__props.hoverTdIndex];
+      return hoverTdList == null ? void 0 : hoverTdList.some((i) => i === tdIndex);
     }
     return (_ctx, _cache) => {
       return openBlock(), createElementBlock("div", _hoisted_1, [
@@ -120,43 +140,49 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                     Fragment,
                     null,
                     renderList(__props.data, (tdRecord, tdIndex) => {
-                      return openBlock(), createElementBlock("div", {
-                        key: tdIndex,
-                        class: "lc-desc-list__tbody__tr"
-                      }, [
-                        (openBlock(true), createElementBlock(
-                          Fragment,
-                          null,
-                          renderList(__props.columns, (thRecord, thIndex) => {
-                            return openBlock(), createElementBlock(
-                              "div",
-                              {
-                                key: thIndex,
-                                class: "lc-desc-list__tbody__tr__cell",
-                                style: normalizeStyle(unref(customRecordStyle)(thRecord))
-                              },
-                              [
-                                renderSlot(_ctx.$slots, getTdCellSlotName(thRecord), {
-                                  record: tdRecord,
-                                  index: tdIndex,
-                                  column: thRecord,
-                                  colIndex: thIndex,
-                                  value: unref(getTdCellNode)(tdRecord, thRecord, tdIndex)
-                                }, () => [
-                                  createElementVNode("span", {
-                                    class: "lc-desc-list__tbody__tr__cell__span",
-                                    title: unref(getTdCellNode)(tdRecord, thRecord, tdIndex)
-                                  }, toDisplayString(unref(getTdCellNode)(tdRecord, thRecord, tdIndex)), 9, _hoisted_5)
-                                ], true)
-                              ],
-                              4
-                              /* STYLE */
-                            );
-                          }),
-                          128
-                          /* KEYED_FRAGMENT */
-                        ))
-                      ]);
+                      return openBlock(), createElementBlock(
+                        "div",
+                        {
+                          key: tdIndex,
+                          class: normalizeClass(["lc-desc-list__tbody__tr", { "tr-hover": matchHoverTd(tdIndex) }])
+                        },
+                        [
+                          (openBlock(true), createElementBlock(
+                            Fragment,
+                            null,
+                            renderList(__props.columns, (thRecord, thIndex) => {
+                              return openBlock(), createElementBlock(
+                                "div",
+                                {
+                                  key: thIndex,
+                                  class: "lc-desc-list__tbody__tr__cell",
+                                  style: normalizeStyle(unref(customRecordStyle)(thRecord))
+                                },
+                                [
+                                  renderSlot(_ctx.$slots, getTdCellSlotName(thRecord), {
+                                    record: tdRecord,
+                                    index: tdIndex,
+                                    column: thRecord,
+                                    colIndex: thIndex,
+                                    value: unref(getTdCellNode)(tdRecord, thRecord, tdIndex)
+                                  }, () => [
+                                    createElementVNode("span", {
+                                      class: "lc-desc-list__tbody__tr__cell__span",
+                                      title: unref(getTdCellNode)(tdRecord, thRecord, tdIndex)
+                                    }, toDisplayString(unref(getTdCellNode)(tdRecord, thRecord, tdIndex)), 9, _hoisted_5)
+                                  ], true)
+                                ],
+                                4
+                                /* STYLE */
+                              );
+                            }),
+                            128
+                            /* KEYED_FRAGMENT */
+                          ))
+                        ],
+                        2
+                        /* CLASS */
+                      );
                     }),
                     128
                     /* KEYED_FRAGMENT */

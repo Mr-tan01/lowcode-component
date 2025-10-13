@@ -10,7 +10,12 @@
             </div>
             <LcElasticScrollbar v-show="data.length" ref="scrollbarRef">
                 <div class="lc-desc-list__tbody">
-                    <div v-for="(tdRecord, tdIndex) in data" :key="tdIndex" class="lc-desc-list__tbody__tr">
+                    <div
+                        v-for="(tdRecord, tdIndex) in data"
+                        :key="tdIndex"
+                        class="lc-desc-list__tbody__tr"
+                        :class="{ 'tr-hover': matchHoverTd(tdIndex) }"
+                    >
                         <div
                             v-for="(thRecord, thIndex) in columns"
                             :key="thIndex"
@@ -43,7 +48,7 @@
 </template>
 
 <script lang="ts" setup>
-import { PropType, ref, onMounted, watch, nextTick } from 'vue'
+import { PropType, ref, onMounted, watch, nextTick, computed } from 'vue'
 import memoize from 'lodash-es/memoize'
 import { LcElasticScrollbar } from '@/components/education/components/elasticScrollbar'
 import { LcEmpty } from '@/components/education/components/empty'
@@ -56,7 +61,11 @@ export interface Columns {
     width?: string
     flex?: string | number
 }
-const { data = [] } = defineProps({
+const {
+    data = [],
+    showHoverArrow,
+    hoverTdIndex,
+} = defineProps({
     columns: {
         type: Array as PropType<Columns[]>,
         default: () => [],
@@ -64,6 +73,15 @@ const { data = [] } = defineProps({
     data: {
         type: Array as PropType<Record<string, any>[]>,
         default: () => [],
+    },
+    // hoverTdIndex用于手动控制高亮的行，传入索引或索引数组
+    hoverTdIndex: {
+        type: Array as PropType<number[] | number>,
+    },
+    // 是否显示hover高亮左侧箭头
+    showHoverArrow: {
+        type: Boolean,
+        default: true,
     },
 })
 
@@ -120,6 +138,15 @@ const customRecordStyle: (_record: Columns) => Record<string, any> = memoize(thR
 
 function getTdCellSlotName(_thRecord) {
     return _thRecord.dataIndex ?? 'default'
+}
+
+const computedHoverArrowOpacity = computed(() => {
+    return showHoverArrow ? '1' : '0'
+})
+function matchHoverTd(tdIndex: number) {
+    if (hoverTdIndex == null) return false
+    const hoverTdList = Array.isArray(hoverTdIndex) ? hoverTdIndex : [hoverTdIndex]
+    return hoverTdList?.some(i => i === tdIndex)
 }
 </script>
 
@@ -214,13 +241,19 @@ function getTdCellSlotName(_thRecord) {
                 transition: opacity 0.3s;
             }
 
-            &:hover {
+            @mixin tr-hover {
                 background: linear-gradient(90deg, rgba(15, 251, 248, 0) 0%, rgba(15, 251, 248, 0.35) 100%);
                 border: 1px solid;
                 border-image: linear-gradient(90deg, rgba(34, 253, 252, 0), rgba(15, 251, 248, 1)) 1 1;
                 &::before {
-                    opacity: 1;
+                    opacity: v-bind(computedHoverArrowOpacity);
                 }
+            }
+            &:hover {
+                @include tr-hover;
+            }
+            &.tr-hover {
+                @include tr-hover;
             }
 
             &__cell {

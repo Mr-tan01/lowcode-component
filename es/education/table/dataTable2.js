@@ -1,4 +1,4 @@
-import { defineComponent, ref, computed, openBlock, createElementBlock, createVNode, unref, mergeProps, withCtx } from "vue";
+import { defineComponent, ref, computed, createElementBlock, openBlock, createVNode, unref, mergeProps, withCtx } from "vue";
 import { NDataTable } from "naive-ui";
 import LcEmpty from "./empty/index.js";
 const _hoisted_1 = { class: "lc-data-table" };
