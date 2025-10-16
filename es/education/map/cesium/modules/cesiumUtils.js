@@ -5,7 +5,7 @@ import { CesiumHeatmap } from "cesium-heatmap-es6";
 import { areaData } from "./type.js";
 import { createClusterBillboard, createInfoCanvas, createEntityConfig, updateViewerEntityInfo, heatmapGradient } from "./tools.js";
 import { useMessage } from "naive-ui";
-import { Color, Rectangle, CustomDataSource, JulianDate, HorizontalOrigin, VerticalOrigin, ScreenSpaceEventType, ScreenSpaceEventHandler, Cartographic, Cartesian3, Math as Math$1, BoundingSphere, defined, ArcGisMapServerImageryProvider, PolygonHierarchy, PolylineDashMaterialProperty, ImageryLayer, Primitive, Entity, Cartesian2 } from "@cesium/engine";
+import { Color, Rectangle, CustomDataSource, JulianDate, HorizontalOrigin, VerticalOrigin, ScreenSpaceEventType, ScreenSpaceEventHandler, Cartographic, Cartesian3, Math as Math$1, BoundingSphere, defined, ArcGisMapServerImageryProvider, PolygonHierarchy, ImageryLayer, Primitive, Entity, Cartesian2 } from "@cesium/engine";
 import { Viewer } from "@cesium/widgets";
 class cesiumService {
   constructor(containerId, options) {
@@ -54,7 +54,7 @@ class cesiumService {
     });
     __publicField(this, "renderTasks", /* @__PURE__ */ new WeakMap());
     // 分批渲染点位
-    __publicField(this, "batchRenderPoints", async (points, defaultShowState, batchRenderConfig) => {
+    __publicField(this, "batchRenderPoints", async (points, defaultShowState, batchRenderConfig, cb) => {
       this.cancelBatchRender();
       const totalLength = points.length;
       if (totalLength === 0) return;
@@ -68,12 +68,16 @@ class cesiumService {
         const startIndex = batchIndex * batchSize;
         const endIndex = Math.min(startIndex + batchSize, totalLength);
         const batchPoints = points.slice(startIndex, endIndex);
-        batchPoints.forEach((point) => {
-          this.addPoint(point, "value");
-          if (defaultShowState) {
-            this.addPoint(point);
-          }
-        });
+        if (cb) {
+          cb(batchPoints);
+        } else {
+          batchPoints.forEach((point) => {
+            this.addPoint(point, "value");
+            if (defaultShowState) {
+              this.addPoint(point);
+            }
+          });
+        }
         const taskId = requestAnimationFrame(() => {
           renderBatch(batchIndex + 1);
         });
@@ -246,8 +250,8 @@ class cesiumService {
     });
   }
   // 处理相机高度变化
-  handleCameraHeightChange() {
-    var _a, _b;
+  async handleCameraHeightChange() {
+    var _a;
     if (!this.viewer || !this.pointEntities) return;
     const cameraHeight = this.viewer.camera.positionCartographic.height;
     if (this.options.limitHeightHandler) {
@@ -255,22 +259,26 @@ class cesiumService {
     }
     this.shouldShowLabels = cameraHeight <= (((_a = this.options.config) == null ? void 0 : _a.labelShowHeightThreshold) ?? 5e3);
     if (this.shouldShowLabels) {
-      (_b = this.pointData) == null ? void 0 : _b.forEach((item) => {
-        this.addPoint(item, void 0, "Label");
+      await this.batchRenderPoints(this.pointData || [], false, { batchRenderSize: 50, batchRenderDelay: 100 }, (batchPoints) => {
+        batchPoints == null ? void 0 : batchPoints.forEach((item) => {
+          this.addPoint(item, void 0, "Label");
+        });
       });
     }
-    this.pointEntities.forEach((entity) => {
-      if (entity.name && entity.name.endsWith("Label")) {
-        if (this.shouldShowLabels && !entity.show) {
-          entity.show = true;
-          if (entity.label) {
-            entity.label.disableDepthTestDistance = Number.POSITIVE_INFINITY;
-            entity.label.heightReference = 1;
+    await this.batchRenderPoints(this.pointEntities || [], false, { batchRenderSize: 50, batchRenderDelay: 100 }, (batchPoints) => {
+      batchPoints.forEach((entity) => {
+        if (entity.name && entity.name.endsWith("Label")) {
+          if (this.shouldShowLabels && !entity.show) {
+            entity.show = true;
+            if (entity.label) {
+              entity.label.disableDepthTestDistance = Number.POSITIVE_INFINITY;
+              entity.label.heightReference = 1;
+            }
+          } else if (!this.shouldShowLabels && entity.show) {
+            entity.show = false;
           }
-        } else if (!this.shouldShowLabels && entity.show) {
-          entity.show = false;
         }
-      }
+      });
     });
   }
   // 设置事件处理器
@@ -541,10 +549,9 @@ class cesiumService {
       name,
       polyline: {
         positions,
-        material: new PolylineDashMaterialProperty({
-          color: Color.fromCssColorString("#1E9EFA").withAlpha(0.7)
-        }),
-        width: 2
+        material: Color.fromCssColorString("#022f49"),
+        // 使用纯色材质
+        width: 7
       },
       polygon: {
         hierarchy: new PolygonHierarchy(positions),
