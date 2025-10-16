@@ -55,8 +55,9 @@
                             :class="{
                                 'lc-checkbox-filter__check__label--selected': checkboxAllValue.includes(check.value),
                             }"
-                            >{{ check.label }}</span
                         >
+                            <slot name="check-box-label" v-bind="check">{{ check.label }}</slot>
+                        </span>
                     </LcCheckbox>
                 </div>
             </template>
@@ -71,6 +72,7 @@ export type FilterItem = {
     label: string
     value: number | string
     disabled?: boolean
+    meta?: Record<string, any>
 }
 export type FilterList = {
     label: string
@@ -175,6 +177,8 @@ watch(checkboxAllValue, value => {
             font-size: 16px;
             color: #9dcbed;
             line-height: 26px;
+            display: flex;
+            align-items: center;
             &--selected {
                 color: #0ffbf8;
             }
