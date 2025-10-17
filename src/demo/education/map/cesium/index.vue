@@ -130,6 +130,7 @@ function loadHandler(state: boolean) {
 }
 
 function iconHandler(alt: string) {
+    console.log(alt, '====>')
     if (alt === 'Map') {
         cesiumMap.value?.changeModel('setInitialView', {
             destination: Cartesian3.fromDegrees(114.187446, 22.674131, 130000),

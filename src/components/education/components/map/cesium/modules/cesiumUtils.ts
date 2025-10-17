@@ -482,10 +482,9 @@ export class cesiumService {
 
         this.cleanupTileLoadListener()
         this.updateLayerState(url)
-
         try {
             provider = await this.loadProviderWithFallback({
-                targetUrl: imageLayerUrl || url,
+                targetUrl: imageLayerState && imageLayerUrl ? imageLayerUrl : url,
                 useZondy: imageLayerState,
                 fallbackUrl: this.options.config.defaultUrl ?? this.defaultConfig.defaultUrl,
             })
@@ -980,7 +979,6 @@ export class cesiumService {
 
         // 清除现有图层和实体
         this.viewer.imageryLayers.removeAll()
-
         // 加载新图层
         this.loadTileLayer(imageryLayersUrl)
     }

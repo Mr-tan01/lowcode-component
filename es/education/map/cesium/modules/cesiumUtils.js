@@ -399,7 +399,7 @@ class cesiumService {
     this.updateLayerState(url);
     try {
       provider = await this.loadProviderWithFallback({
-        targetUrl: imageLayerUrl || url,
+        targetUrl: imageLayerState && imageLayerUrl ? imageLayerUrl : url,
         useZondy: imageLayerState,
         fallbackUrl: this.options.config.defaultUrl ?? this.defaultConfig.defaultUrl
       });
