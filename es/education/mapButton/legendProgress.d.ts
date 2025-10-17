@@ -8,6 +8,10 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
         required: true;
         validator: (value: number[]) => boolean;
     };
+    labelValueTofixedLength: {
+        type: NumberConstructor;
+        default: number;
+    };
     colors: {
         type: () => string[];
         default: () => never[];
@@ -28,6 +32,10 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
         required: true;
         validator: (value: number[]) => boolean;
     };
+    labelValueTofixedLength: {
+        type: NumberConstructor;
+        default: number;
+    };
     colors: {
         type: () => string[];
         default: () => never[];
@@ -40,6 +48,7 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
     "onUpdate-stops"?: ((...args: any[]) => any) | undefined;
 }>, {
     label: string;
+    labelValueTofixedLength: number;
     colors: string[];
     unit: string;
 }, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {

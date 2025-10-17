@@ -54,6 +54,10 @@ const props = defineProps({
         required: true,
         validator: (value: number[]) => value.every(item => item >= 0 && item <= 1),
     },
+    labelValueTofixedLength: {
+        type: Number,
+        default: 1,
+    },
     colors: {
         type: Array as () => string[],
         default: () => [],
@@ -109,8 +113,8 @@ const displayMax = computed(() => {
     return processedData.value.length > 0 ? roundMax(processedData.value[processedData.value.length - 1]) : 0
 })
 
-const formattedMin = computed(() => displayMin.value.toFixed(1))
-const formattedMax = computed(() => displayMax.value.toFixed(1))
+const formattedMin = computed(() => displayMin.value.toFixed(props.labelValueTofixedLength))
+const formattedMax = computed(() => displayMax.value.toFixed(props.labelValueTofixedLength))
 
 // 颜色生成
 const generateColors = (count: number): string[] => {

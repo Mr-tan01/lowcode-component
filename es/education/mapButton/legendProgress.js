@@ -1,7 +1,7 @@
 import _sfc_main from "./legendProgress2.js";
 import './assets/legendProgress.css';/* empty css                */
 import _export_sfc from "./_virtual/_plugin-vue_export-helper.js";
-const legendProgress = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-d02c6625"]]);
+const legendProgress = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-d27729b6"]]);
 export {
   legendProgress as default
 };
