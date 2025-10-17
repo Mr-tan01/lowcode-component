@@ -290,7 +290,8 @@ export class cesiumService {
     }
 
     // 处理相机高度变化
-    async handleCameraHeightChange(): Promise<void> {
+    // 处理相机高度变化
+    handleCameraHeightChange(): void {
         if (!this.viewer || !this.pointEntities) return
 
         const cameraHeight = this.viewer.camera.positionCartographic.height
@@ -301,30 +302,27 @@ export class cesiumService {
 
         this.shouldShowLabels = cameraHeight <= (this.options.config?.labelShowHeightThreshold ?? 5000)
         if (this.shouldShowLabels) {
-            await this.batchRenderPoints(this.pointData || [], false, { batchRenderSize: 50, batchRenderDelay: 100 }, batchPoints => {
-                batchPoints?.forEach(item => {
-                    this.addPoint(item, undefined, 'Label')
-                })
+            this.pointData?.forEach(item => {
+                this.addPoint(item, undefined, 'Label')
             })
         }
-        await this.batchRenderPoints(this.pointEntities || [], false, { batchRenderSize: 50, batchRenderDelay: 100 }, batchPoints => {
-            batchPoints.forEach(entity => {
-                if (entity.name && entity.name.endsWith('Label')) {
-                    // 只有在应该显示标签且标签当前未显示时才更新
-                    if (this.shouldShowLabels && !entity.show) {
-                        entity.show = true
+        this.pointEntities.forEach(entity => {
+            if (entity.name && entity.name.endsWith('Label')) {
+                // 只有在应该显示标签且标签当前未显示时才更新
+                if (this.shouldShowLabels && !entity.show) {
+                    entity.show = true
 
-                        // 设置标签的避让属性
-                        if (entity.label) {
-                            entity.label.disableDepthTestDistance = Number.POSITIVE_INFINITY
-                            entity.label.heightReference = 1 as any // 使用高度参考
-                        }
-                    } else if (!this.shouldShowLabels && entity.show) {
-                        // 如果不需要显示标签且标签当前显示，则隐藏
-                        entity.show = false
+                    // 设置标签的避让属性
+                    if (entity.label) {
+                        // @ts-expect-error
+                        entity.label.disableDepthTestDistance = Number.POSITIVE_INFINITY
+                        entity.label.heightReference = 1 as any // 使用高度参考
                     }
+                } else if (!this.shouldShowLabels && entity.show) {
+                    // 如果不需要显示标签且标签当前显示，则隐藏
+                    entity.show = false
                 }
-            })
+            }
         })
     }
 
@@ -609,7 +607,6 @@ export class cesiumService {
         points: any[],
         defaultShowState: boolean,
         batchRenderConfig: { batchRenderSize: number; batchRenderDelay: number },
-        cb?: (batchPoints: any[]) => void,
     ): Promise<void> => {
         // 取消任何正在进行的渲染任务
         this.cancelBatchRender()
@@ -632,17 +629,12 @@ export class cesiumService {
             const startIndex = batchIndex * batchSize
             const endIndex = Math.min(startIndex + batchSize, totalLength)
             const batchPoints = points.slice(startIndex, endIndex)
-            if (cb) {
-                cb(batchPoints)
-            } else {
-                // 渲染当前批次的点位
-                batchPoints.forEach(point => {
-                    this.addPoint(point, 'value')
-                    if (defaultShowState) {
-                        this.addPoint(point)
-                    }
-                })
-            }
+            batchPoints.forEach(point => {
+                this.addPoint(point, 'value')
+                if (defaultShowState) {
+                    this.addPoint(point)
+                }
+            })
 
             // 继续进行下一批渲染
             const taskId = requestAnimationFrame(() => {

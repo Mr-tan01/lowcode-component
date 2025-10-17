@@ -54,7 +54,7 @@ class cesiumService {
     });
     __publicField(this, "renderTasks", /* @__PURE__ */ new WeakMap());
     // 分批渲染点位
-    __publicField(this, "batchRenderPoints", async (points, defaultShowState, batchRenderConfig, cb) => {
+    __publicField(this, "batchRenderPoints", async (points, defaultShowState, batchRenderConfig) => {
       this.cancelBatchRender();
       const totalLength = points.length;
       if (totalLength === 0) return;
@@ -68,16 +68,12 @@ class cesiumService {
         const startIndex = batchIndex * batchSize;
         const endIndex = Math.min(startIndex + batchSize, totalLength);
         const batchPoints = points.slice(startIndex, endIndex);
-        if (cb) {
-          cb(batchPoints);
-        } else {
-          batchPoints.forEach((point) => {
-            this.addPoint(point, "value");
-            if (defaultShowState) {
-              this.addPoint(point);
-            }
-          });
-        }
+        batchPoints.forEach((point) => {
+          this.addPoint(point, "value");
+          if (defaultShowState) {
+            this.addPoint(point);
+          }
+        });
         const taskId = requestAnimationFrame(() => {
           renderBatch(batchIndex + 1);
         });
@@ -250,8 +246,9 @@ class cesiumService {
     });
   }
   // 处理相机高度变化
-  async handleCameraHeightChange() {
-    var _a;
+  // 处理相机高度变化
+  handleCameraHeightChange() {
+    var _a, _b;
     if (!this.viewer || !this.pointEntities) return;
     const cameraHeight = this.viewer.camera.positionCartographic.height;
     if (this.options.limitHeightHandler) {
@@ -259,26 +256,22 @@ class cesiumService {
     }
     this.shouldShowLabels = cameraHeight <= (((_a = this.options.config) == null ? void 0 : _a.labelShowHeightThreshold) ?? 5e3);
     if (this.shouldShowLabels) {
-      await this.batchRenderPoints(this.pointData || [], false, { batchRenderSize: 50, batchRenderDelay: 100 }, (batchPoints) => {
-        batchPoints == null ? void 0 : batchPoints.forEach((item) => {
-          this.addPoint(item, void 0, "Label");
-        });
+      (_b = this.pointData) == null ? void 0 : _b.forEach((item) => {
+        this.addPoint(item, void 0, "Label");
       });
     }
-    await this.batchRenderPoints(this.pointEntities || [], false, { batchRenderSize: 50, batchRenderDelay: 100 }, (batchPoints) => {
-      batchPoints.forEach((entity) => {
-        if (entity.name && entity.name.endsWith("Label")) {
-          if (this.shouldShowLabels && !entity.show) {
-            entity.show = true;
-            if (entity.label) {
-              entity.label.disableDepthTestDistance = Number.POSITIVE_INFINITY;
-              entity.label.heightReference = 1;
-            }
-          } else if (!this.shouldShowLabels && entity.show) {
-            entity.show = false;
+    this.pointEntities.forEach((entity) => {
+      if (entity.name && entity.name.endsWith("Label")) {
+        if (this.shouldShowLabels && !entity.show) {
+          entity.show = true;
+          if (entity.label) {
+            entity.label.disableDepthTestDistance = Number.POSITIVE_INFINITY;
+            entity.label.heightReference = 1;
           }
+        } else if (!this.shouldShowLabels && entity.show) {
+          entity.show = false;
         }
-      });
+      }
     });
   }
   // 设置事件处理器
