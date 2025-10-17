@@ -21,13 +21,14 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     sort: { default: "order" },
     animateIndex: { default: 0 },
     type: { default: "ranking" },
-    showBall: { type: Boolean, default: true }
+    showBall: { type: Boolean, default: true },
+    maxProportion: {}
   },
   setup(__props) {
     function complierTotal(data) {
       return data.reduce((pre, cur) => pre += cur.value, 0);
     }
-    const total = computed(() => complierTotal(__props.list));
+    const total = computed(() => __props.maxProportion ?? complierTotal(__props.list));
     const isAnimate = ref(__props.animateIndex);
     function getCurrentProportion(value) {
       if (!value) return 0;

@@ -57,17 +57,19 @@ const {
     animateIndex = 0,
     type = 'ranking',
     showBall = true,
+    maxProportion,
 } = defineProps<{
     list: RankingRecord[]
     sort?: 'order' | 'reverse' | 'none'
     animateIndex?: 0 | 1
     type?: 'ranking' | 'proprotion'
     showBall?: boolean
+    maxProportion?: number
 }>()
 function complierTotal(data: RankingRecord[]) {
     return data.reduce((pre: number, cur) => (pre += cur.value), 0)
 }
-const total = computed(() => complierTotal(list))
+const total = computed(() => maxProportion ?? complierTotal(list))
 const isAnimate = ref(animateIndex)
 function getCurrentProportion(value?: RankingRecord['value']) {
     if (!value) return 0
@@ -189,6 +191,7 @@ onMounted(() => {
                         border: 1px solid #a6cfff;
                         padding: 0 8px;
                         box-sizing: border-box;
+                        align-self: flex-start;
                     }
                 }
 
@@ -203,6 +206,7 @@ onMounted(() => {
                     &__unit {
                         @include fontcss();
                         opacity: 0.5;
+                        text-wrap: nowrap;
                     }
                 }
             }

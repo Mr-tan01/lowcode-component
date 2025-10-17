@@ -1,4 +1,4 @@
-import { defineComponent, ref, computed, watch, openBlock, createElementBlock, createElementVNode, toDisplayString, Fragment, renderList, normalizeStyle, withDirectives, vShow } from "vue";
+import { defineComponent, ref, computed, watch, createElementBlock, openBlock, createElementVNode, toDisplayString, Fragment, renderList, normalizeStyle, withDirectives, vShow } from "vue";
 const _hoisted_1 = { class: "legend-progress" };
 const _hoisted_2 = { class: "legend-progress__label" };
 const _hoisted_3 = { class: "legend-progress__center" };
@@ -16,6 +16,10 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       type: Array,
       required: true,
       validator: (value) => value.every((item) => item >= 0 && item <= 1)
+    },
+    labelValueTofixedLength: {
+      type: Number,
+      default: 1
     },
     colors: {
       type: Array,
@@ -68,8 +72,8 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     const displayMax = computed(() => {
       return processedData.value.length > 0 ? roundMax(processedData.value[processedData.value.length - 1]) : 0;
     });
-    const formattedMin = computed(() => displayMin.value.toFixed(1));
-    const formattedMax = computed(() => displayMax.value.toFixed(1));
+    const formattedMin = computed(() => displayMin.value.toFixed(props.labelValueTofixedLength));
+    const formattedMax = computed(() => displayMax.value.toFixed(props.labelValueTofixedLength));
     const generateColors = (count) => {
       if (count === 0) return [];
       if (props.colors && props.colors.length > 0) {
