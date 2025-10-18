@@ -21,6 +21,10 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       type: Number,
       default: 1
     },
+    isSortArr: {
+      type: Boolean,
+      default: true
+    },
     colors: {
       type: Array,
       default: () => []
@@ -64,6 +68,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     };
     const processedData = computed(() => {
       const unique = [...new Set(props.data)];
+      if (!props.isSortArr) return unique;
       return unique.sort((a, b) => a - b);
     });
     const displayMin = computed(() => {

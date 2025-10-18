@@ -58,6 +58,10 @@ const props = defineProps({
         type: Number,
         default: 1,
     },
+    isSortArr: {
+        type: Boolean,
+        default: true,
+    },
     colors: {
         type: Array as () => string[],
         default: () => [],
@@ -103,6 +107,7 @@ const roundMax = (value: number) => {
 
 const processedData = computed(() => {
     const unique = [...new Set(props.data)]
+    if (!props.isSortArr) return unique
     return unique.sort((a, b) => a - b)
 })
 

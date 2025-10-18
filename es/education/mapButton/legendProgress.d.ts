@@ -12,6 +12,10 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
         type: NumberConstructor;
         default: number;
     };
+    isSortArr: {
+        type: BooleanConstructor;
+        default: boolean;
+    };
     colors: {
         type: () => string[];
         default: () => never[];
@@ -36,6 +40,10 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
         type: NumberConstructor;
         default: number;
     };
+    isSortArr: {
+        type: BooleanConstructor;
+        default: boolean;
+    };
     colors: {
         type: () => string[];
         default: () => never[];
@@ -49,6 +57,7 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
 }>, {
     label: string;
     labelValueTofixedLength: number;
+    isSortArr: boolean;
     colors: string[];
     unit: string;
 }, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {
