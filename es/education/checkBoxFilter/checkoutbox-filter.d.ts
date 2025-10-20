@@ -37,6 +37,10 @@ declare const __VLS_component: import('vue').DefineComponent<import('vue').Extra
         type: StringConstructor;
         default: string;
     };
+    showReset: {
+        type: BooleanConstructor;
+        default: boolean;
+    };
     value: {
         type: PropType<(string | number)[]>;
     };
@@ -58,6 +62,10 @@ declare const __VLS_component: import('vue').DefineComponent<import('vue').Extra
         type: StringConstructor;
         default: string;
     };
+    showReset: {
+        type: BooleanConstructor;
+        default: boolean;
+    };
     value: {
         type: PropType<(string | number)[]>;
     };
@@ -67,6 +75,7 @@ declare const __VLS_component: import('vue').DefineComponent<import('vue').Extra
 }>, {
     isCheckAll: boolean;
     resetText: string;
+    showReset: boolean;
 }, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, HTMLDivElement>;
 declare const _default: __VLS_WithTemplateSlots<typeof __VLS_component, __VLS_TemplateResult["slots"]>;
 export default _default;
