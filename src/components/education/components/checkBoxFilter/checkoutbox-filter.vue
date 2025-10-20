@@ -35,7 +35,7 @@
                         </g>
                     </svg>
                 </div>
-                <span>重置</span>
+                <span>{{ resetText }}</span>
             </span>
         </div>
 
@@ -92,6 +92,10 @@ const {
     },
     isCheckAll: {
         type: Boolean,
+    },
+    resetText: {
+        type: String,
+        default: '重置',
     },
 })
 

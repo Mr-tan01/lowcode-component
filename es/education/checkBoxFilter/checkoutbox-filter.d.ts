@@ -33,6 +33,10 @@ declare const __VLS_component: import('vue').DefineComponent<import('vue').Extra
     isCheckAll: {
         type: BooleanConstructor;
     };
+    resetText: {
+        type: StringConstructor;
+        default: string;
+    };
     value: {
         type: PropType<(string | number)[]>;
     };
@@ -50,6 +54,10 @@ declare const __VLS_component: import('vue').DefineComponent<import('vue').Extra
     isCheckAll: {
         type: BooleanConstructor;
     };
+    resetText: {
+        type: StringConstructor;
+        default: string;
+    };
     value: {
         type: PropType<(string | number)[]>;
     };
@@ -58,6 +66,7 @@ declare const __VLS_component: import('vue').DefineComponent<import('vue').Extra
     "onUpdate:value"?: ((value: (string | number)[]) => any) | undefined;
 }>, {
     isCheckAll: boolean;
+    resetText: string;
 }, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, HTMLDivElement>;
 declare const _default: __VLS_WithTemplateSlots<typeof __VLS_component, __VLS_TemplateResult["slots"]>;
 export default _default;
