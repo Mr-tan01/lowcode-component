@@ -10,7 +10,7 @@
                     >全选</span
                 >
             </LcCheckbox>
-            <span class="check-reset lc-checkbox-gaid__row" @click="handleReset">
+            <span v-if="showReset" class="check-reset lc-checkbox-gaid__row" @click="handleReset">
                 <div class="check-reset__icon">
                     <svg
                         width="16px"
@@ -96,6 +96,10 @@ const {
     resetText: {
         type: String,
         default: '重置',
+    },
+    showReset: {
+        type: Boolean,
+        default: true,
     },
 })
 
@@ -193,6 +197,7 @@ watch(checkboxAllValue, value => {
         width: 100%;
         display: flex;
         flex-wrap: wrap;
+        justify-content: flex-start;
         &__row {
             margin-bottom: 14px;
             flex: 0 0 calc(100% / v-bind(row));
