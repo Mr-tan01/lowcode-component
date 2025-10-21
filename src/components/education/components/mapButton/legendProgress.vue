@@ -106,7 +106,11 @@ const roundMax = (value: number) => {
 }
 
 const processedData = computed(() => {
-    const unique = [...new Set(props.data)]
+    // 过滤掉无效值，替换为 0
+    const filteredData = props.data.map(value => {
+        return Number.isFinite(value) ? value : 0
+    })
+    const unique = [...new Set(filteredData)]
     if (!props.isSortArr) return unique
     return unique.sort((a, b) => a - b)
 })

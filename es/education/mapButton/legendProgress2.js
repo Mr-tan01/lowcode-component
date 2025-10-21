@@ -67,7 +67,10 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       return Math.round(value * 100);
     };
     const processedData = computed(() => {
-      const unique = [...new Set(props.data)];
+      const filteredData = props.data.map((value) => {
+        return Number.isFinite(value) ? value : 0;
+      });
+      const unique = [...new Set(filteredData)];
       if (!props.isSortArr) return unique;
       return unique.sort((a, b) => a - b);
     });
