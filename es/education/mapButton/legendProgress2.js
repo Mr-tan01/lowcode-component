@@ -67,6 +67,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       return Math.round(value * 100);
     };
     const processedData = computed(() => {
+      if (!props.data || !Array.isArray(props.data)) return [];
       const filteredData = props.data.map((value) => {
         return Number.isFinite(value) ? value : 0;
       });
@@ -75,10 +76,12 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       return unique.sort((a, b) => a - b);
     });
     const displayMin = computed(() => {
-      return processedData.value.length > 0 ? roundMin(processedData.value[0]) : 0;
+      if (!processedData.value || processedData.value.length === 0) return 0;
+      return roundMin(processedData.value[0]);
     });
     const displayMax = computed(() => {
-      return processedData.value.length > 0 ? roundMax(processedData.value[processedData.value.length - 1]) : 0;
+      if (!processedData.value || processedData.value.length === 0) return 0;
+      return roundMax(processedData.value[processedData.value.length - 1]);
     });
     const formattedMin = computed(() => displayMin.value.toFixed(props.labelValueTofixedLength));
     const formattedMax = computed(() => displayMax.value.toFixed(props.labelValueTofixedLength));
