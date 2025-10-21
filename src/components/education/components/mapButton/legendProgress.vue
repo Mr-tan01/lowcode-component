@@ -106,6 +106,7 @@ const roundMax = (value: number) => {
 }
 
 const processedData = computed(() => {
+    if (!props.data || !Array.isArray(props.data)) return []
     // 过滤掉无效值，替换为 0
     const filteredData = props.data.map(value => {
         return Number.isFinite(value) ? value : 0
@@ -116,10 +117,12 @@ const processedData = computed(() => {
 })
 
 const displayMin = computed(() => {
-    return processedData.value.length > 0 ? roundMin(processedData.value[0]) : 0
+    if (!processedData.value || processedData.value.length === 0) return 0
+    return roundMin(processedData.value[0])
 })
 const displayMax = computed(() => {
-    return processedData.value.length > 0 ? roundMax(processedData.value[processedData.value.length - 1]) : 0
+    if (!processedData.value || processedData.value.length === 0) return 0
+    return roundMax(processedData.value[processedData.value.length - 1])
 })
 
 const formattedMin = computed(() => displayMin.value.toFixed(props.labelValueTofixedLength))
