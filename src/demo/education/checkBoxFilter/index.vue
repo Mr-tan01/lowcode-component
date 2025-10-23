@@ -3,7 +3,8 @@
         <DemoHelpBox title="复选框过滤" description="深圳教育项目-复选框过滤" rswidth="1210px" rs-height="500px" :code="demoCodes.code1">
             value: {{ checkboxValue }}
             <div class="size-box">
-                <LcCheckboxFilter v-model:value="checkboxValue" :data-list @check="check"> </LcCheckboxFilter>
+                <LcCheckboxFilter v-model:value="checkboxValue" :data-list :require-at-least-one-per-category="true" @check="check">
+                </LcCheckboxFilter>
             </div>
         </DemoHelpBox>
     </div>
