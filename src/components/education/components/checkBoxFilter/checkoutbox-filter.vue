@@ -48,7 +48,8 @@
                         :key="check.value"
                         class="lc-checkbox-gaid__row"
                         :value="check.value"
-                        :disabled="check.disabled"
+                        :disabled="isOptionDisabled(check)"
+                        @click="handleCheckboxClick(check.value, $event)"
                     >
                         <span
                             class="lc-checkbox-filter__check__label"
@@ -68,6 +69,9 @@
 import { ref, computed, PropType, watch } from 'vue'
 import { LcCheckbox, LcCheckboxGroup } from '@/components/education/components/checkbox/index'
 import { LcSubhead } from '@/components/education/components/headline'
+import { useMessage } from 'naive-ui'
+
+const message = useMessage()
 export type FilterItem = {
     label: string
     value: number | string
@@ -83,6 +87,7 @@ const {
     row = 2,
     dataList = [],
     isCheckAll = false,
+    requireAtLeastOnePerCategory = false,
 } = defineProps({
     row: {
         type: Number,
@@ -100,6 +105,10 @@ const {
     showReset: {
         type: Boolean,
         default: true,
+    },
+    requireAtLeastOnePerCategory: {
+        type: Boolean,
+        default: false,
     },
 })
 
@@ -132,7 +141,22 @@ const handleCheckAll = (checked: boolean) => {
 }
 
 const handleReset = () => {
-    checkboxAllValue.value = []
+    if (requireAtLeastOnePerCategory) {
+        // 重置时每个分类至少保留一个选项
+        const newValue: (number | string)[] = []
+        dataList.forEach(item => {
+            if (item.children && item.children.length > 0) {
+                // 默认保留第一个选项
+                const firstChild = item.children[0]
+                if (!firstChild.disabled) {
+                    newValue.push(firstChild.value)
+                }
+            }
+        })
+        checkboxAllValue.value = newValue
+    } else {
+        checkboxAllValue.value = []
+    }
     checkAll.value = false
 }
 
@@ -140,6 +164,46 @@ const updateCheckAllStatus = () => {
     const allValues = checkAllVlaue.value
     const selectedValues = checkboxAllValue.value
     checkAll.value = allValues.every(value => selectedValues.includes(value))
+}
+
+// 获取禁用的选项
+const isOptionDisabled = (check: FilterItem) => {
+    return check.disabled
+}
+
+// 如果是因分类限制则需要阻止取消操作的选项
+const isCategoryRequiredPrevented = (check: FilterItem) => {
+    if (check.disabled) return false // 正常禁用的选项不应用此逻辑
+    if (requireAtLeastOnePerCategory && checkboxAllValue.value.includes(check.value)) {
+        const category = dataList.find(item => item.children?.some(child => child.value === check.value))
+        if (category?.children) {
+            const categoryValues = category.children.map(child => child.value)
+            const selectedInCategory = checkboxAllValue.value.filter(val => categoryValues.includes(val))
+            // 如果只有一个选项被选中，则阻止取消
+            return selectedInCategory.length === 1 && selectedInCategory.includes(check.value)
+        }
+    }
+    return false
+}
+
+const handleCheckboxClick = (value: number | string, event: Event) => {
+    const checkItem = dataList.flatMap(item => item.children || []).find(child => child.value === value)
+    if (checkItem && requireAtLeastOnePerCategory && checkboxAllValue.value.includes(value)) {
+        if (isCategoryRequiredPrevented(checkItem)) {
+            // 阻止取消
+            event.preventDefault()
+            event.stopPropagation()
+            // 立即恢复复选框的选中状态
+            setTimeout(() => {
+                if (!checkboxAllValue.value.includes(value)) {
+                    checkboxAllValue.value = [...checkboxAllValue.value, value]
+                }
+            }, 0)
+            message.warning('每个分类必须至少勾选一个选项')
+            return false
+        }
+    }
+    return true
 }
 
 if (isCheckAll) {
