@@ -8,7 +8,7 @@ declare const _default: import('vue').DefineComponent<__VLS_Props, {}, {}, {}, {
 }, string, import('vue').PublicProps, Readonly<__VLS_Props> & Readonly<{
     onOnload?: ((...args: any[]) => any) | undefined;
 }>, {
-    mapKey: string;
     options: mars2d.Map.Options;
+    mapKey: string;
 }, {}, {}, {}, string, import('vue').ComponentProvideOptions, false, {}, HTMLDivElement>;
 export default _default;

@@ -68,6 +68,21 @@ const areaData = {
     position: shenZhen.features[10]
   }
 };
+var CanvasMode = /* @__PURE__ */ ((CanvasMode2) => {
+  CanvasMode2["Text"] = "text";
+  CanvasMode2["Image"] = "image";
+  return CanvasMode2;
+})(CanvasMode || {});
+var CanvasType = /* @__PURE__ */ ((CanvasType2) => {
+  CanvasType2["Danger"] = "danger";
+  CanvasType2["Success"] = "success";
+  CanvasType2["Primary"] = "primary";
+  CanvasType2["Warning"] = "warning";
+  CanvasType2["Hover"] = "hover";
+  return CanvasType2;
+})(CanvasType || {});
 export {
+  CanvasMode,
+  CanvasType,
   areaData
 };

@@ -1,74 +1,82 @@
-import primary from "../image/primary.svg.js";
-import success from "../image/success.svg.js";
-import warning from "../image/warning.svg.js";
-import danger from "../image/danger.svg.js";
-import primaryLabel from "../image/primary_label.png.js";
-import successLabel from "../image/success_label.png.js";
-import warningLabel from "../image/warning_label.png.js";
-import dangerLabel from "../image/danger_label.png.js";
-import iconPrimary from "../image/icon_primary.svg.js";
-import iconSuccess from "../image/icon_success.svg.js";
-import { CallbackProperty, VerticalOrigin, Cartesian2, Cartesian3, JulianDate } from "@cesium/engine";
-const imageUrlOption = {
-  primary,
-  success,
-  warning,
-  danger,
-  primary_label: primaryLabel,
-  success_label: successLabel,
-  warning_label: warningLabel,
-  danger_label: dangerLabel,
-  icon_primary: iconPrimary,
-  icon_success: iconSuccess
-};
-const options = {
-  width: 50,
-  height: 75,
-  fontStyle: {
-    size: "24px",
-    family: "HarmonyOS Sans SC",
-    color: "#fff",
-    weight: "bold"
-  },
-  textStyle: {
-    size: "16px",
-    family: "HarmonyOS_Sans_SC_Medium",
-    weight: "normal"
+import { defaultFontConfig, defaultCanvasConfig } from "./const.js";
+import { CanvasType, CanvasMode } from "./type.js";
+import { cloneDeep, merge } from "lodash-es";
+import { CallbackProperty, VerticalOrigin, Cartesian3, JulianDate } from "@cesium/engine";
+function darkenColor(color, percent) {
+  const num = parseInt(color.slice(1), 16);
+  const amt = Math.round(2.55 * percent);
+  let R = (num >> 16) - amt;
+  let G = (num >> 8 & 255) - amt;
+  let B = (num & 255) - amt;
+  R = R < 0 ? 0 : R;
+  G = G < 0 ? 0 : G;
+  B = B < 0 ? 0 : B;
+  return "#" + ((1 << 24) + (R << 16) + (G << 8) + B).toString(16).slice(1);
+}
+const drawText = (ctx, fontSizeConfig, label) => {
+  if (fontSizeConfig == null ? void 0 : fontSizeConfig.customCanvasText) {
+    fontSizeConfig.customCanvasText(ctx, label);
+    return;
   }
-};
-const reloadText = (option) => {
-  var _a, _b, _c, _d, _e, _f, _g, _h, _i, _j, _k, _l, _m, _n, _o;
-  const { info, valueKey, canvas, ctx, text } = option;
-  const valueFont = `
-    ${((_a = info == null ? void 0 : info.fontStyle) == null ? void 0 : _a.weight) ?? ((_b = options == null ? void 0 : options.fontStyle) == null ? void 0 : _b.weight)} 
-    ${((_c = info == null ? void 0 : info.fontStyle) == null ? void 0 : _c.size) ?? ((_d = options == null ? void 0 : options.fontStyle) == null ? void 0 : _d.size)}
-    ${((_e = info == null ? void 0 : info.fontStyle) == null ? void 0 : _e.family) ?? ((_f = options == null ? void 0 : options.fontStyle) == null ? void 0 : _f.family)}`;
-  const textFont = `
-    ${((_g = info == null ? void 0 : info.textStyle) == null ? void 0 : _g.weight) ?? ((_h = options == null ? void 0 : options.textStyle) == null ? void 0 : _h.weight)} 
-    ${((_i = info == null ? void 0 : info.textStyle) == null ? void 0 : _i.size) ?? ((_j = options == null ? void 0 : options.textStyle) == null ? void 0 : _j.size)}
-    ${((_k = info == null ? void 0 : info.textStyle) == null ? void 0 : _k.family) ?? ((_l = options == null ? void 0 : options.textStyle) == null ? void 0 : _l.family)}`;
-  ctx.font = valueKey ? valueFont : textFont;
-  ctx.fillStyle = (valueKey ? (_m = info == null ? void 0 : info.fontStyle) == null ? void 0 : _m.color : (_n = info == null ? void 0 : info.textStyle) == null ? void 0 : _n.color) ?? ((_o = options.fontStyle) == null ? void 0 : _o.color);
+  const text = label || "-";
+  ctx.font = `${fontSizeConfig.weight} ${fontSizeConfig.size} ${fontSizeConfig.family}`;
+  ctx.fillStyle = fontSizeConfig.color;
+  ctx.textAlign = "center";
   ctx.textBaseline = "middle";
-  ctx.textAlign = "left";
-  const textX = valueKey ? (info == null ? void 0 : info.textOffsetX) ?? 13 : 46;
-  const textY = (info == null ? void 0 : info.textOffsetY) ?? canvas.height / 2 - (valueKey ? 10 : 0);
-  ctx.fillText(text, textX, textY);
+  fontSizeConfig.fillText ? fontSizeConfig.fillText(ctx) : ctx.fillText(text, 25, 25);
 };
-const eraseOverlapImage = (ctx) => {
+function drawOnCanvas(options) {
+  const { width = 60, height = 85, iconType = CanvasType.Primary, currentMode = CanvasMode.Text, fontConfig, canvas, ctx, customCanvas } = options;
+  if (customCanvas) {
+    customCanvas == null ? void 0 : customCanvas(canvas, ctx);
+    return;
+  }
+  const fontSizeConfig = merge(defaultFontConfig, fontConfig ?? {});
+  const { borderColor, backgroundColor } = merge(defaultCanvasConfig[iconType], options, {});
+  ctx.clearRect(0, 0, width, height);
+  canvas.width = width ? width : 60;
+  canvas.height = height ? height : 85;
   ctx.save();
+  ctx.translate(5, 5);
+  const gradient = ctx.createLinearGradient(0, 0, 0, 400);
+  gradient.addColorStop(0, backgroundColor);
+  gradient.addColorStop(1, darkenColor(backgroundColor, 20));
   ctx.beginPath();
-  ctx.moveTo(0, 0);
-  ctx.lineTo(22, 0);
-  ctx.quadraticCurveTo(30, 15, 20, 26);
-  ctx.lineTo(0, 45);
+  ctx.moveTo(50, 24.58);
+  ctx.bezierCurveTo(50, 34.36, 43.6, 40.76, 35.78, 46.77);
+  ctx.bezierCurveTo(31.83, 49.8, 28.81, 55.58, 26.73, 64.11);
+  ctx.bezierCurveTo(26.54, 64.9, 25.79, 65.4, 25, 65.31);
+  ctx.bezierCurveTo(24.21, 65.4, 23.46, 64.9, 23.27, 64.11);
+  ctx.bezierCurveTo(21.19, 55.58, 18.17, 49.8, 14.22, 46.77);
+  ctx.lineTo(13.49, 46.2);
+  ctx.bezierCurveTo(6, 40.35, 0, 34.06, 0, 24.58);
+  ctx.bezierCurveTo(0, 11, 11.19, 0, 25, 0);
+  ctx.bezierCurveTo(38.81, 0, 50, 11, 50, 24.58);
   ctx.closePath();
-  ctx.globalCompositeOperation = "destination-out";
-  ctx.fillStyle = "rgba(0,0,0,1)";
+  ctx.fillStyle = gradient;
+  ctx.fill();
+  ctx.save();
+  ctx.clip();
+  if (currentMode === CanvasMode.Text) {
+    const { label } = options;
+    drawText(ctx, fontSizeConfig, label);
+  } else if (currentMode === CanvasMode.Image) ;
+  ctx.restore();
+  ctx.strokeStyle = borderColor ?? backgroundColor;
+  ctx.lineWidth = 4;
+  ctx.stroke();
+  ctx.beginPath();
+  ctx.ellipse(25.52, 67.88, 7.88, 1.6, 0, 0, Math.PI * 2);
+  ctx.shadowColor = "#325581";
+  ctx.shadowBlur = 5;
+  ctx.shadowOffsetX = 0;
+  ctx.shadowOffsetY = 0;
+  ctx.fillStyle = "#325581";
+  ctx.globalAlpha = 0.72;
   ctx.fill();
   ctx.restore();
-};
-const createInfoCanvas = (info, valueKey, labelType) => {
+}
+const createInfoCanvas = (info) => {
   return new Promise((resolve, reject) => {
     const canvas = document.createElement("canvas");
     const ctx = canvas.getContext("2d");
@@ -76,97 +84,14 @@ const createInfoCanvas = (info, valueKey, labelType) => {
       reject(new Error("Could not get canvas context"));
       return;
     }
-    canvas.width = (info == null ? void 0 : info.width) ?? options.width;
-    canvas.height = (info == null ? void 0 : info.height) ?? options.height;
-    const { iconType, textIconType, customIcon } = info;
-    const icons = {
-      icon: iconType ? imageUrlOption[iconType] : imageUrlOption["primary"],
-      textIcon: textIconType ? imageUrlOption[textIconType] : imageUrlOption[(labelType ? "success" : "primary") + "_label"]
-    };
-    const bgImageUrl = customIcon && valueKey ? customIcon : icons == null ? void 0 : icons[valueKey ? "icon" : "textIcon"];
-    const text = (info == null ? void 0 : info[valueKey ?? "text"]) || "";
     const cleanup = () => {
       ctx.setTransform(1, 0, 0, 1, 0, 0);
       ctx.clearRect(0, 0, canvas.width, canvas.height);
     };
-    reloadText({
-      info,
-      valueKey,
-      canvas,
-      ctx,
-      text
-    });
-    if (bgImageUrl) {
-      const image = new Image();
-      image.crossOrigin = "Anonymous";
-      image.src = bgImageUrl;
-      image.onload = () => {
-        reloadText({
-          info,
-          valueKey,
-          canvas,
-          ctx,
-          text
-        });
-        canvas.width = valueKey ? (info == null ? void 0 : info.width) ?? image.width : ctx.measureText(text).width + 80;
-        canvas.height = (info == null ? void 0 : info.height) ?? image.height;
-        ctx.drawImage(image, 0, 0, image.width, image.height, 0, 0, canvas.width, canvas.height);
-        if (!valueKey) {
-          eraseOverlapImage(ctx);
-        }
-        reloadText({
-          info,
-          valueKey,
-          canvas,
-          ctx,
-          text
-        });
-        resolve({ canvas, cleanup });
-      };
-      image.onerror = () => {
-        reject(new Error("Failed to load image"));
-      };
-    } else {
-      reloadText({
-        info,
-        valueKey,
-        canvas,
-        ctx,
-        text
-      });
-      resolve({ canvas, cleanup });
-    }
+    drawOnCanvas({ ...info.options, canvas, ctx });
+    resolve({ canvas, cleanup });
   });
 };
-const loadImage = (url) => {
-  return new Promise((resolve, reject) => {
-    const image = new Image();
-    image.crossOrigin = "Anonymous";
-    image.onload = () => resolve(image);
-    image.onerror = reject;
-    image.src = url;
-  });
-};
-async function drawImageCanvas(imgSrc) {
-  return new Promise((resolve, reject) => {
-    const image = new Image();
-    image.crossOrigin = "anonymous";
-    image.src = imgSrc;
-    image.onload = () => {
-      try {
-        const canvas = document.createElement("canvas");
-        const ctx = canvas.getContext("2d");
-        if (!ctx) return reject(new Error("无法获取2D上下文"));
-        canvas.width = image.naturalWidth;
-        canvas.height = image.naturalHeight;
-        ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
-        resolve(canvas);
-      } catch (e) {
-        reject(new Error("画布创建失败", { cause: e }));
-      }
-    };
-  });
-}
 function createClusterBillboard(count, primaryType, typeCount = {}, typeColors = {}) {
   const canvas = document.createElement("canvas");
   const ctx = canvas.getContext("2d");
@@ -213,30 +138,16 @@ function createClusterBillboard(count, primaryType, typeCount = {}, typeColors =
   }
   return canvas;
 }
-async function updateViewerEntityInfo(info, entity, type) {
+async function updateViewerEntityInfo(info, entity) {
   var _a, _b;
   if ((entity == null ? void 0 : entity.billboard) && entity.properties) {
     const currentTime = JulianDate.now();
     const changeState = (_a = entity.properties) == null ? void 0 : _a.getValue(currentTime).changeState;
-    const valueIcon = changeState ? (info == null ? void 0 : info.iconType) ?? "primary" : (info == null ? void 0 : info.changeIconType) ?? "success";
-    const textIcon = changeState ? (info == null ? void 0 : info.textIconType) ?? "primary_label" : (info == null ? void 0 : info.changeTextIconType) ?? "success_label";
-    let valueInfo = (_b = entity.billboard.image) == null ? void 0 : _b.getValue();
-    valueInfo = typeof valueInfo === "string" ? await drawImageCanvas(valueInfo) : valueInfo;
-    const ctx = valueInfo.getContext("2d");
-    const image = await loadImage(info.customIcon && type && changeState ? info.customIcon : imageUrlOption[type ? valueIcon : textIcon]);
-    ctx == null ? void 0 : ctx.clearRect(0, 0, valueInfo.width, valueInfo.height);
-    ctx.drawImage(image, 0, 0, valueInfo.width, valueInfo.height);
-    if (!type) {
-      eraseOverlapImage(ctx);
-    }
-    reloadText({
-      info,
-      valueKey: type,
-      canvas: valueInfo,
-      ctx,
-      text: type ? info.value : info.text
+    const canvasOptions = cloneDeep(info.options);
+    const { canvas } = await createInfoCanvas({
+      options: merge(canvasOptions, { iconType: !changeState ? CanvasType.Hover : ((_b = info.options) == null ? void 0 : _b.iconType) ?? CanvasType.Primary })
     });
-    entity.billboard.image = valueInfo.toDataURL("image/png");
+    entity.billboard.image = canvas;
     entity.properties.changeState = new CallbackProperty(() => {
       return !changeState;
     }, false);
@@ -245,25 +156,18 @@ async function updateViewerEntityInfo(info, entity, type) {
 const createEntityConfig = async ({
   point,
   valueInfo,
-  type,
+  isPopoverEntity = false,
   viewer
 }) => {
   const commonProperties = {
-    value: point == null ? void 0 : point.value,
-    text: point == null ? void 0 : point.text,
     changeState: false,
-    type: (point == null ? void 0 : point.iconType) ?? "primary",
     position: [point.lng, point.lat],
-    name: type ? point.name : `${point.name}Label`
+    options: point.options,
+    valueInfo
   };
   const commonBillboard = {
     image: valueInfo,
-    pixelOffset: new CallbackProperty(() => {
-      const height = viewer.camera.positionCartographic.height;
-      const scale = Math.max(0.3, Math.min(2, 1 - height / 1e5));
-      return type ? new Cartesian2(0, 0) : new Cartesian2(valueInfo.width * scale / 2, (valueInfo.height / 2 - 43) * scale);
-    }, false),
-    disableDepthTestDistance: type ? void 0 : Number.POSITIVE_INFINITY,
+    disableDepthTestDistance: isPopoverEntity ? Number.POSITIVE_INFINITY : void 0,
     verticalOrigin: VerticalOrigin.BOTTOM,
     scale: new CallbackProperty(() => {
       const height = viewer.camera.positionCartographic.height;
@@ -272,9 +176,10 @@ const createEntityConfig = async ({
     }, false)
   };
   return {
+    name: isPopoverEntity ? `${point.name}Label` : point.name,
     position: Cartesian3.fromDegrees(point.lng, point.lat, 50),
-    name: type ? point.name : `${point.name}Label`,
     properties: commonProperties,
+    isPopoverEntity,
     billboard: commonBillboard
   };
 };

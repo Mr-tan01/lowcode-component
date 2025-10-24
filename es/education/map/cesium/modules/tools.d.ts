@@ -1,7 +1,6 @@
-import { Viewer, Entity, Cartesian3 } from 'cesium';
+import { Entity, Cartesian3, Viewer } from 'cesium';
 import { EntityConfig, pointType } from './type';
-export declare const changeIconOption: any;
-export declare const createInfoCanvas: (info: any, valueKey?: string, labelType?: string) => Promise<{
+export declare const createInfoCanvas: (info: any) => Promise<{
     canvas: HTMLCanvasElement;
     cleanup: () => void;
 }>;
@@ -9,15 +8,15 @@ export declare function createClusterBillboard(count: number, primaryType: strin
 /**
  * 修改entity信息
  */
-export declare function updateViewerEntityInfo(info: any, entity: Entity | undefined, type?: string): Promise<void>;
+export declare function updateViewerEntityInfo(info: any, entity: Entity | undefined): Promise<void>;
 /**
  * 创建entity信息
  * @returns EntityConfig
  */
-export declare const createEntityConfig: ({ point, valueInfo, type, viewer, }: {
+export declare const createEntityConfig: ({ point, valueInfo, isPopoverEntity, viewer, }: {
     point: pointType;
     valueInfo: HTMLCanvasElement;
-    type?: string;
+    isPopoverEntity?: boolean;
     viewer: Viewer;
 }) => Promise<EntityConfig>;
 /**

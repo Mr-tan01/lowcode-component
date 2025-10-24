@@ -1,138 +1,123 @@
-import { Viewer } from 'cesium'
-/**
- * 创建信息Canvas元素
- * @param info 信息对象
- * @param valueKey 值键名
- * @param labelType 文字键值
- * @returns Promise<{canvas: HTMLCanvasElement, cleanup: () => void}>
- */
-import { VerticalOrigin } from 'cesium'
-import primary from '../image/primary.svg'
-import success from '../image/success.svg'
-import warning from '../image/warning.svg'
-import danger from '../image/danger.svg'
-import primaryLabel from '../image/primary_label.png'
-import successLabel from '../image/success_label.png'
-import warningLabel from '../image/warning_label.png'
-import dangerLabel from '../image/danger_label.png'
-import iconPrimary from '../image/icon_primary.svg'
-import iconSuccess from '../image/icon_success.svg'
+import { type Entity, JulianDate, CallbackProperty, Cartesian3, Math as cesiumMath, Viewer, VerticalOrigin } from 'cesium'
+import { defaultFontConfig, defaultCanvasConfig } from './const'
+import { CanvasMode, CanvasType, type fontStyle, CanvasConfigOptions, EntityProperties, EntityConfig, pointType, TextModeConfig } from './type'
+import { cloneDeep, merge } from 'lodash-es'
+// 颜色辅助函数 - 加深颜色
+function darkenColor(color, percent) {
+    const num = parseInt(color.slice(1), 16)
+    const amt = Math.round(2.55 * percent)
+    let R = (num >> 16) - amt
+    let G = ((num >> 8) & 0x00ff) - amt
+    let B = (num & 0x0000ff) - amt
 
-interface fontStyle {
-    size?: string
-    family?: string
-    color?: string
-    width?: number
-    weight?:
-        | number // 100-900
-        | 'normal' // 400
-        | 'bold' // 700
-        | 'bolder'
-        | 'lighter'
+    R = R < 0 ? 0 : R
+    G = G < 0 ? 0 : G
+    B = B < 0 ? 0 : B
+
+    return '#' + ((1 << 24) + (R << 16) + (G << 8) + B).toString(16).slice(1)
 }
 
-interface canvasOption {
-    width?: number
-    height?: number
-    fontStyle?: fontStyle
-    textStyle?: fontStyle
-}
-
-const imageUrlOption: any = {
-    primary: primary,
-    success: success,
-    warning: warning,
-    danger: danger,
-    primary_label: primaryLabel,
-    success_label: successLabel,
-    warning_label: warningLabel,
-    danger_label: dangerLabel,
-    icon_primary: iconPrimary,
-    icon_success: iconSuccess,
-}
-
-export const changeIconOption: any = {
-    icon_success: iconSuccess,
-    icon_primary: iconPrimary,
-}
-
-const options = {
-    width: 50,
-    height: 75,
-    fontStyle: {
-        size: '24px',
-        family: 'HarmonyOS Sans SC',
-        color: '#fff',
-        weight: 'bold',
-    },
-    textStyle: {
-        size: '16px',
-        family: 'HarmonyOS_Sans_SC_Medium',
-        color: '#fff',
-        weight: 'normal',
-    },
-} as canvasOption
-
-interface reloadTextOption {
-    info: any
-    valueKey: string | undefined | boolean
-    canvas: HTMLCanvasElement
-    ctx: CanvasRenderingContext2D
-    text: string
-}
-
-/**
- * 绘制文本信息
- * @param option 信息对象 reloadTextOption
- * @returns void
- */
-
-const reloadText = (option: reloadTextOption): void => {
-    const { info, valueKey, canvas, ctx, text } = option
-
-    const valueFont = `
-    ${info?.fontStyle?.weight ?? options?.fontStyle?.weight} 
-    ${info?.fontStyle?.size ?? options?.fontStyle?.size}
-    ${info?.fontStyle?.family ?? options?.fontStyle?.family}`
-
-    const textFont = `
-    ${info?.textStyle?.weight ?? options?.textStyle?.weight} 
-    ${info?.textStyle?.size ?? options?.textStyle?.size}
-    ${info?.textStyle?.family ?? options?.textStyle?.family}`
-
-    // 绘制文本
-    ctx.font = valueKey ? valueFont : textFont
-    ctx.fillStyle = (valueKey ? info?.fontStyle?.color : info?.textStyle?.color) ?? options.fontStyle?.color
+// 绘制文字
+const drawText = (ctx: CanvasRenderingContext2D, fontSizeConfig: fontStyle, label: string) => {
+    if (fontSizeConfig?.customCanvasText) {
+        fontSizeConfig.customCanvasText(ctx, label)
+        return
+    }
+    // 绘制文字
+    const text = label || '-'
+    ctx.font = `${fontSizeConfig.weight} ${fontSizeConfig.size} ${fontSizeConfig.family}`
+    ctx.fillStyle = fontSizeConfig.color
+    ctx.textAlign = 'center'
     ctx.textBaseline = 'middle'
-    ctx.textAlign = 'left'
-    const textX = valueKey ? (info?.textOffsetX ?? 13) : 46
-    const textY = info?.textOffsetY ?? canvas.height / 2 - (valueKey ? 10 : 0)
-    ctx.fillText(text, textX, textY)
+    fontSizeConfig.fillText ? fontSizeConfig.fillText(ctx) : ctx.fillText(text, 25, 25)
 }
 
-/**
- * 擦除重叠部分
- * @param ctx canvas内容 CanvasRenderingContext2D
- * @returns void
- */
-const eraseOverlapImage = (ctx: CanvasRenderingContext2D): void => {
-    // 设置透明区域
+// 绘制水滴函数
+function drawOnCanvas(options: CanvasConfigOptions & { canvas: HTMLCanvasElement; ctx: CanvasRenderingContext2D }): void {
+    const { width = 60, height = 85, iconType = CanvasType.Primary, currentMode = CanvasMode.Text, fontConfig, canvas, ctx, customCanvas } = options
+    // 如果不符合述求则自定义
+    if (customCanvas) {
+        customCanvas?.(canvas, ctx)
+        return
+    }
+    // 获取文字
+    const fontSizeConfig = merge(defaultFontConfig, fontConfig ?? {})
+    // 获取颜色
+    const { borderColor, backgroundColor } = merge(defaultCanvasConfig[iconType], options, {})
+    // 清除画布
+    ctx.clearRect(0, 0, width, height)
+    canvas.width = width ? width : 60
+    canvas.height = height ? height : 85
+    // 设置缩放和平移
     ctx.save()
+    ctx.translate(5, 5)
+    // 创建渐变
+    const gradient = ctx.createLinearGradient(0, 0, 0, 400)
+    gradient.addColorStop(0, backgroundColor)
+    gradient.addColorStop(1, darkenColor(backgroundColor, 20))
+
+    // 绘制水滴路径
     ctx.beginPath()
-    ctx.moveTo(0, 0)
-    ctx.lineTo(22, 0)
-    ctx.quadraticCurveTo(30, 15, 20, 26)
-    ctx.lineTo(0, 45)
+    ctx.moveTo(50, 24.58)
+    ctx.bezierCurveTo(50, 34.36, 43.6, 40.76, 35.78, 46.77)
+    ctx.bezierCurveTo(31.83, 49.8, 28.81, 55.58, 26.73, 64.11)
+    ctx.bezierCurveTo(26.54, 64.9, 25.79, 65.4, 25, 65.31)
+    ctx.bezierCurveTo(24.21, 65.4, 23.46, 64.9, 23.27, 64.11)
+    ctx.bezierCurveTo(21.19, 55.58, 18.17, 49.8, 14.22, 46.77)
+    ctx.lineTo(13.49, 46.2)
+    ctx.bezierCurveTo(6, 40.35, 0, 34.06, 0, 24.58)
+    ctx.bezierCurveTo(0, 11, 11.19, 0, 25, 0)
+    ctx.bezierCurveTo(38.81, 0, 50, 11, 50, 24.58)
     ctx.closePath()
 
-    // 擦除区域
-    ctx.globalCompositeOperation = 'destination-out'
-    ctx.fillStyle = 'rgba(0,0,0,1)'
+    // 填充水滴
+    ctx.fillStyle = gradient
     ctx.fill()
+
+    // 绘制内容（图片或文字）
+    ctx.save()
+    // 使用裁剪路径限制绘制区域
+    ctx.clip()
+
+    if (currentMode === CanvasMode.Text) {
+        const { label } = options as TextModeConfig
+        // 绘制文字
+        drawText(ctx, fontSizeConfig, label)
+    } else if (currentMode === CanvasMode.Image) {
+        // // 绘制图片
+        // const size = parseInt(imageSize.value)
+        // const x = 25 - size / 2
+        // const y = 30 - size / 2
+        // ctx.drawImage(uploadedImage, x, y, size, size)
+    }
+
+    ctx.restore()
+
+    // 绘制描边
+    ctx.strokeStyle = borderColor ?? backgroundColor
+    ctx.lineWidth = 4
+    ctx.stroke()
+
+    // 绘制阴影椭圆
+    ctx.beginPath()
+    ctx.ellipse(25.52, 67.88, 7.88, 1.6, 0, 0, Math.PI * 2)
+
+    // 添加阴影效果
+    ctx.shadowColor = '#325581'
+    ctx.shadowBlur = 5
+    ctx.shadowOffsetX = 0
+    ctx.shadowOffsetY = 0
+
+    ctx.fillStyle = '#325581'
+    ctx.globalAlpha = 0.72
+    ctx.fill()
+
+    // 恢复上下文设置
     ctx.restore()
 }
 
-export const createInfoCanvas = (info: any, valueKey?: string, labelType?: string): Promise<{ canvas: HTMLCanvasElement; cleanup: () => void }> => {
+// 创建水滴或者悬浮popover
+export const createInfoCanvas = (info: any): Promise<{ canvas: HTMLCanvasElement; cleanup: () => void }> => {
     return new Promise((resolve, reject) => {
         // 创建canvas元素
         const canvas = document.createElement('canvas')
@@ -142,126 +127,13 @@ export const createInfoCanvas = (info: any, valueKey?: string, labelType?: strin
             return
         }
 
-        // 设置canvas尺寸
-        canvas.width = info?.width ?? options.width
-        canvas.height = info?.height ?? options.height
-
-        const { iconType, textIconType, customIcon } = info
-        const icons = {
-            icon: iconType ? imageUrlOption[iconType] : imageUrlOption['primary'],
-            textIcon: textIconType ? imageUrlOption[textIconType] : imageUrlOption[(labelType ? 'success' : 'primary') + '_label'],
-        }
-
-        // 绘制背景
-        const bgImageUrl = customIcon && valueKey ? customIcon : icons?.[valueKey ? 'icon' : 'textIcon']
-        const text = info?.[valueKey ?? 'text'] || ''
-
         // 清理dom中的canvas
         const cleanup = () => {
             ctx.setTransform(1, 0, 0, 1, 0, 0) // 重置变换
             ctx.clearRect(0, 0, canvas.width, canvas.height)
         }
-
-        reloadText({
-            info: info,
-            valueKey: valueKey,
-            canvas: canvas,
-            ctx: ctx,
-            text: text,
-        })
-
-        if (bgImageUrl) {
-            const image = new Image()
-            image.crossOrigin = 'Anonymous'
-            image.src = bgImageUrl
-            image.onload = () => {
-                // 先绘制文本 获取添加文字后的宽高
-                reloadText({
-                    info: info,
-                    valueKey: valueKey,
-                    canvas: canvas,
-                    ctx: ctx,
-                    text: text,
-                })
-
-                canvas.width = valueKey ? (info?.width ?? image.width) : ctx.measureText(text).width + 80
-                canvas.height = info?.height ?? image.height
-
-                // 绘制图片到画布 宽高为获取后的值
-                ctx.drawImage(image, 0, 0, image.width, image.height, 0, 0, canvas.width, canvas.height)
-
-                if (!valueKey) {
-                    eraseOverlapImage(ctx)
-                }
-
-                // 重新绘制文本 绘制图片会清空画布
-                reloadText({
-                    info: info,
-                    valueKey: valueKey,
-                    canvas: canvas,
-                    ctx: ctx,
-                    text: text,
-                })
-
-                resolve({ canvas, cleanup })
-            }
-
-            image.onerror = () => {
-                reject(new Error('Failed to load image'))
-            }
-        } else {
-            reloadText({
-                info: info,
-                valueKey: valueKey,
-                canvas: canvas,
-                ctx: ctx,
-                text: text,
-            })
-            resolve({ canvas, cleanup })
-        }
-    })
-}
-
-/**
- *  创建图片元素
- * @param url 图片链接
- * @returns Promise<HTMLImageElement>
- */
-
-const loadImage = (url: string): Promise<HTMLImageElement> => {
-    return new Promise((resolve, reject) => {
-        const image = new Image()
-        image.crossOrigin = 'Anonymous'
-        image.onload = () => resolve(image)
-        image.onerror = reject
-        image.src = url
-    })
-}
-
-/**
- *  图片转canvas
- * @param url 图片链接
- * @returns Promise<HTMLCanvasElement>
- */
-
-async function drawImageCanvas(imgSrc: string): Promise<HTMLCanvasElement> {
-    return new Promise((resolve, reject) => {
-        const image = new Image()
-        image.crossOrigin = 'anonymous'
-        image.src = imgSrc
-        image.onload = () => {
-            try {
-                const canvas = document.createElement('canvas')
-                const ctx = canvas.getContext('2d')
-                if (!ctx) return reject(new Error('无法获取2D上下文'))
-                canvas.width = image.naturalWidth
-                canvas.height = image.naturalHeight
-                ctx.drawImage(image, 0, 0, canvas.width, canvas.height)
-                resolve(canvas)
-            } catch (e) {
-                reject(new Error('画布创建失败', { cause: e }))
-            }
-        }
+        drawOnCanvas({ ...info.options, canvas, ctx })
+        resolve({ canvas, cleanup })
     })
 }
 
@@ -331,38 +203,20 @@ export function createClusterBillboard(
     return canvas
 }
 
-import { type Entity, JulianDate, CallbackProperty, Cartesian2, Cartesian3, Math as cesiumMath } from 'cesium'
-import { EntityConfig, pointType } from './type'
-import { EntityProperties } from './type'
-
 /**
  * 修改entity信息
  */
 
-export async function updateViewerEntityInfo(info: any, entity: Entity | undefined, type?: string) {
+export async function updateViewerEntityInfo(info: any, entity: Entity | undefined) {
     if (entity?.billboard && entity.properties) {
         const currentTime = JulianDate.now() // 获取当前时间戳
         const changeState = entity.properties?.getValue(currentTime).changeState // 直接访问属性
-        const valueIcon = changeState ? (info?.iconType ?? 'primary') : (info?.changeIconType ?? 'success')
-        const textIcon = changeState ? (info?.textIconType ?? 'primary_label') : (info?.changeTextIconType ?? 'success_label')
-        let valueInfo = entity.billboard.image?.getValue()
-        valueInfo = typeof valueInfo === 'string' ? await drawImageCanvas(valueInfo) : valueInfo
-        const ctx = valueInfo.getContext('2d')
-        const image = await loadImage(info.customIcon && type && changeState ? info.customIcon : imageUrlOption[type ? valueIcon : textIcon])
-        ctx?.clearRect(0, 0, valueInfo.width, valueInfo.height)
-        ctx.drawImage(image, 0, 0, valueInfo.width, valueInfo.height)
-        if (!type) {
-            eraseOverlapImage(ctx)
-        }
-        reloadText({
-            info: info,
-            valueKey: type,
-            canvas: valueInfo,
-            ctx: ctx,
-            text: type ? info.value : info.text,
+        const canvasOptions = cloneDeep(info.options)
+        const { canvas } = await createInfoCanvas({
+            options: merge(canvasOptions, { iconType: !changeState ? CanvasType.Hover : (info.options?.iconType ?? CanvasType.Primary) }),
         })
-        entity.billboard.image = valueInfo.toDataURL('image/png')
-        // 动态修改changeState属性
+        entity.billboard.image = canvas as any
+        // // 动态修改changeState属性
         entity.properties.changeState = new CallbackProperty(() => {
             return !changeState
         }, false)
@@ -376,32 +230,23 @@ export async function updateViewerEntityInfo(info: any, entity: Entity | undefin
 export const createEntityConfig = async ({
     point,
     valueInfo,
-    type,
+    isPopoverEntity = false,
     viewer,
 }: {
     point: pointType
     valueInfo: HTMLCanvasElement
-    type?: string
+    isPopoverEntity?: boolean
     viewer: Viewer
 }): Promise<EntityConfig> => {
-    // 没有type就是label
     const commonProperties: EntityProperties = {
-        value: point?.value,
-        text: point?.text,
         changeState: false,
-        type: point?.iconType ?? 'primary',
         position: [point.lng, point.lat],
-        name: type ? point.name : `${point.name}Label`,
+        options: point.options,
+        valueInfo,
     }
     const commonBillboard = {
         image: valueInfo,
-        pixelOffset: new CallbackProperty(() => {
-            const height = viewer.camera.positionCartographic.height
-            // 修改为高度越大缩放越小，使用1.5作为基础值减去高度比例// 添加边界检查，确保缩放比例在合理范围内
-            const scale = Math.max(0.3, Math.min(2, 1 - height / 100000))
-            return type ? new Cartesian2(0, 0) : new Cartesian2((valueInfo.width * scale) / 2, (valueInfo.height / 2 - 43) * scale)
-        }, false),
-        disableDepthTestDistance: type ? undefined : Number.POSITIVE_INFINITY,
+        disableDepthTestDistance: isPopoverEntity ? Number.POSITIVE_INFINITY : undefined,
         verticalOrigin: VerticalOrigin.BOTTOM,
         scale: new CallbackProperty(() => {
             const height = viewer.camera.positionCartographic.height
@@ -412,9 +257,10 @@ export const createEntityConfig = async ({
     }
 
     return {
+        name: isPopoverEntity ? `${point.name}Label` : point.name,
         position: Cartesian3.fromDegrees(point.lng, point.lat, 50),
-        name: type ? point.name : `${point.name}Label`,
         properties: commonProperties,
+        isPopoverEntity: isPopoverEntity,
         billboard: commonBillboard as any,
     }
 }

@@ -5,7 +5,7 @@ import { CesiumHeatmap } from "cesium-heatmap-es6";
 import { areaData } from "./type.js";
 import { createClusterBillboard, createInfoCanvas, createEntityConfig, updateViewerEntityInfo, heatmapGradient } from "./tools.js";
 import { useMessage } from "naive-ui";
-import { Color, Rectangle, CustomDataSource, JulianDate, HorizontalOrigin, VerticalOrigin, ScreenSpaceEventType, ScreenSpaceEventHandler, Cartographic, Cartesian3, Math as Math$1, BoundingSphere, defined, ArcGisMapServerImageryProvider, PolygonHierarchy, ImageryLayer, Primitive, Entity, Cartesian2 } from "@cesium/engine";
+import { Color, Rectangle, CustomDataSource, JulianDate, HorizontalOrigin, VerticalOrigin, ScreenSpaceEventType, ScreenSpaceEventHandler, defined, Cartesian3, Cartographic, Math as Math$1, BoundingSphere, ArcGisMapServerImageryProvider, PolygonHierarchy, ImageryLayer, Primitive, Entity, Cartesian2 } from "@cesium/engine";
 import { Viewer } from "@cesium/widgets";
 class cesiumService {
   constructor(containerId, options) {
@@ -42,8 +42,6 @@ class cesiumService {
     __publicField(this, "throttleDelay", 100);
     __publicField(this, "rretryCount", 3);
     __publicField(this, "cameraChangedListener", null);
-    __publicField(this, "shouldShowLabels", false);
-    // 当前是否展示全部悬浮label
     // 深圳市地理边界（根据瓦片定义经纬度范围）
     __publicField(this, "shenzhenBounds", Rectangle.fromDegrees(113.94, 22.43, 114.57, 22.83));
     __publicField(this, "message", useMessage());
@@ -69,9 +67,9 @@ class cesiumService {
         const endIndex = Math.min(startIndex + batchSize, totalLength);
         const batchPoints = points.slice(startIndex, endIndex);
         batchPoints.forEach((point) => {
-          this.addPoint(point, "value");
+          this.addPoint({ point });
           if (defaultShowState) {
-            this.addPoint(point);
+            this.addPoint({ point });
           }
         });
         const taskId = requestAnimationFrame(() => {
@@ -246,33 +244,12 @@ class cesiumService {
     });
   }
   // 处理相机高度变化
-  // 处理相机高度变化
   handleCameraHeightChange() {
-    var _a, _b;
     if (!this.viewer || !this.pointEntities) return;
     const cameraHeight = this.viewer.camera.positionCartographic.height;
     if (this.options.limitHeightHandler) {
       this.options.limitHeightHandler(cameraHeight);
     }
-    this.shouldShowLabels = cameraHeight <= (((_a = this.options.config) == null ? void 0 : _a.labelShowHeightThreshold) ?? 5e3);
-    if (this.shouldShowLabels) {
-      (_b = this.pointData) == null ? void 0 : _b.forEach((item) => {
-        this.addPoint(item, void 0, "Label");
-      });
-    }
-    this.pointEntities.forEach((entity) => {
-      if (entity.name && entity.name.endsWith("Label")) {
-        if (this.shouldShowLabels && !entity.show) {
-          entity.show = true;
-          if (entity.label) {
-            entity.label.disableDepthTestDistance = Number.POSITIVE_INFINITY;
-            entity.label.heightReference = 1;
-          }
-        } else if (!this.shouldShowLabels && entity.show) {
-          entity.show = false;
-        }
-      }
-    });
   }
   // 设置事件处理器
   setupEventHandlers() {
@@ -287,6 +264,28 @@ class cesiumService {
       ScreenSpaceEventType.MOUSE_MOVE
     );
     canvas.addEventListener("mouseout", this.handleCanvasMouseOut.bind(this));
+  }
+  // 处理左键点击
+  handleLeftClick(click) {
+    var _a;
+    if (!this.viewer) return;
+    this.viewer.selectedEntity = void 0;
+    if ((_a = this.options) == null ? void 0 : _a.offsetState) {
+      click.position.x *= 1.18;
+      click.position.y *= 1.18;
+    }
+    const pickedObject = this.viewer.scene.pick(click.position);
+    if (defined(pickedObject) && pickedObject.id) {
+      if (pickedObject.id.type === "cluster") {
+        const entities = pickedObject.id.entities;
+        const { longitude, latitude, height } = this.calcHeightByExtent(entities, 4);
+        this.viewer.camera.flyTo({
+          destination: Cartesian3.fromDegrees(longitude, latitude, height),
+          duration: 0.5
+        });
+      }
+      this.options.pointHandler(pickedObject.id);
+    }
   }
   /**
    * 根据点位集合计算最佳飞行高度
@@ -324,28 +323,6 @@ class cesiumService {
       height: sphere.radius * scale
     };
   }
-  // 处理左键点击
-  handleLeftClick(click) {
-    var _a;
-    if (!this.viewer) return;
-    this.viewer.selectedEntity = void 0;
-    if ((_a = this.options) == null ? void 0 : _a.offsetState) {
-      click.position.x *= 1.18;
-      click.position.y *= 1.18;
-    }
-    const pickedObject = this.viewer.scene.pick(click.position);
-    if (defined(pickedObject) && pickedObject.id) {
-      if (pickedObject.id.type === "cluster") {
-        const entities = pickedObject.id.entities;
-        const { longitude, latitude, height } = this.calcHeightByExtent(entities, 4);
-        this.viewer.camera.flyTo({
-          destination: Cartesian3.fromDegrees(longitude, latitude, height),
-          duration: 0.5
-        });
-      }
-      this.options.config.hoverState ? this.pointClickHandler(pickedObject.id) : this.options.pointHandler(pickedObject.id);
-    }
-  }
   // 新增方法：处理鼠标离开地图事件
   handleCanvasMouseOut() {
     if (this.lastHoveredEntity) {
@@ -356,7 +333,7 @@ class cesiumService {
   // 处理鼠标移动
   handleMouseMove(movement) {
     var _a, _b;
-    if (!this.viewer || this.shouldShowLabels) return;
+    if (!this.viewer) return;
     const now = Date.now();
     if (now - this.lastThrottleTime < this.throttleDelay) return;
     this.lastThrottleTime = now;
@@ -491,12 +468,17 @@ class cesiumService {
     console.error("图层加载流程失败:", error);
   }
   // 添加点标记
-  async addPoint(point, type, labelType) {
+  async addPoint({ point, isPopoverEntity = false }) {
     var _a;
     if (!this.viewer && !this.dataSource) return null;
-    const valueInfo = await createInfoCanvas(point, type, labelType);
-    const entityConfig = await createEntityConfig({ point, valueInfo: valueInfo.canvas, type, viewer: this.viewer });
-    const entity = ((_a = this[labelType === "Label" ? "viewer" : "dataSource"]) == null ? void 0 : _a.entities.add(entityConfig)) ?? null;
+    const valueInfo = await createInfoCanvas(point);
+    const entityConfig = await createEntityConfig({
+      point,
+      valueInfo: valueInfo.canvas,
+      isPopoverEntity,
+      viewer: this.viewer
+    });
+    const entity = ((_a = this[isPopoverEntity ? "viewer" : "dataSource"]) == null ? void 0 : _a.entities.add(entityConfig)) ?? null;
     if (!this.pointEntities) {
       this.pointEntities = [];
     }
@@ -596,57 +578,22 @@ class cesiumService {
       labelEntityIndex: ((_c = this.pointEntities) == null ? void 0 : _c.findIndex((item) => item.name === labelName)) ?? -1
     };
   }
-  // 控制窗体
-  pointClickHandler(pickedObject) {
-    var _a, _b, _c, _d;
-    const { name } = pickedObject;
-    const { labelName, dataIndex, entityIndex, labelEntityIndex } = this.getEntityNameInfo(name);
-    const shouldAddPoint = dataIndex !== -1 && labelEntityIndex === -1 && !this.options.defaultShowState;
-    updateViewerEntityInfo((_a = this.pointData) == null ? void 0 : _a[dataIndex], (_b = this.pointEntities) == null ? void 0 : _b[entityIndex], "value");
-    if (labelEntityIndex !== -1 && this.options.defaultShowState) {
-      updateViewerEntityInfo((_c = this.pointData) == null ? void 0 : _c[dataIndex], (_d = this.pointEntities) == null ? void 0 : _d[labelEntityIndex]);
-    }
-    if (shouldAddPoint && this.pointData) {
-      this.addPoint(this.pointData[dataIndex], void 0, "Label");
-    }
-    this.handleLabelsVisibility(labelName);
-    this.options.pointHandler(pickedObject);
-  }
-  // 处理标签显示/隐藏
-  handleLabelsVisibility(currentLabelName) {
-    if (this.options.defaultShowState || !this.pointEntities) return;
-    const currentTime = JulianDate.now();
-    this.pointEntities.forEach((item) => {
-      var _a, _b, _c, _d;
-      if ((_a = item.name) == null ? void 0 : _a.endsWith("Label")) {
-        item.show = item.name === currentLabelName && !item.show;
-      } else {
-        const changeState = (_b = item.properties) == null ? void 0 : _b.getValue(currentTime).changeState;
-        if (!changeState) return;
-        const valueIndex = ((_c = this.pointData) == null ? void 0 : _c.findIndex((option) => option.name === item.name)) ?? -1;
-        if (valueIndex !== -1) {
-          updateViewerEntityInfo((_d = this.pointData) == null ? void 0 : _d[valueIndex], item, "value");
-        }
-      }
-    });
-  }
   // 鼠标悬浮处理
   pointHoverHandler(pickedObject) {
     const { name } = pickedObject;
     if (name == null ? void 0 : name.includes("Label")) return;
     const { labelName, dataIndex, entityIndex, labelEntityIndex } = this.getEntityNameInfo(name);
-    this.handleHoverLabelDisplay(dataIndex, labelName, labelEntityIndex);
+    this.handleHoverLabelDisplay(dataIndex, labelName, labelEntityIndex, pickedObject);
     this.applyHoverEffect(dataIndex, entityIndex);
     this.hideOtherLabels(labelName);
   }
   // 处理悬浮时标签显示
-  handleHoverLabelDisplay(dataIndex, labelName, labelEntityIndex) {
+  handleHoverLabelDisplay(dataIndex, labelName, labelEntityIndex, pickedObject) {
+    var _a, _b;
     if (dataIndex === -1 || this.options.defaultShowState) return;
     if (labelEntityIndex === -1 && this.pointData) {
-      this.addPoint(this.pointData[dataIndex], void 0, "Label");
-    } else if (labelEntityIndex !== -1 && this.pointEntities) {
-      this.pointEntities[labelEntityIndex].show = true;
-    }
+      (_b = (_a = this.options).createdTooltip) == null ? void 0 : _b.call(_a, pickedObject, this.pointData[dataIndex]);
+    } else if (labelEntityIndex !== -1 && this.pointEntities) ;
   }
   // 应用悬浮效果
   applyHoverEffect(dataIndex, entityIndex) {
@@ -659,7 +606,7 @@ class cesiumService {
     if (!properties.hoverState) {
       entity.properties.addProperty("hoverState", true);
     }
-    updateViewerEntityInfo((_a = this.pointData) == null ? void 0 : _a[dataIndex], entity, "value");
+    updateViewerEntityInfo((_a = this.pointData) == null ? void 0 : _a[dataIndex], entity);
   }
   // 隐藏其他标签
   hideOtherLabels(currentLabelName) {
@@ -696,9 +643,9 @@ class cesiumService {
     const point = (_a = this.pointData) == null ? void 0 : _a[dataIndex];
     if (!point) return;
     if (properties.changeState) {
-      point.changeIconType ? updateViewerEntityInfo(point, entity, "change") : updateViewerEntityInfo(point, entity, "value");
+      point.changeIconType ? updateViewerEntityInfo(point, entity) : updateViewerEntityInfo(point, entity);
     } else {
-      updateViewerEntityInfo(point, entity, "value");
+      updateViewerEntityInfo(point, entity);
     }
   }
   // 处理鼠标离开时标签可见性

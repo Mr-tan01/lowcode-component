@@ -42,6 +42,10 @@ export declare const cesiumProps: {
         type: PropType<string>;
         default: string;
     };
+    showPopoverHeight: {
+        type: NumberConstructor;
+        default: number;
+    };
     centerPosition: {
         type: PropType<Cartesian3>;
     };
@@ -99,6 +103,16 @@ export declare const cesiumProps: {
         default: {
             flag: boolean;
             offset: number;
+        };
+    };
+    popoverOffset: {
+        type: PropType<{
+            popoverOffsetX: number;
+            popoverOffsetY: number;
+        }>;
+        default: {
+            popoverOffsetX: number;
+            popoverOffsetY: number;
         };
     };
     pointBatchRender: {
