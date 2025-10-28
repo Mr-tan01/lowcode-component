@@ -193,7 +193,7 @@ export interface pointType {
     lng: number;
     lat: number;
     changeIconType?: changeIconType | string;
-    options: BaseCanvasConfigOptions;
+    options: CanvasConfigOptions;
 }
 export interface polygonType {
     name: string;

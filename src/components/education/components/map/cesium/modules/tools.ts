@@ -284,7 +284,7 @@ export const convertCartographic = async (viewerData: any, cartesian: Cartesian3
  * 蓝色 - 青色 - 绿色 - 橙色 - 红色
  */
 export const heatmapGradient = {
-    '0.00': '#0c29ce',
+    '0.00': '#0094ff',
     '0.25': '#09d3d0',
     '0.50': '#91fa68',
     '0.75': '#fca22c',
