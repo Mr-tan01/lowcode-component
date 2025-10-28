@@ -33,8 +33,8 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
   setup(__props, { emit: __emit }) {
     var _a;
     useCssVars((_ctx) => ({
-      "6883b170": _ctx.gap,
-      "b3b77d90": _ctx.offsetAnimationTime
+      "869be02c": _ctx.gap,
+      "a26b289c": _ctx.offsetAnimationTime
     }));
     const carouseIndex = ref(0);
     const _isTransition = ref(true);
@@ -93,6 +93,15 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       () => modelIndex.value,
       () => {
         onParentElResize();
+      }
+    );
+    watch(
+      () => modelValue.value,
+      () => {
+        const newIndex = listSource.value.findIndex((item) => __props.rowKey(item) === modelValue.value);
+        if (newIndex !== -1 && newIndex !== modelIndex.value) {
+          modelIndex.value = newIndex;
+        }
       }
     );
     onMounted(appendBeforeAfterData);
