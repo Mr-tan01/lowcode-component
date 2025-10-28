@@ -1,4 +1,4 @@
-import { defineComponent, mergeModels, mergeDefaults, useCssVars, ref, useModel, computed, shallowRef, watch, nextTick, onMounted, openBlock, createElementBlock, createElementVNode, unref, createCommentVNode, normalizeClass, normalizeStyle, Fragment, renderList, renderSlot, mergeProps, toDisplayString } from "vue";
+import { defineComponent, mergeModels, useCssVars, ref, useModel, computed, shallowRef, watch, nextTick, onMounted, createElementBlock, openBlock, createElementVNode, createCommentVNode, unref, normalizeStyle, normalizeClass, Fragment, renderList, renderSlot, mergeProps, toDisplayString, mergeDefaults } from "vue";
 import _imports_0 from "./images/lt-arrow.png.js";
 import _imports_1 from "./images/rt-arrow.png.js";
 import _imports_2 from "./images/top-arrow.png.js";
@@ -33,8 +33,8 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
   setup(__props, { emit: __emit }) {
     var _a;
     useCssVars((_ctx) => ({
-      "6883b170": _ctx.gap,
-      "b3b77d90": _ctx.offsetAnimationTime
+      "869be02c": _ctx.gap,
+      "a26b289c": _ctx.offsetAnimationTime
     }));
     const carouseIndex = ref(0);
     const _isTransition = ref(true);
@@ -93,6 +93,15 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       () => modelIndex.value,
       () => {
         onParentElResize();
+      }
+    );
+    watch(
+      () => modelValue.value,
+      () => {
+        const newIndex = listSource.value.findIndex((item) => __props.rowKey(item) === modelValue.value);
+        if (newIndex !== -1 && newIndex !== modelIndex.value) {
+          modelIndex.value = newIndex;
+        }
       }
     );
     onMounted(appendBeforeAfterData);
@@ -239,7 +248,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
             class: "lc-carouse-box__wrapper__arrow arrow--left",
             onClick: _cache[0] || (_cache[0] = //@ts-ignore
             (...args) => unref(leftHandler) && unref(leftHandler)(...args))
-          }, _cache[2] || (_cache[2] = [
+          }, [..._cache[2] || (_cache[2] = [
             createElementVNode(
               "img",
               {
@@ -250,9 +259,9 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
               },
               null,
               -1
-              /* HOISTED */
+              /* CACHED */
             )
-          ]))) : createCommentVNode("v-if", true),
+          ])])) : createCommentVNode("v-if", true),
           createElementVNode(
             "div",
             {
@@ -318,7 +327,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
             class: "lc-carouse-box__wrapper__arrow arrow--right",
             onClick: _cache[1] || (_cache[1] = //@ts-ignore
             (...args) => unref(rightHandler) && unref(rightHandler)(...args))
-          }, _cache[3] || (_cache[3] = [
+          }, [..._cache[3] || (_cache[3] = [
             createElementVNode(
               "img",
               {
@@ -329,9 +338,9 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
               },
               null,
               -1
-              /* HOISTED */
+              /* CACHED */
             )
-          ]))) : createCommentVNode("v-if", true)
+          ])])) : createCommentVNode("v-if", true)
         ]),
         _ctx.showTrack ? (openBlock(), createElementBlock("div", _hoisted_5, [
           renderSlot(_ctx.$slots, "track", {}, () => [
@@ -345,7 +354,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
               },
               null,
               -1
-              /* HOISTED */
+              /* CACHED */
             ))
           ], true)
         ])) : createCommentVNode("v-if", true)

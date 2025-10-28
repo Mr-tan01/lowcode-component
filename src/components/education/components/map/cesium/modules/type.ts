@@ -91,7 +91,7 @@ export interface pointType {
     lng: number
     lat: number
     changeIconType?: changeIconType | string // 变动图标
-    options: BaseCanvasConfigOptions
+    options: CanvasConfigOptions
 }
 
 export interface polygonType {

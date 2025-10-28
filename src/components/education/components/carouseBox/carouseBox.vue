@@ -152,6 +152,15 @@ watch(
         onParentElResize()
     },
 )
+watch(
+    () => modelValue.value,
+    () => {
+        const newIndex = listSource.value.findIndex(item => rowKey(item) === modelValue.value)
+        if (newIndex !== -1 && newIndex !== modelIndex.value) {
+            modelIndex.value = newIndex
+        }
+    },
+)
 onMounted(appendBeforeAfterData) // 初始化
 
 // 追加前后临时数据
