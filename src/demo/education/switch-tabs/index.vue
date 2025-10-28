@@ -18,10 +18,10 @@ import { LcSwitchTabs } from '@/components/education/components/switch-tabs'
 import { ref } from 'vue'
 import { demoCodes } from './demo-codes'
 
-const tabValue = ref('龙岗区')
+const tabValue = ref('深圳市')
 const tabValue2 = ref(0)
 const handleChange = () => {
-    tabValue.value = '福田区'
+    tabValue.value = '龙岗区'
 }
 </script>
 
