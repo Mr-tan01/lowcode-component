@@ -1,12 +1,12 @@
 import { PopoverProps } from 'naive-ui';
 type __VLS_Props = {
     placement?: PopoverProps['placement'];
-    popoverMaxHeight?: string;
 };
 declare function __VLS_template(): {
     attrs: Partial<{}>;
     slots: {
-        default?(_: {}): any;
+        trigger?(_: {}): any;
+        content?(_: {}): any;
     };
     refs: {};
     rootEl: HTMLDivElement;
