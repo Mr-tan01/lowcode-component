@@ -1,5 +1,15 @@
 <template>
     <div class="lcmapbutton">
+        <div class="Lcswitch-map__tabs">
+            <n-popover v-bind="$attrs" :placement="placement" :show-arrow="false">
+                <template #trigger>
+                    <slot><img src="./images/layer.png" alt="" /></slot>
+                </template>
+                <div class="popover-content">
+                    <MapBlock @item-click="handleMapBlockItemClick" />
+                </div>
+            </n-popover>
+        </div>
         <div class="lcmapbutton-upside">
             <img
                 v-for="(image, index) in images"
@@ -10,40 +20,60 @@
                 @click="handleClick(image.alt)"
             />
         </div>
-        <div class="lcmapbutton-underside">
-            <img class="lcmapbutton-underside-map" src="./images/map.png" alt="Map" @click="handleClick('Map')" />
-        </div>
     </div>
 </template>
 
 <script lang="ts" setup>
 import { defineEmits } from 'vue'
-import layer from './images/layer.png'
-import originalPpoint from './images/original-point.png'
+import { NPopover, type PopoverProps } from 'naive-ui'
 import zoomin from './images/zoom-in.png'
 import zoomOut from './images/zoom-out.png'
+import MapBlock from './comp/mapBlock.vue'
 
 const images = [
-    { src: layer, alt: 'Layer' },
-    { src: originalPpoint, alt: 'OriginalPoint' },
     { src: zoomin, alt: 'ZoomIn' },
     { src: zoomOut, alt: 'ZoomOut' },
 ]
+
+const { placement = 'left-start', popoverMaxHeight = '350px' } = defineProps<{
+    placement?: PopoverProps['placement']
+    popoverMaxHeight?: string
+}>()
 
 const emit = defineEmits(['iconClicked'])
 
 const handleClick = (alt: string) => {
     emit('iconClicked', alt)
 }
+
+const handleMapBlockItemClick = (item: string) => {
+    emit('iconClicked', item)
+}
 </script>
 
+<style>
+.n-popover {
+    max-height: v-bind(popoverMaxHeight);
+    --n-color: transparent !important;
+    --n-box-shadow: none !important;
+    --n-border-radius: 5px !important;
+    --n-padding: 10px !important;
+    overflow: visible;
+}
+.n-popover:not(.n-popover--raw) {
+    background: rgba(8, 68, 113, 0.75);
+    border-image: linear-gradient(200deg, rgba(21, 154, 255, 1), rgba(15, 251, 248, 1)) 1 1;
+    backdrop-filter: blur(3px);
+}
+</style>
 <style lang="scss" scoped>
 .lcmapbutton {
-    width: 74px;
-    height: 339px;
+    width: fit-content;
+    height: fit-content;
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: 50px;
     &-upside {
         display: flex;
         flex-direction: column;

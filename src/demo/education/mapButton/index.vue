@@ -1,7 +1,7 @@
 <template>
     <div class="demo-mapButton">
         <DemoBox title="mapButton" description="基础用法" rswidth="500px" :code="code1">
-            <LcMapButton></LcMapButton>
+            <LcMapButton @icon-clicked="console.log($event)"></LcMapButton>
         </DemoBox>
         <DemoBox title="legendProgress" description="基础用法" rswidth="500px" :code="code1">
             <LcLegendProgress
