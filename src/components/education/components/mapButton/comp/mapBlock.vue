@@ -15,6 +15,7 @@
 
 <script lang="ts" setup>
 import { MapType, MapImagesMap } from './const'
+import { defineEmits } from 'vue'
 
 const mapBlockName = Object.values(MapType) as MapType[]
 
@@ -27,7 +28,7 @@ const handleClick = (item: MapType) => {
 
 <style scoped lang="scss">
 .map-block {
-    height: 250px;
+    max-height: 435px;
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -63,7 +64,7 @@ const handleClick = (item: MapType) => {
     display: flex;
     align-items: center;
     gap: 15px;
-    background: rgba(8, 68, 113, 0.75);
+    background: rgba(8, 68, 113, 1);
     backdrop-filter: blur(3px);
     border-radius: 4px;
     padding: 5px 25px;
@@ -71,13 +72,13 @@ const handleClick = (item: MapType) => {
     cursor: pointer;
 }
 .district-menu-item {
-    height: 50px;
+    min-height: 50px;
     display: flex;
     align-items: center;
     gap: 10px;
     padding: 0 20px;
     border-radius: 3px;
-    background: rgba(8, 68, 113, 0.75);
+    background: rgba(8, 68, 113, 1);
     backdrop-filter: blur(3px);
     border-radius: 4px;
     transition: all 0.3s ease;
@@ -95,6 +96,7 @@ const handleClick = (item: MapType) => {
         display: flex;
         align-items: center;
         justify-content: center;
+        line-height: 50px;
         border-left: 1px solid rgba(255, 255, 255, 0.08);
     }
 }

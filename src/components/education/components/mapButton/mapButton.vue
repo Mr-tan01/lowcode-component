@@ -3,10 +3,12 @@
         <div class="Lcswitch-map__tabs">
             <n-popover v-bind="$attrs" :placement="placement" :show-arrow="false">
                 <template #trigger>
-                    <slot><img src="./images/layer.png" alt="" /></slot>
+                    <slot name="trigger"><img src="./images/layer.png" alt="" /></slot>
                 </template>
                 <div class="popover-content">
-                    <MapBlock @item-click="handleMapBlockItemClick" />
+                    <slot name="content">
+                        <MapBlock @item-click="handleMapBlockItemClick" />
+                    </slot>
                 </div>
             </n-popover>
         </div>
@@ -35,9 +37,8 @@ const images = [
     { src: zoomOut, alt: 'ZoomOut' },
 ]
 
-const { placement = 'left-start', popoverMaxHeight = '350px' } = defineProps<{
+const { placement = 'left-start' } = defineProps<{
     placement?: PopoverProps['placement']
-    popoverMaxHeight?: string
 }>()
 
 const emit = defineEmits(['iconClicked'])
@@ -51,21 +52,6 @@ const handleMapBlockItemClick = (item: string) => {
 }
 </script>
 
-<style>
-.n-popover {
-    max-height: v-bind(popoverMaxHeight);
-    --n-color: transparent !important;
-    --n-box-shadow: none !important;
-    --n-border-radius: 5px !important;
-    --n-padding: 10px !important;
-    overflow: visible;
-}
-.n-popover:not(.n-popover--raw) {
-    background: rgba(8, 68, 113, 0.75);
-    border-image: linear-gradient(200deg, rgba(21, 154, 255, 1), rgba(15, 251, 248, 1)) 1 1;
-    backdrop-filter: blur(3px);
-}
-</style>
 <style lang="scss" scoped>
 .lcmapbutton {
     width: fit-content;
@@ -75,6 +61,7 @@ const handleMapBlockItemClick = (item: string) => {
     align-items: center;
     gap: 50px;
     &-upside {
+        height: fit-content;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -82,10 +69,11 @@ const handleMapBlockItemClick = (item: string) => {
             cursor: pointer;
             width: 52px;
             height: 52px;
+            object-fit: contain;
+            display: block;
         }
         &-icon:nth-last-child(1),
-        &-icon:nth-last-child(2),
-        &-icon:nth-last-child(3) {
+        &-icon:nth-last-child(2) {
             margin-top: 8px;
         }
     }
@@ -93,6 +81,19 @@ const handleMapBlockItemClick = (item: string) => {
         margin-top: 33px;
         display: flex;
         justify-content: center;
+    }
+}
+:deep(.n-popover) {
+    --n-color: transparent !important;
+    --n-box-shadow: none !important;
+    --n-border-radius: 5px !important;
+    --n-padding: 10px !important;
+    overflow: visible;
+    &:not(.n-popover--raw) {
+        background: rgba(8, 68, 113, 0.35);
+        border-radius: 6px;
+        border: 1px solid;
+        border-image: linear-gradient(200deg, rgba(21, 154, 255, 1), rgba(15, 251, 248, 1)) 1 1;
     }
 }
 </style>

@@ -1,4 +1,4 @@
-import { defineComponent, useCssVars, createElementBlock, openBlock, createElementVNode, createVNode, unref, mergeProps, withCtx, renderSlot, Fragment, renderList } from "vue";
+import { defineComponent, createElementBlock, openBlock, createElementVNode, createVNode, unref, mergeProps, withCtx, renderSlot, Fragment, renderList } from "vue";
 import _imports_0 from "./images/layer.png.js";
 import { NPopover } from "naive-ui";
 import zoomin from "./images/zoom-in.png.js";
@@ -12,14 +12,10 @@ const _hoisted_5 = ["src", "alt", "onClick"];
 const _sfc_main = /* @__PURE__ */ defineComponent({
   __name: "mapButton",
   props: {
-    placement: { default: "left-start" },
-    popoverMaxHeight: { default: "350px" }
+    placement: { default: "left-start" }
   },
   emits: ["iconClicked"],
   setup(__props, { emit: __emit }) {
-    useCssVars((_ctx) => ({
-      "ef2c4b02": _ctx.popoverMaxHeight
-    }));
     const images = [
       { src: zoomin, alt: "ZoomIn" },
       { src: zoomOut, alt: "ZoomOut" }
@@ -39,7 +35,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
             "show-arrow": false
           }), {
             trigger: withCtx(() => [
-              renderSlot(_ctx.$slots, "default", {}, () => [
+              renderSlot(_ctx.$slots, "trigger", {}, () => [
                 _cache[0] || (_cache[0] = createElementVNode(
                   "img",
                   {
@@ -54,7 +50,9 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
             ]),
             default: withCtx(() => [
               createElementVNode("div", _hoisted_3, [
-                createVNode(MapBlock, { onItemClick: handleMapBlockItemClick })
+                renderSlot(_ctx.$slots, "content", {}, () => [
+                  createVNode(MapBlock, { onItemClick: handleMapBlockItemClick })
+                ], true)
               ])
             ]),
             _: 3
