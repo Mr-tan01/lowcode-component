@@ -280,13 +280,12 @@ export const convertCartographic = async (viewerData: any, cartesian: Cartesian3
 
 /**
  * 热力图渐变色配置
- * 0.00 - 0.25 - 0.50 - 0.75 - 1.00
+ * 0.00 - 0.25 - 0.75 - 1.00
  * 蓝色 - 青色 - 绿色 - 橙色 - 红色
  */
 export const heatmapGradient = {
-    '0.00': '#0094ff',
-    '0.25': '#09d3d0',
-    '0.50': '#91fa68',
-    '0.75': '#fca22c',
-    '1.00': '#fb0f0f',
+    '0.0': '#0094ff', // 对应 < 17
+    '0.25': '#4fae22',
+    '0.5': '#fca22c',
+    '1.0': '#fb0f0f', // 对应 > 21
 }

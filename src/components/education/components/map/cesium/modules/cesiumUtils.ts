@@ -21,7 +21,7 @@ import {
     Primitive,
     BoundingSphere,
 } from 'cesium'
-import { CesiumHeatmap } from 'cesium-heatmap-es6'
+import { CesiumHeatmap, type HeatmapDataOption } from 'cesium-heatmap-es6'
 import { areaData, type controlStatusType, type optionType, type pointType, type changeModelParamType } from './type'
 import { createInfoCanvas, createClusterBillboard, updateViewerEntityInfo, createEntityConfig, heatmapGradient } from './tools'
 import { useMessage } from 'naive-ui'
@@ -912,11 +912,17 @@ export class cesiumService {
     }
 
     // 热力图
-    buildHeatMap(
-        points: { x: number; y: number; value: number }[],
-        heatOptions: { radius: number; maxOpacity: number; minOpacity: number } = { radius: 5, maxOpacity: 0, minOpacity: 0.5 },
-        gradient: Record<string, string> = heatmapGradient,
-    ) {
+    buildHeatMap({
+        points,
+        gradient = heatmapGradient,
+        heatOptions = { radius: 5, maxOpacity: 0, minOpacity: 0.5 },
+        heatmapDataOptions,
+    }: {
+        points: { x: number; y: number; value: number }[]
+        heatOptions: { radius: number; maxOpacity: number; minOpacity: number }
+        gradient: Record<string, string>
+        heatmapDataOptions: HeatmapDataOption
+    }) {
         if (!this.viewer) return
         const heatmap = new CesiumHeatmap(this.viewer, {
             zoomToLayer: false,
@@ -927,6 +933,8 @@ export class cesiumService {
                 minOpacity: heatOptions.minOpacity,
                 gradient: gradient,
             },
+            bounds: [this.shenzhenBounds.west, this.shenzhenBounds.south, this.shenzhenBounds.east, this.shenzhenBounds.north],
+            heatmapDataOptions: heatmapDataOptions,
         })
         return heatmap
     }

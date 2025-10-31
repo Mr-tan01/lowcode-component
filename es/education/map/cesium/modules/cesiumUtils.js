@@ -704,7 +704,12 @@ class cesiumService {
     this.loadTileLayer(imageryLayersUrl);
   }
   // 热力图
-  buildHeatMap(points, heatOptions = { radius: 5, maxOpacity: 0, minOpacity: 0.5 }, gradient = heatmapGradient) {
+  buildHeatMap({
+    points,
+    gradient = heatmapGradient,
+    heatOptions = { radius: 5, maxOpacity: 0, minOpacity: 0.5 },
+    heatmapDataOptions
+  }) {
     if (!this.viewer) return;
     const heatmap = new CesiumHeatmap(this.viewer, {
       zoomToLayer: false,
@@ -714,7 +719,9 @@ class cesiumService {
         maxOpacity: heatOptions.maxOpacity,
         minOpacity: heatOptions.minOpacity,
         gradient
-      }
+      },
+      bounds: [this.shenzhenBounds.west, this.shenzhenBounds.south, this.shenzhenBounds.east, this.shenzhenBounds.north],
+      heatmapDataOptions
     });
     return heatmap;
   }
