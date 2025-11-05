@@ -4,7 +4,7 @@ import memoize from "lodash-es/memoize";
 import { bigNumber, overflowStr } from "lowcode-share/es/share";
 import './assets/headline/radiohead.css';import './assets/icon/iconCard.css';import './assets/icon/icon.css';import './assets/headline/headline.css';/* empty css               */
 import LcSubhead from "./headline/subhead.js";
-/* empty css           */
+/* empty css            */
 /* empty css              */
 /* empty css                   */
 const _hoisted_1 = { class: "lc-planning-indicators" };

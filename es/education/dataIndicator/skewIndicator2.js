@@ -85,13 +85,15 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                   class: "lc-skew-indicator__wrapper__info--result--value",
                   title: _ctx.value.toString()
                 }, [
-                  createVNode(unref(NNumberAnimation), {
-                    "show-separator": "",
-                    from: 0,
-                    to: renderValue.value,
-                    active: "",
-                    precision: decimals.value
-                  }, null, 8, ["to", "precision"])
+                  renderSlot(_ctx.$slots, "default", {}, () => [
+                    createVNode(unref(NNumberAnimation), {
+                      "show-separator": "",
+                      from: 0,
+                      to: renderValue.value,
+                      active: "",
+                      precision: decimals.value
+                    }, null, 8, ["to", "precision"])
+                  ], true)
                 ], 8, _hoisted_8),
                 renderUnit.value ? (openBlock(), createElementBlock(
                   "div",

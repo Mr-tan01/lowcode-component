@@ -14,7 +14,9 @@
                 </div>
                 <div class="lc-skew-indicator__wrapper__info--result">
                     <div class="lc-skew-indicator__wrapper__info--result--value" :title="value.toString()">
-                        <NNumberAnimation show-separator :from="0" :to="renderValue" active :precision="decimals" />
+                        <slot name="value">
+                            <NNumberAnimation show-separator :from="0" :to="renderValue" active :precision="decimals" />
+                        </slot>
                     </div>
                     <div v-if="renderUnit" class="lc-skew-indicator__wrapper__info--result--unit">
                         {{ renderUnit }}
