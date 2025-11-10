@@ -1,7 +1,7 @@
 <template>
     <div class="demo-listBox">
         <DemoHelpBox title="listBox" description="列表框" rswidth="962px" rs-height="600px" :code="code1">
-            <LclistBox :rows="dataRows" :bordered="true"></LclistBox>
+            <LclistBox :rows="dataRows" :cols="3" :bordered="true"></LclistBox>
         </DemoHelpBox>
     </div>
 </template>
@@ -15,6 +15,7 @@ const dataRows = [
         indicatorId: '1',
         indicatorName: '介个人的名字是是是是是是是',
         indicatorValue: '张三',
+        span: 2,
     },
     {
         indicatorId: '2',
