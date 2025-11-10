@@ -2,7 +2,7 @@
     <div class="dynamic-data-list" :class="{ 'is-bordered': bordered }">
         <LcElasticScrollbar>
             <NGrid :x-gap="gap" :cols="cols">
-                <NGi v-for="(row, rowIndex) in rows" :key="`row-${rowIndex}`" class="list-row" :style="getRowStyle(rowIndex)">
+                <NGi v-for="(row, rowIndex) in rows" :key="`row-${rowIndex}`" :span="row.span || 1" class="list-row" :style="getRowStyle(rowIndex)">
                     <div class="key-cell" :style="getKeyCellStyle(rowIndex)" :title="row.indicatorName">
                         {{ row.indicatorName }}
                     </div>

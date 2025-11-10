@@ -97,6 +97,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                     renderList(_ctx.rows, (row, rowIndex) => {
                       return openBlock(), createBlock(unref(NGi), {
                         key: `row-${rowIndex}`,
+                        span: row.span || 1,
                         class: "list-row",
                         style: normalizeStyle(getRowStyle(rowIndex))
                       }, {
@@ -114,7 +115,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                         ]),
                         _: 2
                         /* DYNAMIC */
-                      }, 1032, ["style"]);
+                      }, 1032, ["span", "style"]);
                     }),
                     128
                     /* KEYED_FRAGMENT */
