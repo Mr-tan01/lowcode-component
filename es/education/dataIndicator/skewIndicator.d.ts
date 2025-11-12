@@ -13,7 +13,7 @@ declare function __VLS_template(): {
     attrs: Partial<{}>;
     slots: {
         icon?(_: {}): any;
-        default?(_: {}): any;
+        value?(_: {}): any;
     };
     refs: {};
     rootEl: HTMLDivElement;
