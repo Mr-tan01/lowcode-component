@@ -3,7 +3,7 @@
         <div class="Lcswitch-map__tabs">
             <n-popover v-bind="$attrs" :placement="placement" :show-arrow="false">
                 <template #trigger>
-                    <slot name="trigger"><img src="./images/layer.png" alt="" /></slot>
+                    <slot name="trigger"><img class="lcmapbutton-upside-icon" src="./images/layer.png" alt="" /></slot>
                 </template>
                 <div class="popover-content">
                     <slot name="content">
