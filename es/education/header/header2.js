@@ -1,8 +1,10 @@
-import { defineComponent, mergeModels, useModel, computed, ref, useTemplateRef, onMounted, openBlock, createElementBlock, createElementVNode, renderSlot, createVNode, unref, withCtx, normalizeClass, mergeProps, toDisplayString, normalizeStyle, Fragment, renderList, createCommentVNode } from "vue";
+import { defineComponent, mergeModels, useModel, computed, ref, useTemplateRef, onMounted, createElementBlock, openBlock, normalizeStyle, createElementVNode, renderSlot, createVNode, unref, withCtx, normalizeClass, mergeProps, createCommentVNode, Fragment, renderList, toDisplayString } from "vue";
 import _imports_0 from "./images/right-arrow.png.js";
 import { NPopover } from "naive-ui/es/popover";
 import { scale } from "mmjs-core";
 import LcCarouseBox from "./carouseBox/index.js";
+import headerNavBg from "./images/header-nav-bg.png.js";
+import { headerNavBgs } from "./const.js";
 const _hoisted_1 = { class: "lcc-header__prefix-slot" };
 const _hoisted_2 = { class: "lcc-header__wrapper" };
 const _hoisted_3 = { class: "lcc-header__wrapper__navs" };
@@ -32,6 +34,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     const listSource = computed(() => {
       return __props.navDatas === void 0 ? [] : __props.navDatas;
     });
+    const currentIndex = ref(2);
     const maxWidth = ref(0);
     const fontSize = ref(16);
     const headerRef = useTemplateRef("headerRef");
@@ -77,6 +80,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       if (parent && !__props.hideArrow && handleClick) {
         handleClick(parent, index);
       }
+      currentIndex.value = index;
       $emit("jump", { parent, item, index });
     }
     function carouseChange(value) {
@@ -88,13 +92,27 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     function handleMouseleave() {
       $emit("handleMouseleave");
     }
+    const headerBgStyle = computed(() => {
+      if (!__props.hideArrow) {
+        return {
+          backgroundImage: `url(${headerNavBg})`,
+          backgroundRepeat: "no-repeat"
+        };
+      }
+      console.log(modelIndex.value, "==>");
+      return {
+        backgroundImage: `url(${headerNavBgs[modelIndex.value]})`,
+        backgroundRepeat: "no-repeat"
+      };
+    });
     return (_ctx, _cache) => {
       return openBlock(), createElementBlock(
         "div",
         {
           ref_key: "headerRef",
           ref: headerRef,
-          class: "lcc-header"
+          class: "lcc-header",
+          style: normalizeStyle(headerBgStyle.value)
         },
         [
           createElementVNode("div", _hoisted_1, [
@@ -115,7 +133,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                     "div",
                     {
                       class: normalizeClass(["lcc-header__wrapper__navs__item", {
-                        active: isActive
+                        active: _ctx.hideArrow ? index === modelIndex.value : isActive
                       }])
                     },
                     [
@@ -173,7 +191,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                                               })
                                             ],
                                             -1
-                                            /* HOISTED */
+                                            /* CACHED */
                                           )),
                                           createElementVNode("div", {
                                             class: "lcc-header__wrapper__navs__drop__group__label--text",
@@ -233,8 +251,8 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
             renderSlot(_ctx.$slots, "suffix", {}, void 0, true)
           ])
         ],
-        512
-        /* NEED_PATCH */
+        4
+        /* STYLE */
       );
     };
   }

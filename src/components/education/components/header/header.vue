@@ -1,5 +1,5 @@
 <template>
-    <div ref="headerRef" class="lcc-header">
+    <div ref="headerRef" class="lcc-header" :style="headerBgStyle">
         <div class="lcc-header__prefix-slot">
             <slot name="prefix"> </slot>
         </div>
@@ -10,7 +10,7 @@
                         <div
                             class="lcc-header__wrapper__navs__item"
                             :class="{
-                                active: isActive,
+                                active: hideArrow ? index === modelIndex : isActive,
                             }"
                         >
                             <n-popover
@@ -100,6 +100,8 @@ import { computed, ref, useTemplateRef, onMounted } from 'vue'
 import { NPopover } from 'naive-ui/es/popover'
 import { scale } from 'mmjs-core'
 import { LcCarouseBox, type LcCarouseBoxChangeEvent } from '@/components/education/components/carouseBox'
+import headerNavBg from './images/header-nav-bg.png'
+import { headerNavBgs } from './const'
 type ListRaw = {
     label: string
     children: NavData[]
@@ -132,6 +134,7 @@ const modelIndex = defineModel<number>('index', { default: 0 })
 const listSource = computed(() => {
     return navDatas === void 0 ? [] : navDatas
 })
+const currentIndex = ref(2)
 const maxWidth = ref(0)
 const fontSize = ref(16)
 const headerRef = useTemplateRef('headerRef')
@@ -187,6 +190,7 @@ function jump({ parent, item, index, handleClick }: jumpParams) {
     if (parent && !hideArrow && handleClick) {
         handleClick(parent, index)
     }
+    currentIndex.value = index
     $emit('jump', { parent, item, index })
 }
 
@@ -201,6 +205,20 @@ function handleMouseover(record, index) {
 function handleMouseleave() {
     $emit('handleMouseleave')
 }
+
+const headerBgStyle = computed(() => {
+    if (!hideArrow) {
+        return {
+            backgroundImage: `url(${headerNavBg})`,
+            backgroundRepeat: 'no-repeat',
+        }
+    }
+    console.log(modelIndex.value, '==>')
+    return {
+        backgroundImage: `url(${headerNavBgs[modelIndex.value]})`,
+        backgroundRepeat: 'no-repeat',
+    }
+})
 </script>
 
 <style lang="scss">
@@ -224,28 +242,27 @@ function handleMouseleave() {
 .lcc-header {
     width: 100%;
     height: 106px;
-    background: url(./images/header-nav-bg.png) no-repeat;
     background-size: 1920px 100%;
     background-position: center top;
     --min-width: 1100px;
     position: relative;
     min-width: var(--min-width);
-    &::before {
-        content: '';
-        background: url('./images/focus-point-light.png') no-repeat;
-        background-size: 100% 100%;
-        filter: brightness(8);
-        mix-blend-mode: screen;
-        left: 50%;
-        width: 245px;
-        height: 100%;
-        transform: translateX(-50%);
-        position: absolute;
-        bottom: -28%;
-        user-select: none;
-        pointer-events: none;
-        z-index: 9;
-    }
+    // &::before {
+    //     content: '';
+    //     background: url('./images/focus-point-light.png') no-repeat;
+    //     background-size: 100% 100%;
+    //     filter: brightness(8);
+    //     mix-blend-mode: screen;
+    //     left: 50%;
+    //     width: 245px;
+    //     height: 100%;
+    //     transform: translateX(-50%);
+    //     position: absolute;
+    //     bottom: -28%;
+    //     user-select: none;
+    //     pointer-events: none;
+    //     z-index: 9;
+    // }
     &__prefix-slot {
         position: absolute;
         left: 0;
