@@ -2,6 +2,7 @@ import s1Img from './images/s1.png'
 import s2Img from './images/s2.png'
 import s3Img from './images/s3.png'
 import s4Img from './images/s4.png'
+import s5Img from './images/s5.png'
 import { type Domains, type NameTypes } from '@/components/education/components/icon'
 
 export const robotBQMap = {
@@ -9,6 +10,7 @@ export const robotBQMap = {
     s2: s2Img,
     s3: s3Img,
     s4: s4Img,
+    s5: s5Img,
 }
 
 export type RobotBQMapKeys = keyof typeof robotBQMap

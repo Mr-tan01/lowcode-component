@@ -19,8 +19,12 @@
                 :ai-config
                 :is-focus
                 :hid-dir="robotHideDir"
+                :popup-size="popupSize"
                 v-bind="$attrs"
             >
+                <template v-for="(_, name) in $slots" #[name]="slotProps">
+                    <slot :name="name" v-bind="slotProps" />
+                </template>
             </robotChatPopup>
             <img class="lc-robot__wrapper__image" :class="[imageLayoutClass]" :src="robotSrc" draggable="false" alt="" />
             <robotChatPopup
@@ -29,8 +33,12 @@
                 :ai-config
                 :is-focus
                 :hid-dir="robotHideDir"
+                :popup-size="popupSize"
                 v-bind="$attrs"
             >
+                <template v-for="(_, name) in $slots" #[name]="slotProps">
+                    <slot :name="name" v-bind="slotProps" />
+                </template>
             </robotChatPopup>
         </div>
     </div>
@@ -70,6 +78,7 @@ const {
     draggable = false,
     position = 'fixed',
     popupContextMaxH = undefined,
+    popupSize = 'small',
 } = defineProps<{
     src?: string
     value?: RobotBQMapKeys
@@ -82,6 +91,7 @@ const {
     popupContextMaxH?: string
     draggable?: boolean
     position?: 'relative' | 'absolute' | 'fixed'
+    popupSize?: 'small' | 'medium' | 'large'
 }>()
 const isFocus = defineModel<boolean>('isShow', { default: false })
 const robotSrc = computed(() => src || robotBQMap[value])
@@ -112,7 +122,7 @@ const { y: robotPositionBottom } = toRefs(robotOffset)
         }
 
         .lc-robot__wrapper__image--status-rt {
-            transform: translateX(45%) rotate(-30deg);
+            transform: translateX(45%) rotate(-30deg) scaleX(-1);
         }
     }
 
@@ -162,6 +172,9 @@ const { y: robotPositionBottom } = toRefs(robotOffset)
                     &__image {
                         transform: unset;
                         overflow: unset;
+                        &--status-rt {
+                            transform: scaleX(-1);
+                        }
                     }
                 }
             }
@@ -178,7 +191,7 @@ const { y: robotPositionBottom } = toRefs(robotOffset)
             }
 
             &--status-rt {
-                transform: translateX(70%) rotate(-30deg);
+                transform: translateX(70%) rotate(-30deg) scaleX(-1);
             }
         }
     }

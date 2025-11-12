@@ -14,22 +14,24 @@
                     {{ aiConfig.sayHello }}
                 </div>
                 <div class="lc-robot-chat-popup__content--inner__quick">
-                    <n-scrollbar :style="{ maxHeight }">
-                        <div
-                            v-for="(item, index) in aiConfig.quick"
-                            :key="index"
-                            class="lc-robot-chat-popup__content--inner__quick__item"
-                            @click="clickQuick(item)"
-                        >
-                            <img class="lc-robot-chat-popup__content--inner__quick__item--img" src="./images/voice.png" alt="" />
-                            <div class="lc-robot-chat-popup__content--inner__quick__item--text" :title="item.text">
-                                <n-marquee v-if="item.text.length > 10" :speed="25" :gradient="false">
-                                    {{ item.text }}&nbsp;&nbsp;&nbsp;&nbsp;{{ item.text }}
-                                </n-marquee>
-                                <div v-else>{{ item.text }}</div>
+                    <slot name="center">
+                        <n-scrollbar :style="{ maxHeight }">
+                            <div
+                                v-for="(item, index) in aiConfig.quick"
+                                :key="index"
+                                class="lc-robot-chat-popup__content--inner__quick__item"
+                                @click="clickQuick(item)"
+                            >
+                                <img class="lc-robot-chat-popup__content--inner__quick__item--img" src="./images/voice.png" alt="" />
+                                <div class="lc-robot-chat-popup__content--inner__quick__item--text" :title="item.text">
+                                    <n-marquee v-if="item.text.length > 10" :speed="25" :gradient="false">
+                                        {{ item.text }}&nbsp;&nbsp;&nbsp;&nbsp;{{ item.text }}
+                                    </n-marquee>
+                                    <div v-else>{{ item.text }}</div>
+                                </div>
                             </div>
-                        </div>
-                    </n-scrollbar>
+                        </n-scrollbar>
+                    </slot>
                 </div>
             </div>
         </div>
@@ -37,7 +39,7 @@
 </template>
 
 <script lang="ts" setup>
-import { PropType } from 'vue'
+import { PropType, computed } from 'vue'
 import { type AiConfigProps } from './types'
 import { NScrollbar, NMarquee } from 'naive-ui/es'
 import { type ImageHideDir } from './const'
@@ -49,6 +51,7 @@ const {
         quick: [],
     },
     maxHeight = '75px',
+    popupSize = 'small',
 } = defineProps({
     isFocus: {
         type: Boolean,
@@ -62,6 +65,9 @@ const {
     maxHeight: {
         type: String,
     },
+    popupSize: {
+        type: String as PropType<'small' | 'medium' | 'large'>,
+    },
 })
 
 const emit = defineEmits<{
@@ -71,14 +77,25 @@ const emit = defineEmits<{
 function clickQuick(item: AiConfigProps['quick'][number]) {
     emit('clickQuick', item)
 }
+
+const imgWidth = computed(() => {
+    return popupSize === 'small' ? '237px' : popupSize === 'medium' ? '319px' : '527px'
+})
+const imgHeight = computed(() => {
+    return popupSize === 'small' ? '132px' : popupSize === 'medium' ? '120px' : '585px'
+})
+const popupBackground = computed(() => {
+    const imageFileName = `msg-popup${hidDir === 'rt' ? '-r-' : '-'}bg-${popupSize}.png`
+    const imageUrl = new URL(`./images/${imageFileName}`, import.meta.url).href
+    return `url(${imageUrl})`
+})
 </script>
 
 <style lang="scss" scoped>
 .lc-robot-chat-popup {
     position: relative;
-    width: 0;
-    height: 132px;
-    background: url(./images/msg-popup-bg.png) no-repeat;
+    height: v-bind(imgHeight);
+    background: v-bind(popupBackground) no-repeat;
     background-size: 100% 100%;
     z-index: -1;
     opacity: 0;
@@ -88,11 +105,13 @@ function clickQuick(item: AiConfigProps['quick'][number]) {
         padding: 13px 20px;
         padding-left: 30px;
         height: 100%;
+        width: 100%;
         position: relative;
 
         &--inner {
             position: absolute;
             color: #fff;
+            width: 100%;
             height: 100%;
 
             &__sayhello {
@@ -108,7 +127,10 @@ function clickQuick(item: AiConfigProps['quick'][number]) {
             }
 
             &__quick {
+                width: v-bind(imgWidth);
                 height: 100%;
+                padding-right: 50px;
+                box-sizing: border-box;
 
                 &__item {
                     display: flex;
@@ -137,19 +159,8 @@ function clickQuick(item: AiConfigProps['quick'][number]) {
         }
     }
 
-    &__hide--lt {
-        transform-origin: 0 50%;
-        transform: translateX(-50%) scale(0);
-    }
-
-    &__hide--rt {
-        transform-origin: 100% 50%;
-        transform: translateX(50%) scale(0);
-        background-image: url(./images/msg-popup-r-bg.png);
-    }
-
     &--focus {
-        width: 237px;
+        width: v-bind(imgWidth);
         transform: translateX(0) scale(1);
         z-index: 1;
         opacity: 1;

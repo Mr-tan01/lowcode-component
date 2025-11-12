@@ -2,11 +2,13 @@ import s1Img from "./images/s1.png.js";
 import s2Img from "./images/s2.png.js";
 import s3Img from "./images/s3.png.js";
 import s4Img from "./images/s4.png.js";
+import s5Img from "./images/s5.png.js";
 const robotBQMap = {
   s1: s1Img,
   s2: s2Img,
   s3: s3Img,
-  s4: s4Img
+  s4: s4Img,
+  s5: s5Img
 };
 const imageShowTrigger = {
   none: "none",
