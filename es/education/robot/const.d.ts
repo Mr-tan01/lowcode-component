@@ -4,6 +4,7 @@ export declare const robotBQMap: {
     s2: string;
     s3: string;
     s4: string;
+    s5: string;
 };
 export type RobotBQMapKeys = keyof typeof robotBQMap;
 type ReadValue<T> = T[keyof T];

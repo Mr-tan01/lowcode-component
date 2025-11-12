@@ -1,4 +1,4 @@
-import { defineComponent, mergeModels, useCssVars, unref, toRefs, useModel, computed, createElementBlock, openBlock, normalizeClass, createElementVNode, createBlock, createCommentVNode, mergeProps } from "vue";
+import { defineComponent, mergeModels, useCssVars, unref, toRefs, useModel, computed, createElementBlock, openBlock, normalizeClass, createElementVNode, createBlock, createCommentVNode, mergeProps, createSlots, renderList, withCtx, renderSlot, normalizeProps, guardReactiveProps } from "vue";
 import { robotBQMap, imageShowTrigger, imageHideDir } from "./const.js";
 import robotChatPopup from "./robot-chat-popup.js";
 import { useDragRobotPosition } from "./drag.js";
@@ -33,7 +33,8 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     }) },
     popupContextMaxH: { default: () => void 0 },
     draggable: { type: Boolean, default: false },
-    position: { default: "fixed" }
+    position: { default: "fixed" },
+    popupSize: { default: "small" }
   }, {
     "isShow": { type: Boolean, ...{ default: false } },
     "isShowModifiers": {}
@@ -41,10 +42,10 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
   emits: ["update:isShow"],
   setup(__props) {
     useCssVars((_ctx) => ({
-      "59c2d553": _ctx.position,
-      "171ef754": unref(robotPositionBottom),
-      "2cbd1c48": _ctx.width,
-      "30bdcfd1": _ctx.height
+      "4ca42fb8": _ctx.position,
+      "6806b03a": unref(robotPositionBottom),
+      "1bc6b8ab": _ctx.width,
+      "434162e2": _ctx.height
     }));
     const isFocus = useModel(__props, "isShow");
     const robotSrc = computed(() => __props.src || robotBQMap[__props.value]);
@@ -90,8 +91,21 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
               "max-height": _ctx.popupContextMaxH,
               "ai-config": _ctx.aiConfig,
               "is-focus": isFocus.value,
-              "hid-dir": robotHideDir.value
-            }, _ctx.$attrs), null, 16, ["max-height", "ai-config", "is-focus", "hid-dir"])) : createCommentVNode("v-if", true),
+              "hid-dir": robotHideDir.value,
+              "popup-size": _ctx.popupSize
+            }, _ctx.$attrs), createSlots({
+              _: 2
+              /* DYNAMIC */
+            }, [
+              renderList(_ctx.$slots, (_, name) => {
+                return {
+                  name,
+                  fn: withCtx((slotProps) => [
+                    renderSlot(_ctx.$slots, name, normalizeProps(guardReactiveProps(slotProps)), void 0, true)
+                  ])
+                };
+              })
+            ]), 1040, ["max-height", "ai-config", "is-focus", "hid-dir", "popup-size"])) : createCommentVNode("v-if", true),
             createElementVNode("img", {
               class: normalizeClass(["lc-robot__wrapper__image", [imageLayoutClass.value]]),
               src: robotSrc.value,
@@ -103,8 +117,21 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
               "max-height": _ctx.popupContextMaxH,
               "ai-config": _ctx.aiConfig,
               "is-focus": isFocus.value,
-              "hid-dir": robotHideDir.value
-            }, _ctx.$attrs), null, 16, ["max-height", "ai-config", "is-focus", "hid-dir"])) : createCommentVNode("v-if", true)
+              "hid-dir": robotHideDir.value,
+              "popup-size": _ctx.popupSize
+            }, _ctx.$attrs), createSlots({
+              _: 2
+              /* DYNAMIC */
+            }, [
+              renderList(_ctx.$slots, (_, name) => {
+                return {
+                  name,
+                  fn: withCtx((slotProps) => [
+                    renderSlot(_ctx.$slots, name, normalizeProps(guardReactiveProps(slotProps)), void 0, true)
+                  ])
+                };
+              })
+            ]), 1040, ["max-height", "ai-config", "is-focus", "hid-dir", "popup-size"])) : createCommentVNode("v-if", true)
           ],
           32
           /* NEED_HYDRATION */

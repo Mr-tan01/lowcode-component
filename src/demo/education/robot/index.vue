@@ -28,6 +28,11 @@
                     hid-dir="rt"
                     show-popup
                 ></LcRobot>
+                <LcRobot width="auto" height="147px" value="s5" trigger="focus" :show-popup="true" :popup-size="popupSize" :draggable="true">
+                    <template #center>
+                        <div @click="handle">点我切换大小</div>
+                    </template>
+                </LcRobot>
             </NSpace>
         </DemoHelpBox>
     </div>
@@ -37,6 +42,18 @@ import { NSpace } from 'naive-ui'
 import { DemoHelpBox } from '@/components/common/DemoHelpBox'
 import { LcRobot, LcMainRobot } from '@/components/education/components/robot'
 import { code1, code2, codeStr0 } from './demo-codes'
+import { ref } from 'vue'
+
+const popupSize = ref<'small' | 'medium' | 'large'>('large')
+function handle() {
+    if (popupSize.value === 'small') {
+        popupSize.value = 'medium'
+    } else if (popupSize.value === 'medium') {
+        popupSize.value = 'large'
+    } else {
+        popupSize.value = 'small'
+    }
+}
 </script>
 
 <style lang="scss" scoped>
