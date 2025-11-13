@@ -67,7 +67,7 @@
                                                 :key="ckey"
                                                 class="lcc-header__wrapper__navs__drop__group__item__group__nav"
                                                 :class="{
-                                                    highlight: (isActive && selectedKey === child.path) || selectedKey === child.label,
+                                                    highlight: selectedKey === child.path || selectedKey === child.label,
                                                 }"
                                                 @click="
                                                     jump({

@@ -171,6 +171,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       initCesium();
     };
     __expose({
+      reloadPointData,
       changeModel,
       loadedTileLayer,
       clearEntity,
