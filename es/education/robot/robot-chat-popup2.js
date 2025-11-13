@@ -50,7 +50,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     isFocus: false,
     hidDir: "rt",
     aiConfig: () => ({
-      sayHello: "您好，我是智能客服机器人，请问您需要什么帮助？",
+      sayHello: "Hi，我是小教！ 您可以试着说",
       quick: []
     }),
     maxHeight: "75px",
@@ -59,19 +59,19 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
   emits: ["clickQuick"],
   setup(__props, { emit: __emit }) {
     useCssVars((_ctx) => ({
-      "fbc4ce20": imgHeight.value,
-      "fe86aec0": popupBackground.value,
-      "78a488dd": imgWidth.value
+      "4d1291ac": imgHeight.value,
+      "2870b35a": popupBackground.value,
+      "6af1bb63": imgWidth.value
     }));
     const emit = __emit;
     function clickQuick(item) {
       emit("clickQuick", item);
     }
     const imgWidth = computed(() => {
-      return __props.popupSize === "small" ? "237px" : __props.popupSize === "medium" ? "319px" : "527px";
+      return __props.popupSize === "small" ? "319px" : __props.popupSize === "medium" ? "446px" : "527px";
     });
     const imgHeight = computed(() => {
-      return __props.popupSize === "small" ? "132px" : __props.popupSize === "medium" ? "120px" : "585px";
+      return __props.popupSize === "small" ? "120px" : __props.popupSize === "medium" ? "319px" : "585px";
     });
     const popupBackground = computed(() => {
       const imageFileName = `msg-popup${__props.hidDir === "rt" ? "-r-" : "-"}bg-${__props.popupSize}.png`;
