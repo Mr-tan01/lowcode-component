@@ -65,7 +65,6 @@ const reloadPointData = async (): Promise<void> => {
     } else {
         cesiumUtils.pointData = pointData
     }
-
     // 批量渲染点位
     await cesiumUtils.batchRenderPoints(cesiumUtils.pointData || [], defaultShowState, pointBatchRender)
 
@@ -222,6 +221,7 @@ const initCesiumDebounced = () => {
 }
 
 defineExpose({
+    reloadPointData,
     changeModel,
     loadedTileLayer,
     clearEntity,

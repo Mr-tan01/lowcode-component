@@ -206,7 +206,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                                               return openBlock(), createElementBlock("div", {
                                                 key: ckey,
                                                 class: normalizeClass(["lcc-header__wrapper__navs__drop__group__item__group__nav", {
-                                                  highlight: isActive && selectedKey.value === child.path || selectedKey.value === child.label
+                                                  highlight: selectedKey.value === child.path || selectedKey.value === child.label
                                                 }]),
                                                 onClick: ($event) => jump({
                                                   parent: el,
