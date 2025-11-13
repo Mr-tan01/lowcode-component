@@ -19,7 +19,10 @@ type __VLS_PublicProps = {
 } & __VLS_Props;
 declare function __VLS_template(): {
     attrs: Partial<{}>;
-    slots: any;
+    slots: {
+        center?(_: {}): any;
+        center?(_: {}): any;
+    };
     refs: {};
     rootEl: HTMLDivElement;
 };

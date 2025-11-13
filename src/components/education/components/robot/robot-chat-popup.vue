@@ -47,7 +47,7 @@ const {
     isFocus = false,
     hidDir = 'rt',
     aiConfig = {
-        sayHello: '您好，我是智能客服机器人，请问您需要什么帮助？',
+        sayHello: 'Hi，我是小教！ 您可以试着说',
         quick: [],
     },
     maxHeight = '75px',
@@ -79,10 +79,10 @@ function clickQuick(item: AiConfigProps['quick'][number]) {
 }
 
 const imgWidth = computed(() => {
-    return popupSize === 'small' ? '237px' : popupSize === 'medium' ? '319px' : '527px'
+    return popupSize === 'small' ? '319px' : popupSize === 'medium' ? '446px' : '527px'
 })
 const imgHeight = computed(() => {
-    return popupSize === 'small' ? '132px' : popupSize === 'medium' ? '120px' : '585px'
+    return popupSize === 'small' ? '120px' : popupSize === 'medium' ? '319px' : '585px'
 })
 const popupBackground = computed(() => {
     const imageFileName = `msg-popup${hidDir === 'rt' ? '-r-' : '-'}bg-${popupSize}.png`
@@ -97,6 +97,8 @@ const popupBackground = computed(() => {
     height: v-bind(imgHeight);
     background: v-bind(popupBackground) no-repeat;
     background-size: 100% 100%;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
     z-index: -1;
     opacity: 0;
     transition: linear 0.3s;

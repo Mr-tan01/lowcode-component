@@ -1,4 +1,4 @@
-import { defineComponent, mergeModels, useCssVars, unref, toRefs, useModel, computed, createElementBlock, openBlock, normalizeClass, createElementVNode, createBlock, createCommentVNode, mergeProps, createSlots, renderList, withCtx, renderSlot, normalizeProps, guardReactiveProps } from "vue";
+import { defineComponent, mergeModels, useCssVars, unref, toRefs, useModel, computed, toRef, createElementBlock, openBlock, normalizeClass, createElementVNode, createBlock, createCommentVNode, mergeProps, withCtx, renderSlot } from "vue";
 import { robotBQMap, imageShowTrigger, imageHideDir } from "./const.js";
 import robotChatPopup from "./robot-chat-popup.js";
 import { useDragRobotPosition } from "./drag.js";
@@ -7,34 +7,18 @@ const _hoisted_2 = ["src"];
 const _sfc_main = /* @__PURE__ */ defineComponent({
   __name: "robot",
   props: /* @__PURE__ */ mergeModels({
-    src: { default: "" },
-    value: { default: "s1" },
-    width: { default: "219px" },
-    height: { default: "233px" },
-    trigger: { default: "none" },
-    hidDir: { default: "lt" },
-    showPopup: { type: Boolean, default: false },
-    aiConfig: { default: () => ({
-      sayHello: "Hi，我是小教！ 您可以试着说",
-      quick: [
-        {
-          text: "部门汇报模式"
-        },
-        {
-          text: "任务查看模式"
-        },
-        {
-          text: "1974年，第一次在东南亚打自由搏击就得了冠军；1980年打赢了日本重炮手雷龙，接着连续三年打败所有日本空手道高手，赢得全日本自由搏击冠军……"
-        },
-        {
-          text: "智能问答模式"
-        }
-      ]
-    }) },
-    popupContextMaxH: { default: () => void 0 },
-    draggable: { type: Boolean, default: false },
-    position: { default: "fixed" },
-    popupSize: { default: "small" }
+    src: {},
+    value: {},
+    width: {},
+    height: {},
+    trigger: {},
+    hidDir: {},
+    showPopup: { type: Boolean },
+    aiConfig: {},
+    popupContextMaxH: {},
+    draggable: { type: Boolean },
+    position: {},
+    popupSize: {}
   }, {
     "isShow": { type: Boolean, ...{ default: false } },
     "isShowModifiers": {}
@@ -42,26 +26,28 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
   emits: ["update:isShow"],
   setup(__props) {
     useCssVars((_ctx) => ({
-      "4ca42fb8": _ctx.position,
-      "6806b03a": unref(robotPositionBottom),
-      "1bc6b8ab": _ctx.width,
-      "434162e2": _ctx.height
+      "ab540044": _ctx.position,
+      "45e60c57": unref(robotPositionTop),
+      "10da4b31": _ctx.width,
+      "1ebfbdc8": _ctx.height
     }));
+    const props = __props;
     const isFocus = useModel(__props, "isShow");
-    const robotSrc = computed(() => __props.src || robotBQMap[__props.value]);
-    const { isDraging, startDrag, stopDrag, robotOffset, xAdsorptionDir } = useDragRobotPosition();
+    const robotSrc = computed(() => props.src || robotBQMap[props.value || "s1"]);
+    const popupSizeRef = toRef(() => props.popupSize || "small");
+    const { isDraging, startDrag, stopDrag, robotOffset, xAdsorptionDir } = useDragRobotPosition(popupSizeRef);
     const robotHideDir = computed(() => {
-      return !__props.draggable ? __props.hidDir : xAdsorptionDir.value;
+      return !props.draggable ? props.hidDir : xAdsorptionDir.value;
     });
     const imageLayoutClass = computed(() => {
       return {
-        [`lc-robot__wrapper__image--status-${robotHideDir.value}`]: __props.trigger !== imageShowTrigger.none
+        [`lc-robot__wrapper__image--status-${robotHideDir.value}`]: props.trigger !== imageShowTrigger.none
       };
     });
     function useShowPopup(dir) {
-      return computed(() => __props.showPopup && robotHideDir.value === dir).value;
+      return computed(() => props.showPopup && robotHideDir.value === dir).value;
     }
-    const { y: robotPositionBottom } = toRefs(robotOffset);
+    const { y: robotPositionTop } = toRefs(robotOffset);
     return (_ctx, _cache) => {
       return openBlock(), createElementBlock("div", {
         class: normalizeClass(["lc-robot", [
@@ -93,19 +79,13 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
               "is-focus": isFocus.value,
               "hid-dir": robotHideDir.value,
               "popup-size": _ctx.popupSize
-            }, _ctx.$attrs), createSlots({
-              _: 2
-              /* DYNAMIC */
-            }, [
-              renderList(_ctx.$slots, (_, name) => {
-                return {
-                  name,
-                  fn: withCtx((slotProps) => [
-                    renderSlot(_ctx.$slots, name, normalizeProps(guardReactiveProps(slotProps)), void 0, true)
-                  ])
-                };
-              })
-            ]), 1040, ["max-height", "ai-config", "is-focus", "hid-dir", "popup-size"])) : createCommentVNode("v-if", true),
+            }, _ctx.$attrs), {
+              center: withCtx(() => [
+                renderSlot(_ctx.$slots, "center", {}, void 0, true)
+              ]),
+              _: 3
+              /* FORWARDED */
+            }, 16, ["max-height", "ai-config", "is-focus", "hid-dir", "popup-size"])) : createCommentVNode("v-if", true),
             createElementVNode("img", {
               class: normalizeClass(["lc-robot__wrapper__image", [imageLayoutClass.value]]),
               src: robotSrc.value,
@@ -119,19 +99,13 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
               "is-focus": isFocus.value,
               "hid-dir": robotHideDir.value,
               "popup-size": _ctx.popupSize
-            }, _ctx.$attrs), createSlots({
-              _: 2
-              /* DYNAMIC */
-            }, [
-              renderList(_ctx.$slots, (_, name) => {
-                return {
-                  name,
-                  fn: withCtx((slotProps) => [
-                    renderSlot(_ctx.$slots, name, normalizeProps(guardReactiveProps(slotProps)), void 0, true)
-                  ])
-                };
-              })
-            ]), 1040, ["max-height", "ai-config", "is-focus", "hid-dir", "popup-size"])) : createCommentVNode("v-if", true)
+            }, _ctx.$attrs), {
+              center: withCtx(() => [
+                renderSlot(_ctx.$slots, "center", {}, void 0, true)
+              ]),
+              _: 3
+              /* FORWARDED */
+            }, 16, ["max-height", "ai-config", "is-focus", "hid-dir", "popup-size"])) : createCommentVNode("v-if", true)
           ],
           32
           /* NEED_HYDRATION */

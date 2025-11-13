@@ -1,5 +1,6 @@
-export declare function useDragRobotPosition(): {
-    isDraging: import('vue').Ref<boolean, boolean>;
+import { Ref } from 'vue';
+export declare function useDragRobotPosition(popupSize: Ref<'small' | 'medium' | 'large'>): {
+    isDraging: Ref<boolean, boolean>;
     startDrag: () => void;
     stopDrag: (event: DragEvent) => void;
     draging: (event: DragEvent) => void;
