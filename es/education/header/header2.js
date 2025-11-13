@@ -99,7 +99,6 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
           backgroundRepeat: "no-repeat"
         };
       }
-      console.log(modelIndex.value, "==>");
       return {
         backgroundImage: `url(${headerNavBgs[modelIndex.value]})`,
         backgroundRepeat: "no-repeat"

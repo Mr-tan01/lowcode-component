@@ -213,7 +213,6 @@ const headerBgStyle = computed(() => {
             backgroundRepeat: 'no-repeat',
         }
     }
-    console.log(modelIndex.value, '==>')
     return {
         backgroundImage: `url(${headerNavBgs[modelIndex.value]})`,
         backgroundRepeat: 'no-repeat',
