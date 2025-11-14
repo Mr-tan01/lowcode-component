@@ -43,6 +43,7 @@ import { PropType, computed } from 'vue'
 import { type AiConfigProps } from './types'
 import { NScrollbar, NMarquee } from 'naive-ui/es'
 import { type ImageHideDir } from './const'
+import { scale } from 'mmjs-core'
 const {
     isFocus = false,
     hidDir = 'rt',
@@ -79,10 +80,10 @@ function clickQuick(item: AiConfigProps['quick'][number]) {
 }
 
 const imgWidth = computed(() => {
-    return popupSize === 'small' ? '319px' : popupSize === 'medium' ? '446px' : '527px'
+    return popupSize === 'small' ? `${scale(349)}px` : popupSize === 'medium' ? `${scale(466)}px` : `${scale(537)}px`
 })
 const imgHeight = computed(() => {
-    return popupSize === 'small' ? '120px' : popupSize === 'medium' ? '319px' : '585px'
+    return popupSize === 'small' ? `${scale(140)}px` : popupSize === 'medium' ? `${scale(339)}px` : `${scale(625)}px`
 })
 const popupBackground = computed(() => {
     const imageFileName = `msg-popup${hidDir === 'rt' ? '-r-' : '-'}bg-${popupSize}.png`
@@ -106,16 +107,18 @@ const popupBackground = computed(() => {
     &__content {
         padding: 13px 20px;
         padding-left: 30px;
+        box-sizing: border-box;
         height: 100%;
         width: 100%;
         position: relative;
 
         &--inner {
-            position: absolute;
+            position: relative;
             color: #fff;
             width: 100%;
             height: 100%;
-
+            display: flex;
+            flex-direction: column;
             &__sayhello {
                 font-family:
                     PingFangSC,
@@ -126,13 +129,13 @@ const popupBackground = computed(() => {
                 line-height: 24px;
                 text-align: left;
                 margin-bottom: 8px;
+                flex-shrink: 0;
             }
 
             &__quick {
-                width: v-bind(imgWidth);
-                height: 100%;
-                padding-right: 50px;
-                box-sizing: border-box;
+                width: 100%;
+                flex: 1;
+                min-height: 0;
 
                 &__item {
                     display: flex;

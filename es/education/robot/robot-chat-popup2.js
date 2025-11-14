@@ -21,6 +21,7 @@ import __vite_glob_0_19 from "./images/voice.png2.js";
 import { defineComponent, mergeDefaults, useCssVars, computed, createElementBlock, openBlock, normalizeClass, createElementVNode, toDisplayString, renderSlot, createVNode, unref, normalizeStyle, withCtx, Fragment, renderList, createBlock, createTextVNode } from "vue";
 import _imports_1 from "./images/voice.png.js";
 import { NScrollbar, NMarquee } from "naive-ui/es";
+import { scale } from "mmjs-core";
 const _hoisted_1 = { class: "lc-robot-chat-popup__content" };
 const _hoisted_2 = { class: "lc-robot-chat-popup__content--inner" };
 const _hoisted_3 = { class: "lc-robot-chat-popup__content--inner__sayhello" };
@@ -59,19 +60,19 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
   emits: ["clickQuick"],
   setup(__props, { emit: __emit }) {
     useCssVars((_ctx) => ({
-      "4d1291ac": imgHeight.value,
-      "2870b35a": popupBackground.value,
-      "6af1bb63": imgWidth.value
+      "2d101370": imgHeight.value,
+      "4ced79c0": popupBackground.value,
+      "7f8e8346": imgWidth.value
     }));
     const emit = __emit;
     function clickQuick(item) {
       emit("clickQuick", item);
     }
     const imgWidth = computed(() => {
-      return __props.popupSize === "small" ? "319px" : __props.popupSize === "medium" ? "446px" : "527px";
+      return __props.popupSize === "small" ? `${scale(349)}px` : __props.popupSize === "medium" ? `${scale(466)}px` : `${scale(537)}px`;
     });
     const imgHeight = computed(() => {
-      return __props.popupSize === "small" ? "120px" : __props.popupSize === "medium" ? "319px" : "585px";
+      return __props.popupSize === "small" ? `${scale(140)}px` : __props.popupSize === "medium" ? `${scale(339)}px` : `${scale(625)}px`;
     });
     const popupBackground = computed(() => {
       const imageFileName = `msg-popup${__props.hidDir === "rt" ? "-r-" : "-"}bg-${__props.popupSize}.png`;
