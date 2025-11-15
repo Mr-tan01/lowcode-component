@@ -47,6 +47,7 @@ export const HeadlineCode = `
     <LcHeadline>
         基础教师队伍结构
     </LcHeadline>
+    <LcMainHeading title="义务教育办学条件保障"></LcMainHeading>
 </template>
 `
 

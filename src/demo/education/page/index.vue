@@ -46,6 +46,7 @@
                 <n-space>
                     <LcHeadline> 监测试点样本园所优质均衡分析四象限图 </LcHeadline>
                     <LcHeadline> 基础教师队伍结构 </LcHeadline>
+                    <LcMainHeading title="义务教育办学条件保障"></LcMainHeading>
                 </n-space>
             </div>
         </DemoHelpBox>
@@ -80,7 +81,7 @@ import { LcDecoratorTitle } from '@/components/education/components/decoratorTit
 import * as pageTitle from './demo-codes'
 import VueResizable from 'vue-resizable'
 import { LcChartTitle } from '@/components/education/components/chartTitle'
-import { LcHeadline, LcSubhead } from '@/components/education/components/headline'
+import { LcHeadline, LcSubhead, LcMainHeading } from '@/components/education/components/headline'
 import { LcIcon } from '@/components/education/components/icon'
 import { LcRadiohead } from '@/components/education/components/headline'
 </script>
