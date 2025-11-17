@@ -13,7 +13,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
   },
   setup(__props) {
     useCssVars((_ctx) => ({
-      "2f24b870": iconWidth.value
+      "v2f24b870": iconWidth.value
     }));
     const props = __props;
     const { domain, name, size, ext, selected } = toRefs(props);

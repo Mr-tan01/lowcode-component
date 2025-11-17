@@ -54,7 +54,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
             /* TEXT */
           ),
           createElementVNode("div", _hoisted_4, [
-            createElementVNode("span", _hoisted_5, [
+            createElementVNode("div", _hoisted_5, [
               createVNode(unref(NNumberAnimation), {
                 "show-separator": "",
                 from: 0,

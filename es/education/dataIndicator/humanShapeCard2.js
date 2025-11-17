@@ -59,7 +59,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
           (openBlock(true), createElementBlock(
             Fragment,
             null,
-            renderList(_ctx.letData, (item, key) => {
+            renderList(__props.letData, (item, key) => {
               return openBlock(), createElementBlock("div", {
                 key,
                 class: "lc-human-shapeCard__wrapper__item"
@@ -74,7 +74,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                 createElementVNode("div", _hoisted_4, [
                   createElementVNode("div", {
                     class: "lc-human-shapeCard__wrapper__item__content__val tooltip-container",
-                    "data-tooltip": `${item.lefValue}${item.lefUnit || _ctx.lefUnit}`
+                    "data-tooltip": `${item.lefValue}${item.lefUnit || __props.lefUnit}`
                   }, [
                     createVNode(unref(NNumberAnimation), {
                       "show-separator": "",
@@ -98,7 +98,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                   )),
                   createElementVNode("div", {
                     class: "lc-human-shapeCard__wrapper__item__content__val tooltip-container",
-                    "data-tooltip": `${item.rigValue}${item.rigUnit || _ctx.rigUnit}`
+                    "data-tooltip": `${item.rigValue}${item.rigUnit || __props.rigUnit}`
                   }, [
                     createVNode(unref(NNumberAnimation), {
                       "show-separator": "",
@@ -138,7 +138,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
           (openBlock(true), createElementBlock(
             Fragment,
             null,
-            renderList(_ctx.rigData, (item, key) => {
+            renderList(__props.rigData, (item, key) => {
               return openBlock(), createElementBlock("div", {
                 key,
                 class: "lc-human-shapeCard__wrapper__item"
@@ -153,7 +153,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                 createElementVNode("div", _hoisted_10, [
                   createElementVNode("div", {
                     class: "lc-human-shapeCard__wrapper__item__content__val tooltip-container",
-                    "data-tooltip": `${item.lefValue}${item.lefUnit || _ctx.lefUnit}`
+                    "data-tooltip": `${item.lefValue}${item.lefUnit || __props.lefUnit}`
                   }, [
                     createVNode(unref(NNumberAnimation), {
                       "show-separator": "",
@@ -177,7 +177,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                   )),
                   createElementVNode("div", {
                     class: "lc-human-shapeCard__wrapper__item__content__val tooltip-container",
-                    "data-tooltip": `${item.rigValue}${item.rigUnit || _ctx.rigUnit}`
+                    "data-tooltip": `${item.rigValue}${item.rigUnit || __props.rigUnit}`
                   }, [
                     createVNode(unref(NNumberAnimation), {
                       "show-separator": "",

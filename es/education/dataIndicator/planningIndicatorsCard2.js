@@ -2,11 +2,12 @@ import { defineComponent, useCssVars, computed, createElementBlock, openBlock, c
 import { NNumberAnimation } from "naive-ui/es/number-animation";
 import memoize from "lodash-es/memoize";
 import { bigNumber, overflowStr } from "lowcode-share/es/share";
-import './assets/headline/radiohead.css';import './assets/icon/iconCard.css';import './assets/icon/icon.css';import './assets/headline/headline.css';/* empty css               */
+import './assets/headline/mainHeading.css';import './assets/headline/radiohead.css';import './assets/icon/iconCard.css';import './assets/icon/icon.css';import './assets/headline/headline.css';/* empty css               */
 import LcSubhead from "./headline/subhead.js";
 /* empty css            */
 /* empty css              */
 /* empty css                   */
+/* empty css                     */
 const _hoisted_1 = { class: "lc-planning-indicators" };
 const _hoisted_2 = { class: "lc-planning-indicators__header" };
 const _hoisted_3 = { class: "lc-planning-indicators__item__title" };
@@ -31,7 +32,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     useCssVars((_ctx) => ({
       "cc2487c6": leftOrderValue.value,
       "b836a3aa": centerOrderValue.value,
-      "2aeb826c": rightOrderValue.value
+      "v2aeb826c": rightOrderValue.value
     }));
     const renderValue = memoize(
       (value, decimal = 0) => {
@@ -76,48 +77,48 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       return openBlock(), createElementBlock("div", _hoisted_1, [
         createElementVNode("div", _hoisted_2, [
           createVNode(unref(LcSubhead), {
-            text: (_a = _ctx.data) == null ? void 0 : _a.header,
+            text: (_a = __props.data) == null ? void 0 : _a.header,
             type: "center",
             "font-size": "12px",
-            "max-length": _ctx.data.header.length ?? 4
+            "max-length": __props.data.header.length ?? 4
           }, null, 8, ["text", "max-length"])
         ]),
         createElementVNode(
           "div",
           {
-            class: normalizeClass(["lc-planning-indicators__item", [`dir-${_ctx.direction}`]])
+            class: normalizeClass(["lc-planning-indicators__item", [`dir-${__props.direction}`]])
           },
           [
             createElementVNode(
               "div",
               {
-                class: normalizeClass(["lc-planning-indicators__item__left", [`dir-${_ctx.direction}`]])
+                class: normalizeClass(["lc-planning-indicators__item__left", [`dir-${__props.direction}`]])
               },
               [
                 createElementVNode(
                   "span",
                   _hoisted_3,
-                  toDisplayString(formatedText((_c = (_b = _ctx.data) == null ? void 0 : _b.leftItem) == null ? void 0 : _c.title, (_e = (_d = _ctx.data) == null ? void 0 : _d.leftItem) == null ? void 0 : _e.maxLength)),
+                  toDisplayString(formatedText((_c = (_b = __props.data) == null ? void 0 : _b.leftItem) == null ? void 0 : _c.title, (_e = (_d = __props.data) == null ? void 0 : _d.leftItem) == null ? void 0 : _e.maxLength)),
                   1
                   /* TEXT */
                 ),
                 createElementVNode("span", {
                   class: "lc-planning-indicators__item__left--value",
-                  title: String(_ctx.data.leftItem.value)
+                  title: String(__props.data.leftItem.value)
                 }, [
                   createElementVNode("span", _hoisted_5, [
                     createVNode(unref(NNumberAnimation), {
                       "show-separator": "",
                       from: 0,
-                      to: unref(renderValue)((_f = _ctx.data) == null ? void 0 : _f.leftItem.value, (_g = _ctx.data) == null ? void 0 : _g.leftItem.decimal),
+                      to: unref(renderValue)((_f = __props.data) == null ? void 0 : _f.leftItem.value, (_g = __props.data) == null ? void 0 : _g.leftItem.decimal),
                       active: "",
-                      precision: (_h = _ctx.data) == null ? void 0 : _h.leftItem.decimal
+                      precision: (_h = __props.data) == null ? void 0 : _h.leftItem.decimal
                     }, null, 8, ["to", "precision"])
                   ]),
                   createElementVNode(
                     "span",
                     _hoisted_6,
-                    toDisplayString(unref(renderUnit)((_i = _ctx.data) == null ? void 0 : _i.leftItem.value, (_j = _ctx.data) == null ? void 0 : _j.leftItem.unit, (_l = (_k = _ctx.data) == null ? void 0 : _k.leftItem) == null ? void 0 : _l.decimal)),
+                    toDisplayString(unref(renderUnit)((_i = __props.data) == null ? void 0 : _i.leftItem.value, (_j = __props.data) == null ? void 0 : _j.leftItem.unit, (_l = (_k = __props.data) == null ? void 0 : _k.leftItem) == null ? void 0 : _l.decimal)),
                     1
                     /* TEXT */
                   )
@@ -128,40 +129,40 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
             ),
             createElementVNode("div", _hoisted_7, [
               createElementVNode("img", {
-                src: (_m = _ctx.data) == null ? void 0 : _m.icon,
+                src: (_m = __props.data) == null ? void 0 : _m.icon,
                 alt: ""
               }, null, 8, _hoisted_8)
             ]),
             createElementVNode(
               "div",
               {
-                class: normalizeClass(["lc-planning-indicators__item__right", [`dir-${_ctx.direction}`]])
+                class: normalizeClass(["lc-planning-indicators__item__right", [`dir-${__props.direction}`]])
               },
               [
                 createElementVNode(
                   "span",
                   _hoisted_9,
-                  toDisplayString(formatedText((_o = (_n = _ctx.data) == null ? void 0 : _n.rightItem) == null ? void 0 : _o.title, (_q = (_p = _ctx.data) == null ? void 0 : _p.rightItem) == null ? void 0 : _q.maxLength)),
+                  toDisplayString(formatedText((_o = (_n = __props.data) == null ? void 0 : _n.rightItem) == null ? void 0 : _o.title, (_q = (_p = __props.data) == null ? void 0 : _p.rightItem) == null ? void 0 : _q.maxLength)),
                   1
                   /* TEXT */
                 ),
                 createElementVNode("span", {
                   class: "lc-planning-indicators__item__right--value",
-                  title: String(_ctx.data.rightItem.value)
+                  title: String(__props.data.rightItem.value)
                 }, [
                   createElementVNode("span", _hoisted_11, [
                     createVNode(unref(NNumberAnimation), {
                       "show-separator": "",
                       from: 0,
-                      to: unref(renderValue)((_r = _ctx.data) == null ? void 0 : _r.rightItem.value, (_t = (_s = _ctx.data) == null ? void 0 : _s.rightItem) == null ? void 0 : _t.decimal),
+                      to: unref(renderValue)((_r = __props.data) == null ? void 0 : _r.rightItem.value, (_t = (_s = __props.data) == null ? void 0 : _s.rightItem) == null ? void 0 : _t.decimal),
                       active: "",
-                      precision: (_u = _ctx.data) == null ? void 0 : _u.rightItem.decimal
+                      precision: (_u = __props.data) == null ? void 0 : _u.rightItem.decimal
                     }, null, 8, ["to", "precision"])
                   ]),
                   createElementVNode(
                     "span",
                     _hoisted_12,
-                    toDisplayString(unref(renderUnit)((_w = (_v = _ctx.data) == null ? void 0 : _v.rightItem) == null ? void 0 : _w.value, (_y = (_x = _ctx.data) == null ? void 0 : _x.rightItem) == null ? void 0 : _y.unit, (_A = (_z = _ctx.data) == null ? void 0 : _z.rightItem) == null ? void 0 : _A.decimal)),
+                    toDisplayString(unref(renderUnit)((_w = (_v = __props.data) == null ? void 0 : _v.rightItem) == null ? void 0 : _w.value, (_y = (_x = __props.data) == null ? void 0 : _x.rightItem) == null ? void 0 : _y.unit, (_A = (_z = __props.data) == null ? void 0 : _z.rightItem) == null ? void 0 : _A.decimal)),
                     1
                     /* TEXT */
                   )

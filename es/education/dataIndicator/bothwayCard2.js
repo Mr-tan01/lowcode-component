@@ -55,7 +55,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
             createElementVNode(
               "div",
               _hoisted_4,
-              toDisplayString(_ctx.label),
+              toDisplayString(__props.label),
               1
               /* TEXT */
             ),
@@ -63,7 +63,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
               (openBlock(true), createElementBlock(
                 Fragment,
                 null,
-                renderList(_ctx.data, (item, key) => {
+                renderList(__props.data, (item, key) => {
                   return openBlock(), createElementBlock("div", {
                     key,
                     class: "lc-bothway-card__wrapper__info-range__wrapper__info"
@@ -90,7 +90,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                           1
                           /* TEXT */
                         ),
-                        key !== _ctx.data.length - 1 ? (openBlock(), createElementBlock("div", _hoisted_8, " | ")) : createCommentVNode("v-if", true)
+                        key !== __props.data.length - 1 ? (openBlock(), createElementBlock("div", _hoisted_8, " | ")) : createCommentVNode("v-if", true)
                       ];
                     }, true)
                   ]);
