@@ -64,7 +64,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
             (openBlock(true), createElementBlock(
               Fragment,
               null,
-              renderList(_ctx.data, (item, key) => {
+              renderList(__props.data, (item, key) => {
                 return openBlock(), createElementBlock("div", {
                   key,
                   class: "lc-range-indicator__wrapper__info"

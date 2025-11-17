@@ -5,9 +5,9 @@
         <div class="indicator-card-vice__wrapper">
             <div class="indicator-card-vice__wrapper__label">{{ label }}</div>
             <div class="indicator-card-vice__wrapper__value">
-                <span class="indicator-card-vice__wrapper__value__num">
-                    <NNumberAnimation show-separator :from="0" :to="value" active :precision="0"
-                /></span>
+                <div class="indicator-card-vice__wrapper__value__num">
+                    <NNumberAnimation show-separator :from="0" :to="value" active :precision="0" />
+                </div>
                 <div class="indicator-card-vice__wrapper__img">
                     <img src="./images/card/big-substrate-bg.png" alt="" />
                 </div>
@@ -44,7 +44,7 @@ const { label = '已建成并投入运行设施(个)', value = 0 } = defineProps
         background-repeat: no-repeat;
         background-size: 100% 100%;
         position: absolute;
-        top: 36px;
+        top: 30px;
         left: 0;
     }
 
@@ -57,19 +57,24 @@ const { label = '已建成并投入运行设施(个)', value = 0 } = defineProps
             text-align: left;
             font-style: normal;
             text-transform: none;
+            margin-bottom: 10px;
         }
         &__value {
-            display: flex;
-            justify-content: center;
-            margin-top: 10px;
             position: relative;
 
             &__num {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 100%;
+                text-align: center;
                 position: absolute;
+                top: 0;
                 font-family: HarmonyOS_Sans_SC_Medium;
-                font-size: 60px;
+                font-size: 80px;
                 color: transparent;
-                line-height: 73px;
+                height: 115px;
+                line-height: 100%;
                 text-shadow: 0px 0px 40px rgba(0, 129, 255, 0.4);
                 text-align: center;
                 font-style: normal;
@@ -80,11 +85,11 @@ const { label = '已建成并投入运行设施(个)', value = 0 } = defineProps
             }
         }
         &__img {
-            width: 185px;
-            height: 185px;
+            padding-top: 20px;
+            text-align: center;
             img {
-                width: 100%;
-                height: 100%;
+                width: 185px;
+                height: 185px;
             }
         }
     }
@@ -95,12 +100,12 @@ const { label = '已建成并投入运行设施(个)', value = 0 } = defineProps
     }
     .spot-top {
         position: absolute;
-        top: 34px;
+        top: 28px;
         right: 20px;
     }
     .spot-down {
         position: absolute;
-        bottom: 30px;
+        top: 140px;
         left: 20px;
     }
 }

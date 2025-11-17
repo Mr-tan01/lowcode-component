@@ -56,7 +56,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
   }),
   setup(__props) {
     useCssVars((_ctx) => ({
-      "20d45b36": __props.fontSize
+      "v20d45b36": __props.fontSize
     }));
     const direction = {
       right: "right",
