@@ -26,10 +26,10 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
   emits: ["update:isShow"],
   setup(__props) {
     useCssVars((_ctx) => ({
-      "ab540044": _ctx.position,
-      "45e60c57": unref(robotPositionTop),
-      "10da4b31": _ctx.width,
-      "1ebfbdc8": _ctx.height
+      "562d8051": _ctx.position,
+      "06092c6c": unref(robotPositionTop),
+      "17ce50c4": _ctx.width,
+      "7533224f": _ctx.height
     }));
     const props = __props;
     const isFocus = useModel(__props, "isShow");

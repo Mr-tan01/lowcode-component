@@ -92,17 +92,6 @@ const { y: robotPositionTop } = toRefs(robotOffset)
 
 <style lang="scss" scoped>
 .lc-robot {
-    &:hover {
-        cursor: pointer;
-        .lc-robot__wrapper__image--status-lt {
-            transform: translateX(-45%) rotate(30deg);
-        }
-
-        .lc-robot__wrapper__image--status-rt {
-            transform: translateX(45%) rotate(-30deg) scaleX(-1);
-        }
-    }
-
     &--draggable {
         position: v-bind(position);
         z-index: 9999;
@@ -165,10 +154,18 @@ const { y: robotPositionTop } = toRefs(robotOffset)
 
             &--status-lt {
                 transform: translateX(-70%) rotate(30deg);
+                &:hover {
+                    cursor: pointer;
+                    transform: translateX(-45%) rotate(30deg);
+                }
             }
 
             &--status-rt {
                 transform: translateX(70%) rotate(-30deg) scaleX(-1);
+                &:hover {
+                    cursor: pointer;
+                    transform: translateX(45%) rotate(-30deg) scaleX(-1);
+                }
             }
         }
     }
