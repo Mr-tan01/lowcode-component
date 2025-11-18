@@ -35,7 +35,7 @@ const baseOptions = {
             },
             name: {
               fontSize: scale(12),
-              lineHeight: scale(11),
+              lineHeight: scale(18),
               align: "center",
               color: "rgb(9, 238, 241)"
             }
