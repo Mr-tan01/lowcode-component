@@ -1,7 +1,7 @@
 {
     "name": "lowcode-component",
     "private": true,
-    "version": "0.1.0-alpha.3.9.5",
+    "version": "0.1.0-alpha.3.9.6",
     "type": "module",
     "main": "dist/index.prod.mjs",
     "types": "dist/types/index.d.ts",
@@ -28,8 +28,6 @@
         "mmjs-core": "^0.13.4"
     },
     "devDependencies": {
-        "leaflet": "^1.9.4",
-        "mars2d": "^3.3.4",
         "@cesium/engine": "^16.0.0",
         "@cesium/widgets": "^11.1.0",
         "@eslint/js": "^9.34.0",
