@@ -11,9 +11,15 @@ importers:
       '@mmj-code-lib/lowcode':
         specifier: git+http://liangweizhu@siteshun:AtwN-yrbpBsNVz35S6sA@code.siteshun.com:800/front-component/STS/mmj-code-lib.git#lowcode-0.1.2
         version: git+http://liangweizhu%40siteshun:AtwN-yrbpBsNVz35S6sA@code.siteshun.com:800/front-component/STS/mmj-code-lib.git#eb829e2635c40056fb47c377ebdbd8e909fb826c
+      leaflet:
+        specifier: ^1.9.4
+        version: 1.9.4
       lowcode-share:
         specifier: git+http://code.siteshun.com:800/front-component/lowcode-sview/lowcode-share.git#develop
         version: git+http://code.siteshun.com:800/front-component/lowcode-sview/lowcode-share.git#57abe187750f0e5360d8d463588766c29d26b75e(typescript@5.6.3)
+      mars2d:
+        specifier: ^3.3.4
+        version: 3.3.4
       mmjs-core:
         specifier: ^0.13.4
         version: 0.13.4(vue@3.5.21(typescript@5.6.3))
@@ -93,9 +99,6 @@ importers:
       husky:
         specifier: 8.0.0
         version: 8.0.0
-      leaflet:
-        specifier: ^1.9.4
-        version: 1.9.4
       lint-staged:
         specifier: ^16.1.5
         version: 16.2.0
@@ -105,9 +108,6 @@ importers:
       lodash-es:
         specifier: ^4.17.21
         version: 4.17.21
-      mars2d:
-        specifier: ^3.3.4
-        version: 3.3.4
       naive-ui:
         specifier: ^2.42.0
         version: 2.43.1(vue@3.5.21(typescript@5.6.3))
