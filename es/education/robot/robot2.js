@@ -26,10 +26,10 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
   emits: ["update:isShow"],
   setup(__props) {
     useCssVars((_ctx) => ({
-      "562d8051": _ctx.position,
-      "06092c6c": unref(robotPositionTop),
-      "17ce50c4": _ctx.width,
-      "7533224f": _ctx.height
+      "61ee6592": _ctx.position,
+      "1d731ea0": unref(robotPositionTop),
+      "45ad2478": _ctx.width,
+      "562870b5": _ctx.height
     }));
     const props = __props;
     const isFocus = useModel(__props, "isShow");
@@ -74,6 +74,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
           [
             useShowPopup(unref(imageHideDir).rt) ? (openBlock(), createBlock(robotChatPopup, mergeProps({
               key: 0,
+              class: { popupShow: useShowPopup(unref(imageHideDir).rt) && !isFocus.value },
               "max-height": _ctx.popupContextMaxH,
               "ai-config": _ctx.aiConfig,
               "is-focus": isFocus.value,
@@ -85,7 +86,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
               ]),
               _: 3
               /* FORWARDED */
-            }, 16, ["max-height", "ai-config", "is-focus", "hid-dir", "popup-size"])) : createCommentVNode("v-if", true),
+            }, 16, ["class", "max-height", "ai-config", "is-focus", "hid-dir", "popup-size"])) : createCommentVNode("v-if", true),
             createElementVNode("img", {
               class: normalizeClass(["lc-robot__wrapper__image", [imageLayoutClass.value]]),
               src: robotSrc.value,
@@ -94,6 +95,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
             }, null, 10, _hoisted_2),
             useShowPopup(unref(imageHideDir).lt) ? (openBlock(), createBlock(robotChatPopup, mergeProps({
               key: 1,
+              class: { popupShow: useShowPopup(unref(imageHideDir).lt) && !isFocus.value },
               "max-height": _ctx.popupContextMaxH,
               "ai-config": _ctx.aiConfig,
               "is-focus": isFocus.value,
@@ -105,7 +107,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
               ]),
               _: 3
               /* FORWARDED */
-            }, 16, ["max-height", "ai-config", "is-focus", "hid-dir", "popup-size"])) : createCommentVNode("v-if", true)
+            }, 16, ["class", "max-height", "ai-config", "is-focus", "hid-dir", "popup-size"])) : createCommentVNode("v-if", true)
           ],
           32
           /* NEED_HYDRATION */
