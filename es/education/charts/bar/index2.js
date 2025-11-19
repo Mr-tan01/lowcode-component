@@ -31,7 +31,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
         });
         if (typeof __props.events.legendselectchanged !== "function" && __props.events.legendselectchanged !== null)
           (_b = (_a = chartBar.value) == null ? void 0 : _a.chartInstance) == null ? void 0 : _b.on("legendselectchanged", function() {
-            var _a2, _b2, _c, _d;
+            var _a2, _b2, _c, _d, _e, _f, _g, _h, _i, _j;
             const chart = (_a2 = chartBar.value) == null ? void 0 : _a2.chartInstance;
             if (!chart) return;
             const option = chart.getOption();
@@ -39,9 +39,24 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
             const selected = legend.selected || {};
             const seriesData = option.series;
             const yAxis = option.yAxis;
-            if (!Array.isArray(yAxis) || yAxis.length <= 1) return;
+            if (!Array.isArray(yAxis)) return;
             chart.setOption({
-              yAxis: [{ show: selected[(_c = seriesData == null ? void 0 : seriesData[0]) == null ? void 0 : _c.name] !== false }, { show: selected[(_d = seriesData == null ? void 0 : seriesData[1]) == null ? void 0 : _d.name] !== false }]
+              yAxis: [
+                {
+                  show: selected[(_c = seriesData == null ? void 0 : seriesData[0]) == null ? void 0 : _c.name] !== false,
+                  axisLabel: {
+                    formatter: selected[(_d = seriesData == null ? void 0 : seriesData[0]) == null ? void 0 : _d.name] !== false ? ((_f = (_e = yAxis[0]) == null ? void 0 : _e.axisLabel) == null ? void 0 : _f.formatter) || "{value}" : ""
+                    // 隐藏标签
+                  }
+                },
+                {
+                  show: selected[(_g = seriesData == null ? void 0 : seriesData[1]) == null ? void 0 : _g.name] !== false,
+                  axisLabel: {
+                    formatter: selected[(_h = seriesData == null ? void 0 : seriesData[1]) == null ? void 0 : _h.name] !== false ? ((_j = (_i = yAxis[1]) == null ? void 0 : _i.axisLabel) == null ? void 0 : _j.formatter) || "{value}" : ""
+                    // 隐藏标签
+                  }
+                }
+              ]
             });
           });
       }

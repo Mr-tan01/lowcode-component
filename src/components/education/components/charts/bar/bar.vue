@@ -49,17 +49,29 @@ onMounted(() => {
             chartBar.value?.chartInstance?.on('legendselectchanged', function () {
                 const chart = chartBar.value?.chartInstance
                 if (!chart) return
-                // 获取当前所有图例状态和系列数据
+
                 const option = chart.getOption()
                 const legend = option.legend?.[0]
                 const selected = legend.selected || {}
                 const seriesData = option.series
                 const yAxis = option.yAxis
-                if (!Array.isArray(yAxis) || yAxis.length <= 1) return
+                if (!Array.isArray(yAxis)) return
 
-                // 根据系列显示状态控制y轴显示
                 chart.setOption({
-                    yAxis: [{ show: selected[seriesData?.[0]?.name] !== false }, { show: selected[seriesData?.[1]?.name] !== false }],
+                    yAxis: [
+                        {
+                            show: selected[seriesData?.[0]?.name] !== false,
+                            axisLabel: {
+                                formatter: selected[seriesData?.[0]?.name] !== false ? yAxis[0]?.axisLabel?.formatter || '{value}' : '', // 隐藏标签
+                            },
+                        },
+                        {
+                            show: selected[seriesData?.[1]?.name] !== false,
+                            axisLabel: {
+                                formatter: selected[seriesData?.[1]?.name] !== false ? yAxis[1]?.axisLabel?.formatter || '{value}' : '', // 隐藏标签
+                            },
+                        },
+                    ],
                 })
             })
     }
