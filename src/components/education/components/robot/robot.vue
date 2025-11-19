@@ -15,6 +15,7 @@
         <div class="lc-robot__wrapper" tabindex="-1" @focus="isFocus = true" @blur="isFocus = false">
             <robotChatPopup
                 v-if="useShowPopup(imageHideDir.rt)"
+                :class="{ popupShow: useShowPopup(imageHideDir.rt) && !isFocus }"
                 :max-height="popupContextMaxH"
                 :ai-config
                 :is-focus
@@ -29,6 +30,7 @@
             <img class="lc-robot__wrapper__image" :class="[imageLayoutClass]" :src="robotSrc" draggable="false" alt="" />
             <robotChatPopup
                 v-if="useShowPopup(imageHideDir.lt)"
+                :class="{ popupShow: useShowPopup(imageHideDir.lt) && !isFocus }"
                 :max-height="popupContextMaxH"
                 :ai-config
                 :is-focus
@@ -169,5 +171,8 @@ const { y: robotPositionTop } = toRefs(robotOffset)
             }
         }
     }
+}
+.popupShow {
+    display: none;
 }
 </style>
