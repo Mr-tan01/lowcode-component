@@ -58,7 +58,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       return openBlock(), createElementBlock(
         "div",
         {
-          class: normalizeClass(["lc-skew-indicator", [`lc-skew-indicator--${__props.type}`]])
+          class: normalizeClass(["lc-skew-indicator", [`lc-skew-indicator--${_ctx.type}`]])
         },
         [
           createElementVNode("div", _hoisted_1, [
@@ -66,7 +66,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
               createElementVNode("div", _hoisted_3, [
                 renderSlot(_ctx.$slots, "icon", {}, () => [
                   createElementVNode("img", {
-                    src: __props.icon,
+                    src: _ctx.icon,
                     alt: ""
                   }, null, 8, _hoisted_4)
                 ], true)
@@ -76,14 +76,14 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
               createElementVNode(
                 "div",
                 _hoisted_6,
-                toDisplayString(__props.label),
+                toDisplayString(_ctx.label),
                 1
                 /* TEXT */
               ),
               createElementVNode("div", _hoisted_7, [
                 createElementVNode("div", {
                   class: "lc-skew-indicator__wrapper__info--result--value",
-                  title: __props.value.toString()
+                  title: _ctx.value.toString()
                 }, [
                   renderSlot(_ctx.$slots, "value", {}, () => [
                     createVNode(unref(NNumberAnimation), {
@@ -102,11 +102,11 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                   1
                   /* TEXT */
                 )) : createCommentVNode("v-if", true),
-                __props.tip ? (openBlock(), createElementBlock("div", _hoisted_10, [
+                _ctx.tip ? (openBlock(), createElementBlock("div", _hoisted_10, [
                   createVNode(unref(LcTooltip), null, {
                     default: withCtx(() => [
                       createTextVNode(
-                        toDisplayString(__props.tip),
+                        toDisplayString(_ctx.tip),
                         1
                         /* TEXT */
                       )

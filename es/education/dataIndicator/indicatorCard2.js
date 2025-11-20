@@ -30,9 +30,9 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
   },
   setup(__props) {
     useCssVars((_ctx) => ({
-      "v711e7860": padValue.value,
-      "v13815724": _ctx.valueColor,
-      "v0617d42a": _ctx.hintColor
+      "711e7860": padValue.value,
+      "13815724": _ctx.valueColor,
+      "0617d42a": _ctx.hintColor
     }));
     const SIZE = {
       small: "small",
@@ -71,18 +71,18 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
         "div",
         {
           class: normalizeClass(["lc-indicator-card", {
-            "lc-indicator-card--noborder": __props.type === "noborder"
+            "lc-indicator-card--noborder": _ctx.type === "noborder"
           }])
         },
         [
           createElementVNode("div", _hoisted_1, [
             createElementVNode("div", _hoisted_2, [
-              __props.tip ? (openBlock(), createElementBlock("div", _hoisted_3, [
+              _ctx.tip ? (openBlock(), createElementBlock("div", _hoisted_3, [
                 renderSlot(_ctx.$slots, "tooltip", {}, () => [
                   createVNode(unref(LcTooltip), null, {
                     default: withCtx(() => [
                       createTextVNode(
-                        toDisplayString(__props.tip),
+                        toDisplayString(_ctx.tip),
                         1
                         /* TEXT */
                       )
@@ -95,7 +95,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
               createElementVNode("div", _hoisted_4, [
                 createElementVNode("span", {
                   class: "lc-indicator-card__wrapper--result--value",
-                  title: __props.value.toString()
+                  title: _ctx.value.toString()
                 }, [
                   renderSlot(_ctx.$slots, "value", {}, () => [
                     createVNode(unref(NNumberAnimation), {
@@ -118,7 +118,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
               createElementVNode(
                 "div",
                 _hoisted_7,
-                toDisplayString(__props.hint),
+                toDisplayString(_ctx.hint),
                 1
                 /* TEXT */
               )

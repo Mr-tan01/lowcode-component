@@ -2,7 +2,9 @@
     <div class="minitype-card">
         <div class="minitype-card__label">{{ label }}</div>
         <div class="minitype-card__value">
-            <span class="minitype-card__value__num"> <NNumberAnimation show-separator :from="0" :to="value" active :precision="decimal" /></span>
+            <span class="minitype-card__value__num">
+                <NNumberAnimation show-separator :from="0" :to="displayValue" active :precision="decimal" />
+            </span>
         </div>
         <div class="minitype-card__img">
             <img :src="bgIcon" alt="" />
@@ -12,12 +14,14 @@
 
 <script lang="ts" setup>
 import { NNumberAnimation } from 'naive-ui/es/number-animation'
+import { computed } from 'vue'
 import defaultImage from './images/card/small-substrate-bg.png'
 const {
     label = '已建成并投入运行设施(个)',
     value = 0,
     bgIcon = defaultImage,
     decimal = 0,
+    isRoundOff = false,
 } = defineProps({
     label: {
         type: String,
@@ -31,6 +35,17 @@ const {
     decimal: {
         type: Number,
     },
+    isRoundOff: {
+        type: Boolean,
+    },
+})
+const displayValue = computed(() => {
+    if (decimal === 0) return value
+    if (isRoundOff) {
+        const factor = Math.pow(10, decimal)
+        return Math.floor(value * factor) / factor
+    }
+    return value
 })
 </script>
 
