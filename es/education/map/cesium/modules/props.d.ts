@@ -67,6 +67,9 @@ export declare const cesiumProps: {
             scene3DOnly: boolean;
             orderIndependentTranslucency: boolean;
             selectionIndicator: boolean;
+            useDefaultRenderLoop: boolean;
+            requestRenderMode: boolean;
+            maximumRenderTimeChange: number;
             contextOptions: {
                 allowTextureFilterAnisotropic: boolean;
                 webgl: {

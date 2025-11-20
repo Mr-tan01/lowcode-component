@@ -67,6 +67,9 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
             scene3DOnly: boolean;
             orderIndependentTranslucency: boolean;
             selectionIndicator: boolean;
+            useDefaultRenderLoop: boolean;
+            requestRenderMode: boolean;
+            maximumRenderTimeChange: number;
             contextOptions: {
                 allowTextureFilterAnisotropic: boolean;
                 webgl: {
@@ -201,6 +204,9 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
             scene3DOnly: boolean;
             orderIndependentTranslucency: boolean;
             selectionIndicator: boolean;
+            useDefaultRenderLoop: boolean;
+            requestRenderMode: boolean;
+            maximumRenderTimeChange: number;
             contextOptions: {
                 allowTextureFilterAnisotropic: boolean;
                 webgl: {

@@ -8,10 +8,10 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
   __name: "sampling",
   props: {
     list: { default: () => [] },
-    showCheckbox: { type: Boolean, default: false }
+    showCheckbox: { type: Boolean, default: false },
+    valueKey: { default: "name" }
   },
-  emits: ["handleChange"],
-  setup(__props, { emit: __emit }) {
+  setup(__props) {
     function getIcon(p) {
       if (!p) return;
       return samplingStaticIcons[p] ?? p;
@@ -37,7 +37,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                     }, () => [
                       _ctx.showCheckbox ? (openBlock(), createBlock(unref(NCheckbox), {
                         key: 0,
-                        value: item.name,
+                        value: item[_ctx.valueKey],
                         class: "lc-checkbox"
                       }, null, 8, ["value"])) : createCommentVNode("v-if", true),
                       createElementVNode("img", {

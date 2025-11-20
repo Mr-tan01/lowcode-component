@@ -469,7 +469,7 @@ class cesiumService {
   }
   // 添加点标记
   async addPoint({ point, isPopoverEntity = false }) {
-    var _a;
+    var _a, _b;
     if (!this.viewer && !this.dataSource) return null;
     const valueInfo = await createInfoCanvas(point);
     const entityConfig = await createEntityConfig({
@@ -484,6 +484,7 @@ class cesiumService {
     }
     if (entity) {
       this.pointEntities.push(entity);
+      (_b = this.viewer) == null ? void 0 : _b.scene.requestRender();
     }
     return entity;
   }

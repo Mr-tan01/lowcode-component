@@ -31,7 +31,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
         });
         if (typeof __props.events.legendselectchanged !== "function" && __props.events.legendselectchanged !== null)
           (_b = (_a = chartBar.value) == null ? void 0 : _a.chartInstance) == null ? void 0 : _b.on("legendselectchanged", function() {
-            var _a2, _b2, _c, _d;
+            var _a2, _b2, _c, _d, _e, _f, _g, _h, _i, _j, _k, _l;
             const chart = (_a2 = chartBar.value) == null ? void 0 : _a2.chartInstance;
             if (!chart) return;
             const option = chart.getOption();
@@ -39,9 +39,38 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
             const selected = legend.selected || {};
             const seriesData = option.series;
             const yAxis = option.yAxis;
-            if (!Array.isArray(yAxis) || yAxis.length <= 1) return;
+            if (!Array.isArray(yAxis)) return;
+            if (yAxis.length <= 1) {
+              const allHidden = Object.values(selected).every((show) => show === false);
+              chart.setOption({
+                yAxis: [
+                  {
+                    show: !allHidden,
+                    axisLabel: {
+                      formatter: !allHidden ? ((_d = (_c = yAxis[0]) == null ? void 0 : _c.axisLabel) == null ? void 0 : _d.formatter) || "{value}" : ""
+                    }
+                  }
+                ]
+              });
+              return;
+            }
             chart.setOption({
-              yAxis: [{ show: selected[(_c = seriesData == null ? void 0 : seriesData[0]) == null ? void 0 : _c.name] !== false }, { show: selected[(_d = seriesData == null ? void 0 : seriesData[1]) == null ? void 0 : _d.name] !== false }]
+              yAxis: [
+                {
+                  show: selected[(_e = seriesData == null ? void 0 : seriesData[0]) == null ? void 0 : _e.name] !== false,
+                  axisLabel: {
+                    formatter: selected[(_f = seriesData == null ? void 0 : seriesData[0]) == null ? void 0 : _f.name] !== false ? ((_h = (_g = yAxis[0]) == null ? void 0 : _g.axisLabel) == null ? void 0 : _h.formatter) || "{value}" : ""
+                    // 隐藏标签
+                  }
+                },
+                {
+                  show: selected[(_i = seriesData == null ? void 0 : seriesData[1]) == null ? void 0 : _i.name] !== false,
+                  axisLabel: {
+                    formatter: selected[(_j = seriesData == null ? void 0 : seriesData[1]) == null ? void 0 : _j.name] !== false ? ((_l = (_k = yAxis[1]) == null ? void 0 : _k.axisLabel) == null ? void 0 : _l.formatter) || "{value}" : ""
+                    // 隐藏标签
+                  }
+                }
+              ]
             });
           });
       }
