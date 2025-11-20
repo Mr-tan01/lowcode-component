@@ -47,6 +47,12 @@ const cesiumProps = {
       scene3DOnly: true,
       orderIndependentTranslucency: true,
       selectionIndicator: false,
+      useDefaultRenderLoop: true,
+      // 保持默认渲染循环
+      requestRenderMode: true,
+      // 启用请求渲染模式
+      maximumRenderTimeChange: 1,
+      // 最大渲染时间变化
       contextOptions: {
         allowTextureFilterAnisotropic: true,
         webgl: {

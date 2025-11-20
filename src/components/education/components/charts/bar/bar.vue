@@ -56,6 +56,22 @@ onMounted(() => {
                 const seriesData = option.series
                 const yAxis = option.yAxis
                 if (!Array.isArray(yAxis)) return
+                if (yAxis.length <= 1) {
+                    // 检查是否所有图例都被隐藏
+                    const allHidden = Object.values(selected).every(show => show === false)
+
+                    chart.setOption({
+                        yAxis: [
+                            {
+                                show: !allHidden,
+                                axisLabel: {
+                                    formatter: !allHidden ? yAxis[0]?.axisLabel?.formatter || '{value}' : '',
+                                },
+                            },
+                        ],
+                    })
+                    return
+                }
 
                 chart.setOption({
                     yAxis: [

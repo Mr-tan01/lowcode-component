@@ -573,6 +573,7 @@ export class cesiumService {
 
         if (entity) {
             this.pointEntities.push(entity)
+            this.viewer?.scene.requestRender()
         }
 
         return entity
