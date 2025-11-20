@@ -11,6 +11,9 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
     decimal: {
         type: NumberConstructor;
     };
+    isRoundOff: {
+        type: BooleanConstructor;
+    };
 }>, {}, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
     label: {
         type: StringConstructor;
@@ -24,5 +27,10 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
     decimal: {
         type: NumberConstructor;
     };
-}>> & Readonly<{}>, {}, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, HTMLDivElement>;
+    isRoundOff: {
+        type: BooleanConstructor;
+    };
+}>> & Readonly<{}>, {
+    isRoundOff: boolean;
+}, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, HTMLDivElement>;
 export default _default;

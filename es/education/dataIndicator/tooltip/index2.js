@@ -14,7 +14,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
   },
   setup(__props) {
     useCssVars((_ctx) => ({
-      "v3f9a9582": unref(iconSize)
+      "3f9a9582": unref(iconSize)
     }));
     const iconSize = typeof __props.size === "number" ? `${__props.size}px` : __props.size;
     return (_ctx, _cache) => {
@@ -70,7 +70,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                   createElementVNode(
                     "div",
                     _hoisted_5,
-                    toDisplayString(__props.title),
+                    toDisplayString(_ctx.title),
                     1
                     /* TEXT */
                   )
