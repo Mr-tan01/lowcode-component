@@ -15,19 +15,19 @@
         </DemoHelpBox>
         <DemoHelpBox title="机器人图标" description="深圳教育项目-机器人图标" rswidth="1210px" rs-height="auto" :code="code2">
             <NSpace>
-                <LcRobot width="auto" height="147px" value="s4" trigger="focus" show-popup draggable></LcRobot>
-                <LcRobot width="auto" height="147px" value="s4" trigger="focus" show-popup draggable position="absolute"></LcRobot>
-                <LcRobot width="auto" height="147px" value="s4" trigger="focus" show-popup></LcRobot>
-                <LcRobot width="auto" height="147px" value="s4" trigger="focus" hid-dir="rt" show-popup></LcRobot>
+                <LcRobot width="auto" height="147px" value="s4" trigger="hover" show-popup draggable></LcRobot>
+                <LcRobot width="auto" height="147px" value="s4" trigger="hover" show-popup draggable position="absolute"></LcRobot>
+                <LcRobot width="auto" height="147px" value="s4" trigger="hover" show-popup></LcRobot>
+                <LcRobot width="auto" height="147px" value="s4" trigger="hover" hid-dir="rt" show-popup></LcRobot>
                 <LcRobot
                     width="auto"
                     height="147px"
                     src="https://b0.bdstatic.com/2d43e63ca240bdf793814be0dbc9c3a5.jpg@h_1280"
-                    trigger="focus"
+                    trigger="hover"
                     hid-dir="rt"
                     show-popup
                 ></LcRobot>
-                <LcRobot width="auto" height="147px" value="s5" trigger="focus" :show-popup="true" :popup-size="popupSize" :draggable="true">
+                <LcRobot width="auto" height="147px" value="s5" trigger="hover" :show-popup="true" :popup-size="popupSize" :draggable="true">
                     <template #center>
                         <div @click="handle">点我切换大小</div>
                     </template>

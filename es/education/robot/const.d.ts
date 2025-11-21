@@ -10,7 +10,7 @@ export type RobotBQMapKeys = keyof typeof robotBQMap;
 type ReadValue<T> = T[keyof T];
 export declare const imageShowTrigger: {
     readonly none: "none";
-    readonly focus: "focus";
+    readonly hover: "hover";
 };
 export type ImageShowTrigger = ReadValue<typeof imageShowTrigger>;
 export declare const imageHideDir: {

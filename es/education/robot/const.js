@@ -12,7 +12,7 @@ const robotBQMap = {
 };
 const imageShowTrigger = {
   none: "none",
-  focus: "focus"
+  hover: "hover"
 };
 const imageHideDir = {
   lt: "lt",

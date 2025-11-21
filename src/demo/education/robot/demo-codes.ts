@@ -14,13 +14,13 @@ export const code2 = `
 <template>
     <NSpace>
         // 拖拽机器人
-        <LcRobot width="auto" height="147px" value="s4" trigger="focus" showPopup draggable></LcRobot>
-        <LcRobot width="auto" height="147px" value="s4" trigger="focus" showPopup draggable position="absolute"></LcRobot>
+        <LcRobot width="auto" height="147px" value="s4" trigger="hover" showPopup draggable></LcRobot>
+        <LcRobot width="auto" height="147px" value="s4" trigger="hover" showPopup draggable position="absolute"></LcRobot>
         // 其它用法
-        <LcRobot width="auto" height="147px" value="s4" trigger="focus" showPopup></LcRobot>
-        <LcRobot width="auto" height="147px" value="s4" trigger="focus" hid-dir="rt" showPopup></LcRobot>
+        <LcRobot width="auto" height="147px" value="s4" trigger="hover" showPopup></LcRobot>
+        <LcRobot width="auto" height="147px" value="s4" trigger="hover" hid-dir="rt" showPopup></LcRobot>
         <LcRobot width="auto" height="147px"
-            src="https://b0.bdstatic.com/2d43e63ca240bdf793814be0dbc9c3a5.jpg@h_1280" trigger="focus"
+            src="https://b0.bdstatic.com/2d43e63ca240bdf793814be0dbc9c3a5.jpg@h_1280" trigger="hover"
             hid-dir="rt" showPopup></LcRobot>
     </NSpace>
 </template>
