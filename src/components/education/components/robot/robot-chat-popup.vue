@@ -106,7 +106,6 @@ const popupBackground = computed(() => {
 
     &__content {
         padding: 13px 20px;
-        padding-left: 30px;
         box-sizing: border-box;
         height: 100%;
         width: 100%;
@@ -141,7 +140,6 @@ const popupBackground = computed(() => {
                     display: flex;
                     align-items: center;
                     gap: 15px;
-
                     font-family:
                         PingFangSC,
                         PingFang SC;
