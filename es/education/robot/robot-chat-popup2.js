@@ -60,9 +60,9 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
   emits: ["clickQuick"],
   setup(__props, { emit: __emit }) {
     useCssVars((_ctx) => ({
-      "2d101370": imgHeight.value,
-      "4ced79c0": popupBackground.value,
-      "7f8e8346": imgWidth.value
+      "740f5ea8": imgHeight.value,
+      "a9fd7750": popupBackground.value,
+      "59f1a7b6": imgWidth.value
     }));
     const emit = __emit;
     function clickQuick(item) {
