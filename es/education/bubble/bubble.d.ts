@@ -3,6 +3,7 @@ type __VLS_Props = {
     data?: {
         label: string;
         value: number;
+        symbolSize?: number[];
     }[];
     debounceTime?: number;
     chartOptions?: EChartsCoreOption | EChartsOption;

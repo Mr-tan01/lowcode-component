@@ -16,7 +16,7 @@ const {
     debounceTime = 300,
     chartOptions = {},
 } = defineProps<{
-    data?: { label: string; value: number }[]
+    data?: { label: string; value: number; symbolSize?: number[] }[]
     debounceTime?: number
     chartOptions?: EChartsCoreOption | EChartsOption
 }>()
@@ -28,7 +28,8 @@ const formatData = computed(() => {
     return data.map(item => {
         return {
             name: item.label,
-            symbolSize: [scale(180), scale(129)],
+            symbolSize: item.symbolSize || [scale(180), scale(129)],
+            hoverSymbolSize: item.symbolSize || [scale(200), scale(150)],
             draggable: true,
             symbol: `image://${defaultImage}`,
             ...item,
@@ -61,7 +62,46 @@ const initChart = () => {
             const newData = formatData.value.map(node => ({
                 ...node,
                 symbol: node.name === params?.data?.name ? `image://${hoverImg}` : `image://${defaultImage}`,
-                symbolSize: node.name === params.data.name ? [scale(200), scale(150)] : [scale(180), scale(129)],
+                symbolSize: node.name === params.data.name ? node.hoverSymbolSize : node.symbolSize,
+                label:
+                    node.name === params.data.name
+                        ? {
+                              normal: {
+                                  formatter: function (params) {
+                                      let name = params.data.name
+                                      const match = name.match(/^([^(]+)(\([^)]+\))?$/)
+                                      if (match) {
+                                          const desc = match[1]
+                                          const unit = match[2] || ''
+                                          let result = ''
+                                          const wrapLen = 5
+                                          for (let i = 0; i < desc.length; i += wrapLen) {
+                                              result += desc.slice(i, i + wrapLen)
+                                              if (i + wrapLen < desc.length) result += '\n'
+                                          }
+                                          name = result + unit
+                                      }
+                                      return '{value|' + params.data.value + '}\n{name|' + name + '}'
+                                  },
+                                  show: true,
+                                  rich: {
+                                      value: {
+                                          fontSize: scale(32 * 1.2),
+                                          lineHeight: scale(24 * 1.2),
+                                          align: 'center',
+                                          color: 'rgb(9, 238, 241)',
+                                      },
+                                      name: {
+                                          fontSize: scale(18 * 1.2),
+                                          lineHeight: scale(20 * 1.2),
+                                          align: 'center',
+                                          color: 'rgb(9, 238, 241)',
+                                      },
+                                  },
+                              },
+                              align: 'center',
+                          }
+                        : {},
             }))
             chartInstance.value?.setOption({
                 series: [
@@ -76,6 +116,42 @@ const initChart = () => {
         chartInstance.value?.setOption({
             series: [
                 {
+                    label: {
+                        normal: {
+                            formatter: function (params) {
+                                let name = params.data.name
+                                const match = name.match(/^([^(]+)(\([^)]+\))?$/)
+                                if (match) {
+                                    const desc = match[1]
+                                    const unit = match[2] || ''
+                                    let result = ''
+                                    const wrapLen = 5
+                                    for (let i = 0; i < desc.length; i += wrapLen) {
+                                        result += desc.slice(i, i + wrapLen)
+                                        if (i + wrapLen < desc.length) result += '\n'
+                                    }
+                                    name = result + unit
+                                }
+                                return '{value|' + params.data.value + '}\n{name|' + name + '}'
+                            },
+                            show: true,
+                            rich: {
+                                value: {
+                                    fontSize: scale(32),
+                                    lineHeight: scale(24),
+                                    align: 'center',
+                                    color: 'rgb(9, 238, 241)',
+                                },
+                                name: {
+                                    fontSize: scale(18),
+                                    lineHeight: scale(20),
+                                    align: 'center',
+                                    color: 'rgb(9, 238, 241)',
+                                },
+                            },
+                        },
+                        align: 'center',
+                    },
                     data: formatData.value,
                 },
             ],
