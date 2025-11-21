@@ -12,7 +12,7 @@
         @dragstart="startDrag"
         @dragend="stopDrag"
     >
-        <div class="lc-robot__wrapper" tabindex="-1" @focus="isFocus = true" @blur="isFocus = false">
+        <div class="lc-robot__wrapper" @mouseenter="isFocus = true" @mouseleave="isFocus = false">
             <robotChatPopup
                 v-if="useShowPopup(imageHideDir.rt)"
                 :class="{ popupShow: useShowPopup(imageHideDir.rt) && !isFocus }"
@@ -134,7 +134,7 @@ const { y: robotPositionTop } = toRefs(robotOffset)
         display: flex;
         outline: none;
 
-        &:focus {
+        &:hover {
             .lc-robot {
                 &__wrapper {
                     &__image {

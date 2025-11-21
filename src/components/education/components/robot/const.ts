@@ -18,7 +18,7 @@ type ReadValue<T> = T[keyof T]
 
 export const imageShowTrigger = {
     none: 'none',
-    focus: 'focus',
+    hover: 'hover',
 } as const
 
 export type ImageShowTrigger = ReadValue<typeof imageShowTrigger>

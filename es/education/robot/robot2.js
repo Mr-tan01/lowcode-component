@@ -26,10 +26,10 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
   emits: ["update:isShow"],
   setup(__props) {
     useCssVars((_ctx) => ({
-      "61ee6592": _ctx.position,
-      "1d731ea0": unref(robotPositionTop),
-      "45ad2478": _ctx.width,
-      "562870b5": _ctx.height
+      "3369fd44": _ctx.position,
+      "7e1d7886": unref(robotPositionTop),
+      "01e7b78b": _ctx.width,
+      "21404002": _ctx.height
     }));
     const props = __props;
     const isFocus = useModel(__props, "isShow");
@@ -67,9 +67,8 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
           "div",
           {
             class: "lc-robot__wrapper",
-            tabindex: "-1",
-            onFocus: _cache[0] || (_cache[0] = ($event) => isFocus.value = true),
-            onBlur: _cache[1] || (_cache[1] = ($event) => isFocus.value = false)
+            onMouseenter: _cache[0] || (_cache[0] = ($event) => isFocus.value = true),
+            onMouseleave: _cache[1] || (_cache[1] = ($event) => isFocus.value = false)
           },
           [
             useShowPopup(unref(imageHideDir).rt) ? (openBlock(), createBlock(robotChatPopup, mergeProps({
