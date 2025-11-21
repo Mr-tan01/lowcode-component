@@ -1,8 +1,47 @@
-import { PropType } from 'vue';
+import { Ref } from 'vue';
 import { EChartsCoreOption, EChartsOption } from 'echarts';
-declare const _default: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
-    options: PropType<EChartsCoreOption | EChartsOption>;
-}>, {}, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
-    options: PropType<EChartsCoreOption | EChartsOption>;
-}>> & Readonly<{}>, {}, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, HTMLDivElement>;
+type __VLS_Props = {
+    options?: EChartsCoreOption | EChartsOption;
+    events?: {
+        [eventName: string]: (chartBar: Ref) => (...args: any) => void;
+    };
+};
+declare const _default: import('vue').DefineComponent<__VLS_Props, {}, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<__VLS_Props> & Readonly<{}>, {}, {}, {}, {}, string, import('vue').ComponentProvideOptions, false, {
+    chartLineRef: import('vue').CreateComponentPublicInstanceWithMixins<Readonly<import('vue').ExtractPropTypes<{
+        opts: {
+            type: import('vue').PropType<EChartsOption>;
+            default: () => {};
+        };
+        transFormSizeKeys: {
+            type: import('vue').PropType<string[]>;
+            default: () => never[];
+        };
+    }>>, {
+        chartInstance: import('vue').ShallowRef<import('echarts').ECharts | undefined>;
+    }, unknown, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, import('vue').PublicProps, {
+        transFormSizeKeys: string[];
+        opts: echarts.EChartsOption;
+    }, true, {}, {}, import('vue').GlobalComponents, import('vue').GlobalDirectives, string, {}, any, import('vue').ComponentProvideOptions, {
+        P: {};
+        B: {};
+        D: {};
+        C: {};
+        M: {};
+        Defaults: {};
+    }, Readonly<import('vue').ExtractPropTypes<{
+        opts: {
+            type: import('vue').PropType<EChartsOption>;
+            default: () => {};
+        };
+        transFormSizeKeys: {
+            type: import('vue').PropType<string[]>;
+            default: () => never[];
+        };
+    }>>, {
+        chartInstance: import('vue').ShallowRef<import('echarts').ECharts | undefined>;
+    }, {}, {}, {}, {
+        transFormSizeKeys: string[];
+        opts: echarts.EChartsOption;
+    }> | null;
+}, HTMLDivElement>;
 export default _default;
