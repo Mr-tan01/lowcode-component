@@ -23,7 +23,7 @@
         "dist"
     ],
     "dependencies": {
-        "@mmj-code-lib/lowcode": "git+http://liangweizhu@siteshun:AtwN-yrbpBsNVz35S6sA@code.siteshun.com:800/front-component/STS/mmj-code-lib.git#lowcode-0.1.3",
+        "@mmj-code-lib/lowcode": "git+http://liangweizhu@siteshun:smb-bbkt3z_dJV7W9u5R@code.siteshun.com:800/front-component/STS/mmj-code-lib.git#lowcode-0.1.3",
         "lowcode-share": "git+http://code.siteshun.com:800/front-component/lowcode-sview/lowcode-share.git#develop",
         "mmjs-core": "^0.13.4"
     },
