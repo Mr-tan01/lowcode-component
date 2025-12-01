@@ -77,6 +77,9 @@ export const innerImageDomain = {
         primarySchool: 'primary-school',
         middleSchool: 'middle-school',
         university: 'university',
+        studentPopulation: 'student-population',
+        professionalTeachers: 'professional-teachers',
+        area: 'area',
     },
     event: {
         domain: 'domain',

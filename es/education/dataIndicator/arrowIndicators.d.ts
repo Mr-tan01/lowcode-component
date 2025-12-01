@@ -3,6 +3,7 @@ import { PropType } from 'vue';
 declare function __VLS_template(): {
     attrs: Partial<{}>;
     slots: {
+        icon?(_: {}): any;
         value?(_: {}): any;
     };
     refs: {};

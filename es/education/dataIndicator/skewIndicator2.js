@@ -24,7 +24,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
   props: {
     label: { default: "" },
     value: { default: 0 },
-    unit: {},
+    unit: { default: "" },
     fixed: { type: Boolean, default: true },
     decimal: { default: 0 },
     icon: { default: () => personIcon },

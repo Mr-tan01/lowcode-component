@@ -40,7 +40,7 @@ import { LcTooltip } from '@/components/education/components/tooltip'
 const {
     label = '',
     value = 0,
-    unit,
+    unit = '',
     fixed = true,
     decimal = 0,
     icon = personIcon,
@@ -50,7 +50,7 @@ const {
 } = defineProps<{
     label?: string
     value?: number
-    unit: string
+    unit?: string
     fixed?: boolean
     decimal?: number
     icon?: string
