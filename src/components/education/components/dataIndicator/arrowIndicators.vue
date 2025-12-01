@@ -1,8 +1,10 @@
 <template>
     <div class="lc-arrow-indicators">
-        <div class="lc-arrow-indicators__icon">
-            <LcIcon domain="event" :name="icon" :size="70"></LcIcon>
-        </div>
+        <slot name="icon">
+            <div class="lc-arrow-indicators__icon">
+                <LcIcon domain="event" :name="icon" :size="70"></LcIcon>
+            </div>
+        </slot>
         <div class="lc-arrow-indicators__center">
             <div class="lc-arrow-indicators__center__lable">
                 {{ label }}

@@ -11,6 +11,7 @@ import { default as default11 } from "./minitypeCard.js";
 import { default as default12 } from "./humanShapeCard.js";
 import { default as default13 } from "./bothwayCard.js";
 export {
+  default7 as LcArrowIndicators,
   default13 as LcBothwayCard,
   default12 as LcHumanShapeCard,
   default4 as LcIndicatorCard,
@@ -21,6 +22,5 @@ export {
   default8 as LcPlanningIndicators,
   default2 as LcRangeIndicator,
   default3 as LcSkewIndicator,
-  default7 as lcArrowIndicators,
   default6 as lcBimodalIndex
 };

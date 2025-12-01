@@ -1,7 +1,7 @@
 type __VLS_Props = {
     label?: string;
     value?: number;
-    unit: string;
+    unit?: string;
     fixed?: boolean;
     decimal?: number;
     icon?: string;

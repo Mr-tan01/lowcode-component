@@ -1,5 +1,5 @@
-import { defineComponent, mergeDefaults, computed, createElementBlock, openBlock, createElementVNode, createVNode, unref, toDisplayString, renderSlot } from "vue";
-import LcIcon from "./icon/index.js";
+import { defineComponent, mergeDefaults, computed, createElementBlock, openBlock, renderSlot, createElementVNode, createVNode, unref, toDisplayString } from "vue";
+import LcIcon from "./icon/index2.js";
 import './assets/icon/iconCard.css';/* empty css              */
 import { NNumberAnimation } from "naive-ui/es/number-animation";
 import { bigNumber } from "lowcode-share/es/share";
@@ -55,13 +55,15 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     });
     return (_ctx, _cache) => {
       return openBlock(), createElementBlock("div", _hoisted_1, [
-        createElementVNode("div", _hoisted_2, [
-          createVNode(unref(LcIcon), {
-            domain: "event",
-            name: __props.icon,
-            size: 70
-          }, null, 8, ["name"])
-        ]),
+        renderSlot(_ctx.$slots, "icon", {}, () => [
+          createElementVNode("div", _hoisted_2, [
+            createVNode(unref(LcIcon), {
+              domain: "event",
+              name: __props.icon,
+              size: 70
+            }, null, 8, ["name"])
+          ])
+        ], true),
         createElementVNode("div", _hoisted_3, [
           createElementVNode(
             "div",

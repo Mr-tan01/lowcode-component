@@ -16,10 +16,10 @@
                     :sub-content="'222'"
                 ></LcLargesKewIndicator>
 
-                <lcArrowIndicators label="心理教师总数" :value="2370" unit="人" :decimal="2"></lcArrowIndicators>
-                <lcArrowIndicators label="心理教师总数" :icon="'reward'">
+                <LcArrowIndicators label="心理教师总数" :value="2370" unit="人" :decimal="2"></LcArrowIndicators>
+                <LcArrowIndicators label="心理教师总数" :icon="'reward'">
                     <template #value> 1:900 </template>
-                </lcArrowIndicators>
+                </LcArrowIndicators>
 
                 <LcRangeIndicator
                     :data="[
@@ -168,13 +168,13 @@ import {
     LcIndicatorList,
     LcPlanningIndicators,
     lcBimodalIndex,
-    lcArrowIndicators,
+    LcArrowIndicators,
     LcLargesKewIndicator,
     LcIndicatorCardArrows,
     LcMinitypeCard,
     LcHumanShapeCard,
     LcBothwayCard,
-} from '@/components/education/components/dataIndicator'
+} from '@/components/education/components'
 import { code1, code3, code4, code5 } from './demo-codes'
 import Icon from './image/test.png'
 const data = {
