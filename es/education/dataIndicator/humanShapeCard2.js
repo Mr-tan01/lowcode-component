@@ -5,13 +5,13 @@ import memoize from "lodash-es/memoize";
 import { bigNumber } from "lowcode-share/es/share";
 const _hoisted_1 = { class: "lc-human-shapeCard" };
 const _hoisted_2 = { class: "lc-human-shapeCard__wrapper" };
-const _hoisted_3 = { class: "lc-human-shapeCard__wrapper__item__title tiele-left" };
+const _hoisted_3 = ["title"];
 const _hoisted_4 = { class: "lc-human-shapeCard__wrapper__item__content content-left" };
 const _hoisted_5 = ["data-tooltip"];
 const _hoisted_6 = ["data-tooltip"];
 const _hoisted_7 = { class: "lc-human-shapeCard__img" };
 const _hoisted_8 = { class: "lc-human-shapeCard__wrapper" };
-const _hoisted_9 = { class: "lc-human-shapeCard__wrapper__item__title tiele-right" };
+const _hoisted_9 = ["title"];
 const _hoisted_10 = { class: "lc-human-shapeCard__wrapper__item__content" };
 const _hoisted_11 = ["data-tooltip"];
 const _hoisted_12 = ["data-tooltip"];
@@ -64,13 +64,10 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                 key,
                 class: "lc-human-shapeCard__wrapper__item"
               }, [
-                createElementVNode(
-                  "span",
-                  _hoisted_3,
-                  toDisplayString(item.title),
-                  1
-                  /* TEXT */
-                ),
+                createElementVNode("span", {
+                  class: "lc-human-shapeCard__wrapper__item__title tiele-left",
+                  title: item.title
+                }, toDisplayString(item.title), 9, _hoisted_3),
                 createElementVNode("div", _hoisted_4, [
                   createElementVNode("div", {
                     class: "lc-human-shapeCard__wrapper__item__content__val tooltip-container",
@@ -143,13 +140,10 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                 key,
                 class: "lc-human-shapeCard__wrapper__item"
               }, [
-                createElementVNode(
-                  "span",
-                  _hoisted_9,
-                  toDisplayString(item.title),
-                  1
-                  /* TEXT */
-                ),
+                createElementVNode("span", {
+                  class: "lc-human-shapeCard__wrapper__item__title tiele-right",
+                  title: item.title
+                }, toDisplayString(item.title), 9, _hoisted_9),
                 createElementVNode("div", _hoisted_10, [
                   createElementVNode("div", {
                     class: "lc-human-shapeCard__wrapper__item__content__val tooltip-container",

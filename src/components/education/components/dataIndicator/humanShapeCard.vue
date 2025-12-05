@@ -2,7 +2,7 @@
     <div class="lc-human-shapeCard">
         <div class="lc-human-shapeCard__wrapper">
             <div v-for="(item, key) in letData" :key="key" class="lc-human-shapeCard__wrapper__item">
-                <span class="lc-human-shapeCard__wrapper__item__title tiele-left">{{ item.title }}</span>
+                <span class="lc-human-shapeCard__wrapper__item__title tiele-left" :title="item.title">{{ item.title }}</span>
                 <div class="lc-human-shapeCard__wrapper__item__content content-left">
                     <div
                         class="lc-human-shapeCard__wrapper__item__content__val tooltip-container"
@@ -40,7 +40,7 @@
         </div>
         <div class="lc-human-shapeCard__wrapper">
             <div v-for="(item, key) in rigData" :key="key" class="lc-human-shapeCard__wrapper__item">
-                <span class="lc-human-shapeCard__wrapper__item__title tiele-right">{{ item.title }}</span>
+                <span class="lc-human-shapeCard__wrapper__item__title tiele-right" :title="item.title">{{ item.title }}</span>
                 <div class="lc-human-shapeCard__wrapper__item__content">
                     <div
                         class="lc-human-shapeCard__wrapper__item__content__val tooltip-container"

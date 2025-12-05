@@ -711,6 +711,7 @@ class cesiumService {
     heatOptions = { radius: 5, maxOpacity: 0, minOpacity: 0.5 },
     heatmapDataOptions
   }) {
+    var _a;
     if (!this.viewer) return;
     const heatmap = new CesiumHeatmap(this.viewer, {
       zoomToLayer: false,
@@ -724,10 +725,13 @@ class cesiumService {
       bounds: [this.shenzhenBounds.west, this.shenzhenBounds.south, this.shenzhenBounds.east, this.shenzhenBounds.north],
       heatmapDataOptions
     });
+    (_a = this.viewer) == null ? void 0 : _a.scene.requestRender();
     return heatmap;
   }
   // 删除
   removeHeatMap(heatmap) {
+    var _a;
+    console.log("removeHeatMap", heatmap, this.viewer);
     if (!this.viewer || !heatmap) return;
     if (heatmap.element) {
       document.body.removeChild(heatmap.element);
@@ -745,6 +749,8 @@ class cesiumService {
         heatmap.cameraMoveEnd = void 0;
       }
     }
+    heatmap.remove();
+    (_a = this.viewer) == null ? void 0 : _a.scene.requestRender();
   }
   // 检查是否在深圳边界内
   isPointInShenzhen(longitude, latitude) {
