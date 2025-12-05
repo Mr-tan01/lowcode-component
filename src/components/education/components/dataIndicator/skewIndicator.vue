@@ -158,8 +158,7 @@ const renderUnit = computed(() => {
                     display: flex;
                     align-items: flex-end;
                     padding-left: 12px;
-                    opacity: 0;
-                    transition: opacity linear 0.3s;
+                    opacity: 1;
 
                     :deep(svg) {
                         color: #0ffbf8;
