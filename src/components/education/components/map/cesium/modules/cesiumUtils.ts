@@ -937,11 +937,13 @@ export class cesiumService {
             bounds: [this.shenzhenBounds.west, this.shenzhenBounds.south, this.shenzhenBounds.east, this.shenzhenBounds.north],
             heatmapDataOptions: heatmapDataOptions,
         })
+        this.viewer?.scene.requestRender()
         return heatmap
     }
 
     // 删除
     removeHeatMap(heatmap: CesiumHeatmap | any): void {
+        console.log('removeHeatMap', heatmap, this.viewer)
         if (!this.viewer || !heatmap) return
         if (heatmap.element) {
             document.body.removeChild(heatmap.element)
@@ -959,6 +961,8 @@ export class cesiumService {
                 heatmap.cameraMoveEnd = undefined
             }
         }
+        heatmap.remove()
+        this.viewer?.scene.requestRender()
     }
 
     // 检查是否在深圳边界内
