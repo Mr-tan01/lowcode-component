@@ -10,7 +10,9 @@
             </div>
             <div class="lc-skew-indicator__wrapper__info">
                 <div class="lc-skew-indicator__wrapper__info--label">
-                    {{ label }}
+                    <slot name="label">
+                        {{ label }}
+                    </slot>
                 </div>
                 <div class="lc-skew-indicator__wrapper__info--result">
                     <div class="lc-skew-indicator__wrapper__info--result--value" :title="value.toString()">

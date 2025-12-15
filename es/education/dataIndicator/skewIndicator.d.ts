@@ -13,6 +13,7 @@ declare function __VLS_template(): {
     attrs: Partial<{}>;
     slots: {
         icon?(_: {}): any;
+        label?(_: {}): any;
         value?(_: {}): any;
     };
     refs: {};

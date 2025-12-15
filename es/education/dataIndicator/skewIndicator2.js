@@ -1,4 +1,4 @@
-import { defineComponent, computed, createElementBlock, openBlock, normalizeClass, createElementVNode, renderSlot, toDisplayString, createCommentVNode, createVNode, unref, withCtx, createTextVNode } from "vue";
+import { defineComponent, computed, createElementBlock, openBlock, normalizeClass, createElementVNode, renderSlot, createTextVNode, toDisplayString, createCommentVNode, createVNode, unref, withCtx } from "vue";
 import personIcon from "./images/skew/icon/person.png.js";
 import { bigNumber } from "lowcode-share/es/share";
 import { NNumberAnimation } from "naive-ui/es/number-animation";
@@ -73,13 +73,15 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
               ])
             ]),
             createElementVNode("div", _hoisted_5, [
-              createElementVNode(
-                "div",
-                _hoisted_6,
-                toDisplayString(_ctx.label),
-                1
-                /* TEXT */
-              ),
+              createElementVNode("div", _hoisted_6, [
+                renderSlot(_ctx.$slots, "label", {}, () => [
+                  createTextVNode(
+                    toDisplayString(_ctx.label),
+                    1
+                    /* TEXT */
+                  )
+                ], true)
+              ]),
               createElementVNode("div", _hoisted_7, [
                 createElementVNode("div", {
                   class: "lc-skew-indicator__wrapper__info--result--value",
