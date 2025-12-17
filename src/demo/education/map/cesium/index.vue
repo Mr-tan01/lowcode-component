@@ -10,7 +10,7 @@
                     :basic-config="basicConfig"
                     base-url="https://jysl.sz.edu.cn:8314"
                     :default-show-state="false"
-                    :area-name="'深圳市'"
+                    :area-name="'福田区'"
                     @load-handler="loadHandler"
                     @point-handler="onPointHandler"
                 ></LcCesium>
@@ -108,7 +108,7 @@ const defSwitchTabList = [
 const show = ref<boolean>(false)
 let accessToken = ref<string | null>(null)
 
-const tabValue = ref('宝安区')
+const tabValue = ref('福田区')
 let cesiumMap = ref<CesiumInstanceType | null>(null)
 let optionInfo = ref<pointType[]>([])
 let buildHeatMap
@@ -120,6 +120,7 @@ function changePolygon(value: ChangeEvent): void {
     cesiumMap.value?.loadedTileLayer(true)
     cesiumMap.value?.changeModel('polygonClickHandler', value.label)
     optionInfo.value = pointInfo[value.label]
+    console.log(optionInfo.value, '==>')
     setTimeout(() => {
         cesiumMap.value?.loadedTileLayer(false)
     }, 1000)
@@ -156,6 +157,7 @@ onMounted(async () => {
     // await cesiumMap.value?.changeModel("buildHeatMap", heatMapData);
     // cesiumMap.value?.changeModel("updateHeatMapPoints", heatMapData);
     // cesiumMap.value?.changeModel("updateHeatMapMaxMin", { max: max, min: min });
+    optionInfo.value = pointInfo['福田区']
 })
 const add = () => {
     const heatMapData = heatMapDataHandle(data.data)
