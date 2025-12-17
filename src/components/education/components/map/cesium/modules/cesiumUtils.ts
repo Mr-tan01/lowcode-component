@@ -557,26 +557,39 @@ export class cesiumService {
     }
 
     // 添加点标记
-    async addPoint({ point, isPopoverEntity = false }: { point: pointType; isPopoverEntity?: boolean }): Promise<Entity | null | void> {
-        if (!this.viewer && !this.dataSource) return null
-        const valueInfo = await createInfoCanvas(point)
-        const entityConfig = await createEntityConfig({
-            point,
-            valueInfo: valueInfo.canvas,
-            isPopoverEntity,
-            viewer: this.viewer!,
-        })
-        const entity: Entity | null = this[isPopoverEntity ? 'viewer' : 'dataSource']?.entities.add(entityConfig) ?? null
-        if (!this.pointEntities) {
-            this.pointEntities = []
-        }
+    async addPoint({ point, isPopoverEntity = false }) {
+        try {
+            const valueInfo = await createInfoCanvas(point)
+            const entityConfig = await createEntityConfig({
+                point,
+                valueInfo: valueInfo.canvas,
+                isPopoverEntity,
+                viewer: this.viewer!,
+            })
 
-        if (entity) {
-            this.pointEntities.push(entity)
-            this.viewer?.scene.requestRender()
-        }
+            // 确保viewer已完全初始化
+            if (!this.viewer?.scene) {
+                console.warn('Viewer未就绪，延迟加载...')
+                await new Promise(resolve => setTimeout(resolve, 100))
+            }
 
-        return entity
+            const entity = this[isPopoverEntity ? 'viewer' : 'dataSource']?.entities.add(entityConfig)
+
+            if (entity) {
+                // 强制渲染
+                this.viewer?.scene.requestRender()
+                // 等待一帧确保渲染
+                await new Promise(resolve => requestAnimationFrame(resolve))
+
+                // console.log('实体已添加，检查渲染状态...')
+                // this.debugEntity(entity)
+            }
+
+            return entity
+        } catch (error) {
+            console.error('添加点位失败:', error)
+            return null
+        }
     }
 
     private renderTasks = new WeakMap<this, number>()
@@ -601,9 +614,9 @@ export class cesiumService {
             if (batchIndex >= batches) {
                 // 所有批次渲染完成，检查相机高度
                 this.handleCameraHeightChange()
+                this.viewer?.scene.requestRender()
                 return
             }
-
             const startIndex = batchIndex * batchSize
             const endIndex = Math.min(startIndex + batchSize, totalLength)
             const batchPoints = points.slice(startIndex, endIndex)

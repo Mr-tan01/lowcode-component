@@ -59,8 +59,10 @@ class cesiumService {
       const batchSize = batchRenderConfig.batchRenderSize;
       const batches = Math.ceil(totalLength / batchSize);
       const renderBatch = (batchIndex) => {
+        var _a;
         if (batchIndex >= batches) {
           this.handleCameraHeightChange();
+          (_a = this.viewer) == null ? void 0 : _a.scene.requestRender();
           return;
         }
         const startIndex = batchIndex * batchSize;
@@ -469,24 +471,29 @@ class cesiumService {
   }
   // 添加点标记
   async addPoint({ point, isPopoverEntity = false }) {
-    var _a, _b;
-    if (!this.viewer && !this.dataSource) return null;
-    const valueInfo = await createInfoCanvas(point);
-    const entityConfig = await createEntityConfig({
-      point,
-      valueInfo: valueInfo.canvas,
-      isPopoverEntity,
-      viewer: this.viewer
-    });
-    const entity = ((_a = this[isPopoverEntity ? "viewer" : "dataSource"]) == null ? void 0 : _a.entities.add(entityConfig)) ?? null;
-    if (!this.pointEntities) {
-      this.pointEntities = [];
+    var _a, _b, _c;
+    try {
+      const valueInfo = await createInfoCanvas(point);
+      const entityConfig = await createEntityConfig({
+        point,
+        valueInfo: valueInfo.canvas,
+        isPopoverEntity,
+        viewer: this.viewer
+      });
+      if (!((_a = this.viewer) == null ? void 0 : _a.scene)) {
+        console.warn("Viewer未就绪，延迟加载...");
+        await new Promise((resolve) => setTimeout(resolve, 100));
+      }
+      const entity = (_b = this[isPopoverEntity ? "viewer" : "dataSource"]) == null ? void 0 : _b.entities.add(entityConfig);
+      if (entity) {
+        (_c = this.viewer) == null ? void 0 : _c.scene.requestRender();
+        await new Promise((resolve) => requestAnimationFrame(resolve));
+      }
+      return entity;
+    } catch (error) {
+      console.error("添加点位失败:", error);
+      return null;
     }
-    if (entity) {
-      this.pointEntities.push(entity);
-      (_b = this.viewer) == null ? void 0 : _b.scene.requestRender();
-    }
-    return entity;
   }
   // 取消正在进行的批量渲染
   cancelBatchRender() {

@@ -63,9 +63,9 @@ export declare class cesiumService {
     private addProviderToViewer;
     private handleLoadError;
     addPoint({ point, isPopoverEntity }: {
-        point: pointType;
-        isPopoverEntity?: boolean;
-    }): Promise<Entity | null | void>;
+        point: any;
+        isPopoverEntity?: boolean | undefined;
+    }): Promise<Entity | null | undefined>;
     private renderTasks;
     batchRenderPoints: (points: any[], defaultShowState: boolean, batchRenderConfig: {
         batchRenderSize: number;
