@@ -508,21 +508,32 @@ class cesiumService {
     var _a, _b, _c;
     if (!this[key]) return;
     if (key === "pointEntities") {
-      for (const entity of this[key]) {
-        if (entity.name && entity.name.endsWith("Label")) {
-          (_a = this.viewer) == null ? void 0 : _a.entities.remove(entity);
-        } else {
-          (_b = this.dataSource) == null ? void 0 : _b.entities.remove(entity);
-        }
+      if (this.dataSource) {
+        this.dataSource.entities.removeAll();
       }
-      this[key] = [];
+      if (this.viewer) {
+        const entities = this.viewer.entities.values;
+        const pointEntities = entities.filter(
+          (entity) => {
+            var _a2;
+            return entity.name && (entity.name.endsWith("Label") || ((_a2 = this.pointEntities) == null ? void 0 : _a2.includes(entity)));
+          }
+        );
+        pointEntities.forEach((entity) => {
+          var _a2;
+          (_a2 = this.viewer) == null ? void 0 : _a2.entities.remove(entity);
+        });
+      }
+      this.pointEntities = [];
+      (_a = this.viewer) == null ? void 0 : _a.scene.requestRender();
       return;
     }
     if (!type || !this[type]) return;
     for (const entity of this[key]) {
-      (_c = this[type]) == null ? void 0 : _c.entities.remove(entity);
+      (_b = this[type]) == null ? void 0 : _b.entities.remove(entity);
     }
     this[key] = [];
+    (_c = this.viewer) == null ? void 0 : _c.scene.requestRender();
   }
   addPolygon(name) {
     if (!this.viewer || !(name in areaData)) return;
@@ -547,8 +558,8 @@ class cesiumService {
     this.polygonEntities.push(entity);
   }
   // 深圳全市添加Polygon
-  addAllDistricts() {
-    this.clearEntity("polygonEntities", "viewer");
+  async addAllDistricts() {
+    await this.clearEntity("polygonEntities", "viewer");
     Object.keys(areaData).filter((key) => key !== "深圳市").forEach(this.addPolygon.bind(this));
   }
   // 获取当前地图经纬度、高度

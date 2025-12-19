@@ -31,7 +31,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     const tooltip = useTemplateRef("tooltipRef");
     const emit = __emit;
     const reloadPointData = async () => {
-      clearEntity();
+      await clearEntity();
       const offsetPointData = cesiumUtils.offsetDuplicateCoordinates(__props.pointData, "lng", "lat", __props.openOffset.offset);
       if (__props.openOffset.flag) {
         cesiumUtils.pointData = offsetPointData;
@@ -110,9 +110,9 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
         isTooltipVisible.value = false;
       }
     }
-    const clearEntity = () => {
-      cesiumUtils.clearEntity("pointEntities", "dataSource");
-      cesiumUtils.clearEntity("pointEntities", "viewer");
+    const clearEntity = async () => {
+      await cesiumUtils.clearEntity("pointEntities", "dataSource");
+      await cesiumUtils.clearEntity("pointEntities", "viewer");
     };
     const changeModel = (type, value) => {
       if (cesiumUtils[type]) {
@@ -190,9 +190,9 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     );
     const initPointDataChange = watch(
       [initPointDataStatus, () => __props.pointData, () => __props.areaName],
-      () => {
+      async () => {
         if (!initPointDataStatus.value) {
-          clearEntity();
+          await clearEntity();
           reloadPointData();
         }
       },
