@@ -19,12 +19,12 @@ import { Entity, Cartesian3, JulianDate, SceneTransforms } from 'cesium'
 import { NSpin } from 'naive-ui'
 
 const initImageryLayersStatus = ref<boolean>(true)
-const initPointDataStatus = ref<boolean>(true)
+const initPointDataStatus = ref<boolean>(true) // 是否初始化结束
 const isTooltipVisible = ref(false)
 const lastPickedEntity = ref()
 const lastPickedPointOptions = ref()
 const tooltipContent = ref()
-
+const viewerInitialized = ref(false)
 const tooltip = useTemplateRef('tooltipRef')
 const emit = defineEmits<{
     (e: 'pointHandler', value: EntityProperties): void
@@ -72,11 +72,11 @@ const reloadPointData = async (): Promise<void> => {
     cesiumUtils.handleCameraHeightChange()
 }
 
-const loadedTileLayer = async (status: boolean): Promise<void> => {
+const loadedTileLayer = (status: boolean): void => {
     initPointDataStatus.value = status
 }
 
-const loadImageryLayers = async (status: boolean): Promise<void> => {
+const loadImageryLayers = (status: boolean): void => {
     emit('loadHandler', !status)
     initImageryLayersStatus.value = status
     if (initPointDataStatus.value) {
@@ -158,10 +158,11 @@ const changeModel = <T extends changeModelType>(type: changeModelType, value: ch
     }
 }
 
-const initCesium = async (): Promise<{ status: boolean }> => {
+const initCesium = async () => {
     try {
         if (!accessToken) {
-            return { status: false }
+            loadedTileLayer(false)
+            return
         }
         // 同步数据
         cesiumUtils.pointData = pointData
@@ -175,6 +176,7 @@ const initCesium = async (): Promise<{ status: boolean }> => {
         if (!viewerInitSuccess) {
             throw new Error('Viewer 初始化失败')
         }
+        viewerInitialized.value = true
         // 视角变化时更新tooltip位置
         cesiumUtils.viewer?.scene?.postRender.addEventListener(function () {
             const height = cesiumUtils.viewer?.camera.positionCartographic.height || 0
@@ -201,10 +203,9 @@ const initCesium = async (): Promise<{ status: boolean }> => {
         if (areaName) {
             cesiumUtils.polygonClickHandler(areaName)
         }
-        return { status: true }
+        loadedTileLayer(false)
     } catch {
         loadedTileLayer(false)
-        return { status: false }
     }
 }
 
@@ -215,9 +216,9 @@ const spinStyle = computed(() => {
     }
 })
 
-const initCesiumDebounced = () => {
+const initCesiumDebounced = async () => {
     cesiumUtils.destroy()
-    initCesium()
+    await initCesium()
 }
 
 defineExpose({
@@ -242,12 +243,14 @@ const offsetStateChange = watch(
 )
 
 const initPointDataChange = watch(
-    [initPointDataStatus, () => pointData, () => areaName],
+    [initPointDataStatus, () => pointData, () => areaName, viewerInitialized],
     async () => {
-        if (!initPointDataStatus.value) {
-            await clearEntity()
-            reloadPointData()
+        // 只有当 viewer 已初始化时才执行
+        if (!viewerInitialized.value || initPointDataStatus.value) {
+            return
         }
+
+        await reloadPointData()
     },
     { deep: true },
 )

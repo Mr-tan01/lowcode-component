@@ -28,6 +28,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     const lastPickedEntity = ref();
     const lastPickedPointOptions = ref();
     const tooltipContent = ref();
+    const viewerInitialized = ref(false);
     const tooltip = useTemplateRef("tooltipRef");
     const emit = __emit;
     const reloadPointData = async () => {
@@ -41,10 +42,10 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       await cesiumUtils.batchRenderPoints(cesiumUtils.pointData || [], __props.defaultShowState, __props.pointBatchRender);
       cesiumUtils.handleCameraHeightChange();
     };
-    const loadedTileLayer = async (status) => {
+    const loadedTileLayer = (status) => {
       initPointDataStatus.value = status;
     };
-    const loadImageryLayers = async (status) => {
+    const loadImageryLayers = (status) => {
       emit("loadHandler", !status);
       initImageryLayersStatus.value = status;
       if (initPointDataStatus.value) {
@@ -125,7 +126,8 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       var _a, _b;
       try {
         if (!__props.accessToken) {
-          return { status: false };
+          loadedTileLayer(false);
+          return;
         }
         cesiumUtils.pointData = __props.pointData;
         cesiumUtils.options.config = __props.basicConfig;
@@ -136,6 +138,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
         if (!viewerInitSuccess) {
           throw new Error("Viewer 初始化失败");
         }
+        viewerInitialized.value = true;
         (_b = (_a = cesiumUtils.viewer) == null ? void 0 : _a.scene) == null ? void 0 : _b.postRender.addEventListener(function() {
           var _a2;
           const height = ((_a2 = cesiumUtils.viewer) == null ? void 0 : _a2.camera.positionCartographic.height) || 0;
@@ -154,10 +157,9 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
         if (__props.areaName) {
           cesiumUtils.polygonClickHandler(__props.areaName);
         }
-        return { status: true };
+        loadedTileLayer(false);
       } catch {
         loadedTileLayer(false);
-        return { status: false };
       }
     };
     const spinStyle = computed(() => {
@@ -166,9 +168,9 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
         "--n-spin-description-color": __props.spinDescriptionColor ?? "#046ab1"
       };
     });
-    const initCesiumDebounced = () => {
+    const initCesiumDebounced = async () => {
       cesiumUtils.destroy();
-      initCesium();
+      await initCesium();
     };
     __expose({
       reloadPointData,
@@ -189,12 +191,12 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       { deep: true }
     );
     const initPointDataChange = watch(
-      [initPointDataStatus, () => __props.pointData, () => __props.areaName],
+      [initPointDataStatus, () => __props.pointData, () => __props.areaName, viewerInitialized],
       async () => {
-        if (!initPointDataStatus.value) {
-          await clearEntity();
-          reloadPointData();
+        if (!viewerInitialized.value || initPointDataStatus.value) {
+          return;
         }
+        await reloadPointData();
       },
       { deep: true }
     );
