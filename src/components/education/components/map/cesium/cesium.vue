@@ -57,7 +57,7 @@ const {
 } = defineProps(cesiumProps)
 
 const reloadPointData = async (): Promise<void> => {
-    clearEntity()
+    await clearEntity()
     const offsetPointData = cesiumUtils.offsetDuplicateCoordinates(pointData, 'lng', 'lat', openOffset.offset)
     // 开启相同点位偏移
     if (openOffset.flag) {
@@ -146,9 +146,9 @@ function updateTooltipPosition(viewer) {
     }
 }
 // 清除选中图层
-const clearEntity = () => {
-    cesiumUtils.clearEntity('pointEntities', 'dataSource')
-    cesiumUtils.clearEntity('pointEntities', 'viewer')
+const clearEntity = async () => {
+    await cesiumUtils.clearEntity('pointEntities', 'dataSource')
+    await cesiumUtils.clearEntity('pointEntities', 'viewer')
 }
 const changeModel = <T extends changeModelType>(type: changeModelType, value: changeModelParamType[T]): void => {
     if (cesiumUtils[type]) {
@@ -243,9 +243,9 @@ const offsetStateChange = watch(
 
 const initPointDataChange = watch(
     [initPointDataStatus, () => pointData, () => areaName],
-    () => {
+    async () => {
         if (!initPointDataStatus.value) {
-            clearEntity()
+            await clearEntity()
             reloadPointData()
         }
     },

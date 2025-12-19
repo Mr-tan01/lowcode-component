@@ -132,7 +132,7 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
     reloadPointData: () => Promise<void>;
     changeModel: <T extends changeModelType>(type: changeModelType, value: changeModelParamType[T]) => void;
     loadedTileLayer: (status: boolean) => Promise<void>;
-    clearEntity: () => void;
+    clearEntity: () => Promise<void>;
     cesiumUtils: cesiumService;
 }, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {} & {
     pointHandler: (value: EntityProperties) => any;

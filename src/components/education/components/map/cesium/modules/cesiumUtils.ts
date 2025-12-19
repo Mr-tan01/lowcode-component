@@ -650,19 +650,28 @@ export class cesiumService {
     // 清除指定entity
     async clearEntity(key: 'pointEntities' | 'polygonEntities', type?: 'dataSource' | 'viewer'): Promise<void> {
         if (!this[key]) return
-
         // 如果是点实体，需要特殊处理，因为点实体分布在dataSource和viewer中
         if (key === 'pointEntities') {
-            for (const entity of this[key]) {
-                if (entity.name && entity.name.endsWith('Label')) {
-                    // 标签实体从viewer中移除
-                    this.viewer?.entities.remove(entity)
-                } else {
-                    // 普通点实体从dataSource中移除
-                    this.dataSource?.entities.remove(entity)
-                }
+            // 清空dataSource中的所有实体
+            if (this.dataSource) {
+                this.dataSource.entities.removeAll()
             }
-            this[key] = []
+
+            // 从viewer中移除所有点相关的实体
+            if (this.viewer) {
+                const entities = this.viewer.entities.values
+                const pointEntities = entities.filter(
+                    entity => entity.name && (entity.name.endsWith('Label') || this.pointEntities?.includes(entity)),
+                )
+
+                pointEntities.forEach(entity => {
+                    this.viewer?.entities.remove(entity)
+                })
+            }
+
+            // 清空数组
+            this.pointEntities = []
+            this.viewer?.scene.requestRender()
             return
         }
 
@@ -672,6 +681,7 @@ export class cesiumService {
             this[type]?.entities.remove(entity)
         }
         this[key] = []
+        this.viewer?.scene.requestRender()
     }
 
     addPolygon(name: string): void {
@@ -700,8 +710,8 @@ export class cesiumService {
     }
 
     // 深圳全市添加Polygon
-    addAllDistricts() {
-        this.clearEntity('polygonEntities', 'viewer')
+    async addAllDistricts() {
+        await this.clearEntity('polygonEntities', 'viewer')
         ;(Object.keys(areaData) as Array<keyof typeof areaData>).filter(key => key !== '深圳市').forEach(this.addPolygon.bind(this))
     }
 
