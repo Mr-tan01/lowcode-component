@@ -291,7 +291,6 @@ export class cesiumService {
     // 处理相机高度变化
     handleCameraHeightChange(): void {
         if (!this.viewer || !this.pointEntities) return
-
         const cameraHeight = this.viewer.camera.positionCartographic.height
         // 触发高度变化事件
         if (this.options.limitHeightHandler) {
