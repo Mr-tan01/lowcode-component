@@ -17,9 +17,7 @@
                 ></LcLargesKewIndicator>
 
                 <LcArrowIndicators label="心理教师总数" :value="2370" unit="人" :decimal="2"></LcArrowIndicators>
-                <LcArrowIndicators label="心理教师总数" :icon="'reward'">
-                    <template #value> 1:900 </template>
-                </LcArrowIndicators>
+                <LcArrowIndicators label="心理教师总数" :icon="'reward'"> </LcArrowIndicators>
 
                 <LcRangeIndicator
                     :data="[

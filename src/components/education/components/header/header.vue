@@ -39,7 +39,7 @@
                                 <div
                                     v-if="record.list?.length"
                                     class="lcc-header__wrapper__navs__drop"
-                                    :style="{ '--grid-col': record.list?.length >= 3 ? 3 : record.list?.length }"
+                                    :style="{ '--grid-col': record.list?.length >= 4 ? 4 : record.list?.length }"
                                 >
                                     <div
                                         v-for="(el, key) in record.list"
