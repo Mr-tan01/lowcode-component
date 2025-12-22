@@ -54,7 +54,7 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, onMounted, ref, watch, nextTick, shallowRef } from 'vue'
+import { computed, onMounted, ref, watch, nextTick, shallowRef, onUnmounted } from 'vue'
 import { type ChangeEvent, type TabListRaw } from './types'
 import throttle from 'lodash-es/throttle'
 import debounce from 'lodash-es/debounce'
@@ -115,6 +115,7 @@ function initCarouseIndex() {
     carouseIndex.value = modelIndex.value
 }
 initCarouseIndex()
+
 function createStepHandler(dir: number): () => void {
     return throttle(() => {
         let currentIndex = carouseIndex.value + dir
@@ -133,25 +134,107 @@ const rightHandler = createStepHandler(1)
 const tabButtonRef = shallowRef<HTMLButtonElement[]>([])
 const tabButtonParentElRef = shallowRef<HTMLDivElement>()
 const carouselTrainElRef = shallowRef<HTMLDivElement>()
-const forceCompile = ref(0)
+
+// 尺寸缓存
+const sizeCache = ref<{
+    normalButtonWidth: number
+    maxButtonCount: number
+    carouselWidth: number
+    maxAppendCount: number
+    offset: number
+    parentWidth: number
+    lastUpdate: number
+}>({
+    normalButtonWidth: 0,
+    maxButtonCount: 0,
+    carouselWidth: 0,
+    maxAppendCount: 0,
+    offset: 0,
+    parentWidth: 0,
+    lastUpdate: 0,
+})
+
+// 防抖更新尺寸
+let updateSizeTimeout: number | null = null
+function updateSizes() {
+    if (updateSizeTimeout) {
+        cancelAnimationFrame(updateSizeTimeout)
+    }
+
+    updateSizeTimeout = requestAnimationFrame(() => {
+        if (!tabButtonParentElRef.value || !tabButtonRef.value.length || !carouselTrainElRef.value) {
+            return
+        }
+
+        // 批量读取DOM属性，减少重排
+        const parentWidth = tabButtonParentElRef.value.offsetWidth
+        const carouselWidth = carouselTrainElRef.value.offsetWidth
+
+        // 如果父元素宽度没有变化，可以跳过部分计算
+        if (sizeCache.value.parentWidth === parentWidth && Date.now() - sizeCache.value.lastUpdate < 1000) {
+            return
+        }
+
+        let normalButtonWidth = 0
+        let activeButtonWidth = 0
+
+        // 使用第一个非激活按钮作为标准宽度
+        for (let i = 0; i < tabButtonRef.value.length; i++) {
+            const buttonEl = tabButtonRef.value[i]
+            if (buttonEl) {
+                if (buttonEl.classList.contains('active')) {
+                    activeButtonWidth = buttonEl.offsetWidth
+                } else if (!normalButtonWidth) {
+                    normalButtonWidth = buttonEl.offsetWidth
+                }
+
+                if (normalButtonWidth && activeButtonWidth) break
+            }
+        }
+
+        // 如果没有找到非激活按钮，使用第一个按钮的宽度
+        if (!normalButtonWidth && tabButtonRef.value[0]) {
+            normalButtonWidth = tabButtonRef.value[0].offsetWidth
+        }
+
+        const maxCount = normalButtonWidth ? parentWidth / normalButtonWidth : 0
+        const maxButtonCount = maxCount
+        const maxAppendCount = disabled ? 0 : Math.round(maxCount)
+
+        sizeCache.value = {
+            normalButtonWidth: backCenter ? normalButtonWidth : 0,
+            maxButtonCount: backCenter ? maxButtonCount : 0,
+            carouselWidth: backCenter ? carouselWidth : 0,
+            maxAppendCount: backCenter ? maxAppendCount : 0,
+            offset: backCenter ? activeButtonWidth / 2 : 0,
+            parentWidth,
+            lastUpdate: Date.now(),
+        }
+
+        updateSizeTimeout = null
+    })
+}
 
 watch(
     () => list,
     () => {
-        updateCompile()
-        nextTick(appendBeforeAfterData)
+        nextTick(() => {
+            appendBeforeAfterData()
+            // 等待DOM更新后更新尺寸
+            setTimeout(updateSizes, 50)
+        })
     },
-    {
-        deep: 1,
-    },
+    { deep: true },
 )
 
 watch(
     () => modelIndex.value,
     () => {
-        onParentElResize()
+        // 索引变化时不需要立即更新尺寸，只需要在下一次动画帧更新
+        requestAnimationFrame(updateSizes)
     },
 )
+
 watch(
     () => modelValue.value,
     () => {
@@ -161,26 +244,36 @@ watch(
         }
     },
 )
-onMounted(appendBeforeAfterData) // 初始化
+
+onMounted(() => {
+    appendBeforeAfterData()
+    // 初始化后等待DOM渲染完成再测量尺寸
+    setTimeout(updateSizes, 100)
+})
 
 // 追加前后临时数据
 function appendBeforeAfterData() {
-    if (!clientRect.value) return
-    const { maxAppendCount } = clientRect.value
-    const appendCount = maxAppendCount
-    if (appendCount === 0) return
-    beforeAfterTempData.value.appendCount = appendCount
-    initCarouseIndex() // 初始化轮播索引
-    carouseIndex.value += appendCount // 轮播索引增加临时数据偏移值
+    if (!sizeCache.value.parentWidth) {
+        updateSizes()
+        return
+    }
+
+    const { maxAppendCount } = sizeCache.value
+    if (maxAppendCount === 0) return
+
+    beforeAfterTempData.value.appendCount = maxAppendCount
+    initCarouseIndex()
+    carouseIndex.value += maxAppendCount
+
     if (disabled) {
         beforeAfterTempData.value.before = []
         beforeAfterTempData.value.after = []
         return
     }
-    const listClone = listSource.value ?? []
 
-    beforeAfterTempData.value.before = listClone.slice(-appendCount).map(uuCloneKey) // 把结尾的{maxAppendCount}个追加到前面
-    beforeAfterTempData.value.after = listClone.slice(0, appendCount).map(uuCloneKey) // 把开始的{maxAppendCount}个追加到后面
+    const listClone = listSource.value ?? []
+    beforeAfterTempData.value.before = listClone.slice(-maxAppendCount).map(uuCloneKey)
+    beforeAfterTempData.value.after = listClone.slice(0, maxAppendCount).map(uuCloneKey)
 }
 
 function uuCloneKey(item: TabListRaw, index: number): TabListRaw {
@@ -190,96 +283,63 @@ function uuCloneKey(item: TabListRaw, index: number): TabListRaw {
     }
 }
 
-function updateCompile() {
-    forceCompile.value++ // 强制更新
-}
-
-function onParentElResize() {
+// 监听父元素和按钮元素的变化
+let resizeObserver: ResizeObserver | null = null
+onMounted(() => {
     if (!window.ResizeObserver || !tabButtonParentElRef.value) return
-    const observer = new ResizeObserver(
+
+    resizeObserver = new ResizeObserver(
         debounce(() => {
-            updateCompile()
+            updateSizes()
             appendBeforeAfterData()
         }, offsetAnimationTime),
     )
-    observer.observe(tabButtonParentElRef.value)
-}
-// 监听父元素的resize
-onMounted(onParentElResize)
 
-// 让选中的在中心点，计算中心点
-const clientRect = computed(() => {
-    forceCompile.value++ // 强制更新
-    if (!tabButtonParentElRef.value || !tabButtonRef.value || !carouselTrainElRef.value) return
-    // 获取到父元素的宽度
-    const width = tabButtonParentElRef.value.offsetWidth
-    // 获取到按钮的宽度
-    const buttonMapsWidth = {
-        normal: 0,
-        active: 0,
-    }
-    for (let i = 0; i <= tabButtonRef.value.length; i++) {
-        const buttonEl = tabButtonRef.value[i]
-        // 获取到选中的按钮宽度
-        if (buttonEl?.classList?.contains('active')) {
-            buttonMapsWidth.active = buttonEl.offsetWidth
-        } else {
-            // 获取到正常的按钮宽度
-            buttonMapsWidth.normal = buttonEl?.offsetWidth
+    resizeObserver.observe(tabButtonParentElRef.value)
+
+    // 观察按钮尺寸变化
+    const buttonObserver = new ResizeObserver(debounce(updateSizes, offsetAnimationTime))
+
+    // 监听前几个按钮的尺寸变化
+    nextTick(() => {
+        if (tabButtonRef.value) {
+            tabButtonRef.value.slice(0, 3).forEach(button => {
+                buttonObserver.observe(button)
+            })
         }
+    })
+})
 
-        // 如果获取到两个值，则退出
-        if (buttonMapsWidth.active && buttonMapsWidth.normal) {
-            break
-        }
+onUnmounted(() => {
+    if (resizeObserver) {
+        resizeObserver.disconnect()
     }
-    // 获取到正常的按钮宽度
-    const normalButtonWidth = buttonMapsWidth.normal
-    // 获取到选中的按钮宽度
-    const activeButtonWidth = buttonMapsWidth.active
-    // 计算最多能容纳几个按钮
-    const maxCount = width / normalButtonWidth
-    const maxButtonCount = maxCount // 保留小数，计算偏移精度的偏移量需要用到
-    const maxAppendCount = disabled ? 0 : Math.round(maxCount) // 用来确定最少需要追加多少个自定元素（处理loop用）
-    // 获取到轮播轨道的宽度
-    const carouselWidth = carouselTrainElRef.value.offsetWidth
-
-    return {
-        normalButtonWidth: backCenter ? normalButtonWidth : 0,
-        maxButtonCount: backCenter ? maxButtonCount : 0,
-        carouselWidth: backCenter ? carouselWidth : 0,
-        maxAppendCount: backCenter ? maxAppendCount : 0,
-        offset: backCenter ? activeButtonWidth / 2 : 0, // 加上选中的按钮宽度一半, 让选中的按钮在中心点
+    if (updateSizeTimeout) {
+        cancelAnimationFrame(updateSizeTimeout)
     }
 })
 
 // 计算轮播偏移量
-
 const carouselOffset = computed(() => {
-    if (clientRect.value) {
-        const { normalButtonWidth, maxButtonCount, offset, carouselWidth } = clientRect.value
-        const maxButtonCountHalf = maxButtonCount / 2
-        let offsetValue = (normalButtonWidth * (carouseIndex.value - maxButtonCountHalf) + offset) * -1
+    if (!backCenter) return 0
 
-        if (offsetValue >= 0) {
-            // 如果偏移量大于0，则设置为0, 证明已经左边到头了
-            offsetValue = 0
-        } else if (offsetValue <= -carouselWidth + normalButtonWidth * maxButtonCount) {
-            // 证明已经到头了, 最起码需要展示全按钮在区域内容，区域不能空
-            offsetValue = -carouselWidth + normalButtonWidth * maxButtonCount
-        }
-        return offsetValue
+    const { normalButtonWidth, maxButtonCount, offset, carouselWidth } = sizeCache.value
+
+    if (!normalButtonWidth || !maxButtonCount || !carouselWidth) {
+        return 0
     }
-    return 0
+
+    const maxButtonCountHalf = maxButtonCount / 2
+    let offsetValue = (normalButtonWidth * (carouseIndex.value - maxButtonCountHalf) + offset) * -1
+
+    if (offsetValue >= 0) {
+        offsetValue = 0
+    } else if (offsetValue <= -carouselWidth + normalButtonWidth * maxButtonCount) {
+        offsetValue = -carouselWidth + normalButtonWidth * maxButtonCount
+    }
+
+    return offsetValue
 })
-
-function requestAnimationFrame(callback: () => void) {
-    if (window.requestAnimationFrame) {
-        window.requestAnimationFrame(callback)
-    } else {
-        callback()
-    }
-}
 
 function transitionCallabck(callback: () => void, isNextTick: boolean = true) {
     requestAnimationFrame(() => {
@@ -293,24 +353,25 @@ function transitionCallabck(callback: () => void, isNextTick: boolean = true) {
 
 function transitionCallabckLoop(index: number) {
     transitionCallabck(() => {
-        // 关闭过度效果
         _isTransition.value = false
-        // 更新轮播索引，实现无限轮播
         carouseIndex.value = index
     }, false)
 }
 
 const handleClick = throttle((_item: TabListRaw, index: number) => {
     if (disabled) return
-    // 开启过度效果
+
     if (!_isTransition.value) {
         _isTransition.value = true
     }
+
     const appendCount = beforeAfterTempData.value.appendCount
     let _index = index - appendCount
 
     if (modelIndex.value == _index) return
+
     carouseIndex.value = index
+
     if (_index < 0) {
         transitionCallabckLoop(listSource.value.length + _index + appendCount)
         _index = listSource.value.length - 1

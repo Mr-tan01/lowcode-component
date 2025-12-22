@@ -161,7 +161,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                               {
                                 key: 0,
                                 class: "lcc-header__wrapper__navs__drop",
-                                style: normalizeStyle({ "--grid-col": ((_b = record.list) == null ? void 0 : _b.length) >= 3 ? 3 : (_c = record.list) == null ? void 0 : _c.length })
+                                style: normalizeStyle({ "--grid-col": ((_b = record.list) == null ? void 0 : _b.length) >= 4 ? 4 : (_c = record.list) == null ? void 0 : _c.length })
                               },
                               [
                                 (openBlock(true), createElementBlock(
