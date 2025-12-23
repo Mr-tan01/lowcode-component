@@ -1,4 +1,4 @@
-import { defineComponent, useTemplateRef, computed, onMounted, createElementBlock, openBlock, createVNode, unref, mergeProps } from "vue";
+import { defineComponent, useTemplateRef, computed, onMounted, onUnmounted, createElementBlock, openBlock, createVNode, unref, mergeProps } from "vue";
 import { SChartsBar } from "@mmj-code-lib/lowcode/es/components";
 import { useCommonBarOptions, useCommonBarSeries, commonBarOptions } from "./options.js";
 import merge from "lodash-es/merge";
@@ -73,6 +73,17 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
               ]
             });
           });
+      }
+    });
+    onUnmounted(() => {
+      if (chartBar.value && chartBar.value.chartInstance) {
+        Object.entries(__props.events).forEach(([eventName, eventHandler]) => {
+          var _a, _b;
+          if (typeof eventHandler !== "function") return;
+          (_b = (_a = chartBar.value) == null ? void 0 : _a.chartInstance) == null ? void 0 : _b.off(eventName, eventHandler(chartBar));
+        });
+        chartBar.value.chartInstance.dispose();
+        chartBar.value.chartInstance = void 0;
       }
     });
     return (_ctx, _cache) => {

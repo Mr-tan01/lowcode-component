@@ -17,7 +17,7 @@ declare const _default: import('vue').DefineComponent<__VLS_Props, {}, {}, {}, {
             default: () => never[];
         };
     }>>, {
-        chartInstance: import('vue').ShallowRef<import('echarts').ECharts | undefined>;
+        chartInstance: import('vue').ShallowRef<import('echarts').ECharts | null | undefined>;
     }, unknown, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, import('vue').PublicProps, {
         transFormSizeKeys: string[];
         opts: echarts.EChartsOption;
@@ -38,7 +38,7 @@ declare const _default: import('vue').DefineComponent<__VLS_Props, {}, {}, {}, {
             default: () => never[];
         };
     }>>, {
-        chartInstance: import('vue').ShallowRef<import('echarts').ECharts | undefined>;
+        chartInstance: import('vue').ShallowRef<import('echarts').ECharts | null | undefined>;
     }, {}, {}, {}, {
         transFormSizeKeys: string[];
         opts: echarts.EChartsOption;

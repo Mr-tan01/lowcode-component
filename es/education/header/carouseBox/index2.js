@@ -1,4 +1,4 @@
-import { defineComponent, mergeModels, useCssVars, ref, useModel, computed, shallowRef, watch, nextTick, onMounted, onUnmounted, createElementBlock, openBlock, createElementVNode, createCommentVNode, unref, normalizeStyle, normalizeClass, Fragment, renderList, renderSlot, mergeProps, toDisplayString, mergeDefaults } from "vue";
+import { defineComponent, mergeModels, useCssVars, ref, useModel, computed, shallowRef, watch, nextTick, onMounted, onBeforeUnmount, onUnmounted, createElementBlock, openBlock, createElementVNode, createCommentVNode, unref, normalizeStyle, normalizeClass, Fragment, renderList, renderSlot, mergeProps, toDisplayString, mergeDefaults } from "vue";
 import _imports_0 from "./images/lt-arrow.png.js";
 import _imports_1 from "./images/rt-arrow.png.js";
 import _imports_2 from "./images/top-arrow.png.js";
@@ -33,8 +33,8 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
   setup(__props, { emit: __emit }) {
     var _a;
     useCssVars((_ctx) => ({
-      "07a98bd2": _ctx.gap,
-      "3945d0cc": _ctx.offsetAnimationTime
+      "28416dd8": _ctx.gap,
+      "1b77de48": _ctx.offsetAnimationTime
     }));
     const carouseIndex = ref(0);
     const _isTransition = ref(true);
@@ -58,12 +58,24 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       return [...beforeAfterTempData.value.before, ...listClone, ...beforeAfterTempData.value.after];
     });
     const isEven = computed(() => carouseIndex.value % 2 === 0);
+    const throttleInstances = ref([]);
+    const debounceInstances = ref([]);
+    function createManagedThrottle(func, wait, options) {
+      const throttled = throttle(func, wait, options);
+      throttleInstances.value.push(throttled);
+      return throttled;
+    }
+    function createManagedDebounce(func, wait, options) {
+      const debounced = debounce(func, wait, options);
+      debounceInstances.value.push(debounced);
+      return debounced;
+    }
     function initCarouseIndex() {
       carouseIndex.value = modelIndex.value;
     }
     initCarouseIndex();
     function createStepHandler(dir) {
-      return throttle(() => {
+      return createManagedThrottle(() => {
         let currentIndex = carouseIndex.value + dir;
         if (currentIndex < 0) {
           currentIndex = renderList$1.value.length - 1;
@@ -87,12 +99,26 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       parentWidth: 0,
       lastUpdate: 0
     });
+    const animationFrameIds = ref([]);
+    const timeoutIds = ref([]);
+    const resizeObservers = ref([]);
+    function requestManagedAnimationFrame(callback) {
+      const id = requestAnimationFrame(callback);
+      animationFrameIds.value.push(id);
+      return id;
+    }
+    function setManagedTimeout(callback, delay) {
+      const id = window.setTimeout(callback, delay);
+      timeoutIds.value.push(id);
+      return id;
+    }
     let updateSizeTimeout = null;
     function updateSizes() {
       if (updateSizeTimeout) {
         cancelAnimationFrame(updateSizeTimeout);
+        updateSizeTimeout = null;
       }
-      updateSizeTimeout = requestAnimationFrame(() => {
+      updateSizeTimeout = requestManagedAnimationFrame(() => {
         if (!tabButtonParentElRef.value || !tabButtonRef.value.length || !carouselTrainElRef.value) {
           return;
         }
@@ -137,7 +163,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       () => {
         nextTick(() => {
           appendBeforeAfterData();
-          setTimeout(updateSizes, 50);
+          setManagedTimeout(updateSizes, 50);
         });
       },
       { deep: true }
@@ -145,7 +171,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     watch(
       () => modelIndex.value,
       () => {
-        requestAnimationFrame(updateSizes);
+        requestManagedAnimationFrame(updateSizes);
       }
     );
     watch(
@@ -159,7 +185,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     );
     onMounted(() => {
       appendBeforeAfterData();
-      setTimeout(updateSizes, 100);
+      setManagedTimeout(updateSizes, 100);
     });
     function appendBeforeAfterData() {
       if (!sizeCache.value.parentWidth) {
@@ -186,32 +212,31 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
         value: __props.rowKey(item) + "_clone_" + index + "_" + Date.now()
       };
     }
-    let resizeObserver = null;
+    let buttonResizeObserver = null;
+    const observedButtons = /* @__PURE__ */ new Set();
+    let parentResizeObserver = null;
     onMounted(() => {
       if (!window.ResizeObserver || !tabButtonParentElRef.value) return;
-      resizeObserver = new ResizeObserver(
-        debounce(() => {
-          updateSizes();
-          appendBeforeAfterData();
-        }, __props.offsetAnimationTime)
-      );
-      resizeObserver.observe(tabButtonParentElRef.value);
-      const buttonObserver = new ResizeObserver(debounce(updateSizes, __props.offsetAnimationTime));
+      const debouncedUpdateSizes = createManagedDebounce(updateSizes, __props.offsetAnimationTime);
+      const debouncedAppendData = createManagedDebounce(appendBeforeAfterData, __props.offsetAnimationTime);
+      parentResizeObserver = new ResizeObserver(() => {
+        debouncedUpdateSizes();
+        debouncedAppendData();
+      });
+      parentResizeObserver.observe(tabButtonParentElRef.value);
+      resizeObservers.value.push(parentResizeObserver);
+      buttonResizeObserver = new ResizeObserver(debouncedUpdateSizes);
+      resizeObservers.value.push(buttonResizeObserver);
       nextTick(() => {
         if (tabButtonRef.value) {
           tabButtonRef.value.slice(0, 3).forEach((button) => {
-            buttonObserver.observe(button);
+            if (!observedButtons.has(button)) {
+              buttonResizeObserver.observe(button);
+              observedButtons.add(button);
+            }
           });
         }
       });
-    });
-    onUnmounted(() => {
-      if (resizeObserver) {
-        resizeObserver.disconnect();
-      }
-      if (updateSizeTimeout) {
-        cancelAnimationFrame(updateSizeTimeout);
-      }
     });
     const carouselOffset = computed(() => {
       if (!__props.backCenter) return 0;
@@ -228,12 +253,15 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       }
       return offsetValue;
     });
+    const transitionTimer = ref(null);
     function transitionCallabck(callback, isNextTick = true) {
-      requestAnimationFrame(() => {
+      requestManagedAnimationFrame(() => {
         if (isNextTick) {
-          nextTick(setTimeout.bind(null, callback, __props.offsetAnimationTime));
+          nextTick(() => {
+            transitionTimer.value = setManagedTimeout(callback, __props.offsetAnimationTime);
+          });
         } else {
-          setTimeout(callback, __props.offsetAnimationTime);
+          transitionTimer.value = setManagedTimeout(callback, __props.offsetAnimationTime);
         }
       });
     }
@@ -243,7 +271,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
         carouseIndex.value = index;
       }, false);
     }
-    const handleClick = throttle((_item, index) => {
+    const handleClick = createManagedThrottle((_item, index) => {
       if (__props.disabled) return;
       if (!_isTransition.value) {
         _isTransition.value = true;
@@ -270,6 +298,55 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       };
       $emit("change", _newChangeEventData);
     }, __props.offsetAnimationTime);
+    function cleanup() {
+      animationFrameIds.value.forEach((id) => cancelAnimationFrame(id));
+      animationFrameIds.value = [];
+      timeoutIds.value.forEach((id) => clearTimeout(id));
+      timeoutIds.value = [];
+      if (transitionTimer.value) {
+        clearTimeout(transitionTimer.value);
+        transitionTimer.value = null;
+      }
+      if (updateSizeTimeout) {
+        cancelAnimationFrame(updateSizeTimeout);
+        updateSizeTimeout = null;
+      }
+      throttleInstances.value.forEach((instance) => {
+        var _a2;
+        return (_a2 = instance.cancel) == null ? void 0 : _a2.call(instance);
+      });
+      throttleInstances.value = [];
+      debounceInstances.value.forEach((instance) => {
+        var _a2;
+        return (_a2 = instance.cancel) == null ? void 0 : _a2.call(instance);
+      });
+      debounceInstances.value = [];
+      resizeObservers.value.forEach((observer) => {
+        observer.disconnect();
+      });
+      resizeObservers.value = [];
+      if (buttonResizeObserver) {
+        observedButtons.forEach((button) => {
+          buttonResizeObserver.unobserve(button);
+        });
+        buttonResizeObserver.disconnect();
+        buttonResizeObserver = null;
+      }
+      if (parentResizeObserver) {
+        parentResizeObserver.disconnect();
+        parentResizeObserver = null;
+      }
+      observedButtons.clear();
+      tabButtonRef.value = [];
+      tabButtonParentElRef.value = void 0;
+      carouselTrainElRef.value = void 0;
+    }
+    onBeforeUnmount(() => {
+      cleanup();
+    });
+    onUnmounted(() => {
+      cleanup();
+    });
     return (_ctx, _cache) => {
       return openBlock(), createElementBlock("div", _hoisted_1, [
         createElementVNode("div", _hoisted_2, [

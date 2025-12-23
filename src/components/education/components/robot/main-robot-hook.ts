@@ -1,4 +1,4 @@
-import { computed, onMounted, ref, shallowRef } from 'vue'
+import { computed, onMounted, ref, shallowRef, onUnmounted } from 'vue'
 import debounce from 'lodash-es/debounce'
 import memoize from 'lodash-es/memoize'
 
@@ -17,25 +17,27 @@ export function useStarRotate() {
     const starRadius = ref({ x: 0 }) // 星星的半径
     const angleOffset = ref(0) // 旋转偏移量
     const displayAlternately = ref<number[]>([]) // 交替显示的索引
-
-    const initElRadius = debounce(() => {
+    let resizeObserver: ResizeObserver | null = null
+    let debouncedInitElRadius: ReturnType<typeof debounce> | null = null
+    const initElRadius = () => {
         const starWrapper = starWrapperRef.value
         if (!starWrapper || !starElRefs.value) return
         const { width, height } = starWrapper.getBoundingClientRect()
         circleRadius.value.x = width / 2
         circleRadius.value.y = height / 2
         const { width: starWidth } = starElRefs.value[0].getBoundingClientRect()
-        starRadius.value.x = starWidth / 2 // 星星的半径
-    })
+        starRadius.value.x = starWidth / 2
+    }
     function onParentElResize() {
         if (!window.ResizeObserver || !starWrapperRef.value) return
-        const observer = new ResizeObserver(
-            debounce(() => {
-                initElRadius()
-            }, offsetAnimationTime),
-        )
-        observer.observe(starWrapperRef.value)
+
+        // 创建防抖函数
+        debouncedInitElRadius = debounce(initElRadius, offsetAnimationTime)
+
+        resizeObserver = new ResizeObserver(debouncedInitElRadius)
+        resizeObserver.observe(starWrapperRef.value)
     }
+
     onMounted(() => {
         onParentElResize()
         setTimeout(() => initElRadius)
@@ -143,7 +145,24 @@ export function useStarRotate() {
             '--z-index-number': zIndex,
         }
     }
+    // 清理函数
+    const cleanup = () => {
+        if (resizeObserver && starWrapperRef.value) {
+            resizeObserver.unobserve(starWrapperRef.value)
+            resizeObserver.disconnect()
+            resizeObserver = null
+        }
+
+        if (debouncedInitElRadius) {
+            debouncedInitElRadius.cancel()
+            debouncedInitElRadius = null
+        }
+    }
+    onUnmounted(() => {
+        cleanup()
+    })
     return {
+        cleanup,
         getTextStyle,
         starLneght,
         starWrapperRef,

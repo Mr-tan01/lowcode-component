@@ -6,7 +6,7 @@
 
 <script lang="ts" setup>
 import { SChartsBar } from '@mmj-code-lib/lowcode/es/components'
-import { computed, onMounted, Ref, useTemplateRef } from 'vue'
+import { computed, onMounted, Ref, useTemplateRef, onUnmounted } from 'vue'
 import { type EChartsOption, type EChartsCoreOption } from 'echarts'
 import { commonBarOptions, useCommonBarOptions, useCommonBarSeries } from './options'
 import merge from 'lodash-es/merge'
@@ -90,6 +90,17 @@ onMounted(() => {
                     ],
                 })
             })
+    }
+})
+onUnmounted(() => {
+    if (chartBar.value && chartBar.value.chartInstance) {
+        // 解绑事件
+        Object.entries(events).forEach(([eventName, eventHandler]) => {
+            if (typeof eventHandler !== 'function') return
+            chartBar.value?.chartInstance?.off(eventName, eventHandler(chartBar))
+        })
+        chartBar.value.chartInstance.dispose()
+        chartBar.value.chartInstance = undefined
     }
 })
 </script>

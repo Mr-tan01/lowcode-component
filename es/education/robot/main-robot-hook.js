@@ -1,4 +1,4 @@
-import { shallowRef, ref, onMounted, computed } from "vue";
+import { shallowRef, ref, onMounted, computed, onUnmounted } from "vue";
 import debounce from "lodash-es/debounce";
 import memoize from "lodash-es/memoize";
 const offsetAnimationTime = 300;
@@ -16,7 +16,9 @@ function useStarRotate() {
   const starRadius = ref({ x: 0 });
   const angleOffset = ref(0);
   const displayAlternately = ref([]);
-  const initElRadius = debounce(() => {
+  let resizeObserver = null;
+  let debouncedInitElRadius = null;
+  const initElRadius = () => {
     const starWrapper = starWrapperRef.value;
     if (!starWrapper || !starElRefs.value) return;
     const { width, height } = starWrapper.getBoundingClientRect();
@@ -24,15 +26,12 @@ function useStarRotate() {
     circleRadius.value.y = height / 2;
     const { width: starWidth } = starElRefs.value[0].getBoundingClientRect();
     starRadius.value.x = starWidth / 2;
-  });
+  };
   function onParentElResize() {
     if (!window.ResizeObserver || !starWrapperRef.value) return;
-    const observer = new ResizeObserver(
-      debounce(() => {
-        initElRadius();
-      }, offsetAnimationTime)
-    );
-    observer.observe(starWrapperRef.value);
+    debouncedInitElRadius = debounce(initElRadius, offsetAnimationTime);
+    resizeObserver = new ResizeObserver(debouncedInitElRadius);
+    resizeObserver.observe(starWrapperRef.value);
   }
   onMounted(() => {
     onParentElResize();
@@ -124,7 +123,22 @@ function useStarRotate() {
       "--z-index-number": zIndex
     };
   }
+  const cleanup = () => {
+    if (resizeObserver && starWrapperRef.value) {
+      resizeObserver.unobserve(starWrapperRef.value);
+      resizeObserver.disconnect();
+      resizeObserver = null;
+    }
+    if (debouncedInitElRadius) {
+      debouncedInitElRadius.cancel();
+      debouncedInitElRadius = null;
+    }
+  };
+  onUnmounted(() => {
+    cleanup();
+  });
   return {
+    cleanup,
     getTextStyle,
     starLneght,
     starWrapperRef,

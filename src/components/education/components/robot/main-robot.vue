@@ -86,7 +86,7 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, PropType, ref, watchEffect } from 'vue'
+import { computed, PropType, ref, watchEffect, onUnmounted } from 'vue'
 import { useSpeech } from './speech'
 import { LcIcon } from '@/components/education/components/icon'
 import { defStarData, StarType, StarItemType } from './const'
@@ -142,6 +142,7 @@ const {
     starMaxShowCount,
     displayAlternately,
     fullAngle: circleFullAngle,
+    cleanup: cleanupStarRotate, // 新增清理函数
 } = useStarRotate()
 
 const reverseIndex = memoize(
@@ -172,20 +173,15 @@ watchEffect(() => {
 const step = computed(() => 360 / duration)
 const time = computed(() => 1000 / duration)
 const isAnimate = ref(animate)
-let timer
+let animationFrameId: number | null = null
+let timerId: number | null = null
 
-function _requestAnimationFrame(callback) {
-    if (window.requestAnimationFrame) {
-        window.requestAnimationFrame.call(this, callback)
-    } else {
-        callback()
-    }
-}
 function autoRotate() {
     if (!isAnimate.value) return
-    setTimeout(() => {
+    // 使用setTimeout来控制速度，但是这里我们使用requestAnimationFrame来更新动画，所以用setTimeout来延迟
+    timerId = window.setTimeout(() => {
         if (!isAnimate.value) return
-        _requestAnimationFrame(() => {
+        animationFrameId = window.requestAnimationFrame(() => {
             angleOffset.value += step.value
             if (angleOffset.value >= 360) {
                 angleOffset.value = 0
@@ -194,9 +190,21 @@ function autoRotate() {
         })
     }, time.value)
 }
-if (isAnimate.value) {
-    autoRotate()
-}
+// 监听动画状态变化
+watchEffect(() => {
+    if (isAnimate.value) {
+        autoRotate()
+    } else {
+        if (animationFrameId) {
+            cancelAnimationFrame(animationFrameId)
+            animationFrameId = null
+        }
+        if (timerId) {
+            clearTimeout(timerId)
+            timerId = null
+        }
+    }
+})
 
 const $emit = defineEmits<{
     (e: 'click', item: StarType, index: number): void
@@ -213,12 +221,19 @@ function starItemClick(item: StarItemType, index: number): void {
     $emit('itemClick', item, index)
 }
 
+// 修改鼠标事件，使用ref存储timer
+const mouseLeaveTimer = ref<number | null>(null)
+
 function mouseenter() {
-    clearTimeout(timer)
+    if (mouseLeaveTimer.value) {
+        clearTimeout(mouseLeaveTimer.value)
+        mouseLeaveTimer.value = null
+    }
     isAnimate.value = false
 }
+
 function mouseleave() {
-    timer = setTimeout(() => {
+    mouseLeaveTimer.value = window.setTimeout(() => {
         if (isAnimate.value) return
         isAnimate.value = animate
         autoRotate()
@@ -226,7 +241,31 @@ function mouseleave() {
 }
 
 const modelContext = defineModel<string>('value', { default: '' })
+// 组件卸载时清理
+onUnmounted(() => {
+    isAnimate.value = false
 
+    if (animationFrameId) {
+        cancelAnimationFrame(animationFrameId)
+    }
+
+    if (timerId) {
+        clearTimeout(timerId)
+    }
+
+    // 清理语音识别
+    stop()
+
+    // 清理星星旋转相关的资源
+    if (cleanupStarRotate) {
+        cleanupStarRotate()
+    }
+
+    // 清理鼠标事件定时器
+    if (mouseLeaveTimer.value) {
+        clearTimeout(mouseLeaveTimer.value)
+    }
+})
 on('result', () => {
     modelContext.value = output.value?.textContent || ''
 })

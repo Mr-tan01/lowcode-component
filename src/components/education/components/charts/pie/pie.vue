@@ -137,7 +137,13 @@ function resizeChart(entries) {
 const { stop } = useResizeObserver(chartDomRef, debounce(resizeChart, debounceTime))
 
 const wrapperPading = computed(() => (legendPosition === 'absolute' ? `0 ${scale(legendWidth)}` : '0'))
-onBeforeUnmount(stop)
+onBeforeUnmount(() => {
+    stop()
+    if (chartInstance.value) {
+        chartInstance.value.dispose()
+        chartInstance.value = undefined
+    }
+})
 defineExpose({
     chartInstance,
     stop,

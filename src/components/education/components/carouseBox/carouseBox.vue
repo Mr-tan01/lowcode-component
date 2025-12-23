@@ -54,7 +54,7 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, onMounted, ref, watch, nextTick, shallowRef, onUnmounted } from 'vue'
+import { computed, onMounted, ref, watch, nextTick, shallowRef, onUnmounted, onBeforeUnmount } from 'vue'
 import { type ChangeEvent, type TabListRaw } from './types'
 import throttle from 'lodash-es/throttle'
 import debounce from 'lodash-es/debounce'
@@ -71,7 +71,7 @@ const modelValue = defineModel<TabListRaw['value']>('value', { default: '' })
 const {
     list,
     offsetAnimationTime = 250,
-    rowKey = (item: TabListRaw) => item.value ?? Math.random(),
+    rowKey = (item: TabListRaw) => item.value ?? `${item.label}_${Date.now()}`,
     showTrack = true,
     gap = 10,
     disabled = false,
@@ -84,7 +84,7 @@ const listSource = computed(() => {
 
 const showArrow = computed(() => !disabled)
 
-// 如果modelIndex为-1，则以modelValue为准
+// 初始化索引
 if (modelIndex.value === -1) {
     modelIndex.value = listSource.value?.findIndex(item => rowKey(item) === modelValue.value) ?? 0
 }
@@ -104,12 +104,29 @@ const beforeAfterTempData = ref<{
 })
 
 const renderList = computed(() => {
-    // clone 一份放在结尾
     const listClone = listSource.value ?? []
     return [...beforeAfterTempData.value.before, ...listClone, ...beforeAfterTempData.value.after]
 })
 
 const isEven = computed(() => carouseIndex.value! % 2 === 0)
+
+// 使用 ref 存储清理函数
+const throttleInstances = ref<Array<ReturnType<typeof throttle>>>([])
+const debounceInstances = ref<Array<ReturnType<typeof debounce>>>([])
+
+// 创建带清理的节流函数
+function createManagedThrottle<T extends (...args: any[]) => any>(func: T, wait: number, options?: Parameters<typeof throttle>[2]): T {
+    const throttled = throttle(func, wait, options)
+    throttleInstances.value.push(throttled)
+    return throttled as any
+}
+
+// 创建带清理的防抖函数
+function createManagedDebounce<T extends (...args: any[]) => any>(func: T, wait: number, options?: Parameters<typeof debounce>[2]): T {
+    const debounced = debounce(func, wait, options)
+    debounceInstances.value.push(debounced)
+    return debounced as any
+}
 
 function initCarouseIndex() {
     carouseIndex.value = modelIndex.value
@@ -117,7 +134,7 @@ function initCarouseIndex() {
 initCarouseIndex()
 
 function createStepHandler(dir: number): () => void {
-    return throttle(() => {
+    return createManagedThrottle(() => {
         let currentIndex = carouseIndex.value + dir
         if (currentIndex < 0) {
             currentIndex = renderList.value.length - 1
@@ -154,19 +171,39 @@ const sizeCache = ref<{
     lastUpdate: 0,
 })
 
+// 使用 ref 存储定时器和动画帧ID
+const animationFrameIds = ref<number[]>([])
+const timeoutIds = ref<number[]>([])
+const resizeObservers = ref<ResizeObserver[]>([])
+
+// 管理动画帧
+function requestManagedAnimationFrame(callback): number {
+    const id = requestAnimationFrame(callback)
+    animationFrameIds.value.push(id)
+    return id
+}
+
+// 管理定时器
+function setManagedTimeout(callback: () => void, delay: number): number {
+    const id = window.setTimeout(callback, delay)
+    timeoutIds.value.push(id)
+    return id
+}
+
 // 防抖更新尺寸
 let updateSizeTimeout: number | null = null
+
 function updateSizes() {
     if (updateSizeTimeout) {
         cancelAnimationFrame(updateSizeTimeout)
+        updateSizeTimeout = null
     }
 
-    updateSizeTimeout = requestAnimationFrame(() => {
+    updateSizeTimeout = requestManagedAnimationFrame(() => {
         if (!tabButtonParentElRef.value || !tabButtonRef.value.length || !carouselTrainElRef.value) {
             return
         }
 
-        // 批量读取DOM属性，减少重排
         const parentWidth = tabButtonParentElRef.value.offsetWidth
         const carouselWidth = carouselTrainElRef.value.offsetWidth
 
@@ -215,13 +252,61 @@ function updateSizes() {
     })
 }
 
+// 生成短UUID确保唯一性
+function generateShortUUID(): string {
+    return Math.random().toString(36).substring(2, 11)
+}
+
+// 克隆数据并生成唯一key
+function uuCloneKey(item: TabListRaw, index: number, prefix: string = ''): TabListRaw {
+    return {
+        ...item,
+        value: `${rowKey(item)}_clone_${prefix}${index}_${generateShortUUID()}`,
+    }
+}
+
+// 追加前后临时数据
+function appendBeforeAfterData() {
+    if (!sizeCache.value.parentWidth) {
+        updateSizes()
+        return
+    }
+
+    const { maxAppendCount } = sizeCache.value
+    if (maxAppendCount === 0) return
+
+    beforeAfterTempData.value.appendCount = maxAppendCount
+    initCarouseIndex()
+
+    // 在下一个tick更新carouseIndex，确保克隆数据已经更新
+    nextTick(() => {
+        carouseIndex.value += maxAppendCount
+    })
+
+    if (disabled) {
+        beforeAfterTempData.value.before = []
+        beforeAfterTempData.value.after = []
+        return
+    }
+
+    const listClone = listSource.value ?? []
+
+    // 清空现有克隆数据
+    beforeAfterTempData.value.before = []
+    beforeAfterTempData.value.after = []
+
+    // 重新生成克隆数据，使用不同的前缀确保唯一性
+    beforeAfterTempData.value.before = listClone.slice(-maxAppendCount).map((item, index) => uuCloneKey(item, index, 'before_'))
+    beforeAfterTempData.value.after = listClone.slice(0, maxAppendCount).map((item, index) => uuCloneKey(item, index, 'after_'))
+}
+
 watch(
     () => list,
     () => {
         nextTick(() => {
             appendBeforeAfterData()
             // 等待DOM更新后更新尺寸
-            setTimeout(updateSizes, 50)
+            setManagedTimeout(updateSizes, 50)
         })
     },
     { deep: true },
@@ -231,7 +316,7 @@ watch(
     () => modelIndex.value,
     () => {
         // 索引变化时不需要立即更新尺寸，只需要在下一次动画帧更新
-        requestAnimationFrame(updateSizes)
+        requestManagedAnimationFrame(updateSizes)
     },
 )
 
@@ -248,75 +333,48 @@ watch(
 onMounted(() => {
     appendBeforeAfterData()
     // 初始化后等待DOM渲染完成再测量尺寸
-    setTimeout(updateSizes, 100)
+    setManagedTimeout(updateSizes, 100)
 })
 
-// 追加前后临时数据
-function appendBeforeAfterData() {
-    if (!sizeCache.value.parentWidth) {
-        updateSizes()
-        return
-    }
-
-    const { maxAppendCount } = sizeCache.value
-    if (maxAppendCount === 0) return
-
-    beforeAfterTempData.value.appendCount = maxAppendCount
-    initCarouseIndex()
-    carouseIndex.value += maxAppendCount
-
-    if (disabled) {
-        beforeAfterTempData.value.before = []
-        beforeAfterTempData.value.after = []
-        return
-    }
-
-    const listClone = listSource.value ?? []
-    beforeAfterTempData.value.before = listClone.slice(-maxAppendCount).map(uuCloneKey)
-    beforeAfterTempData.value.after = listClone.slice(0, maxAppendCount).map(uuCloneKey)
-}
-
-function uuCloneKey(item: TabListRaw, index: number): TabListRaw {
-    return {
-        ...item,
-        value: rowKey(item) + '_clone_' + index + '_' + Date.now(),
-    }
-}
+// 使用一个 ResizeObserver 观察所有按钮
+let buttonResizeObserver: ResizeObserver | null = null
+const observedButtons = new Set<Element>()
 
 // 监听父元素和按钮元素的变化
-let resizeObserver: ResizeObserver | null = null
+let parentResizeObserver: ResizeObserver | null = null
+
 onMounted(() => {
     if (!window.ResizeObserver || !tabButtonParentElRef.value) return
 
-    resizeObserver = new ResizeObserver(
-        debounce(() => {
-            updateSizes()
-            appendBeforeAfterData()
-        }, offsetAnimationTime),
-    )
+    // 创建防抖的更新函数
+    const debouncedUpdateSizes = createManagedDebounce(updateSizes, offsetAnimationTime)
+    const debouncedAppendData = createManagedDebounce(appendBeforeAfterData, offsetAnimationTime)
 
-    resizeObserver.observe(tabButtonParentElRef.value)
+    // 观察父元素
+    parentResizeObserver = new ResizeObserver(() => {
+        debouncedUpdateSizes()
+        debouncedAppendData()
+    })
 
-    // 观察按钮尺寸变化
-    const buttonObserver = new ResizeObserver(debounce(updateSizes, offsetAnimationTime))
+    parentResizeObserver.observe(tabButtonParentElRef.value)
+    resizeObservers.value.push(parentResizeObserver)
 
-    // 监听前几个按钮的尺寸变化
+    // 观察按钮尺寸变化 - 只观察前几个按钮
+    buttonResizeObserver = new ResizeObserver(debouncedUpdateSizes)
+    resizeObservers.value.push(buttonResizeObserver)
+
+    // 监听按钮尺寸变化
     nextTick(() => {
         if (tabButtonRef.value) {
+            // 只监听前3个按钮，避免过多监听
             tabButtonRef.value.slice(0, 3).forEach(button => {
-                buttonObserver.observe(button)
+                if (!observedButtons.has(button)) {
+                    buttonResizeObserver!.observe(button)
+                    observedButtons.add(button)
+                }
             })
         }
     })
-})
-
-onUnmounted(() => {
-    if (resizeObserver) {
-        resizeObserver.disconnect()
-    }
-    if (updateSizeTimeout) {
-        cancelAnimationFrame(updateSizeTimeout)
-    }
 })
 
 // 计算轮播偏移量
@@ -341,12 +399,17 @@ const carouselOffset = computed(() => {
     return offsetValue
 })
 
+// 使用 ref 存储 transition 定时器
+const transitionTimer = ref<number | null>(null)
+
 function transitionCallabck(callback: () => void, isNextTick: boolean = true) {
-    requestAnimationFrame(() => {
+    requestManagedAnimationFrame(() => {
         if (isNextTick) {
-            nextTick(setTimeout.bind(null, callback, offsetAnimationTime))
+            nextTick(() => {
+                transitionTimer.value = setManagedTimeout(callback, offsetAnimationTime)
+            })
         } else {
-            setTimeout(callback, offsetAnimationTime)
+            transitionTimer.value = setManagedTimeout(callback, offsetAnimationTime)
         }
     })
 }
@@ -358,7 +421,7 @@ function transitionCallabckLoop(index: number) {
     }, false)
 }
 
-const handleClick = throttle((_item: TabListRaw, index: number) => {
+const handleClick = createManagedThrottle((_item: TabListRaw, index: number) => {
     if (disabled) return
 
     if (!_isTransition.value) {
@@ -392,13 +455,88 @@ const handleClick = throttle((_item: TabListRaw, index: number) => {
     }
 
     $emit('change', _newChangeEventData)
-}, offsetAnimationTime) as unknown as (_item: TabListRaw, index: number) => void
+}, offsetAnimationTime)
+
+// 清理函数
+function cleanup() {
+    // 清理动画帧
+    animationFrameIds.value.forEach(id => cancelAnimationFrame(id))
+    animationFrameIds.value = []
+
+    // 清理定时器
+    timeoutIds.value.forEach(id => clearTimeout(id))
+    timeoutIds.value = []
+
+    // 清理 transition 定时器
+    if (transitionTimer.value) {
+        clearTimeout(transitionTimer.value)
+        transitionTimer.value = null
+    }
+
+    // 清理 updateSizeTimeout
+    if (updateSizeTimeout) {
+        cancelAnimationFrame(updateSizeTimeout)
+        updateSizeTimeout = null
+    }
+
+    // 清理节流/防抖函数
+    throttleInstances.value.forEach(instance => instance.cancel?.())
+    throttleInstances.value = []
+
+    debounceInstances.value.forEach(instance => instance.cancel?.())
+    debounceInstances.value = []
+
+    // 清理 ResizeObserver
+    resizeObservers.value.forEach(observer => {
+        observer.disconnect()
+    })
+    resizeObservers.value = []
+
+    // 清理 button observer
+    if (buttonResizeObserver) {
+        observedButtons.forEach(button => {
+            buttonResizeObserver!.unobserve(button)
+        })
+        buttonResizeObserver.disconnect()
+        buttonResizeObserver = null
+    }
+
+    if (parentResizeObserver) {
+        parentResizeObserver.disconnect()
+        parentResizeObserver = null
+    }
+
+    // 清空观察的按钮集合
+    observedButtons.clear()
+
+    // 清空克隆数据
+    beforeAfterTempData.value.before = []
+    beforeAfterTempData.value.after = []
+    beforeAfterTempData.value.appendCount = 0
+
+    // 清除 DOM 引用
+    tabButtonRef.value = []
+    tabButtonParentElRef.value = undefined
+    carouselTrainElRef.value = undefined
+}
+
+// 组件销毁前清理
+onBeforeUnmount(() => {
+    cleanup()
+})
+
+// 组件卸载时再次清理确保没有遗漏
+onUnmounted(() => {
+    cleanup()
+})
 </script>
 
 <style lang="scss" scoped>
 .lc-carouse-box {
     width: 100%;
     user-select: none;
+    position: relative;
+    contain: layout style; /* 性能优化：限制样式重计算范围 */
 
     &__track {
         position: relative;
@@ -413,6 +551,7 @@ const handleClick = throttle((_item: TabListRaw, index: number) => {
                 left: 50%;
                 bottom: 0;
                 transform: translate(-50%, 0);
+                image-rendering: -webkit-optimize-contrast; /* 图片渲染优化 */
             }
         }
     }
@@ -430,6 +569,11 @@ const handleClick = throttle((_item: TabListRaw, index: number) => {
             mask: var(--mask-image);
             -webkit-mask: var(--mask-image);
 
+            /* 硬件加速优化 */
+            transform: translateZ(0);
+            backface-visibility: hidden;
+            perspective: 1000;
+
             &--train {
                 --transition-time: v-bind(offsetAnimationTime);
                 width: fit-content;
@@ -439,7 +583,7 @@ const handleClick = throttle((_item: TabListRaw, index: number) => {
                 transform: var(--carousel-offset);
 
                 &.is-transition {
-                    transition: transform calc(var(--transition-time) * 1ms) linear;
+                    transition: transform calc(var(--transition-time) * 1ms) cubic-bezier(0.34, 1.56, 0.64, 1);
                 }
 
                 &__button {
@@ -447,6 +591,7 @@ const handleClick = throttle((_item: TabListRaw, index: number) => {
                     outline: none;
                     border: none;
                     transition: none;
+                    contain: content; /* 性能优化：限制内容重排 */
 
                     &:hover {
                         cursor: pointer;
@@ -474,6 +619,7 @@ const handleClick = throttle((_item: TabListRaw, index: number) => {
             &--image {
                 width: 36px;
                 height: 40px;
+                image-rendering: -webkit-optimize-contrast;
             }
         }
     }

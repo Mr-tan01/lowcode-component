@@ -1,7 +1,7 @@
 import _sfc_main from "./index2.js";
 import '../assets/line/line.css';/* empty css       */
 import _export_sfc from "../_virtual/_plugin-vue_export-helper.js";
-const LcLineChart = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-d29f3dda"]]);
+const LcLineChart = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-2be22132"]]);
 export {
   LcLineChart as default
 };

@@ -7,14 +7,14 @@
 <script lang="ts" setup>
 import { useResizeObserver } from '@vueuse/core'
 import { init, type EChartsType, type EChartsOption } from 'echarts'
-import { onMounted, PropType, shallowRef, useTemplateRef, watchEffect, ref } from 'vue'
+import { onMounted, PropType, shallowRef, useTemplateRef, watchEffect, ref, onBeforeUnmount } from 'vue'
 import { debounce, cloneDeep, merge } from 'lodash-es'
 
 import { transformEChartsConfig } from '@mmj-code-lib/lowcode/es/shared'
 const commonChartRef = useTemplateRef('commonChart')
 
 const cloneDeepOptions = ref()
-const chartInstance = shallowRef<EChartsType>()
+const chartInstance = shallowRef<EChartsType | null>(null)
 const {
     debounceTime = 300,
     options = {},
@@ -57,6 +57,11 @@ defineExpose({
         return chartInstance.value
     },
     setOptions,
+})
+onBeforeUnmount(() => {
+    console.log('我是卸载啊')
+    chartInstance.value?.dispose()
+    chartInstance.value = null
 })
 </script>
 

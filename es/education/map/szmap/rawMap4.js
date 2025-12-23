@@ -1,4 +1,4 @@
-import { defineComponent, mergeDefaults, useCssVars, computed, ref, onMounted, createElementBlock, openBlock, createCommentVNode, createVNode, createElementVNode, Fragment, renderList, mergeProps, createBlock, resolveDynamicComponent, renderSlot, unref } from "vue";
+import { defineComponent, mergeDefaults, useCssVars, computed, ref, onMounted, onBeforeUnmount, onUnmounted, createElementBlock, openBlock, createCommentVNode, createVNode, createElementVNode, Fragment, renderList, mergeProps, createBlock, resolveDynamicComponent, renderSlot, unref } from "vue";
 import _sfc_main$2 from "./comp/sshzq.js";
 import Baoan from "./comp/baoan.js";
 import Dapeng from "./comp/dapeng.js";
@@ -16,30 +16,24 @@ import LcMark from "../mark/index2.js";
 import { propsRaw } from "./props.js";
 import { defFloatLevelConfig, LabelModelEnum, szBlockNames, defBlockLabelMap } from "./const.js";
 import merge from "lodash-es/merge";
-const _hoisted_1 = { class: "lc-szmap-raw" };
+const _hoisted_1 = ["id"];
 const _hoisted_2 = {
-  class: "lc-szmap-raw__svg",
-  viewBox: "0 0 922 527",
-  version: "1.1"
-};
-const _hoisted_3 = ["id"];
-const _hoisted_4 = {
   id: "页面-2",
   stroke: "none",
   "stroke-width": "1",
   fill: "none",
   "fill-rule": "evenodd"
 };
-const _hoisted_5 = {
+const _hoisted_3 = {
   id: "编组-76",
   transform: "translate(4, 0)"
 };
-const _hoisted_6 = {
+const _hoisted_4 = {
   id: "编组",
   transform: "translate(0, 35)",
   "fill-rule": "nonzero"
 };
-const _hoisted_7 = {
+const _hoisted_5 = {
   key: 0,
   class: "lc-szmap-raw__mark-group"
 };
@@ -58,9 +52,12 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
   emits: ["markClick", "markMouseover", "markMouseenter", "markMouseleave"],
   setup(__props, { emit: __emit }) {
     useCssVars((_ctx) => ({
-      "7cdd1f8c": mapRotateX.value,
-      "1c19c2e2": labelWrapInsetY.value
+      "73ea6053": mapRotateX.value,
+      "367b7bb0": labelWrapInsetY.value
     }));
+    const containerRef = ref();
+    const svgRef = ref();
+    const defsRef = ref();
     const blockList = {
       [szBlockNames["光明"]]: Guangming,
       [szBlockNames["宝安"]]: Baoan,
@@ -94,8 +91,9 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     function markClick(key) {
       $emits("markClick", getMarkProp(key));
     }
+    let timer = null;
     onMounted(() => {
-      setTimeout(() => {
+      timer = setTimeout(() => {
         labelAnimateNum.value = 1;
       }, 300);
     });
@@ -150,95 +148,157 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       currentMapKey.value = "";
       $emits("markMouseleave", key);
     };
+    function cleanup() {
+      if (timer) {
+        clearTimeout(timer);
+        timer = null;
+      }
+      if (svgRef.value) {
+        const animations = svgRef.value.getAnimations();
+        animations.forEach((animation) => {
+          animation.cancel();
+        });
+        if (defsRef.value) {
+          const gradients = defsRef.value.querySelectorAll("linearGradient");
+          gradients.forEach((gradient) => {
+            gradient.remove();
+          });
+        }
+        svgRef.value.style.transition = "";
+        svgRef.value.style.transform = "";
+      }
+      if (containerRef.value) {
+        containerRef.value.style.perspective = "";
+      }
+      labelAnimateNum.value = 0;
+      currentMapKey.value = "";
+    }
+    onBeforeUnmount(() => {
+      cleanup();
+    });
+    onUnmounted(() => {
+      cleanup();
+    });
     return (_ctx, _cache) => {
-      return openBlock(), createElementBlock("div", _hoisted_1, [
-        (openBlock(), createElementBlock("svg", _hoisted_2, [
-          createVNode(_sfc_main$1),
-          createElementVNode("defs", null, [
-            (openBlock(true), createElementBlock(
-              Fragment,
-              null,
-              renderList(levelsList.value, ([type, item], key) => {
-                return openBlock(), createElementBlock("linearGradient", {
-                  id: `linearGradient-float-${type}`,
-                  key
-                }, [
+      return openBlock(), createElementBlock(
+        "div",
+        {
+          ref_key: "containerRef",
+          ref: containerRef,
+          class: "lc-szmap-raw"
+        },
+        [
+          (openBlock(), createElementBlock(
+            "svg",
+            {
+              ref_key: "svgRef",
+              ref: svgRef,
+              class: "lc-szmap-raw__svg",
+              viewBox: "0 0 922 527",
+              version: "1.1"
+            },
+            [
+              createVNode(_sfc_main$1),
+              createElementVNode(
+                "defs",
+                {
+                  ref_key: "defsRef",
+                  ref: defsRef
+                },
+                [
                   (openBlock(true), createElementBlock(
                     Fragment,
                     null,
-                    renderList(item == null ? void 0 : item.stop, (el, index) => {
-                      return openBlock(), createElementBlock(
-                        "stop",
-                        mergeProps({ ref_for: true }, typeof el === "object" && !Array.isArray(el) ? el : {}, { key: index }),
-                        null,
-                        16
-                        /* FULL_PROPS */
-                      );
+                    renderList(levelsList.value, ([type, item], key) => {
+                      return openBlock(), createElementBlock("linearGradient", {
+                        id: `linearGradient-float-${type}`,
+                        key
+                      }, [
+                        (openBlock(true), createElementBlock(
+                          Fragment,
+                          null,
+                          renderList(item == null ? void 0 : item.stop, (el, index) => {
+                            return openBlock(), createElementBlock(
+                              "stop",
+                              mergeProps({ ref_for: true }, typeof el === "object" && !Array.isArray(el) ? el : {}, { key: index }),
+                              null,
+                              16
+                              /* FULL_PROPS */
+                            );
+                          }),
+                          128
+                          /* KEYED_FRAGMENT */
+                        ))
+                      ], 8, _hoisted_1);
                     }),
                     128
                     /* KEYED_FRAGMENT */
                   ))
-                ], 8, _hoisted_3);
-              }),
-              128
-              /* KEYED_FRAGMENT */
-            ))
-          ]),
-          createElementVNode("g", _hoisted_4, [
-            createElementVNode("g", _hoisted_5, [
-              createElementVNode("g", _hoisted_6, [
-                (openBlock(), createElementBlock(
-                  Fragment,
-                  null,
-                  renderList(blockList, (is, key, index) => {
-                    return createVNode(resolveDynamicComponent(is), mergeProps({
-                      key: index,
-                      class: blockClass.value
-                    }, { ref_for: true }, getBlockProperties(key), {
-                      "show-border": _ctx.showBorder,
-                      onMouseenter: ($event) => onMouseoverMapkey(key),
-                      onMouseover: ($event) => onMouseenterMapkey(key),
-                      onMouseleave: ($event) => hidePopver($event, key),
-                      onClick: ($event) => markClick(key)
-                    }), null, 16, ["class", "show-border", "onMouseenter", "onMouseover", "onMouseleave", "onClick"]);
-                  }),
-                  64
-                  /* STABLE_FRAGMENT */
-                )),
-                _ctx.showLabel ? (openBlock(), createBlock(Labels, {
-                  key: 0,
-                  labels: _ctx.labels,
-                  values: _ctx.values
-                }, null, 8, ["labels", "values"])) : createCommentVNode("v-if", true)
+                ],
+                512
+                /* NEED_PATCH */
+              ),
+              createElementVNode("g", _hoisted_2, [
+                createElementVNode("g", _hoisted_3, [
+                  createElementVNode("g", _hoisted_4, [
+                    (openBlock(), createElementBlock(
+                      Fragment,
+                      null,
+                      renderList(blockList, (is, key, index) => {
+                        return createVNode(resolveDynamicComponent(is), mergeProps({
+                          key: index,
+                          class: blockClass.value
+                        }, { ref_for: true }, getBlockProperties(key), {
+                          "show-border": _ctx.showBorder,
+                          onMouseenter: ($event) => onMouseoverMapkey(key),
+                          onMouseover: ($event) => onMouseenterMapkey(key),
+                          onMouseleave: ($event) => hidePopver($event, key),
+                          onClick: ($event) => markClick(key)
+                        }), null, 16, ["class", "show-border", "onMouseenter", "onMouseover", "onMouseleave", "onClick"]);
+                      }),
+                      64
+                      /* STABLE_FRAGMENT */
+                    )),
+                    _ctx.showLabel ? (openBlock(), createBlock(Labels, {
+                      key: 0,
+                      labels: _ctx.labels,
+                      values: _ctx.values
+                    }, null, 8, ["labels", "values"])) : createCommentVNode("v-if", true)
+                  ])
+                ])
               ])
-            ])
-          ])
-        ])),
-        _ctx.showLabel ? (openBlock(), createElementBlock("div", _hoisted_7, [
-          renderSlot(_ctx.$slots, "mapLabel", {
-            blockList,
-            labelClass,
-            getValue: getMarkProp,
-            currentMapKey: currentMapKey.value
-          }, () => [
-            (openBlock(), createElementBlock(
-              Fragment,
-              null,
-              renderList(blockList, (_, key) => {
-                return createVNode(unref(LcMark), mergeProps({
-                  key,
-                  class: labelClass(key)
-                }, { ref_for: true }, getMarkProp(key), {
-                  size: "small",
-                  onClick: ($event) => markClick(key)
-                }), null, 16, ["class", "onClick"]);
-              }),
-              64
-              /* STABLE_FRAGMENT */
-            ))
-          ], true)
-        ])) : createCommentVNode("v-if", true)
-      ]);
+            ],
+            512
+            /* NEED_PATCH */
+          )),
+          _ctx.showLabel ? (openBlock(), createElementBlock("div", _hoisted_5, [
+            renderSlot(_ctx.$slots, "mapLabel", {
+              blockList,
+              labelClass,
+              getValue: getMarkProp,
+              currentMapKey: currentMapKey.value
+            }, () => [
+              (openBlock(), createElementBlock(
+                Fragment,
+                null,
+                renderList(blockList, (_, key) => {
+                  return createVNode(unref(LcMark), mergeProps({
+                    key,
+                    class: labelClass(key)
+                  }, { ref_for: true }, getMarkProp(key), {
+                    size: "small",
+                    onClick: ($event) => markClick(key)
+                  }), null, 16, ["class", "onClick"]);
+                }),
+                64
+                /* STABLE_FRAGMENT */
+              ))
+            ], true)
+          ])) : createCommentVNode("v-if", true)
+        ],
+        512
+        /* NEED_PATCH */
+      );
     };
   }
 });

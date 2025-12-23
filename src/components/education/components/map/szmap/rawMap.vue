@@ -1,8 +1,8 @@
 <template>
-    <div class="lc-szmap-raw">
-        <svg class="lc-szmap-raw__svg" viewBox="0 0 922 527" version="1.1">
+    <div ref="containerRef" class="lc-szmap-raw">
+        <svg ref="svgRef" class="lc-szmap-raw__svg" viewBox="0 0 922 527" version="1.1">
             <Defines></Defines>
-            <defs>
+            <defs ref="defsRef">
                 <linearGradient v-for="([type, item], key) in levelsList" :id="`linearGradient-float-${type}`" :key>
                     <stop v-for="(el, index) in item?.stop" v-bind="typeof el === 'object' && !Array.isArray(el) ? el : {}" :key="index"></stop>
                 </linearGradient>
@@ -41,6 +41,7 @@
         </div>
     </div>
 </template>
+
 <script lang="ts" setup>
 import Sshzq from './comp/sshzq.vue'
 import Baoan from './comp/baoan.vue'
@@ -56,7 +57,7 @@ import Longhua from './comp/longhua.vue'
 import Defines from './comp/defines.vue'
 import Labels from './comp/labels.vue'
 import { LcMark } from '@/components/education/components/mark'
-import { type Component, computed, onMounted, ref } from 'vue'
+import { type Component, computed, onMounted, ref, onUnmounted, onBeforeUnmount } from 'vue'
 import { type Levels, propsRaw } from './props'
 import { defFloatLevelConfig, LabelModelEnum, type BlockName, szBlockNames, defBlockLabelMap } from './const'
 import merge from 'lodash-es/merge'
@@ -73,6 +74,11 @@ const {
     disabledGradient = false,
     labelModel = LabelModelEnum.DEFAULT,
 } = defineProps(propsRaw)
+
+// 添加 DOM 引用用于清理
+const containerRef = ref<HTMLElement>()
+const svgRef = ref<SVGSVGElement>()
+const defsRef = ref<SVGDefsElement>()
 
 const blockList: Record<BlockName, Component> = {
     [szBlockNames['光明']]: Guangming,
@@ -115,9 +121,13 @@ function markClick(key: BlockName) {
     // 点击事件处理
     $emits('markClick', getMarkProp(key))
 }
+
+// 存储定时器用于清理
+let timer: ReturnType<typeof setTimeout> | null = null
+
 onMounted(() => {
     // 显示动画
-    setTimeout(() => {
+    timer = setTimeout(() => {
         labelAnimateNum.value = 1
     }, 300)
 })
@@ -178,6 +188,55 @@ const hidePopver = (event: MouseEvent, key: BlockName) => {
     currentMapKey.value = ''
     $emits('markMouseleave', key)
 }
+
+// 清理函数
+function cleanup() {
+    // 清理定时器
+    if (timer) {
+        clearTimeout(timer)
+        timer = null
+    }
+
+    // 清理所有 SVG 动画
+    if (svgRef.value) {
+        const animations = svgRef.value.getAnimations()
+        animations.forEach(animation => {
+            animation.cancel()
+        })
+
+        // 清理 SVG 渐变
+        if (defsRef.value) {
+            const gradients = defsRef.value.querySelectorAll('linearGradient')
+            gradients.forEach(gradient => {
+                gradient.remove()
+            })
+        }
+
+        // 清理 SVG 样式
+        svgRef.value.style.transition = ''
+        svgRef.value.style.transform = ''
+    }
+
+    // 清理容器样式
+    if (containerRef.value) {
+        containerRef.value.style.perspective = ''
+    }
+
+    // 清理所有可能的事件监听器（Vue 通常会自动清理，但这里确保一下）
+    // 重置数据
+    labelAnimateNum.value = 0
+    currentMapKey.value = ''
+}
+
+// 组件销毁前清理
+onBeforeUnmount(() => {
+    cleanup()
+})
+
+// 组件卸载时再次清理
+onUnmounted(() => {
+    cleanup()
+})
 </script>
 
 <style lang="scss" scoped>

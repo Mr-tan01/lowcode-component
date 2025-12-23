@@ -1,4 +1,4 @@
-import { defineComponent, mergeDefaults, useTemplateRef, ref, shallowRef, onMounted, watchEffect, createElementBlock, openBlock, createElementVNode } from "vue";
+import { defineComponent, mergeDefaults, useTemplateRef, ref, shallowRef, onMounted, watchEffect, onBeforeUnmount, createElementBlock, openBlock, createElementVNode } from "vue";
 import { useResizeObserver } from "@vueuse/core";
 import { init } from "echarts";
 import { debounce, cloneDeep, merge } from "lodash-es";
@@ -22,7 +22,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
   setup(__props, { expose: __expose }) {
     const commonChartRef = useTemplateRef("commonChart");
     const cloneDeepOptions = ref();
-    const chartInstance = shallowRef();
+    const chartInstance = shallowRef(null);
     useResizeObserver(
       commonChartRef,
       debounce(() => {
@@ -57,6 +57,12 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
         return chartInstance.value;
       },
       setOptions
+    });
+    onBeforeUnmount(() => {
+      var _a;
+      console.log("我是卸载啊");
+      (_a = chartInstance.value) == null ? void 0 : _a.dispose();
+      chartInstance.value = null;
     });
     return (_ctx, _cache) => {
       return openBlock(), createElementBlock("div", _hoisted_1, [

@@ -1,4 +1,4 @@
-import { defineComponent, mergeModels, computed, watchEffect, ref, useModel, createElementBlock, openBlock, createElementVNode, withDirectives, createTextVNode, toDisplayString, unref, vShow, vModelText, renderSlot, Fragment, renderList, normalizeStyle, createVNode, mergeDefaults } from "vue";
+import { defineComponent, mergeModels, computed, watchEffect, ref, useModel, onUnmounted, createElementBlock, openBlock, createElementVNode, withDirectives, createTextVNode, toDisplayString, unref, vShow, vModelText, renderSlot, Fragment, renderList, normalizeStyle, createVNode, mergeDefaults } from "vue";
 import _imports_0 from "./images/main-robot.png.js";
 import _imports_1 from "./images/voice.png.js";
 import _imports_2 from "./images/microphone.png.js";
@@ -71,7 +71,9 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       startAngle: circleStartAngle,
       starMaxShowCount,
       displayAlternately,
-      fullAngle: circleFullAngle
+      fullAngle: circleFullAngle,
+      cleanup: cleanupStarRotate
+      // 新增清理函数
     } = useStarRotate();
     const reverseIndex = memoize(
       (len, index) => {
@@ -98,19 +100,13 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     const step = computed(() => 360 / __props.duration);
     const time = computed(() => 1e3 / __props.duration);
     const isAnimate = ref(__props.animate);
-    let timer;
-    function _requestAnimationFrame(callback) {
-      if (window.requestAnimationFrame) {
-        window.requestAnimationFrame.call(this, callback);
-      } else {
-        callback();
-      }
-    }
+    let animationFrameId = null;
+    let timerId = null;
     function autoRotate() {
       if (!isAnimate.value) return;
-      setTimeout(() => {
+      timerId = window.setTimeout(() => {
         if (!isAnimate.value) return;
-        _requestAnimationFrame(() => {
+        animationFrameId = window.requestAnimationFrame(() => {
           angleOffset.value += step.value;
           if (angleOffset.value >= 360) {
             angleOffset.value = 0;
@@ -119,9 +115,20 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
         });
       }, time.value);
     }
-    if (isAnimate.value) {
-      autoRotate();
-    }
+    watchEffect(() => {
+      if (isAnimate.value) {
+        autoRotate();
+      } else {
+        if (animationFrameId) {
+          cancelAnimationFrame(animationFrameId);
+          animationFrameId = null;
+        }
+        if (timerId) {
+          clearTimeout(timerId);
+          timerId = null;
+        }
+      }
+    });
     const $emit = __emit;
     function starClick(item, index) {
       angleOffset.value = averageAngle.value * index * -1;
@@ -131,18 +138,38 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       angleOffset.value = averageAngle.value * index * -1;
       $emit("itemClick", item, index);
     }
+    const mouseLeaveTimer = ref(null);
     function mouseenter() {
-      clearTimeout(timer);
+      if (mouseLeaveTimer.value) {
+        clearTimeout(mouseLeaveTimer.value);
+        mouseLeaveTimer.value = null;
+      }
       isAnimate.value = false;
     }
     function mouseleave() {
-      timer = setTimeout(() => {
+      mouseLeaveTimer.value = window.setTimeout(() => {
         if (isAnimate.value) return;
         isAnimate.value = __props.animate;
         autoRotate();
       }, 2e3);
     }
     const modelContext = useModel(__props, "value");
+    onUnmounted(() => {
+      isAnimate.value = false;
+      if (animationFrameId) {
+        cancelAnimationFrame(animationFrameId);
+      }
+      if (timerId) {
+        clearTimeout(timerId);
+      }
+      stop();
+      if (cleanupStarRotate) {
+        cleanupStarRotate();
+      }
+      if (mouseLeaveTimer.value) {
+        clearTimeout(mouseLeaveTimer.value);
+      }
+    });
     on("result", () => {
       var _a;
       modelContext.value = ((_a = output.value) == null ? void 0 : _a.textContent) || "";
