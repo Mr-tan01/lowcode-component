@@ -39,6 +39,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                 _cache[0] || (_cache[0] = createElementVNode(
                   "img",
                   {
+                    class: "lcmapbutton-upside-icon",
                     src: _imports_0,
                     alt: ""
                   },

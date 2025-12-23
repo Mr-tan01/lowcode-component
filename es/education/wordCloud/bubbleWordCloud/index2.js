@@ -52,7 +52,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     const _baseAngle = Math.PI / 360;
     let speed = 1;
     const angleX = ref(speed * _baseAngle);
-    const angleY = ref(-speed * _baseAngle);
+    const angleY = ref(-1 * _baseAngle);
     let x, y, z, cos, sin = 0;
     function rotateX() {
       cos = Math.cos(angleX.value);
@@ -109,7 +109,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     }, 10);
     function wrapperMosueLeave() {
       angleX.value = speed * _baseAngle;
-      angleY.value = -speed * _baseAngle;
+      angleY.value = -1 * _baseAngle;
       if (__props.enableAnimate) {
         autoRotate = _autRotateAnimate;
         autoRotate();

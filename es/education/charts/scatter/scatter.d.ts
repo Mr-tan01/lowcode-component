@@ -8,7 +8,7 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
         options: PropType<EChartsOption>;
         notMerge: BooleanConstructor;
     }>> & Readonly<{}>, {
-        chartInstance: import('echarts').ECharts | undefined;
+        chartInstance: import('echarts').ECharts | null;
         setOptions: (options: EChartsOption, deep: boolean, lazyUpdate?: boolean) => void;
     }, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, import('vue').PublicProps, {
         notMerge: boolean;
@@ -26,7 +26,7 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
         options: PropType<EChartsOption>;
         notMerge: BooleanConstructor;
     }>> & Readonly<{}>, {
-        chartInstance: import('echarts').ECharts | undefined;
+        chartInstance: import('echarts').ECharts | null;
         setOptions: (options: EChartsOption, deep: boolean, lazyUpdate?: boolean) => void;
     }, {}, {}, {}, {
         notMerge: boolean;
@@ -39,7 +39,7 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
         options: PropType<EChartsOption>;
         notMerge: BooleanConstructor;
     }>> & Readonly<{}>, {
-        chartInstance: import('echarts').ECharts | undefined;
+        chartInstance: import('echarts').ECharts | null;
         setOptions: (options: EChartsOption, deep: boolean, lazyUpdate?: boolean) => void;
     }, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, import('vue').PublicProps, {
         notMerge: boolean;
@@ -57,7 +57,7 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
         options: PropType<EChartsOption>;
         notMerge: BooleanConstructor;
     }>> & Readonly<{}>, {
-        chartInstance: import('echarts').ECharts | undefined;
+        chartInstance: import('echarts').ECharts | null;
         setOptions: (options: EChartsOption, deep: boolean, lazyUpdate?: boolean) => void;
     }, {}, {}, {}, {
         notMerge: boolean;

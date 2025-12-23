@@ -33,7 +33,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
   }),
   setup(__props) {
     useCssVars((_ctx) => ({
-      "651f976e": computedHoverArrowOpacity.value
+      "feb06906": computedHoverArrowOpacity.value
     }));
     const tdCellTypeMap = {
       index: (_tdRecord, _thRecord, _tdIndex) => {

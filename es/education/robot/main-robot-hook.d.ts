@@ -1,4 +1,5 @@
 export declare function useStarRotate(): {
+    cleanup: () => void;
     getTextStyle: (index: number) => {
         transform: string;
     };

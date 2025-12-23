@@ -6,7 +6,7 @@
 
 <script lang="ts" setup>
 import { SChartsLine } from '@mmj-code-lib/lowcode/es/components'
-import { computed, onMounted, useTemplateRef, Ref } from 'vue'
+import { computed, onMounted, useTemplateRef, Ref, onUnmounted } from 'vue'
 import { type EChartsCoreOption, type EChartsOption } from 'echarts'
 import { useCommonLineOptions, useCommonLineSeries } from './options'
 import merge from 'lodash-es/merge'
@@ -76,6 +76,17 @@ onMounted(() => {
                     ],
                 })
             })
+    }
+})
+onUnmounted(() => {
+    if (chartLine.value && chartLine.value.chartInstance) {
+        // 解绑事件
+        Object.entries(events).forEach(([eventName, eventHandler]) => {
+            if (typeof eventHandler !== 'function') return
+            chartLine.value?.chartInstance?.off(eventName, eventHandler(chartLine))
+        })
+        chartLine.value.chartInstance.dispose()
+        chartLine.value.chartInstance = undefined
     }
 })
 </script>

@@ -1,4 +1,4 @@
-import { defineComponent, computed, useTemplateRef, onMounted, createElementBlock, openBlock, createVNode, unref, mergeProps } from "vue";
+import { defineComponent, computed, useTemplateRef, onMounted, onUnmounted, createElementBlock, openBlock, createVNode, unref, mergeProps } from "vue";
 import { SChartsLine } from "@mmj-code-lib/lowcode/es/components";
 import { useCommonLineOptions, useCommonLineSeries } from "./options.js";
 import merge from "lodash-es/merge";
@@ -68,6 +68,17 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
               ]
             });
           });
+      }
+    });
+    onUnmounted(() => {
+      if (chartLine.value && chartLine.value.chartInstance) {
+        Object.entries(__props.events).forEach(([eventName, eventHandler]) => {
+          var _a, _b;
+          if (typeof eventHandler !== "function") return;
+          (_b = (_a = chartLine.value) == null ? void 0 : _a.chartInstance) == null ? void 0 : _b.off(eventName, eventHandler(chartLine));
+        });
+        chartLine.value.chartInstance.dispose();
+        chartLine.value.chartInstance = void 0;
       }
     });
     return (_ctx, _cache) => {
