@@ -2,8 +2,9 @@ import { defineComponent, createBlock, openBlock, unref, mergeProps, withCtx, cr
 import { NCheckboxGroup, NCheckbox } from "naive-ui/es/checkbox";
 import { samplingStaticIcons } from "./const.js";
 const _hoisted_1 = { class: "Lc-boder" };
-const _hoisted_2 = ["src"];
-const _hoisted_3 = { class: "Lc-boder-box-text" };
+const _hoisted_2 = { class: "Lc-boder-box-icon" };
+const _hoisted_3 = ["src"];
+const _hoisted_4 = { class: "Lc-boder-box-text" };
 const _sfc_main = /* @__PURE__ */ defineComponent({
   __name: "sampling",
   props: {
@@ -40,13 +41,17 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                         value: item[_ctx.valueKey],
                         class: "lc-checkbox"
                       }, null, 8, ["value"])) : createCommentVNode("v-if", true),
-                      createElementVNode("img", {
-                        src: getIcon(item.icon),
-                        alt: ""
-                      }, null, 8, _hoisted_2),
+                      createElementVNode("div", _hoisted_2, [
+                        renderSlot(_ctx.$slots, "icon", { item }, () => [
+                          createElementVNode("img", {
+                            src: getIcon(item.icon),
+                            alt: ""
+                          }, null, 8, _hoisted_3)
+                        ], true)
+                      ]),
                       createElementVNode(
                         "span",
-                        _hoisted_3,
+                        _hoisted_4,
                         toDisplayString(item.name),
                         1
                         /* TEXT */
