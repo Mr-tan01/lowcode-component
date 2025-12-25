@@ -11,6 +11,9 @@ declare function __VLS_template(): {
             record: LcSamplingRecords;
             index: number;
         }): any;
+        icon?(_: {
+            item: LcSamplingRecords;
+        }): any;
     };
     refs: {};
     rootEl: any;

@@ -4,7 +4,11 @@
             <div v-for="(item, key) in list" :key class="Lc-boder-box">
                 <slot :record="item" :index="key">
                     <NCheckbox v-if="showCheckbox" :value="item[valueKey]" class="lc-checkbox"></NCheckbox>
-                    <img :src="getIcon(item.icon)" alt="" />
+                    <div class="Lc-boder-box-icon">
+                        <slot name="icon" :item="item">
+                            <img :src="getIcon(item.icon)" alt="" />
+                        </slot>
+                    </div>
                     <span class="Lc-boder-box-text">
                         {{ item.name }}
                     </span>
@@ -18,7 +22,6 @@
 import { NCheckboxGroup, NCheckbox } from 'naive-ui/es/checkbox'
 import { samplingStaticIcons } from './const'
 import { type LcSamplingRecords } from './types'
-
 const {
     list = [],
     showCheckbox = false,
@@ -58,7 +61,10 @@ function getIcon(p?: string) {
             height: 16px;
             object-fit: contain;
         }
-
+        &-icon {
+            display: flex;
+            align-items: center;
+        }
         &-text {
             font-family:
                 PingFangSC,
