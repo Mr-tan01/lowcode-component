@@ -1,4 +1,4 @@
-import { defineComponent, mergeModels, useCssVars, ref, useModel, computed, shallowRef, watch, nextTick, onMounted, onBeforeUnmount, onUnmounted, createElementBlock, openBlock, createElementVNode, createCommentVNode, unref, normalizeStyle, normalizeClass, Fragment, renderList, renderSlot, mergeProps, toDisplayString, mergeDefaults } from "vue";
+import { defineComponent, mergeModels, useCssVars, ref, useModel, computed, shallowRef, watch, nextTick, onMounted, createElementBlock, openBlock, createElementVNode, createCommentVNode, unref, normalizeStyle, normalizeClass, Fragment, renderList, renderSlot, mergeProps, toDisplayString, mergeDefaults } from "vue";
 import _imports_0 from "./images/lt-arrow.png.js";
 import _imports_1 from "./images/rt-arrow.png.js";
 import _imports_2 from "./images/top-arrow.png.js";
@@ -33,8 +33,8 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
   setup(__props, { emit: __emit }) {
     var _a;
     useCssVars((_ctx) => ({
-      "28416dd8": _ctx.gap,
-      "1b77de48": _ctx.offsetAnimationTime
+      "869be02c": _ctx.gap,
+      "a26b289c": _ctx.offsetAnimationTime
     }));
     const carouseIndex = ref(0);
     const _isTransition = ref(true);
@@ -58,24 +58,12 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       return [...beforeAfterTempData.value.before, ...listClone, ...beforeAfterTempData.value.after];
     });
     const isEven = computed(() => carouseIndex.value % 2 === 0);
-    const throttleInstances = ref([]);
-    const debounceInstances = ref([]);
-    function createManagedThrottle(func, wait, options) {
-      const throttled = throttle(func, wait, options);
-      throttleInstances.value.push(throttled);
-      return throttled;
-    }
-    function createManagedDebounce(func, wait, options) {
-      const debounced = debounce(func, wait, options);
-      debounceInstances.value.push(debounced);
-      return debounced;
-    }
     function initCarouseIndex() {
       carouseIndex.value = modelIndex.value;
     }
     initCarouseIndex();
     function createStepHandler(dir) {
-      return createManagedThrottle(() => {
+      return throttle(() => {
         let currentIndex = carouseIndex.value + dir;
         if (currentIndex < 0) {
           currentIndex = renderList$1.value.length - 1;
@@ -90,88 +78,21 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     const tabButtonRef = shallowRef([]);
     const tabButtonParentElRef = shallowRef();
     const carouselTrainElRef = shallowRef();
-    const sizeCache = ref({
-      normalButtonWidth: 0,
-      maxButtonCount: 0,
-      carouselWidth: 0,
-      maxAppendCount: 0,
-      offset: 0,
-      parentWidth: 0,
-      lastUpdate: 0
-    });
-    const animationFrameIds = ref([]);
-    const timeoutIds = ref([]);
-    const resizeObservers = ref([]);
-    function requestManagedAnimationFrame(callback) {
-      const id = requestAnimationFrame(callback);
-      animationFrameIds.value.push(id);
-      return id;
-    }
-    function setManagedTimeout(callback, delay) {
-      const id = window.setTimeout(callback, delay);
-      timeoutIds.value.push(id);
-      return id;
-    }
-    let updateSizeTimeout = null;
-    function updateSizes() {
-      if (updateSizeTimeout) {
-        cancelAnimationFrame(updateSizeTimeout);
-        updateSizeTimeout = null;
-      }
-      updateSizeTimeout = requestManagedAnimationFrame(() => {
-        if (!tabButtonParentElRef.value || !tabButtonRef.value.length || !carouselTrainElRef.value) {
-          return;
-        }
-        const parentWidth = tabButtonParentElRef.value.offsetWidth;
-        const carouselWidth = carouselTrainElRef.value.offsetWidth;
-        if (sizeCache.value.parentWidth === parentWidth && Date.now() - sizeCache.value.lastUpdate < 1e3) {
-          return;
-        }
-        let normalButtonWidth = 0;
-        let activeButtonWidth = 0;
-        for (let i = 0; i < tabButtonRef.value.length; i++) {
-          const buttonEl = tabButtonRef.value[i];
-          if (buttonEl) {
-            if (buttonEl.classList.contains("active")) {
-              activeButtonWidth = buttonEl.offsetWidth;
-            } else if (!normalButtonWidth) {
-              normalButtonWidth = buttonEl.offsetWidth;
-            }
-            if (normalButtonWidth && activeButtonWidth) break;
-          }
-        }
-        if (!normalButtonWidth && tabButtonRef.value[0]) {
-          normalButtonWidth = tabButtonRef.value[0].offsetWidth;
-        }
-        const maxCount = normalButtonWidth ? parentWidth / normalButtonWidth : 0;
-        const maxButtonCount = maxCount;
-        const maxAppendCount = __props.disabled ? 0 : Math.round(maxCount);
-        sizeCache.value = {
-          normalButtonWidth: __props.backCenter ? normalButtonWidth : 0,
-          maxButtonCount: __props.backCenter ? maxButtonCount : 0,
-          carouselWidth: __props.backCenter ? carouselWidth : 0,
-          maxAppendCount: __props.backCenter ? maxAppendCount : 0,
-          offset: __props.backCenter ? activeButtonWidth / 2 : 0,
-          parentWidth,
-          lastUpdate: Date.now()
-        };
-        updateSizeTimeout = null;
-      });
-    }
+    const forceCompile = ref(0);
     watch(
       () => __props.list,
       () => {
-        nextTick(() => {
-          appendBeforeAfterData();
-          setManagedTimeout(updateSizes, 50);
-        });
+        updateCompile();
+        nextTick(appendBeforeAfterData);
       },
-      { deep: true }
+      {
+        deep: 1
+      }
     );
     watch(
       () => modelIndex.value,
       () => {
-        requestManagedAnimationFrame(updateSizes);
+        onParentElResize();
       }
     );
     watch(
@@ -183,28 +104,23 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
         }
       }
     );
-    onMounted(() => {
-      appendBeforeAfterData();
-      setManagedTimeout(updateSizes, 100);
-    });
+    onMounted(appendBeforeAfterData);
     function appendBeforeAfterData() {
-      if (!sizeCache.value.parentWidth) {
-        updateSizes();
-        return;
-      }
-      const { maxAppendCount } = sizeCache.value;
-      if (maxAppendCount === 0) return;
-      beforeAfterTempData.value.appendCount = maxAppendCount;
+      if (!clientRect.value) return;
+      const { maxAppendCount } = clientRect.value;
+      const appendCount = maxAppendCount;
+      if (appendCount === 0) return;
+      beforeAfterTempData.value.appendCount = appendCount;
       initCarouseIndex();
-      carouseIndex.value += maxAppendCount;
+      carouseIndex.value += appendCount;
       if (__props.disabled) {
         beforeAfterTempData.value.before = [];
         beforeAfterTempData.value.after = [];
         return;
       }
       const listClone = listSource.value ?? [];
-      beforeAfterTempData.value.before = listClone.slice(-maxAppendCount).map(uuCloneKey);
-      beforeAfterTempData.value.after = listClone.slice(0, maxAppendCount).map(uuCloneKey);
+      beforeAfterTempData.value.before = listClone.slice(-appendCount).map(uuCloneKey);
+      beforeAfterTempData.value.after = listClone.slice(0, appendCount).map(uuCloneKey);
     }
     function uuCloneKey(item, index) {
       return {
@@ -212,56 +128,82 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
         value: __props.rowKey(item) + "_clone_" + index + "_" + Date.now()
       };
     }
-    let buttonResizeObserver = null;
-    const observedButtons = /* @__PURE__ */ new Set();
-    let parentResizeObserver = null;
-    onMounted(() => {
+    function updateCompile() {
+      forceCompile.value++;
+    }
+    function onParentElResize() {
       if (!window.ResizeObserver || !tabButtonParentElRef.value) return;
-      const debouncedUpdateSizes = createManagedDebounce(updateSizes, __props.offsetAnimationTime);
-      const debouncedAppendData = createManagedDebounce(appendBeforeAfterData, __props.offsetAnimationTime);
-      parentResizeObserver = new ResizeObserver(() => {
-        debouncedUpdateSizes();
-        debouncedAppendData();
-      });
-      parentResizeObserver.observe(tabButtonParentElRef.value);
-      resizeObservers.value.push(parentResizeObserver);
-      buttonResizeObserver = new ResizeObserver(debouncedUpdateSizes);
-      resizeObservers.value.push(buttonResizeObserver);
-      nextTick(() => {
-        if (tabButtonRef.value) {
-          tabButtonRef.value.slice(0, 3).forEach((button) => {
-            if (!observedButtons.has(button)) {
-              buttonResizeObserver.observe(button);
-              observedButtons.add(button);
-            }
-          });
+      const observer = new ResizeObserver(
+        debounce(() => {
+          updateCompile();
+          appendBeforeAfterData();
+        }, __props.offsetAnimationTime)
+      );
+      observer.observe(tabButtonParentElRef.value);
+    }
+    onMounted(onParentElResize);
+    const clientRect = computed(() => {
+      var _a2;
+      forceCompile.value++;
+      if (!tabButtonParentElRef.value || !tabButtonRef.value || !carouselTrainElRef.value) return;
+      const width = tabButtonParentElRef.value.offsetWidth;
+      const buttonMapsWidth = {
+        normal: 0,
+        active: 0
+      };
+      for (let i = 0; i <= tabButtonRef.value.length; i++) {
+        const buttonEl = tabButtonRef.value[i];
+        if ((_a2 = buttonEl == null ? void 0 : buttonEl.classList) == null ? void 0 : _a2.contains("active")) {
+          buttonMapsWidth.active = buttonEl.offsetWidth;
+        } else {
+          buttonMapsWidth.normal = buttonEl == null ? void 0 : buttonEl.offsetWidth;
         }
-      });
+        if (buttonMapsWidth.active && buttonMapsWidth.normal) {
+          break;
+        }
+      }
+      const normalButtonWidth = buttonMapsWidth.normal;
+      const activeButtonWidth = buttonMapsWidth.active;
+      const maxCount = width / normalButtonWidth;
+      const maxButtonCount = maxCount;
+      const maxAppendCount = __props.disabled ? 0 : Math.round(maxCount);
+      const carouselWidth = carouselTrainElRef.value.offsetWidth;
+      return {
+        normalButtonWidth: __props.backCenter ? normalButtonWidth : 0,
+        maxButtonCount: __props.backCenter ? maxButtonCount : 0,
+        carouselWidth: __props.backCenter ? carouselWidth : 0,
+        maxAppendCount: __props.backCenter ? maxAppendCount : 0,
+        offset: __props.backCenter ? activeButtonWidth / 2 : 0
+        // 加上选中的按钮宽度一半, 让选中的按钮在中心点
+      };
     });
     const carouselOffset = computed(() => {
-      if (!__props.backCenter) return 0;
-      const { normalButtonWidth, maxButtonCount, offset, carouselWidth } = sizeCache.value;
-      if (!normalButtonWidth || !maxButtonCount || !carouselWidth) {
-        return 0;
+      if (clientRect.value) {
+        const { normalButtonWidth, maxButtonCount, offset, carouselWidth } = clientRect.value;
+        const maxButtonCountHalf = maxButtonCount / 2;
+        let offsetValue = (normalButtonWidth * (carouseIndex.value - maxButtonCountHalf) + offset) * -1;
+        if (offsetValue >= 0) {
+          offsetValue = 0;
+        } else if (offsetValue <= -carouselWidth + normalButtonWidth * maxButtonCount) {
+          offsetValue = -carouselWidth + normalButtonWidth * maxButtonCount;
+        }
+        return offsetValue;
       }
-      const maxButtonCountHalf = maxButtonCount / 2;
-      let offsetValue = (normalButtonWidth * (carouseIndex.value - maxButtonCountHalf) + offset) * -1;
-      if (offsetValue >= 0) {
-        offsetValue = 0;
-      } else if (offsetValue <= -carouselWidth + normalButtonWidth * maxButtonCount) {
-        offsetValue = -carouselWidth + normalButtonWidth * maxButtonCount;
-      }
-      return offsetValue;
+      return 0;
     });
-    const transitionTimer = ref(null);
+    function requestAnimationFrame(callback) {
+      if (window.requestAnimationFrame) {
+        window.requestAnimationFrame(callback);
+      } else {
+        callback();
+      }
+    }
     function transitionCallabck(callback, isNextTick = true) {
-      requestManagedAnimationFrame(() => {
+      requestAnimationFrame(() => {
         if (isNextTick) {
-          nextTick(() => {
-            transitionTimer.value = setManagedTimeout(callback, __props.offsetAnimationTime);
-          });
+          nextTick(setTimeout.bind(null, callback, __props.offsetAnimationTime));
         } else {
-          transitionTimer.value = setManagedTimeout(callback, __props.offsetAnimationTime);
+          setTimeout(callback, __props.offsetAnimationTime);
         }
       });
     }
@@ -271,7 +213,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
         carouseIndex.value = index;
       }, false);
     }
-    const handleClick = createManagedThrottle((_item, index) => {
+    const handleClick = throttle((_item, index) => {
       if (__props.disabled) return;
       if (!_isTransition.value) {
         _isTransition.value = true;
@@ -298,55 +240,6 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       };
       $emit("change", _newChangeEventData);
     }, __props.offsetAnimationTime);
-    function cleanup() {
-      animationFrameIds.value.forEach((id) => cancelAnimationFrame(id));
-      animationFrameIds.value = [];
-      timeoutIds.value.forEach((id) => clearTimeout(id));
-      timeoutIds.value = [];
-      if (transitionTimer.value) {
-        clearTimeout(transitionTimer.value);
-        transitionTimer.value = null;
-      }
-      if (updateSizeTimeout) {
-        cancelAnimationFrame(updateSizeTimeout);
-        updateSizeTimeout = null;
-      }
-      throttleInstances.value.forEach((instance) => {
-        var _a2;
-        return (_a2 = instance.cancel) == null ? void 0 : _a2.call(instance);
-      });
-      throttleInstances.value = [];
-      debounceInstances.value.forEach((instance) => {
-        var _a2;
-        return (_a2 = instance.cancel) == null ? void 0 : _a2.call(instance);
-      });
-      debounceInstances.value = [];
-      resizeObservers.value.forEach((observer) => {
-        observer.disconnect();
-      });
-      resizeObservers.value = [];
-      if (buttonResizeObserver) {
-        observedButtons.forEach((button) => {
-          buttonResizeObserver.unobserve(button);
-        });
-        buttonResizeObserver.disconnect();
-        buttonResizeObserver = null;
-      }
-      if (parentResizeObserver) {
-        parentResizeObserver.disconnect();
-        parentResizeObserver = null;
-      }
-      observedButtons.clear();
-      tabButtonRef.value = [];
-      tabButtonParentElRef.value = void 0;
-      carouselTrainElRef.value = void 0;
-    }
-    onBeforeUnmount(() => {
-      cleanup();
-    });
-    onUnmounted(() => {
-      cleanup();
-    });
     return (_ctx, _cache) => {
       return openBlock(), createElementBlock("div", _hoisted_1, [
         createElementVNode("div", _hoisted_2, [
