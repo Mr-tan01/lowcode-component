@@ -1,7 +1,7 @@
 import _sfc_main from "./index2.js";
 import '../assets/carouseBox/carouseBox.css';/* empty css       */
 import _export_sfc from "../_virtual/_plugin-vue_export-helper.js";
-const LcCarouseBox = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-c383a12c"]]);
+const LcCarouseBox = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-8408ebb7"]]);
 export {
   LcCarouseBox as default
 };
