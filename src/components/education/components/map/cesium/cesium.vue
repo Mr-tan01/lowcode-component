@@ -5,13 +5,13 @@
             <template #description> 地图加载中... </template>
         </NSpin>
         <div v-show="isTooltipVisible && tooltipContent" ref="tooltipRef" class="lc-cesium__tooltip">
-            <div ref="tooltipContentRef" class="lc-cesium__tooltip--content">{{ tooltipContent }}</div>
+            <div class="lc-cesium__tooltip--content">{{ tooltipContent }}</div>
         </div>
     </div>
 </template>
 
 <script lang="ts" setup>
-import { ref, onMounted, onBeforeUnmount, watch, computed, useTemplateRef } from 'vue'
+import { ref, onMounted, onBeforeUnmount, watch, computed, useTemplateRef, nextTick } from 'vue'
 import { cesiumService } from './modules/cesiumUtils'
 import { cesiumProps } from './modules/props'
 import type { changeModelType, changeModelParamType, EntityProperties } from './modules/type'
@@ -23,8 +23,8 @@ const initPointDataStatus = ref<boolean>(true) // 是否初始化结束
 const isTooltipVisible = ref(false)
 const lastPickedEntity = ref()
 const lastPickedPointOptions = ref()
-const tooltipContent = ref()
 const viewerInitialized = ref(false)
+const tooltipContent = ref()
 const tooltip = useTemplateRef('tooltipRef')
 const emit = defineEmits<{
     (e: 'pointHandler', value: EntityProperties): void
@@ -107,6 +107,7 @@ const cesiumUtils = new cesiumService('cesium-3d-viewer', {
     },
     createdTooltip: (data: Entity, point: any) => {
         const height = cesiumUtils.viewer?.camera.positionCartographic.height || 0
+        console.log(height, showPopoverHeight, '===>')
         if (height > showPopoverHeight) return
 
         lastPickedEntity.value = data
@@ -125,20 +126,23 @@ function updateTooltipPosition(viewer) {
         const canvasPosition = SceneTransforms.worldToWindowCoordinates(viewer.scene, cartesian)
         if (canvasPosition && !isNaN(canvasPosition.x) && !isNaN(canvasPosition.y)) {
             isTooltipVisible.value = true
-            if (!tooltip.value) return
-            const height = viewer.camera.positionCartographic.height
-            const scale = Math.max(0.3, Math.min(2, 1 - height / 100000))
-            tooltip.value.style.transform = `scale(${scale})`
-            tooltip.value.style.transformOrigin = `center center`
-            const tooltipWidth = tooltip.value?.offsetWidth
-            const tooltipHeight = tooltip.value?.offsetHeight
-            // 新的位置计算方式，考虑缩放影响
-            const offsetX = (tooltipWidth - 40) / 2 + (popoverOffset.popoverOffsetX || 0)
-            const offsetY = (tooltipHeight + 8) / 2 + (popoverOffset.popoverOffsetY || 0)
 
-            tooltip.value.style.top = canvasPosition.y - (options.valueInfo.height + offsetY) * scale + 'px'
-            tooltip.value.style.left = canvasPosition.x - offsetX + 'px'
             tooltipContent.value = lastPickedPointOptions.value?.popoverLabel
+            nextTick(() => {
+                if (!tooltip.value) return
+                const height = viewer.camera.positionCartographic.height
+                const scale = Math.max(0.3, Math.min(2, 1 - height / 100000))
+                tooltip.value.style.transform = `scale(${scale})`
+                tooltip.value.style.transformOrigin = `center center`
+                const tooltipWidth = tooltip.value?.offsetWidth
+                const tooltipHeight = tooltip.value?.offsetHeight
+                // 新的位置计算方式，考虑缩放影响
+                const offsetX = (tooltipWidth - 40) / 2 + (popoverOffset.popoverOffsetX || 0)
+                const offsetY = (tooltipHeight + 8) / 2 + (popoverOffset.popoverOffsetY || 0)
+
+                tooltip.value.style.top = canvasPosition.y - options.valueInfo.height * scale - offsetY + 'px'
+                tooltip.value.style.left = canvasPosition.x - offsetX + 'px'
+            })
         }
     } catch (e) {
         console.error('Error updating tooltip position:', e)

@@ -1,4 +1,4 @@
-import { defineComponent, mergeDefaults, ref, useTemplateRef, computed, watch, onMounted, onBeforeUnmount, createElementBlock, openBlock, createVNode, withDirectives, unref, normalizeStyle, withCtx, createElementVNode, createTextVNode, toDisplayString, vShow } from "vue";
+import { defineComponent, mergeDefaults, ref, useTemplateRef, nextTick, computed, watch, onMounted, onBeforeUnmount, createElementBlock, openBlock, createVNode, withDirectives, unref, normalizeStyle, withCtx, createElementVNode, createTextVNode, toDisplayString, vShow } from "vue";
 import { cesiumService } from "./modules/cesiumUtils.js";
 import { cesiumProps } from "./modules/props.js";
 import { NSpin } from "naive-ui";
@@ -8,6 +8,7 @@ const _hoisted_2 = {
   ref: "tooltipRef",
   class: "lc-cesium__tooltip"
 };
+const _hoisted_3 = { class: "lc-cesium__tooltip--content" };
 const _sfc_main = /* @__PURE__ */ defineComponent({
   __name: "cesium",
   props: /* @__PURE__ */ mergeDefaults(cesiumProps, {
@@ -27,8 +28,8 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     const isTooltipVisible = ref(false);
     const lastPickedEntity = ref();
     const lastPickedPointOptions = ref();
-    const tooltipContent = ref();
     const viewerInitialized = ref(false);
+    const tooltipContent = ref();
     const tooltip = useTemplateRef("tooltipRef");
     const emit = __emit;
     const reloadPointData = async () => {
@@ -76,6 +77,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       createdTooltip: (data, point) => {
         var _a;
         const height = ((_a = cesiumUtils.viewer) == null ? void 0 : _a.camera.positionCartographic.height) || 0;
+        console.log(height, __props.showPopoverHeight, "===>");
         if (height > __props.showPopoverHeight) return;
         lastPickedEntity.value = data;
         lastPickedPointOptions.value = point.options;
@@ -86,25 +88,28 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       }
     });
     function updateTooltipPosition(viewer) {
-      var _a, _b, _c;
+      var _a;
       try {
         const cartesian = lastPickedEntity.value.position.getValue(viewer.clock.currentTime);
         const options = lastPickedEntity.value.properties.getValue(viewer.clock.currentTime);
         const canvasPosition = SceneTransforms.worldToWindowCoordinates(viewer.scene, cartesian);
         if (canvasPosition && !isNaN(canvasPosition.x) && !isNaN(canvasPosition.y)) {
           isTooltipVisible.value = true;
-          if (!tooltip.value) return;
-          const height = viewer.camera.positionCartographic.height;
-          const scale = Math.max(0.3, Math.min(2, 1 - height / 1e5));
-          tooltip.value.style.transform = `scale(${scale})`;
-          tooltip.value.style.transformOrigin = `center center`;
-          const tooltipWidth = (_a = tooltip.value) == null ? void 0 : _a.offsetWidth;
-          const tooltipHeight = (_b = tooltip.value) == null ? void 0 : _b.offsetHeight;
-          const offsetX = (tooltipWidth - 40) / 2 + (__props.popoverOffset.popoverOffsetX || 0);
-          const offsetY = (tooltipHeight + 8) / 2 + (__props.popoverOffset.popoverOffsetY || 0);
-          tooltip.value.style.top = canvasPosition.y - (options.valueInfo.height + offsetY) * scale + "px";
-          tooltip.value.style.left = canvasPosition.x - offsetX + "px";
-          tooltipContent.value = (_c = lastPickedPointOptions.value) == null ? void 0 : _c.popoverLabel;
+          tooltipContent.value = (_a = lastPickedPointOptions.value) == null ? void 0 : _a.popoverLabel;
+          nextTick(() => {
+            var _a2, _b;
+            if (!tooltip.value) return;
+            const height = viewer.camera.positionCartographic.height;
+            const scale = Math.max(0.3, Math.min(2, 1 - height / 1e5));
+            tooltip.value.style.transform = `scale(${scale})`;
+            tooltip.value.style.transformOrigin = `center center`;
+            const tooltipWidth = (_a2 = tooltip.value) == null ? void 0 : _a2.offsetWidth;
+            const tooltipHeight = (_b = tooltip.value) == null ? void 0 : _b.offsetHeight;
+            const offsetX = (tooltipWidth - 40) / 2 + (__props.popoverOffset.popoverOffsetX || 0);
+            const offsetY = (tooltipHeight + 8) / 2 + (__props.popoverOffset.popoverOffsetY || 0);
+            tooltip.value.style.top = canvasPosition.y - options.valueInfo.height * scale - offsetY + "px";
+            tooltip.value.style.left = canvasPosition.x - offsetX + "px";
+          });
         }
       } catch (e) {
         console.error("Error updating tooltip position:", e);
@@ -245,13 +250,10 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
           [
             createElementVNode(
               "div",
-              {
-                ref: "tooltipContentRef",
-                class: "lc-cesium__tooltip--content"
-              },
+              _hoisted_3,
               toDisplayString(tooltipContent.value),
-              513
-              /* TEXT, NEED_PATCH */
+              1
+              /* TEXT */
             )
           ],
           512

@@ -23,7 +23,7 @@ const cesiumProps = {
   // spin文字颜色
   showPopoverHeight: {
     type: Number,
-    default: 1e4
+    default: 35e3
   },
   centerPosition: {
     type: Object

@@ -295,6 +295,5 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
     };
 }, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {
     tooltipRef: HTMLDivElement;
-    tooltipContentRef: HTMLDivElement;
 }, HTMLDivElement>;
 export default _default;

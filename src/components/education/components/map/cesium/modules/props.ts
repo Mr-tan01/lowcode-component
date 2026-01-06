@@ -19,7 +19,7 @@ export const cesiumProps = {
     }, // spin文字颜色
     showPopoverHeight: {
         type: Number,
-        default: 10000,
+        default: 35000,
     },
     centerPosition: {
         type: Object as PropType<Cartesian3>,
