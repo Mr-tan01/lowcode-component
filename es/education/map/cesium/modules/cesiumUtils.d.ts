@@ -1,4 +1,4 @@
-import { Viewer, Entity } from 'cesium';
+import { Viewer, Entity, CustomDataSource } from 'cesium';
 import { CesiumHeatmap, HeatmapDataOption } from 'cesium-heatmap-es6';
 import { controlStatusType, optionType, pointType, changeModelParamType } from './type';
 export declare class cesiumService {
@@ -13,7 +13,7 @@ export declare class cesiumService {
     private imageLayerState;
     private imageLayerUrl;
     private tileLoadCallback;
-    private dataSource;
+    dataSource: CustomDataSource | null;
     private centerPosition;
     private defaultCenterKey;
     private defaultConfig;

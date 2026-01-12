@@ -19,7 +19,7 @@ export const cesiumProps = {
     }, // spin文字颜色
     showPopoverHeight: {
         type: Number,
-        default: 10000,
+        default: 35000,
     },
     centerPosition: {
         type: Object as PropType<Cartesian3>,
@@ -84,5 +84,13 @@ export const cesiumProps = {
     pointBatchRender: {
         type: Object as PropType<{ batchRenderSize: number; batchRenderDelay: number }>,
         default: { batchRenderSize: 50, batchRenderDelay: 0 },
+    },
+    enableAllTooltips: {
+        type: Boolean,
+        default: false,
+    },
+    allTooltipsHeight: {
+        type: Number,
+        default: 1000,
     },
 }

@@ -23,7 +23,7 @@ const cesiumProps = {
   // spin文字颜色
   showPopoverHeight: {
     type: Number,
-    default: 1e4
+    default: 35e3
   },
   centerPosition: {
     type: Object
@@ -92,6 +92,14 @@ const cesiumProps = {
   pointBatchRender: {
     type: Object,
     default: { batchRenderSize: 50, batchRenderDelay: 0 }
+  },
+  enableAllTooltips: {
+    type: Boolean,
+    default: false
+  },
+  allTooltipsHeight: {
+    type: Number,
+    default: 1e3
   }
 };
 export {

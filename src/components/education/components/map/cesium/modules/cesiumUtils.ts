@@ -36,7 +36,7 @@ export class cesiumService {
     private imageLayerUrl: string | null = null
     private tileLoadCallback: OmitThisParameter<(remaining: number) => void> | null = null
 
-    private dataSource: CustomDataSource | null = null
+    public dataSource: CustomDataSource | null = null
     private centerPosition: Cartesian3 | null = null
     private defaultCenterKey: string = '深圳市'
     private defaultConfig = {

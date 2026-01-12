@@ -128,4 +128,12 @@ export declare const cesiumProps: {
             batchRenderDelay: number;
         };
     };
+    enableAllTooltips: {
+        type: BooleanConstructor;
+        default: boolean;
+    };
+    allTooltipsHeight: {
+        type: NumberConstructor;
+        default: number;
+    };
 };
