@@ -128,6 +128,14 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
             batchRenderDelay: number;
         };
     };
+    enableAllTooltips: {
+        type: BooleanConstructor;
+        default: boolean;
+    };
+    allTooltipsHeight: {
+        type: NumberConstructor;
+        default: number;
+    };
 }>, {
     reloadPointData: () => Promise<void>;
     changeModel: <T extends changeModelType>(type: changeModelType, value: changeModelParamType[T]) => void;
@@ -265,6 +273,14 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
             batchRenderDelay: number;
         };
     };
+    enableAllTooltips: {
+        type: BooleanConstructor;
+        default: boolean;
+    };
+    allTooltipsHeight: {
+        type: NumberConstructor;
+        default: number;
+    };
 }>> & Readonly<{
     onPointHandler?: ((value: EntityProperties) => any) | undefined;
     onLimitHeightHandler?: ((value: number) => any) | undefined;
@@ -293,7 +309,10 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
         batchRenderSize: number;
         batchRenderDelay: number;
     };
+    enableAllTooltips: boolean;
+    allTooltipsHeight: number;
 }, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {
     tooltipRef: HTMLDivElement;
+    entityTooltipRefs: HTMLDivElement[];
 }, HTMLDivElement>;
 export default _default;

@@ -10,6 +10,7 @@
                     :basic-config="basicConfig"
                     base-url="https://jysl.sz.edu.cn:8314"
                     :default-show-state="false"
+                    :enable-all-tooltips="true"
                     :area-name="'福田区'"
                     @load-handler="loadHandler"
                     @point-handler="onPointHandler"

@@ -92,6 +92,14 @@ const cesiumProps = {
   pointBatchRender: {
     type: Object,
     default: { batchRenderSize: 50, batchRenderDelay: 0 }
+  },
+  enableAllTooltips: {
+    type: Boolean,
+    default: false
+  },
+  allTooltipsHeight: {
+    type: Number,
+    default: 1e3
   }
 };
 export {
