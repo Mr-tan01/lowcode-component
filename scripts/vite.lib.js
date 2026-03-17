@@ -3,7 +3,7 @@ import commonViteConfig from './config.js'
 import merge from 'lodash-es/merge.js'
 import { EsmComBuilder, tasking } from '@mmj-code-lib/scripts'
 import { program } from 'commander'
-import pck from './package.json' assert { type: 'json' }
+import pck from './package.json' with { type: 'json' }
 
 const programActions = {}
 program

@@ -62,7 +62,7 @@ export class cesiumService {
     private cameraChangedListener: (() => void) | null = null
 
     // 深圳市地理边界（根据瓦片定义经纬度范围）
-    private shenzhenBounds = Rectangle.fromDegrees(113.94, 22.43, 114.57, 22.83)
+    private shenzhenBounds = Rectangle.fromDegrees(113.94, 22.43, 115.5, 23.1)
 
     private message = useMessage()
     constructor(
