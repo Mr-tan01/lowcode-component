@@ -3,7 +3,10 @@
         <div class="Lcswitch-map__tabs">
             <n-popover v-bind="$attrs" :placement="placement" :show-arrow="false">
                 <template #trigger>
-                    <slot name="trigger"><img class="lcmapbutton-upside-icon" src="./images/layer.png" alt="" /></slot>
+                    <slot name="trigger">
+                        <!-- <img  src="./images/layer.png" alt="" /> -->
+                        <div class="lcmapbutton-map-icon"></div>
+                    </slot>
                 </template>
                 <div class="popover-content">
                     <slot name="content">
@@ -26,7 +29,6 @@
 </template>
 
 <script lang="ts" setup>
-import { defineEmits } from 'vue'
 import { NPopover, type PopoverProps } from 'naive-ui'
 import zoomin from './images/zoom-in.png'
 import zoomOut from './images/zoom-out.png'
@@ -60,6 +62,19 @@ const handleMapBlockItemClick = (item: string) => {
     flex-direction: column;
     align-items: center;
     gap: 50px;
+    &-map-icon {
+        cursor: pointer;
+        width: 52px;
+        height: 52px;
+        object-fit: contain;
+        display: block;
+        background-image: url('./images/layer.png');
+        background-size: cover;
+        &:hover {
+            background-image: url('./images/layer_hover.png');
+            background-size: cover;
+        }
+    }
     &-upside {
         height: fit-content;
         display: flex;

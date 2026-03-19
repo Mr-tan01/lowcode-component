@@ -1,5 +1,4 @@
-import { defineComponent, createElementBlock, openBlock, createElementVNode, createVNode, unref, mergeProps, withCtx, renderSlot, Fragment, renderList } from "vue";
-import _imports_0 from "./images/layer.png.js";
+import { defineComponent, createElementBlock, openBlock, createElementVNode, createVNode, unref, mergeProps, withCtx, renderSlot, createCommentVNode, Fragment, renderList } from "vue";
 import { NPopover } from "naive-ui";
 import zoomin from "./images/zoom-in.png.js";
 import zoomOut from "./images/zoom-out.png.js";
@@ -36,13 +35,10 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
           }), {
             trigger: withCtx(() => [
               renderSlot(_ctx.$slots, "trigger", {}, () => [
+                createCommentVNode(' <img  src="./images/layer.png" alt="" /> '),
                 _cache[0] || (_cache[0] = createElementVNode(
-                  "img",
-                  {
-                    class: "lcmapbutton-upside-icon",
-                    src: _imports_0,
-                    alt: ""
-                  },
+                  "div",
+                  { class: "lcmapbutton-map-icon" },
                   null,
                   -1
                   /* CACHED */
