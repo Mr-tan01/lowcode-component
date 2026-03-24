@@ -43,7 +43,7 @@ class cesiumService {
     __publicField(this, "rretryCount", 3);
     __publicField(this, "cameraChangedListener", null);
     // 深圳市地理边界（根据瓦片定义经纬度范围）
-    __publicField(this, "shenzhenBounds", Rectangle.fromDegrees(113.94, 22.43, 115.5, 23.1));
+    __publicField(this, "shenzhenBounds", Rectangle.fromDegrees(110, 20, 118, 25));
     __publicField(this, "message", useMessage());
     __publicField(this, "doubleClickHandler", (event) => {
       event.preventDefault();
