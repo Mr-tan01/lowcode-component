@@ -1,8 +1,10 @@
-import { shallowRef, ref, onMounted, computed, onUnmounted } from "vue";
+import { ref, shallowRef, onMounted, computed, onUnmounted } from "vue";
 import debounce from "lodash-es/debounce";
 import memoize from "lodash-es/memoize";
 const offsetAnimationTime = 300;
 function useStarRotate() {
+  const enableFlip = ref(false);
+  const hideWhenBack = ref(false);
   const starWrapperRef = shallowRef();
   const starElRefs = shallowRef();
   const startAngle = ref(90);
@@ -73,7 +75,7 @@ function useStarRotate() {
     const { x } = offset(angleDeg, radiusX, radiusY, appedYOffset);
     const isRightHalf = x > circleRadius.value.x;
     let transform = "";
-    if (isRightHalf) {
+    if (enableFlip.value && isRightHalf) {
       transform += " rotateY(180deg)";
     }
     return {
@@ -103,7 +105,7 @@ function useStarRotate() {
     const zIndex = isBlockNode ? 10 : 0;
     const isRightHalf = x > circleRadius.value.x;
     let transform = `translate(-50%, -50%) scale(${scale})`;
-    if (isRightHalf) {
+    if (enableFlip.value && isRightHalf) {
       transform += " rotateY(180deg)";
     }
     let isHideBlock = displayAlternately.value.includes(index);
@@ -114,6 +116,12 @@ function useStarRotate() {
     if (isHideBlock) {
       scale = 0;
       opacity = 0;
+    }
+    if (hideWhenBack.value) {
+      if (scale < 0.4) {
+        opacity = 0;
+        scale = 0;
+      }
     }
     return {
       "left": x + "px",
@@ -149,7 +157,9 @@ function useStarRotate() {
     startAngle,
     starMaxShowCount,
     displayAlternately,
-    fullAngle
+    fullAngle,
+    enableFlip,
+    hideWhenBack
   };
 }
 export {

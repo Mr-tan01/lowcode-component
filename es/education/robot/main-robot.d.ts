@@ -21,6 +21,15 @@ declare const __VLS_component: import('vue').DefineComponent<import('vue').Extra
     maxShowCount: NumberConstructor;
     fullAngle: NumberConstructor;
     forbidden: BooleanConstructor;
+    counterClockwise: BooleanConstructor;
+    flip: {
+        type: BooleanConstructor;
+        default: boolean;
+    };
+    hideWhenBack: {
+        type: BooleanConstructor;
+        default: boolean;
+    };
     value: {
         type: PropType<string>;
     };
@@ -38,6 +47,15 @@ declare const __VLS_component: import('vue').DefineComponent<import('vue').Extra
     maxShowCount: NumberConstructor;
     fullAngle: NumberConstructor;
     forbidden: BooleanConstructor;
+    counterClockwise: BooleanConstructor;
+    flip: {
+        type: BooleanConstructor;
+        default: boolean;
+    };
+    hideWhenBack: {
+        type: BooleanConstructor;
+        default: boolean;
+    };
     value: {
         type: PropType<string>;
     };
@@ -48,6 +66,9 @@ declare const __VLS_component: import('vue').DefineComponent<import('vue').Extra
 }>, {
     animate: boolean;
     forbidden: boolean;
+    counterClockwise: boolean;
+    flip: boolean;
+    hideWhenBack: boolean;
 }, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {
     starWrapperRef: HTMLDivElement;
     starElRefs: HTMLDivElement[];
