@@ -4,6 +4,8 @@ import memoize from 'lodash-es/memoize'
 
 const offsetAnimationTime = 300
 export function useStarRotate() {
+    const enableFlip = ref(false) // 翻转开关
+    const hideWhenBack = ref(false) // 隐藏星星
     const starWrapperRef = shallowRef<HTMLElement>()
     const starElRefs = shallowRef<HTMLElement[]>()
     const startAngle = ref(90) // 起始角度
@@ -17,6 +19,7 @@ export function useStarRotate() {
     const starRadius = ref({ x: 0 }) // 星星的半径
     const angleOffset = ref(0) // 旋转偏移量
     const displayAlternately = ref<number[]>([]) // 交替显示的索引
+
     let resizeObserver: ResizeObserver | null = null
     let debouncedInitElRadius: ReturnType<typeof debounce> | null = null
     const initElRadius = () => {
@@ -88,8 +91,8 @@ export function useStarRotate() {
         const { x } = offset(angleDeg, radiusX, radiusY, appedYOffset)
         const isRightHalf = x > circleRadius.value.x
         let transform = ''
-        if (isRightHalf) {
-            transform += ' rotateY(180deg)' // 翻转标签
+        if (enableFlip.value && isRightHalf) {
+            transform += ' rotateY(180deg)'
         }
         return {
             transform,
@@ -124,8 +127,8 @@ export function useStarRotate() {
         const isRightHalf = x > circleRadius.value.x
         let transform = `translate(-50%, -50%) scale(${scale})`
 
-        if (isRightHalf) {
-            transform += ' rotateY(180deg)' // 翻转标签
+        if (enableFlip.value && isRightHalf) {
+            transform += ' rotateY(180deg)'
         }
 
         let isHideBlock = displayAlternately.value.includes(index)
@@ -137,6 +140,16 @@ export function useStarRotate() {
             scale = 0
             opacity = 0
         }
+        //  旋转到背面隐藏（可选开关）
+        // 旋转到背面隐藏（可选开关）- 已缩小隐藏范围
+        if (hideWhenBack.value) {
+            // 改成 0.7 ~ 0.8 就一定会触发！
+            if (scale < 0.4) {
+                opacity = 0
+                scale = 0
+            }
+        }
+
         return {
             'left': x + 'px',
             'top': y + 'px',
@@ -158,9 +171,11 @@ export function useStarRotate() {
             debouncedInitElRadius = null
         }
     }
+
     onUnmounted(() => {
         cleanup()
     })
+
     return {
         cleanup,
         getTextStyle,
@@ -174,5 +189,7 @@ export function useStarRotate() {
         starMaxShowCount,
         displayAlternately,
         fullAngle,
+        enableFlip,
+        hideWhenBack,
     }
 }

@@ -1,4 +1,4 @@
-import { defineComponent, mergeModels, computed, watchEffect, ref, useModel, onUnmounted, createElementBlock, openBlock, createElementVNode, withDirectives, createTextVNode, toDisplayString, unref, vShow, vModelText, renderSlot, Fragment, renderList, normalizeStyle, createVNode, mergeDefaults } from "vue";
+import { defineComponent, mergeModels, watchEffect, computed, ref, useModel, onUnmounted, createElementBlock, openBlock, createElementVNode, withDirectives, createTextVNode, toDisplayString, unref, vShow, vModelText, renderSlot, Fragment, renderList, normalizeStyle, createVNode, mergeDefaults } from "vue";
 import _imports_0 from "./images/main-robot.png.js";
 import _imports_1 from "./images/voice.png.js";
 import _imports_2 from "./images/microphone.png.js";
@@ -30,7 +30,10 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     startAngle: Number,
     maxShowCount: Number,
     fullAngle: Number,
-    forbidden: Boolean
+    forbidden: Boolean,
+    counterClockwise: Boolean,
+    flip: { type: Boolean, default: false },
+    hideWhenBack: { type: Boolean, default: false }
   }, {
     placeholder: "AI 智能问数",
     stars: () => void 0,
@@ -39,7 +42,10 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     startAngle: 90,
     maxShowCount: 7,
     fullAngle: 360,
-    forbidden: false
+    forbidden: false,
+    counterClockwise: false,
+    flip: false,
+    hideWhenBack: false
   }), {
     "value": { default: "" },
     "valueModifiers": {}
@@ -72,9 +78,17 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       starMaxShowCount,
       displayAlternately,
       fullAngle: circleFullAngle,
-      cleanup: cleanupStarRotate
+      cleanup: cleanupStarRotate,
       // 新增清理函数
+      enableFlip: hookFlip,
+      // 翻转开关
+      hideWhenBack: hookHideBack
+      // 隐藏星星
     } = useStarRotate();
+    watchEffect(() => {
+      hookFlip.value = __props.flip;
+      hookHideBack.value = __props.hideWhenBack;
+    });
     const reverseIndex = memoize(
       (len, index) => {
         return len - (index + 1);
@@ -107,9 +121,16 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       timerId = window.setTimeout(() => {
         if (!isAnimate.value) return;
         animationFrameId = window.requestAnimationFrame(() => {
-          angleOffset.value += step.value;
-          if (angleOffset.value >= 360) {
-            angleOffset.value = 0;
+          if (__props.counterClockwise) {
+            angleOffset.value -= step.value;
+            if (angleOffset.value <= 0) {
+              angleOffset.value = 360;
+            }
+          } else {
+            angleOffset.value += step.value;
+            if (angleOffset.value >= 360) {
+              angleOffset.value = 0;
+            }
           }
           autoRotate();
         });

@@ -105,6 +105,9 @@ const {
     maxShowCount = 7,
     fullAngle = 360,
     forbidden = false,
+    counterClockwise = false,
+    flip = false,
+    hideWhenBack = false,
 } = defineProps({
     placeholder: String,
     stars: Array as PropType<StarType[]>,
@@ -114,6 +117,9 @@ const {
     maxShowCount: Number,
     fullAngle: Number,
     forbidden: Boolean,
+    counterClockwise: Boolean,
+    flip: { type: Boolean, default: false },
+    hideWhenBack: { type: Boolean, default: false },
 })
 
 const { start, stop, output, on } = useSpeech()
@@ -143,8 +149,13 @@ const {
     displayAlternately,
     fullAngle: circleFullAngle,
     cleanup: cleanupStarRotate, // 新增清理函数
+    enableFlip: hookFlip, // 翻转开关
+    hideWhenBack: hookHideBack, // 隐藏星星
 } = useStarRotate()
-
+watchEffect(() => {
+    hookFlip.value = flip
+    hookHideBack.value = hideWhenBack
+})
 const reverseIndex = memoize(
     (len, index) => {
         return len - (index + 1)
@@ -182,9 +193,17 @@ function autoRotate() {
     timerId = window.setTimeout(() => {
         if (!isAnimate.value) return
         animationFrameId = window.requestAnimationFrame(() => {
-            angleOffset.value += step.value
-            if (angleOffset.value >= 360) {
-                angleOffset.value = 0
+            if (counterClockwise) {
+                // 逆时针
+                angleOffset.value -= step.value
+                if (angleOffset.value <= 0) {
+                    angleOffset.value = 360
+                }
+            } else {
+                angleOffset.value += step.value
+                if (angleOffset.value >= 360) {
+                    angleOffset.value = 0
+                }
             }
             autoRotate()
         })

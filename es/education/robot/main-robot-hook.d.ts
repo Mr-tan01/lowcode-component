@@ -27,4 +27,6 @@ export declare function useStarRotate(): {
     starMaxShowCount: import('vue').Ref<number, number>;
     displayAlternately: import('vue').Ref<number[], number[]>;
     fullAngle: import('vue').Ref<number, number>;
+    enableFlip: import('vue').Ref<boolean, boolean>;
+    hideWhenBack: import('vue').Ref<boolean, boolean>;
 };
