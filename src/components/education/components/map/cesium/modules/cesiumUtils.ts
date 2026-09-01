@@ -10,6 +10,7 @@ import {
     ScreenSpaceEventType,
     WebMapTileServiceImageryProvider,
     ArcGisMapServerImageryProvider,
+    GeographicTilingScheme,
     JulianDate,
     CustomDataSource,
     VerticalOrigin,
@@ -22,9 +23,19 @@ import {
     BoundingSphere,
 } from 'cesium'
 import { CesiumHeatmap, type HeatmapDataOption } from 'cesium-heatmap-es6'
-import { areaData, type controlStatusType, type optionType, type pointType, type changeModelParamType } from './type'
+import { createTiandituImageryProviders, TIANDITU_KEY } from '../../../mapButton/const'
+import {
+    areaData,
+    type controlStatusType,
+    type optionType,
+    type pointType,
+    type changeModelParamType,
+    type imageryLayerType,
+    type imageryLayerProviderType,
+} from './type'
 import { createInfoCanvas, createClusterBillboard, updateViewerEntityInfo, createEntityConfig, heatmapGradient } from './tools'
-import { useMessage } from 'naive-ui'
+
+type imageryProviderResultType = WebMapTileServiceImageryProvider | ArcGisMapServerImageryProvider
 export class cesiumService {
     public viewer: Viewer | null = null
     public pointData: pointType[] | null = []
@@ -58,13 +69,11 @@ export class cesiumService {
     private lastHoveredEntity: Entity | null = null
     private lastThrottleTime: number = 0
     private throttleDelay: number = 100
-    private rretryCount: number = 3
     private cameraChangedListener: (() => void) | null = null
 
     // 深圳市地理边界（根据瓦片定义经纬度范围）
     private shenzhenBounds = Rectangle.fromDegrees(110.0, 20.0, 118.0, 25.0)
 
-    private message = useMessage()
     constructor(
         public containerId: string,
         public options: optionType,
@@ -217,6 +226,7 @@ export class cesiumService {
 
     async initViewer(controlStatus: controlStatusType): Promise<boolean> {
         if (this.viewer) this.destroy()
+        this.tileLoadCallback = this.handleTileLoadProgress.bind(this)
 
         try {
             this.viewer = new Viewer(this.containerId, controlStatus)
@@ -290,8 +300,9 @@ export class cesiumService {
 
     // 处理相机高度变化
     handleCameraHeightChange(): void {
-        if (!this.viewer || !this.pointEntities) return
+        if (!this.viewer) return
         const cameraHeight = this.viewer.camera.positionCartographic.height
+        if (!this.pointEntities) return
         // 触发高度变化事件
         if (this.options.limitHeightHandler) {
             this.options.limitHeightHandler(cameraHeight)
@@ -447,48 +458,33 @@ export class cesiumService {
     }
 
     // 加载瓦片
-    async loadTileLayer(url: string): Promise<void> {
-        let provider
+    async loadTileLayer(option: string | imageryLayerType): Promise<void> {
         this.options.loadTileLayerHandler(true)
-        const { viewer, imageLayerState, imageLayerUrl } = this
+        const { viewer } = this
+        const layerOption = this.normalizeImageryLayerOption(option)
 
         this.cleanupTileLoadListener()
-        this.updateLayerState(url)
+        if (viewer && this.tileLoadCallback) {
+            viewer.scene?.globe?.tileLoadProgressEvent.addEventListener(this.tileLoadCallback)
+        }
+        this.updateLayerState(layerOption.url)
         try {
-            provider = await this.loadProviderWithFallback({
-                targetUrl: imageLayerState && imageLayerUrl ? imageLayerUrl : url,
-                useZondy: imageLayerState,
-                fallbackUrl: this.options.config.defaultUrl ?? this.defaultConfig.defaultUrl,
+            const provider = await this.loadProvider({
+                targetUrl: layerOption.url,
+                providerType: layerOption.providerType,
+                providerOptions: layerOption.providerOptions,
             })
 
             if (viewer && provider) {
-                await this.addProviderToViewer(viewer, provider)
+                const providers = Array.isArray(provider) ? provider : [provider]
+                for (const item of providers) {
+                    await this.addProviderToViewer(viewer, item)
+                }
             }
         } catch (error) {
-            await this.retryLoadProvider(imageLayerUrl || url, imageLayerState)
             this.handleLoadError(error)
-        }
-    }
-
-    // 重试
-    private async retryLoadProvider(url: string, useZondy: boolean | null): Promise<void> {
-        let attempts = 0
-        while (attempts < this.rretryCount) {
-            try {
-                await new Promise(resolve => setTimeout(resolve, 1000))
-                const provider = await this.loadProviderWithFallback({
-                    targetUrl: url,
-                    useZondy,
-                    fallbackUrl: this.options.config.defaultUrl ?? this.defaultConfig.defaultUrl,
-                })
-                if (this.viewer && provider) {
-                    await this.addProviderToViewer(this.viewer, provider)
-                    return
-                }
-            } catch {
-                attempts++
-                this.message.error('瓦片加载失败,请刷新重试')
-            }
+            this.cleanupTileLoadListener()
+            this.options.loadTileLayerHandler(false)
         }
     }
 
@@ -502,49 +498,137 @@ export class cesiumService {
         if (!this.imageLayerUrl) {
             this.imageLayerUrl = url
         }
-        this.imageLayerState = !this.imageLayerState
     }
 
-    private async loadProviderWithFallback(options: {
-        targetUrl: string
-        useZondy: boolean | null
-        fallbackUrl: string
-    }): Promise<WebMapTileServiceImageryProvider | ArcGisMapServerImageryProvider> {
-        try {
-            let provider: any
-
-            if (options.useZondy) {
-                // @ts-ignore
-                provider = await Zondy.WebMapTileServiceImageryProvider.fromUrl(options.targetUrl, {
-                    rectangle: Rectangle.fromDegrees(
-                        113.72, // 西经
-                        22.11, // 南纬
-                        115.05, // 东经
-                        22.88, // 北纬
-                    ),
-                    ...(this.options?.config?.providerOptions ?? {}),
-                })
-            } else {
-                provider = await ArcGisMapServerImageryProvider.fromUrl(options.targetUrl)
+    private normalizeImageryLayerOption(option: string | imageryLayerType): imageryLayerType {
+        if (typeof option !== 'string') {
+            const providerType = option.providerType ?? this.getImageryLayerProviderType(option.url)
+            return {
+                ...option,
+                url: this.normalizeImageryServiceUrl(option.url, providerType),
+                providerType,
             }
+        }
 
-            return provider
-        } catch {
-            try {
-                return await ArcGisMapServerImageryProvider.fromUrl(options.fallbackUrl)
-            } catch (fallbackError) {
-                this.options.loadTileLayerHandler(false)
-                throw fallbackError
-            }
+        const providerType = this.getImageryLayerProviderType(option)
+
+        return {
+            label: option,
+            value: option,
+            url: this.normalizeImageryServiceUrl(option, providerType),
+            providerType,
         }
     }
 
-    private async addProviderToViewer(viewer: Viewer, provider: WebMapTileServiceImageryProvider | ArcGisMapServerImageryProvider): Promise<void> {
+    private getImageryLayerProviderType(url: string): imageryLayerProviderType {
+        if (url.includes('tianditu.gov.cn')) {
+            return 'tianditu'
+        }
+
+        if (url.includes('/WMTSServer')) {
+            return 'wmts'
+        }
+
+        return 'arcgis'
+    }
+
+    private normalizeImageryServiceUrl(url: string, providerType: imageryLayerProviderType): string {
+        if (providerType !== 'wmts' || !url.includes('/WMTSServer')) {
+            return url
+        }
+
+        try {
+            const sourceUrl = new URL(url, window.location.origin)
+            sourceUrl.searchParams.delete('request')
+            sourceUrl.searchParams.delete('service')
+            sourceUrl.searchParams.delete('acceptversions')
+            sourceUrl.searchParams.delete('version')
+
+            if (sourceUrl.origin === window.location.origin && !/^https?:\/\//.test(url)) {
+                return `${sourceUrl.pathname}${sourceUrl.search}`
+            }
+
+            return sourceUrl.toString()
+        } catch {
+            return url
+                .replace(/[?&](request|service|acceptversions|version)=[^&]*/gi, '')
+                .replace('?&', '?')
+                .replace(/&&+/g, '&')
+                .replace(/[?&]$/, '')
+        }
+    }
+
+    private async loadProvider(options: {
+        targetUrl: string
+        providerType?: imageryLayerProviderType
+        providerOptions?: imageryLayerType['providerOptions']
+    }): Promise<imageryProviderResultType | imageryProviderResultType[]> {
+        let provider: imageryProviderResultType | imageryProviderResultType[]
+
+        if (options.providerType === 'tianditu') {
+            provider = this.createTiandituProviders(options.providerOptions)
+        } else if (options.providerType === 'wmts') {
+            provider = await this.createWmtsProvider(options)
+        } else {
+            provider = await ArcGisMapServerImageryProvider.fromUrl(options.targetUrl)
+        }
+
+        return provider
+    }
+
+    /**
+     * 创建天地图矢量底图和注记底图。
+     * 由于天地图通常需要 vec + cva 双层叠加，这里统一收口成数组返回，外层只负责添加。
+     */
+    private createTiandituProviders(providerOptions?: imageryLayerType['providerOptions']): imageryProviderResultType[] {
+        const key = providerOptions?.tiandituKey ?? TIANDITU_KEY
+        const maxZoom = providerOptions?.maximumLevel ?? 18
+        const layers: Array<'vec' | 'cva'> = providerOptions?.tiandituLayers?.length ? providerOptions.tiandituLayers : ['vec', 'cva']
+
+        return createTiandituImageryProviders({
+            Cesium: { WebMapTileServiceImageryProvider },
+            key,
+            maxZoom,
+            layers,
+        })
+    }
+
+    private async createWmtsProvider(options: {
+        targetUrl: string
+        providerOptions?: imageryLayerType['providerOptions']
+    }): Promise<WebMapTileServiceImageryProvider> {
+        if (options.providerOptions?.layer && options.providerOptions?.tileMatrixSetID) {
+            const { tilingSchemeType, rectangle, ...providerOptions } = options.providerOptions
+            const layer = options.providerOptions.layer
+            const tileMatrixSetID = options.providerOptions.tileMatrixSetID
+            const layerRectangle = rectangle ?? [113.74686892275194, 22.39895423067949, 114.624444498382, 22.864642206724653]
+            const maximumLevel =
+                providerOptions.maximumLevel ?? (providerOptions.tileMatrixLabels ? providerOptions.tileMatrixLabels.length - 1 : undefined)
+
+            return new WebMapTileServiceImageryProvider({
+                url: options.targetUrl,
+                layer,
+                tileMatrixSetID,
+                style: providerOptions.style ?? 'default',
+                format: providerOptions.format ?? 'image/png',
+                ...providerOptions,
+                minimumLevel: providerOptions.minimumLevel ?? 0,
+                maximumLevel,
+                tilingScheme: tilingSchemeType === 'geographic' ? new GeographicTilingScheme() : undefined,
+                rectangle: Rectangle.fromDegrees(layerRectangle[0], layerRectangle[1], layerRectangle[2], layerRectangle[3]),
+            })
+        }
+
+        // @ts-ignore
+        return await Zondy.WebMapTileServiceImageryProvider.fromUrl(options.targetUrl, {
+            rectangle: Rectangle.fromDegrees(113.74686892275194, 22.39895423067949, 114.624444498382, 22.864642206724653),
+            ...(this.options?.config?.providerOptions ?? {}),
+        })
+    }
+
+    private async addProviderToViewer(viewer: Viewer, provider: imageryProviderResultType): Promise<void> {
         try {
             viewer.imageryLayers.addImageryProvider(provider)
-            if (this.tileLoadCallback) {
-                viewer.scene?.globe?.tileLoadProgressEvent.addEventListener(this.tileLoadCallback)
-            }
         } catch (error) {
             console.error('添加图层失败:', error)
             throw error
@@ -925,13 +1009,13 @@ export class cesiumService {
     }
 
     // 切换图层
-    setViewerLayer(imageryLayersUrl: string): void {
+    setViewerLayer(option: string | imageryLayerType): void {
         if (!this.viewer) return
 
         // 清除现有图层和实体
         this.viewer.imageryLayers.removeAll()
         // 加载新图层
-        this.loadTileLayer(imageryLayersUrl)
+        this.loadTileLayer(option)
     }
 
     // 热力图

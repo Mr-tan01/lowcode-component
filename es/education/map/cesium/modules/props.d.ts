@@ -1,6 +1,6 @@
 import { PropType } from 'vue';
-import { controlStatusType, pointType, basicConfigType } from './type';
-import { Color, Cartesian3, ArcGisMapServerImageryProvider } from 'cesium';
+import { controlStatusType, pointType, basicConfigType, imageryLayerType } from './type';
+import { Color, Cartesian3 } from 'cesium';
 export declare const cesiumProps: {
     clientId: {
         type: PropType<string>;
@@ -14,6 +14,9 @@ export declare const cesiumProps: {
     };
     imageryLayersUrl: {
         type: PropType<string>;
+    };
+    imageryLayerList: {
+        type: PropType<imageryLayerType[]>;
     };
     areaName: {
         type: PropType<string>;
@@ -61,7 +64,7 @@ export declare const cesiumProps: {
             homeButton: boolean;
             sceneModePicker: boolean;
             baseLayerPicker: boolean;
-            imageryProvider: Promise<ArcGisMapServerImageryProvider>;
+            baseLayer: boolean;
             navigationHelpButton: boolean;
             fullscreenButton: boolean;
             scene3DOnly: boolean;

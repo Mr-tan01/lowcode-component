@@ -1,6 +1,6 @@
 import { Viewer, Entity, CustomDataSource } from 'cesium';
 import { CesiumHeatmap, HeatmapDataOption } from 'cesium-heatmap-es6';
-import { controlStatusType, optionType, pointType, changeModelParamType } from './type';
+import { controlStatusType, optionType, pointType, changeModelParamType, imageryLayerType } from './type';
 export declare class cesiumService {
     containerId: string;
     options: optionType;
@@ -23,10 +23,8 @@ export declare class cesiumService {
     private lastHoveredEntity;
     private lastThrottleTime;
     private throttleDelay;
-    private rretryCount;
     private cameraChangedListener;
     private shenzhenBounds;
-    private message;
     constructor(containerId: string, options: optionType);
     /**
      * 对经纬度完全相同的数据点进行均匀环形偏移
@@ -55,11 +53,19 @@ export declare class cesiumService {
     private handleCanvasMouseOut;
     private handleMouseMove;
     private handleTileLoadProgress;
-    loadTileLayer(url: string): Promise<void>;
-    private retryLoadProvider;
+    loadTileLayer(option: string | imageryLayerType): Promise<void>;
     private cleanupTileLoadListener;
     private updateLayerState;
-    private loadProviderWithFallback;
+    private normalizeImageryLayerOption;
+    private getImageryLayerProviderType;
+    private normalizeImageryServiceUrl;
+    private loadProvider;
+    /**
+     * 创建天地图矢量底图和注记底图。
+     * 由于天地图通常需要 vec + cva 双层叠加，这里统一收口成数组返回，外层只负责添加。
+     */
+    private createTiandituProviders;
+    private createWmtsProvider;
     private addProviderToViewer;
     private handleLoadError;
     addPoint({ point, isPopoverEntity }: {
@@ -87,7 +93,7 @@ export declare class cesiumService {
     private handleLabelVisibilityOnExit;
     polygonClickHandler(name: string): void;
     setInitialView(option: changeModelParamType['setInitialView'], openFly?: boolean): void;
-    setViewerLayer(imageryLayersUrl: string): void;
+    setViewerLayer(option: string | imageryLayerType): void;
     buildHeatMap({ points, gradient, heatOptions, heatmapDataOptions, }: {
         points: {
             x: number;

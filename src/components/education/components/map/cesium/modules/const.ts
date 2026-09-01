@@ -1,4 +1,5 @@
 import { CanvasType, type fontStyle } from './type'
+
 export const defaultFontConfig: fontStyle = {
     size: '24px',
     family: 'HarmonyOS Sans SC',

@@ -1,5 +1,5 @@
 import { cesiumService } from './modules/cesiumUtils';
-import { changeModelType, changeModelParamType, EntityProperties } from './modules/type';
+import { changeModelType, changeModelParamType, EntityProperties, imageryLayerType } from './modules/type';
 import { Cartesian3 } from 'cesium';
 declare const _default: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
     clientId: {
@@ -14,6 +14,9 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
     };
     imageryLayersUrl: {
         type: import('vue').PropType<string>;
+    };
+    imageryLayerList: {
+        type: import('vue').PropType<imageryLayerType[]>;
     };
     areaName: {
         type: import('vue').PropType<string>;
@@ -61,7 +64,7 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
             homeButton: boolean;
             sceneModePicker: boolean;
             baseLayerPicker: boolean;
-            imageryProvider: Promise<import('cesium').ArcGisMapServerImageryProvider>;
+            baseLayer: boolean;
             navigationHelpButton: boolean;
             fullscreenButton: boolean;
             scene3DOnly: boolean;
@@ -136,13 +139,18 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
         type: NumberConstructor;
         default: number;
     };
+    imageryLayer: {
+        type: import('vue').PropType<string>;
+    };
 }>, {
     reloadPointData: () => Promise<void>;
-    changeModel: <T extends changeModelType>(type: changeModelType, value: changeModelParamType[T]) => void;
+    changeModel: <T extends changeModelType>(type: T, value: changeModelParamType[T]) => void;
     loadedTileLayer: (status: boolean) => void;
     clearEntity: () => Promise<void>;
     cesiumUtils: cesiumService;
-}, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {} & {
+}, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {
+    "update:imageryLayer": (value: string) => any;
+} & {
     pointHandler: (value: EntityProperties) => any;
     limitHeightHandler: (value: number) => any;
     loadHandler: (value: boolean) => any;
@@ -160,6 +168,9 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
     imageryLayersUrl: {
         type: import('vue').PropType<string>;
     };
+    imageryLayerList: {
+        type: import('vue').PropType<imageryLayerType[]>;
+    };
     areaName: {
         type: import('vue').PropType<string>;
     };
@@ -206,7 +217,7 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
             homeButton: boolean;
             sceneModePicker: boolean;
             baseLayerPicker: boolean;
-            imageryProvider: Promise<import('cesium').ArcGisMapServerImageryProvider>;
+            baseLayer: boolean;
             navigationHelpButton: boolean;
             fullscreenButton: boolean;
             scene3DOnly: boolean;
@@ -281,10 +292,14 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
         type: NumberConstructor;
         default: number;
     };
+    imageryLayer: {
+        type: import('vue').PropType<string>;
+    };
 }>> & Readonly<{
     onPointHandler?: ((value: EntityProperties) => any) | undefined;
     onLimitHeightHandler?: ((value: number) => any) | undefined;
     onLoadHandler?: ((value: boolean) => any) | undefined;
+    "onUpdate:imageryLayer"?: ((value: string) => any) | undefined;
 }>, {
     baseUrl: string | null;
     defaultShowState: boolean;
