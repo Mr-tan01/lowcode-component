@@ -1,6 +1,6 @@
 import { ref, computed, watch, onBeforeUnmount, nextTick } from "vue";
 import { useMessage } from "naive-ui";
-import { Cesium3DTileset, Cartesian3, Matrix4, Cartographic, Math as Math$1, Transforms, Matrix3, HeadingPitchRoll, ShadowMode, HeadingPitchRange, Color, Resource } from "@cesium/engine";
+import { Cesium3DTileset, Cartesian3, Matrix4, Cartographic, Math as Math$1, Transforms, Matrix3, HeadingPitchRoll, Color, ShadowMode, HeadingPitchRange, Resource } from "@cesium/engine";
 import { Viewer } from "@cesium/widgets";
 const speedStepMap = {
   slow: {
@@ -26,6 +26,9 @@ function useCesiumModel(props, visible, emit) {
   const viewer = ref(null);
   const tileset = ref(null);
   const loading = ref(false);
+  const retrying = ref(false);
+  const loadError = ref(null);
+  const runtimeToken = ref(props.token);
   const lightingEnabled = ref(props.enhance3D ?? true);
   const shadowsEnabled = ref(props.enableShadows ?? true);
   const heightControl = ref(props.heightOffset);
@@ -35,11 +38,15 @@ function useCesiumModel(props, visible, emit) {
   const initialCameraDestination = ref(null);
   const sourceModelCenter = ref(null);
   const loadedUrl = ref("");
+  const reloadSeed = ref(0);
+  const loadRequestId = ref(0);
   const autoRotating = ref(false);
   const fullscreen = ref(false);
   const opening = ref(false);
   const locateFrame = ref(null);
   let autoRotateTimer = null;
+  let modelRenderWaitCleanup = null;
+  let rejectModelRenderWait = null;
   const speedStep = computed(() => {
     const preset = speedStepMap[props.operationSpeed ?? "normal"];
     return {
@@ -48,10 +55,34 @@ function useCesiumModel(props, visible, emit) {
     };
   });
   const loadStatusText = computed(() => {
-    if (loading.value) return `加载中：${props.title}`;
+    var _a, _b, _c;
+    if (retrying.value) return ((_a = props.display) == null ? void 0 : _a.retryDescription) ?? `正在重新加载：${props.title}`;
+    if (loading.value) return ((_b = props.display) == null ? void 0 : _b.loadingDescription) ?? `加载中：${props.title}`;
+    if (loadError.value) return ((_c = props.display) == null ? void 0 : _c.errorDescription) ?? `模型加载失败`;
     if (tileset.value) return `加载完成：${props.title}`;
     return `未加载：${props.title}`;
   });
+  const sceneBackgroundColor = computed(() => {
+    var _a;
+    return ((_a = props.display) == null ? void 0 : _a.sceneBackgroundColor) ?? "#ffffff";
+  });
+  const loadErrorMessage = computed(() => {
+    var _a;
+    if (!loadError.value) return "";
+    if (loadError.value instanceof Error) return loadError.value.message;
+    if (typeof loadError.value === "string") return loadError.value;
+    if (typeof loadError.value === "object") {
+      const error = loadError.value;
+      const status = error.status ?? error.statusCode ?? ((_a = error.response) == null ? void 0 : _a.status);
+      const message2 = error.message ?? error.errorMessage ?? error.statusText ?? error.detail;
+      if (typeof message2 === "string" && /Request has failed/i.test(message2)) return "";
+      if (message2 && status) return `${message2} (${status})`;
+      if (message2) return String(message2);
+      if (status) return `请求失败 (${status})`;
+    }
+    return "";
+  });
+  const getResolvedToken = () => runtimeToken.value ?? props.token;
   const syncControlsFromProps = () => {
     heightControl.value = props.heightOffset;
     headingControl.value = props.heading;
@@ -63,7 +94,7 @@ function useCesiumModel(props, visible, emit) {
     layerId: props.layerId,
     version: props.version,
     appId: props.appId,
-    token: props.token,
+    token: getResolvedToken(),
     baseUrl: props.baseUrl,
     tilesetFile: props.tilesetFile,
     longitudeOffset: props.longitudeOffset,
@@ -109,9 +140,148 @@ function useCesiumModel(props, visible, emit) {
     if (option.token && !url.includes("access_token=")) {
       queryParameters.access_token = option.token;
     }
+    queryParameters._reload = String(reloadSeed.value);
     return new Resource({
       url,
       queryParameters
+    });
+  };
+  const clearTilesetFailureListener = () => {
+    if (tileset.value && tilesetFailureListener.value) {
+      tileset.value.tileFailed.removeEventListener(tilesetFailureListener.value);
+    }
+    tilesetFailureListener.value = null;
+  };
+  const tilesetFailureListener = ref(null);
+  const bindTilesetFailureListener = (model) => {
+    clearTilesetFailureListener();
+    const onTileFailed = (error) => {
+      if (model !== tileset.value) return;
+      if (loadError.value) return;
+      if (rejectModelRenderWait) {
+        rejectModelRenderWait(error);
+        return;
+      }
+      console.error("模型瓦片加载失败:", error);
+      message.error("模型加载失败");
+      loadError.value = error;
+      clearTilesetFailureListener();
+      removeModel();
+      emit("loadError", error);
+    };
+    tilesetFailureListener.value = onTileFailed;
+    model.tileFailed.addEventListener(onTileFailed);
+  };
+  const destroyTileset = (model) => {
+    const destroy = model.destroy;
+    if (typeof destroy === "function") {
+      destroy.call(model);
+    }
+  };
+  const clearModelRenderWait = () => {
+    if (modelRenderWaitCleanup) {
+      modelRenderWaitCleanup();
+    }
+    modelRenderWaitCleanup = null;
+    rejectModelRenderWait = null;
+  };
+  const waitForModelRendered = (model, isCurrentLoad) => {
+    clearModelRenderWait();
+    return new Promise((resolve, reject) => {
+      let settled = false;
+      let renderTimeout = null;
+      let noVisibleTileTimeout = null;
+      let hasVisibleTile = false;
+      let pendingPostRenderViewer = null;
+      let pendingPostRenderListener = null;
+      const cleanup = () => {
+        model.initialTilesLoaded.removeEventListener(onReady);
+        model.allTilesLoaded.removeEventListener(onReady);
+        model.tileVisible.removeEventListener(onTileVisible);
+        model.loadProgress.removeEventListener(onLoadProgress);
+        if (pendingPostRenderViewer && pendingPostRenderListener) {
+          pendingPostRenderViewer.scene.postRender.removeEventListener(pendingPostRenderListener);
+        }
+        pendingPostRenderViewer = null;
+        pendingPostRenderListener = null;
+        if (renderTimeout !== null) {
+          window.clearTimeout(renderTimeout);
+          renderTimeout = null;
+        }
+        if (noVisibleTileTimeout !== null) {
+          window.clearTimeout(noVisibleTileTimeout);
+          noVisibleTileTimeout = null;
+        }
+      };
+      const settle = (callback) => {
+        if (settled) return;
+        settled = true;
+        cleanup();
+        modelRenderWaitCleanup = null;
+        rejectModelRenderWait = null;
+        callback();
+      };
+      const resolveAfterRenderedFrame = () => {
+        if (!isCurrentLoad()) {
+          settle(() => resolve());
+          return;
+        }
+        const currentViewer = viewer.value;
+        if (!currentViewer) {
+          settle(() => resolve());
+          return;
+        }
+        const onPostRender = () => {
+          currentViewer.scene.postRender.removeEventListener(onPostRender);
+          pendingPostRenderViewer = null;
+          pendingPostRenderListener = null;
+          settle(() => resolve());
+        };
+        pendingPostRenderViewer = currentViewer;
+        pendingPostRenderListener = onPostRender;
+        currentViewer.scene.postRender.addEventListener(onPostRender);
+        currentViewer.scene.requestRender();
+      };
+      const onReady = () => {
+        if (hasVisibleTile) {
+          resolveAfterRenderedFrame();
+        }
+      };
+      const onTileVisible = () => {
+        hasVisibleTile = true;
+        resolveAfterRenderedFrame();
+      };
+      const rejectWithoutVisibleTile = () => {
+        if (settled || hasVisibleTile || !isCurrentLoad()) return;
+        settle(() => reject(new Error("模型瓦片未渲染，请重试")));
+      };
+      const scheduleNoVisibleTileCheck = () => {
+        if (hasVisibleTile || noVisibleTileTimeout !== null) return;
+        noVisibleTileTimeout = window.setTimeout(() => {
+          noVisibleTileTimeout = null;
+          rejectWithoutVisibleTile();
+        }, 1200);
+      };
+      const onLoadProgress = (numberOfPendingRequests, numberOfTilesProcessing) => {
+        if (numberOfPendingRequests === 0 && numberOfTilesProcessing === 0) {
+          if (hasVisibleTile) {
+            resolveAfterRenderedFrame();
+            return;
+          }
+          scheduleNoVisibleTileCheck();
+        }
+      };
+      modelRenderWaitCleanup = cleanup;
+      rejectModelRenderWait = (error) => {
+        settle(() => reject(error));
+      };
+      renderTimeout = window.setTimeout(() => {
+        settle(() => reject(new Error("模型加载超时，请重试")));
+      }, 6e4);
+      model.initialTilesLoaded.addEventListener(onReady);
+      model.allTilesLoaded.addEventListener(onReady);
+      model.tileVisible.addEventListener(onTileVisible);
+      model.loadProgress.addEventListener(onLoadProgress);
     });
   };
   const getModelBaseHeight = (model, option) => {
@@ -186,6 +356,14 @@ function useCesiumModel(props, visible, emit) {
     viewer.value.shadows = shadowsEnabled.value;
     viewer.value.scene.globe.depthTestAgainstTerrain = false;
     viewer.value.scene.globe.show = false;
+    if (viewer.value.scene.skyBox) {
+      viewer.value.scene.skyBox.show = false;
+    }
+    if (viewer.value.scene.skyAtmosphere) {
+      viewer.value.scene.skyAtmosphere.show = false;
+    }
+    viewer.value.scene.backgroundColor = Color.fromCssColorString(sceneBackgroundColor.value);
+    viewer.value.scene.globe.baseColor = Color.fromCssColorString(sceneBackgroundColor.value);
     if (tileset.value) {
       tileset.value.shadows = shadowsEnabled.value ? ShadowMode.ENABLED : ShadowMode.DISABLED;
     }
@@ -217,10 +395,16 @@ function useCesiumModel(props, visible, emit) {
         }
       }
     });
-    nextViewer.scene.backgroundColor = Color.TRANSPARENT;
-    nextViewer.scene.globe.baseColor = Color.TRANSPARENT;
+    nextViewer.scene.backgroundColor = Color.fromCssColorString(sceneBackgroundColor.value);
+    nextViewer.scene.globe.baseColor = Color.fromCssColorString(sceneBackgroundColor.value);
     nextViewer.scene.globe.show = false;
     nextViewer.scene.globe.depthTestAgainstTerrain = false;
+    if (nextViewer.scene.skyBox) {
+      nextViewer.scene.skyBox.show = false;
+    }
+    if (nextViewer.scene.skyAtmosphere) {
+      nextViewer.scene.skyAtmosphere.show = false;
+    }
     viewer.value = nextViewer;
     applySceneEffect();
   };
@@ -240,6 +424,7 @@ function useCesiumModel(props, visible, emit) {
   const removeModel = () => {
     stopAutoRotate();
     cancelLocateFrame();
+    clearTilesetFailureListener();
     if (viewer.value && tileset.value) {
       viewer.value.scene.primitives.remove(tileset.value);
       viewer.value.scene.requestRender();
@@ -270,11 +455,36 @@ function useCesiumModel(props, visible, emit) {
     }
     viewer.value.scene.requestRender();
   };
-  const loadModel = async () => {
-    if (!viewer.value || !props.layerId) return;
+  const refreshTokenIfNeeded = async (forceRefresh = false) => {
+    if (!forceRefresh || !props.tokenLoader) return;
+    const nextToken = await props.tokenLoader();
+    if (!nextToken) {
+      throw new Error("重新获取 token 失败");
+    }
+    runtimeToken.value = nextToken;
+  };
+  const loadModel = async (options = {}) => {
+    if (!props.layerId) {
+      loadError.value = new Error("模型图层 ID 不存在");
+      loading.value = false;
+      retrying.value = false;
+      return;
+    }
+    if (!viewer.value) {
+      loadError.value = new Error("模型容器初始化失败");
+      loading.value = false;
+      retrying.value = false;
+      return;
+    }
+    const currentLoadRequestId = ++loadRequestId.value;
+    const isCurrentLoad = () => currentLoadRequestId === loadRequestId.value && visible.value && !!viewer.value;
+    if (!options.keepErrorVisible) {
+      loadError.value = null;
+    }
     loading.value = true;
     removeModel();
     try {
+      await refreshTokenIfNeeded(options.forceRefreshToken ?? false);
       const model = await Cesium3DTileset.fromUrl(getTilesetResource(layerOption.value), {
         maximumScreenSpaceError: 2,
         dynamicScreenSpaceError: true,
@@ -282,23 +492,40 @@ function useCesiumModel(props, visible, emit) {
         ...props.modelOptions ?? {},
         show: true
       });
+      if (!isCurrentLoad()) {
+        destroyTileset(model);
+        return;
+      }
+      const renderReady = waitForModelRendered(model, isCurrentLoad);
       tileset.value = model;
       sourceModelCenter.value = Cartesian3.clone(model.boundingSphere.center);
       viewer.value.scene.primitives.add(model);
+      bindTilesetFailureListener(model);
       applyModelTransform();
       applySceneEffect();
       initialModelMatrix.value = Matrix4.clone(model.modelMatrix);
       locateModel({ afterLayout: true, recordInitialView: true });
+      viewer.value.scene.requestRender();
+      await renderReady;
+      if (!isCurrentLoad()) return;
       emit("loaded", { tileset: model, url: loadedUrl.value });
     } catch (error) {
+      if (!isCurrentLoad()) return;
       console.error("模型加载失败:", error);
       message.error("模型加载失败");
+      loadError.value = error;
+      removeModel();
       emit("loadError", error);
     } finally {
-      loading.value = false;
+      if (isCurrentLoad()) {
+        loading.value = false;
+        retrying.value = false;
+      }
     }
   };
   const destroyViewer = () => {
+    loadRequestId.value += 1;
+    clearModelRenderWait();
     stopAutoRotate();
     cancelLocateFrame();
     removeModel();
@@ -319,8 +546,16 @@ function useCesiumModel(props, visible, emit) {
       opening.value = false;
     }
   };
-  const reloadModel = () => {
-    void loadModel();
+  const reloadModel = async () => {
+    reloadSeed.value += 1;
+    retrying.value = true;
+    loading.value = true;
+    loadError.value = null;
+    await nextTick();
+    destroyViewer();
+    await nextTick();
+    await initViewer();
+    await loadModel({ forceRefreshToken: true, keepErrorVisible: true });
   };
   const resetView = () => {
     if (!viewer.value) return;
@@ -408,6 +643,7 @@ function useCesiumModel(props, visible, emit) {
         void openModel();
       } else {
         destroyViewer();
+        retrying.value = false;
       }
     },
     { immediate: true }
@@ -415,6 +651,7 @@ function useCesiumModel(props, visible, emit) {
   watch(
     () => [props.version, props.layerId, props.appId, props.token, props.baseUrl, props.tilesetFile],
     () => {
+      runtimeToken.value = props.token;
       syncControlsFromProps();
       if (visible.value && viewer.value) {
         void loadModel();
@@ -438,6 +675,9 @@ function useCesiumModel(props, visible, emit) {
     viewer,
     tileset,
     loading,
+    retrying,
+    loadError,
+    loadErrorMessage,
     loadStatusText,
     autoRotating,
     fullscreen,

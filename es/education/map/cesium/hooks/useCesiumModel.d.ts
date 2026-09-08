@@ -6,6 +6,7 @@ export interface CesiumModelDialogProps {
     title?: string;
     width?: string;
     height?: string;
+    display?: CesiumModelDialogDisplayConfig;
     version?: cesiumModelVersionType;
     layerId: string;
     appId?: string;
@@ -27,9 +28,26 @@ export interface CesiumModelDialogProps {
     operationSpeed?: OperationSpeed;
     rotateStep?: number;
     autoRotateInterval?: number;
+    tokenLoader?: () => Promise<string | null | undefined>;
     options?: Cesium3DTileset.ConstructorOptions;
     modelOptions?: Cesium3DTileset.ConstructorOptions;
     terrainProvider?: TerrainProvider;
+}
+export interface CesiumModelDialogDisplayConfig {
+    viewerBackground?: string;
+    panelBackground?: string;
+    panelBorderColor?: string;
+    panelTextColor?: string;
+    sceneBackgroundColor?: string;
+    loadingDescription?: string;
+    retryDescription?: string;
+    loadingStroke?: string;
+    errorTitle?: string;
+    errorDescription?: string;
+    retryText?: string;
+    showToolbar?: boolean;
+    showControls?: boolean;
+    showRetryButton?: boolean;
 }
 export type LoadedPayload = {
     tileset: Cesium3DTileset;
@@ -49,10 +67,13 @@ export interface UseCesiumModelReturn {
     viewer: Ref<Viewer | null>;
     tileset: Ref<Cesium3DTileset | null>;
     loading: Ref<boolean>;
+    retrying: Ref<boolean>;
+    loadError: Ref<unknown | null>;
+    loadErrorMessage: ComputedRef<string>;
     loadStatusText: ComputedRef<string>;
     autoRotating: Ref<boolean>;
     fullscreen: Ref<boolean>;
-    reloadModel: () => void;
+    reloadModel: () => Promise<void>;
     locateModel: (options?: LocateModelOptions) => void;
     resetView: () => void;
     zoomIn: () => void;

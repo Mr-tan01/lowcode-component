@@ -4,7 +4,7 @@ type __VLS_PublicProps = {
     'show'?: boolean;
 } & __VLS_Props;
 declare const _default: import('vue').DefineComponent<__VLS_PublicProps, {
-    reloadModel: () => void;
+    reloadModel: () => Promise<void>;
     locateModel: (options?: {
         afterLayout?: boolean;
         recordInitialView?: boolean;
@@ -33,6 +33,7 @@ declare const _default: import('vue').DefineComponent<__VLS_PublicProps, {
     baseUrl: string;
     options: import("cesium").Cesium3DTileset.ConstructorOptions;
     terrainProvider: import('cesium').TerrainProvider;
+    display: import('./hooks/useCesiumModel').CesiumModelDialogDisplayConfig;
     appId: string;
     token: string | null;
     tilesetFile: string;

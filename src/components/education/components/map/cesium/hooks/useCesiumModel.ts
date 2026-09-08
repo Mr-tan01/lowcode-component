@@ -25,6 +25,7 @@ export interface CesiumModelDialogProps {
     title?: string
     width?: string
     height?: string
+    display?: CesiumModelDialogDisplayConfig
     // 模型服务接入参数：version 控制 v1/v2 路径，layerId 是服务图层 ID。
     version?: cesiumModelVersionType
     layerId: string
@@ -51,9 +52,27 @@ export interface CesiumModelDialogProps {
     operationSpeed?: OperationSpeed
     rotateStep?: number
     autoRotateInterval?: number
+    tokenLoader?: () => Promise<string | null | undefined>
     options?: Cesium3DTileset.ConstructorOptions
     modelOptions?: Cesium3DTileset.ConstructorOptions
     terrainProvider?: TerrainProvider
+}
+
+export interface CesiumModelDialogDisplayConfig {
+    viewerBackground?: string
+    panelBackground?: string
+    panelBorderColor?: string
+    panelTextColor?: string
+    sceneBackgroundColor?: string
+    loadingDescription?: string
+    retryDescription?: string
+    loadingStroke?: string
+    errorTitle?: string
+    errorDescription?: string
+    retryText?: string
+    showToolbar?: boolean
+    showControls?: boolean
+    showRetryButton?: boolean
 }
 
 export type LoadedPayload = {
@@ -77,10 +96,13 @@ export interface UseCesiumModelReturn {
     viewer: Ref<Viewer | null>
     tileset: Ref<Cesium3DTileset | null>
     loading: Ref<boolean>
+    retrying: Ref<boolean>
+    loadError: Ref<unknown | null>
+    loadErrorMessage: ComputedRef<string>
     loadStatusText: ComputedRef<string>
     autoRotating: Ref<boolean>
     fullscreen: Ref<boolean>
-    reloadModel: () => void
+    reloadModel: () => Promise<void>
     locateModel: (options?: LocateModelOptions) => void
     resetView: () => void
     zoomIn: () => void
@@ -119,6 +141,9 @@ export function useCesiumModel(props: Readonly<CesiumModelDialogProps>, visible:
     const viewer = ref<Viewer | null>(null)
     const tileset = ref<Cesium3DTileset | null>(null)
     const loading = ref(false)
+    const retrying = ref(false)
+    const loadError = ref<unknown | null>(null)
+    const runtimeToken = ref<string | null | undefined>(props.token)
     const lightingEnabled = ref(props.enhance3D ?? true)
     const shadowsEnabled = ref(props.enableShadows ?? true)
     const heightControl = ref(props.heightOffset)
@@ -128,11 +153,15 @@ export function useCesiumModel(props: Readonly<CesiumModelDialogProps>, visible:
     const initialCameraDestination = ref<Cartesian3 | null>(null)
     const sourceModelCenter = ref<Cartesian3 | null>(null)
     const loadedUrl = ref('')
+    const reloadSeed = ref(0)
+    const loadRequestId = ref(0)
     const autoRotating = ref(false)
     const fullscreen = ref(false)
     const opening = ref(false)
     const locateFrame = ref<number | null>(null)
     let autoRotateTimer: number | null = null
+    let modelRenderWaitCleanup: (() => void) | null = null
+    let rejectModelRenderWait: ((error: unknown) => void) | null = null
 
     const speedStep = computed(() => {
         const preset = speedStepMap[props.operationSpeed ?? 'normal']
@@ -142,10 +171,30 @@ export function useCesiumModel(props: Readonly<CesiumModelDialogProps>, visible:
         }
     })
     const loadStatusText = computed(() => {
-        if (loading.value) return `加载中：${props.title}`
+        if (retrying.value) return props.display?.retryDescription ?? `正在重新加载：${props.title}`
+        if (loading.value) return props.display?.loadingDescription ?? `加载中：${props.title}`
+        if (loadError.value) return props.display?.errorDescription ?? `模型加载失败`
         if (tileset.value) return `加载完成：${props.title}`
         return `未加载：${props.title}`
     })
+    const sceneBackgroundColor = computed(() => props.display?.sceneBackgroundColor ?? '#ffffff')
+    const loadErrorMessage = computed(() => {
+        if (!loadError.value) return ''
+        if (loadError.value instanceof Error) return loadError.value.message
+        if (typeof loadError.value === 'string') return loadError.value
+        if (typeof loadError.value === 'object') {
+            const error = loadError.value as Record<string, any>
+            const status = error.status ?? error.statusCode ?? error.response?.status
+            const message = error.message ?? error.errorMessage ?? error.statusText ?? error.detail
+            if (typeof message === 'string' && /Request has failed/i.test(message)) return ''
+            if (message && status) return `${message} (${status})`
+            if (message) return String(message)
+            if (status) return `请求失败 (${status})`
+        }
+        return ''
+    })
+
+    const getResolvedToken = (): string | null | undefined => runtimeToken.value ?? props.token
 
     const syncControlsFromProps = (): void => {
         heightControl.value = props.heightOffset
@@ -159,7 +208,7 @@ export function useCesiumModel(props: Readonly<CesiumModelDialogProps>, visible:
         layerId: props.layerId,
         version: props.version,
         appId: props.appId,
-        token: props.token,
+        token: getResolvedToken(),
         baseUrl: props.baseUrl,
         tilesetFile: props.tilesetFile,
         longitudeOffset: props.longitudeOffset,
@@ -221,9 +270,174 @@ export function useCesiumModel(props: Readonly<CesiumModelDialogProps>, visible:
             queryParameters.access_token = option.token
         }
 
+        queryParameters._reload = String(reloadSeed.value)
+
         return new Resource({
             url,
             queryParameters,
+        })
+    }
+
+    const clearTilesetFailureListener = (): void => {
+        if (tileset.value && tilesetFailureListener.value) {
+            tileset.value.tileFailed.removeEventListener(tilesetFailureListener.value)
+        }
+        tilesetFailureListener.value = null
+    }
+
+    const tilesetFailureListener = ref<((error: unknown) => void) | null>(null)
+
+    const bindTilesetFailureListener = (model: Cesium3DTileset): void => {
+        clearTilesetFailureListener()
+        const onTileFailed = (error: unknown): void => {
+            if (model !== tileset.value) return
+            if (loadError.value) return
+
+            if (rejectModelRenderWait) {
+                rejectModelRenderWait(error)
+                return
+            }
+
+            console.error('模型瓦片加载失败:', error)
+            message.error('模型加载失败')
+            loadError.value = error
+            clearTilesetFailureListener()
+            removeModel()
+            emit('loadError', error)
+        }
+        tilesetFailureListener.value = onTileFailed
+        model.tileFailed.addEventListener(onTileFailed)
+    }
+
+    const destroyTileset = (model: Cesium3DTileset): void => {
+        const destroy = (model as unknown as { destroy?: () => void }).destroy
+        if (typeof destroy === 'function') {
+            destroy.call(model)
+        }
+    }
+
+    const clearModelRenderWait = (): void => {
+        if (modelRenderWaitCleanup) {
+            modelRenderWaitCleanup()
+        }
+        modelRenderWaitCleanup = null
+        rejectModelRenderWait = null
+    }
+
+    const waitForModelRendered = (model: Cesium3DTileset, isCurrentLoad: () => boolean): Promise<void> => {
+        clearModelRenderWait()
+
+        return new Promise((resolve, reject) => {
+            let settled = false
+            let renderTimeout: number | null = null
+            let noVisibleTileTimeout: number | null = null
+            let hasVisibleTile = false
+            let pendingPostRenderViewer: Viewer | null = null
+            let pendingPostRenderListener: (() => void) | null = null
+
+            const cleanup = (): void => {
+                model.initialTilesLoaded.removeEventListener(onReady)
+                model.allTilesLoaded.removeEventListener(onReady)
+                model.tileVisible.removeEventListener(onTileVisible)
+                model.loadProgress.removeEventListener(onLoadProgress)
+                if (pendingPostRenderViewer && pendingPostRenderListener) {
+                    pendingPostRenderViewer.scene.postRender.removeEventListener(pendingPostRenderListener)
+                }
+                pendingPostRenderViewer = null
+                pendingPostRenderListener = null
+                if (renderTimeout !== null) {
+                    window.clearTimeout(renderTimeout)
+                    renderTimeout = null
+                }
+                if (noVisibleTileTimeout !== null) {
+                    window.clearTimeout(noVisibleTileTimeout)
+                    noVisibleTileTimeout = null
+                }
+            }
+
+            const settle = (callback: () => void): void => {
+                if (settled) return
+                settled = true
+                cleanup()
+                modelRenderWaitCleanup = null
+                rejectModelRenderWait = null
+                callback()
+            }
+
+            const resolveAfterRenderedFrame = (): void => {
+                if (!isCurrentLoad()) {
+                    settle(() => resolve())
+                    return
+                }
+
+                const currentViewer = viewer.value
+                if (!currentViewer) {
+                    settle(() => resolve())
+                    return
+                }
+
+                const onPostRender = (): void => {
+                    currentViewer.scene.postRender.removeEventListener(onPostRender)
+                    pendingPostRenderViewer = null
+                    pendingPostRenderListener = null
+                    settle(() => resolve())
+                }
+
+                pendingPostRenderViewer = currentViewer
+                pendingPostRenderListener = onPostRender
+                currentViewer.scene.postRender.addEventListener(onPostRender)
+                currentViewer.scene.requestRender()
+            }
+
+            const onReady = (): void => {
+                if (hasVisibleTile) {
+                    resolveAfterRenderedFrame()
+                }
+            }
+
+            const onTileVisible = (): void => {
+                hasVisibleTile = true
+                resolveAfterRenderedFrame()
+            }
+
+            const rejectWithoutVisibleTile = (): void => {
+                if (settled || hasVisibleTile || !isCurrentLoad()) return
+
+                settle(() => reject(new Error('模型瓦片未渲染，请重试')))
+            }
+
+            const scheduleNoVisibleTileCheck = (): void => {
+                if (hasVisibleTile || noVisibleTileTimeout !== null) return
+
+                noVisibleTileTimeout = window.setTimeout(() => {
+                    noVisibleTileTimeout = null
+                    rejectWithoutVisibleTile()
+                }, 1200)
+            }
+
+            const onLoadProgress = (numberOfPendingRequests: number, numberOfTilesProcessing: number): void => {
+                if (numberOfPendingRequests === 0 && numberOfTilesProcessing === 0) {
+                    if (hasVisibleTile) {
+                        resolveAfterRenderedFrame()
+                        return
+                    }
+
+                    scheduleNoVisibleTileCheck()
+                }
+            }
+
+            modelRenderWaitCleanup = cleanup
+            rejectModelRenderWait = (error: unknown): void => {
+                settle(() => reject(error))
+            }
+            renderTimeout = window.setTimeout(() => {
+                settle(() => reject(new Error('模型加载超时，请重试')))
+            }, 60000)
+
+            model.initialTilesLoaded.addEventListener(onReady)
+            model.allTilesLoaded.addEventListener(onReady)
+            model.tileVisible.addEventListener(onTileVisible)
+            model.loadProgress.addEventListener(onLoadProgress)
         })
     }
 
@@ -320,6 +534,14 @@ export function useCesiumModel(props: Readonly<CesiumModelDialogProps>, visible:
         viewer.value.shadows = shadowsEnabled.value
         viewer.value.scene.globe.depthTestAgainstTerrain = false
         viewer.value.scene.globe.show = false
+        if (viewer.value.scene.skyBox) {
+            viewer.value.scene.skyBox.show = false
+        }
+        if (viewer.value.scene.skyAtmosphere) {
+            viewer.value.scene.skyAtmosphere.show = false
+        }
+        viewer.value.scene.backgroundColor = Color.fromCssColorString(sceneBackgroundColor.value)
+        viewer.value.scene.globe.baseColor = Color.fromCssColorString(sceneBackgroundColor.value)
 
         if (tileset.value) {
             tileset.value.shadows = shadowsEnabled.value ? ShadowMode.ENABLED : ShadowMode.DISABLED
@@ -355,10 +577,16 @@ export function useCesiumModel(props: Readonly<CesiumModelDialogProps>, visible:
                 },
             },
         })
-        nextViewer.scene.backgroundColor = Color.TRANSPARENT
-        nextViewer.scene.globe.baseColor = Color.TRANSPARENT
+        nextViewer.scene.backgroundColor = Color.fromCssColorString(sceneBackgroundColor.value)
+        nextViewer.scene.globe.baseColor = Color.fromCssColorString(sceneBackgroundColor.value)
         nextViewer.scene.globe.show = false
         nextViewer.scene.globe.depthTestAgainstTerrain = false
+        if (nextViewer.scene.skyBox) {
+            nextViewer.scene.skyBox.show = false
+        }
+        if (nextViewer.scene.skyAtmosphere) {
+            nextViewer.scene.skyAtmosphere.show = false
+        }
         viewer.value = nextViewer
         applySceneEffect()
     }
@@ -381,6 +609,7 @@ export function useCesiumModel(props: Readonly<CesiumModelDialogProps>, visible:
     const removeModel = (): void => {
         stopAutoRotate()
         cancelLocateFrame()
+        clearTilesetFailureListener()
         if (viewer.value && tileset.value) {
             viewer.value.scene.primitives.remove(tileset.value)
             viewer.value.scene.requestRender()
@@ -415,13 +644,47 @@ export function useCesiumModel(props: Readonly<CesiumModelDialogProps>, visible:
         viewer.value.scene.requestRender()
     }
 
-    const loadModel = async (): Promise<void> => {
-        if (!viewer.value || !props.layerId) return
+    const refreshTokenIfNeeded = async (forceRefresh = false): Promise<void> => {
+        if (!forceRefresh || !props.tokenLoader) return
 
+        const nextToken = await props.tokenLoader()
+        if (!nextToken) {
+            throw new Error('重新获取 token 失败')
+        }
+        runtimeToken.value = nextToken
+    }
+
+    type LoadModelOptions = {
+        forceRefreshToken?: boolean
+        keepErrorVisible?: boolean
+    }
+
+    const loadModel = async (options: LoadModelOptions = {}): Promise<void> => {
+        if (!props.layerId) {
+            loadError.value = new Error('模型图层 ID 不存在')
+            loading.value = false
+            retrying.value = false
+            return
+        }
+
+        if (!viewer.value) {
+            loadError.value = new Error('模型容器初始化失败')
+            loading.value = false
+            retrying.value = false
+            return
+        }
+
+        const currentLoadRequestId = ++loadRequestId.value
+        const isCurrentLoad = (): boolean => currentLoadRequestId === loadRequestId.value && visible.value && !!viewer.value
+
+        if (!options.keepErrorVisible) {
+            loadError.value = null
+        }
         loading.value = true
         removeModel()
 
         try {
+            await refreshTokenIfNeeded(options.forceRefreshToken ?? false)
             const model = await Cesium3DTileset.fromUrl(getTilesetResource(layerOption.value), {
                 maximumScreenSpaceError: 2,
                 dynamicScreenSpaceError: true,
@@ -430,24 +693,42 @@ export function useCesiumModel(props: Readonly<CesiumModelDialogProps>, visible:
                 show: true,
             })
 
+            if (!isCurrentLoad()) {
+                destroyTileset(model)
+                return
+            }
+
+            const renderReady = waitForModelRendered(model, isCurrentLoad)
             tileset.value = model
             sourceModelCenter.value = Cartesian3.clone(model.boundingSphere.center)
             viewer.value.scene.primitives.add(model)
+            bindTilesetFailureListener(model)
             applyModelTransform()
             applySceneEffect()
             initialModelMatrix.value = Matrix4.clone(model.modelMatrix)
             locateModel({ afterLayout: true, recordInitialView: true })
+            viewer.value.scene.requestRender()
+            await renderReady
+            if (!isCurrentLoad()) return
             emit('loaded', { tileset: model, url: loadedUrl.value })
         } catch (error) {
+            if (!isCurrentLoad()) return
             console.error('模型加载失败:', error)
             message.error('模型加载失败')
+            loadError.value = error
+            removeModel()
             emit('loadError', error)
         } finally {
-            loading.value = false
+            if (isCurrentLoad()) {
+                loading.value = false
+                retrying.value = false
+            }
         }
     }
 
     const destroyViewer = (): void => {
+        loadRequestId.value += 1
+        clearModelRenderWait()
         stopAutoRotate()
         cancelLocateFrame()
         removeModel()
@@ -470,8 +751,16 @@ export function useCesiumModel(props: Readonly<CesiumModelDialogProps>, visible:
         }
     }
 
-    const reloadModel = (): void => {
-        void loadModel()
+    const reloadModel = async (): Promise<void> => {
+        reloadSeed.value += 1
+        retrying.value = true
+        loading.value = true
+        loadError.value = null
+        await nextTick()
+        destroyViewer()
+        await nextTick()
+        await initViewer()
+        await loadModel({ forceRefreshToken: true, keepErrorVisible: true })
     }
 
     const resetView = (): void => {
@@ -575,6 +864,7 @@ export function useCesiumModel(props: Readonly<CesiumModelDialogProps>, visible:
                 void openModel()
             } else {
                 destroyViewer()
+                retrying.value = false
             }
         },
         { immediate: true },
@@ -583,6 +873,7 @@ export function useCesiumModel(props: Readonly<CesiumModelDialogProps>, visible:
     watch(
         () => [props.version, props.layerId, props.appId, props.token, props.baseUrl, props.tilesetFile],
         () => {
+            runtimeToken.value = props.token
             syncControlsFromProps()
             if (visible.value && viewer.value) {
                 void loadModel()
@@ -610,6 +901,9 @@ export function useCesiumModel(props: Readonly<CesiumModelDialogProps>, visible:
         viewer,
         tileset,
         loading,
+        retrying,
+        loadError,
+        loadErrorMessage,
         loadStatusText,
         autoRotating,
         fullscreen,

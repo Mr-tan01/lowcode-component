@@ -1,17 +1,45 @@
-import { defineComponent, mergeModels, useModel, createBlock, openBlock, unref, withCtx, createElementVNode, normalizeClass, createVNode, createTextVNode, toDisplayString } from "vue";
-import { NSpin, NButton } from "naive-ui";
+import { defineComponent, mergeModels, useModel, computed, createBlock, openBlock, unref, withCtx, createElementVNode, normalizeStyle, normalizeClass, createVNode, createElementBlock, createCommentVNode, createTextVNode, toDisplayString } from "vue";
+import { NSpin, NResult, NSpace, NButton } from "naive-ui";
 import LcModal from "../modal/index.js";
 import { useCesiumModel } from "./hooks/useCesiumModel.js";
-const _hoisted_1 = { class: "lc-cesium-model__viewer-wrap" };
-const _hoisted_2 = { class: "lc-cesium-model__panel" };
-const _hoisted_3 = { class: "lc-cesium-model__toolbar" };
-const _hoisted_4 = { class: "lc-cesium-model__controls" };
+const _hoisted_1 = {
+  key: 0,
+  class: "lc-cesium-model__state"
+};
+const _hoisted_2 = {
+  key: 1,
+  class: "lc-cesium-model__viewer-wrap"
+};
+const _hoisted_3 = {
+  key: 0,
+  class: "lc-cesium-model__panel"
+};
+const _hoisted_4 = { class: "lc-cesium-model__toolbar" };
+const _hoisted_5 = {
+  key: 0,
+  class: "lc-cesium-model__controls"
+};
 const _sfc_main = /* @__PURE__ */ defineComponent({
   __name: "modelDialog",
   props: /* @__PURE__ */ mergeModels({
     title: { default: "模型预览" },
     width: { default: "1200px" },
     height: { default: "720px" },
+    display: { default: () => ({
+      viewerBackground: "rgba(1, 17, 39, 0.86)",
+      panelBackground: "rgba(5, 25, 51, 0.68)",
+      panelBorderColor: "rgba(77, 172, 255, 0.42)",
+      panelTextColor: "#ffffff",
+      sceneBackgroundColor: "#ffffff",
+      loadingDescription: "模型加载中，请稍候",
+      loadingStroke: "#4dafff",
+      errorTitle: "模型加载失败",
+      errorDescription: "请检查模型服务或稍后重试",
+      retryText: "重试",
+      showToolbar: true,
+      showControls: true,
+      showRetryButton: true
+    }) },
     version: { default: "v2" },
     layerId: {},
     appId: { default: void 0 },
@@ -33,6 +61,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     operationSpeed: { default: "normal" },
     rotateStep: { default: void 0 },
     autoRotateInterval: { default: 200 },
+    tokenLoader: {},
     options: { default: void 0 },
     modelOptions: { default: void 0 },
     terrainProvider: { default: void 0 }
@@ -44,12 +73,31 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
   setup(__props, { expose: __expose, emit: __emit }) {
     const props = __props;
     const visible = useModel(__props, "show");
+    const defaultDisplay = {
+      viewerBackground: "rgba(1, 17, 39, 0.86)",
+      panelBackground: "rgba(5, 25, 51, 0.68)",
+      panelBorderColor: "rgba(77, 172, 255, 0.42)",
+      panelTextColor: "#ffffff",
+      sceneBackgroundColor: "#ffffff",
+      loadingDescription: "模型加载中，请稍候",
+      loadingStroke: "#4dafff",
+      errorTitle: "模型加载失败",
+      errorDescription: "请检查模型服务或稍后重试",
+      retryText: "重试",
+      showToolbar: true,
+      showControls: true,
+      showRetryButton: true
+    };
+    const display = computed(() => ({ ...defaultDisplay, ...props.display ?? {} }));
     const emit = __emit;
     const {
       rootRef,
       containerRef,
       tileset,
       loading,
+      retrying,
+      loadError,
+      loadStatusText,
       autoRotating,
       fullscreen,
       reloadModel,
@@ -65,6 +113,14 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       toggleAutoRotate,
       toggleFullscreen
     } = useCesiumModel(props, visible, emit);
+    const rootStyle = computed(() => ({
+      "--lc-cesium-model-viewer-bg": display.value.viewerBackground,
+      "--lc-cesium-model-panel-bg": display.value.panelBackground,
+      "--lc-cesium-model-panel-border": display.value.panelBorderColor,
+      "--lc-cesium-model-panel-text": display.value.panelTextColor,
+      "--n-spin-description-color": display.value.panelTextColor,
+      "--lc-cesium-model-retry-text-color": display.value.panelTextColor
+    }));
     __expose({
       reloadModel,
       locateModel,
@@ -90,15 +146,54 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
             {
               ref_key: "rootRef",
               ref: rootRef,
-              class: normalizeClass(["lc-cesium-model", { "is-fullscreen": unref(fullscreen) }])
+              class: normalizeClass(["lc-cesium-model", { "is-fullscreen": unref(fullscreen), "is-loading": unref(loading), "is-error": !!unref(loadError) }]),
+              style: normalizeStyle(rootStyle.value)
             },
             [
               createVNode(unref(NSpin), {
                 show: unref(loading),
+                description: display.value.loadingDescription || unref(loadStatusText),
+                stroke: display.value.loadingStroke || "#18a058",
+                size: "large",
                 class: "lc-cesium-model__spin"
               }, {
                 default: withCtx(() => [
-                  createElementVNode("div", _hoisted_1, [
+                  unref(loadError) ? (openBlock(), createElementBlock("div", _hoisted_1, [
+                    createVNode(unref(NResult), {
+                      status: "error",
+                      title: display.value.errorTitle || "模型加载失败",
+                      description: unref(retrying) ? display.value.retryDescription || "正在重新加载，请稍候" : display.value.errorDescription || "模型加载异常，请点击重试"
+                    }, {
+                      footer: withCtx(() => [
+                        display.value.showRetryButton !== false ? (openBlock(), createBlock(unref(NSpace), {
+                          key: 0,
+                          justify: "center"
+                        }, {
+                          default: withCtx(() => [
+                            createVNode(unref(NButton), {
+                              type: "primary",
+                              loading: unref(loading) || unref(retrying),
+                              onClick: unref(reloadModel)
+                            }, {
+                              default: withCtx(() => [
+                                createTextVNode(
+                                  toDisplayString(display.value.retryText || "重试"),
+                                  1
+                                  /* TEXT */
+                                )
+                              ]),
+                              _: 1
+                              /* STABLE */
+                            }, 8, ["loading", "onClick"])
+                          ]),
+                          _: 1
+                          /* STABLE */
+                        })) : createCommentVNode("v-if", true)
+                      ]),
+                      _: 1
+                      /* STABLE */
+                    }, 8, ["title", "description"])
+                  ])) : (openBlock(), createElementBlock("div", _hoisted_2, [
                     createElementVNode(
                       "div",
                       {
@@ -110,8 +205,8 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                       512
                       /* NEED_PATCH */
                     ),
-                    createElementVNode("div", _hoisted_2, [
-                      createElementVNode("div", _hoisted_3, [
+                    display.value.showToolbar !== false ? (openBlock(), createElementBlock("div", _hoisted_3, [
+                      createElementVNode("div", _hoisted_4, [
                         createVNode(unref(NButton), {
                           size: "small",
                           disabled: !unref(tileset),
@@ -159,7 +254,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                           /* STABLE */
                         }, 8, ["disabled", "onClick"])
                       ]),
-                      createElementVNode("div", _hoisted_4, [
+                      display.value.showControls !== false ? (openBlock(), createElementBlock("div", _hoisted_5, [
                         createVNode(unref(NButton), {
                           size: "small",
                           disabled: !unref(tileset),
@@ -280,16 +375,16 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                           _: 1
                           /* STABLE */
                         }, 8, ["disabled", "onClick"])
-                      ])
-                    ])
-                  ])
+                      ])) : createCommentVNode("v-if", true)
+                    ])) : createCommentVNode("v-if", true)
+                  ]))
                 ]),
                 _: 1
                 /* STABLE */
-              }, 8, ["show"])
+              }, 8, ["show", "description", "stroke"])
             ],
-            2
-            /* CLASS */
+            6
+            /* CLASS, STYLE */
           )
         ]),
         _: 1
