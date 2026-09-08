@@ -33,6 +33,9 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       }
       return "100%";
     });
+    const renderProgressValue = (value) => {
+      return Math.max(0, Math.min(Number(value), 100));
+    };
     const renderValue = (total) => {
       if (__props.fixed) {
         const { result } = bigNumber(total, __props.decimal);
@@ -68,7 +71,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                       {
                         class: "lc-progress__wrapper__item__left",
                         style: normalizeStyle({
-                          "--progress": item.value,
+                          "--progress": renderProgressValue(item.value),
                           "--bgColor": item.color
                         })
                       },

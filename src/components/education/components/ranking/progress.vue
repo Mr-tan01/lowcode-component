@@ -6,7 +6,7 @@
                     <div
                         class="lc-progress__wrapper__item__left"
                         :style="{
-                            '--progress': item.value,
+                            '--progress': renderProgressValue(item.value),
                             '--bgColor': item.color,
                         }"
                     >
@@ -62,6 +62,9 @@ const maxWidth = computed(() => {
     }
     return '100%'
 })
+const renderProgressValue = value => {
+    return Math.max(0, Math.min(Number(value), 100))
+}
 const renderValue = total => {
     if (fixed) {
         const { result } = bigNumber(total, decimal)
@@ -145,6 +148,7 @@ const renderUnit = memoize(
                 font-size: 14px;
                 max-width: 84px;
                 color: #ffffff;
+                z-index: 1;
             }
         }
     }

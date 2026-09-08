@@ -7,6 +7,9 @@ import {
     type Cartesian3,
     type PolylineDashMaterialProperty,
     Cartesian2,
+    type Cesium3DTileset,
+    type HeightReference,
+    type ImageryLayer,
 } from 'cesium'
 import { type CesiumHeatmap } from 'cesium-heatmap-es6'
 import shenZhen from './深圳市（各区）.json'
@@ -90,6 +93,8 @@ export interface pointType {
     name: string // 唯一name属性 获取唯一entity实例 切勿重复
     lng: number
     lat: number
+    height?: number
+    heightReference?: HeightReference
     changeIconType?: changeIconType | string // 变动图标
     options: CanvasConfigOptions
 }
@@ -127,6 +132,7 @@ export interface EntityConfig {
         image: HTMLCanvasElement
         disableDepthTestDistance: number | undefined
         pixelOffset: Cartesian2
+        heightReference?: HeightReference
     }
 }
 
@@ -137,6 +143,7 @@ export interface controlStatusType {
     homeButton?: boolean // 初始视图
     sceneModePicker?: boolean // 场景模式切换
     baseLayerPicker?: boolean // 底图图层选择器
+    baseLayer?: ImageryLayer | false // 默认底图，false 时不加载 Cesium 默认影像
     navigationHelpButton?: boolean // 导航帮助按钮
     fullscreenButton?: boolean // 全屏按钮
     skyBox?: SkyBox // 天空盒（星空背景）
@@ -166,6 +173,63 @@ export interface basicConfigType {
     defaultUrl?: string // 默认瓦片地址
     providerOptions?: Record<string, any> // 瓦片参数
     labelShowHeightThreshold?: number // 多少高度显示全瓦片
+}
+
+export type imageryLayerProviderType = 'wmts' | 'arcgis' | 'tianditu'
+
+export interface imageryLayerType {
+    label: string // 图层名称
+    value: string // 图层唯一值
+    url: string // 图层服务地址，支持 {client_id} 和 {access_token} 占位符
+    providerType?: imageryLayerProviderType // 图层服务类型，默认按URL自动判断
+    providerOptions?: {
+        layer?: string
+        style?: string
+        format?: string
+        tileMatrixSetID?: string
+        tileMatrixLabels?: string[]
+        minimumLevel?: number
+        maximumLevel?: number
+        tilingSchemeType?: 'geographic' | 'webMercator'
+        rectangle?: [number, number, number, number]
+        tiandituKey?: string
+        tiandituLayers?: Array<'vec' | 'cva'>
+    }
+    preview?: string // 图层切换浮层缩略图
+}
+
+export type cesiumModelVersionType = 'v1' | 'v2'
+export type cesiumModelOperationSpeedType = 'slow' | 'normal' | 'fast'
+
+export interface cesiumModelLayerType {
+    layerId: string // 模型图层 ID
+    version?: cesiumModelVersionType // 服务版本，v1/v2路径不同
+    appId?: string // 应用 ID，对应接口里的 client_id
+    token?: string | null // 接口 token，对应 access_token
+    baseUrl?: string // 图层服务根路径，默认使用接口文档中的服务地址
+    tilesetFile?: string // 主入口文件，默认 tileset.json
+    longitudeOffset?: number // 模型经度微调，单位度，正数向东
+    latitudeOffset?: number // 模型纬度微调，单位度，正数向北
+    heightOffset?: number // 模型高度微调，单位米，正数向上
+    fitToGround?: boolean // 是否把模型底部贴合到地面高度
+    groundHeight?: number // 指定贴合目标地面高程，单位米；不传时读取当前地形/椭球高度
+    modelBaseHeight?: number // 指定模型原始底部高程，单位米；不传时用包围体估算
+    heading?: number // 绕局部垂直轴旋转，单位度
+    pitch?: number // 绕局部横轴旋转，单位度
+    roll?: number // 绕局部纵轴旋转，单位度
+    scale?: number // 模型整体缩放
+    enhance3D?: boolean // 加载后启用光照、阴影等三维视觉增强
+    enableShadows?: boolean // 是否让模型参与阴影渲染
+    operationSpeed?: cesiumModelOperationSpeedType // 操作速度档位，影响旋转、抬高降低、拉近拉远的默认步长
+    rotateStep?: number // 单次旋转角度，单位度；传入后优先级高于 operationSpeed 的旋转步长
+    autoRotateInterval?: number // 自动旋转间隔，单位毫秒；数值越小旋转越快
+    options?: Cesium3DTileset.ConstructorOptions
+}
+
+export interface mapPointModelType extends cesiumModelLayerType {
+    code?: string // 学校代码
+    identifier?: string // 学校标识码
+    name?: string // 学校名称
 }
 
 export interface optionType {
@@ -198,7 +262,7 @@ export type changeModelParamType = {
     polygonClickHandler: string
     setCameraHeight: string
     setInitialView: { destination: Cartesian3; duration?: number }
-    setViewerLayer: string
+    setViewerLayer: string | imageryLayerType
     ZoomIn: string
     ZoomOut: string
     clearEntity: {
@@ -441,6 +505,7 @@ type BaseCanvasConfigOptions = {
     customPopoverCanvas?: (canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D) => void
     borderColor?: string
     backgroundColor?: string
+    model?: mapPointModelType
 }
 
 export type TextModeConfig = BaseCanvasConfigOptions & {

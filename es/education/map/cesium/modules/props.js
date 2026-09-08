@@ -1,9 +1,12 @@
-import { Color, ArcGisMapServerImageryProvider } from "@cesium/engine";
+import { Color } from "@cesium/engine";
 const cesiumProps = {
   clientId: { type: String },
   accessToken: { type: String },
   baseUrl: { type: String, default: "/jysl" },
   imageryLayersUrl: { type: String },
+  imageryLayerList: {
+    type: Array
+  },
   areaName: { type: String },
   // 初始化区域
   defaultShowState: { type: Boolean, default: false },
@@ -40,8 +43,7 @@ const cesiumProps = {
       homeButton: false,
       sceneModePicker: false,
       baseLayerPicker: false,
-      imageryProvider: ArcGisMapServerImageryProvider.fromUrl("https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer"),
-      // 避免使用cesium ions资源
+      baseLayer: false,
       navigationHelpButton: false,
       fullscreenButton: false,
       scene3DOnly: true,

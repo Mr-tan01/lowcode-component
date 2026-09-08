@@ -2,10 +2,10 @@ var __defProp = Object.defineProperty;
 var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
 var __publicField = (obj, key, value) => __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
 import { CesiumHeatmap } from "cesium-heatmap-es6";
+import { TIANDITU_KEY, createTiandituImageryProviders } from "../../Button/const.js";
 import { areaData } from "./type.js";
 import { createClusterBillboard, createInfoCanvas, createEntityConfig, updateViewerEntityInfo, heatmapGradient } from "./tools.js";
-import { useMessage } from "naive-ui";
-import { Color, Rectangle, CustomDataSource, JulianDate, HorizontalOrigin, VerticalOrigin, ScreenSpaceEventType, ScreenSpaceEventHandler, defined, Cartesian3, Cartographic, Math as Math$1, BoundingSphere, ArcGisMapServerImageryProvider, PolygonHierarchy, ImageryLayer, Primitive, Entity, Cartesian2 } from "@cesium/engine";
+import { Color, Rectangle, CustomDataSource, JulianDate, HorizontalOrigin, VerticalOrigin, ScreenSpaceEventType, ScreenSpaceEventHandler, defined, Cartesian3, Cartographic, Math as Math$1, BoundingSphere, ArcGisMapServerImageryProvider, WebMapTileServiceImageryProvider, GeographicTilingScheme, PolygonHierarchy, ImageryLayer, Primitive, Entity, Cartesian2 } from "@cesium/engine";
 import { Viewer } from "@cesium/widgets";
 class cesiumService {
   constructor(containerId, options) {
@@ -40,11 +40,9 @@ class cesiumService {
     __publicField(this, "lastHoveredEntity", null);
     __publicField(this, "lastThrottleTime", 0);
     __publicField(this, "throttleDelay", 100);
-    __publicField(this, "rretryCount", 3);
     __publicField(this, "cameraChangedListener", null);
     // 深圳市地理边界（根据瓦片定义经纬度范围）
     __publicField(this, "shenzhenBounds", Rectangle.fromDegrees(110, 20, 118, 25));
-    __publicField(this, "message", useMessage());
     __publicField(this, "doubleClickHandler", (event) => {
       event.preventDefault();
       event.stopPropagation();
@@ -199,6 +197,7 @@ class cesiumService {
   async initViewer(controlStatus) {
     var _a;
     if (this.viewer) this.destroy();
+    this.tileLoadCallback = this.handleTileLoadProgress.bind(this);
     try {
       this.viewer = new Viewer(this.containerId, controlStatus);
       this.viewer.cesiumWidget.creditContainer.style.display = "none";
@@ -247,8 +246,9 @@ class cesiumService {
   }
   // 处理相机高度变化
   handleCameraHeightChange() {
-    if (!this.viewer || !this.pointEntities) return;
+    if (!this.viewer) return;
     const cameraHeight = this.viewer.camera.positionCartographic.height;
+    if (!this.pointEntities) return;
     if (this.options.limitHeightHandler) {
       this.options.limitHeightHandler(cameraHeight);
     }
@@ -370,45 +370,32 @@ class cesiumService {
     }
   }
   // 加载瓦片
-  async loadTileLayer(url) {
-    let provider;
+  async loadTileLayer(option) {
+    var _a, _b;
     this.options.loadTileLayerHandler(true);
-    const { viewer, imageLayerState, imageLayerUrl } = this;
+    const { viewer } = this;
+    const layerOption = this.normalizeImageryLayerOption(option);
     this.cleanupTileLoadListener();
-    this.updateLayerState(url);
+    if (viewer && this.tileLoadCallback) {
+      (_b = (_a = viewer.scene) == null ? void 0 : _a.globe) == null ? void 0 : _b.tileLoadProgressEvent.addEventListener(this.tileLoadCallback);
+    }
+    this.updateLayerState(layerOption.url);
     try {
-      provider = await this.loadProviderWithFallback({
-        targetUrl: imageLayerState && imageLayerUrl ? imageLayerUrl : url,
-        useZondy: imageLayerState,
-        fallbackUrl: this.options.config.defaultUrl ?? this.defaultConfig.defaultUrl
+      const provider = await this.loadProvider({
+        targetUrl: layerOption.url,
+        providerType: layerOption.providerType,
+        providerOptions: layerOption.providerOptions
       });
       if (viewer && provider) {
-        await this.addProviderToViewer(viewer, provider);
+        const providers = Array.isArray(provider) ? provider : [provider];
+        for (const item of providers) {
+          await this.addProviderToViewer(viewer, item);
+        }
       }
     } catch (error) {
-      await this.retryLoadProvider(imageLayerUrl || url, imageLayerState);
       this.handleLoadError(error);
-    }
-  }
-  // 重试
-  async retryLoadProvider(url, useZondy) {
-    let attempts = 0;
-    while (attempts < this.rretryCount) {
-      try {
-        await new Promise((resolve) => setTimeout(resolve, 1e3));
-        const provider = await this.loadProviderWithFallback({
-          targetUrl: url,
-          useZondy,
-          fallbackUrl: this.options.config.defaultUrl ?? this.defaultConfig.defaultUrl
-        });
-        if (this.viewer && provider) {
-          await this.addProviderToViewer(this.viewer, provider);
-          return;
-        }
-      } catch {
-        attempts++;
-        this.message.error("瓦片加载失败,请刷新重试");
-      }
+      this.cleanupTileLoadListener();
+      this.options.loadTileLayerHandler(false);
     }
   }
   cleanupTileLoadListener() {
@@ -421,46 +408,107 @@ class cesiumService {
     if (!this.imageLayerUrl) {
       this.imageLayerUrl = url;
     }
-    this.imageLayerState = !this.imageLayerState;
   }
-  async loadProviderWithFallback(options) {
-    var _a, _b;
+  normalizeImageryLayerOption(option) {
+    if (typeof option !== "string") {
+      const providerType2 = option.providerType ?? this.getImageryLayerProviderType(option.url);
+      return {
+        ...option,
+        url: this.normalizeImageryServiceUrl(option.url, providerType2),
+        providerType: providerType2
+      };
+    }
+    const providerType = this.getImageryLayerProviderType(option);
+    return {
+      label: option,
+      value: option,
+      url: this.normalizeImageryServiceUrl(option, providerType),
+      providerType
+    };
+  }
+  getImageryLayerProviderType(url) {
+    if (url.includes("tianditu.gov.cn")) {
+      return "tianditu";
+    }
+    if (url.includes("/WMTSServer")) {
+      return "wmts";
+    }
+    return "arcgis";
+  }
+  normalizeImageryServiceUrl(url, providerType) {
+    if (providerType !== "wmts" || !url.includes("/WMTSServer")) {
+      return url;
+    }
     try {
-      let provider;
-      if (options.useZondy) {
-        provider = await Zondy.WebMapTileServiceImageryProvider.fromUrl(options.targetUrl, {
-          rectangle: Rectangle.fromDegrees(
-            113.72,
-            // 西经
-            22.11,
-            // 南纬
-            115.05,
-            // 东经
-            22.88
-            // 北纬
-          ),
-          ...((_b = (_a = this.options) == null ? void 0 : _a.config) == null ? void 0 : _b.providerOptions) ?? {}
-        });
-      } else {
-        provider = await ArcGisMapServerImageryProvider.fromUrl(options.targetUrl);
+      const sourceUrl = new URL(url, window.location.origin);
+      sourceUrl.searchParams.delete("request");
+      sourceUrl.searchParams.delete("service");
+      sourceUrl.searchParams.delete("acceptversions");
+      sourceUrl.searchParams.delete("version");
+      if (sourceUrl.origin === window.location.origin && !/^https?:\/\//.test(url)) {
+        return `${sourceUrl.pathname}${sourceUrl.search}`;
       }
-      return provider;
+      return sourceUrl.toString();
     } catch {
-      try {
-        return await ArcGisMapServerImageryProvider.fromUrl(options.fallbackUrl);
-      } catch (fallbackError) {
-        this.options.loadTileLayerHandler(false);
-        throw fallbackError;
-      }
+      return url.replace(/[?&](request|service|acceptversions|version)=[^&]*/gi, "").replace("?&", "?").replace(/&&+/g, "&").replace(/[?&]$/, "");
     }
   }
+  async loadProvider(options) {
+    let provider;
+    if (options.providerType === "tianditu") {
+      provider = this.createTiandituProviders(options.providerOptions);
+    } else if (options.providerType === "wmts") {
+      provider = await this.createWmtsProvider(options);
+    } else {
+      provider = await ArcGisMapServerImageryProvider.fromUrl(options.targetUrl);
+    }
+    return provider;
+  }
+  /**
+   * 创建天地图矢量底图和注记底图。
+   * 由于天地图通常需要 vec + cva 双层叠加，这里统一收口成数组返回，外层只负责添加。
+   */
+  createTiandituProviders(providerOptions) {
+    var _a;
+    const key = (providerOptions == null ? void 0 : providerOptions.tiandituKey) ?? TIANDITU_KEY;
+    const maxZoom = (providerOptions == null ? void 0 : providerOptions.maximumLevel) ?? 18;
+    const layers = ((_a = providerOptions == null ? void 0 : providerOptions.tiandituLayers) == null ? void 0 : _a.length) ? providerOptions.tiandituLayers : ["vec", "cva"];
+    return createTiandituImageryProviders({
+      Cesium: { WebMapTileServiceImageryProvider },
+      key,
+      maxZoom,
+      layers
+    });
+  }
+  async createWmtsProvider(options) {
+    var _a, _b, _c, _d;
+    if (((_a = options.providerOptions) == null ? void 0 : _a.layer) && ((_b = options.providerOptions) == null ? void 0 : _b.tileMatrixSetID)) {
+      const { tilingSchemeType, rectangle, ...providerOptions } = options.providerOptions;
+      const layer = options.providerOptions.layer;
+      const tileMatrixSetID = options.providerOptions.tileMatrixSetID;
+      const layerRectangle = rectangle ?? [113.74686892275194, 22.39895423067949, 114.624444498382, 22.864642206724653];
+      const maximumLevel = providerOptions.maximumLevel ?? (providerOptions.tileMatrixLabels ? providerOptions.tileMatrixLabels.length - 1 : void 0);
+      return new WebMapTileServiceImageryProvider({
+        url: options.targetUrl,
+        layer,
+        tileMatrixSetID,
+        style: providerOptions.style ?? "default",
+        format: providerOptions.format ?? "image/png",
+        ...providerOptions,
+        minimumLevel: providerOptions.minimumLevel ?? 0,
+        maximumLevel,
+        tilingScheme: tilingSchemeType === "geographic" ? new GeographicTilingScheme() : void 0,
+        rectangle: Rectangle.fromDegrees(layerRectangle[0], layerRectangle[1], layerRectangle[2], layerRectangle[3])
+      });
+    }
+    return await Zondy.WebMapTileServiceImageryProvider.fromUrl(options.targetUrl, {
+      rectangle: Rectangle.fromDegrees(113.74686892275194, 22.39895423067949, 114.624444498382, 22.864642206724653),
+      ...((_d = (_c = this.options) == null ? void 0 : _c.config) == null ? void 0 : _d.providerOptions) ?? {}
+    });
+  }
   async addProviderToViewer(viewer, provider) {
-    var _a, _b;
     try {
       viewer.imageryLayers.addImageryProvider(provider);
-      if (this.tileLoadCallback) {
-        (_b = (_a = viewer.scene) == null ? void 0 : _a.globe) == null ? void 0 : _b.tileLoadProgressEvent.addEventListener(this.tileLoadCallback);
-      }
     } catch (error) {
       console.error("添加图层失败:", error);
       throw error;
@@ -717,10 +765,10 @@ class cesiumService {
     });
   }
   // 切换图层
-  setViewerLayer(imageryLayersUrl) {
+  setViewerLayer(option) {
     if (!this.viewer) return;
     this.viewer.imageryLayers.removeAll();
-    this.loadTileLayer(imageryLayersUrl);
+    this.loadTileLayer(option);
   }
   // 热力图
   buildHeatMap({

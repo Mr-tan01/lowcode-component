@@ -15,7 +15,6 @@
 
 <script lang="ts" setup>
 import { MapType, MapImagesMap } from './const'
-import { defineEmits } from 'vue'
 
 const mapBlockName = Object.values(MapType) as MapType[]
 

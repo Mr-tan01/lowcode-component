@@ -247,6 +247,7 @@ export const createEntityConfig = async ({
     const commonBillboard = {
         image: valueInfo,
         disableDepthTestDistance: isPopoverEntity ? Number.POSITIVE_INFINITY : undefined,
+        heightReference: point.heightReference,
         verticalOrigin: VerticalOrigin.BOTTOM,
         scale: new CallbackProperty(() => {
             const height = viewer.camera.positionCartographic.height
@@ -258,7 +259,7 @@ export const createEntityConfig = async ({
 
     return {
         name: isPopoverEntity ? `${point.name}Label` : point.name,
-        position: Cartesian3.fromDegrees(point.lng, point.lat, 50),
+        position: Cartesian3.fromDegrees(point.lng, point.lat, point.height ?? 50),
         properties: commonProperties,
         isPopoverEntity: isPopoverEntity,
         billboard: commonBillboard as any,

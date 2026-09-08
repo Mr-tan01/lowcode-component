@@ -1,6 +1,7 @@
-import { defineComponent, mergeDefaults, ref, useTemplateRef, nextTick, computed, watch, onMounted, onBeforeUnmount, createElementBlock, openBlock, createVNode, createCommentVNode, withDirectives, unref, normalizeStyle, withCtx, createElementVNode, createTextVNode, toDisplayString, vShow, Fragment, renderList } from "vue";
+import { defineComponent, mergeModels, ref, useTemplateRef, useModel, nextTick, computed, watch, onMounted, onBeforeUnmount, createElementBlock, openBlock, createVNode, createCommentVNode, withDirectives, unref, normalizeStyle, withCtx, createElementVNode, createTextVNode, toDisplayString, vShow, Fragment, renderList, mergeDefaults } from "vue";
 import { cesiumService } from "./modules/cesiumUtils.js";
 import { cesiumProps } from "./modules/props.js";
+import { defaultImageryLayerList } from "../Button/const.js";
 import { NSpin } from "naive-ui";
 import { JulianDate, SceneTransforms, Cartesian3, Matrix4, Cartesian4 } from "@cesium/engine";
 const _hoisted_1 = { class: "lc-cesium" };
@@ -13,8 +14,10 @@ const _hoisted_4 = { class: "lc-cesium__multi-tooltip" };
 const _hoisted_5 = { class: "lc-cesium__tooltip--content" };
 const _sfc_main = /* @__PURE__ */ defineComponent({
   __name: "cesium",
-  props: /* @__PURE__ */ mergeDefaults(cesiumProps, {
-    clientId: "74109f7095974ab1a5e930c8e998580d",
+  props: /* @__PURE__ */ mergeModels(/* @__PURE__ */ mergeDefaults(cesiumProps, {
+    clientId: "f765f64dc1fd40f480dcf8e274850931",
+    imageryLayerList: defaultImageryLayerList,
+    __skip_imageryLayerList: true,
     defaultCenterKey: "深圳市",
     centerPosition: () => Cartesian3.fromDegrees(114.187446, 22.674131, 13e4),
     pointData: () => [],
@@ -24,8 +27,11 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     popoverOffset: () => ({ popoverOffsetX: 0, popoverOffsetY: 0 }),
     enableAllTooltips: false,
     allTooltipsHeight: 1e3
+  }), {
+    "imageryLayer": { default: defaultImageryLayerList[0].value },
+    "imageryLayerModifiers": {}
   }),
-  emits: ["pointHandler", "limitHeightHandler", "loadHandler"],
+  emits: /* @__PURE__ */ mergeModels(["pointHandler", "limitHeightHandler", "loadHandler"], ["update:imageryLayer"]),
   setup(__props, { expose: __expose, emit: __emit }) {
     const initImageryLayersStatus = ref(true);
     const initPointDataStatus = ref(true);
@@ -40,6 +46,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     const lowHeightTooltips = ref([]);
     const lowHeightTooltipUpdateId = ref();
     const emit = __emit;
+    const currentImageryLayer = useModel(__props, "imageryLayer");
     const isPositionInView = (position, viewer) => {
       try {
         const camera = viewer.camera;
@@ -336,6 +343,34 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       await cesiumUtils.clearEntity("pointEntities", "dataSource");
       await cesiumUtils.clearEntity("pointEntities", "viewer");
     };
+    const normalizeTokenUrl = (url) => {
+      return url.replaceAll("{client_id}", encodeURIComponent(__props.clientId ?? "")).replaceAll("{access_token}", encodeURIComponent(__props.accessToken ?? ""));
+    };
+    const getCurrentImageryLayer = () => {
+      if (__props.imageryLayersUrl) {
+        return {
+          label: currentImageryLayer.value,
+          value: currentImageryLayer.value,
+          url: normalizeTokenUrl(__props.imageryLayersUrl)
+        };
+      }
+      const selectedLayer = __props.imageryLayerList.find((item) => item.value === currentImageryLayer.value);
+      if (selectedLayer) {
+        return {
+          ...selectedLayer,
+          url: normalizeTokenUrl(selectedLayer.url)
+        };
+      }
+      return void 0;
+    };
+    const getDefaultImageryLayer = () => {
+      const defaultImageryLayer = defaultImageryLayerList[0];
+      return {
+        ...defaultImageryLayer,
+        url: normalizeTokenUrl(defaultImageryLayer.url)
+      };
+    };
+    const isTokenRequiredLayer = (layer) => layer.url.includes("access_token=");
     const changeModel = (type, value) => {
       if (cesiumUtils[type]) {
         cesiumUtils[type](value);
@@ -346,7 +381,8 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     const initCesium = async () => {
       var _a;
       try {
-        if (!__props.accessToken) {
+        const titleLayer = getCurrentImageryLayer() ?? getDefaultImageryLayer();
+        if (!__props.accessToken && isTokenRequiredLayer(titleLayer)) {
           loadedTileLayer(false);
           return;
         }
@@ -377,8 +413,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
         });
         cesiumUtils.updateViewerAttribute();
         cesiumUtils.setInitialView({ destination: __props.centerPosition }, false);
-        const titleUrl = __props.imageryLayersUrl ?? `${__props.baseUrl}/service/api/a466c72ef1ea4f93aae5af7f6ab5b56e/igs/rest/services/SZMAP_Blue_DT_ZW_2024_Q2_4490/WMTSServer?client_id=${__props.clientId}&access_token=${__props.accessToken}`;
-        await cesiumUtils.loadTileLayer(titleUrl);
+        await cesiumUtils.loadTileLayer(titleLayer);
         if (__props.areaName) {
           cesiumUtils.polygonClickHandler(__props.areaName);
         }
@@ -408,6 +443,16 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       cesiumUtils
     });
     const initCesiumDebouncedChange = watch([() => __props.accessToken, () => __props.imageryLayersUrl], initCesiumDebounced);
+    const imageryLayerChange = watch(
+      [() => currentImageryLayer.value, () => __props.imageryLayerList, viewerInitialized],
+      () => {
+        if (!viewerInitialized.value) return;
+        const layer = getCurrentImageryLayer();
+        if (!layer) return;
+        cesiumUtils.setViewerLayer(layer);
+      },
+      { deep: true }
+    );
     const offsetStateChange = watch(
       () => __props.offsetState,
       (newValue) => {
@@ -434,6 +479,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     onBeforeUnmount(() => {
       clearLowHeightUpdate();
       initCesiumDebouncedChange();
+      imageryLayerChange();
       offsetStateChange();
       initPointDataChange();
       cesiumUtils.destroy();

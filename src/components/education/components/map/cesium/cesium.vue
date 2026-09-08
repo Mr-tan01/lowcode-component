@@ -29,7 +29,8 @@
 import { ref, onMounted, onBeforeUnmount, watch, computed, useTemplateRef, nextTick } from 'vue'
 import { cesiumService } from './modules/cesiumUtils'
 import { cesiumProps } from './modules/props'
-import type { changeModelType, changeModelParamType, EntityProperties } from './modules/type'
+import { type changeModelType, type changeModelParamType, type EntityProperties, type imageryLayerType } from './modules/type'
+import { defaultImageryLayerList } from '../../mapButton/const'
 import { Entity, Cartesian3, JulianDate, SceneTransforms, Matrix4, Cartesian4, type Viewer } from 'cesium'
 import { NSpin } from 'naive-ui'
 
@@ -66,10 +67,10 @@ const emit = defineEmits<{
 }>()
 
 const {
-    clientId = '74109f7095974ab1a5e930c8e998580d',
+    clientId = 'f765f64dc1fd40f480dcf8e274850931',
     accessToken,
-    baseUrl,
     imageryLayersUrl,
+    imageryLayerList = defaultImageryLayerList,
     areaName,
     defaultShowState,
     flyToHeight,
@@ -90,6 +91,8 @@ const {
     enableAllTooltips = false,
     allTooltipsHeight = 1000,
 } = defineProps(cesiumProps)
+
+const currentImageryLayer = defineModel<string>('imageryLayer', { default: defaultImageryLayerList[0].value })
 
 // 检查点是否在相机视锥体内
 const isPositionInView = (position: Cartesian3, viewer: Viewer): boolean => {
@@ -489,7 +492,43 @@ const clearEntity = async () => {
     await cesiumUtils.clearEntity('pointEntities', 'viewer')
 }
 
-const changeModel = <T extends changeModelType>(type: changeModelType, value: changeModelParamType[T]): void => {
+const normalizeTokenUrl = (url: string): string => {
+    return url.replaceAll('{client_id}', encodeURIComponent(clientId ?? '')).replaceAll('{access_token}', encodeURIComponent(accessToken ?? ''))
+}
+
+const getCurrentImageryLayer = (): imageryLayerType | undefined => {
+    if (imageryLayersUrl) {
+        return {
+            label: currentImageryLayer.value,
+            value: currentImageryLayer.value,
+            url: normalizeTokenUrl(imageryLayersUrl),
+        }
+    }
+
+    const selectedLayer = imageryLayerList.find(item => item.value === currentImageryLayer.value)
+
+    if (selectedLayer) {
+        return {
+            ...selectedLayer,
+            url: normalizeTokenUrl(selectedLayer.url),
+        }
+    }
+
+    return undefined
+}
+
+const getDefaultImageryLayer = (): imageryLayerType => {
+    const defaultImageryLayer = defaultImageryLayerList[0]
+
+    return {
+        ...defaultImageryLayer,
+        url: normalizeTokenUrl(defaultImageryLayer.url),
+    }
+}
+
+const isTokenRequiredLayer = (layer: { url: string }): boolean => layer.url.includes('access_token=')
+
+const changeModel = <T extends changeModelType>(type: T, value: changeModelParamType[T]): void => {
     if ((cesiumUtils as any)[type]) {
         ;(cesiumUtils as any)[type](value)
     } else {
@@ -499,7 +538,9 @@ const changeModel = <T extends changeModelType>(type: changeModelType, value: ch
 
 const initCesium = async () => {
     try {
-        if (!accessToken) {
+        const titleLayer = getCurrentImageryLayer() ?? getDefaultImageryLayer()
+
+        if (!accessToken && isTokenRequiredLayer(titleLayer)) {
             loadedTileLayer(false)
             return
         }
@@ -545,11 +586,7 @@ const initCesium = async () => {
         cesiumUtils.setInitialView({ destination: centerPosition }, false)
 
         // 加载瓦片图层
-        const titleUrl =
-            imageryLayersUrl ??
-            `${baseUrl}/service/api/a466c72ef1ea4f93aae5af7f6ab5b56e/igs/rest/services/SZMAP_Blue_DT_ZW_2024_Q2_4490/WMTSServer?client_id=${clientId}&access_token=${accessToken}`
-
-        await cesiumUtils.loadTileLayer(titleUrl)
+        await cesiumUtils.loadTileLayer(titleLayer)
         if (areaName) {
             cesiumUtils.polygonClickHandler(areaName)
         }
@@ -586,6 +623,19 @@ defineExpose({
 
 const initCesiumDebouncedChange = watch([() => accessToken, () => imageryLayersUrl], initCesiumDebounced)
 
+const imageryLayerChange = watch(
+    [() => currentImageryLayer.value, () => imageryLayerList, viewerInitialized],
+    () => {
+        if (!viewerInitialized.value) return
+
+        const layer = getCurrentImageryLayer()
+        if (!layer) return
+
+        cesiumUtils.setViewerLayer(layer)
+    },
+    { deep: true },
+)
+
 const offsetStateChange = watch(
     () => offsetState,
     newValue => {
@@ -618,6 +668,7 @@ onBeforeUnmount(() => {
     // 清理所有定时器和监听器
     clearLowHeightUpdate()
     initCesiumDebouncedChange()
+    imageryLayerChange()
     offsetStateChange()
     initPointDataChange()
     cesiumUtils.destroy()

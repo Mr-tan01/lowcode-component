@@ -1,4 +1,4 @@
-import { SceneMode, SkyAtmosphere, SkyBox, Color, Entity, Cartesian3, PolylineDashMaterialProperty, Cartesian2 } from 'cesium';
+import { SceneMode, SkyAtmosphere, SkyBox, Color, Entity, Cartesian3, PolylineDashMaterialProperty, Cartesian2, Cesium3DTileset, HeightReference, ImageryLayer } from 'cesium';
 import { CesiumHeatmap } from 'cesium-heatmap-es6';
 export declare const areaData: {
     深圳市: {
@@ -192,6 +192,8 @@ export interface pointType {
     name: string;
     lng: number;
     lat: number;
+    height?: number;
+    heightReference?: HeightReference;
     changeIconType?: changeIconType | string;
     options: CanvasConfigOptions;
 }
@@ -224,6 +226,7 @@ export interface EntityConfig {
         image: HTMLCanvasElement;
         disableDepthTestDistance: number | undefined;
         pixelOffset: Cartesian2;
+        heightReference?: HeightReference;
     };
 }
 export interface controlStatusType {
@@ -233,6 +236,7 @@ export interface controlStatusType {
     homeButton?: boolean;
     sceneModePicker?: boolean;
     baseLayerPicker?: boolean;
+    baseLayer?: ImageryLayer | false;
     navigationHelpButton?: boolean;
     fullscreenButton?: boolean;
     skyBox?: SkyBox;
@@ -262,6 +266,58 @@ export interface basicConfigType {
     providerOptions?: Record<string, any>;
     labelShowHeightThreshold?: number;
 }
+export type imageryLayerProviderType = 'wmts' | 'arcgis' | 'tianditu';
+export interface imageryLayerType {
+    label: string;
+    value: string;
+    url: string;
+    providerType?: imageryLayerProviderType;
+    providerOptions?: {
+        layer?: string;
+        style?: string;
+        format?: string;
+        tileMatrixSetID?: string;
+        tileMatrixLabels?: string[];
+        minimumLevel?: number;
+        maximumLevel?: number;
+        tilingSchemeType?: 'geographic' | 'webMercator';
+        rectangle?: [number, number, number, number];
+        tiandituKey?: string;
+        tiandituLayers?: Array<'vec' | 'cva'>;
+    };
+    preview?: string;
+}
+export type cesiumModelVersionType = 'v1' | 'v2';
+export type cesiumModelOperationSpeedType = 'slow' | 'normal' | 'fast';
+export interface cesiumModelLayerType {
+    layerId: string;
+    version?: cesiumModelVersionType;
+    appId?: string;
+    token?: string | null;
+    baseUrl?: string;
+    tilesetFile?: string;
+    longitudeOffset?: number;
+    latitudeOffset?: number;
+    heightOffset?: number;
+    fitToGround?: boolean;
+    groundHeight?: number;
+    modelBaseHeight?: number;
+    heading?: number;
+    pitch?: number;
+    roll?: number;
+    scale?: number;
+    enhance3D?: boolean;
+    enableShadows?: boolean;
+    operationSpeed?: cesiumModelOperationSpeedType;
+    rotateStep?: number;
+    autoRotateInterval?: number;
+    options?: Cesium3DTileset.ConstructorOptions;
+}
+export interface mapPointModelType extends cesiumModelLayerType {
+    code?: string;
+    identifier?: string;
+    name?: string;
+}
 export interface optionType {
     config: basicConfigType;
     defaultShowState: boolean;
@@ -285,7 +341,7 @@ export type changeModelParamType = {
         destination: Cartesian3;
         duration?: number;
     };
-    setViewerLayer: string;
+    setViewerLayer: string | imageryLayerType;
     ZoomIn: string;
     ZoomOut: string;
     clearEntity: {
@@ -404,6 +460,7 @@ type BaseCanvasConfigOptions = {
     customPopoverCanvas?: (canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D) => void;
     borderColor?: string;
     backgroundColor?: string;
+    model?: mapPointModelType;
 };
 export type TextModeConfig = BaseCanvasConfigOptions & {
     currentMode: CanvasMode.Text;
