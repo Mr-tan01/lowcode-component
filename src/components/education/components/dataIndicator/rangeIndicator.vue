@@ -8,13 +8,7 @@
                     <div class="lc-range-indicator__wrapper__info--result">
                         <slot :name="item.customSlot" :item="item">
                             <div class="lc-range-indicator__wrapper__info--result--value" :title="item.value?.toString()">
-                                <NNumberAnimation
-                                    show-separator
-                                    :from="0"
-                                    :to="renderValue(item.value)"
-                                    active
-                                    :precision="renderdecimals(item.value)"
-                                />
+                                <NNumberAnimation show-separator :from="0" :to="renderValue(item)" active :precision="renderdecimals(item)" />
                             </div>
                             <div v-if="renderUnit(item.value, item.unit)" class="lc-range-indicator__wrapper__info--result--unit">
                                 {{ renderUnit(item.value, item.unit) }}
@@ -36,10 +30,11 @@
 <script lang="ts" setup>
 import { bigNumber } from 'lowcode-share/es/share'
 import { NNumberAnimation } from 'naive-ui/es/number-animation'
-import memoize from 'lodash-es/memoize'
+import floor from 'lodash-es/floor'
 type Data = {
     label?: string
     value?: number
+    decimal?: number
     unit?: string
     customSlot?: string
     customValue?: string | number
@@ -58,31 +53,29 @@ const {
     notCheckInteger?: boolean
 }>()
 
-const renderdecimals = memoize(value => {
-    const { unit: numUnit } = bigNumber(value)
+const renderdecimals = ({ value, decimal: itemDecimal }: Data) => {
+    if (itemDecimal != null) return itemDecimal
+    const { unit: numUnit } = bigNumber(value ?? 0)
     if (Number.isInteger(value) && !numUnit && !notCheckInteger) {
         return 0
     }
     return decimal
-})
-const renderValue = memoize(value => {
-    if (fixed) {
-        const { result } = bigNumber(value, decimal)
-        return result
-    }
-    return value
-})
+}
+const renderValue = (item: Data) => {
+    const precision = renderdecimals(item)
+    const value = item.value ?? 0
+    const result = fixed ? bigNumber(value, precision).result : value
+    // 先向零截断，避免数字动画四舍五入；floor 使用指数移位避免直接乘法的浮点误差。
+    return Math.sign(result) * floor(Math.abs(result), precision)
+}
 
-const renderUnit = memoize(
-    (value, _unit) => {
-        if (fixed) {
-            const { unit: numUnit } = bigNumber(value, decimal)
-            return `${numUnit}${_unit || unit}`
-        }
-        return _unit || unit
-    },
-    (value, _unit) => `${value}_${_unit || unit}`,
-)
+const renderUnit = (value: Data['value'], itemUnit?: string) => {
+    if (fixed) {
+        const { unit: numUnit } = bigNumber(value ?? 0)
+        return `${numUnit}${itemUnit || unit}`
+    }
+    return itemUnit || unit
+}
 </script>
 
 <style lang="scss" scoped>

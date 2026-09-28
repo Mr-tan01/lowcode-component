@@ -1,7 +1,7 @@
 import { defineComponent, createElementBlock, openBlock, createElementVNode, Fragment, renderList, createCommentVNode, renderSlot, createVNode, unref, toDisplayString } from "vue";
 import { bigNumber } from "lowcode-share/es/share";
 import { NNumberAnimation } from "naive-ui/es/number-animation";
-import memoize from "lodash-es/memoize";
+import floor from "lodash-es/floor";
 const _hoisted_1 = { class: "lc-range-indicator" };
 const _hoisted_2 = { class: "lc-range-indicator__wrapper" };
 const _hoisted_3 = { class: "lc-range-indicator__wrapper__info-range" };
@@ -26,30 +26,27 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     notCheckInteger: { type: Boolean, default: false }
   },
   setup(__props) {
-    const renderdecimals = memoize((value) => {
-      const { unit: numUnit } = bigNumber(value);
+    const renderdecimals = ({ value, decimal: itemDecimal }) => {
+      if (itemDecimal != null) return itemDecimal;
+      const { unit: numUnit } = bigNumber(value ?? 0);
       if (Number.isInteger(value) && !numUnit && !__props.notCheckInteger) {
         return 0;
       }
       return __props.decimal;
-    });
-    const renderValue = memoize((value) => {
+    };
+    const renderValue = (item) => {
+      const precision = renderdecimals(item);
+      const value = item.value ?? 0;
+      const result = __props.fixed ? bigNumber(value, precision).result : value;
+      return Math.sign(result) * floor(Math.abs(result), precision);
+    };
+    const renderUnit = (value, itemUnit) => {
       if (__props.fixed) {
-        const { result } = bigNumber(value, __props.decimal);
-        return result;
+        const { unit: numUnit } = bigNumber(value ?? 0);
+        return `${numUnit}${itemUnit || __props.unit}`;
       }
-      return value;
-    });
-    const renderUnit = memoize(
-      (value, _unit) => {
-        if (__props.fixed) {
-          const { unit: numUnit } = bigNumber(value, __props.decimal);
-          return `${numUnit}${_unit || __props.unit}`;
-        }
-        return _unit || __props.unit;
-      },
-      (value, _unit) => `${value}_${_unit || __props.unit}`
-    );
+      return itemUnit || __props.unit;
+    };
     return (_ctx, _cache) => {
       return openBlock(), createElementBlock("div", _hoisted_1, [
         createElementVNode("div", _hoisted_2, [
@@ -87,15 +84,15 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                           createVNode(unref(NNumberAnimation), {
                             "show-separator": "",
                             from: 0,
-                            to: unref(renderValue)(item.value),
+                            to: renderValue(item),
                             active: "",
-                            precision: unref(renderdecimals)(item.value)
+                            precision: renderdecimals(item)
                           }, null, 8, ["to", "precision"])
                         ], 8, _hoisted_5),
-                        unref(renderUnit)(item.value, item.unit) ? (openBlock(), createElementBlock(
+                        renderUnit(item.value, item.unit) ? (openBlock(), createElementBlock(
                           "div",
                           _hoisted_6,
-                          toDisplayString(unref(renderUnit)(item.value, item.unit)),
+                          toDisplayString(renderUnit(item.value, item.unit)),
                           1
                           /* TEXT */
                         )) : createCommentVNode("v-if", true)
