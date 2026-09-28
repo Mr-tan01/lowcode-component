@@ -1,6 +1,7 @@
 type Data = {
     label?: string;
     value?: number;
+    decimal?: number;
     unit?: string;
     customSlot?: string;
     customValue?: string | number;
